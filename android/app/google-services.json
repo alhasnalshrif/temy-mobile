@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "146492320098",
+    "project_id": "distancesocial-e3418",
+    "storage_bucket": "distancesocial-e3418.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146492320098:android:0789b5b108d10339ea643b",
+        "android_client_info": {
+          "package_name": "com.alshrif.doctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146492320098-qei2ha8gvp9s8e16grtv6stqceta22in.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzRzJeAZ538-T4Mo4wLfGPpyx4lOzvafM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146492320098-qei2ha8gvp9s8e16grtv6stqceta22in.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,22 @@
+
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs To add a new lane in fibase app distribution"
+  lane :firebase_distribution do
+    sh "flutter clean"
+    sh "flutter build apk --release --flavor production --target lib/main_prodction.dart --no-tree-shake-icons"
+    firebase_app_distribution(
+      app: "1:146492320098:android:0789b5b108d10339ea643b",
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+      android_artifact_type: "APK",
+      android_artifact_path: "../build/app/outputs/apk/production/release/app-production-release.apk",
+      testers: "alhasnalshrif@gmail.com",
+      release_notes: "This release includes the following changes: \n- Bug fixes and performance improvements",
+    )
+  end
+
+
+end
+
