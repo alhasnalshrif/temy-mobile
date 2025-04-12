@@ -4,13 +4,13 @@ import 'package:flutter_complete_project/features/home/ui/widgets/category_list_
 import 'package:flutter_complete_project/core/routing/routes.dart';
 
 class CategoryListView extends StatelessWidget {
-  final List<CategoryData?> categoryDataList;
+  final List<CategoryData?> specializationDataList;
   final double spacing;
   final int maxItems;
 
   const CategoryListView({
     super.key,
-    required this.categoryDataList,
+    required this.specializationDataList,
     this.spacing = 8.0,
     this.maxItems = 6,
   });
@@ -32,8 +32,9 @@ class CategoryListView extends StatelessWidget {
     }
 
     // Calculate the number of items to show
-    final int itemCount =
-        categoryDataList.length > maxItems ? maxItems : categoryDataList.length;
+    final int itemCount = specializationDataList.length > maxItems
+        ? maxItems
+        : specializationDataList.length;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -51,16 +52,17 @@ class CategoryListView extends StatelessWidget {
         itemBuilder: (context, index) {
           // Calculate a staggered animation delay based on index
           return CategoryListViewItem(
-            categoryResponseModel: categoryDataList[index],
+            categoryResponseModel: specializationDataList[index],
             indexItem: index,
             radius: (screenWidth / crossAxisCount) * 0.3, // Responsive radius
             onTap: () {
               // Navigate to CategoryScreen with category id
-              debugPrint('Category tapped: ${categoryDataList[index]?.name}');
+              debugPrint(
+                  'Category tapped: ${specializationDataList[index]?.name}');
 
               Navigator.of(context).pushNamed(
                 Routes.categoryScreen,
-                arguments: categoryDataList[index]?.id ?? '',
+                arguments: specializationDataList[index]?.id,
               );
             },
           );

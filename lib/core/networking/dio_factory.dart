@@ -32,13 +32,10 @@ class DioFactory {
       'authorization':
           'Bearer ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}'
     };
-  }  
-  
+  }
+
   static void setTokenIntoHeaderAfterLogin(String token) async {
-    dio?.options.headers = {
-      'authorization':
-          'Bearer $token'
-    };
+    dio?.options.headers = {'authorization': 'Bearer $token'};
   }
 
   static void addDioInterceptor() {

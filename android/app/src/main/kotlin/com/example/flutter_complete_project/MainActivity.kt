@@ -1,4 +1,4 @@
-package com.alshrif.doctor
+package com.alshrif.temy
 
 import io.flutter.embedding.android.FlutterActivity
 

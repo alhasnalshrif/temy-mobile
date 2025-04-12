@@ -6,6 +6,7 @@ import 'package:flutter_complete_project/core/theme/styles.dart';
 import 'package:flutter_complete_project/features/booking/ui/booking.dart';
 import 'package:flutter_complete_project/features/home/logic/home_cubit.dart';
 import 'package:flutter_complete_project/features/home/ui/home_screen.dart';
+import 'package:flutter_complete_project/features/profile/logic/profile_cubit.dart';
 import 'package:flutter_complete_project/features/profile/ui/profile.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -33,7 +34,10 @@ class _MyDashboardState extends State<DashboardScreen> {
         child: const HomeScreen(),
       ),
       const BookingScreen(),
-      const ProfileScreen(),
+      BlocProvider(
+        create: (context) => ProfileCubit(getIt())..getProfile(),
+        child: const ProfileScreen(),
+      ),
     ];
   }
 

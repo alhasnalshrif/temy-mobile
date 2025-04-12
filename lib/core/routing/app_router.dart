@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_complete_project/core/routing/routes.dart';
 import 'package:flutter_complete_project/features/booking/ui/booking.dart';
+import 'package:flutter_complete_project/features/category/logic/category_cubit.dart';
+import 'package:flutter_complete_project/features/category/ui/category_screen.dart';
 import 'package:flutter_complete_project/features/dashboard/dashboard_screen.dart';
 import 'package:flutter_complete_project/features/home/logic/home_cubit.dart';
 import 'package:flutter_complete_project/features/home/ui/home_screen.dart';
@@ -52,6 +54,16 @@ class AppRouter {
       case Routes.dashboardScreen:
         return MaterialPageRoute(
           builder: (_) => const DashboardScreen(),
+        );
+
+      case Routes.categoryScreen:
+        final categoryId = settings.arguments as String?;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                CategoryCubit(getIt(), categoryId!)..getCategory(),
+            child: const CategoryScreen(),
+          ),
         );
       default:
         return MaterialPageRoute(

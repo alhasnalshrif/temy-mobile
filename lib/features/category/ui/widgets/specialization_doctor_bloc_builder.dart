@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_complete_project/core/helpers/spacing.dart';
-import 'package:flutter_complete_project/features/home/logic/home_cubit.dart';
-import 'package:flutter_complete_project/features/home/logic/home_state.dart';
-import 'package:flutter_complete_project/features/home/ui/widgets/category_list_view.dart';
+import 'package:flutter_complete_project/features/category/logic/category_cubit.dart';
+import 'package:flutter_complete_project/features/category/logic/category_state.dart';
+
+import 'package:flutter_complete_project/features/category/ui/widgets/category_list_view.dart';
 
 class SpecializationDoctorBlocBuilder extends StatelessWidget {
   const SpecializationDoctorBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<CategoryCubit, CategoryState>(
       buildWhen: (previous, current) =>
-          current is CategoriesLoading ||
-          current is CategoriesSuccess ||
-          current is CategoriesError,
+          current is CategoryLoading ||
+          current is CategorySuccess ||
+          current is CategoryError,
       builder: (context, state) {
         return state.maybeMap(
-          categoriesLoading: (value) {
+          categoryLoading: (value) {
             return setupLoading();
           },
-          categoriesSuccess: (categoriesResponseModel) {
-            var categoriesList = categoriesResponseModel
-                .categoriesResponseModel.categoryDataList;
+          categorySuccess: (categoriesResponseModel) {
+            print(
+                categoriesResponseModel.categoryResponseModel.categoryDataList);
+            print(
+                'categoriesResponseModel.categoryResponseModel.categoryDataList');
+            var categoriesList =
+                categoriesResponseModel.categoryResponseModel.categoryDataList;
             return setupSuccess(categoriesList);
           },
-          categoriesError: (errorHandler) => setupError(),
+          categoryError: (errorHandler) => setupError(),
           orElse: () {
             return const SizedBox.shrink();
           },
@@ -44,7 +49,7 @@ class SpecializationDoctorBlocBuilder extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          CategoryListView(categoryDataList: categoriesList ?? []),
+          CategoryListView(specializationDataList: categoriesList ?? []),
           verticalSpace(24),
         ],
       ),
