@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_complete_project/features/category/data/models/category_response.dart';
+import 'package:flutter_complete_project/features/category/data/models/service_response.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CategoryListViewItem extends StatelessWidget {
-  final CategoryData? categoryResponseModel;
+  final ServiceData? serviceResponseModel;
   final int indexItem;
   final double radius;
   final VoidCallback? onTap;
@@ -12,7 +13,7 @@ class CategoryListViewItem extends StatelessWidget {
 
   const CategoryListViewItem({
     super.key,
-    this.categoryResponseModel,
+    this.serviceResponseModel,
     required this.indexItem,
     this.radius = 30,
     this.onTap,
@@ -22,7 +23,7 @@ class CategoryListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       opacity: 1.0,
       child: GestureDetector(
         onTap: onTap,
@@ -34,7 +35,7 @@ class CategoryListViewItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _CategoryImage(
-                imageUrl: categoryResponseModel?.imageCover,
+                imageUrl: serviceResponseModel?.imageCover,
                 radius: radius,
                 backgroundColor: backgroundColor,
               ),
@@ -42,7 +43,7 @@ class CategoryListViewItem extends StatelessWidget {
               ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: radius * 2.5),
                 child: Text(
-                  categoryResponseModel?.name ?? 'Service',
+                  serviceResponseModel?.name ?? 'Service',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Colors.grey[800],
                         height: 1.2,

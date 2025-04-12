@@ -23,11 +23,11 @@ class SpecializationDoctorBlocBuilder extends StatelessWidget {
           },
           categorySuccess: (categoriesResponseModel) {
             print(
-                categoriesResponseModel.categoryResponseModel.categoryDataList);
+                categoriesResponseModel.serviceResponseModel.serviceDataList);
             print(
                 'categoriesResponseModel.categoryResponseModel.categoryDataList');
             var categoriesList =
-                categoriesResponseModel.categoryResponseModel.categoryDataList;
+                categoriesResponseModel.serviceResponseModel.serviceDataList;
             return setupSuccess(categoriesList);
           },
           categoryError: (errorHandler) => setupError(),

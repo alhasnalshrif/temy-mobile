@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/features/home/data/models/category_response.dart';
-import 'package:flutter_complete_project/features/home/ui/widgets/category_list_view_item.dart';
+import 'package:flutter_complete_project/features/category/data/models/service_response.dart';
+import 'package:flutter_complete_project/features/category/ui/widgets/category_list_view_item.dart';
 import 'package:flutter_complete_project/core/routing/routes.dart';
 
 class CategoryListView extends StatelessWidget {
-  final List<CategoryData?> specializationDataList;
+  final List<ServiceData?> specializationDataList;
   final double spacing;
   final int maxItems;
 
@@ -52,7 +52,7 @@ class CategoryListView extends StatelessWidget {
         itemBuilder: (context, index) {
           // Calculate a staggered animation delay based on index
           return CategoryListViewItem(
-            categoryResponseModel: specializationDataList[index],
+            serviceResponseModel: specializationDataList[index],
             indexItem: index,
             radius: (screenWidth / crossAxisCount) * 0.3, // Responsive radius
             onTap: () {

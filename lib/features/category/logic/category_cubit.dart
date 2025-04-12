@@ -13,8 +13,8 @@ class CategoryCubit extends Cubit<CategoryState> {
     emit(const CategoryState.categoryLoading());
     final response = await _categoryRepo.getCategory(categoryId);
     response.when(
-      success: (categoryResponseModel) {
-        emit(CategoryState.categorySuccess(categoryResponseModel));
+      success: (serviceResponseModel) {
+        emit(CategoryState.categorySuccess(serviceResponseModel));
       },
       failure: (error) {
         emit(CategoryState.categoryError(error));

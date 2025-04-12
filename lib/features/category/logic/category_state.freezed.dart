@@ -20,7 +20,7 @@ mixin _$CategoryState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() categoryLoading,
-    required TResult Function(CategoryResponseModel categoryResponseModel)
+    required TResult Function(ServiceResponseModel serviceResponseModel)
         categorySuccess,
     required TResult Function(ErrorHandler errorHandler) categoryError,
   }) =>
@@ -29,7 +29,7 @@ mixin _$CategoryState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? categoryLoading,
-    TResult? Function(CategoryResponseModel categoryResponseModel)?
+    TResult? Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryError,
   }) =>
@@ -38,7 +38,7 @@ mixin _$CategoryState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? categoryLoading,
-    TResult Function(CategoryResponseModel categoryResponseModel)?
+    TResult Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult Function(ErrorHandler errorHandler)? categoryError,
     required TResult orElse(),
@@ -135,7 +135,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() categoryLoading,
-    required TResult Function(CategoryResponseModel categoryResponseModel)
+    required TResult Function(ServiceResponseModel serviceResponseModel)
         categorySuccess,
     required TResult Function(ErrorHandler errorHandler) categoryError,
   }) {
@@ -147,7 +147,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? categoryLoading,
-    TResult? Function(CategoryResponseModel categoryResponseModel)?
+    TResult? Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryError,
   }) {
@@ -159,7 +159,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? categoryLoading,
-    TResult Function(CategoryResponseModel categoryResponseModel)?
+    TResult Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult Function(ErrorHandler errorHandler)? categoryError,
     required TResult orElse(),
@@ -255,7 +255,7 @@ class _$CategoryLoadingImpl implements CategoryLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() categoryLoading,
-    required TResult Function(CategoryResponseModel categoryResponseModel)
+    required TResult Function(ServiceResponseModel serviceResponseModel)
         categorySuccess,
     required TResult Function(ErrorHandler errorHandler) categoryError,
   }) {
@@ -267,7 +267,7 @@ class _$CategoryLoadingImpl implements CategoryLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? categoryLoading,
-    TResult? Function(CategoryResponseModel categoryResponseModel)?
+    TResult? Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryError,
   }) {
@@ -279,7 +279,7 @@ class _$CategoryLoadingImpl implements CategoryLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? categoryLoading,
-    TResult Function(CategoryResponseModel categoryResponseModel)?
+    TResult Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult Function(ErrorHandler errorHandler)? categoryError,
     required TResult orElse(),
@@ -338,7 +338,7 @@ abstract class _$$CategorySuccessImplCopyWith<$Res> {
           $Res Function(_$CategorySuccessImpl) then) =
       __$$CategorySuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CategoryResponseModel categoryResponseModel});
+  $Res call({ServiceResponseModel serviceResponseModel});
 }
 
 /// @nodoc
@@ -354,13 +354,13 @@ class __$$CategorySuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? categoryResponseModel = null,
+    Object? serviceResponseModel = freezed,
   }) {
     return _then(_$CategorySuccessImpl(
-      null == categoryResponseModel
-          ? _value.categoryResponseModel
-          : categoryResponseModel // ignore: cast_nullable_to_non_nullable
-              as CategoryResponseModel,
+      freezed == serviceResponseModel
+          ? _value.serviceResponseModel
+          : serviceResponseModel // ignore: cast_nullable_to_non_nullable
+              as ServiceResponseModel,
     ));
   }
 }
@@ -368,14 +368,14 @@ class __$$CategorySuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CategorySuccessImpl implements CategorySuccess {
-  const _$CategorySuccessImpl(this.categoryResponseModel);
+  const _$CategorySuccessImpl(this.serviceResponseModel);
 
   @override
-  final CategoryResponseModel categoryResponseModel;
+  final ServiceResponseModel serviceResponseModel;
 
   @override
   String toString() {
-    return 'CategoryState.categorySuccess(categoryResponseModel: $categoryResponseModel)';
+    return 'CategoryState.categorySuccess(serviceResponseModel: $serviceResponseModel)';
   }
 
   @override
@@ -383,12 +383,13 @@ class _$CategorySuccessImpl implements CategorySuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CategorySuccessImpl &&
-            (identical(other.categoryResponseModel, categoryResponseModel) ||
-                other.categoryResponseModel == categoryResponseModel));
+            const DeepCollectionEquality()
+                .equals(other.serviceResponseModel, serviceResponseModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, categoryResponseModel);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(serviceResponseModel));
 
   /// Create a copy of CategoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -404,11 +405,11 @@ class _$CategorySuccessImpl implements CategorySuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() categoryLoading,
-    required TResult Function(CategoryResponseModel categoryResponseModel)
+    required TResult Function(ServiceResponseModel serviceResponseModel)
         categorySuccess,
     required TResult Function(ErrorHandler errorHandler) categoryError,
   }) {
-    return categorySuccess(categoryResponseModel);
+    return categorySuccess(serviceResponseModel);
   }
 
   @override
@@ -416,11 +417,11 @@ class _$CategorySuccessImpl implements CategorySuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? categoryLoading,
-    TResult? Function(CategoryResponseModel categoryResponseModel)?
+    TResult? Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryError,
   }) {
-    return categorySuccess?.call(categoryResponseModel);
+    return categorySuccess?.call(serviceResponseModel);
   }
 
   @override
@@ -428,13 +429,13 @@ class _$CategorySuccessImpl implements CategorySuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? categoryLoading,
-    TResult Function(CategoryResponseModel categoryResponseModel)?
+    TResult Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult Function(ErrorHandler errorHandler)? categoryError,
     required TResult orElse(),
   }) {
     if (categorySuccess != null) {
-      return categorySuccess(categoryResponseModel);
+      return categorySuccess(serviceResponseModel);
     }
     return orElse();
   }
@@ -479,10 +480,9 @@ class _$CategorySuccessImpl implements CategorySuccess {
 
 abstract class CategorySuccess implements CategoryState {
   const factory CategorySuccess(
-          final CategoryResponseModel categoryResponseModel) =
-      _$CategorySuccessImpl;
+      final ServiceResponseModel serviceResponseModel) = _$CategorySuccessImpl;
 
-  CategoryResponseModel get categoryResponseModel;
+  ServiceResponseModel get serviceResponseModel;
 
   /// Create a copy of CategoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -562,7 +562,7 @@ class _$CategoryErrorImpl implements CategoryError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() categoryLoading,
-    required TResult Function(CategoryResponseModel categoryResponseModel)
+    required TResult Function(ServiceResponseModel serviceResponseModel)
         categorySuccess,
     required TResult Function(ErrorHandler errorHandler) categoryError,
   }) {
@@ -574,7 +574,7 @@ class _$CategoryErrorImpl implements CategoryError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? categoryLoading,
-    TResult? Function(CategoryResponseModel categoryResponseModel)?
+    TResult? Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryError,
   }) {
@@ -586,7 +586,7 @@ class _$CategoryErrorImpl implements CategoryError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? categoryLoading,
-    TResult Function(CategoryResponseModel categoryResponseModel)?
+    TResult Function(ServiceResponseModel serviceResponseModel)?
         categorySuccess,
     TResult Function(ErrorHandler errorHandler)? categoryError,
     required TResult orElse(),
