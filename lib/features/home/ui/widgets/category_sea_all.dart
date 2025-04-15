@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_project/core/theme/styles.dart';
 
@@ -8,7 +9,7 @@ class DoctorSpecialitySeaAll extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       Text(
-        'اختر الحلاق',
+        'welcome'.tr(),
         style: TextStyles.font18DarkBold,
       ),
       const Spacer(),

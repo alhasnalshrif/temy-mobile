@@ -4,16 +4,26 @@ import 'package:flutter_complete_project/core/helpers/constants.dart';
 import 'package:flutter_complete_project/core/helpers/extensions.dart';
 import 'package:flutter_complete_project/core/helpers/shared_pref_helper.dart';
 import 'package:flutter_complete_project/temy_app.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'core/routing/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
   setupGetIt();
   await checkedIfUserLoggedIn();
-  runApp(TemyApp(
-    appRouter: AppRouter(),
-  ));
+  runApp(
+    EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('ar')],
+        path:
+            'assets/translations', // <-- change the path of the translation files
+        fallbackLocale: const Locale('ar'),
+        child: TemyApp(
+          appRouter: AppRouter(),
+        )),
+  );
 }
 
 checkedIfUserLoggedIn() async {

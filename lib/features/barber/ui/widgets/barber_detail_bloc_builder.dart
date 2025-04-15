@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_complete_project/features/barber/logic/barber_cubit.dart';
 import 'package:flutter_complete_project/features/barber/logic/barber_state.dart';
-import 'package:flutter_complete_project/features/barber/ui/widgets/barber_detrail_screen.dart';
+import 'package:flutter_complete_project/features/barber/ui/widgets/barber_detail_screen.dart';
 
 class SpecializationDoctorBlocBuilder extends StatelessWidget {
   const SpecializationDoctorBlocBuilder({super.key});
@@ -40,9 +40,7 @@ class SpecializationDoctorBlocBuilder extends StatelessWidget {
   }
 
   Widget setupSuccess(categoriesList) {
-    return Expanded(
-      child: BarberScreenItem(serviceResponseModel: categoriesList),
-    );
+    return BarberScreenItem(serviceResponseModel: categoriesList);
   }
 
   Widget setupError() {

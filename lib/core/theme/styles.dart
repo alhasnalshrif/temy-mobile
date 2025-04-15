@@ -152,6 +152,12 @@ class TextStyles {
     color: Colors.black,
   );
 
+  static TextStyle font18DarkSemiBold = const TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeightHelper.semiBold,
+    color: Colors.black,
+  );
+
   static TextStyle font16DarkBold = const TextStyle(
     fontSize: 16,
     fontWeight: FontWeightHelper.bold,

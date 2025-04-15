@@ -6,14 +6,26 @@ import 'package:flutter_complete_project/core/helpers/shared_pref_helper.dart';
 import 'package:flutter_complete_project/temy_app.dart';
 
 import 'core/routing/app_router.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
   setupGetIt();
   await checkedIfUserLoggedIn();
-  runApp(TemyApp(
-    appRouter: AppRouter(),
-  ));
+  runApp(
+    EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('ar')],
+        path:
+            'assets/translations', // <-- change the path of the translation files
+        fallbackLocale: const Locale('ar'),
+        startLocale: const Locale('ar'), // <-- force Arabic as default
+        child: TemyApp(
+          appRouter: AppRouter(),
+        )),
+  );
 }
 
 checkedIfUserLoggedIn() async {

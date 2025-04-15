@@ -6,7 +6,6 @@ import 'package:flutter_complete_project/features/login/logic/cubit/login_cubit.
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
-import 'password_validations.dart';
 
 class EmailAndPassword extends StatefulWidget {
   const EmailAndPassword({super.key});
