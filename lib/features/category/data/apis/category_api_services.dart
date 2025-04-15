@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_complete_project/core/networking/api_constants.dart';
 import 'package:flutter_complete_project/features/category/data/apis/category_api_constants.dart';
-import 'package:flutter_complete_project/features/category/data/models/category_response.dart';
 import 'package:flutter_complete_project/features/category/data/models/service_response.dart';
 import 'package:retrofit/retrofit.dart';
 

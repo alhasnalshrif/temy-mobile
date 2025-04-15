@@ -1,8 +1,9 @@
 import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
+import 'package:flutter_complete_project/features/home/data/models/barber_response.dart';
 import 'package:flutter_complete_project/features/home/data/models/category_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part  'home_state.freezed.dart';
+part 'home_state.freezed.dart';
 
 @freezed
 class HomeState with _$HomeState {
@@ -10,8 +11,16 @@ class HomeState with _$HomeState {
 
   // categories
   const factory HomeState.categoriesLoading() = CategoriesLoading;
-  const factory HomeState.categoriesSuccess(CategoryResponseModel categoriesResponseModel) = CategoriesSuccess;
+  const factory HomeState.categoriesSuccess(
+      CategoryResponseModel categoriesResponseModel) = CategoriesSuccess;
 
-  const factory HomeState.categoriesError(ErrorHandler errorHandler) = CategoriesError;
+  const factory HomeState.categoriesError(ErrorHandler errorHandler) =
+      CategoriesError;
 
+  // barbers
+  const factory HomeState.barbersLoading() = BarbersLoading;
+  const factory HomeState.barbersSuccess(
+      BarberResponseModel barbersResponseModel) = BarbersSuccess;
+  const factory HomeState.barbersError(ErrorHandler errorHandler) =
+      BarbersError;
 }

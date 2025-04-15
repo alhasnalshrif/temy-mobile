@@ -12,20 +12,20 @@ class SpecializationDoctorBlocBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (previous, current) =>
-          current is CategoriesLoading ||
-          current is CategoriesSuccess ||
-          current is CategoriesError,
+          current is BarbersLoading ||
+          current is BarbersSuccess ||
+          current is BarbersError,
       builder: (context, state) {
         return state.maybeMap(
-          categoriesLoading: (value) {
+          barbersLoading: (value) {
             return setupLoading();
           },
-          categoriesSuccess: (categoriesResponseModel) {
-            var categoriesList = categoriesResponseModel
-                .categoriesResponseModel.categoryDataList;
-            return setupSuccess(categoriesList);
+          barbersSuccess: (barbersResponseModel) {
+            var barberesLis =
+                barbersResponseModel.barbersResponseModel.barberDataList;
+            return setupSuccess(barberesLis);
           },
-          categoriesError: (errorHandler) => setupError(),
+          barbersError: (errorHandler) => setupError(),
           orElse: () {
             return const SizedBox.shrink();
           },
@@ -40,11 +40,11 @@ class SpecializationDoctorBlocBuilder extends StatelessWidget {
     );
   }
 
-  Widget setupSuccess(categoriesList) {
+  Widget setupSuccess(barberesLis) {
     return Expanded(
       child: Column(
         children: [
-          CategoryListView(categoryDataList: categoriesList ?? []),
+          CategoryListView(categoryDataList: barberesLis ?? []),
           verticalSpace(24),
         ],
       ),

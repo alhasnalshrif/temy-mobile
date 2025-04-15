@@ -8,7 +8,7 @@ class DoctorSpecialitySeaAll extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       Text(
-        'اختر نوع خدمه',
+        'اختر الحلاق',
         style: TextStyles.font18DarkBold,
       ),
       const Spacer(),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_complete_project/features/home/data/models/barber_response.dart';
 import 'package:flutter_complete_project/features/home/data/models/category_response.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CategoryListViewItem extends StatelessWidget {
-  final CategoryData? categoryResponseModel;
+  final BarberData? categoryResponseModel;
   final int indexItem;
   final double radius;
   final VoidCallback? onTap;
@@ -22,7 +23,7 @@ class CategoryListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       opacity: 1.0,
       child: GestureDetector(
         onTap: onTap,
@@ -34,7 +35,7 @@ class CategoryListViewItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _CategoryImage(
-                imageUrl: categoryResponseModel?.imageCover,
+                imageUrl: categoryResponseModel?.avatar,
                 radius: radius,
                 backgroundColor: backgroundColor,
               ),

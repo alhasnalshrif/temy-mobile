@@ -30,7 +30,8 @@ class _MyDashboardState extends State<DashboardScreen> {
   void _initializeScreens() {
     _widgetOptions = [
       BlocProvider(
-        create: (context) => HomeCubit(getIt())..getCategories(),
+        // create: (context) => HomeCubit(getIt())..getCategories(),
+        create: (context) => HomeCubit(getIt())..getBarbers(),
         child: const HomeScreen(),
       ),
       const BookingScreen(),

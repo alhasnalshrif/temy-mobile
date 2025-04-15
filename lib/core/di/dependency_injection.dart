@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_complete_project/core/networking/api_service.dart';
 import 'package:flutter_complete_project/core/networking/dio_factory.dart';
+import 'package:flutter_complete_project/features/barber/data/apis/barber_api_services.dart';
+import 'package:flutter_complete_project/features/barber/data/repos/barber_repo.dart';
 import 'package:flutter_complete_project/features/category/data/apis/category_api_services.dart';
 import 'package:flutter_complete_project/features/category/data/repos/category_repo.dart';
-import 'package:flutter_complete_project/features/category/logic/category_cubit.dart';
 import 'package:flutter_complete_project/features/home/data/apis/home_api_services.dart';
 import 'package:flutter_complete_project/features/home/data/repos/home_repo.dart';
 import 'package:flutter_complete_project/features/profile/data/apis/profile_api_services.dart';
@@ -38,6 +39,10 @@ Future<void> setupGetIt() async {
       .registerLazySingleton<ProfileApiServices>(() => ProfileApiServices(dio));
   getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
 
-  getIt.registerLazySingleton<CategoryApiServices>(() => CategoryApiServices(dio));
+  getIt.registerLazySingleton<CategoryApiServices>(
+      () => CategoryApiServices(dio));
   getIt.registerLazySingleton<CategoryRepo>(() => CategoryRepo(getIt()));
+
+  getIt.registerLazySingleton<BarberApiServices>(() => BarberApiServices(dio));
+  getIt.registerLazySingleton<BarberRepo>(() => BarberRepo(getIt()));
 }

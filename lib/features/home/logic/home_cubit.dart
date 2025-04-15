@@ -18,4 +18,17 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+  void getBarbers() async {
+    emit(const HomeState.barbersLoading());
+    final response = await _homeRepo.getBarbers();
+    response.when(
+      success: (barbersResponseModel) {
+        emit(HomeState.barbersSuccess(barbersResponseModel));
+      },
+      failure: (error) {
+        emit(HomeState.barbersError(error));
+      },
+    );
+  }
 }

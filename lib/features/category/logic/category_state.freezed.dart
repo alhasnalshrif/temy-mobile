@@ -354,10 +354,10 @@ class __$$CategorySuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? serviceResponseModel = freezed,
+    Object? serviceResponseModel = null,
   }) {
     return _then(_$CategorySuccessImpl(
-      freezed == serviceResponseModel
+      null == serviceResponseModel
           ? _value.serviceResponseModel
           : serviceResponseModel // ignore: cast_nullable_to_non_nullable
               as ServiceResponseModel,
@@ -383,13 +383,12 @@ class _$CategorySuccessImpl implements CategorySuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CategorySuccessImpl &&
-            const DeepCollectionEquality()
-                .equals(other.serviceResponseModel, serviceResponseModel));
+            (identical(other.serviceResponseModel, serviceResponseModel) ||
+                other.serviceResponseModel == serviceResponseModel));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(serviceResponseModel));
+  int get hashCode => Object.hash(runtimeType, serviceResponseModel);
 
   /// Create a copy of CategoryState
   /// with the given fields replaced by the non-null parameter values.

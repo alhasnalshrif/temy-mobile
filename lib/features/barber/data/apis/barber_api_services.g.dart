@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'profile_api_services.dart';
+part of 'barber_api_services.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'profile_api_services.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
-class _ProfileApiServices implements ProfileApiServices {
-  _ProfileApiServices(
+class _BarberApiServices implements BarberApiServices {
+  _BarberApiServices(
     this._dio, {
     this.baseUrl,
     this.errorLogger,
@@ -24,19 +24,19 @@ class _ProfileApiServices implements ProfileApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<UserProfile> getProfile() async {
+  Future<BarberDetailResponseModel> getBarberDetail(String barberId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<UserProfile>(Options(
+    final _options = _setStreamType<BarberDetailResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'users/profile',
+          'users/barbers/${barberId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -46,9 +46,9 @@ class _ProfileApiServices implements ProfileApiServices {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserProfile _value;
+    late BarberDetailResponseModel _value;
     try {
-      _value = UserProfile.fromJson(_result.data!);
+      _value = BarberDetailResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
