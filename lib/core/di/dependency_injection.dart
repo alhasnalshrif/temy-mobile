@@ -13,7 +13,6 @@ import 'package:temy_barber/features/profile/data/apis/profile_api_services.dart
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_services.dart';
 import 'package:get_it/get_it.dart';
-import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 
 import '../../features/login/data/repos/login_repo.dart';
 import '../../features/login/logic/cubit/login_cubit.dart';
