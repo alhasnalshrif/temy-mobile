@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/theme/styles.dart';
+import 'package:temy_barber/core/theme/styles.dart';
 
 class DoctorSpecialitySeaAll extends StatelessWidget {
   const DoctorSpecialitySeaAll({super.key});

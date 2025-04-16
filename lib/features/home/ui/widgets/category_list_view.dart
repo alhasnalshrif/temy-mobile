@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/features/home/data/models/barber_response.dart';
-import 'package:flutter_complete_project/features/home/ui/widgets/category_list_view_item.dart';
-import 'package:flutter_complete_project/core/routing/routes.dart';
+import 'package:temy_barber/features/home/data/models/barber_response.dart';
+import 'package:temy_barber/features/home/ui/widgets/category_list_view_item.dart';
+import 'package:temy_barber/core/routing/routes.dart';
 
 class CategoryListView extends StatelessWidget {
   final List<BarberData?> categoryDataList;

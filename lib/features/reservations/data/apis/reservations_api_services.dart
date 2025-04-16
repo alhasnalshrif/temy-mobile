@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_complete_project/core/networking/api_constants.dart';
-import 'package:flutter_complete_project/features/reservations/data/models/reservation_detail_request.dart';
-import 'package:flutter_complete_project/features/reservations/data/apis/reservations_api_constants.dart';
+import 'package:temy_barber/core/networking/api_constants.dart';
+import 'package:temy_barber/features/reservations/data/models/reservation_detail_request.dart';
+import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
+import 'package:temy_barber/features/reservations/data/apis/reservations_api_constants.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'reservations_api_services.g.dart';
@@ -13,4 +14,8 @@ abstract class ReservationApiServices {
   @POST(ReservationsApiConstants.reservations)
   Future<ReservationRequestModel> postReservations(
       @Body() ReservationRequestModel reservationRequest);
+
+  @GET('${ReservationsApiConstants.reservations}/available-slots')
+  Future<TimeSlotsResponse> getAvailableTimeSlots(
+      @Query('barberId') String barberId, @Query('date') String date);
 }

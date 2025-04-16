@@ -1,4 +1,4 @@
-name: flutter_complete_project
+name: temy_barber
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -68,6 +68,11 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   shared_preferences: ^2.5.3
   carousel_slider: ^5.0.0
+  
+  # PDF generation and document sharing
+  pdf: ^3.10.4
+  path_provider: ^2.1.1
+  share_plus: ^7.2.1
 
 dev_dependencies:
   flutter_test:

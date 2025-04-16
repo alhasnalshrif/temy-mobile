@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/features/barber/ui/widgets/barber_detail_bloc_builder.dart';
+import 'package:temy_barber/features/barber/ui/widgets/barber_detail_bloc_builder.dart';
 
 class BarberScreen extends StatelessWidget {
   const BarberScreen({super.key});
@@ -8,7 +8,7 @@ class BarberScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-        child: SpecializationDoctorBlocBuilder(),
+        child: BarberDetailBlocBuilder(),
       ),
     );
   }

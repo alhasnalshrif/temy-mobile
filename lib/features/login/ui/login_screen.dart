@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/features/login/logic/cubit/login_cubit.dart';
+import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
 
 import '../../../core/helpers/spacing.dart';
 import '../../../core/theme/styles.dart';

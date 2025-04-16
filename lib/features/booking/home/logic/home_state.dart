@@ -1,5 +1,5 @@
-// import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
-// import 'package:flutter_complete_project/features/home/data/models/category_response.dart';
+// import 'package:temy_barber/core/networking/api_error_handler.dart';
+// import 'package:temy_barber/features/home/data/models/category_response.dart';
 // import 'package:freezed_annotation/freezed_annotation.dart';
 
 // // part  '../../../home copy/home/logic/home_state.freezed.dart';

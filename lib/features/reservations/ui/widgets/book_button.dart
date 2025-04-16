@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 
 class BookButton extends StatelessWidget {
   final VoidCallback onPressed;

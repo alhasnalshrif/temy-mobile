@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_complete_project/core/networking/api_constants.dart';
-import 'package:flutter_complete_project/features/profile/data/apis/profile_api_constants.dart';
-import 'package:flutter_complete_project/features/profile/data/models/profile_response.dart';
+import 'package:temy_barber/core/networking/api_constants.dart';
+import 'package:temy_barber/features/profile/data/apis/profile_api_constants.dart';
+import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'profile_api_services.g.dart';

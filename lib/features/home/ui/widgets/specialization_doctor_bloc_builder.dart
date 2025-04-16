@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/core/helpers/spacing.dart';
-import 'package:flutter_complete_project/features/home/logic/home_cubit.dart';
-import 'package:flutter_complete_project/features/home/logic/home_state.dart';
-import 'package:flutter_complete_project/features/home/ui/widgets/category_list_view.dart';
+import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/features/home/logic/home_cubit.dart';
+import 'package:temy_barber/features/home/logic/home_state.dart';
+import 'package:temy_barber/features/home/ui/widgets/category_list_view.dart';
 
 class SpecializationDoctorBlocBuilder extends StatelessWidget {
   const SpecializationDoctorBlocBuilder({super.key});

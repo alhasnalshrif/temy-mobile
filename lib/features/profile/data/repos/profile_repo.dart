@@ -1,7 +1,7 @@
-import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
-import 'package:flutter_complete_project/core/networking/api_result.dart';
-import 'package:flutter_complete_project/features/profile/data/apis/profile_api_services.dart';
-import 'package:flutter_complete_project/features/profile/data/models/profile_response.dart';
+import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
+import 'package:temy_barber/features/profile/data/apis/profile_api_services.dart';
+import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 
 class ProfileRepo {
   final ProfileApiServices _profileApiServices;

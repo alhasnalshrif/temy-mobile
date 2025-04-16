@@ -1,5 +1,5 @@
-import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
-import 'package:flutter_complete_project/features/profile/data/models/profile_response.dart';
+import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'profile_state.freezed.dart';
@@ -10,8 +10,8 @@ class ProfileState with _$ProfileState {
 
   // categories
   const factory ProfileState.profileLoading() = ProfileLoading;
-  const factory ProfileState.profileSuccess(
-      UserProfile userProfile) = ProfileSuccess;
+  const factory ProfileState.profileSuccess(UserProfile userProfile) =
+      ProfileSuccess;
 
   const factory ProfileState.profileError(ErrorHandler errorHandler) =
       ProfileError;

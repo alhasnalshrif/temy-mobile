@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/features/profile/data/repos/profile_repo.dart';
+import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {

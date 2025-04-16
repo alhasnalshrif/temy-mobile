@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/core/di/dependency_injection.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
-import 'package:flutter_complete_project/core/theme/styles.dart';
-import 'package:flutter_complete_project/features/booking/ui/booking.dart';
-import 'package:flutter_complete_project/features/home/logic/home_cubit.dart';
-import 'package:flutter_complete_project/features/home/ui/home_screen.dart';
-import 'package:flutter_complete_project/features/profile/logic/profile_cubit.dart';
-import 'package:flutter_complete_project/features/profile/ui/profile.dart';
+import 'package:temy_barber/core/di/dependency_injection.dart';
+import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/features/booking/ui/booking.dart';
+import 'package:temy_barber/features/home/logic/home_cubit.dart';
+import 'package:temy_barber/features/home/ui/home_screen.dart';
+import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
+import 'package:temy_barber/features/profile/ui/profile.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});

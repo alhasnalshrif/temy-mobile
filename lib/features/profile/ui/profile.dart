@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/core/helpers/spacing.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
-import 'package:flutter_complete_project/core/theme/styles.dart';
-import 'package:flutter_complete_project/features/profile/logic/profile_cubit.dart';
-import 'package:flutter_complete_project/features/profile/logic/profile_state.dart';
+import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
+import 'package:temy_barber/features/profile/logic/profile_state.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

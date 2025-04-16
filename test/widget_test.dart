@@ -6,8 +6,8 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/routing/app_router.dart';
-import 'package:flutter_complete_project/temy_app.dart';
+import 'package:temy_barber/core/routing/app_router.dart';
+import 'package:temy_barber/temy_app.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

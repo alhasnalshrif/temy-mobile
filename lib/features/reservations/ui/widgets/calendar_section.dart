@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 
 class CalendarSection extends StatefulWidget {
   final int maxBookingDays;

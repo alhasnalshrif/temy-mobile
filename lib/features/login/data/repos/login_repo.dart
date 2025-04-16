@@ -1,8 +1,8 @@
-import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
-import 'package:flutter_complete_project/core/networking/api_result.dart';
-import 'package:flutter_complete_project/core/networking/api_service.dart';
-import 'package:flutter_complete_project/features/login/data/models/login_request_body.dart';
-import 'package:flutter_complete_project/features/login/data/models/login_response.dart';
+import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
+import 'package:temy_barber/core/networking/api_service.dart';
+import 'package:temy_barber/features/login/data/models/login_request_body.dart';
+import 'package:temy_barber/features/login/data/models/login_response.dart';
 
 class LoginRepo {
   final ApiService _apiService;

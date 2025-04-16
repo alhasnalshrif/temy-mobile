@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/core/routing/routes.dart';
-import 'package:flutter_complete_project/features/barber/data/models/reservation_arguments.dart';
-import 'package:flutter_complete_project/features/barber/logic/barber_cubit.dart';
-import 'package:flutter_complete_project/features/barber/ui/barber_screen.dart';
-import 'package:flutter_complete_project/features/category/logic/category_cubit.dart';
-import 'package:flutter_complete_project/features/category/ui/category_screen.dart';
-import 'package:flutter_complete_project/features/dashboard/dashboard_screen.dart';
-import 'package:flutter_complete_project/features/login/logic/cubit/login_cubit.dart';
-import 'package:flutter_complete_project/features/login/ui/login_screen.dart';
-import 'package:flutter_complete_project/features/onboarding/onboarding_screen.dart';
-import 'package:flutter_complete_project/features/reservations/ui/reservations_screen.dart';
-import 'package:flutter_complete_project/features/sign_up/logic/sign_up_cubit.dart';
-import 'package:flutter_complete_project/features/sign_up/ui/sign_up_screen.dart';
+import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
+import 'package:temy_barber/features/barber/logic/barber_cubit.dart';
+import 'package:temy_barber/features/barber/ui/barber_screen.dart';
+import 'package:temy_barber/features/category/logic/category_cubit.dart';
+import 'package:temy_barber/features/category/ui/category_screen.dart';
+import 'package:temy_barber/features/dashboard/dashboard_screen.dart';
+import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
+import 'package:temy_barber/features/login/ui/login_screen.dart';
+import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
+import 'package:temy_barber/features/reservations/ui/reservations_screen.dart';
+import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
+import 'package:temy_barber/features/sign_up/ui/sign_up_screen.dart';
+import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 import '../di/dependency_injection.dart';
 
 class AppRouter {
@@ -58,7 +59,10 @@ class AppRouter {
       case Routes.reservationScreen:
         final args = settings.arguments as ReservationArguments;
         return MaterialPageRoute(
-          builder: (_) => ReservationsScreen(arguments: args),
+          builder: (_) => BlocProvider(
+            create: (context) => ReservationCubit(getIt()),
+            child: ReservationsScreen(arguments: args),
+          ),
         );
 
       case Routes.categoryScreen:

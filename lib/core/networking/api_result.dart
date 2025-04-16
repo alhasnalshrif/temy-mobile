@@ -1,4 +1,4 @@
-import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'api_result.freezed.dart';
 

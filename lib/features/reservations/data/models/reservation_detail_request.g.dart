@@ -10,19 +10,20 @@ ReservationRequestModel _$ReservationRequestModelFromJson(
         Map<String, dynamic> json) =>
     ReservationRequestModel(
       user: json['user'] as String,
-      service:
-          (json['service'] as List<dynamic>).map((e) => e as String).toList(),
-      barber: json['barber'] as String,
-      date: json['date'] as String,
-      status: json['status'] as String,
+      serviceIds: (json['serviceIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      barberId: json['barberId'] as String,
+      date: DateTime.parse(json['date'] as String),
+      startTime: json['startTime'] as String,
     );
 
 Map<String, dynamic> _$ReservationRequestModelToJson(
         ReservationRequestModel instance) =>
     <String, dynamic>{
       'user': instance.user,
-      'service': instance.service,
-      'barber': instance.barber,
-      'date': instance.date,
-      'status': instance.status,
+      'serviceIds': instance.serviceIds,
+      'barberId': instance.barberId,
+      'date': instance.date.toIso8601String(),
+      'startTime': instance.startTime,
     };

@@ -1,5 +1,5 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_complete_project/features/home/data/repos/home_repo.dart';
+// import 'package:temy_barber/features/home/data/repos/home_repo.dart';
 // import 'home_state.dart';
 
 // class HomeCubit extends Cubit<HomeState> {

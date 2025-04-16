@@ -1,7 +1,7 @@
-import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
-import 'package:flutter_complete_project/core/networking/api_result.dart';
-import 'package:flutter_complete_project/features/booking/data/apis/home_api_services.dart';
-import 'package:flutter_complete_project/features/booking/data/models/category_response.dart';
+import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
+import 'package:temy_barber/features/booking/data/apis/home_api_services.dart';
+import 'package:temy_barber/features/booking/data/models/category_response.dart';
 
 class HomeRepo {
   final HomeApiServices _homeApiServices;

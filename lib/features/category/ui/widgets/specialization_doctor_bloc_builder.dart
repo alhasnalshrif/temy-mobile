@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/core/helpers/spacing.dart';
-import 'package:flutter_complete_project/features/category/logic/category_cubit.dart';
-import 'package:flutter_complete_project/features/category/logic/category_state.dart';
+import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/features/category/logic/category_cubit.dart';
+import 'package:temy_barber/features/category/logic/category_state.dart';
 
-import 'package:flutter_complete_project/features/category/ui/widgets/category_list_view.dart';
+import 'package:temy_barber/features/category/ui/widgets/category_list_view.dart';
 
 class SpecializationDoctorBlocBuilder extends StatelessWidget {
   const SpecializationDoctorBlocBuilder({super.key});
@@ -22,8 +22,7 @@ class SpecializationDoctorBlocBuilder extends StatelessWidget {
             return setupLoading();
           },
           categorySuccess: (categoriesResponseModel) {
-            print(
-                categoriesResponseModel.serviceResponseModel.serviceDataList);
+            print(categoriesResponseModel.serviceResponseModel.serviceDataList);
             print(
                 'categoriesResponseModel.categoryResponseModel.categoryDataList');
             var categoriesList =

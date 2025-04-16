@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/helpers/extensions.dart';
-import 'package:flutter_complete_project/core/routing/routes.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/routing/routes.dart';
 
 import '../../../../core/theme/styles.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/features/category/data/models/service_response.dart';
-import 'package:flutter_complete_project/features/category/ui/widgets/category_list_view_item.dart';
-import 'package:flutter_complete_project/core/routing/routes.dart';
+import 'package:temy_barber/features/category/data/models/service_response.dart';
+import 'package:temy_barber/features/category/ui/widgets/category_list_view_item.dart';
+import 'package:temy_barber/core/routing/routes.dart';
 
 class CategoryListView extends StatelessWidget {
   final List<ServiceData?> specializationDataList;

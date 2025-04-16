@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_complete_project/core/helpers/constants.dart';
-import 'package:flutter_complete_project/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/core/helpers/constants.dart';
+import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {

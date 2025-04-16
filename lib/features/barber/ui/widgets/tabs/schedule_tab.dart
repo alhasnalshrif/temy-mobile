@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
-import 'package:flutter_complete_project/features/barber/data/models/barber_detail_response.dart';
+import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 
 class ScheduleTab extends StatefulWidget {
   final BarberDetailData? serviceResponseModel;

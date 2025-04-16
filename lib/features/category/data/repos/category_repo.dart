@@ -1,7 +1,7 @@
-import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
-import 'package:flutter_complete_project/core/networking/api_result.dart';
-import 'package:flutter_complete_project/features/category/data/apis/category_api_services.dart';
-import 'package:flutter_complete_project/features/category/data/models/service_response.dart';
+import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
+import 'package:temy_barber/features/category/data/apis/category_api_services.dart';
+import 'package:temy_barber/features/category/data/models/service_response.dart';
 
 class CategoryRepo {
   final CategoryApiServices _categoryApiServices;

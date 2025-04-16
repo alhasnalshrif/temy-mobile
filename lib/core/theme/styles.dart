@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
-import 'package:flutter_complete_project/core/theme/font_weight_helper.dart';
+import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/theme/font_weight_helper.dart';
 
 class TextStyles {
   static TextStyle font24BlackBold = const TextStyle(

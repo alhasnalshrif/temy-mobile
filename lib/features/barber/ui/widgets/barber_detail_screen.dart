@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/routing/routes.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
-import 'package:flutter_complete_project/features/barber/data/models/barber_detail_response.dart';
-import 'package:flutter_complete_project/features/barber/data/models/reservation_arguments.dart';
-import 'package:flutter_complete_project/features/barber/ui/widgets/tabs/about_tab.dart';
-import 'package:flutter_complete_project/features/barber/ui/widgets/barber_image.dart';
-import 'package:flutter_complete_project/features/barber/ui/widgets/rating_display.dart';
-import 'package:flutter_complete_project/features/barber/ui/widgets/tabs/schedule_tab.dart';
-import 'package:flutter_complete_project/features/barber/ui/widgets/tabs/service_tab.dart';
-import 'package:flutter_complete_project/features/barber/ui/widgets/sliver_tab_bar_delegate.dart';
+import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
+import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
+import 'package:temy_barber/features/barber/ui/widgets/tabs/about_tab.dart';
+import 'package:temy_barber/features/barber/ui/widgets/barber_image.dart';
+import 'package:temy_barber/features/barber/ui/widgets/rating_display.dart';
+import 'package:temy_barber/features/barber/ui/widgets/tabs/schedule_tab.dart';
+import 'package:temy_barber/features/barber/ui/widgets/tabs/service_tab.dart';
+import 'package:temy_barber/features/barber/ui/widgets/sliver_tab_bar_delegate.dart';
 
 class BarberScreenItem extends StatefulWidget {
   final BarberDetailData? serviceResponseModel;

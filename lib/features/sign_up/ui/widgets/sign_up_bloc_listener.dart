@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/core/helpers/extensions.dart';
-import 'package:flutter_complete_project/features/sign_up/logic/sign_up_cubit.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/colors.dart';
@@ -59,7 +59,9 @@ class SignupBlocListener extends StatelessWidget {
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                foregroundColor: Colors.white, backgroundColor: Colors.blue, disabledForegroundColor: Colors.grey.withOpacity(0.38),
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
+                disabledForegroundColor: Colors.grey.withOpacity(0.38),
               ),
               onPressed: () {
                 context.pushNamed(Routes.loginScreen);

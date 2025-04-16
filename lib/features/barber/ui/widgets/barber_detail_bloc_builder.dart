@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/features/barber/logic/barber_cubit.dart';
-import 'package:flutter_complete_project/features/barber/logic/barber_state.dart';
-import 'package:flutter_complete_project/features/barber/ui/widgets/barber_detail_screen.dart';
+import 'package:temy_barber/features/barber/logic/barber_cubit.dart';
+import 'package:temy_barber/features/barber/logic/barber_state.dart';
+import 'package:temy_barber/features/barber/ui/widgets/barber_detail_screen.dart';
 
-class SpecializationDoctorBlocBuilder extends StatelessWidget {
-  const SpecializationDoctorBlocBuilder({super.key});
+class BarberDetailBlocBuilder extends StatelessWidget {
+  const BarberDetailBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {

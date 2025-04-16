@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_complete_project/features/home/data/models/banner_response.dart';
+import 'package:temy_barber/features/home/data/models/banner_response.dart';
 import 'package:shimmer/shimmer.dart';
 
 class BannerCarousel extends StatefulWidget {

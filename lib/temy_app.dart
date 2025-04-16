@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/helpers/constants.dart';
-import 'package:flutter_complete_project/core/routing/app_router.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
+import 'package:temy_barber/core/helpers/constants.dart';
+import 'package:temy_barber/core/routing/app_router.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 
 import 'core/routing/routes.dart';
 

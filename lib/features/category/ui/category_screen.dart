@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/helpers/spacing.dart';
-import 'package:flutter_complete_project/features/category/ui/widgets/specialization_doctor_bloc_builder.dart';
+import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/features/category/ui/widgets/specialization_doctor_bloc_builder.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});

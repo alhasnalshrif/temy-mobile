@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/features/category/data/repos/category_repo.dart';
+import 'package:temy_barber/features/category/data/repos/category_repo.dart';
 import 'category_state.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {

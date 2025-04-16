@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
-import 'package:flutter_complete_project/features/sign_up/ui/widgets/sign_up_form.dart';
+import 'package:temy_barber/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
+import 'package:temy_barber/features/sign_up/ui/widgets/sign_up_form.dart';
 
 import '../../../core/helpers/spacing.dart';
 import '../../../core/theme/styles.dart';

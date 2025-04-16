@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/helpers/extensions.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
-import 'package:flutter_complete_project/core/theme/styles.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/theme/styles.dart';
 
 import '../../../core/routing/routes.dart';
 

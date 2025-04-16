@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_complete_project/core/networking/api_constants.dart';
-import 'package:flutter_complete_project/features/barber/data/apis/barber_api_constants.dart';
-import 'package:flutter_complete_project/features/barber/data/models/barber_detail_response.dart';
+import 'package:temy_barber/core/networking/api_constants.dart';
+import 'package:temy_barber/features/barber/data/apis/barber_api_constants.dart';
+import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'barber_api_services.g.dart';

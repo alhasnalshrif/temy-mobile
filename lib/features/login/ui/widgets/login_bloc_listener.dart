@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_complete_project/core/helpers/extensions.dart';
-import 'package:flutter_complete_project/features/login/logic/cubit/login_cubit.dart';
-import 'package:flutter_complete_project/features/login/logic/cubit/login_state.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
+import 'package:temy_barber/features/login/logic/cubit/login_state.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/colors.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/di/dependency_injection.dart';
-import 'package:flutter_complete_project/core/helpers/constants.dart';
-import 'package:flutter_complete_project/core/helpers/extensions.dart';
-import 'package:flutter_complete_project/core/helpers/shared_pref_helper.dart';
-import 'package:flutter_complete_project/temy_app.dart';
+import 'package:temy_barber/core/di/dependency_injection.dart';
+import 'package:temy_barber/core/helpers/constants.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/temy_app.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'core/routing/app_router.dart';

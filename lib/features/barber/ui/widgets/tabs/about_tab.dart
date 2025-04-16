@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/features/barber/data/models/barber_detail_response.dart';
+import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 
 class AboutTab extends StatelessWidget {
   final BarberDetailData? serviceResponseModel;
