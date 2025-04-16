@@ -149,12 +149,12 @@ class _CalendarSectionState extends State<CalendarSection>
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: ColorsManager.lightBlue,
-                borderRadius: BorderRadius.circular(20),
-                border:
-                    Border.all(color: ColorsManager.mainBlue.withOpacity(0.1)),
-              ),
+              // decoration: BoxDecoration(
+              //   color: ColorsManager.lightBlue,
+              //   borderRadius: BorderRadius.circular(20),
+              //   border:
+              //       Border.all(color: ColorsManager.mainBlue.withOpacity(0.1)),
+              // ),
               child: Row(
                 children: [
                   const Icon(
@@ -185,56 +185,62 @@ class _CalendarSectionState extends State<CalendarSection>
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: _previousMonth,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: ColorsManager.thirdfMain,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Icon(
-                          Icons.chevron_left,
-                          color: ColorsManager.mainBlue,
-                        ),
-                      ),
-                    ),
-                  ),
-                  FadeTransition(
-                    opacity: _animation,
-                    child: Text(
-                      _formatMonthYear(currentMonth),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: _nextMonth,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: ColorsManager.thirdfMain,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Icon(
-                          Icons.chevron_right,
-                          color: ColorsManager.mainBlue,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: ColorsManager.thirdfMain,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: _previousMonth,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: ColorsManager.thirdfMain,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Icon(
+                            Icons.chevron_left,
+                            color: ColorsManager.mainBlue,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    FadeTransition(
+                      opacity: _animation,
+                      child: Text(
+                        _formatMonthYear(currentMonth),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: _nextMonth,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: ColorsManager.thirdfMain,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Icon(
+                            Icons.chevron_right,
+                            color: ColorsManager.mainBlue,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 16),
               _buildCalendarDays(),

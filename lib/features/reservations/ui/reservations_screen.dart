@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_project/core/theme/colors.dart';
+import 'package:flutter_complete_project/core/theme/styles.dart';
 import 'package:flutter_complete_project/features/barber/data/models/barber_detail_response.dart';
 import 'package:flutter_complete_project/features/barber/data/models/reservation_arguments.dart';
 import 'package:flutter_complete_project/features/reservations/ui/widgets/services_section.dart';
@@ -148,24 +149,15 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            CircleAvatar(
-              radius: 16,
-              backgroundImage: NetworkImage(barberData?.avatar ?? ''),
-              backgroundColor: Colors.grey[200],
-              onBackgroundImageError: (exception, stackTrace) =>
-                  const Icon(Icons.person),
-            ),
-            const SizedBox(width: 8),
-            Text(barberData?.name ?? ""),
-          ],
+        title: Text(
+          'تفاصيل الحجز',
+          style: TextStyles.font18DarkBlueBold,
         ),
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         elevation: 1,
         shadowColor: Colors.black.withOpacity(0.05),
-        centerTitle: true,
+        // centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {

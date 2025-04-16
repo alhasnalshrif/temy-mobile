@@ -16,26 +16,26 @@ class TotalSection extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'مجموع الحساب',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              Text(
-                '${totalPrice.toStringAsFixed(0)} EGP',
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Container(
-            height: 1,
-            color: ColorsManager.thirdfMain,
-          ),
-          const SizedBox(height: 16),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     const Text(
+          //       'مجموع الحساب',
+          //       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          //     ),
+          //     Text(
+          //       '${totalPrice.toStringAsFixed(0)} EGP',
+          //       style:
+          //           const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(height: 16),
+          // Container(
+          //   height: 1,
+          //   color: ColorsManager.thirdfMain,
+          // ),
+          // const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
