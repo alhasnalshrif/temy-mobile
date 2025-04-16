@@ -12,13 +12,11 @@ class ScheduleTab extends StatefulWidget {
 }
 
 class _ScheduleTabState extends State<ScheduleTab> {
-  String? _selectedTime;
-
   @override
   Widget build(BuildContext context) {
-    final schedule = widget.serviceResponseModel?.schedule;
-    final businessHours = schedule?.businessHours;
-    final timeSlots = schedule?.timeSlots ?? [];
+    final schedule = widget.serviceResponseModel?.availability;
+    final businessHours = widget.serviceResponseModel?.workingHours;
+    final timeSlots = schedule?.slots ?? [];
 
     if (schedule == null || businessHours == null || timeSlots.isEmpty) {
       return const Center(
@@ -74,57 +72,30 @@ class _ScheduleTabState extends State<ScheduleTab> {
               ),
               itemBuilder: (context, index) {
                 final slot = timeSlots[index];
-                final isSelected = _selectedTime == slot.startTime;
-                final isDisabled = !slot.available || slot.booked;
+                final isDisabled = !slot.isAvailable;
                 return AnimatedOpacity(
                   duration: const Duration(milliseconds: 200),
                   opacity: isDisabled ? 0.5 : 1,
-                  child: GestureDetector(
-                    onTap: isDisabled
-                        ? null
-                        : () {
-                            setState(() {
-                              _selectedTime = slot.startTime;
-                            });
-                          },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      decoration: BoxDecoration(
-                        color:
-                            isSelected ? ColorsManager.mainBlue : Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color: isSelected
-                              ? ColorsManager.mainBlue
-                              : ColorsManager.thirdfMain,
-                          width: isSelected ? 2.2 : 1,
-                        ),
-                        boxShadow: isSelected
-                            ? [
-                                BoxShadow(
-                                  color:
-                                      ColorsManager.mainBlue.withOpacity(0.10),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ]
-                            : [],
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: ColorsManager.thirdfMain,
                       ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        slot.formattedTime,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: isSelected
-                                  ? Colors.white
-                                  : isDisabled
-                                      ? Colors.grey[400]
-                                      : ColorsManager.darkBlue,
-                              fontWeight: isSelected
-                                  ? FontWeight.bold
-                                  : FontWeight.w500,
-                              letterSpacing: 0.2,
-                            ),
-                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      slot.time,
+                      // slot.formattedTime,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: isDisabled
+                                ? Colors.grey[400]
+                                : ColorsManager.darkBlue,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.2,
+                          ),
                     ),
                   ),
                 );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_complete_project/core/routing/routes.dart';
+import 'package:flutter_complete_project/features/barber/data/models/reservation_arguments.dart';
 import 'package:flutter_complete_project/features/barber/logic/barber_cubit.dart';
 import 'package:flutter_complete_project/features/barber/ui/barber_screen.dart';
 import 'package:flutter_complete_project/features/category/logic/category_cubit.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_complete_project/features/dashboard/dashboard_screen.dar
 import 'package:flutter_complete_project/features/login/logic/cubit/login_cubit.dart';
 import 'package:flutter_complete_project/features/login/ui/login_screen.dart';
 import 'package:flutter_complete_project/features/onboarding/onboarding_screen.dart';
+import 'package:flutter_complete_project/features/reservations/ui/reservations_screen.dart';
 import 'package:flutter_complete_project/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:flutter_complete_project/features/sign_up/ui/sign_up_screen.dart';
 import '../di/dependency_injection.dart';
@@ -52,6 +54,11 @@ class AppRouter {
       case Routes.dashboardScreen:
         return MaterialPageRoute(
           builder: (_) => const DashboardScreen(),
+        );
+      case Routes.reservationScreen:
+        final args = settings.arguments as ReservationArguments;
+        return MaterialPageRoute(
+          builder: (_) => ReservationsScreen(arguments: args),
         );
 
       case Routes.categoryScreen:

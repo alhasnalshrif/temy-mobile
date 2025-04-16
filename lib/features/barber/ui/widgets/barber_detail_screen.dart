@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_project/core/routing/routes.dart';
 import 'package:flutter_complete_project/core/theme/colors.dart';
 import 'package:flutter_complete_project/features/barber/data/models/barber_detail_response.dart';
+import 'package:flutter_complete_project/features/barber/data/models/reservation_arguments.dart';
 import 'package:flutter_complete_project/features/barber/ui/widgets/tabs/about_tab.dart';
 import 'package:flutter_complete_project/features/barber/ui/widgets/barber_image.dart';
 import 'package:flutter_complete_project/features/barber/ui/widgets/rating_display.dart';
@@ -26,7 +28,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
   bool isFavorite = false;
 
   // Track selected service IDs
-  final Set<String> _selectedServiceIds = {};
+  final Set<BarberService> _selectedServices = {};
   double _selectedTotalPrice = 0.0;
 
   @override
@@ -36,13 +38,13 @@ class _BarberScreenItemState extends State<BarberScreenItem>
   }
 
   // Update selection and price
-  void _onServiceSelected(String id, double price, bool selected) {
+  void _onServiceSelected(BarberService service, double price, bool selected) {
     setState(() {
       if (selected) {
-        _selectedServiceIds.add(id);
+        _selectedServices.add(service);
         _selectedTotalPrice += price;
       } else {
-        _selectedServiceIds.remove(id);
+        _selectedServices.remove(service);
         _selectedTotalPrice -= price;
       }
     });
@@ -117,8 +119,8 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                 ),
                 const SizedBox(height: 8),
                 RatingDisplay(
-                  rating: barber?.averageRating,
-                  reviewCount: barber?.numberOfReviews,
+                  rating: barber?.rating.average ?? 0.0,
+                  reviewCount: barber?.rating.total ?? 0,
                 ),
               ],
             ),
@@ -157,7 +159,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
       children: [
         ServiceTab(
           serviceResponseModel: widget.serviceResponseModel,
-          selectedServiceIds: _selectedServiceIds,
+          selectedServices: _selectedServices,
           onServiceSelected: _onServiceSelected,
         ),
         ScheduleTab(serviceResponseModel: widget.serviceResponseModel),
@@ -175,11 +177,20 @@ class _BarberScreenItemState extends State<BarberScreenItem>
         elevation: 4,
         shadowColor: Colors.black.withOpacity(0.2),
         child: InkWell(
-          onTap: _selectedServiceIds.isEmpty
+          onTap: _selectedServices.isEmpty
               ? null
               : () {
-                  // TODO: Navigate to booking/checkout with selected IDs
-                  // Example: Navigator.pushNamed(context, '/checkout', arguments: _selectedServiceIds.toList());
+                  // Pass both selected services and barber details
+                  final args = ReservationArguments(
+                    selectedServices: _selectedServices.toList(),
+                    barberData: widget.serviceResponseModel,
+                    totalPrice: _selectedTotalPrice,
+                  );
+                  Navigator.pushNamed(
+                    context,
+                    Routes.reservationScreen,
+                    arguments: args,
+                  );
                 },
           borderRadius: BorderRadius.circular(12),
           child: Container(
@@ -187,7 +198,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
             padding: const EdgeInsets.symmetric(vertical: 16),
             alignment: Alignment.center,
             child: Text(
-              _selectedServiceIds.isEmpty
+              _selectedServices.isEmpty
                   ? 'Book Now'
                   : 'Book Now (EGP${_selectedTotalPrice.toStringAsFixed(0)})',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(

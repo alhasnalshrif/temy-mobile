@@ -22,136 +22,109 @@ Map<String, dynamic> _$BarberDetailResponseModelToJson(
 
 BarberDetailData _$BarberDetailDataFromJson(Map<String, dynamic> json) =>
     BarberDetailData(
-      id: json['_id'] as String,
+      id: json['id'] as String,
       name: json['name'] as String,
-      phone: json['phone'] as String,
-      countryCode: json['countryCode'] as String,
-      role: json['role'] as String,
-      verified: json['verified'] as bool,
-      verificationCode: json['verificationCode'] as String,
-      verificationCodeExpires: json['verificationCodeExpires'] as String,
-      resetPasswordCode: json['resetPasswordCode'] as String?,
       avatar: json['avatar'] as String,
       about: json['about'] as String?,
       portfolioImages: (json['portfolioImages'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      averageRating: (json['averageRating'] as num).toDouble(),
-      numberOfReviews: (json['numberOfReviews'] as num).toInt(),
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
-      v: (json['__v'] as num).toInt(),
+      workingHours:
+          WorkingHours.fromJson(json['workingHours'] as Map<String, dynamic>),
+      rating: Rating.fromJson(json['rating'] as Map<String, dynamic>),
       reviews: (json['reviews'] as List<dynamic>)
           .map((e) => BarberReview.fromJson(e as Map<String, dynamic>))
           .toList(),
       services: (json['services'] as List<dynamic>)
           .map((e) => BarberService.fromJson(e as Map<String, dynamic>))
           .toList(),
-      schedule:
-          BarberSchedule.fromJson(json['schedule'] as Map<String, dynamic>),
+      availability:
+          Availability.fromJson(json['availability'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BarberDetailDataToJson(BarberDetailData instance) =>
     <String, dynamic>{
-      '_id': instance.id,
+      'id': instance.id,
       'name': instance.name,
-      'phone': instance.phone,
-      'countryCode': instance.countryCode,
-      'role': instance.role,
-      'verified': instance.verified,
-      'verificationCode': instance.verificationCode,
-      'verificationCodeExpires': instance.verificationCodeExpires,
-      'resetPasswordCode': instance.resetPasswordCode,
       'avatar': instance.avatar,
       'about': instance.about,
       'portfolioImages': instance.portfolioImages,
-      'averageRating': instance.averageRating,
-      'numberOfReviews': instance.numberOfReviews,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-      '__v': instance.v,
+      'workingHours': instance.workingHours,
+      'rating': instance.rating,
       'reviews': instance.reviews,
       'services': instance.services,
-      'schedule': instance.schedule,
+      'availability': instance.availability,
+    };
+
+WorkingHours _$WorkingHoursFromJson(Map<String, dynamic> json) => WorkingHours(
+      start: json['start'] as String,
+      end: json['end'] as String,
+      daysOff:
+          (json['daysOff'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$WorkingHoursToJson(WorkingHours instance) =>
+    <String, dynamic>{
+      'start': instance.start,
+      'end': instance.end,
+      'daysOff': instance.daysOff,
+    };
+
+Rating _$RatingFromJson(Map<String, dynamic> json) => Rating(
+      average: (json['average'] as num).toDouble(),
+      total: (json['total'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$RatingToJson(Rating instance) => <String, dynamic>{
+      'average': instance.average,
+      'total': instance.total,
     };
 
 BarberService _$BarberServiceFromJson(Map<String, dynamic> json) =>
     BarberService(
-      id: json['_id'] as String,
+      id: json['id'] as String,
       name: json['name'] as String,
+      description: json['description'] as String,
       price: (json['price'] as num).toInt(),
       duration: (json['duration'] as num).toInt(),
-      images:
-          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
-      imageCover: json['imageCover'] as String,
       category: json['category'] as String,
-      available: json['available'] as bool,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
-      v: (json['__v'] as num).toInt(),
-      barbers:
-          (json['barbers'] as List<dynamic>).map((e) => e as String).toList(),
-      description: json['description'] as String,
+      imageCover: json['imageCover'] as String,
     );
 
 Map<String, dynamic> _$BarberServiceToJson(BarberService instance) =>
     <String, dynamic>{
-      '_id': instance.id,
+      'id': instance.id,
       'name': instance.name,
+      'description': instance.description,
       'price': instance.price,
       'duration': instance.duration,
-      'images': instance.images,
-      'imageCover': instance.imageCover,
       'category': instance.category,
-      'available': instance.available,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-      '__v': instance.v,
-      'barbers': instance.barbers,
-      'description': instance.description,
+      'imageCover': instance.imageCover,
     };
 
-BarberSchedule _$BarberScheduleFromJson(Map<String, dynamic> json) =>
-    BarberSchedule(
+Availability _$AvailabilityFromJson(Map<String, dynamic> json) => Availability(
       date: json['date'] as String,
-      businessHours:
-          BusinessHours.fromJson(json['businessHours'] as Map<String, dynamic>),
-      timeSlots: (json['timeSlots'] as List<dynamic>)
+      slots: (json['slots'] as List<dynamic>)
           .map((e) => TimeSlot.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isDayOff: json['isDayOff'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$BarberScheduleToJson(BarberSchedule instance) =>
+Map<String, dynamic> _$AvailabilityToJson(Availability instance) =>
     <String, dynamic>{
       'date': instance.date,
-      'businessHours': instance.businessHours,
-      'timeSlots': instance.timeSlots,
-    };
-
-BusinessHours _$BusinessHoursFromJson(Map<String, dynamic> json) =>
-    BusinessHours(
-      start: json['start'] as String,
-      end: json['end'] as String,
-    );
-
-Map<String, dynamic> _$BusinessHoursToJson(BusinessHours instance) =>
-    <String, dynamic>{
-      'start': instance.start,
-      'end': instance.end,
+      'slots': instance.slots,
+      'isDayOff': instance.isDayOff,
     };
 
 TimeSlot _$TimeSlotFromJson(Map<String, dynamic> json) => TimeSlot(
-      startTime: json['startTime'] as String,
-      formattedTime: json['formattedTime'] as String,
-      available: json['available'] as bool,
-      booked: json['booked'] as bool,
+      time: json['time'] as String,
+      isAvailable: json['isAvailable'] as bool,
     );
 
 Map<String, dynamic> _$TimeSlotToJson(TimeSlot instance) => <String, dynamic>{
-      'startTime': instance.startTime,
-      'formattedTime': instance.formattedTime,
-      'available': instance.available,
-      'booked': instance.booked,
+      'time': instance.time,
+      'isAvailable': instance.isAvailable,
     };
 
 BarberReview _$BarberReviewFromJson(Map<String, dynamic> json) =>

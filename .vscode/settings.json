@@ -1,3 +1,4 @@
 {
-    "dart.flutterSdkPath": "~/Documents/flutter"
+    "dart.flutterSdkPath": "~/Documents/flutter","disable-hardware-acceleration": true
+
 }

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/theme/colors.dart';
 import 'package:flutter_complete_project/core/theme/styles.dart';
 import 'package:flutter_complete_project/features/barber/data/models/barber_detail_response.dart';
 
 class ServiceTab extends StatelessWidget {
   final BarberDetailData? serviceResponseModel;
-  final Set<String>? selectedServiceIds;
-  final void Function(String id, double price, bool selected)?
+  final Set<BarberService>? selectedServices;
+  final void Function(BarberService service, double price, bool selected)?
       onServiceSelected;
 
   const ServiceTab({
     super.key,
     this.serviceResponseModel,
-    this.selectedServiceIds,
+    this.selectedServices,
     this.onServiceSelected,
   });
 
@@ -28,16 +27,17 @@ class ServiceTab extends StatelessWidget {
               separatorBuilder: (_, __) => const SizedBox(height: 12),
               itemBuilder: (context, index) {
                 final service = services[index];
-                final isSelected =
-                    selectedServiceIds?.contains(service.id) ?? false;
+                final isSelected = selectedServices?.any((selectedService) =>
+                        selectedService.id == service.id) ??
+                    false;
                 return InkWell(
                   borderRadius: BorderRadius.circular(12),
                   onTap: onServiceSelected == null
                       ? null
                       : () => onServiceSelected!(
-                            service.id,
+                            service,
                             service.price.toDouble(),
-                            !(isSelected),
+                            !isSelected,
                           ),
                   child: Container(
                     decoration: BoxDecoration(
@@ -74,18 +74,15 @@ class ServiceTab extends StatelessWidget {
                       ),
                       trailing: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
                             'EGP ${service.price.toStringAsFixed(0)}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  color: ColorsManager.darkBlue,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            style: TextStyles.font16DarkBold,
                           ),
                           const SizedBox(height: 4),
+                          Text('Min ${service.duration}',
+                              style: TextStyles.font14DarkBlueMedium),
                         ],
                       ),
                     ),

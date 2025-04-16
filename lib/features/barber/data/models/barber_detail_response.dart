@@ -20,50 +20,29 @@ class BarberDetailResponseModel {
 
 @JsonSerializable()
 class BarberDetailData {
-  @JsonKey(name: '_id')
+  @JsonKey(name: 'id')
   final String id;
   final String name;
-  final String phone;
-  final String countryCode;
-  final String role;
-  final bool verified;
-  final String verificationCode;
-  final String verificationCodeExpires;
-  final String? resetPasswordCode;
   final String avatar;
   final String? about;
   final List<String> portfolioImages;
-  final double averageRating;
-  final int numberOfReviews;
-  final String createdAt;
-  final String updatedAt;
-  @JsonKey(name: '__v')
-  final int v;
+  final WorkingHours workingHours;
+  final Rating rating;
   final List<BarberReview> reviews;
   final List<BarberService> services;
-  final BarberSchedule schedule;
+  final Availability availability;
 
   BarberDetailData({
     required this.id,
     required this.name,
-    required this.phone,
-    required this.countryCode,
-    required this.role,
-    required this.verified,
-    required this.verificationCode,
-    required this.verificationCodeExpires,
-    this.resetPasswordCode,
     required this.avatar,
     this.about,
     required this.portfolioImages,
-    required this.averageRating,
-    required this.numberOfReviews,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
+    required this.workingHours,
+    required this.rating,
     required this.reviews,
     required this.services,
-    required this.schedule,
+    required this.availability,
   });
 
   factory BarberDetailData.fromJson(Map<String, dynamic> json) =>
@@ -73,37 +52,57 @@ class BarberDetailData {
 }
 
 @JsonSerializable()
+class WorkingHours {
+  final String start;
+  final String end;
+  final List<String> daysOff;
+
+  WorkingHours({
+    required this.start,
+    required this.end,
+    required this.daysOff,
+  });
+
+  factory WorkingHours.fromJson(Map<String, dynamic> json) =>
+      _$WorkingHoursFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WorkingHoursToJson(this);
+}
+
+@JsonSerializable()
+class Rating {
+  final double average;
+  final int total;
+
+  Rating({
+    required this.average,
+    required this.total,
+  });
+
+  factory Rating.fromJson(Map<String, dynamic> json) => _$RatingFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RatingToJson(this);
+}
+
+@JsonSerializable()
 class BarberService {
-  @JsonKey(name: '_id')
+  @JsonKey(name: 'id')
   final String id;
   final String name;
+  final String description;
   final int price;
   final int duration;
-  final List<String> images;
-  final String imageCover;
   final String category;
-  final bool available;
-  final String createdAt;
-  final String updatedAt;
-  @JsonKey(name: '__v')
-  final int v;
-  final List<String> barbers;
-  final String description;
+  final String imageCover;
 
   BarberService({
     required this.id,
     required this.name,
+    required this.description,
     required this.price,
     required this.duration,
-    required this.images,
-    required this.imageCover,
     required this.category,
-    required this.available,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
-    required this.barbers,
-    required this.description,
+    required this.imageCover,
   });
 
   factory BarberService.fromJson(Map<String, dynamic> json) =>
@@ -113,51 +112,32 @@ class BarberService {
 }
 
 @JsonSerializable()
-class BarberSchedule {
+class Availability {
   final String date;
-  final BusinessHours businessHours;
-  final List<TimeSlot> timeSlots;
+  @JsonKey(name: 'slots')
+  final List<TimeSlot> slots;
+  final bool isDayOff;
 
-  BarberSchedule({
+  Availability({
     required this.date,
-    required this.businessHours,
-    required this.timeSlots,
+    required this.slots,
+    this.isDayOff = false,
   });
 
-  factory BarberSchedule.fromJson(Map<String, dynamic> json) =>
-      _$BarberScheduleFromJson(json);
+  factory Availability.fromJson(Map<String, dynamic> json) =>
+      _$AvailabilityFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BarberScheduleToJson(this);
-}
-
-@JsonSerializable()
-class BusinessHours {
-  final String start;
-  final String end;
-
-  BusinessHours({
-    required this.start,
-    required this.end,
-  });
-
-  factory BusinessHours.fromJson(Map<String, dynamic> json) =>
-      _$BusinessHoursFromJson(json);
-
-  Map<String, dynamic> toJson() => _$BusinessHoursToJson(this);
+  Map<String, dynamic> toJson() => _$AvailabilityToJson(this);
 }
 
 @JsonSerializable()
 class TimeSlot {
-  final String startTime;
-  final String formattedTime;
-  final bool available;
-  final bool booked;
+  final String time;
+  final bool isAvailable;
 
   TimeSlot({
-    required this.startTime,
-    required this.formattedTime,
-    required this.available,
-    required this.booked,
+    required this.time,
+    required this.isAvailable,
   });
 
   factory TimeSlot.fromJson(Map<String, dynamic> json) =>
@@ -168,8 +148,7 @@ class TimeSlot {
 
 @JsonSerializable()
 class BarberReview {
-  // This is an empty class since the JSON example shows an empty reviews array
-  // You can add fields here later when you have the actual review structure
+  // Empty class for now as the JSON example shows an empty reviews array
 
   BarberReview();
 
