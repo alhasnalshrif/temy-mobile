@@ -31,4 +31,17 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+  void getBanners() async {
+    emit(const HomeState.bannersLoading());
+    final response = await _homeRepo.getBanners();
+    response.when(
+      success: (bannersResponseModel) {
+        emit(HomeState.bannersSuccess(bannersResponseModel));
+      },
+      failure: (error) {
+        emit(HomeState.bannersError(error));
+      },
+    );
+  }
 }

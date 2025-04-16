@@ -27,6 +27,10 @@ mixin _$HomeState {
     required TResult Function(BarberResponseModel barbersResponseModel)
         barbersSuccess,
     required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +43,9 @@ mixin _$HomeState {
     TResult? Function()? barbersLoading,
     TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,6 +58,9 @@ mixin _$HomeState {
     TResult Function()? barbersLoading,
     TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +73,9 @@ mixin _$HomeState {
     required TResult Function(BarbersLoading value) barbersLoading,
     required TResult Function(BarbersSuccess value) barbersSuccess,
     required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -74,6 +87,9 @@ mixin _$HomeState {
     TResult? Function(BarbersLoading value)? barbersLoading,
     TResult? Function(BarbersSuccess value)? barbersSuccess,
     TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +101,9 @@ mixin _$HomeState {
     TResult Function(BarbersLoading value)? barbersLoading,
     TResult Function(BarbersSuccess value)? barbersSuccess,
     TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -160,6 +179,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function(BarberResponseModel barbersResponseModel)
         barbersSuccess,
     required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
   }) {
     return initial();
   }
@@ -175,6 +198,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? barbersLoading,
     TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
   }) {
     return initial?.call();
   }
@@ -190,6 +216,9 @@ class _$InitialImpl implements _Initial {
     TResult Function()? barbersLoading,
     TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -208,6 +237,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function(BarbersLoading value) barbersLoading,
     required TResult Function(BarbersSuccess value) barbersSuccess,
     required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
   }) {
     return initial(this);
   }
@@ -222,6 +254,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(BarbersLoading value)? barbersLoading,
     TResult? Function(BarbersSuccess value)? barbersSuccess,
     TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
   }) {
     return initial?.call(this);
   }
@@ -236,6 +271,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(BarbersLoading value)? barbersLoading,
     TResult Function(BarbersSuccess value)? barbersSuccess,
     TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -299,6 +337,10 @@ class _$CategoriesLoadingImpl implements CategoriesLoading {
     required TResult Function(BarberResponseModel barbersResponseModel)
         barbersSuccess,
     required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
   }) {
     return categoriesLoading();
   }
@@ -314,6 +356,9 @@ class _$CategoriesLoadingImpl implements CategoriesLoading {
     TResult? Function()? barbersLoading,
     TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
   }) {
     return categoriesLoading?.call();
   }
@@ -329,6 +374,9 @@ class _$CategoriesLoadingImpl implements CategoriesLoading {
     TResult Function()? barbersLoading,
     TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
     required TResult orElse(),
   }) {
     if (categoriesLoading != null) {
@@ -347,6 +395,9 @@ class _$CategoriesLoadingImpl implements CategoriesLoading {
     required TResult Function(BarbersLoading value) barbersLoading,
     required TResult Function(BarbersSuccess value) barbersSuccess,
     required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
   }) {
     return categoriesLoading(this);
   }
@@ -361,6 +412,9 @@ class _$CategoriesLoadingImpl implements CategoriesLoading {
     TResult? Function(BarbersLoading value)? barbersLoading,
     TResult? Function(BarbersSuccess value)? barbersSuccess,
     TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
   }) {
     return categoriesLoading?.call(this);
   }
@@ -375,6 +429,9 @@ class _$CategoriesLoadingImpl implements CategoriesLoading {
     TResult Function(BarbersLoading value)? barbersLoading,
     TResult Function(BarbersSuccess value)? barbersSuccess,
     TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
     required TResult orElse(),
   }) {
     if (categoriesLoading != null) {
@@ -468,6 +525,10 @@ class _$CategoriesSuccessImpl implements CategoriesSuccess {
     required TResult Function(BarberResponseModel barbersResponseModel)
         barbersSuccess,
     required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
   }) {
     return categoriesSuccess(categoriesResponseModel);
   }
@@ -483,6 +544,9 @@ class _$CategoriesSuccessImpl implements CategoriesSuccess {
     TResult? Function()? barbersLoading,
     TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
   }) {
     return categoriesSuccess?.call(categoriesResponseModel);
   }
@@ -498,6 +562,9 @@ class _$CategoriesSuccessImpl implements CategoriesSuccess {
     TResult Function()? barbersLoading,
     TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
     required TResult orElse(),
   }) {
     if (categoriesSuccess != null) {
@@ -516,6 +583,9 @@ class _$CategoriesSuccessImpl implements CategoriesSuccess {
     required TResult Function(BarbersLoading value) barbersLoading,
     required TResult Function(BarbersSuccess value) barbersSuccess,
     required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
   }) {
     return categoriesSuccess(this);
   }
@@ -530,6 +600,9 @@ class _$CategoriesSuccessImpl implements CategoriesSuccess {
     TResult? Function(BarbersLoading value)? barbersLoading,
     TResult? Function(BarbersSuccess value)? barbersSuccess,
     TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
   }) {
     return categoriesSuccess?.call(this);
   }
@@ -544,6 +617,9 @@ class _$CategoriesSuccessImpl implements CategoriesSuccess {
     TResult Function(BarbersLoading value)? barbersLoading,
     TResult Function(BarbersSuccess value)? barbersSuccess,
     TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
     required TResult orElse(),
   }) {
     if (categoriesSuccess != null) {
@@ -646,6 +722,10 @@ class _$CategoriesErrorImpl implements CategoriesError {
     required TResult Function(BarberResponseModel barbersResponseModel)
         barbersSuccess,
     required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
   }) {
     return categoriesError(errorHandler);
   }
@@ -661,6 +741,9 @@ class _$CategoriesErrorImpl implements CategoriesError {
     TResult? Function()? barbersLoading,
     TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
   }) {
     return categoriesError?.call(errorHandler);
   }
@@ -676,6 +759,9 @@ class _$CategoriesErrorImpl implements CategoriesError {
     TResult Function()? barbersLoading,
     TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
     required TResult orElse(),
   }) {
     if (categoriesError != null) {
@@ -694,6 +780,9 @@ class _$CategoriesErrorImpl implements CategoriesError {
     required TResult Function(BarbersLoading value) barbersLoading,
     required TResult Function(BarbersSuccess value) barbersSuccess,
     required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
   }) {
     return categoriesError(this);
   }
@@ -708,6 +797,9 @@ class _$CategoriesErrorImpl implements CategoriesError {
     TResult? Function(BarbersLoading value)? barbersLoading,
     TResult? Function(BarbersSuccess value)? barbersSuccess,
     TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
   }) {
     return categoriesError?.call(this);
   }
@@ -722,6 +814,9 @@ class _$CategoriesErrorImpl implements CategoriesError {
     TResult Function(BarbersLoading value)? barbersLoading,
     TResult Function(BarbersSuccess value)? barbersSuccess,
     TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
     required TResult orElse(),
   }) {
     if (categoriesError != null) {
@@ -794,6 +889,10 @@ class _$BarbersLoadingImpl implements BarbersLoading {
     required TResult Function(BarberResponseModel barbersResponseModel)
         barbersSuccess,
     required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
   }) {
     return barbersLoading();
   }
@@ -809,6 +908,9 @@ class _$BarbersLoadingImpl implements BarbersLoading {
     TResult? Function()? barbersLoading,
     TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
   }) {
     return barbersLoading?.call();
   }
@@ -824,6 +926,9 @@ class _$BarbersLoadingImpl implements BarbersLoading {
     TResult Function()? barbersLoading,
     TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
     required TResult orElse(),
   }) {
     if (barbersLoading != null) {
@@ -842,6 +947,9 @@ class _$BarbersLoadingImpl implements BarbersLoading {
     required TResult Function(BarbersLoading value) barbersLoading,
     required TResult Function(BarbersSuccess value) barbersSuccess,
     required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
   }) {
     return barbersLoading(this);
   }
@@ -856,6 +964,9 @@ class _$BarbersLoadingImpl implements BarbersLoading {
     TResult? Function(BarbersLoading value)? barbersLoading,
     TResult? Function(BarbersSuccess value)? barbersSuccess,
     TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
   }) {
     return barbersLoading?.call(this);
   }
@@ -870,6 +981,9 @@ class _$BarbersLoadingImpl implements BarbersLoading {
     TResult Function(BarbersLoading value)? barbersLoading,
     TResult Function(BarbersSuccess value)? barbersSuccess,
     TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
     required TResult orElse(),
   }) {
     if (barbersLoading != null) {
@@ -962,6 +1076,10 @@ class _$BarbersSuccessImpl implements BarbersSuccess {
     required TResult Function(BarberResponseModel barbersResponseModel)
         barbersSuccess,
     required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
   }) {
     return barbersSuccess(barbersResponseModel);
   }
@@ -977,6 +1095,9 @@ class _$BarbersSuccessImpl implements BarbersSuccess {
     TResult? Function()? barbersLoading,
     TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
   }) {
     return barbersSuccess?.call(barbersResponseModel);
   }
@@ -992,6 +1113,9 @@ class _$BarbersSuccessImpl implements BarbersSuccess {
     TResult Function()? barbersLoading,
     TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
     required TResult orElse(),
   }) {
     if (barbersSuccess != null) {
@@ -1010,6 +1134,9 @@ class _$BarbersSuccessImpl implements BarbersSuccess {
     required TResult Function(BarbersLoading value) barbersLoading,
     required TResult Function(BarbersSuccess value) barbersSuccess,
     required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
   }) {
     return barbersSuccess(this);
   }
@@ -1024,6 +1151,9 @@ class _$BarbersSuccessImpl implements BarbersSuccess {
     TResult? Function(BarbersLoading value)? barbersLoading,
     TResult? Function(BarbersSuccess value)? barbersSuccess,
     TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
   }) {
     return barbersSuccess?.call(this);
   }
@@ -1038,6 +1168,9 @@ class _$BarbersSuccessImpl implements BarbersSuccess {
     TResult Function(BarbersLoading value)? barbersLoading,
     TResult Function(BarbersSuccess value)? barbersSuccess,
     TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
     required TResult orElse(),
   }) {
     if (barbersSuccess != null) {
@@ -1138,6 +1271,10 @@ class _$BarbersErrorImpl implements BarbersError {
     required TResult Function(BarberResponseModel barbersResponseModel)
         barbersSuccess,
     required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
   }) {
     return barbersError(errorHandler);
   }
@@ -1153,6 +1290,9 @@ class _$BarbersErrorImpl implements BarbersError {
     TResult? Function()? barbersLoading,
     TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
   }) {
     return barbersError?.call(errorHandler);
   }
@@ -1168,6 +1308,9 @@ class _$BarbersErrorImpl implements BarbersError {
     TResult Function()? barbersLoading,
     TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
     TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
     required TResult orElse(),
   }) {
     if (barbersError != null) {
@@ -1186,6 +1329,9 @@ class _$BarbersErrorImpl implements BarbersError {
     required TResult Function(BarbersLoading value) barbersLoading,
     required TResult Function(BarbersSuccess value) barbersSuccess,
     required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
   }) {
     return barbersError(this);
   }
@@ -1200,6 +1346,9 @@ class _$BarbersErrorImpl implements BarbersError {
     TResult? Function(BarbersLoading value)? barbersLoading,
     TResult? Function(BarbersSuccess value)? barbersSuccess,
     TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
   }) {
     return barbersError?.call(this);
   }
@@ -1214,6 +1363,9 @@ class _$BarbersErrorImpl implements BarbersError {
     TResult Function(BarbersLoading value)? barbersLoading,
     TResult Function(BarbersSuccess value)? barbersSuccess,
     TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
     required TResult orElse(),
   }) {
     if (barbersError != null) {
@@ -1233,5 +1385,554 @@ abstract class BarbersError implements HomeState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BarbersErrorImplCopyWith<_$BarbersErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BannersLoadingImplCopyWith<$Res> {
+  factory _$$BannersLoadingImplCopyWith(_$BannersLoadingImpl value,
+          $Res Function(_$BannersLoadingImpl) then) =
+      __$$BannersLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BannersLoadingImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$BannersLoadingImpl>
+    implements _$$BannersLoadingImplCopyWith<$Res> {
+  __$$BannersLoadingImplCopyWithImpl(
+      _$BannersLoadingImpl _value, $Res Function(_$BannersLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$BannersLoadingImpl implements BannersLoading {
+  const _$BannersLoadingImpl();
+
+  @override
+  String toString() {
+    return 'HomeState.bannersLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$BannersLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() categoriesLoading,
+    required TResult Function(CategoryResponseModel categoriesResponseModel)
+        categoriesSuccess,
+    required TResult Function(ErrorHandler errorHandler) categoriesError,
+    required TResult Function() barbersLoading,
+    required TResult Function(BarberResponseModel barbersResponseModel)
+        barbersSuccess,
+    required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
+  }) {
+    return bannersLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? categoriesLoading,
+    TResult? Function(CategoryResponseModel categoriesResponseModel)?
+        categoriesSuccess,
+    TResult? Function(ErrorHandler errorHandler)? categoriesError,
+    TResult? Function()? barbersLoading,
+    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
+  }) {
+    return bannersLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? categoriesLoading,
+    TResult Function(CategoryResponseModel categoriesResponseModel)?
+        categoriesSuccess,
+    TResult Function(ErrorHandler errorHandler)? categoriesError,
+    TResult Function()? barbersLoading,
+    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
+    TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
+    required TResult orElse(),
+  }) {
+    if (bannersLoading != null) {
+      return bannersLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(CategoriesLoading value) categoriesLoading,
+    required TResult Function(CategoriesSuccess value) categoriesSuccess,
+    required TResult Function(CategoriesError value) categoriesError,
+    required TResult Function(BarbersLoading value) barbersLoading,
+    required TResult Function(BarbersSuccess value) barbersSuccess,
+    required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
+  }) {
+    return bannersLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(CategoriesLoading value)? categoriesLoading,
+    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
+    TResult? Function(CategoriesError value)? categoriesError,
+    TResult? Function(BarbersLoading value)? barbersLoading,
+    TResult? Function(BarbersSuccess value)? barbersSuccess,
+    TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
+  }) {
+    return bannersLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(CategoriesLoading value)? categoriesLoading,
+    TResult Function(CategoriesSuccess value)? categoriesSuccess,
+    TResult Function(CategoriesError value)? categoriesError,
+    TResult Function(BarbersLoading value)? barbersLoading,
+    TResult Function(BarbersSuccess value)? barbersSuccess,
+    TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
+    required TResult orElse(),
+  }) {
+    if (bannersLoading != null) {
+      return bannersLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BannersLoading implements HomeState {
+  const factory BannersLoading() = _$BannersLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$BannersSuccessImplCopyWith<$Res> {
+  factory _$$BannersSuccessImplCopyWith(_$BannersSuccessImpl value,
+          $Res Function(_$BannersSuccessImpl) then) =
+      __$$BannersSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BannerResponseModel bannersResponseModel});
+}
+
+/// @nodoc
+class __$$BannersSuccessImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$BannersSuccessImpl>
+    implements _$$BannersSuccessImplCopyWith<$Res> {
+  __$$BannersSuccessImplCopyWithImpl(
+      _$BannersSuccessImpl _value, $Res Function(_$BannersSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bannersResponseModel = null,
+  }) {
+    return _then(_$BannersSuccessImpl(
+      null == bannersResponseModel
+          ? _value.bannersResponseModel
+          : bannersResponseModel // ignore: cast_nullable_to_non_nullable
+              as BannerResponseModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BannersSuccessImpl implements BannersSuccess {
+  const _$BannersSuccessImpl(this.bannersResponseModel);
+
+  @override
+  final BannerResponseModel bannersResponseModel;
+
+  @override
+  String toString() {
+    return 'HomeState.bannersSuccess(bannersResponseModel: $bannersResponseModel)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BannersSuccessImpl &&
+            (identical(other.bannersResponseModel, bannersResponseModel) ||
+                other.bannersResponseModel == bannersResponseModel));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, bannersResponseModel);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BannersSuccessImplCopyWith<_$BannersSuccessImpl> get copyWith =>
+      __$$BannersSuccessImplCopyWithImpl<_$BannersSuccessImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() categoriesLoading,
+    required TResult Function(CategoryResponseModel categoriesResponseModel)
+        categoriesSuccess,
+    required TResult Function(ErrorHandler errorHandler) categoriesError,
+    required TResult Function() barbersLoading,
+    required TResult Function(BarberResponseModel barbersResponseModel)
+        barbersSuccess,
+    required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
+  }) {
+    return bannersSuccess(bannersResponseModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? categoriesLoading,
+    TResult? Function(CategoryResponseModel categoriesResponseModel)?
+        categoriesSuccess,
+    TResult? Function(ErrorHandler errorHandler)? categoriesError,
+    TResult? Function()? barbersLoading,
+    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
+  }) {
+    return bannersSuccess?.call(bannersResponseModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? categoriesLoading,
+    TResult Function(CategoryResponseModel categoriesResponseModel)?
+        categoriesSuccess,
+    TResult Function(ErrorHandler errorHandler)? categoriesError,
+    TResult Function()? barbersLoading,
+    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
+    TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
+    required TResult orElse(),
+  }) {
+    if (bannersSuccess != null) {
+      return bannersSuccess(bannersResponseModel);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(CategoriesLoading value) categoriesLoading,
+    required TResult Function(CategoriesSuccess value) categoriesSuccess,
+    required TResult Function(CategoriesError value) categoriesError,
+    required TResult Function(BarbersLoading value) barbersLoading,
+    required TResult Function(BarbersSuccess value) barbersSuccess,
+    required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
+  }) {
+    return bannersSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(CategoriesLoading value)? categoriesLoading,
+    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
+    TResult? Function(CategoriesError value)? categoriesError,
+    TResult? Function(BarbersLoading value)? barbersLoading,
+    TResult? Function(BarbersSuccess value)? barbersSuccess,
+    TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
+  }) {
+    return bannersSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(CategoriesLoading value)? categoriesLoading,
+    TResult Function(CategoriesSuccess value)? categoriesSuccess,
+    TResult Function(CategoriesError value)? categoriesError,
+    TResult Function(BarbersLoading value)? barbersLoading,
+    TResult Function(BarbersSuccess value)? barbersSuccess,
+    TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
+    required TResult orElse(),
+  }) {
+    if (bannersSuccess != null) {
+      return bannersSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BannersSuccess implements HomeState {
+  const factory BannersSuccess(final BannerResponseModel bannersResponseModel) =
+      _$BannersSuccessImpl;
+
+  BannerResponseModel get bannersResponseModel;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BannersSuccessImplCopyWith<_$BannersSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BannersErrorImplCopyWith<$Res> {
+  factory _$$BannersErrorImplCopyWith(
+          _$BannersErrorImpl value, $Res Function(_$BannersErrorImpl) then) =
+      __$$BannersErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorHandler errorHandler});
+}
+
+/// @nodoc
+class __$$BannersErrorImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$BannersErrorImpl>
+    implements _$$BannersErrorImplCopyWith<$Res> {
+  __$$BannersErrorImplCopyWithImpl(
+      _$BannersErrorImpl _value, $Res Function(_$BannersErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorHandler = null,
+  }) {
+    return _then(_$BannersErrorImpl(
+      null == errorHandler
+          ? _value.errorHandler
+          : errorHandler // ignore: cast_nullable_to_non_nullable
+              as ErrorHandler,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BannersErrorImpl implements BannersError {
+  const _$BannersErrorImpl(this.errorHandler);
+
+  @override
+  final ErrorHandler errorHandler;
+
+  @override
+  String toString() {
+    return 'HomeState.bannersError(errorHandler: $errorHandler)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BannersErrorImpl &&
+            (identical(other.errorHandler, errorHandler) ||
+                other.errorHandler == errorHandler));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorHandler);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BannersErrorImplCopyWith<_$BannersErrorImpl> get copyWith =>
+      __$$BannersErrorImplCopyWithImpl<_$BannersErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() categoriesLoading,
+    required TResult Function(CategoryResponseModel categoriesResponseModel)
+        categoriesSuccess,
+    required TResult Function(ErrorHandler errorHandler) categoriesError,
+    required TResult Function() barbersLoading,
+    required TResult Function(BarberResponseModel barbersResponseModel)
+        barbersSuccess,
+    required TResult Function(ErrorHandler errorHandler) barbersError,
+    required TResult Function() bannersLoading,
+    required TResult Function(BannerResponseModel bannersResponseModel)
+        bannersSuccess,
+    required TResult Function(ErrorHandler errorHandler) bannersError,
+  }) {
+    return bannersError(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? categoriesLoading,
+    TResult? Function(CategoryResponseModel categoriesResponseModel)?
+        categoriesSuccess,
+    TResult? Function(ErrorHandler errorHandler)? categoriesError,
+    TResult? Function()? barbersLoading,
+    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? barbersError,
+    TResult? Function()? bannersLoading,
+    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bannersError,
+  }) {
+    return bannersError?.call(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? categoriesLoading,
+    TResult Function(CategoryResponseModel categoriesResponseModel)?
+        categoriesSuccess,
+    TResult Function(ErrorHandler errorHandler)? categoriesError,
+    TResult Function()? barbersLoading,
+    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
+    TResult Function(ErrorHandler errorHandler)? barbersError,
+    TResult Function()? bannersLoading,
+    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
+    TResult Function(ErrorHandler errorHandler)? bannersError,
+    required TResult orElse(),
+  }) {
+    if (bannersError != null) {
+      return bannersError(errorHandler);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(CategoriesLoading value) categoriesLoading,
+    required TResult Function(CategoriesSuccess value) categoriesSuccess,
+    required TResult Function(CategoriesError value) categoriesError,
+    required TResult Function(BarbersLoading value) barbersLoading,
+    required TResult Function(BarbersSuccess value) barbersSuccess,
+    required TResult Function(BarbersError value) barbersError,
+    required TResult Function(BannersLoading value) bannersLoading,
+    required TResult Function(BannersSuccess value) bannersSuccess,
+    required TResult Function(BannersError value) bannersError,
+  }) {
+    return bannersError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(CategoriesLoading value)? categoriesLoading,
+    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
+    TResult? Function(CategoriesError value)? categoriesError,
+    TResult? Function(BarbersLoading value)? barbersLoading,
+    TResult? Function(BarbersSuccess value)? barbersSuccess,
+    TResult? Function(BarbersError value)? barbersError,
+    TResult? Function(BannersLoading value)? bannersLoading,
+    TResult? Function(BannersSuccess value)? bannersSuccess,
+    TResult? Function(BannersError value)? bannersError,
+  }) {
+    return bannersError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(CategoriesLoading value)? categoriesLoading,
+    TResult Function(CategoriesSuccess value)? categoriesSuccess,
+    TResult Function(CategoriesError value)? categoriesError,
+    TResult Function(BarbersLoading value)? barbersLoading,
+    TResult Function(BarbersSuccess value)? barbersSuccess,
+    TResult Function(BarbersError value)? barbersError,
+    TResult Function(BannersLoading value)? bannersLoading,
+    TResult Function(BannersSuccess value)? bannersSuccess,
+    TResult Function(BannersError value)? bannersError,
+    required TResult orElse(),
+  }) {
+    if (bannersError != null) {
+      return bannersError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BannersError implements HomeState {
+  const factory BannersError(final ErrorHandler errorHandler) =
+      _$BannersErrorImpl;
+
+  ErrorHandler get errorHandler;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BannersErrorImplCopyWith<_$BannersErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

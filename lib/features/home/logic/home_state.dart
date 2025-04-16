@@ -1,4 +1,5 @@
 import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
+import 'package:flutter_complete_project/features/home/data/models/banner_response.dart';
 import 'package:flutter_complete_project/features/home/data/models/barber_response.dart';
 import 'package:flutter_complete_project/features/home/data/models/category_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,7 +14,6 @@ class HomeState with _$HomeState {
   const factory HomeState.categoriesLoading() = CategoriesLoading;
   const factory HomeState.categoriesSuccess(
       CategoryResponseModel categoriesResponseModel) = CategoriesSuccess;
-
   const factory HomeState.categoriesError(ErrorHandler errorHandler) =
       CategoriesError;
 
@@ -23,4 +23,11 @@ class HomeState with _$HomeState {
       BarberResponseModel barbersResponseModel) = BarbersSuccess;
   const factory HomeState.barbersError(ErrorHandler errorHandler) =
       BarbersError;
+
+  // banners
+  const factory HomeState.bannersLoading() = BannersLoading;
+  const factory HomeState.bannersSuccess(
+      BannerResponseModel bannersResponseModel) = BannersSuccess;
+  const factory HomeState.bannersError(ErrorHandler errorHandler) =
+      BannersError;
 }
