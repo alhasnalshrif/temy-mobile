@@ -5,8 +5,8 @@ import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/logic/home_state.dart';
 import 'package:temy_barber/features/home/ui/widgets/category_list_view.dart';
 
-class SpecializationDoctorBlocBuilder extends StatelessWidget {
-  const SpecializationDoctorBlocBuilder({super.key});
+class HomeBlocBuilder extends StatelessWidget {
+  const HomeBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {

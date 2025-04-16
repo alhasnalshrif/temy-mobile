@@ -3,7 +3,7 @@ import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/features/home/ui/widgets/banner_bloc_builder.dart';
 import 'package:temy_barber/features/home/ui/widgets/category_sea_all.dart';
 import 'package:temy_barber/features/home/ui/widgets/home_top_bar.dart';
-import 'package:temy_barber/features/home/ui/widgets/specialization_doctor_bloc_builder.dart';
+import 'package:temy_barber/features/home/ui/widgets/home_bloc_builder.dart';
 
 // import 'widgets/banner_card.dart';
 
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               verticalSpace(24),
               const DoctorSpecialitySeaAll(),
               verticalSpace(10),
-              const SpecializationDoctorBlocBuilder(),
+              const HomeBlocBuilder(),
             ],
           ),
         ),

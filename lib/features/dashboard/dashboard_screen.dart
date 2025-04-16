@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/booking/ui/booking.dart';
 import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/ui/home_screen.dart';
@@ -34,7 +35,11 @@ class _MyDashboardState extends State<DashboardScreen> {
         create: (context) => HomeCubit(getIt())..getBarbers(),
         child: const HomeScreen(),
       ),
-      const BookingScreen(),
+      BlocProvider(
+        // create: (context) => HomeCubit(getIt())..getCategories(),
+        create: (context) => BookingCubit(getIt())..getBooking(),
+        child: const BookingScreen(),
+      ),
       BlocProvider(
         create: (context) => ProfileCubit(getIt())..getProfile(),
         child: const ProfileScreen(),

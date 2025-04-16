@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_api_services.dart';
+part of 'booking_api_services.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'home_api_services.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
-class _HomeApiServices implements HomeApiServices {
-  _HomeApiServices(
+class _BookingApiServices implements BookingApiServices {
+  _BookingApiServices(
     this._dio, {
     this.baseUrl,
     this.errorLogger,
@@ -24,19 +24,19 @@ class _HomeApiServices implements HomeApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<CategoryResponseModel> getCategories() async {
+  Future<BookingResponseModel> getBooking() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<CategoryResponseModel>(Options(
+    final _options = _setStreamType<BookingResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'category',
+          'reservations',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -46,9 +46,9 @@ class _HomeApiServices implements HomeApiServices {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CategoryResponseModel _value;
+    late BookingResponseModel _value;
     try {
-      _value = CategoryResponseModel.fromJson(_result.data!);
+      _value = BookingResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
