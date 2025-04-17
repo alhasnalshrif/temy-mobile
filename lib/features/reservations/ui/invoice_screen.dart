@@ -346,18 +346,18 @@ class InvoiceScreen extends StatelessWidget {
                   children: [
                     pw.Text(
                       'Barber: ${barberData?.name ?? "Temy"}',
-                      style: pw.TextStyle(fontSize: 14),
+                      style: const pw.TextStyle(fontSize: 14),
                     ),
                     pw.Text(
                       'Date: ${reservationDate != null ? DateFormat('yyyy-MM-dd').format(reservationDate!) : "N/A"}',
-                      style: pw.TextStyle(fontSize: 14),
+                      style: const pw.TextStyle(fontSize: 14),
                     ),
                   ],
                 ),
                 pw.SizedBox(height: 10),
                 pw.Text(
                   'Time: ${reservationTime ?? "N/A"}',
-                  style: pw.TextStyle(fontSize: 14),
+                  style: const pw.TextStyle(fontSize: 14),
                 ),
                 pw.SizedBox(height: 20),
 

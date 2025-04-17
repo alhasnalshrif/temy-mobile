@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:temy_barber/features/booking/ui/widgets/booking_bloc_builder.dart';
-import 'package:temy_barber/core/theme/colors.dart';
 
 class BookingScreen extends StatelessWidget {
   const BookingScreen({super.key});
