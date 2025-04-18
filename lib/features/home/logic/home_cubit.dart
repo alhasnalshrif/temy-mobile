@@ -44,4 +44,38 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+  /// Refreshes all home screen data
+  /// Returns a Future that completes when all data is refreshed
+  Future<void> refreshHomeData() async {
+    // Fetch barbers and banners data in parallel
+    await Future.wait([
+      _refreshBarbers(),
+      _refreshBanners(),
+    ]);
+  }
+
+  Future<void> _refreshBarbers() async {
+    final response = await _homeRepo.getBarbers();
+    response.when(
+      success: (barbersResponseModel) {
+        emit(HomeState.barbersSuccess(barbersResponseModel));
+      },
+      failure: (error) {
+        emit(HomeState.barbersError(error));
+      },
+    );
+  }
+
+  Future<void> _refreshBanners() async {
+    final response = await _homeRepo.getBanners();
+    response.when(
+      success: (bannersResponseModel) {
+        emit(HomeState.bannersSuccess(bannersResponseModel));
+      },
+      failure: (error) {
+        emit(HomeState.bannersError(error));
+      },
+    );
+  }
 }

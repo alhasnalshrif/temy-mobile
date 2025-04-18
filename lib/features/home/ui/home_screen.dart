@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/ui/widgets/banner_bloc_builder.dart';
 import 'package:temy_barber/features/home/ui/widgets/category_sea_all.dart';
 import 'package:temy_barber/features/home/ui/widgets/home_top_bar.dart';
@@ -18,18 +20,29 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           margin: const EdgeInsets.fromLTRB(20, 16, 20, 28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const HomeTopBar(),
-              verticalSpace(24),
-              const BannerBlocBuilder(),
-              // const BannerCard(),
-              verticalSpace(24),
-              const DoctorSpecialitySeaAll(),
-              verticalSpace(10),
-              const HomeBlocBuilder(),
-            ],
+          child: RefreshIndicator(
+            color: Theme.of(context).primaryColor,
+            backgroundColor: Colors.white,
+            onRefresh: () async {
+              // Refresh all home screen data
+              await context.read<HomeCubit>().refreshHomeData();
+            },
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const HomeTopBar(),
+                  verticalSpace(24),
+                  const BannerBlocBuilder(),
+                  // const BannerCard(),
+                  verticalSpace(24),
+                  const DoctorSpecialitySeaAll(),
+                  verticalSpace(10),
+                  const HomeBlocBuilder(),
+                ],
+              ),
+            ),
           ),
         ),
       ),

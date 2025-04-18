@@ -41,13 +41,10 @@ class HomeBlocBuilder extends StatelessWidget {
   }
 
   Widget setupSuccess(barberesLis) {
-    return Expanded(
-      child: Column(
-        children: [
-          CategoryListView(categoryDataList: barberesLis ?? []),
-          verticalSpace(24),
-        ],
-      ),
+    return Column(
+      children: [
+        CategoryListView(categoryDataList: barberesLis ?? []),
+      ],
     );
   }
 
