@@ -426,6 +426,8 @@ class InvoiceScreen extends StatelessWidget {
       );
     } catch (e) {
       // Show error if PDF generation fails
+      if (!context.mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Failed to generate invoice: $e'),

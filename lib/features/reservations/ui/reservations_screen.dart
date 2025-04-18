@@ -73,6 +73,8 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     // Get required data
     final userId =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
+    // Add mounted check before using context after await
+    if (!mounted) return;
     final serviceIds = selectedServices.map((s) => s.id).toList();
     final barberId = barberData?.id ?? '';
     final date =
