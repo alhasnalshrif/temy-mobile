@@ -20,7 +20,8 @@ mixin _$BookingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() bookingLoading,
-    required TResult Function(BookingResponseModel bookingResponseModel)
+    required TResult Function(
+            List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
   }) =>
@@ -29,7 +30,8 @@ mixin _$BookingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? bookingLoading,
-    TResult? Function(BookingResponseModel bookingResponseModel)?
+    TResult? Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
   }) =>
@@ -38,7 +40,9 @@ mixin _$BookingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? bookingLoading,
-    TResult Function(BookingResponseModel bookingResponseModel)? bookingSuccess,
+    TResult Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
     required TResult orElse(),
   }) =>
@@ -134,7 +138,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() bookingLoading,
-    required TResult Function(BookingResponseModel bookingResponseModel)
+    required TResult Function(
+            List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
   }) {
@@ -146,7 +151,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? bookingLoading,
-    TResult? Function(BookingResponseModel bookingResponseModel)?
+    TResult? Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
   }) {
@@ -158,7 +164,9 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? bookingLoading,
-    TResult Function(BookingResponseModel bookingResponseModel)? bookingSuccess,
+    TResult Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
     required TResult orElse(),
   }) {
@@ -253,7 +261,8 @@ class _$BookingLoadingImpl implements BookingLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() bookingLoading,
-    required TResult Function(BookingResponseModel bookingResponseModel)
+    required TResult Function(
+            List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
   }) {
@@ -265,7 +274,8 @@ class _$BookingLoadingImpl implements BookingLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? bookingLoading,
-    TResult? Function(BookingResponseModel bookingResponseModel)?
+    TResult? Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
   }) {
@@ -277,7 +287,9 @@ class _$BookingLoadingImpl implements BookingLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? bookingLoading,
-    TResult Function(BookingResponseModel bookingResponseModel)? bookingSuccess,
+    TResult Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
     required TResult orElse(),
   }) {
@@ -335,7 +347,8 @@ abstract class _$$BookingSuccessImplCopyWith<$Res> {
           $Res Function(_$BookingSuccessImpl) then) =
       __$$BookingSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({BookingResponseModel bookingResponseModel});
+  $Res call(
+      {List<BookingData> activeBookings, List<BookingData> historyBookings});
 }
 
 /// @nodoc
@@ -351,13 +364,18 @@ class __$$BookingSuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bookingResponseModel = null,
+    Object? activeBookings = null,
+    Object? historyBookings = null,
   }) {
     return _then(_$BookingSuccessImpl(
-      null == bookingResponseModel
-          ? _value.bookingResponseModel
-          : bookingResponseModel // ignore: cast_nullable_to_non_nullable
-              as BookingResponseModel,
+      activeBookings: null == activeBookings
+          ? _value._activeBookings
+          : activeBookings // ignore: cast_nullable_to_non_nullable
+              as List<BookingData>,
+      historyBookings: null == historyBookings
+          ? _value._historyBookings
+          : historyBookings // ignore: cast_nullable_to_non_nullable
+              as List<BookingData>,
     ));
   }
 }
@@ -365,14 +383,31 @@ class __$$BookingSuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BookingSuccessImpl implements BookingSuccess {
-  const _$BookingSuccessImpl(this.bookingResponseModel);
+  const _$BookingSuccessImpl(
+      {required final List<BookingData> activeBookings,
+      required final List<BookingData> historyBookings})
+      : _activeBookings = activeBookings,
+        _historyBookings = historyBookings;
 
+  final List<BookingData> _activeBookings;
   @override
-  final BookingResponseModel bookingResponseModel;
+  List<BookingData> get activeBookings {
+    if (_activeBookings is EqualUnmodifiableListView) return _activeBookings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activeBookings);
+  }
+
+  final List<BookingData> _historyBookings;
+  @override
+  List<BookingData> get historyBookings {
+    if (_historyBookings is EqualUnmodifiableListView) return _historyBookings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_historyBookings);
+  }
 
   @override
   String toString() {
-    return 'BookingState.bookingSuccess(bookingResponseModel: $bookingResponseModel)';
+    return 'BookingState.bookingSuccess(activeBookings: $activeBookings, historyBookings: $historyBookings)';
   }
 
   @override
@@ -380,12 +415,17 @@ class _$BookingSuccessImpl implements BookingSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BookingSuccessImpl &&
-            (identical(other.bookingResponseModel, bookingResponseModel) ||
-                other.bookingResponseModel == bookingResponseModel));
+            const DeepCollectionEquality()
+                .equals(other._activeBookings, _activeBookings) &&
+            const DeepCollectionEquality()
+                .equals(other._historyBookings, _historyBookings));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, bookingResponseModel);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_activeBookings),
+      const DeepCollectionEquality().hash(_historyBookings));
 
   /// Create a copy of BookingState
   /// with the given fields replaced by the non-null parameter values.
@@ -401,11 +441,12 @@ class _$BookingSuccessImpl implements BookingSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() bookingLoading,
-    required TResult Function(BookingResponseModel bookingResponseModel)
+    required TResult Function(
+            List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
   }) {
-    return bookingSuccess(bookingResponseModel);
+    return bookingSuccess(activeBookings, historyBookings);
   }
 
   @override
@@ -413,11 +454,12 @@ class _$BookingSuccessImpl implements BookingSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? bookingLoading,
-    TResult? Function(BookingResponseModel bookingResponseModel)?
+    TResult? Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
   }) {
-    return bookingSuccess?.call(bookingResponseModel);
+    return bookingSuccess?.call(activeBookings, historyBookings);
   }
 
   @override
@@ -425,12 +467,14 @@ class _$BookingSuccessImpl implements BookingSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? bookingLoading,
-    TResult Function(BookingResponseModel bookingResponseModel)? bookingSuccess,
+    TResult Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
     required TResult orElse(),
   }) {
     if (bookingSuccess != null) {
-      return bookingSuccess(bookingResponseModel);
+      return bookingSuccess(activeBookings, historyBookings);
     }
     return orElse();
   }
@@ -475,9 +519,11 @@ class _$BookingSuccessImpl implements BookingSuccess {
 
 abstract class BookingSuccess implements BookingState {
   const factory BookingSuccess(
-      final BookingResponseModel bookingResponseModel) = _$BookingSuccessImpl;
+      {required final List<BookingData> activeBookings,
+      required final List<BookingData> historyBookings}) = _$BookingSuccessImpl;
 
-  BookingResponseModel get bookingResponseModel;
+  List<BookingData> get activeBookings;
+  List<BookingData> get historyBookings;
 
   /// Create a copy of BookingState
   /// with the given fields replaced by the non-null parameter values.
@@ -557,7 +603,8 @@ class _$BookingErrorImpl implements BookingError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() bookingLoading,
-    required TResult Function(BookingResponseModel bookingResponseModel)
+    required TResult Function(
+            List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
   }) {
@@ -569,7 +616,8 @@ class _$BookingErrorImpl implements BookingError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? bookingLoading,
-    TResult? Function(BookingResponseModel bookingResponseModel)?
+    TResult? Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
   }) {
@@ -581,7 +629,9 @@ class _$BookingErrorImpl implements BookingError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? bookingLoading,
-    TResult Function(BookingResponseModel bookingResponseModel)? bookingSuccess,
+    TResult Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
     required TResult orElse(),
   }) {

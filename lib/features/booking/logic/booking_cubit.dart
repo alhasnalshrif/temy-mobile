@@ -11,7 +11,20 @@ class BookingCubit extends Cubit<BookingState> {
     final response = await _bookingRepo.getBookings();
     response.when(
       success: (bookingResponseModel) {
-        emit(BookingState.bookingSuccess(bookingResponseModel));
+        final allBookings = bookingResponseModel.bookingDataList ?? [];
+        final activeBookings = allBookings
+            .where((booking) =>
+                booking.status == 'pending' || booking.status == 'confirmed')
+            .toList();
+        final historyBookings = allBookings
+            .where((booking) =>
+                booking.status == 'completed' || booking.status == 'cancelled')
+            .toList();
+
+        emit(BookingState.bookingSuccess(
+          activeBookings: activeBookings,
+          historyBookings: historyBookings,
+        ));
       },
       failure: (error) {
         emit(BookingState.bookingError(error));

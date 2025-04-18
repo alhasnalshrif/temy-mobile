@@ -10,11 +10,11 @@ class BookingState with _$BookingState {
 
   // booking
   const factory BookingState.bookingLoading() = BookingLoading;
-  const factory BookingState.bookingSuccess(
-      BookingResponseModel bookingResponseModel) = BookingSuccess;
+  const factory BookingState.bookingSuccess({
+    required List<BookingData> activeBookings,
+    required List<BookingData> historyBookings,
+  }) = BookingSuccess;
 
   const factory BookingState.bookingError(ErrorHandler errorHandler) =
       BookingError;
 }
-
-
