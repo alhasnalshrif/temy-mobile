@@ -16,4 +16,14 @@ class ProfileRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
+
+  Future<ApiResult<UserProfile>> updateProfile(
+      Map<String, dynamic> updateData) async {
+    try {
+      final response = await _profileApiServices.updateProfile(updateData);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
 }

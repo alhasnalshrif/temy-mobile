@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/booking/logic/booking_state.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_card.dart';
@@ -81,8 +82,8 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
               ],
             );
           },
-          bookingLoading: (_) => const Center(
-            child: CircularProgressIndicator(),
+          bookingLoading: (_) => Center(
+            child: ShimmerLoading.rectangular(height: 500), // Example shimmer
           ),
           bookingError: (_) => const ErrorBookingView(),
           orElse: () => Column(

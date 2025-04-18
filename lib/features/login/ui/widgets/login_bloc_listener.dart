@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
 import 'package:temy_barber/features/login/logic/cubit/login_state.dart';
+import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 
 import '../../../../core/routing/routes.dart';
-import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/styles.dart';
 
 class LoginBlocListener extends StatelessWidget {
@@ -19,14 +19,7 @@ class LoginBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            showDialog(
-              context: context,
-              builder: (context) => const Center(
-                child: CircularProgressIndicator(
-                  color: ColorsManager.mainBlue,
-                ),
-              ),
-            );
+            setupLoadingState(context);
           },
           success: (loginResponse) {
             context.pop();
@@ -38,6 +31,18 @@ class LoginBlocListener extends StatelessWidget {
         );
       },
       child: const SizedBox.shrink(),
+    );
+  }
+
+  void setupLoadingState(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Center(
+        // Replace CircularProgressIndicator with ShimmerLoading
+        child: ShimmerLoading.circular(
+          size: 50,
+        ), // Example shimmer
+      ),
     );
   }
 

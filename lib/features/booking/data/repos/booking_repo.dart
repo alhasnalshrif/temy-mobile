@@ -16,4 +16,13 @@ class BookingRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
+
+  Future<ApiResult<void>> cancelBooking(String bookingId) async {
+    try {
+      await _bookingApiServices.cancelBooking(bookingId);
+      return const ApiResult.success(null); // Indicate success with no data
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
 }

@@ -11,6 +11,7 @@ import 'package:temy_barber/features/home/data/apis/home_api_services.dart';
 import 'package:temy_barber/features/home/data/repos/home_repo.dart';
 import 'package:temy_barber/features/profile/data/apis/profile_api_services.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
+import 'package:temy_barber/features/profile/logic/update_profile_cubit.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_services.dart';
 import 'package:get_it/get_it.dart';
 
@@ -58,4 +59,6 @@ Future<void> setupGetIt() async {
   getIt
       .registerLazySingleton<BookingApiServices>(() => BookingApiServices(dio));
   getIt.registerLazySingleton<BookingRepo>(() => BookingRepo(getIt()));
+  getIt.registerFactory<UpdateProfileCubit>(
+      () => UpdateProfileCubit(getIt())); // Add this line
 }

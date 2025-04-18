@@ -48,8 +48,8 @@ class DateTimeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedDate = _formatDate(booking.date);
-    final formattedTime = _formatTime(booking.startTime);
+    // final formattedDate = _formatDate(booking.date);
+    // final formattedTime = _formatTime(booking.startTime);
     final durationText =
         booking.totalDuration != null ? '${booking.totalDuration} min' : 'N/A';
 
@@ -73,7 +73,16 @@ class DateTimeSection extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '$formattedDate at $formattedTime ($durationText)',
+              '${booking.date} ',
+              // '$formattedDate at $formattedTime ($durationText)',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[700],
+              ),
+            ),
+            Text(
+              'at ${booking.startTime} ($durationText)',
+              // '$formattedDate at $formattedTime ($durationText)',
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey[700],

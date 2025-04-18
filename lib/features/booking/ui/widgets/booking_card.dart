@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; // Import Bloc
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
+import 'package:temy_barber/features/booking/logic/booking_cubit.dart'; // Import Cubit
 import 'package:temy_barber/features/booking/ui/widgets/barber_detail_section.dart';
 import 'package:temy_barber/features/booking/ui/widgets/barber_section.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_status_stepper.dart';
@@ -20,6 +22,7 @@ class BookingCard extends StatelessWidget {
     bool isCompleted = booking.status == 'completed';
     bool isCancelled = booking.status == 'cancelled';
     bool isActive = !isCompleted && !isCancelled;
+    bool isPending = booking.status == 'pending';
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -32,7 +35,6 @@ class BookingCard extends StatelessWidget {
           BarberSection(
             name: booking.barber?.name ?? 'Master piece Barbershop',
             avatarUrl: booking.barber?.avatar,
-            // Add location and rating if available in BarberData
             location:
                 'Location Placeholder', // Replace with actual data if available
             rating: '5.0', // Replace with actual data if available
@@ -47,12 +49,127 @@ class BookingCard extends StatelessWidget {
           verticalSpace(16),
           BarberDetailSection(booking: booking),
           verticalSpace(16),
-          if (isActive &&
-              booking.status != 'confirmed') // Show cancel only if pending
+          if (isPending)
             CancelBookingButton(
               onPressed: () {
-                // TODO: Implement cancel booking functionality
-                // Consider showing a confirmation dialog
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20.0)),
+                  ),
+                  backgroundColor: Colors.white,
+                  builder: (BuildContext dialogContext) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(dialogContext).viewInsets.bottom,
+                        left: 16.0,
+                        right: 16.0,
+                        top: 16.0,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Title
+                          Text(
+                            'Confirm Cancellation',
+                            style: Theme.of(dialogContext)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 12.0),
+                          // Description
+                          Text(
+                            'Are you sure you want to cancel this booking? This action cannot be undone.',
+                            style: Theme.of(dialogContext)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color: Colors.black54,
+                                ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 24.0),
+                          // Buttons
+                          Row(
+                            children: [
+                              Expanded(
+                                child: OutlinedButton(
+                                  onPressed: () =>
+                                      Navigator.of(dialogContext).pop(),
+                                  style: OutlinedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0),
+                                    side: const BorderSide(color: Colors.grey),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'No, Keep Booking',
+                                    style: Theme.of(dialogContext)
+                                        .textTheme
+                                        .labelLarge
+                                        ?.copyWith(
+                                          color: Colors.black87,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 12.0),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(dialogContext).pop();
+                                    if (booking.id != null) {
+                                      context
+                                          .read<BookingCubit>()
+                                          .cancelBooking(booking.id!);
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'Error: Cannot cancel booking without ID.'),
+                                          backgroundColor: Colors.redAccent,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0),
+                                    backgroundColor: Colors.redAccent,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Yes, Cancel',
+                                    style: Theme.of(dialogContext)
+                                        .textTheme
+                                        .labelLarge
+                                        ?.copyWith(
+                                          color: Colors.white,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16.0),
+                        ],
+                      ),
+                    );
+                  },
+                );
               },
             ),
           if (isCompleted) const FeedbackButton(),

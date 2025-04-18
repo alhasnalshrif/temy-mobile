@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart'
     as barber;
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
@@ -207,8 +208,9 @@ class TimeSlotSection extends StatelessWidget {
           const SizedBox(height: 16),
           Expanded(
             child: isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
+                ? Center(
+                    // Replace CircularProgressIndicator with ShimmerLoading
+                    child: ShimmerLoading.rectangular(height: 100),
                   )
                 : validStartingSlots.isEmpty
                     ? const Center(

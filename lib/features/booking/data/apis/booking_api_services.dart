@@ -12,4 +12,7 @@ abstract class BookingApiServices {
 
   @GET(BookingApiConstants.reservations)
   Future<BookingResponseModel> getBooking();
+
+  @PATCH(BookingApiConstants.cancelReservation)
+  Future<void> cancelBooking(@Path("id") String bookingId);
 }

@@ -24,6 +24,9 @@ mixin _$BookingState {
             List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
+    required TResult Function() cancelBookingLoading,
+    required TResult Function() cancelBookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) cancelBookingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +37,9 @@ mixin _$BookingState {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
+    TResult? Function()? cancelBookingLoading,
+    TResult? Function()? cancelBookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? cancelBookingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +50,9 @@ mixin _$BookingState {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
+    TResult Function()? cancelBookingLoading,
+    TResult Function()? cancelBookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? cancelBookingError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +62,9 @@ mixin _$BookingState {
     required TResult Function(BookingLoading value) bookingLoading,
     required TResult Function(BookingSuccess value) bookingSuccess,
     required TResult Function(BookingError value) bookingError,
+    required TResult Function(CancelBookingLoading value) cancelBookingLoading,
+    required TResult Function(CancelBookingSuccess value) cancelBookingSuccess,
+    required TResult Function(CancelBookingError value) cancelBookingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +73,9 @@ mixin _$BookingState {
     TResult? Function(BookingLoading value)? bookingLoading,
     TResult? Function(BookingSuccess value)? bookingSuccess,
     TResult? Function(BookingError value)? bookingError,
+    TResult? Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult? Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult? Function(CancelBookingError value)? cancelBookingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +84,9 @@ mixin _$BookingState {
     TResult Function(BookingLoading value)? bookingLoading,
     TResult Function(BookingSuccess value)? bookingSuccess,
     TResult Function(BookingError value)? bookingError,
+    TResult Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult Function(CancelBookingError value)? cancelBookingError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,6 +160,9 @@ class _$InitialImpl implements _Initial {
             List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
+    required TResult Function() cancelBookingLoading,
+    required TResult Function() cancelBookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) cancelBookingError,
   }) {
     return initial();
   }
@@ -155,6 +176,9 @@ class _$InitialImpl implements _Initial {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
+    TResult? Function()? cancelBookingLoading,
+    TResult? Function()? cancelBookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? cancelBookingError,
   }) {
     return initial?.call();
   }
@@ -168,6 +192,9 @@ class _$InitialImpl implements _Initial {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
+    TResult Function()? cancelBookingLoading,
+    TResult Function()? cancelBookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? cancelBookingError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -183,6 +210,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function(BookingLoading value) bookingLoading,
     required TResult Function(BookingSuccess value) bookingSuccess,
     required TResult Function(BookingError value) bookingError,
+    required TResult Function(CancelBookingLoading value) cancelBookingLoading,
+    required TResult Function(CancelBookingSuccess value) cancelBookingSuccess,
+    required TResult Function(CancelBookingError value) cancelBookingError,
   }) {
     return initial(this);
   }
@@ -194,6 +224,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(BookingLoading value)? bookingLoading,
     TResult? Function(BookingSuccess value)? bookingSuccess,
     TResult? Function(BookingError value)? bookingError,
+    TResult? Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult? Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult? Function(CancelBookingError value)? cancelBookingError,
   }) {
     return initial?.call(this);
   }
@@ -205,6 +238,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(BookingLoading value)? bookingLoading,
     TResult Function(BookingSuccess value)? bookingSuccess,
     TResult Function(BookingError value)? bookingError,
+    TResult Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult Function(CancelBookingError value)? cancelBookingError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -265,6 +301,9 @@ class _$BookingLoadingImpl implements BookingLoading {
             List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
+    required TResult Function() cancelBookingLoading,
+    required TResult Function() cancelBookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) cancelBookingError,
   }) {
     return bookingLoading();
   }
@@ -278,6 +317,9 @@ class _$BookingLoadingImpl implements BookingLoading {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
+    TResult? Function()? cancelBookingLoading,
+    TResult? Function()? cancelBookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? cancelBookingError,
   }) {
     return bookingLoading?.call();
   }
@@ -291,6 +333,9 @@ class _$BookingLoadingImpl implements BookingLoading {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
+    TResult Function()? cancelBookingLoading,
+    TResult Function()? cancelBookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? cancelBookingError,
     required TResult orElse(),
   }) {
     if (bookingLoading != null) {
@@ -306,6 +351,9 @@ class _$BookingLoadingImpl implements BookingLoading {
     required TResult Function(BookingLoading value) bookingLoading,
     required TResult Function(BookingSuccess value) bookingSuccess,
     required TResult Function(BookingError value) bookingError,
+    required TResult Function(CancelBookingLoading value) cancelBookingLoading,
+    required TResult Function(CancelBookingSuccess value) cancelBookingSuccess,
+    required TResult Function(CancelBookingError value) cancelBookingError,
   }) {
     return bookingLoading(this);
   }
@@ -317,6 +365,9 @@ class _$BookingLoadingImpl implements BookingLoading {
     TResult? Function(BookingLoading value)? bookingLoading,
     TResult? Function(BookingSuccess value)? bookingSuccess,
     TResult? Function(BookingError value)? bookingError,
+    TResult? Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult? Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult? Function(CancelBookingError value)? cancelBookingError,
   }) {
     return bookingLoading?.call(this);
   }
@@ -328,6 +379,9 @@ class _$BookingLoadingImpl implements BookingLoading {
     TResult Function(BookingLoading value)? bookingLoading,
     TResult Function(BookingSuccess value)? bookingSuccess,
     TResult Function(BookingError value)? bookingError,
+    TResult Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult Function(CancelBookingError value)? cancelBookingError,
     required TResult orElse(),
   }) {
     if (bookingLoading != null) {
@@ -445,6 +499,9 @@ class _$BookingSuccessImpl implements BookingSuccess {
             List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
+    required TResult Function() cancelBookingLoading,
+    required TResult Function() cancelBookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) cancelBookingError,
   }) {
     return bookingSuccess(activeBookings, historyBookings);
   }
@@ -458,6 +515,9 @@ class _$BookingSuccessImpl implements BookingSuccess {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
+    TResult? Function()? cancelBookingLoading,
+    TResult? Function()? cancelBookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? cancelBookingError,
   }) {
     return bookingSuccess?.call(activeBookings, historyBookings);
   }
@@ -471,6 +531,9 @@ class _$BookingSuccessImpl implements BookingSuccess {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
+    TResult Function()? cancelBookingLoading,
+    TResult Function()? cancelBookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? cancelBookingError,
     required TResult orElse(),
   }) {
     if (bookingSuccess != null) {
@@ -486,6 +549,9 @@ class _$BookingSuccessImpl implements BookingSuccess {
     required TResult Function(BookingLoading value) bookingLoading,
     required TResult Function(BookingSuccess value) bookingSuccess,
     required TResult Function(BookingError value) bookingError,
+    required TResult Function(CancelBookingLoading value) cancelBookingLoading,
+    required TResult Function(CancelBookingSuccess value) cancelBookingSuccess,
+    required TResult Function(CancelBookingError value) cancelBookingError,
   }) {
     return bookingSuccess(this);
   }
@@ -497,6 +563,9 @@ class _$BookingSuccessImpl implements BookingSuccess {
     TResult? Function(BookingLoading value)? bookingLoading,
     TResult? Function(BookingSuccess value)? bookingSuccess,
     TResult? Function(BookingError value)? bookingError,
+    TResult? Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult? Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult? Function(CancelBookingError value)? cancelBookingError,
   }) {
     return bookingSuccess?.call(this);
   }
@@ -508,6 +577,9 @@ class _$BookingSuccessImpl implements BookingSuccess {
     TResult Function(BookingLoading value)? bookingLoading,
     TResult Function(BookingSuccess value)? bookingSuccess,
     TResult Function(BookingError value)? bookingError,
+    TResult Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult Function(CancelBookingError value)? cancelBookingError,
     required TResult orElse(),
   }) {
     if (bookingSuccess != null) {
@@ -607,6 +679,9 @@ class _$BookingErrorImpl implements BookingError {
             List<BookingData> activeBookings, List<BookingData> historyBookings)
         bookingSuccess,
     required TResult Function(ErrorHandler errorHandler) bookingError,
+    required TResult Function() cancelBookingLoading,
+    required TResult Function() cancelBookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) cancelBookingError,
   }) {
     return bookingError(errorHandler);
   }
@@ -620,6 +695,9 @@ class _$BookingErrorImpl implements BookingError {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult? Function(ErrorHandler errorHandler)? bookingError,
+    TResult? Function()? cancelBookingLoading,
+    TResult? Function()? cancelBookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? cancelBookingError,
   }) {
     return bookingError?.call(errorHandler);
   }
@@ -633,6 +711,9 @@ class _$BookingErrorImpl implements BookingError {
             List<BookingData> historyBookings)?
         bookingSuccess,
     TResult Function(ErrorHandler errorHandler)? bookingError,
+    TResult Function()? cancelBookingLoading,
+    TResult Function()? cancelBookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? cancelBookingError,
     required TResult orElse(),
   }) {
     if (bookingError != null) {
@@ -648,6 +729,9 @@ class _$BookingErrorImpl implements BookingError {
     required TResult Function(BookingLoading value) bookingLoading,
     required TResult Function(BookingSuccess value) bookingSuccess,
     required TResult Function(BookingError value) bookingError,
+    required TResult Function(CancelBookingLoading value) cancelBookingLoading,
+    required TResult Function(CancelBookingSuccess value) cancelBookingSuccess,
+    required TResult Function(CancelBookingError value) cancelBookingError,
   }) {
     return bookingError(this);
   }
@@ -659,6 +743,9 @@ class _$BookingErrorImpl implements BookingError {
     TResult? Function(BookingLoading value)? bookingLoading,
     TResult? Function(BookingSuccess value)? bookingSuccess,
     TResult? Function(BookingError value)? bookingError,
+    TResult? Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult? Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult? Function(CancelBookingError value)? cancelBookingError,
   }) {
     return bookingError?.call(this);
   }
@@ -670,6 +757,9 @@ class _$BookingErrorImpl implements BookingError {
     TResult Function(BookingLoading value)? bookingLoading,
     TResult Function(BookingSuccess value)? bookingSuccess,
     TResult Function(BookingError value)? bookingError,
+    TResult Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult Function(CancelBookingError value)? cancelBookingError,
     required TResult orElse(),
   }) {
     if (bookingError != null) {
@@ -689,5 +779,468 @@ abstract class BookingError implements BookingState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BookingErrorImplCopyWith<_$BookingErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CancelBookingLoadingImplCopyWith<$Res> {
+  factory _$$CancelBookingLoadingImplCopyWith(_$CancelBookingLoadingImpl value,
+          $Res Function(_$CancelBookingLoadingImpl) then) =
+      __$$CancelBookingLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CancelBookingLoadingImplCopyWithImpl<$Res>
+    extends _$BookingStateCopyWithImpl<$Res, _$CancelBookingLoadingImpl>
+    implements _$$CancelBookingLoadingImplCopyWith<$Res> {
+  __$$CancelBookingLoadingImplCopyWithImpl(_$CancelBookingLoadingImpl _value,
+      $Res Function(_$CancelBookingLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BookingState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CancelBookingLoadingImpl implements CancelBookingLoading {
+  const _$CancelBookingLoadingImpl();
+
+  @override
+  String toString() {
+    return 'BookingState.cancelBookingLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CancelBookingLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() bookingLoading,
+    required TResult Function(
+            List<BookingData> activeBookings, List<BookingData> historyBookings)
+        bookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) bookingError,
+    required TResult Function() cancelBookingLoading,
+    required TResult Function() cancelBookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) cancelBookingError,
+  }) {
+    return cancelBookingLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? bookingLoading,
+    TResult? Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bookingError,
+    TResult? Function()? cancelBookingLoading,
+    TResult? Function()? cancelBookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? cancelBookingError,
+  }) {
+    return cancelBookingLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? bookingLoading,
+    TResult Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? bookingError,
+    TResult Function()? cancelBookingLoading,
+    TResult Function()? cancelBookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? cancelBookingError,
+    required TResult orElse(),
+  }) {
+    if (cancelBookingLoading != null) {
+      return cancelBookingLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(BookingLoading value) bookingLoading,
+    required TResult Function(BookingSuccess value) bookingSuccess,
+    required TResult Function(BookingError value) bookingError,
+    required TResult Function(CancelBookingLoading value) cancelBookingLoading,
+    required TResult Function(CancelBookingSuccess value) cancelBookingSuccess,
+    required TResult Function(CancelBookingError value) cancelBookingError,
+  }) {
+    return cancelBookingLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(BookingLoading value)? bookingLoading,
+    TResult? Function(BookingSuccess value)? bookingSuccess,
+    TResult? Function(BookingError value)? bookingError,
+    TResult? Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult? Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult? Function(CancelBookingError value)? cancelBookingError,
+  }) {
+    return cancelBookingLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(BookingLoading value)? bookingLoading,
+    TResult Function(BookingSuccess value)? bookingSuccess,
+    TResult Function(BookingError value)? bookingError,
+    TResult Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult Function(CancelBookingError value)? cancelBookingError,
+    required TResult orElse(),
+  }) {
+    if (cancelBookingLoading != null) {
+      return cancelBookingLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CancelBookingLoading implements BookingState {
+  const factory CancelBookingLoading() = _$CancelBookingLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$CancelBookingSuccessImplCopyWith<$Res> {
+  factory _$$CancelBookingSuccessImplCopyWith(_$CancelBookingSuccessImpl value,
+          $Res Function(_$CancelBookingSuccessImpl) then) =
+      __$$CancelBookingSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CancelBookingSuccessImplCopyWithImpl<$Res>
+    extends _$BookingStateCopyWithImpl<$Res, _$CancelBookingSuccessImpl>
+    implements _$$CancelBookingSuccessImplCopyWith<$Res> {
+  __$$CancelBookingSuccessImplCopyWithImpl(_$CancelBookingSuccessImpl _value,
+      $Res Function(_$CancelBookingSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BookingState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CancelBookingSuccessImpl implements CancelBookingSuccess {
+  const _$CancelBookingSuccessImpl();
+
+  @override
+  String toString() {
+    return 'BookingState.cancelBookingSuccess()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CancelBookingSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() bookingLoading,
+    required TResult Function(
+            List<BookingData> activeBookings, List<BookingData> historyBookings)
+        bookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) bookingError,
+    required TResult Function() cancelBookingLoading,
+    required TResult Function() cancelBookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) cancelBookingError,
+  }) {
+    return cancelBookingSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? bookingLoading,
+    TResult? Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bookingError,
+    TResult? Function()? cancelBookingLoading,
+    TResult? Function()? cancelBookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? cancelBookingError,
+  }) {
+    return cancelBookingSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? bookingLoading,
+    TResult Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? bookingError,
+    TResult Function()? cancelBookingLoading,
+    TResult Function()? cancelBookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? cancelBookingError,
+    required TResult orElse(),
+  }) {
+    if (cancelBookingSuccess != null) {
+      return cancelBookingSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(BookingLoading value) bookingLoading,
+    required TResult Function(BookingSuccess value) bookingSuccess,
+    required TResult Function(BookingError value) bookingError,
+    required TResult Function(CancelBookingLoading value) cancelBookingLoading,
+    required TResult Function(CancelBookingSuccess value) cancelBookingSuccess,
+    required TResult Function(CancelBookingError value) cancelBookingError,
+  }) {
+    return cancelBookingSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(BookingLoading value)? bookingLoading,
+    TResult? Function(BookingSuccess value)? bookingSuccess,
+    TResult? Function(BookingError value)? bookingError,
+    TResult? Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult? Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult? Function(CancelBookingError value)? cancelBookingError,
+  }) {
+    return cancelBookingSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(BookingLoading value)? bookingLoading,
+    TResult Function(BookingSuccess value)? bookingSuccess,
+    TResult Function(BookingError value)? bookingError,
+    TResult Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult Function(CancelBookingError value)? cancelBookingError,
+    required TResult orElse(),
+  }) {
+    if (cancelBookingSuccess != null) {
+      return cancelBookingSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CancelBookingSuccess implements BookingState {
+  const factory CancelBookingSuccess() = _$CancelBookingSuccessImpl;
+}
+
+/// @nodoc
+abstract class _$$CancelBookingErrorImplCopyWith<$Res> {
+  factory _$$CancelBookingErrorImplCopyWith(_$CancelBookingErrorImpl value,
+          $Res Function(_$CancelBookingErrorImpl) then) =
+      __$$CancelBookingErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorHandler errorHandler});
+}
+
+/// @nodoc
+class __$$CancelBookingErrorImplCopyWithImpl<$Res>
+    extends _$BookingStateCopyWithImpl<$Res, _$CancelBookingErrorImpl>
+    implements _$$CancelBookingErrorImplCopyWith<$Res> {
+  __$$CancelBookingErrorImplCopyWithImpl(_$CancelBookingErrorImpl _value,
+      $Res Function(_$CancelBookingErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BookingState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorHandler = null,
+  }) {
+    return _then(_$CancelBookingErrorImpl(
+      null == errorHandler
+          ? _value.errorHandler
+          : errorHandler // ignore: cast_nullable_to_non_nullable
+              as ErrorHandler,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CancelBookingErrorImpl implements CancelBookingError {
+  const _$CancelBookingErrorImpl(this.errorHandler);
+
+  @override
+  final ErrorHandler errorHandler;
+
+  @override
+  String toString() {
+    return 'BookingState.cancelBookingError(errorHandler: $errorHandler)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CancelBookingErrorImpl &&
+            (identical(other.errorHandler, errorHandler) ||
+                other.errorHandler == errorHandler));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorHandler);
+
+  /// Create a copy of BookingState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CancelBookingErrorImplCopyWith<_$CancelBookingErrorImpl> get copyWith =>
+      __$$CancelBookingErrorImplCopyWithImpl<_$CancelBookingErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() bookingLoading,
+    required TResult Function(
+            List<BookingData> activeBookings, List<BookingData> historyBookings)
+        bookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) bookingError,
+    required TResult Function() cancelBookingLoading,
+    required TResult Function() cancelBookingSuccess,
+    required TResult Function(ErrorHandler errorHandler) cancelBookingError,
+  }) {
+    return cancelBookingError(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? bookingLoading,
+    TResult? Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? bookingError,
+    TResult? Function()? cancelBookingLoading,
+    TResult? Function()? cancelBookingSuccess,
+    TResult? Function(ErrorHandler errorHandler)? cancelBookingError,
+  }) {
+    return cancelBookingError?.call(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? bookingLoading,
+    TResult Function(List<BookingData> activeBookings,
+            List<BookingData> historyBookings)?
+        bookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? bookingError,
+    TResult Function()? cancelBookingLoading,
+    TResult Function()? cancelBookingSuccess,
+    TResult Function(ErrorHandler errorHandler)? cancelBookingError,
+    required TResult orElse(),
+  }) {
+    if (cancelBookingError != null) {
+      return cancelBookingError(errorHandler);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(BookingLoading value) bookingLoading,
+    required TResult Function(BookingSuccess value) bookingSuccess,
+    required TResult Function(BookingError value) bookingError,
+    required TResult Function(CancelBookingLoading value) cancelBookingLoading,
+    required TResult Function(CancelBookingSuccess value) cancelBookingSuccess,
+    required TResult Function(CancelBookingError value) cancelBookingError,
+  }) {
+    return cancelBookingError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(BookingLoading value)? bookingLoading,
+    TResult? Function(BookingSuccess value)? bookingSuccess,
+    TResult? Function(BookingError value)? bookingError,
+    TResult? Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult? Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult? Function(CancelBookingError value)? cancelBookingError,
+  }) {
+    return cancelBookingError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(BookingLoading value)? bookingLoading,
+    TResult Function(BookingSuccess value)? bookingSuccess,
+    TResult Function(BookingError value)? bookingError,
+    TResult Function(CancelBookingLoading value)? cancelBookingLoading,
+    TResult Function(CancelBookingSuccess value)? cancelBookingSuccess,
+    TResult Function(CancelBookingError value)? cancelBookingError,
+    required TResult orElse(),
+  }) {
+    if (cancelBookingError != null) {
+      return cancelBookingError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CancelBookingError implements BookingState {
+  const factory CancelBookingError(final ErrorHandler errorHandler) =
+      _$CancelBookingErrorImpl;
+
+  ErrorHandler get errorHandler;
+
+  /// Create a copy of BookingState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CancelBookingErrorImplCopyWith<_$CancelBookingErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

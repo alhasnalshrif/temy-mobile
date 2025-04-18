@@ -14,6 +14,7 @@ import 'package:temy_barber/features/reservations/ui/widgets/calendar_section.da
 import 'package:temy_barber/features/reservations/ui/widgets/time_slot_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/total_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/book_button.dart';
+import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 
 class ReservationsScreen extends StatefulWidget {
   final ReservationArguments? arguments;
@@ -104,6 +105,23 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
         );
   }
 
+  void _showLoadingDialog(BuildContext context) {
+    _isLoadingDialogShowing = true;
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent dismissing by tapping outside
+      builder: (context) => PopScope(
+        canPop: false, // Prevent dismissing with back button
+        child: Center(
+          // Replace CircularProgressIndicator with ShimmerLoading
+          child: ShimmerLoading.circular(
+            size: 50,
+          ), // Example shimmer
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ReservationCubit, ReservationState>(
@@ -111,18 +129,10 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
         state.maybeWhen(
           reservationLoading: () {
             if (!_isLoadingDialogShowing) {
-              _isLoadingDialogShowing = true;
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+              _showLoadingDialog(context);
             }
           },
           reservationSuccess: (response, arguments) {
-
             if (_isLoadingDialogShowing) {
               Navigator.of(context).pop(); // Dismiss loading dialog
               _isLoadingDialogShowing = false;

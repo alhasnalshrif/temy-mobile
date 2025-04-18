@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 import 'package:temy_barber/features/category/logic/category_cubit.dart';
 import 'package:temy_barber/features/category/logic/category_state.dart';
 
@@ -39,8 +40,8 @@ class SpecializationDoctorBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const Center(
-      child: CircularProgressIndicator(),
+    return  Center(
+      child: ShimmerLoading.rectangular(height: 300), // Example shimmer
     );
   }
 

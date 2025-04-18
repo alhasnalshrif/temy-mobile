@@ -5,15 +5,11 @@ class CancelledIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Chip(
-        label: const Text('Cancelled'),
-        backgroundColor: Colors.red[100],
-        labelStyle:
-            TextStyle(color: Colors.red[700], fontWeight: FontWeight.bold),
-        avatar: Icon(Icons.cancel_outlined, color: Colors.red[700], size: 18),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      ),
-    );
+    return const Center(
+        child: Text('Cancelled',
+            style: TextStyle(
+                color: Color.fromARGB(255, 255, 0, 0),
+                fontSize:
+                    16))); // Replace Color(0xFF000000) with the desired color
   }
 }

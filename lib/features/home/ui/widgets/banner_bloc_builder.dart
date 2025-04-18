@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/logic/home_state.dart';
 import 'package:temy_barber/features/home/ui/widgets/banner_carousel.dart';
+import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 
 class BannerBlocBuilder extends StatelessWidget {
   const BannerBlocBuilder({super.key});
@@ -37,11 +38,8 @@ class BannerBlocBuilder extends StatelessWidget {
   }
 
   Widget _buildLoading() {
-    return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: CircularProgressIndicator(),
-      ),
+    return  Center(
+      child: ShimmerLoading.rectangular(height: 150),
     );
   }
 

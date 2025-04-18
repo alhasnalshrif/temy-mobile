@@ -8,13 +8,18 @@ part 'booking_state.freezed.dart';
 class BookingState with _$BookingState {
   const factory BookingState.initial() = _Initial;
 
-  // booking
+  // booking list
   const factory BookingState.bookingLoading() = BookingLoading;
   const factory BookingState.bookingSuccess({
     required List<BookingData> activeBookings,
     required List<BookingData> historyBookings,
   }) = BookingSuccess;
-
   const factory BookingState.bookingError(ErrorHandler errorHandler) =
       BookingError;
+
+  // Cancel booking
+  const factory BookingState.cancelBookingLoading() = CancelBookingLoading;
+  const factory BookingState.cancelBookingSuccess() = CancelBookingSuccess;
+  const factory BookingState.cancelBookingError(ErrorHandler errorHandler) =
+      CancelBookingError;
 }

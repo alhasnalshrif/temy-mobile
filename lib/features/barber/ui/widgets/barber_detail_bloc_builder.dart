@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/features/barber/logic/barber_cubit.dart';
 import 'package:temy_barber/features/barber/logic/barber_state.dart';
 import 'package:temy_barber/features/barber/ui/widgets/barber_detail_screen.dart';
@@ -34,8 +35,8 @@ class BarberDetailBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const Center(
-      child: CircularProgressIndicator(),
+    return Center(
+      child: ShimmerLoading.rectangular(height: 400),
     );
   }
 

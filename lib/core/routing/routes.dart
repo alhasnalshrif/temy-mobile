@@ -10,4 +10,5 @@ class Routes {
   static const String barberScreen = '/barberScreen';
   static const String reservationScreen = '/reservationScreen';
   static const String invoiceScreen = '/invoiceScreen';
+  static const String updateProfileScreen = '/updateProfileScreen';
 }

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
+// import 'package:temy_barber/core/helpers/navigator_ext.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
+// import 'package:temy_barber/core/router/routes.dart';
+import 'package:temy_barber/core/routing/routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/profile_state.dart';
+import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -56,13 +62,14 @@ class ProfileScreen extends StatelessWidget {
                 String userName = 'User Name';
                 String phoneNumber = 'Phone Number';
                 String? avatarUrl;
+                User? currentUser;
 
                 state.maybeMap(
                   profileSuccess: (value) {
-                    userName = value.userProfile.user?.name ?? 'User Name';
-                    phoneNumber =
-                        value.userProfile.user?.phone ?? 'Phone Number';
-                    avatarUrl = value.userProfile.user?.avatar;
+                    currentUser = value.userProfile.user;
+                    userName = currentUser?.name ?? 'User Name';
+                    phoneNumber = currentUser?.phone ?? 'Phone Number';
+                    avatarUrl = currentUser?.avatar;
                   },
                   orElse: () {},
                 );
@@ -171,7 +178,29 @@ class ProfileScreen extends StatelessWidget {
                     _buildProfileTile(
                       'تعديل الحساب',
                       Icons.person_outline,
-                      onTap: () {},
+                      onTap: () {
+                        final state = context.read<ProfileCubit>().state;
+                        state.maybeMap(
+                          profileSuccess: (successState) {
+                            if (successState.userProfile.user != null) {
+                              context.pushNamed(Routes.updateProfileScreen,
+                                  arguments: successState.userProfile.user!);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'لا يمكن تحميل بيانات المستخدم للتعديل')),
+                              );
+                            }
+                          },
+                          orElse: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('البيانات غير متوفرة حالياً')),
+                            );
+                          },
+                        );
+                      },
                     ),
                     _buildProfileTile(
                       'الخصوصية',
