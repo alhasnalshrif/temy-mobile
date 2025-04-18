@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/widgets/no_internet_page.dart';
 import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/logic/home_state.dart';
