@@ -13,7 +13,11 @@ class DateTimeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(Icons.calendar_today, size: 24, color: Colors.black54),
+        Image.asset(
+          'assets/icons/calendar.png',
+          height: 24,
+          color: Colors.black,
+        ),
         const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
