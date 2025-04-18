@@ -14,7 +14,7 @@ ReservationRequestModel _$ReservationRequestModelFromJson(
           .map((e) => e as String)
           .toList(),
       barberId: json['barberId'] as String,
-      date: DateTime.parse(json['date'] as String),
+      date: json['date'] as String,
       startTime: json['startTime'] as String,
     );
 
@@ -24,6 +24,6 @@ Map<String, dynamic> _$ReservationRequestModelToJson(
       'user': instance.user,
       'serviceIds': instance.serviceIds,
       'barberId': instance.barberId,
-      'date': instance.date.toIso8601String(),
+      'date': instance.date,
       'startTime': instance.startTime,
     };

@@ -10,7 +10,7 @@ class ReservationRequestModel {
   @JsonKey(name: 'barberId')
   final String barberId;
   @JsonKey(name: 'date')
-  final DateTime date;
+  final String date;
   @JsonKey(name: 'startTime')
   final String startTime;
 

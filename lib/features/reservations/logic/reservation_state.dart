@@ -1,6 +1,6 @@
 import 'package:temy_barber/core/networking/api_error_handler.dart';
-import 'package:temy_barber/features/reservations/data/models/reservation_detail_request.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
+import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,7 +13,7 @@ class ReservationState with _$ReservationState {
   // GET Reservation DETAIL
   const factory ReservationState.reservationLoading() = ReservationLoading;
   const factory ReservationState.reservationSuccess(
-    ReservationRequestModel reservationRequestModel, {
+    ReservationResponseModel reservationRequestModel, {
     ReservationArguments? arguments,
   }) = ReservationSuccess;
   const factory ReservationState.reservationError(ErrorHandler errorHandler) =

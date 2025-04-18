@@ -20,7 +20,7 @@ mixin _$ReservationState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() reservationLoading,
-    required TResult Function(ReservationRequestModel reservationRequestModel,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)
         reservationSuccess,
     required TResult Function(ErrorHandler errorHandler) reservationError,
@@ -34,7 +34,7 @@ mixin _$ReservationState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? reservationLoading,
-    TResult? Function(ReservationRequestModel reservationRequestModel,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult? Function(ErrorHandler errorHandler)? reservationError,
@@ -47,7 +47,7 @@ mixin _$ReservationState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? reservationLoading,
-    TResult Function(ReservationRequestModel reservationRequestModel,
+    TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult Function(ErrorHandler errorHandler)? reservationError,
@@ -157,7 +157,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() reservationLoading,
-    required TResult Function(ReservationRequestModel reservationRequestModel,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)
         reservationSuccess,
     required TResult Function(ErrorHandler errorHandler) reservationError,
@@ -174,7 +174,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? reservationLoading,
-    TResult? Function(ReservationRequestModel reservationRequestModel,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult? Function(ErrorHandler errorHandler)? reservationError,
@@ -190,7 +190,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? reservationLoading,
-    TResult Function(ReservationRequestModel reservationRequestModel,
+    TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult Function(ErrorHandler errorHandler)? reservationError,
@@ -299,7 +299,7 @@ class _$ReservationLoadingImpl implements ReservationLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() reservationLoading,
-    required TResult Function(ReservationRequestModel reservationRequestModel,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)
         reservationSuccess,
     required TResult Function(ErrorHandler errorHandler) reservationError,
@@ -316,7 +316,7 @@ class _$ReservationLoadingImpl implements ReservationLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? reservationLoading,
-    TResult? Function(ReservationRequestModel reservationRequestModel,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult? Function(ErrorHandler errorHandler)? reservationError,
@@ -332,7 +332,7 @@ class _$ReservationLoadingImpl implements ReservationLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? reservationLoading,
-    TResult Function(ReservationRequestModel reservationRequestModel,
+    TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult Function(ErrorHandler errorHandler)? reservationError,
@@ -405,7 +405,7 @@ abstract class _$$ReservationSuccessImplCopyWith<$Res> {
       __$$ReservationSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {ReservationRequestModel reservationRequestModel,
+      {ReservationResponseModel reservationRequestModel,
       ReservationArguments? arguments});
 }
 
@@ -429,7 +429,7 @@ class __$$ReservationSuccessImplCopyWithImpl<$Res>
       null == reservationRequestModel
           ? _value.reservationRequestModel
           : reservationRequestModel // ignore: cast_nullable_to_non_nullable
-              as ReservationRequestModel,
+              as ReservationResponseModel,
       arguments: freezed == arguments
           ? _value.arguments
           : arguments // ignore: cast_nullable_to_non_nullable
@@ -445,7 +445,7 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
       {this.arguments});
 
   @override
-  final ReservationRequestModel reservationRequestModel;
+  final ReservationResponseModel reservationRequestModel;
   @override
   final ReservationArguments? arguments;
 
@@ -484,7 +484,7 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() reservationLoading,
-    required TResult Function(ReservationRequestModel reservationRequestModel,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)
         reservationSuccess,
     required TResult Function(ErrorHandler errorHandler) reservationError,
@@ -501,7 +501,7 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? reservationLoading,
-    TResult? Function(ReservationRequestModel reservationRequestModel,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult? Function(ErrorHandler errorHandler)? reservationError,
@@ -517,7 +517,7 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? reservationLoading,
-    TResult Function(ReservationRequestModel reservationRequestModel,
+    TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult Function(ErrorHandler errorHandler)? reservationError,
@@ -581,10 +581,10 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
 
 abstract class ReservationSuccess implements ReservationState {
   const factory ReservationSuccess(
-      final ReservationRequestModel reservationRequestModel,
+      final ReservationResponseModel reservationRequestModel,
       {final ReservationArguments? arguments}) = _$ReservationSuccessImpl;
 
-  ReservationRequestModel get reservationRequestModel;
+  ReservationResponseModel get reservationRequestModel;
   ReservationArguments? get arguments;
 
   /// Create a copy of ReservationState
@@ -666,7 +666,7 @@ class _$ReservationErrorImpl implements ReservationError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() reservationLoading,
-    required TResult Function(ReservationRequestModel reservationRequestModel,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)
         reservationSuccess,
     required TResult Function(ErrorHandler errorHandler) reservationError,
@@ -683,7 +683,7 @@ class _$ReservationErrorImpl implements ReservationError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? reservationLoading,
-    TResult? Function(ReservationRequestModel reservationRequestModel,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult? Function(ErrorHandler errorHandler)? reservationError,
@@ -699,7 +699,7 @@ class _$ReservationErrorImpl implements ReservationError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? reservationLoading,
-    TResult Function(ReservationRequestModel reservationRequestModel,
+    TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult Function(ErrorHandler errorHandler)? reservationError,
@@ -817,7 +817,7 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() reservationLoading,
-    required TResult Function(ReservationRequestModel reservationRequestModel,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)
         reservationSuccess,
     required TResult Function(ErrorHandler errorHandler) reservationError,
@@ -834,7 +834,7 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? reservationLoading,
-    TResult? Function(ReservationRequestModel reservationRequestModel,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult? Function(ErrorHandler errorHandler)? reservationError,
@@ -850,7 +850,7 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? reservationLoading,
-    TResult Function(ReservationRequestModel reservationRequestModel,
+    TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult Function(ErrorHandler errorHandler)? reservationError,
@@ -988,7 +988,7 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() reservationLoading,
-    required TResult Function(ReservationRequestModel reservationRequestModel,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)
         reservationSuccess,
     required TResult Function(ErrorHandler errorHandler) reservationError,
@@ -1005,7 +1005,7 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? reservationLoading,
-    TResult? Function(ReservationRequestModel reservationRequestModel,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult? Function(ErrorHandler errorHandler)? reservationError,
@@ -1021,7 +1021,7 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? reservationLoading,
-    TResult Function(ReservationRequestModel reservationRequestModel,
+    TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult Function(ErrorHandler errorHandler)? reservationError,
@@ -1168,7 +1168,7 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() reservationLoading,
-    required TResult Function(ReservationRequestModel reservationRequestModel,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)
         reservationSuccess,
     required TResult Function(ErrorHandler errorHandler) reservationError,
@@ -1185,7 +1185,7 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? reservationLoading,
-    TResult? Function(ReservationRequestModel reservationRequestModel,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult? Function(ErrorHandler errorHandler)? reservationError,
@@ -1201,7 +1201,7 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? reservationLoading,
-    TResult Function(ReservationRequestModel reservationRequestModel,
+    TResult Function(ReservationResponseModel reservationRequestModel,
             ReservationArguments? arguments)?
         reservationSuccess,
     TResult Function(ErrorHandler errorHandler)? reservationError,

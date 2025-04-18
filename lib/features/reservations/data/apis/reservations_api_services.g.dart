@@ -24,14 +24,14 @@ class _ReservationApiServices implements ReservationApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ReservationRequestModel> postReservations(
+  Future<ReservationResponseModel> postReservations(
       ReservationRequestModel reservationRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(reservationRequest.toJson());
-    final _options = _setStreamType<ReservationRequestModel>(Options(
+    final _options = _setStreamType<ReservationResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -48,9 +48,9 @@ class _ReservationApiServices implements ReservationApiServices {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ReservationRequestModel _value;
+    late ReservationResponseModel _value;
     try {
-      _value = ReservationRequestModel.fromJson(_result.data!);
+      _value = ReservationResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

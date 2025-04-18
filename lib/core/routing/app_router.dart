@@ -10,6 +10,8 @@ import 'package:temy_barber/features/dashboard/dashboard_screen.dart';
 import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
 import 'package:temy_barber/features/login/ui/login_screen.dart';
 import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
+import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
+import 'package:temy_barber/features/reservations/ui/invoice_screen.dart';
 import 'package:temy_barber/features/reservations/ui/reservations_screen.dart';
 import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:temy_barber/features/sign_up/ui/sign_up_screen.dart';
@@ -55,6 +57,12 @@ class AppRouter {
       case Routes.dashboardScreen:
         return MaterialPageRoute(
           builder: (_) => const DashboardScreen(),
+        );
+      case Routes.invoiceScreen:
+        final reservationResponse =
+            settings.arguments as ReservationResponseModel;
+        return MaterialPageRoute(
+          builder: (_) => InvoiceScreen(arguments: reservationResponse),
         );
       case Routes.reservationScreen:
         final args = settings.arguments as ReservationArguments;

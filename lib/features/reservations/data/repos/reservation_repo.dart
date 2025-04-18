@@ -2,6 +2,7 @@ import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_services.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_detail_request.dart';
+import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
 
 class ReservationRepo {
@@ -9,7 +10,7 @@ class ReservationRepo {
 
   ReservationRepo(this._reservationApiServices);
 
-  Future<ApiResult<ReservationRequestModel>> postReservation({
+  Future<ApiResult<ReservationResponseModel>> postReservation({
     required String userId,
     required List<String> serviceIds,
     required String barberId,
@@ -17,15 +18,12 @@ class ReservationRepo {
     required String startTime,
   }) async {
     try {
-      // Parse date string to DateTime
-      final dateTime = DateTime.parse(date);
-
       final response = await _reservationApiServices.postReservations(
         ReservationRequestModel(
           user: userId,
           serviceIds: serviceIds,
           barberId: barberId,
-          date: dateTime,
+          date: date,
           startTime: startTime,
         ),
       );

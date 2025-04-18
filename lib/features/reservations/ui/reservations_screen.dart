@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/core/routing/routes.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
@@ -77,8 +78,11 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     if (!mounted) return;
     final serviceIds = selectedServices.map((s) => s.id).toList();
     final barberId = barberData?.id ?? '';
+    // final date =
+    //     '${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}';
     final date =
         '${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}';
+    print(date);
 
     // Create ReservationArguments with date and time for the invoice screen
     final updatedArguments = ReservationArguments(
@@ -118,6 +122,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
             }
           },
           reservationSuccess: (response, arguments) {
+
             if (_isLoadingDialogShowing) {
               Navigator.of(context).pop(); // Dismiss loading dialog
               _isLoadingDialogShowing = false;
@@ -126,8 +131,8 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
             // Navigate to invoice screen with the updated arguments
             Navigator.pushReplacementNamed(
               context,
-              '/invoice',
-              arguments: arguments,
+              Routes.invoiceScreen,
+              arguments: response,
             );
 
             ScaffoldMessenger.of(context).showSnackBar(
