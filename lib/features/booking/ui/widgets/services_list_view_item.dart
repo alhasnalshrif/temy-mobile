@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shimmer/shimmer.dart';
+
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
 
