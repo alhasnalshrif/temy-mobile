@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
-import 'package:temy_barber/features/home/logic/home_cubit.dart';
 
 class NoInternetPage extends StatelessWidget {
   final VoidCallback onRetry;
