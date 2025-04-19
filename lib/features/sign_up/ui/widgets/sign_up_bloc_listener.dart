@@ -83,8 +83,8 @@ class SignupBlocListener extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  error?.isNotEmpty == true
-                      ? error!
+                  error.isNotEmpty == true
+                      ? error
                       : 'An unexpected error occurred.',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 16,
