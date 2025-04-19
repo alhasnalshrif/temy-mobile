@@ -20,6 +20,8 @@ import '../../features/login/logic/cubit/login_cubit.dart';
 import '../../features/sign_up/data/repos/sign_up_repo.dart';
 import '../../features/sign_up/logic/sign_up_cubit.dart';
 import '../../features/reservations/data/repos/reservation_repo.dart';
+import '../../features/verification/data/repos/verification_repo.dart';
+import '../../features/verification/logic/verification_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -35,6 +37,11 @@ Future<void> setupGetIt() async {
   // signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
+
+  // verification
+  getIt
+      .registerLazySingleton<VerificationRepo>(() => VerificationRepo(getIt()));
+  getIt.registerFactory<VerificationCubit>(() => VerificationCubit(getIt()));
 
   // reservation
   getIt.registerLazySingleton<ReservationApiServices>(

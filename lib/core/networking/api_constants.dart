@@ -3,6 +3,8 @@ class ApiConstants {
 
   static const String login = "auth/login";
   static const String signup = "auth/signup";
+  static const String verify = "auth/verify";
+  static const String resendCode = "auth/resend-code";
 }
 
 class ApiErrors {

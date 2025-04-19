@@ -17,6 +17,8 @@ import 'package:temy_barber/features/reservations/ui/invoice_screen.dart';
 import 'package:temy_barber/features/reservations/ui/reservations_screen.dart';
 import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:temy_barber/features/sign_up/ui/sign_up_screen.dart';
+import 'package:temy_barber/features/verification/logic/verification_cubit.dart';
+import 'package:temy_barber/features/verification/ui/verification_screen.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 import '../di/dependency_injection.dart';
 
@@ -39,6 +41,14 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<SignupCubit>(),
             child: const SignupScreen(),
+          ),
+        );
+      case Routes.verificationScreen:
+        final phoneNumber = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<VerificationCubit>(),
+            child: VerificationScreen(phoneNumber: phoneNumber),
           ),
         );
       // case Routes.homeScreen:

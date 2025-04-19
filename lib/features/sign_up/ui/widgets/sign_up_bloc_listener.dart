@@ -24,8 +24,13 @@ class SignupBlocListener extends StatelessWidget {
             setupLoadingState(context);
           },
           signupSuccess: (signupResponse) {
-            context.pop();
-            showSuccessDialog(context);
+            context.pop(); // Close loading dialog
+
+            // Navigate to verification screen with the phone number
+            final phoneNumber =
+                context.read<SignupCubit>().phoneController.text;
+            context.pushNamed(Routes.verificationScreen,
+                arguments: phoneNumber);
           },
           signupError: (error) {
             setupErrorState(context, error);
@@ -36,63 +41,89 @@ class SignupBlocListener extends StatelessWidget {
     );
   }
 
-  void showSuccessDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Signup Successful'),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Congratulations, you have signed up successfully!'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
-                disabledForegroundColor: Colors.grey.withOpacity(0.38),
-              ),
-              onPressed: () {
-                context.pushNamed(Routes.loginScreen);
-              },
-              child: const Text('Continue'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void setupErrorState(BuildContext context, String error) {
     context.pop();
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font15DarkBlueMedium,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'Got it',
-              style: TextStyles.font14BlueSemiBold,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          insetPadding:
+              const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                ),
+              ],
+            ),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.error_outline,
+                  size: 48,
+                  color: Colors.redAccent,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Error',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Colors.redAccent,
+                        fontWeight: FontWeight.bold,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  error?.isNotEmpty == true
+                      ? error!
+                      : 'An unexpected error occurred.',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 16,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.8),
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () => context.pop(),
+                    icon: const Icon(Icons.check_rounded),
+                    label: const Text(
+                      'Got it',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      elevation: 2,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 

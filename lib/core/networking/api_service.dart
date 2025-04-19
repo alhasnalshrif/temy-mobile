@@ -6,6 +6,8 @@ import 'package:retrofit/retrofit.dart';
 
 import '../../features/sign_up/data/models/sign_up_request_body.dart';
 import '../../features/sign_up/data/models/sign_up_response.dart';
+import '../../features/verification/data/models/resend_code_request_body.dart';
+import '../../features/verification/data/models/verification_request_body.dart';
 
 part 'api_service.g.dart';
 
@@ -21,5 +23,15 @@ abstract class ApiService {
   @POST(ApiConstants.signup)
   Future<SignupResponse> signup(
     @Body() SignupRequestBody signupRequestBody,
+  );
+
+  @POST(ApiConstants.verify)
+  Future<SignupResponse> verify(
+    @Body() VerificationRequestBody verificationRequestBody,
+  );
+
+  @POST(ApiConstants.resendCode)
+  Future<SignupResponse> resendVerificationCode(
+    @Body() ResendCodeRequestBody resendCodeRequestBody,
   );
 }

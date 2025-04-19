@@ -227,7 +227,10 @@ class ProfileScreen extends StatelessWidget {
                           child: SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.read<ProfileCubit>().logout();
+                                context.pushNamed(Routes.loginScreen);
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: ColorsManager.mainBlue,
                                 elevation: 2,

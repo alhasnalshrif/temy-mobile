@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/helpers/constants.dart';
+import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import 'profile_state.dart';
 
@@ -19,5 +21,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  getProfileData() {}
+  void logout() async {
+    await SharedPrefHelper.removeData(SharedPrefKeys.userToken);
+    await SharedPrefHelper.removeData(SharedPrefKeys.userId);
+  }
+//SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)
+//SharedPrefHelper.getSecuredString(SharedPrefKeys.userId)
 }
