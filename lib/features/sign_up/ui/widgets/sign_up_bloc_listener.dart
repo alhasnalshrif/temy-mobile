@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
-
 import '../../../../core/routing/routes.dart';
 import '../../logic/sign_up_state.dart';
 
