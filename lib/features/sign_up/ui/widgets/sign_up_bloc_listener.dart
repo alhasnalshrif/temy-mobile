@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
-import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
+import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 
 import '../../../../core/routing/routes.dart';
-import '../../../../core/theme/styles.dart';
 import '../../logic/sign_up_state.dart';
 
 class SignupBlocListener extends StatelessWidget {
@@ -24,9 +23,8 @@ class SignupBlocListener extends StatelessWidget {
             setupLoadingState(context);
           },
           signupSuccess: (signupResponse) {
-            context.pop(); // Close loading dialog
+            context.pop();
 
-            // Navigate to verification screen with the phone number
             final phoneNumber =
                 context.read<SignupCubit>().phoneController.text;
             context.pushNamed(Routes.verificationScreen,
