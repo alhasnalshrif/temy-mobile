@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
@@ -16,25 +17,26 @@ class UpdateProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: ColorsManager.mainBlue,
+      statusBarIconBrightness: Brightness.light,
+    ));
     return BlocProvider(
       create: (context) => getIt<UpdateProfileCubit>()
         ..initializeFields(currentUser.name ?? '', currentUser.phone ?? ''),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('تعديل الحساب', style: TextStyles.font18DarkBold),
-          leading: const BackButton(color: Colors.black),
-          backgroundColor: Colors.white,
-          elevation: 1,
+          title: Text('تعديل الحساب', style: TextStyles.font18WhiteBold),
+          leading: const BackButton(color: Colors.white),
+          backgroundColor: ColorsManager.mainBlue,
+          // backgroundColor: Colors.white,
         ),
         body: BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
           listener: (context, state) {
             state.whenOrNull(
               success: (userProfile) {
-                // Update profile data in ProfileCubit as well
-                context
-                    .read<ProfileCubit>()
-                    .getProfile(); // Refresh profile screen data
-                Navigator.pop(context); // Go back after success
+                context.read<ProfileCubit>().getProfile();
+                Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                       content: Text(

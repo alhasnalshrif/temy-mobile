@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; // Import BlocProvider
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:temy_barber/core/theme/colors.dart';
-import 'package:temy_barber/features/booking/logic/booking_cubit.dart'; // Import BookingCubit
+import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_bloc_builder.dart';
 
 class BookingScreen extends StatelessWidget {
