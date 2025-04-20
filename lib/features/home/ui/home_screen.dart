@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/ui/widgets/banner_bloc_builder.dart';
-import 'package:temy_barber/features/home/ui/widgets/category_sea_all.dart';
 import 'package:temy_barber/features/home/ui/widgets/home_top_bar.dart';
 import 'package:temy_barber/features/home/ui/widgets/home_bloc_builder.dart';
 

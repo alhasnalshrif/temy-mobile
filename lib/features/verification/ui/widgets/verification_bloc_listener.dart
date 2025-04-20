@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/routing/routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
@@ -41,12 +42,11 @@ class VerificationBlocListener extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Verification Successful'),
-          content: const SingleChildScrollView(
+          title: Text('verification.success_title'.tr()),
+          content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(
-                    'Congratulations, your account has been verified successfully!'),
+                Text('verification.success_message'.tr()),
               ],
             ),
           ),
@@ -60,7 +60,7 @@ class VerificationBlocListener extends StatelessWidget {
               onPressed: () {
                 context.pushReplacementNamed(Routes.loginScreen);
               },
-              child: const Text('Continue to Login'),
+              child: Text('verification.continue_to_login'.tr()),
             ),
           ],
         );
@@ -88,7 +88,7 @@ class VerificationBlocListener extends StatelessWidget {
               context.pop();
             },
             child: Text(
-              'Got it',
+              'verification.got_it'.tr(),
               style: TextStyles.font14BlueSemiBold,
             ),
           ),

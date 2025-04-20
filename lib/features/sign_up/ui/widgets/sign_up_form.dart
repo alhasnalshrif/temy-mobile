@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/app_regex.dart';
 import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
 
@@ -51,7 +52,7 @@ class _SignupFormState extends State<SignupForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Name',
+                'auth.signup.name'.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
@@ -60,10 +61,10 @@ class _SignupFormState extends State<SignupForm> {
               ),
               verticalSpace(8),
               AppTextFormField(
-                hintText: 'Name',
+                hintText: 'auth.signup.name_placeholder'.tr(),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a valid name';
+                    return 'auth.signup.name_error'.tr();
                   }
                   return null;
                 },
@@ -77,7 +78,7 @@ class _SignupFormState extends State<SignupForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Phone number',
+                'auth.signup.phone'.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
@@ -86,12 +87,12 @@ class _SignupFormState extends State<SignupForm> {
               ),
               verticalSpace(8),
               AppTextFormField(
-                hintText: '01012345678',
+                hintText: 'auth.signup.phone_placeholder'.tr(),
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||
                       !AppRegex.isPhoneNumberValid(value)) {
-                    return 'Please enter a valid phone number';
+                    return 'auth.signup.phone_error'.tr();
                   }
                   return null;
                 },
@@ -105,7 +106,7 @@ class _SignupFormState extends State<SignupForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Password',
+                'auth.signup.password'.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
@@ -115,7 +116,7 @@ class _SignupFormState extends State<SignupForm> {
               verticalSpace(8),
               AppTextFormField(
                 controller: context.read<SignupCubit>().passwordController,
-                hintText: 'Password',
+                hintText: 'auth.signup.password_placeholder'.tr(),
                 isObscureText: isPasswordObscureText,
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -131,7 +132,7 @@ class _SignupFormState extends State<SignupForm> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a valid password';
+                    return 'auth.signup.password_confirmation_error'.tr();
                   }
                   return null;
                 },
@@ -144,7 +145,7 @@ class _SignupFormState extends State<SignupForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Password Confirmation',
+                'auth.signup.password_confirmation'.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
@@ -155,7 +156,7 @@ class _SignupFormState extends State<SignupForm> {
               AppTextFormField(
                 controller:
                     context.read<SignupCubit>().passwordConfirmationController,
-                hintText: 'Password Confirmation',
+                hintText: 'auth.signup.password_confirmation_placeholder'.tr(),
                 isObscureText: isPasswordConfirmationObscureText,
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -172,7 +173,7 @@ class _SignupFormState extends State<SignupForm> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a valid password';
+                    return 'auth.signup.password_confirmation_error'.tr();
                   }
                   return null;
                 },

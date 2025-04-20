@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
 import 'package:temy_barber/features/sign_up/ui/widgets/sign_up_form.dart';
 
@@ -24,12 +25,12 @@ class SignupScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'انشي حساب',
+                  'auth.signup.title'.tr(),
                   style: TextStyles.font26BlueBold,
                 ),
                 verticalSpace(12),
                 Text(
-                  'ادخل جميع بياناتك لانشاء حساب',
+                  'auth.signup.subtitle'.tr(),
                   style: TextStyles.font16GrayRegular,
                 ),
                 verticalSpace(36),
@@ -38,7 +39,7 @@ class SignupScreen extends StatelessWidget {
                     const SignupForm(),
                     verticalSpace(40),
                     AppTextButton(
-                      buttonText: "التسجيل",
+                      buttonText: 'auth.signup.button'.tr(),
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
                         validateThenDoSignup(context);

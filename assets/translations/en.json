@@ -64,7 +64,32 @@
         "privacy_policy": "Privacy Policy",
         "forgot_password": "Forgot password?",
         "login_button": "Login",
-        "enter_credentials": "Enter your credentials here to login"
+        "enter_credentials": "Enter your credentials here to login",
+        "signup": {
+            "title": "Create Account",
+            "subtitle": "Enter all your data to create an account",
+            "name": "Name",
+            "name_placeholder": "Name",
+            "name_error": "Please enter a valid name",
+            "phone": "Phone number",
+            "phone_placeholder": "01012345678",
+            "phone_error": "Please enter a valid phone number",
+            "password": "Password",
+            "password_placeholder": "Password",
+            "password_error": "Please enter a valid password",
+            "password_confirmation": "Password Confirmation",
+            "password_confirmation_placeholder": "Password Confirmation",
+            "password_confirmation_error": "Please enter a valid password",
+            "button": "Sign Up",
+            "already_have_account": "Already have an account?"
+        }
+    },
+    "verification": {
+        "success_title": "Verification Successful",
+        "success_message": "Congratulations, your account has been verified successfully!",
+        "continue_to_login": "Continue to Login",
+        "error_title": "Error",
+        "got_it": "Got it"
     },
     "profile": {
         "title": "Profile",

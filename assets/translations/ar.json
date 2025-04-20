@@ -64,7 +64,32 @@
     "privacy_policy": "سياسة الخصوصية",
     "forgot_password": "نسيت كلمة المرور؟",
     "login_button": "تسجيل الدخول",
-    "enter_credentials": "ادخل بياناتك هنا لتسجيل الدخول"
+    "enter_credentials": "ادخل بياناتك هنا لتسجيل الدخول",
+    "signup": {
+      "title": "انشي حساب",
+      "subtitle": "ادخل جميع بياناتك لانشاء حساب",
+      "name": "الاسم",
+      "name_placeholder": "الاسم",
+      "name_error": "الرجاء إدخال اسم صحيح",
+      "phone": "رقم الهاتف",
+      "phone_placeholder": "01012345678",
+      "phone_error": "الرجاء إدخال رقم هاتف صحيح",
+      "password": "كلمة المرور",
+      "password_placeholder": "كلمة المرور",
+      "password_error": "الرجاء إدخال كلمة مرور صحيحة",
+      "password_confirmation": "تأكيد كلمة المرور",
+      "password_confirmation_placeholder": "تأكيد كلمة المرور",
+      "password_confirmation_error": "الرجاء إدخال كلمة مرور صحيحة",
+      "button": "التسجيل",
+      "already_have_account": "لديك حساب بالفعل؟"
+    }
+  },
+  "verification": {
+    "success_title": "تم التحقق بنجاح",
+    "success_message": "تهانينا، تم التحقق من حسابك بنجاح!",
+    "continue_to_login": "المتابعة لتسجيل الدخول",
+    "error_title": "خطأ",
+    "got_it": "فهمت"
   },
   "profile": {
     "title": "الملف الشخصي",
