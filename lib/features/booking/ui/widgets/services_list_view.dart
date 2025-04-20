@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
 import 'package:temy_barber/features/booking/ui/widgets/services_list_view_item.dart';
 
@@ -23,7 +24,7 @@ class ServicesListView extends StatelessWidget {
               Icon(Icons.people_outline, size: 48, color: Colors.grey[400]),
               const SizedBox(height: 16),
               Text(
-                'No services available at the moment',
+                'booking.no_services'.tr(),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Colors.grey[600],
                     ),
@@ -47,7 +48,7 @@ class ServicesListView extends StatelessWidget {
               color: Colors.black,
             ),
             Text(
-              'Service selected',
+              'booking.service_selected'.tr(),
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,

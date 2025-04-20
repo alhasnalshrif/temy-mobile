@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
@@ -52,11 +53,11 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: EmptyBookingView(
                       message: _showActiveBookings
-                          ? 'You don\'t have any active bookings at the moment'
-                          : 'You don\'t have any past bookings yet.',
+                          ? 'booking.empty_active'.tr()
+                          : 'booking.empty_history'.tr(),
                       buttonText: _showActiveBookings
-                          ? 'Book an Appointment'
-                          : 'Explore Services',
+                          ? 'booking.book_appointment'.tr()
+                          : 'booking.explore_services'.tr(),
                       onPressed: () {
                         if (_showActiveBookings) {
                           // TODO: Navigate to booking screen or refresh

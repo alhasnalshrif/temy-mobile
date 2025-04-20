@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 
@@ -19,7 +20,7 @@ class ErrorBookingView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Something went wrong',
+            'common.error_title'.tr(),
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -28,7 +29,7 @@ class ErrorBookingView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'We couldn\'t load your booking information',
+            'booking.error_loading_info'.tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.grey[600],
@@ -46,9 +47,9 @@ class ErrorBookingView extends StatelessWidget {
             onPressed: () {
               context.read<BookingCubit>().getBooking();
             },
-            child: const Text(
-              'Try Again',
-              style: TextStyle(
+            child: Text(
+              'common.try_again'.tr(),
+              style: const TextStyle(
                 color: Colors.white,
               ),
             ),

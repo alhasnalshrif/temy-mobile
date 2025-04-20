@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; // Import Bloc
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
-import 'package:temy_barber/features/booking/logic/booking_cubit.dart'; // Import Cubit
+import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/booking/ui/widgets/barber_detail_section.dart';
 import 'package:temy_barber/features/booking/ui/widgets/barber_section.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_status_stepper.dart';
@@ -33,10 +34,9 @@ class BookingCard extends StatelessWidget {
             BookingStatusStepper(status: booking.status ?? 'pending'),
           if (isActive) verticalSpace(16),
           BarberSection(
-            name: booking.barber?.name ?? 'Master piece Barbershop',
+            name: booking.barber?.name ?? 'booking.default_barber_name'.tr(),
             avatarUrl: booking.barber?.avatar,
-            location:
-                'Location Placeholder', // Replace with actual data if available
+            location: 'booking.default_location'.tr(),
             rating: '5.0', // Replace with actual data if available
             reviewCount: 24, // Replace with actual data if available
           ),
@@ -74,7 +74,7 @@ class BookingCard extends StatelessWidget {
                         children: [
                           // Title
                           Text(
-                            'Confirm Cancellation',
+                            'booking.cancel_title'.tr(),
                             style: Theme.of(dialogContext)
                                 .textTheme
                                 .headlineSmall
@@ -87,7 +87,7 @@ class BookingCard extends StatelessWidget {
                           const SizedBox(height: 12.0),
                           // Description
                           Text(
-                            'Are you sure you want to cancel this booking? This action cannot be undone.',
+                            'booking.cancel_message'.tr(),
                             style: Theme.of(dialogContext)
                                 .textTheme
                                 .bodyMedium
@@ -113,7 +113,7 @@ class BookingCard extends StatelessWidget {
                                     ),
                                   ),
                                   child: Text(
-                                    'No, Keep Booking',
+                                    'booking.keep_booking'.tr(),
                                     style: Theme.of(dialogContext)
                                         .textTheme
                                         .labelLarge
@@ -135,9 +135,10 @@ class BookingCard extends StatelessWidget {
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
-                                        const SnackBar(
+                                        SnackBar(
                                           content: Text(
-                                              'Error: Cannot cancel booking without ID.'),
+                                              'booking.error_cancel_no_id'
+                                                  .tr()),
                                           backgroundColor: Colors.redAccent,
                                         ),
                                       );
@@ -152,7 +153,7 @@ class BookingCard extends StatelessWidget {
                                     ),
                                   ),
                                   child: Text(
-                                    'Yes, Cancel',
+                                    'booking.confirm_cancel'.tr(),
                                     style: Theme.of(dialogContext)
                                         .textTheme
                                         .labelLarge

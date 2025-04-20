@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
@@ -20,9 +21,9 @@ class BookingScreen extends StatelessWidget {
         backgroundColor: ColorsManager.mainBlue,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'Booking',
-          style: TextStyle(
+        title: Text(
+          'booking.screen_title'.tr(),
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
           ),
