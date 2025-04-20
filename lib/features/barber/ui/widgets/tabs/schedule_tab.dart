@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ScheduleTab extends StatefulWidget {
   final BarberDetailData? serviceResponseModel;
@@ -19,10 +20,10 @@ class _ScheduleTabState extends State<ScheduleTab> {
     final timeSlots = schedule?.slots ?? [];
 
     if (schedule == null || businessHours == null || timeSlots.isEmpty) {
-      return const Center(
+      return Center(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text('No scheduling information available.'),
+          padding: const EdgeInsets.all(16.0),
+          child: Text('barber.no_schedule'.tr()),
         ),
       );
     }
@@ -33,7 +34,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Select a Time Slot',
+            'barber.select_time_slot'.tr(),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -88,7 +89,6 @@ class _ScheduleTabState extends State<ScheduleTab> {
                     alignment: Alignment.center,
                     child: Text(
                       slot.time,
-                      // slot.formattedTime,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: isDisabled
                                 ? Colors.grey[400]

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
 
 import '../../../core/helpers/spacing.dart';
@@ -33,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'مرحباً بعودتك',
+                    'auth.welcome_back'.tr(),
                     style: TextStyles.font28WhiteBold,
                   ),
                   verticalSpace(16),
@@ -74,11 +75,10 @@ class LoginScreen extends StatelessWidget {
         children: [
           verticalSpace(10),
           Text(
-            'ادخل بياناتك هنا لتسجيل الدخول',
+            'auth.enter_credentials'.tr(),
             style: TextStyles.font16WhiteSemiBold.copyWith(color: Colors.black),
           ),
           verticalSpace(24),
-          // Email and password fields with shadow
           const EmailAndPassword(),
           verticalSpace(24),
           GestureDetector(
@@ -86,13 +86,13 @@ class LoginScreen extends StatelessWidget {
               // TODO: Navigate to forgot password screen
             },
             child: Text(
-              'نسيت كلمة المرور؟',
+              'auth.forgot_password'.tr(),
               style: TextStyles.font13BlueRegular,
             ),
           ),
           verticalSpace(40),
           AppTextButton(
-            buttonText: "تسجيل الدخول",
+            buttonText: 'auth.login_button'.tr(),
             textStyle: TextStyles.font16WhiteSemiBold,
             onPressed: () => validateThenDoLogin(context),
           ),

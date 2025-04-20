@@ -26,9 +26,10 @@ class BarberDetailData {
   final String avatar;
   final String? about;
   final List<String> portfolioImages;
+  @JsonKey(name: 'max_reservation_days')
+  final int maxReservationDays;
   final WorkingHours workingHours;
   final Rating rating;
-  final List<BarberReview> reviews;
   final List<BarberService> services;
   final Availability availability;
 
@@ -38,9 +39,9 @@ class BarberDetailData {
     required this.avatar,
     this.about,
     required this.portfolioImages,
+    required this.maxReservationDays,
     required this.workingHours,
     required this.rating,
-    required this.reviews,
     required this.services,
     required this.availability,
   });
@@ -89,7 +90,7 @@ class BarberService {
   @JsonKey(name: 'id')
   final String id;
   final String name;
-  final String description;
+  final String? description;
   final int price;
   final int duration;
   final String category;
@@ -98,7 +99,7 @@ class BarberService {
   BarberService({
     required this.id,
     required this.name,
-    required this.description,
+    this.description,
     required this.price,
     required this.duration,
     required this.category,

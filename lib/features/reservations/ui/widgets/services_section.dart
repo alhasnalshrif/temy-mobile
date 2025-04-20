@@ -126,15 +126,15 @@ class ServicesSection extends StatelessWidget {
                               style: TextStyles.font16DarkBold,
                             ),
                             const SizedBox(height: 4),
-                            Text(
-                              service.description,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 12,
-                              ),
-                            ),
+                            // Text(
+                            //   service.description,
+                            //   maxLines: 1,
+                            //   overflow: TextOverflow.ellipsis,
+                            //   style: TextStyle(
+                            //     color: Colors.grey[600],
+                            //     fontSize: 12,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

@@ -2,18 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
-// import 'package:temy_barber/core/helpers/navigator_ext.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
-// import 'package:temy_barber/core/router/routes.dart';
 import 'package:temy_barber/core/routing/routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/profile_state.dart';
+import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/core/helpers/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String currentLanguage = 'ar';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedLanguage();
+  }
+
+  Future<void> _loadSavedLanguage() async {
+    final savedLanguage =
+        await SharedPrefHelper.getString(SharedPrefKeys.language);
+    if (savedLanguage.isNotEmpty) {
+      setState(() {
+        currentLanguage = savedLanguage;
+      });
+    }
+  }
+
+  Future<void> _changeLanguage(String languageCode) async {
+    await SharedPrefHelper.setData(SharedPrefKeys.language, languageCode);
+    await context.setLocale(Locale(languageCode));
+    setState(() {
+      currentLanguage = languageCode;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'الملف الشخصي',
+                    'profile.title'.tr(),
                     style: TextStyles.font18WhiteSemiBold,
                   ),
                   verticalSpace(16),
@@ -51,7 +83,6 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // Enhanced profile section with better spacing and alignment
             BlocBuilder<ProfileCubit, ProfileState>(
               buildWhen: (previous, current) =>
                   current is ProfileLoading ||
@@ -124,7 +155,6 @@ class ProfileScreen extends StatelessWidget {
               },
             ),
             verticalSpace(30),
-            // White bottom section with rounded corners
             Expanded(
               child: Container(
                 width: size.width,
@@ -147,7 +177,6 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Enhanced notification switch with better styling
                     Container(
                       margin: const EdgeInsets.only(bottom: 12),
                       child: SwitchListTile(
@@ -167,15 +196,112 @@ class ProfileScreen extends StatelessWidget {
                                 color: ColorsManager.mainBlue),
                             horizontalSpace(12),
                             Text(
-                              'الإشعارات',
+                              'profile.notifications'.tr(),
                               style: TextStyles.font16DarkBold,
                             ),
                           ],
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.grey.shade100,
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 8, right: 8, left: 8),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.language,
+                                      color: ColorsManager.mainBlue),
+                                  horizontalSpace(12),
+                                  Text(
+                                    'profile.language'.tr(),
+                                    style: TextStyles.font16DarkBold,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: InkWell(
+                                    onTap: () => _changeLanguage('ar'),
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10),
+                                      decoration: BoxDecoration(
+                                        color: currentLanguage == 'ar'
+                                            ? ColorsManager.mainBlue
+                                            : Colors.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: currentLanguage == 'ar'
+                                              ? ColorsManager.mainBlue
+                                              : Colors.grey.shade300,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'profile.arabic'.tr(),
+                                        style: TextStyles.font12DarkGreyRegular
+                                            .copyWith(
+                                          color: currentLanguage == 'ar'
+                                              ? Colors.white
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                horizontalSpace(10),
+                                Expanded(
+                                  child: InkWell(
+                                    onTap: () => _changeLanguage('en'),
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10),
+                                      decoration: BoxDecoration(
+                                        color: currentLanguage == 'en'
+                                            ? ColorsManager.mainBlue
+                                            : Colors.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: currentLanguage == 'en'
+                                              ? ColorsManager.mainBlue
+                                              : Colors.grey.shade300,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'profile.english'.tr(),
+                                        style: TextStyles.font14DarkBlueMedium
+                                            .copyWith(
+                                          color: currentLanguage == 'en'
+                                              ? Colors.white
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     _buildProfileTile(
-                      'تعديل الحساب',
+                      'profile.edit_account'.tr(),
                       Icons.person_outline,
                       onTap: () {
                         final state = context.read<ProfileCubit>().state;
@@ -186,38 +312,38 @@ class ProfileScreen extends StatelessWidget {
                                   arguments: successState.userProfile.user!);
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        'لا يمكن تحميل بيانات المستخدم للتعديل')),
+                                SnackBar(
+                                    content:
+                                        Text('profile.user_data_error'.tr())),
                               );
                             }
                           },
                           orElse: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('البيانات غير متوفرة حالياً')),
+                              SnackBar(
+                                  content:
+                                      Text('profile.data_unavailable'.tr())),
                             );
                           },
                         );
                       },
                     ),
                     _buildProfileTile(
-                      'الخصوصية',
+                      'profile.privacy'.tr(),
                       Icons.lock_outline,
                       onTap: () {},
                     ),
                     _buildProfileTile(
-                      'المساعدة',
+                      'profile.help'.tr(),
                       Icons.help_outline,
                       onTap: () {},
                     ),
                     _buildProfileTile(
-                      'عنا',
+                      'profile.about'.tr(),
                       Icons.info_outline,
                       onTap: () {},
                     ),
                     const Spacer(),
-                    // Enhanced logout button with subtle animation
                     TweenAnimationBuilder<double>(
                       tween: Tween(begin: 0.95, end: 1.0),
                       duration: const Duration(milliseconds: 300),
@@ -241,7 +367,7 @@ class ProfileScreen extends StatelessWidget {
                                     const EdgeInsets.symmetric(vertical: 16),
                               ),
                               child: Text(
-                                'تسجيل الخروج',
+                                'logout'.tr(),
                                 style: TextStyles.font16WhiteSemiBold,
                               ),
                             ),

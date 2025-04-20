@@ -14,12 +14,21 @@ void main() async {
 
   setupGetIt();
   await checkedIfUserLoggedIn();
+
+  // Load saved language preference
+  String savedLanguage =
+      await SharedPrefHelper.getString(SharedPrefKeys.language);
+  if (savedLanguage.isEmpty) {
+    savedLanguage = 'ar'; // Default to Arabic if no language is saved
+    await SharedPrefHelper.setData(SharedPrefKeys.language, savedLanguage);
+  }
+
   runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('ar')],
-        path:
-            'assets/translations', // <-- change the path of the translation files
+        path: 'assets/translations',
         fallbackLocale: const Locale('ar'),
+        startLocale: Locale(savedLanguage), // Use the saved language
         child: TemyApp(
           appRouter: AppRouter(),
         )),
@@ -27,7 +36,6 @@ void main() async {
 }
 
 checkedIfUserLoggedIn() async {
-
   String? userToken =
       await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
 

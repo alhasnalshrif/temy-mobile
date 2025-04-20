@@ -9,6 +9,7 @@ import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/ui/home_screen.dart';
 import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/ui/profile.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -32,7 +33,9 @@ class _MyDashboardState extends State<DashboardScreen> {
     _widgetOptions = [
       BlocProvider(
         // create: (context) => HomeCubit(getIt())..getCategories(),
-        create: (context) => HomeCubit(getIt())..getBarbers(),
+        create: (context) => HomeCubit(getIt())
+          ..getBarbers()
+          ..getBanners(),
         child: const HomeScreen(),
       ),
       BlocProvider(
@@ -57,7 +60,6 @@ class _MyDashboardState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        // child: _widgetOptions.elementAt(_selectedIndex),
         child: IndexedStack(
           index: _selectedIndex,
           children: _widgetOptions,
@@ -79,20 +81,20 @@ class _MyDashboardState extends State<DashboardScreen> {
               icon: Image.asset('assets/icons/home.png', height: 40, width: 40),
               selectedIcon: Image.asset('assets/icons/home.png',
                   height: 40, width: 40, color: ColorsManager.mainBlue),
-              label: "Home",
+              label: 'navigation.home'.tr(),
             ),
             NavigationDestination(
               icon: Image.asset('assets/icons/calendar.png',
                   height: 40, width: 40),
               selectedIcon: Image.asset('assets/icons/calendar.png',
                   height: 40, width: 40, color: ColorsManager.mainBlue),
-              label: 'Booking',
+              label: 'navigation.booking'.tr(),
             ),
             NavigationDestination(
               icon: Image.asset('assets/icons/user.png', height: 40, width: 40),
               selectedIcon: Image.asset('assets/icons/user.png',
                   height: 40, width: 40, color: ColorsManager.mainBlue),
-              label: 'Profile',
+              label: 'navigation.profile'.tr(),
             ),
           ],
           onDestinationSelected: _onItemTapped,

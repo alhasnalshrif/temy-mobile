@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ServiceTab extends StatelessWidget {
   final BarberDetailData? serviceResponseModel;
@@ -21,7 +22,7 @@ class ServiceTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: services.isEmpty
-          ? const Center(child: Text('No services available.'))
+          ? Center(child: Text('barber.no_services'.tr()))
           : ListView.separated(
               itemCount: services.length,
               separatorBuilder: (_, __) => const SizedBox(height: 12),
@@ -64,24 +65,27 @@ class ServiceTab extends StatelessWidget {
                         service.name,
                         style: TextStyles.font18DarkSemiBold,
                       ),
-                      subtitle: Text(
-                        service.description,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.grey[600],
-                            ),
-                      ),
+                      // subtitle: Text(
+                      //   service.description,
+                      //   maxLines: 2,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      //         color: Colors.grey[600],
+                      //       ),
+                      // ),
                       trailing: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            'EGP ${service.price.toStringAsFixed(0)}',
+                            'barber.price'
+                                .tr(args: [service.price.toStringAsFixed(0)]),
                             style: TextStyles.font16DarkBold,
                           ),
                           const SizedBox(height: 4),
-                          Text('Min ${service.duration}',
+                          Text(
+                              'barber.duration'
+                                  .tr(args: [service.duration.toString()]),
                               style: TextStyles.font14DarkBlueMedium),
                         ],
                       ),

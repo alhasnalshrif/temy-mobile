@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../core/theme/styles.dart';
 
@@ -12,19 +13,19 @@ class TermsAndConditionsText extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: 'By logging, you agree to our',
+            text: 'auth.terms_agreement'.tr(),
             style: TextStyles.font13GrayRegular,
           ),
           TextSpan(
-            text: ' Terms & Conditions',
+            text: ' ${'auth.terms_and_conditions'.tr()}',
             style: TextStyles.font13DarkBlueMedium,
           ),
           TextSpan(
-            text: ' and',
+            text: ' ${'auth.and'.tr()}',
             style: TextStyles.font13GrayRegular.copyWith(height: 1.5),
           ),
           TextSpan(
-            text: ' Privacy Policy',
+            text: ' ${'auth.privacy_policy'.tr()}',
             style: TextStyles.font13DarkBlueMedium,
           ),
         ],

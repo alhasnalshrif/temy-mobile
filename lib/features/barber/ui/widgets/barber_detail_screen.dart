@@ -9,6 +9,7 @@ import 'package:temy_barber/features/barber/ui/widgets/rating_display.dart';
 import 'package:temy_barber/features/barber/ui/widgets/tabs/schedule_tab.dart';
 import 'package:temy_barber/features/barber/ui/widgets/tabs/service_tab.dart';
 import 'package:temy_barber/features/barber/ui/widgets/sliver_tab_bar_delegate.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BarberScreenItem extends StatefulWidget {
   final BarberDetailData? serviceResponseModel;
@@ -61,7 +62,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.serviceResponseModel?.name ?? 'Barber Details',
+          widget.serviceResponseModel?.name ?? 'barber.details'.tr(),
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         backgroundColor: ColorsManager.background,
@@ -110,7 +111,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  barber?.name ?? 'Barber Name',
+                  barber?.name ?? 'barber.name'.tr(),
                   style: textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -145,10 +146,10 @@ class _BarberScreenItemState extends State<BarberScreenItem>
           const EdgeInsets.symmetric(vertical: 12, horizontal: -10),
       labelPadding: const EdgeInsets.symmetric(vertical: 8.0),
       dividerHeight: 0,
-      tabs: const [
-        Tab(text: 'Service'),
-        Tab(text: 'Schedule'),
-        Tab(text: 'About'),
+      tabs: [
+        Tab(text: 'barber.service_tab'.tr()),
+        Tab(text: 'barber.schedule_tab'.tr()),
+        Tab(text: 'barber.about_tab'.tr()),
       ],
     );
   }
@@ -199,8 +200,9 @@ class _BarberScreenItemState extends State<BarberScreenItem>
             alignment: Alignment.center,
             child: Text(
               _selectedServices.isEmpty
-                  ? 'Book Now'
-                  : 'Book Now (EGP${_selectedTotalPrice.toStringAsFixed(0)})',
+                  ? 'barber.book_now'.tr()
+                  : 'barber.book_now'.tr() +
+                      ' (${_priceText(_selectedTotalPrice)})',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -210,5 +212,9 @@ class _BarberScreenItemState extends State<BarberScreenItem>
         ),
       ),
     );
+  }
+
+  String _priceText(double price) {
+    return 'barber.price'.tr(args: [price.toStringAsFixed(0)]);
   }
 }

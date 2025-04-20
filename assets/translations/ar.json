@@ -1,5 +1,82 @@
 {
   "welcome": "مرحبا",
   "login": "تسجيل الدخول",
-  "logout": "تسجيل الخروج"
+  "logout": "تسجيل الخروج",
+  "common": {
+    "no_date": "لا يوجد تاريخ",
+    "no_time": "لا يوجد وقت",
+    "not_available": "غير متاح",
+    "got_it": "فهمت"
+  },
+  "barber": {
+    "details": "تفاصيل الحلاق",
+    "no_services": "لا توجد خدمات متاحة.",
+    "no_schedule": "لا توجد معلومات جدولة متاحة.",
+    "select_time_slot": "اختر فترة زمنية",
+    "book_now": "احجز الآن",
+    "service_tab": "الخدمة",
+    "schedule_tab": "المواعيد",
+    "about_tab": "معلومات",
+    "description": "الوصف",
+    "no_description": "لا يوجد وصف متاح.",
+    "available_hours": "الساعات المتاحة",
+    "price": "ج.م ",
+    "duration": "دقيقة "
+  },
+  "booking": {
+    "screen_title": "الحجوزات",
+    "tab_active": "الحجوزات النشطة",
+    "tab_history": "السجل",
+    "no_services": "لا توجد خدمات متاحة حاليا",
+    "service_selected": "الخدمة المحددة",
+    "basic_haircut": "قص شعر أساسي",
+    "basic_haircut_description": "خدمة قص شعر قياسية",
+    "massage": "مساج",
+    "massage_description": "خدمة مساج للاسترخاء",
+    "master_barber": "الحلاق الرئيسي",
+    "unknown_barber": "حلاق غير معروف",
+    "default_specialty": "متخصص قص شعر",
+    "date_time": "التاريخ والوقت",
+    "at": "في",
+    "min": "دقيقة",
+    "cancel_booking": "إلغاء الحجز",
+    "keep_booking": "لا، الاحتفاظ بالحجز",
+    "confirm_cancel": "نعم، إلغاء",
+    "cancel_title": "تأكيد الإلغاء",
+    "cancel_message": "هل أنت متأكد من رغبتك في إلغاء هذا الحجز؟ لا يمكن التراجع عن هذا الإجراء.",
+    "default_barber_name": "صالون ماستر بيس",
+    "default_location": "الموقع غير محدد",
+    "error_cancel_no_id": "خطأ: لا يمكن إلغاء الحجز بدون معرف.",
+    "empty_active": "ليس لديك أي حجوزات نشطة في الوقت الحالي",
+    "empty_history": "ليس لديك أي حجوزات سابقة حتى الآن.",
+    "book_appointment": "احجز موعدًا",
+    "explore_services": "استكشف الخدمات"
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "booking": "الحجوزات",
+    "profile": "الملف الشخصي"
+  },
+  "auth": {
+    "terms_agreement": "بتسجيل الدخول، فإنك توافق على",
+    "terms_and_conditions": "الشروط والأحكام",
+    "and": "و",
+    "privacy_policy": "سياسة الخصوصية",
+    "forgot_password": "نسيت كلمة المرور؟",
+    "login_button": "تسجيل الدخول",
+    "enter_credentials": "ادخل بياناتك هنا لتسجيل الدخول"
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "notifications": "الإشعارات",
+    "language": "اللغة",
+    "arabic": "العربية",
+    "english": "English",
+    "edit_account": "تعديل الحساب",
+    "privacy": "الخصوصية",
+    "help": "المساعدة",
+    "about": "عنا",
+    "user_data_error": "لا يمكن تحميل بيانات المستخدم للتعديل",
+    "data_unavailable": "البيانات غير متوفرة حالياً"
+  }
 }

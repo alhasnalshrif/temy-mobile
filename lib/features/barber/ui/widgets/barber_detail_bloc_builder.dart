@@ -25,7 +25,7 @@ class BarberDetailBlocBuilder extends StatelessWidget {
                 categoriesResponseModel.barberDetailResponseModel.data;
             return setupSuccess(categoriesList);
           },
-          barberError: (errorHandler) => setupError(),
+          barberError: (errorHandler) => setupError(errorHandler),
           orElse: () {
             return const SizedBox.shrink();
           },
@@ -44,7 +44,10 @@ class BarberDetailBlocBuilder extends StatelessWidget {
     return BarberScreenItem(serviceResponseModel: categoriesList);
   }
 
-  Widget setupError() {
-    return const SizedBox.shrink();
+  Widget setupError(errorHandler) {
+    print(errorHandler);
+    return Center(
+      child: Text('Error: ${errorHandler}'),
+    );
   }
 }

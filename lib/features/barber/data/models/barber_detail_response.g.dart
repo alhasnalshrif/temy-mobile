@@ -29,12 +29,10 @@ BarberDetailData _$BarberDetailDataFromJson(Map<String, dynamic> json) =>
       portfolioImages: (json['portfolioImages'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      maxReservationDays: (json['max_reservation_days'] as num).toInt(),
       workingHours:
           WorkingHours.fromJson(json['workingHours'] as Map<String, dynamic>),
       rating: Rating.fromJson(json['rating'] as Map<String, dynamic>),
-      reviews: (json['reviews'] as List<dynamic>)
-          .map((e) => BarberReview.fromJson(e as Map<String, dynamic>))
-          .toList(),
       services: (json['services'] as List<dynamic>)
           .map((e) => BarberService.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -49,9 +47,9 @@ Map<String, dynamic> _$BarberDetailDataToJson(BarberDetailData instance) =>
       'avatar': instance.avatar,
       'about': instance.about,
       'portfolioImages': instance.portfolioImages,
+      'max_reservation_days': instance.maxReservationDays,
       'workingHours': instance.workingHours,
       'rating': instance.rating,
-      'reviews': instance.reviews,
       'services': instance.services,
       'availability': instance.availability,
     };
@@ -84,7 +82,7 @@ BarberService _$BarberServiceFromJson(Map<String, dynamic> json) =>
     BarberService(
       id: json['id'] as String,
       name: json['name'] as String,
-      description: json['description'] as String,
+      description: json['description'] as String?,
       price: (json['price'] as num).toInt(),
       duration: (json['duration'] as num).toInt(),
       category: json['category'] as String,

@@ -1,5 +1,82 @@
 {
     "welcome": "welcome",
     "login": "login",
-    "logout": "logout"
+    "logout": "logout",
+    "common": {
+        "no_date": "No date",
+        "no_time": "No time",
+        "not_available": "N/A",
+        "got_it": "Got it"
+    },
+    "navigation": {
+        "home": "Home",
+        "booking": "Booking",
+        "profile": "Profile"
+    },
+    "barber": {
+        "details": "Barber Details",
+        "no_services": "No services available.",
+        "no_schedule": "No scheduling information available.",
+        "select_time_slot": "Select a Time Slot",
+        "book_now": "Book Now",
+        "service_tab": "Service",
+        "schedule_tab": "Schedule",
+        "about_tab": "About",
+        "description": "Description",
+        "no_description": "No description available.",
+        "available_hours": "Available Hours",
+        "price": "EGP ",
+        "duration": "Min "
+    },
+    "booking": {
+        "screen_title": "Booking",
+        "tab_active": "Active booking",
+        "tab_history": "History",
+        "no_services": "No services available at the moment",
+        "service_selected": "Service selected",
+        "basic_haircut": "Basic Haircut",
+        "basic_haircut_description": "Standard haircut service",
+        "massage": "Massage",
+        "massage_description": "Relaxing massage service",
+        "master_barber": "Master barber",
+        "unknown_barber": "Unknown Barber",
+        "default_specialty": "Specialist Haircut",
+        "date_time": "Date & Time",
+        "at": "at",
+        "min": "min",
+        "cancel_booking": "Cancel Booking",
+        "keep_booking": "No, Keep Booking",
+        "confirm_cancel": "Yes, Cancel",
+        "cancel_title": "Confirm Cancellation",
+        "cancel_message": "Are you sure you want to cancel this booking? This action cannot be undone.",
+        "default_barber_name": "Master piece Barbershop",
+        "default_location": "Location Placeholder",
+        "error_cancel_no_id": "Error: Cannot cancel booking without ID.",
+        "empty_active": "You don't have any active bookings at the moment",
+        "empty_history": "You don't have any past bookings yet.",
+        "book_appointment": "Book an Appointment",
+        "explore_services": "Explore Services"
+    },
+    "auth": {
+        "terms_agreement": "By logging, you agree to our",
+        "terms_and_conditions": "Terms & Conditions",
+        "and": "and",
+        "privacy_policy": "Privacy Policy",
+        "forgot_password": "Forgot password?",
+        "login_button": "Login",
+        "enter_credentials": "Enter your credentials here to login"
+    },
+    "profile": {
+        "title": "Profile",
+        "notifications": "Notifications",
+        "language": "Language",
+        "arabic": "Arabic",
+        "english": "English",
+        "edit_account": "Edit Account",
+        "privacy": "Privacy",
+        "help": "Help",
+        "about": "About",
+        "user_data_error": "User data is not available for editing",
+        "data_unavailable": "Data is currently unavailable"
+    }
 }

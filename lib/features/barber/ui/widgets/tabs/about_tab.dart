@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AboutTab extends StatelessWidget {
   final BarberDetailData? serviceResponseModel;
@@ -14,12 +15,12 @@ class AboutTab extends StatelessWidget {
       physics: const ClampingScrollPhysics(),
       children: [
         Text(
-          'Description',
+          'barber.description'.tr(),
           style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 8),
         Text(
-          serviceResponseModel?.about ?? 'No description available.',
+          serviceResponseModel?.about ?? 'barber.no_description'.tr(),
           style: textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
         ),
         const SizedBox(height: 24),
@@ -40,7 +41,7 @@ class _AvailableHoursSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Available Hours',
+          'barber.available_hours'.tr(),
           style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 12),
