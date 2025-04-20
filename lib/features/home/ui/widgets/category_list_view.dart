@@ -32,8 +32,8 @@ class CategoryListView extends StatelessWidget {
     }
 
     // Calculate the number of items to show
-    final int itemCount =
-        categoryDataList.length > maxItems ? maxItems : categoryDataList.length;
+    final int itemCount = categoryDataList.length;
+    // categoryDataList.length > maxItems ? maxItems : categoryDataList.length;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),

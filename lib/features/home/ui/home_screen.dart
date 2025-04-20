@@ -36,8 +36,7 @@ class HomeScreen extends StatelessWidget {
                   verticalSpace(24),
                   const BannerBlocBuilder(),
                   // const BannerCard(),
-                  verticalSpace(24),
-                  const DoctorSpecialitySeaAll(),
+
                   verticalSpace(10),
                   const HomeBlocBuilder(),
                 ],
