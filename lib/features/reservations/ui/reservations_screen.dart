@@ -15,6 +15,7 @@ import 'package:temy_barber/features/reservations/ui/widgets/time_slot_section.d
 import 'package:temy_barber/features/reservations/ui/widgets/total_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/book_button.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
+import 'package:easy_localization/easy_localization.dart';
 
 class ReservationsScreen extends StatefulWidget {
   final ReservationArguments? arguments;
@@ -147,7 +148,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: const Text('تم الحجز بنجاح!'),
+                content: Text('booking.success_message'.tr()),
                 behavior: SnackBarBehavior.floating,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -194,7 +195,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content:
-                    Text('فشل تحميل المواعيد المتاحة: ${error.toString()}'),
+                    Text('booking.load_error'.tr() + ': ${error.toString()}'),
                 behavior: SnackBarBehavior.floating,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),

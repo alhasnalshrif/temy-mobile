@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ServiceSection extends StatelessWidget {
   final BookingData booking;
@@ -48,7 +49,7 @@ class ServiceSection extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          subtitle: const Text('Basic haircut & vitaminx'),
+          subtitle: Text('booking.basic_haircut_description'.tr()),
         ),
         // Massage
         ListTile(
@@ -70,7 +71,7 @@ class ServiceSection extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          subtitle: const Text('Extra massage'),
+          subtitle: Text('booking.massage_description'.tr()),
         ),
       ],
     );

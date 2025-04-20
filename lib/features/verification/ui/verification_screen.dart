@@ -7,6 +7,7 @@ import 'package:temy_barber/core/widgets/app_text_button.dart';
 import 'package:temy_barber/core/widgets/app_text_form_field.dart';
 import 'package:temy_barber/features/verification/logic/verification_cubit.dart';
 import 'package:temy_barber/features/verification/ui/widgets/verification_bloc_listener.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class VerificationScreen extends StatelessWidget {
   final String phoneNumber;
@@ -91,8 +92,8 @@ class VerificationScreen extends StatelessWidget {
 
                             // Show a snackbar to indicate the code was resent
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('تم إعادة إرسال رمز التحقق'),
+                               SnackBar(
+                                content: Text('verification.resend_code_success'.tr()),
                                 backgroundColor: Colors.green,
                               ),
                             );

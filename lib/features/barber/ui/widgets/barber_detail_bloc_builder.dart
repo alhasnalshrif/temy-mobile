@@ -4,6 +4,7 @@ import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/features/barber/logic/barber_cubit.dart';
 import 'package:temy_barber/features/barber/logic/barber_state.dart';
 import 'package:temy_barber/features/barber/ui/widgets/barber_detail_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BarberDetailBlocBuilder extends StatelessWidget {
   const BarberDetailBlocBuilder({super.key});
@@ -47,7 +48,7 @@ class BarberDetailBlocBuilder extends StatelessWidget {
   Widget setupError(errorHandler) {
     print(errorHandler);
     return Center(
-      child: Text('Error: ${errorHandler}'),
+      child: Text('barber.error'.tr() + ': ${errorHandler}'),
     );
   }
 }

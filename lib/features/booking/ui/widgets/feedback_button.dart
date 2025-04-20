@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class FeedbackButton extends StatelessWidget {
   const FeedbackButton({super.key});
@@ -9,7 +10,7 @@ class FeedbackButton extends StatelessWidget {
     return Center(
       child: OutlinedButton.icon(
         icon: const Icon(Icons.rate_review_outlined, size: 18),
-        label: const Text('Leave Feedback'),
+        label: Text('booking.leave_feedback'.tr()),
         style: OutlinedButton.styleFrom(
           foregroundColor: ColorsManager.mainBlue,
           side: const BorderSide(color: ColorsManager.mainBlue),

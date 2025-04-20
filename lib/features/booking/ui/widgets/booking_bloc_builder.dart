@@ -84,7 +84,7 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
             );
           },
           bookingLoading: (_) => Center(
-            child: ShimmerLoading.rectangular(height: 500), // Example shimmer
+            child: ShimmerLoading.rectangular(height: double.infinity),
           ),
           bookingError: (_) => const ErrorBookingView(),
           orElse: () => Column(
@@ -106,7 +106,6 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: EmptyBookingView(onPressed: () {
-                  // Default action, e.g., refresh bookings
                   context.read<BookingCubit>().getBooking();
                 }),
               ),

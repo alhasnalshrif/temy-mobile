@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BarberDetailSection extends StatelessWidget {
   final BookingData booking;
@@ -45,7 +46,7 @@ class BarberDetailSection extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          subtitle: Text(booking.barber?.name ?? 'Specialist Haircut'),
+          subtitle: Text(booking.barber?.name ?? 'booking.default_specialty'.tr()),
         ),
       ],
     );

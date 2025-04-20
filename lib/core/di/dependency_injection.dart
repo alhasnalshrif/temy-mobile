@@ -66,6 +66,7 @@ Future<void> setupGetIt() async {
   getIt
       .registerLazySingleton<BookingApiServices>(() => BookingApiServices(dio));
   getIt.registerLazySingleton<BookingRepo>(() => BookingRepo(getIt()));
+  
   getIt.registerFactory<UpdateProfileCubit>(
       () => UpdateProfileCubit(getIt())); // Add this line
 }

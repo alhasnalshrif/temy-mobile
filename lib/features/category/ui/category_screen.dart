@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/features/category/ui/widgets/specialization_doctor_bloc_builder.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -10,7 +11,7 @@ class CategoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Categories'),
+        title: Text('navigation.categories'.tr()),
         centerTitle: true,
       ),
       body: SafeArea(
