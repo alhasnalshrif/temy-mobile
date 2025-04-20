@@ -38,7 +38,7 @@ class BannerBlocBuilder extends StatelessWidget {
   }
 
   Widget _buildLoading() {
-    return  Center(
+    return Center(
       child: ShimmerLoading.rectangular(height: 150),
     );
   }

@@ -193,33 +193,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Notifications switch
-                              Container(
-                                margin: const EdgeInsets.only(bottom: 16),
+                              // Container(
+                              //   margin: const EdgeInsets.only(bottom: 16),
                               
-                                child: SwitchListTile(
-                                  activeColor: ColorsManager.mainBlue,
-                                  activeTrackColor:
-                                      ColorsManager.mainBlue.withOpacity(0.2),
-                                  trackOutlineColor: WidgetStateProperty.all(
-                                      Colors.transparent),
-                                  value: true,
-                                  onChanged: (value) {},
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  title: Row(
-                                    children: [
-                                      const Icon(Icons.notifications_outlined,
-                                          color: ColorsManager.mainBlue),
-                                      horizontalSpace(12),
-                                      Text(
-                                        'profile.notifications'.tr(),
-                                        style: TextStyles.font16DarkBold,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                              //   child: SwitchListTile(
+                              //     activeColor: ColorsManager.mainBlue,
+                              //     activeTrackColor:
+                              //         ColorsManager.mainBlue.withOpacity(0.2),
+                              //     trackOutlineColor: WidgetStateProperty.all(
+                              //         Colors.transparent),
+                              //     value: true,
+                              //     onChanged: (value) {},
+                              //     shape: RoundedRectangleBorder(
+                              //       borderRadius: BorderRadius.circular(12),
+                              //     ),
+                              //     title: Row(
+                              //       children: [
+                              //         const Icon(Icons.notifications_outlined,
+                              //             color: ColorsManager.mainBlue),
+                              //         horizontalSpace(12),
+                              //         Text(
+                              //           'profile.notifications'.tr(),
+                              //           style: TextStyles.font16DarkBold,
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
 
                               // Language selector
                               Container(

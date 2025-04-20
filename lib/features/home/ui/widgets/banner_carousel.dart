@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/home/data/models/banner_response.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -26,8 +27,8 @@ class _BannerCarouselState extends State<BannerCarousel> {
         CarouselSlider.builder(
           itemCount: widget.banners.length,
           options: CarouselOptions(
-            height: 180,
-            viewportFraction: 0.9,
+            height: 160,
+            viewportFraction: 1,
             autoPlay: true,
             enlargeCenterPage: true,
             onPageChanged: (index, reason) {
@@ -51,7 +52,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
               margin: const EdgeInsets.symmetric(horizontal: 4.0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.blue.withOpacity(
+                color: ColorsManager.mainBlue.withOpacity(
                   _currentIndex == entry.key ? 0.9 : 0.4,
                 ),
               ),
