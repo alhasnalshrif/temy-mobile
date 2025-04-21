@@ -78,8 +78,7 @@ class ServiceTab extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            'barber.price'
-                                .tr(args: [service.price.toStringAsFixed(0)]),
+                            'barber.price'.tr(args: [service.price.toString()]),
                             style: TextStyles.font16DarkBold,
                           ),
                           const SizedBox(height: 4),

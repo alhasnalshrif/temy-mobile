@@ -66,6 +66,7 @@
         "terms_agreement": "By logging, you agree to our",
         "terms_and_conditions": "Terms & Conditions",
         "and": "and",
+        "welcome_back": "Welcome back",
         "privacy_policy": "Privacy Policy",
         "forgot_password": "Forgot password?",
         "login_button": "Login",
@@ -96,11 +97,6 @@
         "error_title": "Error",
         "got_it": "Got it"
     },
-    "leave_feedback": "Leave Feedback",
-    "success_message": "Booking successful!",
-    "load_error": "Failed to load available appointments",
-    "resend_code_success": "Verification code resent",
-    "error": "Error",
     "profile": {
         "title": "Profile",
         "notifications": "Notifications",

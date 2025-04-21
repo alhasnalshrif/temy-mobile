@@ -48,7 +48,7 @@ class BarberDetailBlocBuilder extends StatelessWidget {
   Widget setupError(errorHandler) {
     print(errorHandler);
     return Center(
-      child: Text('barber.error'.tr() + ': ${errorHandler}'),
+      child: Text('${'barber.error'.tr()}: ${errorHandler}'),
     );
   }
 }

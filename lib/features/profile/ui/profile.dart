@@ -195,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               // Notifications switch
                               // Container(
                               //   margin: const EdgeInsets.only(bottom: 16),
-                              
+
                               //   child: SwitchListTile(
                               //     activeColor: ColorsManager.mainBlue,
                               //     activeTrackColor:

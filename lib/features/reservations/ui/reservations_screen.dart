@@ -195,7 +195,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content:
-                    Text('booking.load_error'.tr() + ': ${error.toString()}'),
+                    Text('${'booking.load_error'.tr()}: ${error.toString()}'),
                 behavior: SnackBarBehavior.floating,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),

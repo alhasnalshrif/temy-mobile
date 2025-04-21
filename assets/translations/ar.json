@@ -20,8 +20,8 @@
     "description": "الوصف",
     "no_description": "لا يوجد وصف متاح.",
     "available_hours": "الساعات المتاحة",
-    "price": "ج.م ",
-    "duration": "دقيقة "
+    "price": "ج.م {}",
+    "duration": "دقيقة {}"
   },
   "booking": {
     "screen_title": "الحجوزات",
@@ -61,6 +61,7 @@
     "terms_agreement": "بتسجيل الدخول، فإنك توافق على",
     "terms_and_conditions": "الشروط والأحكام",
     "and": "و",
+    "welcome_back": "مرحبًا بعودتك",
     "privacy_policy": "سياسة الخصوصية",
     "forgot_password": "نسيت كلمة المرور؟",
     "login_button": "تسجيل الدخول",

@@ -201,8 +201,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
             child: Text(
               _selectedServices.isEmpty
                   ? 'barber.book_now'.tr()
-                  : 'barber.book_now'.tr() +
-                      ' (${_priceText(_selectedTotalPrice)})',
+                  : '${'barber.book_now'.tr()} (${_priceText(_selectedTotalPrice)})',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
