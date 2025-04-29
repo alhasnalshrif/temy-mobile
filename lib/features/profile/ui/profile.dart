@@ -204,102 +204,79 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.grey.shade100,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 8, right: 8, left: 8),
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.language,
-                                      color: ColorsManager.mainBlue),
-                                  horizontalSpace(12),
-                                  Text(
-                                    'profile.language'.tr(),
-                                    style: TextStyles.font16DarkBold,
-                                  ),
-                                ],
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(Icons.language,
+                                  color: ColorsManager.mainBlue),
+                              horizontalSpace(12),
+                              Text(
+                                'profile.language'.tr(),
+                                style: TextStyles.font16DarkBold,
                               ),
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: () => _changeLanguage('ar'),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      decoration: BoxDecoration(
-                                        color: currentLanguage == 'ar'
-                                            ? ColorsManager.mainBlue
-                                            : Colors.white,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                          color: currentLanguage == 'ar'
-                                              ? ColorsManager.mainBlue
-                                              : Colors.grey.shade300,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'profile.arabic'.tr(),
-                                        style: TextStyles.font12DarkGreyRegular
-                                            .copyWith(
-                                          color: currentLanguage == 'ar'
-                                              ? Colors.white
-                                              : Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                horizontalSpace(10),
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: () => _changeLanguage('en'),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      decoration: BoxDecoration(
-                                        color: currentLanguage == 'en'
-                                            ? ColorsManager.mainBlue
-                                            : Colors.white,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                          color: currentLanguage == 'en'
-                                              ? ColorsManager.mainBlue
-                                              : Colors.grey.shade300,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'profile.english'.tr(),
-                                        style: TextStyles.font14DarkBlueMedium
-                                            .copyWith(
-                                          color: currentLanguage == 'en'
-                                              ? Colors.white
-                                              : Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                            ],
+                          ),
+                          Container(
+                            width: 120,
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: Colors.grey.shade300,
+                                width: 1,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 2,
+                                  offset: const Offset(0, 1),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
+                            child: DropdownButtonHideUnderline(
+                              
+                              child: DropdownButton<String>(
+                                borderRadius: BorderRadius.circular(8),
+                                value: currentLanguage,
+                                isExpanded: true,
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: ColorsManager.mainBlue,
+                                ),
+                                dropdownColor: Colors.white,
+                                items: [
+                                  DropdownMenuItem(
+                                    value: 'ar',
+                                    child: Text(
+                                      'profile.arabic'.tr(),
+                                      style: TextStyles.font14DarkBlueMedium,
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'en',
+                                    child: Text(
+                                      'profile.english'.tr(),
+                                      style: TextStyles.font14DarkBlueMedium,
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    _changeLanguage(value);
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    verticalSpace(10),
                     _buildProfileTile(
                       'profile.edit_account'.tr(),
                       Icons.person_outline,

@@ -21,4 +21,18 @@ class CategoryCubit extends Cubit<CategoryState> {
       },
     );
   }
+
+  void getCategoryWithBarbers() async {
+    emit(const CategoryState.categoryWithBarbersLoading());
+    final response = await _categoryRepo.getCategoryWithBarbers(categoryId);
+    response.when(
+      success: (categoryServicesResponse) {
+        emit(
+            CategoryState.categoryWithBarbersSuccess(categoryServicesResponse));
+      },
+      failure: (error) {
+        emit(CategoryState.categoryWithBarbersError(error));
+      },
+    );
+  }
 }

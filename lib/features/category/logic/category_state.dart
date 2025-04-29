@@ -1,4 +1,5 @@
 import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/features/category/data/models/category_services_response.dart';
 import 'package:temy_barber/features/category/data/models/service_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,4 +16,13 @@ class CategoryState with _$CategoryState {
 
   const factory CategoryState.categoryError(ErrorHandler errorHandler) =
       CategoryError;
+
+  // categories with barbers
+  const factory CategoryState.categoryWithBarbersLoading() =
+      CategoryWithBarbersLoading;
+  const factory CategoryState.categoryWithBarbersSuccess(
+          CategoryServicesResponse categoryServicesResponse) =
+      CategoryWithBarbersSuccess;
+  const factory CategoryState.categoryWithBarbersError(
+      ErrorHandler errorHandler) = CategoryWithBarbersError;
 }
