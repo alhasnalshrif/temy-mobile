@@ -30,8 +30,8 @@
         "description": "Description",
         "no_description": "No description available.",
         "available_hours": "Available Hours",
-        "price": "EGP ",
-        "duration": "Min "
+        "price": "EGP {}",
+        "duration": "Min {}"
     },
     "booking": {
         "screen_title": "Booking",
