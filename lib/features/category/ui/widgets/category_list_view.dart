@@ -17,7 +17,6 @@ class CategoryBarberListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate crossAxisCount based on screen width with better breakpoints
     final double screenWidth = MediaQuery.of(context).size.width;
     late final int crossAxisCount;
 
@@ -31,7 +30,6 @@ class CategoryBarberListView extends StatelessWidget {
       crossAxisCount = 2; // Small phones
     }
 
-    // Calculate the number of items to show
     final int itemCount = barberDataList.length > maxItems
         ? maxItems
         : barberDataList.length;
@@ -44,19 +42,17 @@ class CategoryBarberListView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount,
-          childAspectRatio: 0.85, // Better aspect ratio for category items
+          childAspectRatio: 0.85, 
           crossAxisSpacing: spacing,
           mainAxisSpacing: spacing * 1.5,
         ),
         itemCount: itemCount,
         itemBuilder: (context, index) {
-          // Calculate a staggered animation delay based on index
           return CategoryListViewItem(
             serviceResponseModel: barberDataList[index],
             indexItem: index,
-            radius: (screenWidth / crossAxisCount) * 0.3, // Responsive radius
+            radius: (screenWidth / crossAxisCount) * 0.3, 
             onTap: () {
-              // Navigate to CategoryScreen with category id
               debugPrint(
                   'Category tapped: ${barberDataList[index]?.name}');
 
