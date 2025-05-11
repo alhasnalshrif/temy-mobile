@@ -34,7 +34,7 @@ class CategoryListViewItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _CategoryImage(
-                imageUrl: categoryResponseModel?.imageCover,
+                imageUrl: categoryResponseModel.imageCover,
                 radius: radius,
                 backgroundColor: backgroundColor,
               ),

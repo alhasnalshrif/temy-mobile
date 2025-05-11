@@ -9,7 +9,6 @@ import 'package:temy_barber/core/theme/styles.dart';
 
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 // Add imports for PDF generation and sharing
-import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';

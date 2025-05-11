@@ -8,7 +8,6 @@ import 'package:temy_barber/features/home/ui/widgets/category_sea_all.dart';
 import 'package:temy_barber/features/home/ui/widgets/home_top_bar.dart';
 import 'package:temy_barber/features/home/ui/widgets/next_booking_card.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
-import 'package:temy_barber/features/home/ui/widgets/barber/barber_bloc_builder.dart';
 
 // import 'widgets/banner_card.dart';
 
