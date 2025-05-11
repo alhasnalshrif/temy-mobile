@@ -36,8 +36,8 @@ class BookingCard extends StatelessWidget {
             name: booking.barber?.name ?? 'booking.default_barber_name'.tr(),
             avatarUrl: booking.barber?.avatar,
             location: 'booking.default_location'.tr(),
-            rating: '5.0', // Replace with actual data if available
-            reviewCount: 24, // Replace with actual data if available
+            rating: '5.0',
+            reviewCount: 24, 
           ),
           verticalSpace(16),
           const Divider(),
