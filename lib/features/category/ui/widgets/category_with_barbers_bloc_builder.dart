@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/core/helpers/spacing.dart';
-import 'package:temy_barber/core/routing/routes.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/features/category/data/models/category_response.dart';
 import 'package:temy_barber/features/category/logic/category_cubit.dart';
@@ -38,7 +36,7 @@ class CategoryWithBarbersBlocBuilder extends StatelessWidget {
 
   Widget setupSuccess(
       CategoryServicesResponseModel response, BuildContext context) {
-    final category = response.data?.category;
+    // final category = response.data?.category;
     final barbers = response.data?.barbers ?? [];
 
     if (barbers.isEmpty) {
@@ -51,7 +49,7 @@ class CategoryWithBarbersBlocBuilder extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        CategoryBarberListView(barberDataList: barbers),
+          CategoryBarberListView(barberDataList: barbers),
 
           // Expanded(
           //   child: ListView.builder(

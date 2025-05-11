@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/features/category/data/models/category_response.dart';
 import 'package:temy_barber/features/category/data/repos/category_repo.dart';
 import 'category_state.dart';
 
