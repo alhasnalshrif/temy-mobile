@@ -14,7 +14,7 @@ import 'package:temy_barber/features/reservations/ui/widgets/calendar_section.da
 import 'package:temy_barber/features/reservations/ui/widgets/time_slot_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/total_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/book_button.dart';
-import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
+import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ReservationsScreen extends StatefulWidget {
@@ -84,9 +84,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     //     '${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}';
     final date =
         '${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}';
-    print(date);
 
-    // Create ReservationArguments with date and time for the invoice screen
     final updatedArguments = ReservationArguments(
       selectedServices: selectedServices,
       barberData: barberData,
@@ -95,14 +93,13 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
       selectedTime: _selectedTime,
     );
 
-    // Call the reservation cubit directly
     context.read<ReservationCubit>().postReservation(
           userId: userId ?? '', // Add null check
           serviceIds: serviceIds,
           barberId: barberId,
           date: date,
           startTime: _selectedTime!,
-          arguments: updatedArguments, // Pass the updated arguments
+          arguments: updatedArguments,
         );
   }
 
