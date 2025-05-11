@@ -84,7 +84,6 @@ class BookingCard extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(height: 12.0),
-                          // Description
                           Text(
                             'booking.cancel_message'.tr(),
                             style: Theme.of(dialogContext)
