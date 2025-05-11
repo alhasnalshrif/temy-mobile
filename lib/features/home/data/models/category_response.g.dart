@@ -15,8 +15,8 @@ CategoryResponseModel _$CategoryResponseModelFromJson(
           ? null
           : PaginationResult.fromJson(
               json['paginationResult'] as Map<String, dynamic>),
-      categoryDataList: (json['data'] as List<dynamic>?)
-          ?.map((e) => CategoryData.fromJson(e as Map<String, dynamic>))
+      categoryDataList: (json['data'] as List<dynamic>)
+          .map((e) => CategoryData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -41,21 +41,4 @@ Map<String, dynamic> _$PaginationResultToJson(PaginationResult instance) =>
       'currentPage': instance.currentPage,
       'limit': instance.limit,
       'numberOfPages': instance.numberOfPages,
-    };
-
-CategoryData _$CategoryDataFromJson(Map<String, dynamic> json) => CategoryData(
-      id: json['_id'] as String?,
-      name: json['name'] as String?,
-      description: json['description'] as String?,
-      imageCover: json['imageCover'] as String?,
-      version: (json['__v'] as num?)?.toInt(),
-    );
-
-Map<String, dynamic> _$CategoryDataToJson(CategoryData instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-      'description': instance.description,
-      'imageCover': instance.imageCover,
-      '__v': instance.version,
     };

@@ -97,7 +97,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) =>
-                CategoryCubit(getIt(), categoryId!)..getCategory(),
+                CategoryCubit(getIt(), categoryId!)..getCategoryWithBarbers(),
             child: const CategoryScreen(),
           ),
         );
@@ -112,12 +112,15 @@ class AppRouter {
         );
       default:
         return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          ),
+          builder: (_) => const DashboardScreen(),
         );
+      // return MaterialPageRoute(
+      //   builder: (_) => Scaffold(
+      //     body: Center(
+      //       child: Text('No route defined for ${settings.name}'),
+      //     ),
+      //   ),
+      // );
     }
   }
 }

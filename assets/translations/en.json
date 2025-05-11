@@ -16,7 +16,9 @@
     "navigation": {
         "home": "Home",
         "booking": "Booking",
-        "profile": "Profile"
+        "profile": "Profile",
+        "categories": "Categories",
+        "barbers": "Barbers"
     },
     "barber": {
         "details": "Barber Details",

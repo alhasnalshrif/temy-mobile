@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:temy_barber/features/category/data/models/category_response.dart';
-import 'package:temy_barber/features/category/ui/widgets/category_list_view_item.dart';
+import 'package:temy_barber/features/category/data/models/service_response.dart';
+import 'package:temy_barber/features/home/ui/widgets/category/category_list_view_item.dart';
 import 'package:temy_barber/core/routing/routes.dart';
 
-class CategoryBarberListView extends StatelessWidget {
-  final List<BarberData?> barberDataList;
+class CategoryListView extends StatelessWidget {
+  final List<CategoryData> categoryDataList;
   final double spacing;
   final int maxItems;
 
-  const CategoryBarberListView({
+  const CategoryListView({
     super.key,
-    required this.barberDataList,
+    required this.categoryDataList,
     this.spacing = 8.0,
     this.maxItems = 6,
   });
@@ -32,9 +32,8 @@ class CategoryBarberListView extends StatelessWidget {
     }
 
     // Calculate the number of items to show
-    final int itemCount = barberDataList.length > maxItems
-        ? maxItems
-        : barberDataList.length;
+    final int itemCount = categoryDataList.length;
+    // categoryDataList.length > maxItems ? maxItems : categoryDataList.length;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -52,17 +51,17 @@ class CategoryBarberListView extends StatelessWidget {
         itemBuilder: (context, index) {
           // Calculate a staggered animation delay based on index
           return CategoryListViewItem(
-            serviceResponseModel: barberDataList[index],
+            categoryResponseModel: categoryDataList[index],
             indexItem: index,
             radius: (screenWidth / crossAxisCount) * 0.3, // Responsive radius
             onTap: () {
               // Navigate to CategoryScreen with category id
-              debugPrint(
-                  'Category tapped: ${barberDataList[index]?.name}');
+              debugPrint('Category tapped: ${categoryDataList[index].name}');
 
               Navigator.of(context).pushNamed(
-                Routes.barberScreen,
-                arguments: barberDataList[index]?.id,
+                Routes.categoryScreen,
+                // Routes.barberScreen,
+                arguments: categoryDataList[index].id ?? '',
               );
             },
           );

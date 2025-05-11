@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/features/home/logic/home_cubit.dart';
-import 'package:temy_barber/features/home/ui/widgets/banner_bloc_builder.dart';
+import 'package:temy_barber/features/home/ui/widgets/banner/banner_bloc_builder.dart';
+import 'package:temy_barber/features/home/ui/widgets/category/category_bloc_builder.dart';
+import 'package:temy_barber/features/home/ui/widgets/category_sea_all.dart';
 import 'package:temy_barber/features/home/ui/widgets/home_top_bar.dart';
-import 'package:temy_barber/features/home/ui/widgets/home_bloc_builder.dart';
+import 'package:temy_barber/features/home/ui/widgets/next_booking_card.dart';
+import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
+import 'package:temy_barber/features/home/ui/widgets/barber/barber_bloc_builder.dart';
 
 // import 'widgets/banner_card.dart';
 
@@ -25,6 +29,8 @@ class HomeScreen extends StatelessWidget {
             onRefresh: () async {
               // Refresh all home screen data
               await context.read<HomeCubit>().refreshHomeData();
+              // Also refresh bookings data to get the latest booking
+              context.read<BookingCubit>().getBooking();
             },
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -32,12 +38,17 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const HomeTopBar(),
-                  verticalSpace(24),
+                  // Add next booking card here - it will automatically show or hide based on booking data
+                  const NextBookingCard(),
+                  verticalSpace(16),
                   const BannerBlocBuilder(),
-                  // const BannerCard(),
+                  verticalSpace(24),
 
+                  // const BannerCard(),
+                  const DoctorSpecialitySeaAll(),
                   verticalSpace(10),
-                  const HomeBlocBuilder(),
+                  const CategoryBlocBuilder(),
+                  // const HomeBlocBuilder(),
                 ],
               ),
             ),

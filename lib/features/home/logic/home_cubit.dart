@@ -50,9 +50,23 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> refreshHomeData() async {
     // Fetch barbers and banners data in parallel
     await Future.wait([
-      _refreshBarbers(),
+      _refreshCategories(),
+      // _refreshBarbers(),
       _refreshBanners(),
     ]);
+  }
+
+  // refresh categories
+  Future<void> _refreshCategories() async {
+    final response = await _homeRepo.getCategorie();
+    response.when(
+      success: (categoriesResponseModel) {
+        emit(HomeState.categoriesSuccess(categoriesResponseModel));
+      },
+      failure: (error) {
+        emit(HomeState.categoriesError(error));
+      },
+    );
   }
 
   Future<void> _refreshBarbers() async {

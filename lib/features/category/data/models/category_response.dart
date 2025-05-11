@@ -3,45 +3,36 @@ import 'package:json_annotation/json_annotation.dart';
 part 'category_response.g.dart';
 
 @JsonSerializable()
-class CategoryResponseModel {
+class CategoryServicesResponseModel {
   final String? status;
-  final int? results;
-
-  @JsonKey(name: 'paginationResult')
-  final PaginationResult? paginationResult;
 
   @JsonKey(name: 'data')
-  final List<CategoryData>? categoryDataList;
+  final CategoryDetailData? data;
 
-  CategoryResponseModel({
+  CategoryServicesResponseModel({
     this.status,
-    this.results,
-    this.paginationResult,
-    this.categoryDataList,
+    this.data,
   });
 
-  factory CategoryResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$CategoryResponseModelFromJson(json);
+  factory CategoryServicesResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$CategoryServicesResponseModelFromJson(json);
 }
 
 @JsonSerializable()
-class PaginationResult {
-  @JsonKey(name: 'currentPage')
-  final int? currentPage;
+class CategoryDetailData {
+  @JsonKey(name: 'category')
+  final CategoryData? category;
 
-  final int? limit;
+  @JsonKey(name: 'barbers')
+  final List<BarberData>? barbers;
 
-  @JsonKey(name: 'numberOfPages')
-  final int? numberOfPages;
-
-  PaginationResult({
-    this.currentPage,
-    this.limit,
-    this.numberOfPages,
+  CategoryDetailData({
+    this.category,
+    this.barbers,
   });
 
-  factory PaginationResult.fromJson(Map<String, dynamic> json) =>
-      _$PaginationResultFromJson(json);
+  factory CategoryDetailData.fromJson(Map<String, dynamic> json) =>
+      _$CategoryDetailDataFromJson(json);
 }
 
 @JsonSerializable()
@@ -66,4 +57,52 @@ class CategoryData {
 
   factory CategoryData.fromJson(Map<String, dynamic> json) =>
       _$CategoryDataFromJson(json);
+}
+
+@JsonSerializable()
+class BarberData {
+  @JsonKey(name: '_id')
+  final String? id;
+
+  final String? name;
+  final String? phone;
+
+  @JsonKey(name: 'services')
+  final List<ServiceData>? services;
+
+  BarberData({
+    this.id,
+    this.name,
+    this.phone,
+    this.services,
+  });
+
+  factory BarberData.fromJson(Map<String, dynamic> json) =>
+      _$BarberDataFromJson(json);
+}
+
+@JsonSerializable()
+class ServiceData {
+  @JsonKey(name: '_id')
+  final String? id;
+
+  final String? name;
+  final String? description;
+  final int? price;
+  final int? duration;
+  final String? imageCover;
+  final bool? available;
+
+  ServiceData({
+    this.id,
+    this.name,
+    this.description,
+    this.price,
+    this.duration,
+    this.imageCover,
+    this.available,
+  });
+
+  factory ServiceData.fromJson(Map<String, dynamic> json) =>
+      _$ServiceDataFromJson(json);
 }

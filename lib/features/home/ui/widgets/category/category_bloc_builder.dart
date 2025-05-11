@@ -3,30 +3,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/widgets/no_internet_page.dart';
 import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/logic/home_state.dart';
-import 'package:temy_barber/features/home/ui/widgets/category_list_view.dart';
+import 'package:temy_barber/features/home/ui/widgets/category/category_list_view.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 
-class HomeBlocBuilder extends StatelessWidget {
-  const HomeBlocBuilder({super.key});
+class CategoryBlocBuilder extends StatelessWidget {
+  const CategoryBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (previous, current) =>
-          current is BarbersLoading ||
-          current is BarbersSuccess ||
-          current is BarbersError,
+          current is CategoriesLoading ||
+          current is CategoriesSuccess ||
+          current is CategoriesError,
       builder: (context, state) {
         return state.maybeMap(
-          barbersLoading: (value) {
+          categoriesLoading: (value) {
             return setupLoading();
           },
-          barbersSuccess: (barbersResponseModel) {
-            var barberesLis =
-                barbersResponseModel.barbersResponseModel.barberDataList;
-            return setupSuccess(barberesLis);
+          categoriesSuccess: (categoriesResponseModel) {
+            var categoriesList = categoriesResponseModel
+                .categoriesResponseModel.categoryDataList;
+            return setupSuccess(categoriesList);
           },
-          barbersError: (errorHandler) => setupError(context),
+          categoriesError: (errorHandler) => setupError(context),
           orElse: () {
             return const SizedBox.shrink();
           },
@@ -41,10 +41,10 @@ class HomeBlocBuilder extends StatelessWidget {
     );
   }
 
-  Widget setupSuccess(barberesLis) {
+  Widget setupSuccess(categoriesList) {
     return Column(
       children: [
-        CategoryListView(categoryDataList: barberesLis ?? []),
+        CategoryListView(categoryDataList: categoriesList),
       ],
     );
   }
@@ -53,6 +53,5 @@ class HomeBlocBuilder extends StatelessWidget {
     return NoInternetPage(
       onRetry: () => context.read<HomeCubit>().refreshHomeData(),
     );
-    // return const SizedBox.shrink();
   }
 }

@@ -9,7 +9,7 @@ class DoctorSpecialitySeaAll extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       Text(
-        'welcome'.tr(),
+        'navigation.categories'.tr(),
         style: TextStyles.font18DarkBold,
       ),
       const Spacer(),

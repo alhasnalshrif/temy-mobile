@@ -24,46 +24,13 @@ class _CategoryApiServices implements CategoryApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ServiceResponseModel> getCategory(String categoryId) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ServiceResponseModel>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'services?category=?category=${categoryId}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ServiceResponseModel _value;
-    try {
-      _value = ServiceResponseModel.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<CategoryServicesResponse> getCategoryWithBarbers(
+  Future<CategoryServicesResponseModel> getCategoryWithBarbers(
       String categoryId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<CategoryServicesResponse>(Options(
+    final _options = _setStreamType<CategoryServicesResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -80,9 +47,9 @@ class _CategoryApiServices implements CategoryApiServices {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CategoryServicesResponse _value;
+    late CategoryServicesResponseModel _value;
     try {
-      _value = CategoryServicesResponse.fromJson(_result.data!);
+      _value = CategoryServicesResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

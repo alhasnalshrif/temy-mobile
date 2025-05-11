@@ -19,12 +19,9 @@ mixin _$CategoryState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() categoryLoading,
-    required TResult Function(ServiceResponseModel serviceResponseModel)
-        categorySuccess,
-    required TResult Function(ErrorHandler errorHandler) categoryError,
     required TResult Function() categoryWithBarbersLoading,
-    required TResult Function(CategoryServicesResponse categoryServicesResponse)
+    required TResult Function(
+            CategoryServicesResponseModel categoryServicesResponse)
         categoryWithBarbersSuccess,
     required TResult Function(ErrorHandler errorHandler)
         categoryWithBarbersError,
@@ -33,12 +30,8 @@ mixin _$CategoryState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? categoryLoading,
-    TResult? Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryError,
     TResult? Function()? categoryWithBarbersLoading,
-    TResult? Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult? Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryWithBarbersError,
   }) =>
@@ -46,12 +39,8 @@ mixin _$CategoryState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? categoryLoading,
-    TResult Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryError,
     TResult Function()? categoryWithBarbersLoading,
-    TResult Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult Function(ErrorHandler errorHandler)? categoryWithBarbersError,
     required TResult orElse(),
@@ -60,9 +49,6 @@ mixin _$CategoryState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(CategoryLoading value) categoryLoading,
-    required TResult Function(CategorySuccess value) categorySuccess,
-    required TResult Function(CategoryError value) categoryError,
     required TResult Function(CategoryWithBarbersLoading value)
         categoryWithBarbersLoading,
     required TResult Function(CategoryWithBarbersSuccess value)
@@ -74,9 +60,6 @@ mixin _$CategoryState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoryLoading value)? categoryLoading,
-    TResult? Function(CategorySuccess value)? categorySuccess,
-    TResult? Function(CategoryError value)? categoryError,
     TResult? Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult? Function(CategoryWithBarbersSuccess value)?
@@ -87,9 +70,6 @@ mixin _$CategoryState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(CategoryLoading value)? categoryLoading,
-    TResult Function(CategorySuccess value)? categorySuccess,
-    TResult Function(CategoryError value)? categoryError,
     TResult Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult Function(CategoryWithBarbersSuccess value)?
@@ -163,12 +143,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() categoryLoading,
-    required TResult Function(ServiceResponseModel serviceResponseModel)
-        categorySuccess,
-    required TResult Function(ErrorHandler errorHandler) categoryError,
     required TResult Function() categoryWithBarbersLoading,
-    required TResult Function(CategoryServicesResponse categoryServicesResponse)
+    required TResult Function(
+            CategoryServicesResponseModel categoryServicesResponse)
         categoryWithBarbersSuccess,
     required TResult Function(ErrorHandler errorHandler)
         categoryWithBarbersError,
@@ -180,12 +157,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? categoryLoading,
-    TResult? Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryError,
     TResult? Function()? categoryWithBarbersLoading,
-    TResult? Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult? Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryWithBarbersError,
   }) {
@@ -196,12 +169,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? categoryLoading,
-    TResult Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryError,
     TResult Function()? categoryWithBarbersLoading,
-    TResult Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult Function(ErrorHandler errorHandler)? categoryWithBarbersError,
     required TResult orElse(),
@@ -216,9 +185,6 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(CategoryLoading value) categoryLoading,
-    required TResult Function(CategorySuccess value) categorySuccess,
-    required TResult Function(CategoryError value) categoryError,
     required TResult Function(CategoryWithBarbersLoading value)
         categoryWithBarbersLoading,
     required TResult Function(CategoryWithBarbersSuccess value)
@@ -233,9 +199,6 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoryLoading value)? categoryLoading,
-    TResult? Function(CategorySuccess value)? categorySuccess,
-    TResult? Function(CategoryError value)? categoryError,
     TResult? Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult? Function(CategoryWithBarbersSuccess value)?
@@ -249,9 +212,6 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(CategoryLoading value)? categoryLoading,
-    TResult Function(CategorySuccess value)? categorySuccess,
-    TResult Function(CategoryError value)? categoryError,
     TResult Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult Function(CategoryWithBarbersSuccess value)?
@@ -268,528 +228,6 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements CategoryState {
   const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$CategoryLoadingImplCopyWith<$Res> {
-  factory _$$CategoryLoadingImplCopyWith(_$CategoryLoadingImpl value,
-          $Res Function(_$CategoryLoadingImpl) then) =
-      __$$CategoryLoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CategoryLoadingImplCopyWithImpl<$Res>
-    extends _$CategoryStateCopyWithImpl<$Res, _$CategoryLoadingImpl>
-    implements _$$CategoryLoadingImplCopyWith<$Res> {
-  __$$CategoryLoadingImplCopyWithImpl(
-      _$CategoryLoadingImpl _value, $Res Function(_$CategoryLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CategoryState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$CategoryLoadingImpl implements CategoryLoading {
-  const _$CategoryLoadingImpl();
-
-  @override
-  String toString() {
-    return 'CategoryState.categoryLoading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CategoryLoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoryLoading,
-    required TResult Function(ServiceResponseModel serviceResponseModel)
-        categorySuccess,
-    required TResult Function(ErrorHandler errorHandler) categoryError,
-    required TResult Function() categoryWithBarbersLoading,
-    required TResult Function(CategoryServicesResponse categoryServicesResponse)
-        categoryWithBarbersSuccess,
-    required TResult Function(ErrorHandler errorHandler)
-        categoryWithBarbersError,
-  }) {
-    return categoryLoading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoryLoading,
-    TResult? Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryError,
-    TResult? Function()? categoryWithBarbersLoading,
-    TResult? Function(CategoryServicesResponse categoryServicesResponse)?
-        categoryWithBarbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryWithBarbersError,
-  }) {
-    return categoryLoading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoryLoading,
-    TResult Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryError,
-    TResult Function()? categoryWithBarbersLoading,
-    TResult Function(CategoryServicesResponse categoryServicesResponse)?
-        categoryWithBarbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryWithBarbersError,
-    required TResult orElse(),
-  }) {
-    if (categoryLoading != null) {
-      return categoryLoading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoryLoading value) categoryLoading,
-    required TResult Function(CategorySuccess value) categorySuccess,
-    required TResult Function(CategoryError value) categoryError,
-    required TResult Function(CategoryWithBarbersLoading value)
-        categoryWithBarbersLoading,
-    required TResult Function(CategoryWithBarbersSuccess value)
-        categoryWithBarbersSuccess,
-    required TResult Function(CategoryWithBarbersError value)
-        categoryWithBarbersError,
-  }) {
-    return categoryLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoryLoading value)? categoryLoading,
-    TResult? Function(CategorySuccess value)? categorySuccess,
-    TResult? Function(CategoryError value)? categoryError,
-    TResult? Function(CategoryWithBarbersLoading value)?
-        categoryWithBarbersLoading,
-    TResult? Function(CategoryWithBarbersSuccess value)?
-        categoryWithBarbersSuccess,
-    TResult? Function(CategoryWithBarbersError value)? categoryWithBarbersError,
-  }) {
-    return categoryLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoryLoading value)? categoryLoading,
-    TResult Function(CategorySuccess value)? categorySuccess,
-    TResult Function(CategoryError value)? categoryError,
-    TResult Function(CategoryWithBarbersLoading value)?
-        categoryWithBarbersLoading,
-    TResult Function(CategoryWithBarbersSuccess value)?
-        categoryWithBarbersSuccess,
-    TResult Function(CategoryWithBarbersError value)? categoryWithBarbersError,
-    required TResult orElse(),
-  }) {
-    if (categoryLoading != null) {
-      return categoryLoading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CategoryLoading implements CategoryState {
-  const factory CategoryLoading() = _$CategoryLoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$CategorySuccessImplCopyWith<$Res> {
-  factory _$$CategorySuccessImplCopyWith(_$CategorySuccessImpl value,
-          $Res Function(_$CategorySuccessImpl) then) =
-      __$$CategorySuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ServiceResponseModel serviceResponseModel});
-}
-
-/// @nodoc
-class __$$CategorySuccessImplCopyWithImpl<$Res>
-    extends _$CategoryStateCopyWithImpl<$Res, _$CategorySuccessImpl>
-    implements _$$CategorySuccessImplCopyWith<$Res> {
-  __$$CategorySuccessImplCopyWithImpl(
-      _$CategorySuccessImpl _value, $Res Function(_$CategorySuccessImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CategoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? serviceResponseModel = null,
-  }) {
-    return _then(_$CategorySuccessImpl(
-      null == serviceResponseModel
-          ? _value.serviceResponseModel
-          : serviceResponseModel // ignore: cast_nullable_to_non_nullable
-              as ServiceResponseModel,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$CategorySuccessImpl implements CategorySuccess {
-  const _$CategorySuccessImpl(this.serviceResponseModel);
-
-  @override
-  final ServiceResponseModel serviceResponseModel;
-
-  @override
-  String toString() {
-    return 'CategoryState.categorySuccess(serviceResponseModel: $serviceResponseModel)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CategorySuccessImpl &&
-            (identical(other.serviceResponseModel, serviceResponseModel) ||
-                other.serviceResponseModel == serviceResponseModel));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, serviceResponseModel);
-
-  /// Create a copy of CategoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CategorySuccessImplCopyWith<_$CategorySuccessImpl> get copyWith =>
-      __$$CategorySuccessImplCopyWithImpl<_$CategorySuccessImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoryLoading,
-    required TResult Function(ServiceResponseModel serviceResponseModel)
-        categorySuccess,
-    required TResult Function(ErrorHandler errorHandler) categoryError,
-    required TResult Function() categoryWithBarbersLoading,
-    required TResult Function(CategoryServicesResponse categoryServicesResponse)
-        categoryWithBarbersSuccess,
-    required TResult Function(ErrorHandler errorHandler)
-        categoryWithBarbersError,
-  }) {
-    return categorySuccess(serviceResponseModel);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoryLoading,
-    TResult? Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryError,
-    TResult? Function()? categoryWithBarbersLoading,
-    TResult? Function(CategoryServicesResponse categoryServicesResponse)?
-        categoryWithBarbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryWithBarbersError,
-  }) {
-    return categorySuccess?.call(serviceResponseModel);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoryLoading,
-    TResult Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryError,
-    TResult Function()? categoryWithBarbersLoading,
-    TResult Function(CategoryServicesResponse categoryServicesResponse)?
-        categoryWithBarbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryWithBarbersError,
-    required TResult orElse(),
-  }) {
-    if (categorySuccess != null) {
-      return categorySuccess(serviceResponseModel);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoryLoading value) categoryLoading,
-    required TResult Function(CategorySuccess value) categorySuccess,
-    required TResult Function(CategoryError value) categoryError,
-    required TResult Function(CategoryWithBarbersLoading value)
-        categoryWithBarbersLoading,
-    required TResult Function(CategoryWithBarbersSuccess value)
-        categoryWithBarbersSuccess,
-    required TResult Function(CategoryWithBarbersError value)
-        categoryWithBarbersError,
-  }) {
-    return categorySuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoryLoading value)? categoryLoading,
-    TResult? Function(CategorySuccess value)? categorySuccess,
-    TResult? Function(CategoryError value)? categoryError,
-    TResult? Function(CategoryWithBarbersLoading value)?
-        categoryWithBarbersLoading,
-    TResult? Function(CategoryWithBarbersSuccess value)?
-        categoryWithBarbersSuccess,
-    TResult? Function(CategoryWithBarbersError value)? categoryWithBarbersError,
-  }) {
-    return categorySuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoryLoading value)? categoryLoading,
-    TResult Function(CategorySuccess value)? categorySuccess,
-    TResult Function(CategoryError value)? categoryError,
-    TResult Function(CategoryWithBarbersLoading value)?
-        categoryWithBarbersLoading,
-    TResult Function(CategoryWithBarbersSuccess value)?
-        categoryWithBarbersSuccess,
-    TResult Function(CategoryWithBarbersError value)? categoryWithBarbersError,
-    required TResult orElse(),
-  }) {
-    if (categorySuccess != null) {
-      return categorySuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CategorySuccess implements CategoryState {
-  const factory CategorySuccess(
-      final ServiceResponseModel serviceResponseModel) = _$CategorySuccessImpl;
-
-  ServiceResponseModel get serviceResponseModel;
-
-  /// Create a copy of CategoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CategorySuccessImplCopyWith<_$CategorySuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CategoryErrorImplCopyWith<$Res> {
-  factory _$$CategoryErrorImplCopyWith(
-          _$CategoryErrorImpl value, $Res Function(_$CategoryErrorImpl) then) =
-      __$$CategoryErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
-}
-
-/// @nodoc
-class __$$CategoryErrorImplCopyWithImpl<$Res>
-    extends _$CategoryStateCopyWithImpl<$Res, _$CategoryErrorImpl>
-    implements _$$CategoryErrorImplCopyWith<$Res> {
-  __$$CategoryErrorImplCopyWithImpl(
-      _$CategoryErrorImpl _value, $Res Function(_$CategoryErrorImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CategoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$CategoryErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$CategoryErrorImpl implements CategoryError {
-  const _$CategoryErrorImpl(this.errorHandler);
-
-  @override
-  final ErrorHandler errorHandler;
-
-  @override
-  String toString() {
-    return 'CategoryState.categoryError(errorHandler: $errorHandler)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CategoryErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
-
-  /// Create a copy of CategoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CategoryErrorImplCopyWith<_$CategoryErrorImpl> get copyWith =>
-      __$$CategoryErrorImplCopyWithImpl<_$CategoryErrorImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoryLoading,
-    required TResult Function(ServiceResponseModel serviceResponseModel)
-        categorySuccess,
-    required TResult Function(ErrorHandler errorHandler) categoryError,
-    required TResult Function() categoryWithBarbersLoading,
-    required TResult Function(CategoryServicesResponse categoryServicesResponse)
-        categoryWithBarbersSuccess,
-    required TResult Function(ErrorHandler errorHandler)
-        categoryWithBarbersError,
-  }) {
-    return categoryError(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoryLoading,
-    TResult? Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryError,
-    TResult? Function()? categoryWithBarbersLoading,
-    TResult? Function(CategoryServicesResponse categoryServicesResponse)?
-        categoryWithBarbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryWithBarbersError,
-  }) {
-    return categoryError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoryLoading,
-    TResult Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryError,
-    TResult Function()? categoryWithBarbersLoading,
-    TResult Function(CategoryServicesResponse categoryServicesResponse)?
-        categoryWithBarbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryWithBarbersError,
-    required TResult orElse(),
-  }) {
-    if (categoryError != null) {
-      return categoryError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoryLoading value) categoryLoading,
-    required TResult Function(CategorySuccess value) categorySuccess,
-    required TResult Function(CategoryError value) categoryError,
-    required TResult Function(CategoryWithBarbersLoading value)
-        categoryWithBarbersLoading,
-    required TResult Function(CategoryWithBarbersSuccess value)
-        categoryWithBarbersSuccess,
-    required TResult Function(CategoryWithBarbersError value)
-        categoryWithBarbersError,
-  }) {
-    return categoryError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoryLoading value)? categoryLoading,
-    TResult? Function(CategorySuccess value)? categorySuccess,
-    TResult? Function(CategoryError value)? categoryError,
-    TResult? Function(CategoryWithBarbersLoading value)?
-        categoryWithBarbersLoading,
-    TResult? Function(CategoryWithBarbersSuccess value)?
-        categoryWithBarbersSuccess,
-    TResult? Function(CategoryWithBarbersError value)? categoryWithBarbersError,
-  }) {
-    return categoryError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoryLoading value)? categoryLoading,
-    TResult Function(CategorySuccess value)? categorySuccess,
-    TResult Function(CategoryError value)? categoryError,
-    TResult Function(CategoryWithBarbersLoading value)?
-        categoryWithBarbersLoading,
-    TResult Function(CategoryWithBarbersSuccess value)?
-        categoryWithBarbersSuccess,
-    TResult Function(CategoryWithBarbersError value)? categoryWithBarbersError,
-    required TResult orElse(),
-  }) {
-    if (categoryError != null) {
-      return categoryError(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CategoryError implements CategoryState {
-  const factory CategoryError(final ErrorHandler errorHandler) =
-      _$CategoryErrorImpl;
-
-  ErrorHandler get errorHandler;
-
-  /// Create a copy of CategoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CategoryErrorImplCopyWith<_$CategoryErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -837,12 +275,9 @@ class _$CategoryWithBarbersLoadingImpl implements CategoryWithBarbersLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() categoryLoading,
-    required TResult Function(ServiceResponseModel serviceResponseModel)
-        categorySuccess,
-    required TResult Function(ErrorHandler errorHandler) categoryError,
     required TResult Function() categoryWithBarbersLoading,
-    required TResult Function(CategoryServicesResponse categoryServicesResponse)
+    required TResult Function(
+            CategoryServicesResponseModel categoryServicesResponse)
         categoryWithBarbersSuccess,
     required TResult Function(ErrorHandler errorHandler)
         categoryWithBarbersError,
@@ -854,12 +289,8 @@ class _$CategoryWithBarbersLoadingImpl implements CategoryWithBarbersLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? categoryLoading,
-    TResult? Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryError,
     TResult? Function()? categoryWithBarbersLoading,
-    TResult? Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult? Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryWithBarbersError,
   }) {
@@ -870,12 +301,8 @@ class _$CategoryWithBarbersLoadingImpl implements CategoryWithBarbersLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? categoryLoading,
-    TResult Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryError,
     TResult Function()? categoryWithBarbersLoading,
-    TResult Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult Function(ErrorHandler errorHandler)? categoryWithBarbersError,
     required TResult orElse(),
@@ -890,9 +317,6 @@ class _$CategoryWithBarbersLoadingImpl implements CategoryWithBarbersLoading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(CategoryLoading value) categoryLoading,
-    required TResult Function(CategorySuccess value) categorySuccess,
-    required TResult Function(CategoryError value) categoryError,
     required TResult Function(CategoryWithBarbersLoading value)
         categoryWithBarbersLoading,
     required TResult Function(CategoryWithBarbersSuccess value)
@@ -907,9 +331,6 @@ class _$CategoryWithBarbersLoadingImpl implements CategoryWithBarbersLoading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoryLoading value)? categoryLoading,
-    TResult? Function(CategorySuccess value)? categorySuccess,
-    TResult? Function(CategoryError value)? categoryError,
     TResult? Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult? Function(CategoryWithBarbersSuccess value)?
@@ -923,9 +344,6 @@ class _$CategoryWithBarbersLoadingImpl implements CategoryWithBarbersLoading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(CategoryLoading value)? categoryLoading,
-    TResult Function(CategorySuccess value)? categorySuccess,
-    TResult Function(CategoryError value)? categoryError,
     TResult Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult Function(CategoryWithBarbersSuccess value)?
@@ -951,7 +369,7 @@ abstract class _$$CategoryWithBarbersSuccessImplCopyWith<$Res> {
           $Res Function(_$CategoryWithBarbersSuccessImpl) then) =
       __$$CategoryWithBarbersSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CategoryServicesResponse categoryServicesResponse});
+  $Res call({CategoryServicesResponseModel categoryServicesResponse});
 }
 
 /// @nodoc
@@ -974,7 +392,7 @@ class __$$CategoryWithBarbersSuccessImplCopyWithImpl<$Res>
       null == categoryServicesResponse
           ? _value.categoryServicesResponse
           : categoryServicesResponse // ignore: cast_nullable_to_non_nullable
-              as CategoryServicesResponse,
+              as CategoryServicesResponseModel,
     ));
   }
 }
@@ -985,7 +403,7 @@ class _$CategoryWithBarbersSuccessImpl implements CategoryWithBarbersSuccess {
   const _$CategoryWithBarbersSuccessImpl(this.categoryServicesResponse);
 
   @override
-  final CategoryServicesResponse categoryServicesResponse;
+  final CategoryServicesResponseModel categoryServicesResponse;
 
   @override
   String toString() {
@@ -1018,12 +436,9 @@ class _$CategoryWithBarbersSuccessImpl implements CategoryWithBarbersSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() categoryLoading,
-    required TResult Function(ServiceResponseModel serviceResponseModel)
-        categorySuccess,
-    required TResult Function(ErrorHandler errorHandler) categoryError,
     required TResult Function() categoryWithBarbersLoading,
-    required TResult Function(CategoryServicesResponse categoryServicesResponse)
+    required TResult Function(
+            CategoryServicesResponseModel categoryServicesResponse)
         categoryWithBarbersSuccess,
     required TResult Function(ErrorHandler errorHandler)
         categoryWithBarbersError,
@@ -1035,12 +450,8 @@ class _$CategoryWithBarbersSuccessImpl implements CategoryWithBarbersSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? categoryLoading,
-    TResult? Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryError,
     TResult? Function()? categoryWithBarbersLoading,
-    TResult? Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult? Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryWithBarbersError,
   }) {
@@ -1051,12 +462,8 @@ class _$CategoryWithBarbersSuccessImpl implements CategoryWithBarbersSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? categoryLoading,
-    TResult Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryError,
     TResult Function()? categoryWithBarbersLoading,
-    TResult Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult Function(ErrorHandler errorHandler)? categoryWithBarbersError,
     required TResult orElse(),
@@ -1071,9 +478,6 @@ class _$CategoryWithBarbersSuccessImpl implements CategoryWithBarbersSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(CategoryLoading value) categoryLoading,
-    required TResult Function(CategorySuccess value) categorySuccess,
-    required TResult Function(CategoryError value) categoryError,
     required TResult Function(CategoryWithBarbersLoading value)
         categoryWithBarbersLoading,
     required TResult Function(CategoryWithBarbersSuccess value)
@@ -1088,9 +492,6 @@ class _$CategoryWithBarbersSuccessImpl implements CategoryWithBarbersSuccess {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoryLoading value)? categoryLoading,
-    TResult? Function(CategorySuccess value)? categorySuccess,
-    TResult? Function(CategoryError value)? categoryError,
     TResult? Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult? Function(CategoryWithBarbersSuccess value)?
@@ -1104,9 +505,6 @@ class _$CategoryWithBarbersSuccessImpl implements CategoryWithBarbersSuccess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(CategoryLoading value)? categoryLoading,
-    TResult Function(CategorySuccess value)? categorySuccess,
-    TResult Function(CategoryError value)? categoryError,
     TResult Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult Function(CategoryWithBarbersSuccess value)?
@@ -1123,10 +521,10 @@ class _$CategoryWithBarbersSuccessImpl implements CategoryWithBarbersSuccess {
 
 abstract class CategoryWithBarbersSuccess implements CategoryState {
   const factory CategoryWithBarbersSuccess(
-          final CategoryServicesResponse categoryServicesResponse) =
+          final CategoryServicesResponseModel categoryServicesResponse) =
       _$CategoryWithBarbersSuccessImpl;
 
-  CategoryServicesResponse get categoryServicesResponse;
+  CategoryServicesResponseModel get categoryServicesResponse;
 
   /// Create a copy of CategoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -1208,12 +606,9 @@ class _$CategoryWithBarbersErrorImpl implements CategoryWithBarbersError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() categoryLoading,
-    required TResult Function(ServiceResponseModel serviceResponseModel)
-        categorySuccess,
-    required TResult Function(ErrorHandler errorHandler) categoryError,
     required TResult Function() categoryWithBarbersLoading,
-    required TResult Function(CategoryServicesResponse categoryServicesResponse)
+    required TResult Function(
+            CategoryServicesResponseModel categoryServicesResponse)
         categoryWithBarbersSuccess,
     required TResult Function(ErrorHandler errorHandler)
         categoryWithBarbersError,
@@ -1225,12 +620,8 @@ class _$CategoryWithBarbersErrorImpl implements CategoryWithBarbersError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? categoryLoading,
-    TResult? Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoryError,
     TResult? Function()? categoryWithBarbersLoading,
-    TResult? Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult? Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult? Function(ErrorHandler errorHandler)? categoryWithBarbersError,
   }) {
@@ -1241,12 +632,8 @@ class _$CategoryWithBarbersErrorImpl implements CategoryWithBarbersError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? categoryLoading,
-    TResult Function(ServiceResponseModel serviceResponseModel)?
-        categorySuccess,
-    TResult Function(ErrorHandler errorHandler)? categoryError,
     TResult Function()? categoryWithBarbersLoading,
-    TResult Function(CategoryServicesResponse categoryServicesResponse)?
+    TResult Function(CategoryServicesResponseModel categoryServicesResponse)?
         categoryWithBarbersSuccess,
     TResult Function(ErrorHandler errorHandler)? categoryWithBarbersError,
     required TResult orElse(),
@@ -1261,9 +648,6 @@ class _$CategoryWithBarbersErrorImpl implements CategoryWithBarbersError {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(CategoryLoading value) categoryLoading,
-    required TResult Function(CategorySuccess value) categorySuccess,
-    required TResult Function(CategoryError value) categoryError,
     required TResult Function(CategoryWithBarbersLoading value)
         categoryWithBarbersLoading,
     required TResult Function(CategoryWithBarbersSuccess value)
@@ -1278,9 +662,6 @@ class _$CategoryWithBarbersErrorImpl implements CategoryWithBarbersError {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoryLoading value)? categoryLoading,
-    TResult? Function(CategorySuccess value)? categorySuccess,
-    TResult? Function(CategoryError value)? categoryError,
     TResult? Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult? Function(CategoryWithBarbersSuccess value)?
@@ -1294,9 +675,6 @@ class _$CategoryWithBarbersErrorImpl implements CategoryWithBarbersError {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(CategoryLoading value)? categoryLoading,
-    TResult Function(CategorySuccess value)? categorySuccess,
-    TResult Function(CategoryError value)? categoryError,
     TResult Function(CategoryWithBarbersLoading value)?
         categoryWithBarbersLoading,
     TResult Function(CategoryWithBarbersSuccess value)?

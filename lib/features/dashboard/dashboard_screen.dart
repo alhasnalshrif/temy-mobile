@@ -12,35 +12,58 @@ import 'package:temy_barber/features/profile/ui/profile.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+  final int? initialTabIndex;
+
+  const DashboardScreen({super.key, this.initialTabIndex});
 
   @override
   State<DashboardScreen> createState() => _MyDashboardState();
 }
 
 class _MyDashboardState extends State<DashboardScreen> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
   late List<Widget> _widgetOptions;
+  late BookingCubit _bookingCubit;
 
   @override
   void initState() {
     super.initState();
-    // Initialize the screens with their controllers
+    _selectedIndex = widget.initialTabIndex ?? 0;
+    _bookingCubit = BookingCubit(getIt())..getBooking();
     _initializeScreens();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args != null &&
+        args is int &&
+        args >= 0 &&
+        args < _widgetOptions.length) {
+      setState(() {
+        _selectedIndex = args;
+      });
+    }
   }
 
   void _initializeScreens() {
     _widgetOptions = [
-      BlocProvider(
-        // create: (context) => HomeCubit(getIt())..getCategories(),
-        create: (context) => HomeCubit(getIt())
-          ..getBarbers()
-          ..getBanners(),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => HomeCubit(getIt())
+              ..getCategories()
+              ..getBanners(),
+          ),
+          BlocProvider.value(
+            value: _bookingCubit,
+          ),
+        ],
         child: const HomeScreen(),
       ),
-      BlocProvider(
-        // create: (context) => HomeCubit(getIt())..getCategories(),
-        create: (context) => BookingCubit(getIt())..getBooking(),
+      BlocProvider.value(
+        value: _bookingCubit,
         child: const BookingScreen(),
       ),
       BlocProvider(

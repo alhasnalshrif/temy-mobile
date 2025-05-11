@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/logic/home_state.dart';
-import 'package:temy_barber/features/home/ui/widgets/banner_carousel.dart';
+import 'package:temy_barber/features/home/ui/widgets/banner/banner_carousel.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 
 class BannerBlocBuilder extends StatelessWidget {

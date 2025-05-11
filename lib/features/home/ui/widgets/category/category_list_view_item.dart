@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:temy_barber/features/category/data/models/category_response.dart';
 import 'package:temy_barber/features/category/data/models/service_response.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CategoryListViewItem extends StatelessWidget {
-  final BarberData? serviceResponseModel;
+  final CategoryData categoryResponseModel;
   final int indexItem;
   final double radius;
   final VoidCallback? onTap;
@@ -13,7 +12,7 @@ class CategoryListViewItem extends StatelessWidget {
 
   const CategoryListViewItem({
     super.key,
-    this.serviceResponseModel,
+    required this.categoryResponseModel,
     required this.indexItem,
     this.radius = 30,
     this.onTap,
@@ -34,16 +33,16 @@ class CategoryListViewItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // _CategoryImage(
-              //   imageUrl: serviceResponseModel?.imageCover,
-              //   radius: radius,
-              //   backgroundColor: backgroundColor,
-              // ),
-              // const SizedBox(height: 8),
+              _CategoryImage(
+                imageUrl: categoryResponseModel?.imageCover,
+                radius: radius,
+                backgroundColor: backgroundColor,
+              ),
+              const SizedBox(height: 8),
               ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: radius * 2.5),
                 child: Text(
-                  serviceResponseModel?.name ?? 'Service',
+                  categoryResponseModel.name ?? 'Service',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Colors.grey[800],
                         height: 1.2,

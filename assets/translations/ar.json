@@ -55,7 +55,9 @@
   "navigation": {
     "home": "الرئيسية",
     "booking": "الحجوزات",
-    "profile": "الملف الشخصي"
+    "profile": "الملف الشخصي",
+    "categories": "الاقسام",
+    "barbers": "الحلاقين"
   },
   "auth": {
     "terms_agreement": "بتسجيل الدخول، فإنك توافق على",
