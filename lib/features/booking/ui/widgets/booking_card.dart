@@ -10,7 +10,6 @@ import 'package:temy_barber/features/booking/ui/widgets/booking_status_stepper.d
 import 'package:temy_barber/features/booking/ui/widgets/cancel_booking_button.dart';
 import 'package:temy_barber/features/booking/ui/widgets/cancelled_indicator.dart';
 import 'package:temy_barber/features/booking/ui/widgets/date_time_section.dart';
-import 'package:temy_barber/features/booking/ui/widgets/feedback_button.dart';
 import 'package:temy_barber/features/booking/ui/widgets/services_list_view.dart';
 
 class BookingCard extends StatelessWidget {
@@ -173,7 +172,6 @@ class BookingCard extends StatelessWidget {
                 );
               },
             ),
-          if (isCompleted) const FeedbackButton(),
           if (isCancelled) const CancelledIndicator(),
         ],
       ),
