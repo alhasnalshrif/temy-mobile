@@ -29,8 +29,34 @@ class CategoryWithBarbersBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return Center(
-      child: ShimmerLoading.rectangular(height: 400),
+    // Optimized shimmer: show a list of shimmer tiles similar to barber cards
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: 6, // Show 6 shimmer items as placeholders
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Avatar shimmer
+            ShimmerLoading.circular(
+              size: 56,
+            ),
+            const SizedBox(width: 16),
+            // Text shimmer
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ShimmerLoading.rectangular(height: 16, width: 120),
+                  const SizedBox(height: 8),
+                  ShimmerLoading.rectangular(height: 12, width: 80),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

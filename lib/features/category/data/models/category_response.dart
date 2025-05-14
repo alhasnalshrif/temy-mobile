@@ -65,6 +65,7 @@ class BarberData {
   final String? id;
 
   final String? name;
+  final String? avatar;
   final String? phone;
 
   @JsonKey(name: 'services')
@@ -73,6 +74,7 @@ class BarberData {
   BarberData({
     this.id,
     this.name,
+    this.avatar,
     this.phone,
     this.services,
   });

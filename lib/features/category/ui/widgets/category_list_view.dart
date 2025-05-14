@@ -14,48 +14,27 @@ class CategoryBarberListView extends StatelessWidget {
     this.spacing = 8.0,
     this.maxItems = 6,
   });
-
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    late final int crossAxisCount;
-
-    if (screenWidth > 900) {
-      crossAxisCount = 6; // Very large screens
-    } else if (screenWidth > 600) {
-      crossAxisCount = 4; // Tablet size
-    } else if (screenWidth > 400) {
-      crossAxisCount = 3; // Normal phones
-    } else {
-      crossAxisCount = 2; // Small phones
-    }
-
-    final int itemCount = barberDataList.length > maxItems
-        ? maxItems
-        : barberDataList.length;
+    final int itemCount =
+        barberDataList.length > maxItems ? maxItems : barberDataList.length;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: GridView.builder(
+      child: ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          childAspectRatio: 0.85, 
-          crossAxisSpacing: spacing,
-          mainAxisSpacing: spacing * 1.5,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         itemCount: itemCount,
+        separatorBuilder: (context, index) => SizedBox(height: spacing),
         itemBuilder: (context, index) {
           return CategoryListViewItem(
             serviceResponseModel: barberDataList[index],
             indexItem: index,
-            radius: (screenWidth / crossAxisCount) * 0.3, 
+            radius: 36, // Fixed size for better consistency
             onTap: () {
-              debugPrint(
-                  'Category tapped: ${barberDataList[index]?.name}');
-
+              debugPrint('Category tapped: ${barberDataList[index]?.name}');
+          
               Navigator.of(context).pushNamed(
                 Routes.barberScreen,
                 arguments: barberDataList[index]?.id,

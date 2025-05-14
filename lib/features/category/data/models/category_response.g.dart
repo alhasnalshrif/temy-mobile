@@ -58,6 +58,7 @@ Map<String, dynamic> _$CategoryDataToJson(CategoryData instance) =>
 BarberData _$BarberDataFromJson(Map<String, dynamic> json) => BarberData(
       id: json['_id'] as String?,
       name: json['name'] as String?,
+      avatar: json['avatar'] as String?,
       phone: json['phone'] as String?,
       services: (json['services'] as List<dynamic>?)
           ?.map((e) => ServiceData.fromJson(e as Map<String, dynamic>))
@@ -68,6 +69,7 @@ Map<String, dynamic> _$BarberDataToJson(BarberData instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'name': instance.name,
+      'avatar': instance.avatar,
       'phone': instance.phone,
       'services': instance.services,
     };

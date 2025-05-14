@@ -36,8 +36,26 @@ class BarberDetailBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return Center(
-      child: ShimmerLoading.rectangular(height: 400),
+    // Optimized shimmer: show a vertical list of shimmer placeholders matching the detail layout
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: 3, // Show 3 shimmer items as placeholders for detail sections
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Title shimmer
+            ShimmerLoading.rectangular(height: 22, width: 160),
+            const SizedBox(height: 12),
+            // Subtitle shimmer
+            ShimmerLoading.rectangular(height: 16, width: 220),
+            const SizedBox(height: 16),
+            // Content shimmer (e.g., for a card or image)
+            ShimmerLoading.rectangular(height: 80, width: double.infinity),
+          ],
+        ),
+      ),
     );
   }
 

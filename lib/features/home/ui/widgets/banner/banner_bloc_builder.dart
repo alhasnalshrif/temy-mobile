@@ -38,8 +38,15 @@ class BannerBlocBuilder extends StatelessWidget {
   }
 
   Widget _buildLoading() {
-    return Center(
-      child: ShimmerLoading.rectangular(height: 150),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Center(
+        child: ShimmerLoading.rectangular(
+          height: 150,
+          width: double.infinity,
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
     );
   }
 
