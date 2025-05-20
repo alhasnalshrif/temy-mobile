@@ -14,7 +14,7 @@ class _BookingApiServices implements BookingApiServices {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://barber.codepeak.software/api/v1/';
+    baseUrl ??= 'http://192.168.1.8:8080/api/v1/';
   }
 
   final Dio _dio;

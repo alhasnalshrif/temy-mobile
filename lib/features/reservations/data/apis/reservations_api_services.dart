@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:temy_barber/core/networking/api_constants.dart';
+import 'package:temy_barber/features/reservations/data/models/multiple_reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_detail_request.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
@@ -17,7 +18,7 @@ abstract class ReservationApiServices {
       @Body() ReservationRequestModel reservationRequest);
 
   @POST('${ReservationsApiConstants.reservations}/multiple')
-  Future<ReservationResponseModel> postMultipleReservations(
+  Future<MultipleReservationResponseModel> postMultipleReservations(
       @Body() List<ReservationRequestModel> reservationsRequest);
 
   @GET('${ReservationsApiConstants.reservations}/available-slots')

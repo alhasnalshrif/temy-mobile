@@ -13,16 +13,25 @@ import 'package:temy_barber/features/reservations/logic/simple_multi_reservation
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_state.dart';
 
-class BookingConfirmation extends StatelessWidget {
+class BookingConfirmation extends StatefulWidget {
   final ReservationArguments arguments;
-  // Create instance of MultiReservationManager
-  final MultiReservationManager multiReservationManager =
-      MultiReservationManager();
 
-  BookingConfirmation({
+  const BookingConfirmation({
     super.key,
     required this.arguments,
   });
+
+  @override
+  State<BookingConfirmation> createState() => _BookingConfirmationState();
+}
+
+class _BookingConfirmationState extends State<BookingConfirmation> {
+  // Create instance of MultiReservationManager
+  final MultiReservationManager _multiReservationManager =
+      MultiReservationManager();
+
+  // Getter to access widget.arguments more concisely
+  ReservationArguments get arguments => widget.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +44,9 @@ class BookingConfirmation extends StatelessWidget {
           reservationSuccess: (response, arguments) {
             // Dismiss loading dialog if it's showing
             Navigator.of(context, rootNavigator: true).pop();
+
+            // Clear all reservations when successful
+            _multiReservationManager.clearReservations();
 
             // Navigate to invoice screen
             Navigator.pushReplacementNamed(
@@ -62,48 +74,13 @@ class BookingConfirmation extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             'تأكيد الحجز',
-            style: TextStyles.font18DarkBlueBold,
+            style: TextStyles.font16DarkBold,
           ),
+          centerTitle: true,
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
-          elevation: 1,
-          shadowColor: Colors.black.withOpacity(0.05),
-          actions: [
-            if (MultiReservationManager().reservations.isNotEmpty)
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      _showMultipleReservationsDialog(context);
-                    },
-                    icon: const Icon(
-                      Icons.shopping_cart,
-                      color: ColorsManager.mainBlue,
-                    ),
-                  ),
-                  Positioned(
-                    top: 5,
-                    right: 5,
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        '${MultiReservationManager().reservations.length}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-          ],
+          elevation: 0,
+          shadowColor: Colors.transparent,
         ),
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -112,19 +89,22 @@ class BookingConfirmation extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _buildHeader(),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 16),
                         _buildOrderSummary(),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 16),
                         _buildBarberInfo(),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 16),
                         _buildAppointmentInfo(),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 16),
                         _buildPaymentInfo(),
+                        // Add padding at the bottom for better scrolling
+                        const SizedBox(height: 16),
                       ],
                     ),
                   ),
@@ -157,30 +137,24 @@ class BookingConfirmation extends StatelessWidget {
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
         color: ColorsManager.lightBlue,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Row(
         children: [
           const Icon(
             Icons.info_outline,
-            size: 32,
+            size: 24,
             color: ColorsManager.mainBlue,
           ),
-          const SizedBox(height: 8),
-          Text(
-            "مراجعة تفاصيل حجزك",
-            style: TextStyles.font16DarkBold,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            "الرجاء مراجعة تفاصيل الحجز قبل التأكيد",
-            style: TextStyles.font14GrayRegular,
-            textAlign: TextAlign.center,
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              "الرجاء مراجعة تفاصيل الحجز قبل التأكيد",
+              style: TextStyles.font14DarkBlueMedium,
+            ),
           ),
         ],
       ),
@@ -188,303 +162,516 @@ class BookingConfirmation extends StatelessWidget {
   }
 
   Widget _buildOrderSummary() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "ملخص الخدمات",
-          style: TextStyles.font16DarkBold,
-        ),
-        const SizedBox(height: 16),
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: arguments.selectedServices.length,
-          separatorBuilder: (context, index) => const Divider(),
-          itemBuilder: (context, index) {
-            final service = arguments.selectedServices[index];
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      service.name,
-                      style: TextStyles.font14DarkBlueMedium,
-                    ),
-                  ),
-                  Text(
-                    "${service.duration} دقيقة",
-                    style: TextStyles.font14GrayRegular,
-                  ),
-                  const SizedBox(width: 16),
-                  Text(
-                    "${service.price} ريال",
-                    style: TextStyles.font14DarkBlueMedium,
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-        const Divider(thickness: 1.5),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Row(
+    final List<ReservationArguments> existingReservations =
+        _multiReservationManager.reservations;
+
+    if (existingReservations.isNotEmpty) {
+      // Multi-booking mode: display all existing reservations + the current one
+      final List<ReservationArguments> allReservations = [
+        ...existingReservations,
+        arguments
+      ];
+
+      // Calculate grand total
+      final double grandTotal =
+          allReservations.fold(0.0, (total, res) => total + res.totalPrice);
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header with total
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "المجموع",
+                "ملخص الحجوزات (${allReservations.length})",
                 style: TextStyles.font16DarkBold,
               ),
               Text(
-                "${arguments.totalPrice} ريال",
-                style: TextStyles.font16DarkBold,
+                "${grandTotal.toStringAsFixed(2)} جنية",
+                style: TextStyles.font14DarkBlueMedium.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: ColorsManager.mainBlue,
+                ),
               ),
             ],
           ),
-        ),
-      ],
-    );
+          const SizedBox(height: 12),
+
+          // Reservations list - more compact
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: allReservations.length,
+            itemBuilder: (context, index) {
+              final isCurrentReservation = index == allReservations.length - 1;
+              final reservation = allReservations[index];
+
+              // Format date/time
+              String dateTime = "";
+              if (reservation.selectedDate != null &&
+                  reservation.selectedTime != null) {
+                dateTime =
+                    "${DateFormat('d MMM', 'ar').format(reservation.selectedDate!)}, ${reservation.selectedTime}";
+              }
+
+              return Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade200),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Reservation header
+                    Row(
+                      children: [
+                        // Barber avatar
+                        CircleAvatar(
+                          radius: 14,
+                          backgroundImage:
+                              reservation.barberData?.avatar != null
+                                  ? NetworkImage(reservation.barberData!.avatar)
+                                  : null,
+                          child: reservation.barberData?.avatar == null
+                              ? const Icon(Icons.person, size: 14)
+                              : null,
+                        ),
+                        const SizedBox(width: 8),
+                        // Reservation info
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${reservation.barberData?.name ?? 'حلاق غير محدد'} ${dateTime.isNotEmpty ? '- $dateTime' : ''}",
+                                style: TextStyles.font14DarkBlueMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Delete button - only for previous reservations
+                        if (!isCurrentReservation)
+                          IconButton(
+                            onPressed: () => _removeReservation(index),
+                            icon: const Icon(Icons.close,
+                                color: Colors.red, size: 18),
+                            constraints: const BoxConstraints(),
+                            padding: EdgeInsets.zero,
+                            visualDensity: VisualDensity.compact,
+                          ),
+                      ],
+                    ),
+
+                    const Divider(height: 12),
+
+                    // Services - more compact layout
+                    if (reservation.selectedServices.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: reservation.selectedServices.map((service) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 2.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      service.name,
+                                      style: TextStyles.font14DarkBlueMedium,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    "${service.price.toStringAsFixed(0)} جنية",
+                                    style: TextStyles.font14DarkBlueMedium,
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      )
+                    else
+                      Text(
+                        "لا توجد خدمات محددة",
+                        style: TextStyles.font14GrayRegular,
+                      ),
+
+                    // Reservation total
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "${reservation.totalPrice.toStringAsFixed(2)} جنية",
+                            style: TextStyles.font14DarkBlueMedium.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: ColorsManager.mainBlue,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+
+          // Grand total display - simplified
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+            decoration: BoxDecoration(
+              color: ColorsManager.thirdfMain.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "المجموع الكلي",
+                  style: TextStyles.font16DarkBold,
+                ),
+                Text(
+                  "${grandTotal.toStringAsFixed(2)} جنية",
+                  style: TextStyles.font16DarkBold.copyWith(
+                    color: ColorsManager.mainBlue,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    } else {
+      // Single reservation mode - simplified
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "ملخص الخدمات",
+            style: TextStyles.font16DarkBold,
+          ),
+          const SizedBox(height: 12),
+
+          // Services in a more compact container
+          Container(
+            padding: const EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade200),
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Services list
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: arguments.selectedServices.length,
+                  separatorBuilder: (_, __) => const Divider(height: 12),
+                  itemBuilder: (context, index) {
+                    final service = arguments.selectedServices[index];
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            service.name,
+                            style: TextStyles.font14DarkBlueMedium,
+                          ),
+                        ),
+                        Text(
+                          "${service.duration} دقيقة",
+                          style: TextStyles.font14GrayRegular
+                              .copyWith(fontSize: 12),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          "${service.price.toStringAsFixed(2)} جنية",
+                          style: TextStyles.font14DarkBlueMedium
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+
+                const Divider(height: 24),
+
+                // Total
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "المجموع",
+                      style: TextStyles.font16DarkBold,
+                    ),
+                    Text(
+                      "${arguments.totalPrice.toStringAsFixed(2)} جنية",
+                      style: TextStyles.font16DarkBold.copyWith(
+                        color: ColorsManager.mainBlue,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
   }
 
   Widget _buildBarberInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "الحلاق",
-          style: TextStyles.font16DarkBold,
-        ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            CircleAvatar(
-              radius: 24,
-              backgroundImage: arguments.barberData?.avatar != null
-                  ? NetworkImage(arguments.barberData!.avatar)
-                  : null,
-              child: arguments.barberData?.avatar == null
-                  ? const Icon(Icons.person)
-                  : null,
-            ),
-            const SizedBox(width: 16),
-            Column(
+    if (arguments.barberData == null) {
+      return const SizedBox
+          .shrink(); // Don't show this section if barber data is missing
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: Row(
+        children: [
+          // Barber avatar
+          CircleAvatar(
+            radius: 20,
+            backgroundImage: arguments.barberData?.avatar != null
+                ? NetworkImage(arguments.barberData!.avatar)
+                : null,
+            child: arguments.barberData?.avatar == null
+                ? const Icon(Icons.person, size: 20)
+                : null,
+          ),
+          const SizedBox(width: 12),
+
+          // Barber details
+          Expanded(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  arguments.barberData?.name ?? "غير محدد",
-                  style: TextStyles.font16DarkBold,
+                  "الحلاق: ${arguments.barberData?.name ?? "غير محدد"}",
+                  style: TextStyles.font14DarkBlueMedium
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
-                if (arguments.barberData?.rating != null) ...[
-                  const SizedBox(height: 4),
+                if (arguments.barberData?.rating != null)
                   Row(
                     children: [
                       const Icon(
                         Icons.star,
                         color: Colors.amber,
-                        size: 16,
+                        size: 14,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         arguments.barberData!.rating.toString(),
-                        style: TextStyles.font14GrayRegular,
+                        style:
+                            TextStyles.font14GrayRegular.copyWith(fontSize: 12),
                       ),
                     ],
                   ),
-                ],
               ],
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildAppointmentInfo() {
-    String formattedDate = "غير محدد";
-    if (arguments.selectedDate != null) {
-      formattedDate = DateFormat('EEEE, d MMMM, yyyy', 'ar')
-          .format(arguments.selectedDate!);
+    if (arguments.selectedDate == null || arguments.selectedTime == null) {
+      return const SizedBox.shrink(); // Don't display if no date/time selected
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "موعد الحجز",
-          style: TextStyles.font16DarkBold,
-        ),
-        const SizedBox(height: 16),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: ColorsManager
-                .thirdfMain, // Using thirdfMain instead of lightBackground
-            borderRadius: BorderRadius.circular(12),
+    String formattedDate =
+        DateFormat('EEEE, d MMMM', 'ar').format(arguments.selectedDate!);
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: ColorsManager.lightBlue,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Icon(
+              Icons.calendar_today,
+              color: ColorsManager.mainBlue,
+              size: 18,
+            ),
           ),
-          child: Row(
-            children: [
-              const Icon(
-                Icons.calendar_today,
-                color: ColorsManager.mainBlue,
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      formattedDate,
-                      style: TextStyles.font14DarkBlueMedium,
-                    ),
-                    if (arguments.selectedTime != null) ...[
-                      const SizedBox(height: 4),
-                      Text(
-                        "الساعة ${arguments.selectedTime}",
-                        style: TextStyles.font14GrayRegular,
-                      ),
-                    ],
-                  ],
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "موعد الحجز:",
+                  style: TextStyles.font14DarkBlueMedium.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 4),
+                Text(
+                  "$formattedDate - ${arguments.selectedTime}",
+                  style: TextStyles.font14GrayRegular,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _buildPaymentInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "طريقة الدفع",
-          style: TextStyles.font16DarkBold,
-        ),
-        const SizedBox(height: 16),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade300),
-            borderRadius: BorderRadius.circular(12),
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: ColorsManager.lightBlue,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Icon(
+              Icons.payments_outlined,
+              color: ColorsManager.mainBlue,
+              size: 18,
+            ),
           ),
-          child: Row(
-            children: [
-              const Icon(
-                Icons.payments_outlined,
-                color: ColorsManager.mainBlue,
-              ),
-              const SizedBox(width: 16),
-              Text(
-                "الدفع عند الوصول",
-                style: TextStyles.font14DarkBlueMedium,
-              ),
-              const Spacer(),
-              const Icon(
-                Icons.check_circle,
-                color: ColorsManager.mainBlue,
-              ),
-            ],
+          const SizedBox(width: 12),
+          Text(
+            "الدفع عند الوصول",
+            style: TextStyles.font14DarkBlueMedium,
           ),
-        ),
-      ],
+          const Spacer(),
+          const Icon(
+            Icons.check_circle,
+            color: ColorsManager.mainBlue,
+            size: 18,
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildBottomButtons(BuildContext context) {
+    final bool hasMultipleReservations =
+        _multiReservationManager.reservations.isNotEmpty;
+
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, -5),
+            blurRadius: 5,
+            offset: const Offset(0, -2),
           ),
         ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // Only show multi-booking options when needed
+          if (hasMultipleReservations)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Text(
+                "${_multiReservationManager.reservations.length + 1} حجوزات مجدولة",
+                style: TextStyles.font14DarkBlueMedium.copyWith(
+                  color: ColorsManager.mainBlue,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+          // Main action buttons
           Row(
             children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () {
-                    _addToMultipleReservations(context);
-                  },
+              // Add another booking - icon button
+              Container(
+                margin: const EdgeInsets.only(right: 8),
+                decoration: BoxDecoration(
+                  color: ColorsManager.lightBlue,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: IconButton(
+                  onPressed: () => _addToMultipleReservations(context),
                   icon: const Icon(
                     Icons.add_circle_outline,
                     color: ColorsManager.mainBlue,
                   ),
-                  label: const Text(
-                    "إضافة حجز آخر",
-                    style: TextStyle(
-                      color: ColorsManager.mainBlue,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    side: const BorderSide(color: ColorsManager.mainBlue),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+                  tooltip: "إضافة حجز آخر",
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    side: const BorderSide(color: ColorsManager.mainBlue),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+
+              // Clear all - icon button - only show when there are multiple reservations
+              if (hasMultipleReservations)
+                Container(
+                  margin: const EdgeInsets.only(right: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.red.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Text(
-                    "تعديل",
-                    style: TextStyle(
-                      color: ColorsManager.mainBlue,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                  child: IconButton(
+                    onPressed: _clearAllReservations,
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      color: Colors.red,
                     ),
+                    tooltip: "حذف جميع الحجوزات",
                   ),
                 ),
-              ),
-              const SizedBox(width: 16),
+
+              // Confirm button - expanded
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    _confirmMultipleReservations(context);
-                  },
+                child: ElevatedButton.icon(
+                  onPressed: () => _confirmMultipleReservations(context),
+                  icon: const Icon(Icons.check_circle_outline, size: 18),
+                  label: Text(
+                    _multiReservationManager.reservations.isEmpty
+                        ? "تأكيد الحجز"
+                        : "تأكيد الحجوزات",
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorsManager.mainBlue,
                     foregroundColor: Colors.white,
+                    elevation: 0,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: Text(
-                    MultiReservationManager().reservations.isEmpty
-                        ? "تأكيد الحجز"
-                        : "تأكيد الحجوزات (${MultiReservationManager().reservations.length + 1})",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
@@ -507,7 +694,7 @@ class BookingConfirmation extends StatelessWidget {
       );
       return;
     }
-    MultiReservationManager().addReservation(arguments);
+    _multiReservationManager.addReservation(arguments);
 
     // Show confirmation snackbar
     ScaffoldMessenger.of(context).showSnackBar(
@@ -517,8 +704,8 @@ class BookingConfirmation extends StatelessWidget {
       ),
     );
 
-    // Navigate back to category screen to choose another service
-    Navigator.pushNamed(
+    // Navigate to category screen to choose another service, replacing current screen
+    Navigator.pushReplacementNamed(
       context,
       Routes.categoryScreen,
     );
@@ -538,11 +725,8 @@ class BookingConfirmation extends StatelessWidget {
         ),
       );
       return;
-    }
-
-    // Check if we have multiple reservations
-    final manager = MultiReservationManager();
-    if (manager.reservations.isNotEmpty) {
+    } // Check if we have multiple reservations
+    if (_multiReservationManager.reservations.isNotEmpty) {
       // We have multiple reservations, add the current one and submit all
 
       // Check current reservation has date and time
@@ -554,11 +738,9 @@ class BookingConfirmation extends StatelessWidget {
           ),
         );
         return;
-      }
-
-      // Prepare reservations data for API call
-      final reservationsData =
-          manager.getReservationsData(currentReservation: arguments);
+      } // Prepare reservations data for API call
+      final reservationsData = _multiReservationManager.getReservationsData(
+          currentReservation: arguments);
 
       // Call the cubit to make multiple reservations
       context.read<ReservationCubit>().postMultipleReservations(
@@ -567,8 +749,8 @@ class BookingConfirmation extends StatelessWidget {
             arguments: arguments, // Pass the current arguments for UI purposes
           );
 
-      // Clear the manager after submission
-      manager.clearReservations();
+      // Clearing the manager should be handled by the ReservationCubit upon successful submission.
+      // manager.clearReservations(); // Removed from here
     } else {
       // Just a single reservation, use the standard method
       _confirmBooking(context);
@@ -628,96 +810,54 @@ class BookingConfirmation extends StatelessWidget {
         );
   }
 
-  // Show dialog with multiple reservations
-  void _showMultipleReservationsDialog(BuildContext context) {
-    final manager = MultiReservationManager();
-    final reservations = manager.reservations;
+  // Method to remove a reservation
+  void _removeReservation(int index) {
+    setState(() {
+      _multiReservationManager.removeReservationAt(index);
+    });
 
+    // Show confirmation message
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("تم حذف الحجز بنجاح"),
+        backgroundColor: Colors.green,
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
+  // Method to clear all reservations
+  void _clearAllReservations() {
     showDialog(
       context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text(
-            "حجوزاتك المتعددة",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: ColorsManager.mainBlue,
-            ),
-            textAlign: TextAlign.center,
+      builder: (context) => AlertDialog(
+        title: const Text("حذف جميع الحجوزات"),
+        content: const Text("هل أنت متأكد من حذف جميع الحجوزات المضافة؟"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("إلغاء"),
           ),
-          content: SizedBox(
-            width: double.maxFinite,
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: reservations.length,
-              separatorBuilder: (context, index) => const Divider(),
-              itemBuilder: (context, index) {
-                final reservation = reservations[index];
-                return ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(
-                    reservation.barberData?.name ?? "غير محدد",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "الخدمات: ${reservation.selectedServices.map((s) => s.name).join(', ')}",
-                      ),
-                      Text(
-                        "التاريخ: ${DateFormat('dd/MM/yyyy', 'ar').format(reservation.selectedDate!)}",
-                      ),
-                      Text(
-                        "الوقت: ${reservation.selectedTime}",
-                      ),
-                      Text(
-                        "المبلغ: ${reservation.totalPrice} ريال",
-                      ),
-                    ],
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    ),
-                    onPressed: () {
-                      manager.removeReservation(index);
-                      Navigator.pop(context);
-                      // If there are still reservations, show the dialog again
-                      if (manager.reservations.isNotEmpty) {
-                        _showMultipleReservationsDialog(context);
-                      }
-                      // Refresh the UI
-                      (context as Element).markNeedsBuild();
-                    },
-                  ),
-                );
-              },
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _multiReservationManager.clearReservations();
+              });
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("تم حذف جميع الحجوزات"),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            },
+            child: const Text(
+              "حذف",
+              style: TextStyle(color: Colors.red),
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                manager.clearReservations();
-                Navigator.pop(context);
-                // Refresh the UI
-                (context as Element).markNeedsBuild();
-              },
-              child: const Text(
-                "حذف الكل",
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("إغلاق"),
-            ),
-          ],
-        );
-      },
+        ],
+      ),
     );
   }
 }

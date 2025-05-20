@@ -25,6 +25,10 @@ class MultiReservationManager {
     }
   }
 
+  void removeReservationAt(int index) {
+    removeReservation(index);
+  }
+
   double getTotalPrice() {
     return _reservations.fold(
         0, (total, reservation) => total + reservation.totalPrice);

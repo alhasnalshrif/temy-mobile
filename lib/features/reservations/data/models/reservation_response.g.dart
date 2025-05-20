@@ -40,17 +40,18 @@ ServiceModel _$ServiceModelFromJson(Map<String, dynamic> json) => ServiceModel(
       name: json['name'] as String,
       price: (json['price'] as num).toDouble(),
       duration: (json['duration'] as num).toInt(),
-      images:
-          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       imageCover: json['imageCover'] as String,
       category: json['category'] as String,
       available: json['available'] as bool,
       createdAt: json['createdAt'] as String,
       updatedAt: json['updatedAt'] as String,
       version: (json['__v'] as num).toInt(),
-      barbers:
-          (json['barbers'] as List<dynamic>).map((e) => e as String).toList(),
-      description: json['description'] as String,
+      barbers: json['barbers'] as List<dynamic>? ?? [],
+      description: json['description'] as String?,
     );
 
 Map<String, dynamic> _$ServiceModelToJson(ServiceModel instance) =>

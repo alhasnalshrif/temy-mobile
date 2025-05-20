@@ -9,7 +9,7 @@ import 'package:temy_barber/features/login/logic/cubit/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepo _loginRepo;
-  // initial state is set to initial when the cubit is created
+
   LoginCubit(this._loginRepo) : super(const LoginState.initial());
 
   TextEditingController emailController = TextEditingController();

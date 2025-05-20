@@ -50,6 +50,8 @@ class ReservationCubit extends Cubit<ReservationState> {
     );
     response.when(
       success: (reservationResponse) {
+        // Handle the response - we've already converted the multiple reservation response
+        // to a standard reservation response in the repository
         emit(ReservationState.reservationSuccess(
           reservationResponse,
           arguments: arguments,

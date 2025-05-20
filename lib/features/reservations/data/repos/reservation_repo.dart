@@ -1,6 +1,7 @@
 import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_services.dart';
+import 'package:temy_barber/features/reservations/data/models/multiple_reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_detail_request.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
@@ -48,10 +49,15 @@ class ReservationRepo {
               ))
           .toList();
 
-      final response =
+      final multiResponse =
           await _reservationApiServices.postMultipleReservations(reservations);
+
+      // Convert the multiple reservation response to a standard reservation response
+      final response = multiResponse.toReservationResponseModel();
       return ApiResult.success(response);
-    } catch (error) {
+    } catch (error, stackTrace) {
+      print('Error in postMultipleReservations: $error');
+      print('Stack trace: $stackTrace');
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }

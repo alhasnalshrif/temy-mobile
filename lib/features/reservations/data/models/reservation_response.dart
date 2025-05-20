@@ -46,6 +46,7 @@ class ServiceModel {
   final String name;
   final double price;
   final int duration;
+  @JsonKey(defaultValue: <String>[])
   final List<String> images;
   final String imageCover;
   final String category;
@@ -53,10 +54,11 @@ class ServiceModel {
   final String createdAt;
   final String updatedAt;
   @JsonKey(name: '__v')
-  final int version;
-  final List<String> barbers;
-  final String description;
-
+  final int
+      version; // Using dynamic type for barbers to handle both String and non-String IDs
+  @JsonKey(defaultValue: <dynamic>[])
+  final List<dynamic> barbers;
+  final String? description;
   ServiceModel({
     required this.id,
     required this.name,
@@ -70,7 +72,7 @@ class ServiceModel {
     required this.updatedAt,
     required this.version,
     required this.barbers,
-    required this.description,
+    this.description,
   });
 
   factory ServiceModel.fromJson(Map<String, dynamic> json) =>

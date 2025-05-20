@@ -14,7 +14,7 @@ class _ReservationApiServices implements ReservationApiServices {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://barber.codepeak.software/api/v1/';
+    baseUrl ??= 'http://192.168.1.8:8080/api/v1/';
   }
 
   final Dio _dio;
@@ -59,13 +59,13 @@ class _ReservationApiServices implements ReservationApiServices {
   }
 
   @override
-  Future<ReservationResponseModel> postMultipleReservations(
+  Future<MultipleReservationResponseModel> postMultipleReservations(
       List<ReservationRequestModel> reservationsRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = reservationsRequest.map((e) => e.toJson()).toList();
-    final _options = _setStreamType<ReservationResponseModel>(Options(
+    final _options = _setStreamType<MultipleReservationResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -82,9 +82,9 @@ class _ReservationApiServices implements ReservationApiServices {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ReservationResponseModel _value;
+    late MultipleReservationResponseModel _value;
     try {
-      _value = ReservationResponseModel.fromJson(_result.data!);
+      _value = MultipleReservationResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

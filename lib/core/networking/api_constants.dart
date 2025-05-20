@@ -1,5 +1,6 @@
 class ApiConstants {
-  static const String apiBaseUrl = "https://barber.codepeak.software/api/v1/";
+  static const String apiBaseUrl = "http://192.168.1.8:8080/api/v1/";
+  // static const String apiBaseUrl = "https://barber.codepeak.software/api/v1/";
 
   static const String login = "auth/login";
   static const String signup = "auth/signup";
