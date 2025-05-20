@@ -229,17 +229,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Colors.grey.shade300,
                                 width: 1,
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 2,
-                                  offset: const Offset(0, 1),
-                                ),
-                              ],
                             ),
                             child: DropdownButtonHideUnderline(
-                              
                               child: DropdownButton<String>(
                                 borderRadius: BorderRadius.circular(8),
                                 value: currentLanguage,
