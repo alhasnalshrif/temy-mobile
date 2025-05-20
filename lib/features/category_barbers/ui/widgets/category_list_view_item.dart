@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:temy_barber/features/category/data/models/categories_list_response.dart';
+import 'package:temy_barber/features/category_barbers/data/models/category_response.dart';
 
 /// A widget that displays a single category item in a list with an image and name.
 class CategoryListViewItem extends StatelessWidget {
-  final CategoryItem? serviceResponseModel;
+  final BarberData? serviceResponseModel;
   final int indexItem;
   final double radius;
   final VoidCallback? onTap;
@@ -57,7 +57,7 @@ class CategoryListViewItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _CategoryImage(
-              imageUrl: serviceResponseModel?.imageCover,
+              imageUrl: serviceResponseModel?.avatar,
               radius: radius,
               backgroundColor: backgroundColor,
             ),

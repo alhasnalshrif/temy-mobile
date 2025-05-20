@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:temy_barber/features/category/data/models/service_response.dart';
+import 'package:temy_barber/features/category_barbers/data/models/service_response.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CategoryListViewItem extends StatelessWidget {

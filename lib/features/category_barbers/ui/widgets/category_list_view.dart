@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:temy_barber/features/category/data/models/categories_list_response.dart';
-import 'package:temy_barber/features/category/ui/widgets/category_list_view_item.dart';
+import 'package:temy_barber/features/category_barbers/data/models/category_response.dart';
+import 'package:temy_barber/features/category_barbers/ui/widgets/category_list_view_item.dart';
 import 'package:temy_barber/core/routing/routes.dart';
 
 class CategoryBarberListView extends StatelessWidget {
-  final List<CategoryItem?> barberDataList;
+  final List<BarberData?> barberDataList;
   final double spacing;
   final int maxItems;
 
@@ -36,7 +36,7 @@ class CategoryBarberListView extends StatelessWidget {
               debugPrint('Category tapped: ${barberDataList[index]?.name}');
           
               Navigator.of(context).pushNamed(
-                Routes.categoryBarbersScreen,
+                Routes.barberScreen,
                 arguments: barberDataList[index]?.id,
               );
             },

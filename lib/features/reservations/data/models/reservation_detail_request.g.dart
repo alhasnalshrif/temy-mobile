@@ -27,3 +27,18 @@ Map<String, dynamic> _$ReservationRequestModelToJson(
       'date': instance.date,
       'startTime': instance.startTime,
     };
+
+MultipleReservationsRequestModel _$MultipleReservationsRequestModelFromJson(
+        Map<String, dynamic> json) =>
+    MultipleReservationsRequestModel(
+      reservations: (json['reservations'] as List<dynamic>)
+          .map((e) =>
+              ReservationRequestModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$MultipleReservationsRequestModelToJson(
+        MultipleReservationsRequestModel instance) =>
+    <String, dynamic>{
+      'reservations': instance.reservations,
+    };

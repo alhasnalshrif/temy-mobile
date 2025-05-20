@@ -38,6 +38,29 @@ class ReservationCubit extends Cubit<ReservationState> {
     );
   }
 
+  void postMultipleReservations({
+    required String userId,
+    required List<Map<String, dynamic>> reservationsData,
+    ReservationArguments? arguments,
+  }) async {
+    emit(const ReservationState.reservationLoading());
+    final response = await _reservationRepo.postMultipleReservations(
+      userId: userId,
+      reservationsData: reservationsData,
+    );
+    response.when(
+      success: (reservationResponse) {
+        emit(ReservationState.reservationSuccess(
+          reservationResponse,
+          arguments: arguments,
+        ));
+      },
+      failure: (error) {
+        emit(ReservationState.reservationError(error));
+      },
+    );
+  }
+
   void getAvailableTimeSlots({
     required String barberId,
     required DateTime date,

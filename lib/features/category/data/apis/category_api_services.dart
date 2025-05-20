@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:temy_barber/core/networking/api_constants.dart';
-import 'package:temy_barber/features/category/data/models/category_response.dart';
+import 'package:temy_barber/features/category/data/apis/category_api_constants.dart';
+import 'package:temy_barber/features/category/data/models/categories_list_response.dart';
 
 import 'package:retrofit/retrofit.dart';
 
@@ -11,11 +12,8 @@ abstract class CategoryApiServices {
   factory CategoryApiServices(Dio dio, {ParseErrorLogger? errorLogger}) =
       _CategoryApiServices;
 
-  // @GET(CategoryApiConstants.servicesBarber)
-  // Future<CategoryResponseModel> getCategory(
-  //     @Path("id") String categoryId);
+  @GET(CategoryApiConstants.category)
+  Future<CategoriesListResponseModel> getCategory();
 
-  @GET("category/{id}/services")
-  Future<CategoryServicesResponseModel> getCategoryWithBarbers(
-      @Path("id") String categoryId);
+
 }

@@ -9,13 +9,17 @@ import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
+import 'package:temy_barber/features/reservations/logic/simple_multi_reservation_manager.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_state.dart';
 
 class BookingConfirmation extends StatelessWidget {
   final ReservationArguments arguments;
+  // Create instance of MultiReservationManager
+  final MultiReservationManager _multiReservationManager =
+      MultiReservationManager();
 
-  const BookingConfirmation({
+  BookingConfirmation({
     super.key,
     required this.arguments,
   });
@@ -64,6 +68,42 @@ class BookingConfirmation extends StatelessWidget {
           surfaceTintColor: Colors.white,
           elevation: 1,
           shadowColor: Colors.black.withOpacity(0.05),
+          actions: [
+            if (MultiReservationManager().reservations.isNotEmpty)
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      _showMultipleReservationsDialog(context);
+                    },
+                    icon: const Icon(
+                      Icons.shopping_cart,
+                      color: ColorsManager.mainBlue,
+                    ),
+                  ),
+                  Positioned(
+                    top: 5,
+                    right: 5,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        '${MultiReservationManager().reservations.length}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          ],
         ),
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -366,56 +406,173 @@ class BookingConfirmation extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: OutlinedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                side: const BorderSide(color: ColorsManager.mainBlue),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    _addToMultipleReservations(context);
+                  },
+                  icon: const Icon(
+                    Icons.add_circle_outline,
+                    color: ColorsManager.mainBlue,
+                  ),
+                  label: const Text(
+                    "إضافة حجز آخر",
+                    style: TextStyle(
+                      color: ColorsManager.mainBlue,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    side: const BorderSide(color: ColorsManager.mainBlue),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                 ),
               ),
-              child: const Text(
-                "تعديل",
-                style: TextStyle(
-                  color: ColorsManager.mainBlue,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            ],
           ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: ElevatedButton(
-              onPressed: () {
-                _confirmBooking(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ColorsManager.mainBlue,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    side: const BorderSide(color: ColorsManager.mainBlue),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    "تعديل",
+                    style: TextStyle(
+                      color: ColorsManager.mainBlue,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
-              child: const Text(
-                "تأكيد الحجز",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              const SizedBox(width: 16),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _confirmMultipleReservations(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorsManager.mainBlue,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    MultiReservationManager().reservations.isEmpty
+                        ? "تأكيد الحجز"
+                        : "تأكيد الحجوزات (${MultiReservationManager().reservations.length + 1})",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
     );
+  }
+
+  // Method to add the current reservation to multiple reservations
+  void _addToMultipleReservations(BuildContext context) async {
+    if (arguments.selectedDate == null || arguments.selectedTime == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("الرجاء تحديد التاريخ والوقت أولاً"),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    MultiReservationManager().addReservation(arguments);
+
+    // Show confirmation snackbar
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("تم إضافة الحجز، يمكنك الآن اختيار خدمات أخرى"),
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    // Navigate back to category screen to choose another service
+    Navigator.pushNamed(
+      context,
+      Routes.categoryScreen,
+    );
+  }
+
+  // Method to confirm multiple reservations or a single reservation
+  void _confirmMultipleReservations(BuildContext context) async {
+    // Get user ID from SharedPreferences
+    final userId =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
+
+    if (userId.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("عذراً، يجب تسجيل الدخول أولاً"),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Check if we have multiple reservations
+    final manager = MultiReservationManager();
+    if (manager.reservations.isNotEmpty) {
+      // We have multiple reservations, add the current one and submit all
+
+      // Check current reservation has date and time
+      if (arguments.selectedDate == null || arguments.selectedTime == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("الرجاء تحديد التاريخ والوقت للحجز الحالي"),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+
+      // Prepare reservations data for API call
+      final reservationsData =
+          manager.getReservationsData(currentReservation: arguments);
+
+      // Call the cubit to make multiple reservations
+      context.read<ReservationCubit>().postMultipleReservations(
+            userId: userId,
+            reservationsData: reservationsData,
+            arguments: arguments, // Pass the current arguments for UI purposes
+          );
+
+      // Clear the manager after submission
+      manager.clearReservations();
+    } else {
+      // Just a single reservation, use the standard method
+      _confirmBooking(context);
+    }
   }
 
   void _confirmBooking(BuildContext context) async {
@@ -469,5 +626,98 @@ class BookingConfirmation extends StatelessWidget {
           startTime: arguments.selectedTime!,
           arguments: updatedArguments,
         );
+  }
+
+  // Show dialog with multiple reservations
+  void _showMultipleReservationsDialog(BuildContext context) {
+    final manager = MultiReservationManager();
+    final reservations = manager.reservations;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            "حجوزاتك المتعددة",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.mainBlue,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemCount: reservations.length,
+              separatorBuilder: (context, index) => const Divider(),
+              itemBuilder: (context, index) {
+                final reservation = reservations[index];
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(
+                    reservation.barberData?.name ?? "غير محدد",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "الخدمات: ${reservation.selectedServices.map((s) => s.name).join(', ')}",
+                      ),
+                      Text(
+                        "التاريخ: ${DateFormat('dd/MM/yyyy', 'ar').format(reservation.selectedDate!)}",
+                      ),
+                      Text(
+                        "الوقت: ${reservation.selectedTime}",
+                      ),
+                      Text(
+                        "المبلغ: ${reservation.totalPrice} ريال",
+                      ),
+                    ],
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                    onPressed: () {
+                      manager.removeReservation(index);
+                      Navigator.pop(context);
+                      // If there are still reservations, show the dialog again
+                      if (manager.reservations.isNotEmpty) {
+                        _showMultipleReservationsDialog(context);
+                      }
+                      // Refresh the UI
+                      (context as Element).markNeedsBuild();
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                manager.clearReservations();
+                Navigator.pop(context);
+                // Refresh the UI
+                (context as Element).markNeedsBuild();
+              },
+              child: const Text(
+                "حذف الكل",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("إغلاق"),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

@@ -7,6 +7,8 @@ import 'package:temy_barber/features/booking/data/apis/booking_api_services.dart
 import 'package:temy_barber/features/booking/data/repos/booking_repo.dart';
 import 'package:temy_barber/features/category/data/apis/category_api_services.dart';
 import 'package:temy_barber/features/category/data/repos/category_repo.dart';
+import 'package:temy_barber/features/category_barbers/data/apis/category_api_services.dart';
+import 'package:temy_barber/features/category_barbers/data/repos/category_repo.dart';
 import 'package:temy_barber/features/home/data/apis/home_api_services.dart';
 import 'package:temy_barber/features/home/data/repos/home_repo.dart';
 import 'package:temy_barber/features/profile/data/apis/profile_api_services.dart';
@@ -55,6 +57,10 @@ Future<void> setupGetIt() async {
   getIt
       .registerLazySingleton<ProfileApiServices>(() => ProfileApiServices(dio));
   getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
+
+  getIt.registerLazySingleton<CategoryBarberApiServices>(
+      () => CategoryBarberApiServices(dio));
+  getIt.registerLazySingleton<CategoryBarberRepo>(() => CategoryBarberRepo(getIt()));
 
   getIt.registerLazySingleton<CategoryApiServices>(
       () => CategoryApiServices(dio));

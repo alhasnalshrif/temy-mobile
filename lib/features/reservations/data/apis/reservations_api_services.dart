@@ -16,6 +16,10 @@ abstract class ReservationApiServices {
   Future<ReservationResponseModel> postReservations(
       @Body() ReservationRequestModel reservationRequest);
 
+  @POST('${ReservationsApiConstants.reservations}/multiple')
+  Future<ReservationResponseModel> postMultipleReservations(
+      @Body() List<ReservationRequestModel> reservationsRequest);
+
   @GET('${ReservationsApiConstants.reservations}/available-slots')
   Future<TimeSlotsResponse> getAvailableTimeSlots(
       @Query('barberId') String barberId, @Query('date') String date);

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/core/helpers/constants.dart';
-import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/routing/routes.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
@@ -68,39 +66,6 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
             date: selectedDate,
           );
     }
-  }
-
-  void _handleBooking() async {
-    if (!canBook) return;
-
-    // Get required data
-    final userId =
-        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
-    // Add mounted check before using context after await
-    if (!mounted) return;
-    final serviceIds = selectedServices.map((s) => s.id).toList();
-    final barberId = barberData?.id ?? '';
-    // final date =
-    //     '${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}';
-    final date =
-        '${selectedDate.year}-${selectedDate.month.toString().padLeft(2, '0')}-${selectedDate.day.toString().padLeft(2, '0')}';
-
-    final updatedArguments = ReservationArguments(
-      selectedServices: selectedServices,
-      barberData: barberData,
-      totalPrice: totalPrice,
-      selectedDate: selectedDate,
-      selectedTime: _selectedTime,
-    );
-
-    context.read<ReservationCubit>().postReservation(
-          userId: userId ?? '', // Add null check
-          serviceIds: serviceIds,
-          barberId: barberId,
-          date: date,
-          startTime: _selectedTime!,
-          arguments: updatedArguments,
-        );
   }
 
   void _showLoadingDialog(BuildContext context) {

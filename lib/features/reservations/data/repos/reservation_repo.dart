@@ -33,6 +33,29 @@ class ReservationRepo {
     }
   }
 
+  Future<ApiResult<ReservationResponseModel>> postMultipleReservations({
+    required String userId,
+    required List<Map<String, dynamic>> reservationsData,
+  }) async {
+    try {
+      final reservations = reservationsData
+          .map((data) => ReservationRequestModel(
+                user: userId,
+                serviceIds: data['serviceIds'],
+                barberId: data['barberId'],
+                date: data['date'],
+                startTime: data['startTime'],
+              ))
+          .toList();
+
+      final response =
+          await _reservationApiServices.postMultipleReservations(reservations);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
   Future<ApiResult<TimeSlotsResponse>> getAvailableTimeSlots({
     required String barberId,
     required String date,

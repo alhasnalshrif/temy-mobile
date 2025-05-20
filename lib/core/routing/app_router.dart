@@ -6,6 +6,8 @@ import 'package:temy_barber/features/barber/logic/barber_cubit.dart';
 import 'package:temy_barber/features/barber/ui/barber_screen.dart';
 import 'package:temy_barber/features/category/logic/category_cubit.dart';
 import 'package:temy_barber/features/category/ui/category_screen.dart';
+import 'package:temy_barber/features/category_barbers/logic/category_cubit.dart';
+import 'package:temy_barber/features/category_barbers/ui/category_screen.dart';
 import 'package:temy_barber/features/dashboard/dashboard_screen.dart';
 import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
 import 'package:temy_barber/features/login/ui/login_screen.dart';
@@ -52,21 +54,6 @@ class AppRouter {
             child: VerificationScreen(phoneNumber: phoneNumber),
           ),
         );
-      // case Routes.homeScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => HomeCubit(getIt())..getCategories(),
-      //       child: const HomeScreen(),
-      //     ),
-      //   );
-      // case Routes.bookingScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const BookingScreen(),
-      //   );
-      // case Routes.profileScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const ProfileScreen(),
-      //   );
       case Routes.dashboardScreen:
         return MaterialPageRoute(
           builder: (_) => const DashboardScreen(),
@@ -102,12 +89,20 @@ class AppRouter {
         );
 
       case Routes.categoryScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                CategoryCubit(getIt())..getCategory(),
+            child: const CategoryScreen(),
+          ),
+        );
+      case Routes.categoryBarbersScreen:
         final categoryId = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) =>
-                CategoryCubit(getIt(), categoryId!)..getCategoryWithBarbers(),
-            child: const CategoryScreen(),
+                CategoryBarberCubit(getIt(), categoryId!)..getCategoryWithBarbers(),
+            child: const CategoryBarbersScreen(),
           ),
         );
       case Routes.barberScreen:
@@ -123,13 +118,6 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const DashboardScreen(),
         );
-      // return MaterialPageRoute(
-      //   builder: (_) => Scaffold(
-      //     body: Center(
-      //       child: Text('No route defined for ${settings.name}'),
-      //     ),
-      //   ),
-      // );
     }
   }
 }

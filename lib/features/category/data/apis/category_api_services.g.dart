@@ -24,20 +24,19 @@ class _CategoryApiServices implements CategoryApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<CategoryServicesResponseModel> getCategoryWithBarbers(
-      String categoryId) async {
+  Future<CategoriesListResponseModel> getCategory() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<CategoryServicesResponseModel>(Options(
+    final _options = _setStreamType<CategoriesListResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'category/${categoryId}/services',
+          'category',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -47,9 +46,9 @@ class _CategoryApiServices implements CategoryApiServices {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CategoryServicesResponseModel _value;
+    late CategoriesListResponseModel _value;
     try {
-      _value = CategoryServicesResponseModel.fromJson(_result.data!);
+      _value = CategoriesListResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

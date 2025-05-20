@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:temy_barber/features/category/data/models/category_response.dart';
+import 'package:temy_barber/features/category_barbers/data/models/category_response.dart';
 
 part 'category_services_response.g.dart';
 

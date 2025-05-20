@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:temy_barber/features/category/data/models/service_response.dart';
+import 'package:temy_barber/features/category_barbers/data/models/service_response.dart';
 import 'package:temy_barber/features/home/ui/widgets/category/category_list_view_item.dart';
 import 'package:temy_barber/core/routing/routes.dart';
 
@@ -55,12 +55,10 @@ class CategoryListView extends StatelessWidget {
             indexItem: index,
             radius: (screenWidth / crossAxisCount) * 0.3, // Responsive radius
             onTap: () {
-              // Navigate to CategoryScreen with category id
               debugPrint('Category tapped: ${categoryDataList[index].name}');
 
               Navigator.of(context).pushNamed(
-                Routes.categoryScreen,
-                // Routes.barberScreen,
+                Routes.categoryBarbersScreen,
                 arguments: categoryDataList[index].id ?? '',
               );
             },

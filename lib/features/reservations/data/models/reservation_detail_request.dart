@@ -27,3 +27,20 @@ class ReservationRequestModel {
 
   Map<String, dynamic> toJson() => _$ReservationRequestModelToJson(this);
 }
+
+@JsonSerializable()
+class MultipleReservationsRequestModel {
+  @JsonKey(name: 'reservations')
+  final List<ReservationRequestModel> reservations;
+
+  MultipleReservationsRequestModel({
+    required this.reservations,
+  });
+
+  factory MultipleReservationsRequestModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$MultipleReservationsRequestModelFromJson(json);
+
+  Map<String, dynamic> toJson() =>
+      _$MultipleReservationsRequestModelToJson(this);
+}

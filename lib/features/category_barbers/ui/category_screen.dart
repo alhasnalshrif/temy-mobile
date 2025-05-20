@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
-import 'package:temy_barber/features/category/ui/widgets/category_with_barbers_bloc_builder.dart';
+import 'package:temy_barber/features/category_barbers/ui/widgets/category_with_barbers_bloc_builder.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({super.key});
+class CategoryBarbersScreen extends StatelessWidget {
+  const CategoryBarbersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class CategoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('navigation.categories'.tr()),
+        title: Text('navigation.barbers'.tr()),
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
