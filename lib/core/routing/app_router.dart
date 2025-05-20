@@ -13,6 +13,7 @@ import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
+import 'package:temy_barber/features/reservations/ui/booking_confirmation.dart';
 import 'package:temy_barber/features/reservations/ui/invoice_screen.dart';
 import 'package:temy_barber/features/reservations/ui/reservations_screen.dart';
 import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
@@ -89,6 +90,14 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => ReservationCubit(getIt()),
             child: ReservationsScreen(arguments: args),
+          ),
+        );
+      case Routes.bookingConfirmationScreen:
+        final args = settings.arguments as ReservationArguments;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ReservationCubit(getIt()),
+            child: BookingConfirmation(arguments: args),
           ),
         );
 

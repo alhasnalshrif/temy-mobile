@@ -4,10 +4,13 @@ import 'package:intl/intl.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/core/routing/routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
+import 'package:temy_barber/features/reservations/logic/reservation_state.dart';
 
 class BookingConfirmation extends StatelessWidget {
   final ReservationArguments arguments;
@@ -19,44 +22,93 @@ class BookingConfirmation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'تأكيد الحجز',
-          style: TextStyles.font18DarkBlueBold,
+    return BlocListener<ReservationCubit, ReservationState>(
+      listener: (context, state) {
+        state.maybeWhen(
+          reservationLoading: () {
+            _showLoadingDialog(context);
+          },
+          reservationSuccess: (response, arguments) {
+            // Dismiss loading dialog if it's showing
+            Navigator.of(context, rootNavigator: true).pop();
+
+            // Navigate to invoice screen
+            Navigator.pushReplacementNamed(
+              context,
+              Routes.invoiceScreen,
+              arguments: response,
+            );
+          },
+          reservationError: (error) {
+            // Dismiss loading dialog if it's showing
+            Navigator.of(context, rootNavigator: true).pop();
+
+            // Show error message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(error.toString()),
+                backgroundColor: Colors.red,
+              ),
+            );
+          },
+          orElse: () {},
+        );
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'تأكيد الحجز',
+            style: TextStyles.font18DarkBlueBold,
+          ),
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          elevation: 1,
+          shadowColor: Colors.black.withOpacity(0.05),
         ),
         backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
-        elevation: 1,
-        shadowColor: Colors.black.withOpacity(0.05),
-      ),
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildHeader(),
-                      const SizedBox(height: 24),
-                      _buildOrderSummary(),
-                      const SizedBox(height: 24),
-                      _buildBarberInfo(),
-                      const SizedBox(height: 24),
-                      _buildAppointmentInfo(),
-                      const SizedBox(height: 24),
-                      _buildPaymentInfo(),
-                    ],
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildHeader(),
+                        const SizedBox(height: 24),
+                        _buildOrderSummary(),
+                        const SizedBox(height: 24),
+                        _buildBarberInfo(),
+                        const SizedBox(height: 24),
+                        _buildAppointmentInfo(),
+                        const SizedBox(height: 24),
+                        _buildPaymentInfo(),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            _buildBottomButtons(context),
-          ],
+              _buildBottomButtons(context),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Show loading dialog
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => PopScope(
+        canPop: false,
+        child: Center(
+          child: ShimmerLoading.circular(
+            size: 50,
+          ),
         ),
       ),
     );
@@ -381,6 +433,8 @@ class BookingConfirmation extends StatelessWidget {
     // Get user ID from SharedPreferences
     final userId =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
+    // No mounted check needed in stateless widget
+
     if (userId.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -396,14 +450,24 @@ class BookingConfirmation extends StatelessWidget {
     final date =
         '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
 
+    // Create updated arguments object
+    final updatedArguments = ReservationArguments(
+      selectedServices: arguments.selectedServices,
+      barberData: arguments.barberData,
+      totalPrice: arguments.totalPrice,
+      selectedDate: arguments.selectedDate,
+      selectedTime: arguments.selectedTime,
+    );
+
     // Call the reservation cubit to make the reservation
+    // The state handling is now done in the BlocListener
     context.read<ReservationCubit>().postReservation(
-          userId: userId,
+          userId: userId ?? '', // Add null check
           serviceIds: serviceIds,
           barberId: barberId,
           date: date,
           startTime: arguments.selectedTime!,
-          arguments: arguments,
+          arguments: updatedArguments,
         );
   }
 }
