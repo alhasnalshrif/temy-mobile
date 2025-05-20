@@ -9,6 +9,7 @@ import 'package:temy_barber/features/barber/data/models/reservation_arguments.da
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_state.dart';
+import 'package:temy_barber/features/reservations/ui/booking_confirmation.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/services_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/calendar_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/time_slot_section.dart';
@@ -288,7 +289,23 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                             reservationLoading: () => false,
                             orElse: () => true,
                           ),
-                      onPressed: _handleBooking,
+                      // got to BookingConfirmation
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BookingConfirmation(
+                              arguments: ReservationArguments(
+                                selectedServices: selectedServices,
+                                barberData: barberData,
+                                selectedDate: selectedDate,
+                                selectedTime: _selectedTime,
+                                totalPrice: totalPrice,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

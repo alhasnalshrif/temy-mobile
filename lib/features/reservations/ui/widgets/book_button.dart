@@ -58,7 +58,7 @@ class BookButton extends StatelessWidget {
                     ),
                     SizedBox(width: 12),
                     Text(
-                      'احجز الآن',
+                      'التالي',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
