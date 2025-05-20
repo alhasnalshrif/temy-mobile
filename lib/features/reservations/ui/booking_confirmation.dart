@@ -16,7 +16,7 @@ import 'package:temy_barber/features/reservations/logic/reservation_state.dart';
 class BookingConfirmation extends StatelessWidget {
   final ReservationArguments arguments;
   // Create instance of MultiReservationManager
-  final MultiReservationManager _multiReservationManager =
+  final MultiReservationManager multiReservationManager =
       MultiReservationManager();
 
   BookingConfirmation({
