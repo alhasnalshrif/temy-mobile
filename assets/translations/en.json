@@ -55,6 +55,7 @@
         "tab_active": "Active booking",
         "tab_history": "History",
         "no_services": "No services available at the moment",
+        "services": "All Services",
         "service_selected": "Service selected",
         "basic_haircut": "Basic Haircut",
         "basic_haircut_description": "Standard haircut service",

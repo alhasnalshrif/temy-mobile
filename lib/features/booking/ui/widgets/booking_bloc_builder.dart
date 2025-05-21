@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
-import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 import 'package:temy_barber/features/booking/data/models/booking_response.dart'; // Add BookingData model
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/booking/logic/booking_state.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_card.dart';
+import 'package:temy_barber/features/booking/ui/widgets/booking_shimmer.dart'; // Import optimized shimmer
 import 'package:temy_barber/features/booking/ui/widgets/booking_tabs.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_status_stepper.dart'; // Import BookingStatusStepper
 import 'package:temy_barber/features/booking/ui/widgets/empty_booking_view.dart';
@@ -127,8 +127,31 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
               ],
             );
           },
-          bookingLoading: (_) => Center(
-            child: ShimmerLoading.rectangular(height: double.infinity),
+          bookingLoading: (_) => SingleChildScrollView(
+            child: Column(
+              children: [
+                // Show the same tabs UI as the success state for consistency
+                BookingTabs(
+                  showActiveBookings: _showActiveBookings,
+                  onActiveTap: () {
+                    if (!_showActiveBookings) {
+                      setState(() => _showActiveBookings = true);
+                    }
+                  },
+                  onHistoryTap: () {
+                    if (_showActiveBookings) {
+                      setState(() => _showActiveBookings = false);
+                    }
+                  },
+                ),
+                verticalSpace(16),
+                // Use the shimmer with properties matching current state
+                BookingShimmer(
+                  showActiveBookings: _showActiveBookings,
+                  showStatusStepper: _showActiveBookings,
+                ),
+              ],
+            ),
           ),
           bookingError: (_) => const ErrorBookingView(),
           orElse: () => Column(
