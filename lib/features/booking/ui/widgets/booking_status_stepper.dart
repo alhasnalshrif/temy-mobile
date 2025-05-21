@@ -3,21 +3,39 @@ import 'package:temy_barber/core/theme/colors.dart';
 
 class BookingStatusStepper extends StatelessWidget {
   final String status;
+  final Function(String) onStatusTap;
 
-  const BookingStatusStepper({super.key, required this.status});
+  const BookingStatusStepper({
+    super.key,
+    required this.status,
+    required this.onStatusTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     // Determine active step based on status
     int activeStep = 0;
     if (status == 'confirmed') activeStep = 1;
+    if (status == 'completed') activeStep = 2;
     // Add more steps if needed (e.g., 'on the way', 'in progress')
 
     // Define icons and labels for each step
     final steps = [
-      {'icon': Icons.calendar_month_outlined, 'label': 'Booked'},
-      {'icon': Icons.access_time_rounded, 'label': 'Confirmed'},
-      {'icon': Icons.check_circle_outline, 'label': 'Finished'},
+      {
+        'icon': Icons.calendar_month_outlined,
+        'label': 'Booked',
+        'status': 'pending'
+      },
+      {
+        'icon': Icons.access_time_rounded,
+        'label': 'Confirmed',
+        'status': 'confirmed'
+      },
+      {
+        'icon': Icons.check_circle_outline,
+        'label': 'Finished',
+        'status': 'completed'
+      },
     ];
 
     return Column(
@@ -33,6 +51,8 @@ class BookingStatusStepper extends StatelessWidget {
                   context,
                   steps[stepIndex]['icon'] as IconData,
                   isActive: stepIndex <= activeStep,
+                  statusValue: steps[stepIndex]['status'] as String,
+                  index: stepIndex,
                 );
               } else {
                 int connectorIndex = (index - 1) ~/ 2;
@@ -50,6 +70,7 @@ class BookingStatusStepper extends StatelessWidget {
               return _buildStatusText(
                 steps[index]['label'] as String,
                 isActive: index <= activeStep,
+                statusValue: steps[index]['status'] as String,
               );
             }),
           ),
@@ -59,18 +80,29 @@ class BookingStatusStepper extends StatelessWidget {
   }
 
   Widget _buildStatusIndicator(BuildContext context, IconData icon,
-      {required bool isActive}) {
-    return Container(
-      width: 36, // Slightly smaller
-      height: 36,
-      decoration: BoxDecoration(
-        color: isActive ? ColorsManager.mainBlue : Colors.grey[200],
-        shape: BoxShape.circle,
-      ),
-      child: Icon(
-        icon,
-        size: 20, // Slightly smaller icon
-        color: isActive ? Colors.white : Colors.grey[500],
+      {required bool isActive, String? statusValue, int index = 0}) {
+    return GestureDetector(
+      onTap: () {
+        if (statusValue != null) {
+          onStatusTap(statusValue);
+        }
+      },
+      child: Container(
+        width: 36, // Slightly smaller
+        height: 36,
+        decoration: BoxDecoration(
+          color: status == statusValue
+              ? ColorsManager.mainBlue
+              : isActive
+                  ? ColorsManager.mainBlue.withOpacity(0.7)
+                  : Colors.grey[200],
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          icon,
+          size: 20, // Slightly smaller icon
+          color: isActive ? Colors.white : Colors.grey[500],
+        ),
       ),
     );
   }
@@ -84,17 +116,31 @@ class BookingStatusStepper extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusText(String text, {required bool isActive}) {
+  Widget _buildStatusText(String text,
+      {required bool isActive, String? statusValue}) {
     return Flexible(
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 11, // Smaller font
-          color: isActive ? ColorsManager.mainBlue : Colors.grey[600],
-          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+      child: GestureDetector(
+        onTap: () {
+          if (statusValue != null) {
+            onStatusTap(statusValue);
+          }
+        },
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 11, // Smaller font
+            color: status == statusValue
+                ? ColorsManager.mainBlue.withOpacity(1.0)
+                : isActive
+                    ? ColorsManager.mainBlue
+                    : Colors.grey[600],
+            fontWeight: status == statusValue || isActive
+                ? FontWeight.bold
+                : FontWeight.normal,
+          ),
+          overflow: TextOverflow.ellipsis,
         ),
-        overflow: TextOverflow.ellipsis,
       ),
     );
   }

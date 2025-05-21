@@ -29,93 +29,106 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   // Create instance of MultiReservationManager
   final MultiReservationManager _multiReservationManager =
       MultiReservationManager();
-
   // Getter to access widget.arguments more concisely
   ReservationArguments get arguments => widget.arguments;
 
   @override
+  void dispose() {
+    // Clear all multi-reservation data when navigating away from this screen
+    _multiReservationManager.clearReservations();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocListener<ReservationCubit, ReservationState>(
-      listener: (context, state) {
-        state.maybeWhen(
-          reservationLoading: () {
-            _showLoadingDialog(context);
-          },
-          reservationSuccess: (response, arguments) {
-            // Dismiss loading dialog if it's showing
-            Navigator.of(context, rootNavigator: true).pop();
-
-            // Clear all reservations when successful
+    return PopScope(
+        onPopInvoked: (didPop) {
+          // Clear all reservations when navigating back
+          if (didPop) {
             _multiReservationManager.clearReservations();
+          }
+        },
+        child: BlocListener<ReservationCubit, ReservationState>(
+          listener: (context, state) {
+            state.maybeWhen(
+              reservationLoading: () {
+                _showLoadingDialog(context);
+              },
+              reservationSuccess: (response, arguments) {
+                // Dismiss loading dialog if it's showing
+                Navigator.of(context, rootNavigator: true).pop();
 
-            // Navigate to invoice screen
-            Navigator.pushReplacementNamed(
-              context,
-              Routes.invoiceScreen,
-              arguments: response,
+                // Clear all reservations when successful
+                _multiReservationManager.clearReservations();
+
+                // Navigate to invoice screen
+                Navigator.pushReplacementNamed(
+                  context,
+                  Routes.invoiceScreen,
+                  arguments: response,
+                );
+              },
+              reservationError: (error) {
+                // Dismiss loading dialog if it's showing
+                Navigator.of(context, rootNavigator: true).pop();
+
+                // Show error message
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(error.toString()),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              },
+              orElse: () {},
             );
           },
-          reservationError: (error) {
-            // Dismiss loading dialog if it's showing
-            Navigator.of(context, rootNavigator: true).pop();
-
-            // Show error message
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(error.toString()),
-                backgroundColor: Colors.red,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'تأكيد الحجز',
+                style: TextStyles.font16DarkBold,
               ),
-            );
-          },
-          orElse: () {},
-        );
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'تأكيد الحجز',
-            style: TextStyles.font16DarkBold,
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          surfaceTintColor: Colors.white,
-          elevation: 0,
-          shadowColor: Colors.transparent,
-        ),
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildHeader(),
-                        const SizedBox(height: 16),
-                        _buildOrderSummary(),
-                        const SizedBox(height: 16),
-                        _buildBarberInfo(),
-                        const SizedBox(height: 16),
-                        _buildAppointmentInfo(),
-                        const SizedBox(height: 16),
-                        _buildPaymentInfo(),
-                        // Add padding at the bottom for better scrolling
-                        const SizedBox(height: 16),
-                      ],
+              centerTitle: true,
+              backgroundColor: Colors.white,
+              surfaceTintColor: Colors.white,
+              elevation: 0,
+              shadowColor: Colors.transparent,
+            ),
+            backgroundColor: Colors.white,
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildHeader(),
+                            const SizedBox(height: 16),
+                            _buildOrderSummary(),
+                            const SizedBox(height: 16),
+                            _buildBarberInfo(),
+                            const SizedBox(height: 16),
+                            _buildAppointmentInfo(),
+                            const SizedBox(height: 16),
+                            _buildPaymentInfo(),
+                            // Add padding at the bottom for better scrolling
+                            const SizedBox(height: 16),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  _buildBottomButtons(context),
+                ],
               ),
-              _buildBottomButtons(context),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   // Show loading dialog
@@ -216,107 +229,157 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               }
 
               return Container(
-                margin: const EdgeInsets.only(bottom: 12),
-                padding: const EdgeInsets.all(10.0),
+                margin: const EdgeInsets.symmetric(
+                  vertical: 12,
+                ),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade200),
-                  borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.grey.shade100, width: 1),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.15),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                      spreadRadius: 2,
+                    ),
+                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Reservation header
+                    // Header row
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Barber avatar
-                        CircleAvatar(
-                          radius: 14,
-                          backgroundImage:
-                              reservation.barberData?.avatar != null
-                                  ? NetworkImage(reservation.barberData!.avatar)
-                                  : null,
-                          child: reservation.barberData?.avatar == null
-                              ? const Icon(Icons.person, size: 14)
-                              : null,
+                        // Barber avatar with subtle border
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                color: Colors.grey.shade200, width: 1.5),
+                          ),
+                          child: CircleAvatar(
+                            radius: 20,
+                            backgroundColor: Colors.grey.shade100,
+                            backgroundImage: reservation.barberData?.avatar !=
+                                    null
+                                ? NetworkImage(reservation.barberData!.avatar)
+                                : null,
+                            child: reservation.barberData?.avatar == null
+                                ? const Icon(Icons.person,
+                                    size: 20, color: Colors.grey)
+                                : null,
+                          ),
                         ),
-                        const SizedBox(width: 8),
-                        // Reservation info
+                        const SizedBox(width: 12),
+
+                        // Barber name and date
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "${reservation.barberData?.name ?? 'حلاق غير محدد'} ${dateTime.isNotEmpty ? '- $dateTime' : ''}",
-                                style: TextStyles.font14DarkBlueMedium,
+                                reservation.barberData?.name ?? 'حلاق غير محدد',
+                                style: TextStyles.font18DarkBlueBold,
+                                overflow: TextOverflow.ellipsis,
                               ),
+                              if (dateTime.isNotEmpty)
+                                Text(
+                                  dateTime,
+                                  style: TextStyles.font12BlueRegular.copyWith(
+                                    color: Colors.grey.shade600,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                             ],
                           ),
                         ),
-                        // Delete button - only for previous reservations
+
+                        // Delete button with modern styling
                         if (!isCurrentReservation)
                           IconButton(
                             onPressed: () => _removeReservation(index),
-                            icon: const Icon(Icons.close,
-                                color: Colors.red, size: 18),
-                            constraints: const BoxConstraints(),
-                            padding: EdgeInsets.zero,
-                            visualDensity: VisualDensity.compact,
+                            icon: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.red.withOpacity(0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.close,
+                                size: 18,
+                                color: Colors.red,
+                              ),
+                            ),
+                            tooltip: "حذف الحجز",
+                            style: IconButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              visualDensity: VisualDensity.compact,
+                            ),
                           ),
                       ],
                     ),
 
-                    const Divider(height: 12),
+                    const SizedBox(height: 16),
 
-                    // Services - more compact layout
-                    if (reservation.selectedServices.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: reservation.selectedServices.map((service) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 2.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      service.name,
-                                      style: TextStyles.font14DarkBlueMedium,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
+                    // Services section
+                    if (reservation.selectedServices.isNotEmpty) ...[
+                      ...reservation.selectedServices.map((service) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    service.name,
+                                    style: TextStyles.font14DarkBlueMedium
+                                        .copyWith(
+                                      color: Colors.black87,
                                     ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    "${service.price.toStringAsFixed(0)} جنية",
-                                    style: TextStyles.font14DarkBlueMedium,
+                                ),
+                                Text(
+                                  "${service.price.toStringAsFixed(0)} جنية",
+                                  style:
+                                      TextStyles.font14DarkBlueMedium.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: ColorsManager.mainBlue,
                                   ),
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      )
-                    else
+                                ),
+                              ],
+                            ),
+                          )),
+                    ] else ...[
                       Text(
                         "لا توجد خدمات محددة",
-                        style: TextStyles.font14GrayRegular,
+                        style: TextStyles.font14GrayRegular.copyWith(
+                          color: Colors.grey.shade500,
+                        ),
                       ),
+                    ],
 
-                    // Reservation total
+                    // Total price with divider
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                      padding: const EdgeInsets.only(top: 12),
+                      child: Column(
                         children: [
-                          Text(
-                            "${reservation.totalPrice.toStringAsFixed(2)} جنية",
-                            style: TextStyles.font14DarkBlueMedium.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: ColorsManager.mainBlue,
-                            ),
+                          Divider(color: Colors.grey.shade200, height: 24),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "الإجمالي",
+                                style: TextStyles.font14DarkBlueMedium.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              Text(
+                                  "${reservation.totalPrice.toStringAsFixed(2)} جنية",
+                                  style: TextStyles.font18DarkBlueBold),
+                            ],
                           ),
                         ],
                       ),
@@ -586,84 +649,147 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   }
 
   Widget _buildBottomButtons(BuildContext context) {
-    final bool hasMultipleReservations =
-        _multiReservationManager.reservations.isNotEmpty;
-
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 5,
-            offset: const Offset(0, -2),
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 10,
+            offset: const Offset(0, -3),
           ),
         ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Only show multi-booking options when needed
-          if (hasMultipleReservations)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Text(
-                "${_multiReservationManager.reservations.length + 1} حجوزات مجدولة",
-                style: TextStyles.font14DarkBlueMedium.copyWith(
-                  color: ColorsManager.mainBlue,
-                  fontWeight: FontWeight.bold,
+          // Multi-booking button
+          Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+              color: ColorsManager.lightBlue.withOpacity(0.4),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () => _addToMultipleReservations(context),
+                borderRadius: BorderRadius.circular(12),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.add_circle_outline,
+                        color: ColorsManager.mainBlue,
+                        size: 22,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          "إضافة حجز آخر",
+                          style: TextStyles.font14DarkBlueMedium.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: ColorsManager.mainBlue,
+                          ),
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                        color: ColorsManager.mainBlue.withOpacity(0.7),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
+          ),
+
+          // Clear all reservations button - only show when there are multiple reservations
+          // if (_multiReservationManager.reservations.isNotEmpty)
+          //   Container(
+          //     margin: const EdgeInsets.only(bottom: 16),
+          //     decoration: BoxDecoration(
+          //       color: Colors.red.withOpacity(0.1),
+          //       borderRadius: BorderRadius.circular(12),
+          //     ),
+          //     child: Material(
+          //       color: Colors.transparent,
+          //       child: InkWell(
+          //         onTap: _clearAllReservations,
+          //         borderRadius: BorderRadius.circular(12),
+          //         child: Padding(
+          //           padding: const EdgeInsets.symmetric(
+          //               vertical: 12, horizontal: 16),
+          //           child: Row(
+          //             children: [
+          //               const Icon(
+          //                 Icons.delete_outline,
+          //                 color: Colors.red,
+          //                 size: 22,
+          //               ),
+          //               const SizedBox(width: 12),
+          //               Expanded(
+          //                 child: Text(
+          //                   "حذف جميع الحجوزات",
+          //                   style: TextStyles.font14DarkBlueMedium.copyWith(
+          //                     fontWeight: FontWeight.bold,
+          //                     color: Colors.red,
+          //                   ),
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
 
           // Main action buttons
           Row(
             children: [
-              // Add another booking - icon button
-              Container(
-                margin: const EdgeInsets.only(right: 8),
-                decoration: BoxDecoration(
-                  color: ColorsManager.lightBlue,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: IconButton(
-                  onPressed: () => _addToMultipleReservations(context),
+              // Back/Edit button
+              Expanded(
+                flex: 3,
+                child: OutlinedButton.icon(
+                  onPressed: () => Navigator.pop(context),
                   icon: const Icon(
-                    Icons.add_circle_outline,
-                    color: ColorsManager.mainBlue,
+                    Icons.arrow_back_ios,
+                    size: 16,
                   ),
-                  tooltip: "إضافة حجز آخر",
+                  label: const Text("تعديل"),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    foregroundColor: ColorsManager.mainBlue,
+                    side: const BorderSide(color: ColorsManager.mainBlue),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
-
-              // Clear all - icon button - only show when there are multiple reservations
-              if (hasMultipleReservations)
-                Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: IconButton(
-                    onPressed: _clearAllReservations,
-                    icon: const Icon(
-                      Icons.delete_outline,
-                      color: Colors.red,
-                    ),
-                    tooltip: "حذف جميع الحجوزات",
-                  ),
-                ),
-
-              // Confirm button - expanded
+              const SizedBox(width: 16),
+              // Confirm button
               Expanded(
+                flex: 5,
                 child: ElevatedButton.icon(
                   onPressed: () => _confirmMultipleReservations(context),
-                  icon: const Icon(Icons.check_circle_outline, size: 18),
+                  icon: const Icon(Icons.check_circle_outline),
                   label: Text(
                     _multiReservationManager.reservations.isEmpty
                         ? "تأكيد الحجز"
-                        : "تأكيد الحجوزات",
+                        : "تأكيد الحجوزات (${_multiReservationManager.reservations.length + 1})",
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorsManager.mainBlue,
@@ -671,7 +797,11 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                     elevation: 0,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

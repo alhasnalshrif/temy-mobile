@@ -41,7 +41,6 @@ class NextBookingCard extends StatelessWidget {
 
   void _navigateToBookingTab(BuildContext context) {
     Navigator.of(context).pushNamed('/dashboard', arguments: 1);
-
   }
 
   Widget _buildBookingCard(BuildContext context, BookingData booking) {
@@ -80,7 +79,7 @@ class NextBookingCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16), // Increased border radius
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -90,137 +89,144 @@ class NextBookingCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Stack(
-        clipBehavior: Clip.hardEdge,
-        children: [
-          Positioned(
-            top: -25,
-            left: -25,
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
+      child: ClipRRect(
+        // Added ClipRRect to ensure content respects the rounded corners
+        borderRadius: BorderRadius.circular(16), // Same radius as container
+        child: Stack(
+          children: [
+            // Red circle design element
+            Positioned(
+              top: -16,
+              left: -16,
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: const BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
-          ),
 
-          // Main content
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.calendar_today_rounded,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                    horizontalSpace(8),
-                    Text(
-                      'home.next_appointment'.tr(),
-                      style: TextStyles.font14BlueSemiBold.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-                verticalSpace(16),
-                Row(
-                  children: [
-                    // Barber Avatar
-                    CircleAvatar(
-                      radius: 24,
-                      backgroundImage: booking.barber?.avatar != null &&
-                              booking.barber!.avatar!.isNotEmpty
-                          ? NetworkImage(booking.barber!.avatar!)
-                          : null,
-                      backgroundColor: Colors.grey[300],
-                      child: booking.barber?.avatar == null ||
-                              booking.barber!.avatar!.isEmpty
-                          ? const Icon(Icons.person, color: Colors.white)
-                          : null,
-                    ),
-                    horizontalSpace(12),
-                    // Barber details
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            barberName,
-                            style: TextStyles.font16WhiteSemiBold,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          verticalSpace(4),
-                          Text(
-                            serviceName,
-                            style: TextStyles.font13GrayRegular.copyWith(
-                              color: Colors.white70,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                verticalSpace(16),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+            // Main content
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     children: [
-                      const Icon(
-                        Icons.access_time_rounded,
-                        color: Colors.white,
-                        size: 16,
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(
+                              12), // Rounded container for icon
+                        ),
+                        child: const Icon(
+                          Icons.calendar_today_rounded,
+                          color: Colors.white,
+                          size: 16,
+                        ),
                       ),
-                      horizontalSpace(6),
+                      horizontalSpace(8),
                       Text(
-                        '$formattedDate • $formattedTime',
-                        style: TextStyles.font13BlueRegular.copyWith(
+                        'next_appointment'.tr(),
+                        style: TextStyles.font14BlueSemiBold.copyWith(
                           color: Colors.white,
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                  verticalSpace(16),
+                  Row(
+                    children: [
+                      // Barber Avatar with enhanced styling
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: Colors.white.withOpacity(0.3),
+                              width: 2), // Added border
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 8,
+                              spreadRadius: 0,
+                            ),
+                          ],
+                        ),
+                        child: CircleAvatar(
+                          radius: 24,
+                          backgroundImage: booking.barber?.avatar != null &&
+                                  booking.barber!.avatar!.isNotEmpty
+                              ? NetworkImage(booking.barber!.avatar!)
+                              : null,
+                          backgroundColor: Colors.grey[300],
+                          child: booking.barber?.avatar == null ||
+                                  booking.barber!.avatar!.isEmpty
+                              ? const Icon(Icons.person, color: Colors.white)
+                              : null,
+                        ),
+                      ),
+                      horizontalSpace(12),
+                      // Barber details
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              barberName,
+                              style: TextStyles.font16WhiteSemiBold,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            verticalSpace(4),
+                            Text(
+                              serviceName,
+                              style: TextStyles.font13GrayRegular.copyWith(
+                                color: Colors.white70,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
 
-          Positioned(
-            right: 12,
-            top: 0,
-            bottom: 0,
-            child: Center(
-              child: Container(
-                width: 28,
-                height: 28,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.white,
-                  size: 14,
-                ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(
+                              16), // Increased border radius
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.access_time_rounded,
+                              color: Colors.white,
+                              size: 16,
+                            ),
+                            horizontalSpace(6),
+                            Text(
+                              '$formattedDate • $formattedTime',
+                              style: TextStyles.font13BlueRegular.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -2,11 +2,26 @@
   "welcome": "مرحبا",
   "login": "تسجيل الدخول",
   "logout": "تسجيل الخروج",
+  "next_appointment": "الموعد التالي",
   "common": {
     "no_date": "لا يوجد تاريخ",
     "no_time": "لا يوجد وقت",
     "not_available": "غير متاح",
     "got_it": "فهمت"
+  },
+  "default_booking": {
+    "title": "الحجز الافتراضي",
+    "save_as_default": "حفظ كافتراضي",
+    "book_now": "حجز الآن",
+    "saved_as_default": "تم حفظ الحجز كافتراضي",
+    "services": "خدمات",
+    "hour": "ساعة",
+    "remove": "حذف",
+    "cancel": "إلغاء",
+    "remove_title": "إزالة الحجز الافتراضي",
+    "remove_confirmation": "هل أنت متأكد أنك تريد إزالة هذا الحجز الافتراضي؟",
+    "removed": "تم إزالة الحجز الافتراضي",
+    "best_choice": "لخدمتك، لقد اخترت الأفضل دائمًا"
   },
   "barber": {
     "details": "تفاصيل الحلاق",
@@ -97,7 +112,15 @@
     "success_message": "تم الحجز بنجاح!",
     "load_error": "فشل تحميل المواعيد المتاحة",
     "resend_code_success": "تم إعادة إرسال رمز التحقق",
-    "error": "خطأ"
+    "error": "خطأ",
+    "default_booking": {
+      "title": "الحجز الافتراضي",
+      "save_as_default": "حفظ كافتراضي",
+      "book_now": "حجز الآن",
+      "saved_as_default": "تم حفظ الحجز كافتراضي",
+      "services": "خدمات",
+      "hour": "ساعة"
+    }
   },
   "profile": {
     "title": "الملف الشخصي",

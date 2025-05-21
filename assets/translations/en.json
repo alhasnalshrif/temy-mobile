@@ -2,11 +2,26 @@
     "welcome": "welcome",
     "login": "login",
     "logout": "logout",
+    "next_appointment": "Next Appointment",
     "common": {
         "no_date": "No date",
         "no_time": "No time",
         "not_available": "N/A",
         "got_it": "Got it"
+    },
+    "default_booking": {
+        "title": "Default Booking",
+        "save_as_default": "Save as Default",
+        "book_now": "Book Now",
+        "saved_as_default": "Booking saved as default",
+        "services": "services",
+        "hour": "hour",
+        "remove": "Remove",
+        "cancel": "Cancel",
+        "remove_title": "Remove Default Booking",
+        "remove_confirmation": "Are you sure you want to remove this default booking?",
+        "removed": "Default booking removed",
+        "best_choice": "For your service, you've made an excellent choice"
     },
     "leave_feedback": "Leave Feedback",
     "success_message": "Booking successful!",

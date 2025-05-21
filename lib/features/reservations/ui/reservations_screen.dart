@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
@@ -11,9 +12,10 @@ import 'package:temy_barber/features/reservations/ui/widgets/services_section.da
 import 'package:temy_barber/features/reservations/ui/widgets/calendar_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/time_slot_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/total_section.dart';
-import 'package:temy_barber/features/reservations/ui/widgets/book_button.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class ReservationsScreen extends StatefulWidget {
   final ReservationArguments? arguments;
@@ -45,7 +47,6 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   // Get total duration of selected services in minutes
   int get totalDuration =>
       selectedServices.fold(0, (sum, service) => sum + service.duration);
-
   // Check if booking is possible
   bool get canBook => _selectedTime != null && selectedServices.isNotEmpty;
 
@@ -57,6 +58,37 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
 
     // Fetch time slots for the initial date when screen loads
     _fetchAvailableTimeSlots();
+  }
+
+  // Save current reservation as default
+  Future<void> _saveAsDefault() async {
+    if (barberData != null && selectedServices.isNotEmpty) {
+      final prefs = await SharedPreferences.getInstance();
+
+      // Create a map with all necessary data
+      final Map<String, dynamic> defaultReservation = {
+        'barber': {
+          'id': barberData!.id,
+          'name': barberData!.name,
+          'avatar': barberData!.avatar,
+        },
+        'services': selectedServices
+            .map((service) => {
+                  'id': service.id,
+                  'name': service.name,
+                  'price': service.price,
+                  'duration': service.duration,
+                  'category': service.category,
+                  'imageCover': service.imageCover,
+                })
+            .toList(),
+        'totalPrice': totalPrice,
+      };
+
+      // Save as JSON string
+      await prefs.setString(
+          'default_reservation', jsonEncode(defaultReservation));
+    }
   }
 
   void _fetchAvailableTimeSlots() {
@@ -247,26 +279,127 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                     decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
-                    child: BookButton(
-                      isEnabled: canBook &&
-                          state.maybeWhen(
-                            reservationLoading: () => false,
-                            orElse: () => true,
+                    child: Row(
+                      children: [
+                        // Save as Default button
+                        Expanded(
+                          flex: 1,
+                          child: AnimatedOpacity(
+                            opacity: canBook &&
+                                    state.maybeWhen(
+                                      reservationLoading: () => false,
+                                      orElse: () => true,
+                                    )
+                                ? 1.0
+                                : 0.7,
+                            duration: const Duration(milliseconds: 200),
+                            child: ElevatedButton(
+                              onPressed: canBook &&
+                                      state.maybeWhen(
+                                        reservationLoading: () => false,
+                                        orElse: () => true,
+                                      )
+                                  ? () {
+                                      _saveAsDefault();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                              'default_booking.saved_as_default'
+                                                  .tr()),
+                                          behavior: SnackBarBehavior.floating,
+                                          backgroundColor: Colors.green[700],
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(0, 56),
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.white.withOpacity(0.1),
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: BorderSide(
+                                    color: ColorsManager.mainBlue,
+                                    width: 1.5,
+                                  ),
+                                ),
+                                padding: EdgeInsets.zero,
+                                surfaceTintColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                disabledBackgroundColor: Colors.grey.shade200,
+                              ),
+                              child: Text(
+                                'default_booking.save_as_default'.tr(),
+                                style: TextStyle(
+                                  color: ColorsManager.mainBlue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
-                      onPressed: () {
-                        final args = ReservationArguments(
-                          selectedServices: selectedServices,
-                          barberData: barberData,
-                          selectedDate: selectedDate,
-                          selectedTime: _selectedTime,
-                          totalPrice: totalPrice,
-                        );
-                        Navigator.pushNamed(
-                          context,
-                          Routes.bookingConfirmationScreen,
-                          arguments: args,
-                        );
-                      },
+                        ),
+                        const SizedBox(width: 12),
+                        // Next button
+                        Expanded(
+                          flex: 2,
+                          child: AnimatedOpacity(
+                            opacity: canBook &&
+                                    state.maybeWhen(
+                                      reservationLoading: () => false,
+                                      orElse: () => true,
+                                    )
+                                ? 1.0
+                                : 0.7,
+                            duration: const Duration(milliseconds: 200),
+                            child: ElevatedButton(
+                              onPressed: canBook &&
+                                      state.maybeWhen(
+                                        reservationLoading: () => false,
+                                        orElse: () => true,
+                                      )
+                                  ? () {
+                                      final args = ReservationArguments(
+                                        selectedServices: selectedServices,
+                                        barberData: barberData,
+                                        selectedDate: selectedDate,
+                                        selectedTime: _selectedTime,
+                                        totalPrice: totalPrice,
+                                      );
+                                      Navigator.pushNamed(
+                                        context,
+                                        Routes.bookingConfirmationScreen,
+                                        arguments: args,
+                                      );
+                                    }
+                                  : null,
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(0, 56),
+                                backgroundColor: ColorsManager.mainBlue,
+                                foregroundColor: Colors.white.withOpacity(0.1),
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: EdgeInsets.zero,
+                                surfaceTintColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                disabledBackgroundColor: Colors.grey.shade400,
+                              ),
+                              child: const Text(
+                                'التالي',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

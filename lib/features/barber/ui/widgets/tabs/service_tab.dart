@@ -56,11 +56,6 @@ class ServiceTab extends StatelessWidget {
                     child: ListTile(
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 12),
-                      leading: CircleAvatar(
-                        radius: 28,
-                        backgroundImage: NetworkImage(service.imageCover),
-                        backgroundColor: Colors.grey[200],
-                      ),
                       title: Text(
                         service.name,
                         style: TextStyles.font18DarkSemiBold,
@@ -73,19 +68,41 @@ class ServiceTab extends StatelessWidget {
                       //         color: Colors.grey[600],
                       //       ),
                       // ),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            'barber.price'.tr(args: [service.price.toString()]),
-                            style: TextStyles.font16DarkBold,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                'barber.price'
+                                    .tr(args: [service.price.toString()]),
+                                style: TextStyles.font16DarkBold,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                  'barber.duration'
+                                      .tr(args: [service.duration.toString()]),
+                                  style: TextStyles.font14DarkBlueMedium),
+                            ],
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                              'barber.duration'
-                                  .tr(args: [service.duration.toString()]),
-                              style: TextStyles.font14DarkBlueMedium),
+                          if (isSelected)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              child: Container(
+                                padding: const EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ),

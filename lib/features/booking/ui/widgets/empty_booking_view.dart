@@ -25,11 +25,6 @@ class EmptyBookingView extends StatelessWidget {
               height: 120,
               width: 120,
             ),
-            // Icon(
-            //   Icons.calendar_today_outlined,
-            //   size: 64,
-            //   color: Colors.grey[400],
-            // ),
             const SizedBox(height: 16),
             Text(
               'No Bookings Found',
