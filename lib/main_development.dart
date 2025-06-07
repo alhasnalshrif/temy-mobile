@@ -3,6 +3,8 @@ import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/core/services/notification_service.dart';
+import 'package:temy_barber/core/utils/notification_helper.dart';
 import 'package:temy_barber/temy_app.dart';
 
 import 'core/routing/app_router.dart';
@@ -15,6 +17,16 @@ void main() async {
 
   setupGetIt();
   await checkedIfUserLoggedIn();
+
+  // Check OneSignal configuration
+  NotificationHelper.checkConfiguration();
+
+  // Initialize OneSignal notifications
+  await getIt<NotificationService>().initialize();
+
+  // Uncomment for testing notifications in development
+  // await NotificationHelper.testNotifications();
+
   runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('ar')],

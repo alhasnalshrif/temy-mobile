@@ -52,6 +52,10 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+          manifestPlaceholders = [
+            onesignalAppId: "cf73d402-32e3-452e-8d58-bfe6e2129923"
+        ]
     }
 
     flavorDimensions "default"

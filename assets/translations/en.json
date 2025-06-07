@@ -3,12 +3,6 @@
     "login": "login",
     "logout": "logout",
     "next_appointment": "Next Appointment",
-    "common": {
-        "no_date": "No date",
-        "no_time": "No time",
-        "not_available": "N/A",
-        "got_it": "Got it"
-    },
     "default_booking": {
         "title": "Default Booking",
         "save_as_default": "Save as Default",
@@ -114,10 +108,10 @@
         "continue_to_login": "Continue to Login",
         "error_title": "Error",
         "got_it": "Got it"
-    },
-    "profile": {
+    },    "profile": {
         "title": "Profile",
         "notifications": "Notifications",
+        "notification_history": "Notification History",
         "language": "Language",
         "arabic": "Arabic",
         "english": "English",
@@ -127,5 +121,34 @@
         "about": "About",
         "user_data_error": "User data is not available for editing",
         "data_unavailable": "Data is currently unavailable"
+    },
+    "notifications": {
+        "history": "Notification History",
+        "settings": "Notification Settings",
+        "no_history": "No notifications yet",
+        "general": "General",
+        "booking_notifications": "Booking Notifications",
+        "marketing": "Marketing",
+        "push_notifications": "Push Notifications",
+        "push_notifications_desc": "Receive notifications on your device",
+        "booking_reminders": "Booking Reminders",
+        "booking_reminders_desc": "Get notified about upcoming appointments",
+        "promotional_notifications": "Promotional Notifications",
+        "promotional_notifications_desc": "Receive offers and promotional content",
+        "push_disabled_warning": "When push notifications are disabled, you won't receive any notifications including booking reminders.",
+        "info_title": "About Notifications",
+        "info_description": "You can manage your notification preferences here. Changes will be saved automatically.",
+        "settings_saved": "Notification settings saved successfully",
+        "booking_confirmed": "Booking Confirmed",
+        "booking_reminder": "Booking Reminder",        "booking_cancelled": "Booking Cancelled",
+        "promotion": "Promotion"
+    },
+    "common": {
+        "no_date": "No date",
+        "no_time": "No time",
+        "not_available": "N/A",
+        "got_it": "Got it",
+        "save": "Save",
+        "retry": "Retry"
     }
 }

@@ -186,5 +186,11 @@ class TextStyles {
     fontWeight: FontWeightHelper.semiBold,
     color: Colors.white,
   );
+  static TextStyle font16GreyMedium = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeightHelper.medium,
+    color: Colors.grey,
+  );
+
 
 }

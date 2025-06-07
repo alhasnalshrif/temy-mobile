@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/routing/app_router.dart';
+import 'package:temy_barber/core/services/notification_service.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 
 import 'core/routing/routes.dart';
@@ -10,6 +11,10 @@ import 'core/routing/routes.dart';
 class TemyApp extends StatelessWidget {
   final AppRouter appRouter;
   const TemyApp({super.key, required this.appRouter});
+
+  // Global navigator key for deep linking navigation
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,11 @@ class TemyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
     ));
 
+    // Set navigator key for NotificationService
+    NotificationService.setNavigatorKey(navigatorKey);
+
     return MaterialApp(
+      navigatorKey: navigatorKey, // Add navigator key
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

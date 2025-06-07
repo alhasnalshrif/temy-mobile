@@ -5,6 +5,7 @@ import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
 import 'package:temy_barber/features/login/logic/cubit/login_state.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/styles.dart';
@@ -24,6 +25,14 @@ class LoginBlocListener extends StatelessWidget {
           },
           success: (loginResponse) {
             context.pop();
+
+            // Set user ID for OneSignal after successful login
+            final userId = loginResponse.data?.user?.id;
+            if (userId != null) {
+              final notificationCubit = context.read<NotificationCubit>();
+              notificationCubit.setUserId(userId);
+            }
+
             context.pushReplacementNamed(Routes.dashboardScreen);
           },
           error: (error) {

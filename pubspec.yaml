@@ -60,8 +60,11 @@ dependencies:
   # An SVG rendering and widget library for Flutter, which allows painting 
   flutter_svg: ^2.0.9
   # for adapting screen and font size.
-  # flutter_screenutil: ^5.9.0
+  # flutter_screenutil: ^5.9.0  firebase_core: ^3.13.0
   firebase_core: ^3.13.0
+
+  # Push notifications
+  onesignal_flutter: ^5.1.1
 
   cached_network_image: ^3.3.1
   shimmer: ^3.0.0

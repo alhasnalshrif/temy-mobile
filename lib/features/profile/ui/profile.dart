@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/routing/routes.dart';
@@ -9,6 +11,7 @@ import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/profile_state.dart';
+import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -22,11 +25,15 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   String currentLanguage = 'ar';
+  bool notificationsEnabled = true;
+  late NotificationCubit notificationCubit;
 
   @override
   void initState() {
     super.initState();
+    notificationCubit = getIt<NotificationCubit>();
     _loadSavedLanguage();
+    _loadNotificationSettings();
   }
 
   Future<void> _loadSavedLanguage() async {
@@ -47,116 +54,130 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  Future<void> _loadNotificationSettings() async {
+    notificationCubit.getNotificationSettings();
+  }
+
+  void _toggleNotifications(bool value) {
+    setState(() {
+      notificationsEnabled = value;
+    });
+    notificationCubit.updateNotificationSettings(
+      pushNotifications: value,
+      bookingReminders: value,
+      promotionalNotifications: value,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    // Setting status bar to black with white icons for profile screen
+    final size = MediaQuery.of(context)
+        .size; // Setting status bar to black with white icons for profile screen
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.black,
       statusBarIconBrightness: Brightness.light,
     ));
 
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        color: Colors.black,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'profile.title'.tr(),
-                    style: TextStyles.font18WhiteSemiBold,
-                  ),
-                  verticalSpace(16),
-                  Image.asset(
-                    'assets/images/logo.png',
-                    height: 30,
-                    color: Colors.white,
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          color: Colors.black,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'profile.title'.tr(),
+                      style: TextStyles.font18WhiteSemiBold,
+                    ),
+                    verticalSpace(16),
+                    Image.asset(
+                      'assets/images/logo.png',
+                      height: 30,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            BlocBuilder<ProfileCubit, ProfileState>(
-              buildWhen: (previous, current) =>
-                  current is ProfileLoading ||
-                  current is ProfileSuccess ||
-                  current is ProfileError,
-              builder: (context, state) {
-                String userName = 'User Name';
-                String phoneNumber = 'Phone Number';
-                String? avatarUrl;
-                User? currentUser;
+              BlocBuilder<ProfileCubit, ProfileState>(
+                buildWhen: (previous, current) =>
+                    current is ProfileLoading ||
+                    current is ProfileSuccess ||
+                    current is ProfileError,
+                builder: (context, state) {
+                  String userName = 'User Name';
+                  String phoneNumber = 'Phone Number';
+                  String? avatarUrl;
+                  User? currentUser;
 
-                state.maybeMap(
-                  profileSuccess: (value) {
-                    currentUser = value.userProfile.user;
-                    userName = currentUser?.name ?? 'User Name';
-                    phoneNumber = currentUser?.phone ?? 'Phone Number';
-                    avatarUrl = currentUser?.avatar;
-                  },
-                  orElse: () {},
-                );
+                  state.maybeMap(
+                    profileSuccess: (value) {
+                      currentUser = value.userProfile.user;
+                      userName = currentUser?.name ?? 'User Name';
+                      phoneNumber = currentUser?.phone ?? 'Phone Number';
+                      avatarUrl = currentUser?.avatar;
+                    },
+                    orElse: () {},
+                  );
 
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Row(
-                    children: [
-                      Hero(
-                        tag: 'profile-avatar',
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 8,
-                                spreadRadius: 2,
-                              ),
-                            ],
-                          ),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 35,
-                            backgroundImage: avatarUrl != null
-                                ? NetworkImage(avatarUrl!)
-                                : const AssetImage('assets/images/temy.png')
-                                    as ImageProvider,
-                          ),
-                        ),
-                      ),
-                      horizontalSpace(16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            userName,
-                            style: TextStyles.font24WhiteBold,
-                          ),
-                          Text(
-                            phoneNumber,
-                            style: TextStyles.font16WhiteSemiBold.copyWith(
-                              color: Colors.white.withOpacity(0.7),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: Row(
+                      children: [
+                        Hero(
+                          tag: 'profile-avatar',
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 2),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 8,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 35,
+                              backgroundImage: avatarUrl != null
+                                  ? NetworkImage(avatarUrl!)
+                                  : const AssetImage('assets/images/temy.png')
+                                      as ImageProvider,
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-            verticalSpace(30),
-            Expanded(
-              child: Container(
+                        ),
+                        horizontalSpace(16),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              userName,
+                              style: TextStyles.font24WhiteBold,
+                            ),
+                            Text(
+                              phoneNumber,
+                              style: TextStyles.font16WhiteSemiBold.copyWith(
+                                color: Colors.white.withOpacity(0.7),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              verticalSpace(30),
+              Container(
                 width: size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -177,32 +198,149 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Enhanced Notification Settings Section
                     Container(
                       margin: const EdgeInsets.only(bottom: 12),
-                      child: SwitchListTile(
-                        activeColor: ColorsManager.mainBlue,
-                        activeTrackColor:
-                            ColorsManager.mainBlue.withOpacity(0.2),
-                        trackOutlineColor:
-                            WidgetStateProperty.all(ColorsManager.mainBlue),
-                        value: true,
-                        onChanged: (value) {},
+                      child: BlocBuilder<NotificationCubit, NotificationState>(
+                        bloc: notificationCubit,
+                        builder: (context, state) {
+                          bool isLoading = false;
+
+                          if (state.runtimeType
+                              .toString()
+                              .contains('SettingsLoaded')) {
+                            final settingsState = state as dynamic;
+                            notificationsEnabled =
+                                settingsState.settings.pushNotifications;
+                          } else if (state.runtimeType
+                              .toString()
+                              .contains('Loading')) {
+                            isLoading = true;
+                          }
+
+                          return Column(
+                            children: [
+                              // Notification Toggle
+                              SwitchListTile(
+                                activeColor: ColorsManager.mainBlue,
+                                activeTrackColor:
+                                    ColorsManager.mainBlue.withOpacity(0.2),
+                                trackOutlineColor: WidgetStateProperty.all(
+                                    ColorsManager.mainBlue),
+                                value: notificationsEnabled,
+                                onChanged:
+                                    isLoading ? null : _toggleNotifications,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                title: Row(
+                                  children: [
+                                    const Icon(Icons.notifications_outlined,
+                                        color: ColorsManager.mainBlue),
+                                    horizontalSpace(12),
+                                    Text(
+                                      'profile.notifications'.tr(),
+                                      style: TextStyles.font16DarkBold,
+                                    ),
+                                    if (isLoading) ...[
+                                      horizontalSpace(8),
+                                      const SizedBox(
+                                        width: 16,
+                                        height: 16,
+                                        child: CircularProgressIndicator(
+                                            strokeWidth: 2),
+                                      ),
+                                    ],
+                                  ],
+                                ),
+                              ),
+                              // Notification Settings Button
+                              ListTile(
+                                onTap: () => Navigator.pushNamed(
+                                    context, Routes.notificationSettingsScreen),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                title: Row(
+                                  children: [
+                                    const Icon(Icons.settings_outlined,
+                                        color: ColorsManager.mainBlue),
+                                    horizontalSpace(12),
+                                    Text(
+                                      'profile.notification_settings'.tr(),
+                                      style: TextStyles.font16DarkBold,
+                                    ),
+                                  ],
+                                ),
+                                trailing: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: ColorsManager.mainBlue,
+                                  size: 16,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    // Notification History Button
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      child: ListTile(
+                        onTap: () => Navigator.pushNamed(
+                            context, Routes.notificationHistoryScreen),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                         title: Row(
                           children: [
-                            const Icon(Icons.notifications_outlined,
+                            const Icon(Icons.history,
                                 color: ColorsManager.mainBlue),
                             horizontalSpace(12),
                             Text(
-                              'profile.notifications'.tr(),
+                              'profile.notification_history'.tr(),
                               style: TextStyles.font16DarkBold,
                             ),
                           ],
                         ),
+                        trailing: const Icon(
+                          Icons.arrow_forward_ios,
+                          color: ColorsManager.mainBlue,
+                          size: 16,
+                        ),
                       ),
                     ),
+                    // Development Test Button (only in debug mode)
+                    if (kDebugMode)
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        child: ListTile(
+                          onTap: () => Navigator.pushNamed(
+                              context, Routes.notificationTestScreen),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          tileColor: Colors.orange.shade50,
+                          title: Row(
+                            children: [
+                              const Icon(Icons.bug_report,
+                                  color: Colors.orange),
+                              horizontalSpace(12),
+                              Text(
+                                'Notification Testing (Dev)',
+                                style: TextStyles.font16DarkBold.copyWith(
+                                  color: Colors.orange.shade700,
+                                ),
+                              ),
+                            ],
+                          ),
+                          trailing: const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.orange,
+                            size: 16,
+                          ),
+                        ),
+                      ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Row(
@@ -311,7 +449,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Icons.info_outline,
                       onTap: () {},
                     ),
-                    const Spacer(),
+                    verticalSpace(20),
                     TweenAnimationBuilder<double>(
                       tween: Tween(begin: 0.95, end: 1.0),
                       duration: const Duration(milliseconds: 300),
@@ -346,8 +484,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

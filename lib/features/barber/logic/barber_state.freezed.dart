@@ -24,10 +24,6 @@ mixin _$BarberState {
             BarberDetailResponseModel barberDetailResponseModel)
         barberSuccess,
     required TResult Function(ErrorHandler errorHandler) barberError,
-    required TResult Function() barberDetailsLoading,
-    required TResult Function(BarberDetailData barberDetailData)
-        barberDetailsSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberDetailsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,9 +33,6 @@ mixin _$BarberState {
     TResult? Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult? Function(ErrorHandler errorHandler)? barberError,
-    TResult? Function()? barberDetailsLoading,
-    TResult? Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberDetailsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,9 +42,6 @@ mixin _$BarberState {
     TResult Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult Function(ErrorHandler errorHandler)? barberError,
-    TResult Function()? barberDetailsLoading,
-    TResult Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberDetailsError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,9 +51,6 @@ mixin _$BarberState {
     required TResult Function(BarberLoading value) barberLoading,
     required TResult Function(BarberSuccess value) barberSuccess,
     required TResult Function(BarberError value) barberError,
-    required TResult Function(BarberDetailsLoading value) barberDetailsLoading,
-    required TResult Function(BarberDetailsSuccess value) barberDetailsSuccess,
-    required TResult Function(BarberDetailsError value) barberDetailsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,9 +59,6 @@ mixin _$BarberState {
     TResult? Function(BarberLoading value)? barberLoading,
     TResult? Function(BarberSuccess value)? barberSuccess,
     TResult? Function(BarberError value)? barberError,
-    TResult? Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult? Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult? Function(BarberDetailsError value)? barberDetailsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,9 +67,6 @@ mixin _$BarberState {
     TResult Function(BarberLoading value)? barberLoading,
     TResult Function(BarberSuccess value)? barberSuccess,
     TResult Function(BarberError value)? barberError,
-    TResult Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult Function(BarberDetailsError value)? barberDetailsError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -159,10 +140,6 @@ class _$InitialImpl implements _Initial {
             BarberDetailResponseModel barberDetailResponseModel)
         barberSuccess,
     required TResult Function(ErrorHandler errorHandler) barberError,
-    required TResult Function() barberDetailsLoading,
-    required TResult Function(BarberDetailData barberDetailData)
-        barberDetailsSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberDetailsError,
   }) {
     return initial();
   }
@@ -175,9 +152,6 @@ class _$InitialImpl implements _Initial {
     TResult? Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult? Function(ErrorHandler errorHandler)? barberError,
-    TResult? Function()? barberDetailsLoading,
-    TResult? Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberDetailsError,
   }) {
     return initial?.call();
   }
@@ -190,9 +164,6 @@ class _$InitialImpl implements _Initial {
     TResult Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult Function(ErrorHandler errorHandler)? barberError,
-    TResult Function()? barberDetailsLoading,
-    TResult Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberDetailsError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -208,9 +179,6 @@ class _$InitialImpl implements _Initial {
     required TResult Function(BarberLoading value) barberLoading,
     required TResult Function(BarberSuccess value) barberSuccess,
     required TResult Function(BarberError value) barberError,
-    required TResult Function(BarberDetailsLoading value) barberDetailsLoading,
-    required TResult Function(BarberDetailsSuccess value) barberDetailsSuccess,
-    required TResult Function(BarberDetailsError value) barberDetailsError,
   }) {
     return initial(this);
   }
@@ -222,9 +190,6 @@ class _$InitialImpl implements _Initial {
     TResult? Function(BarberLoading value)? barberLoading,
     TResult? Function(BarberSuccess value)? barberSuccess,
     TResult? Function(BarberError value)? barberError,
-    TResult? Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult? Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult? Function(BarberDetailsError value)? barberDetailsError,
   }) {
     return initial?.call(this);
   }
@@ -236,9 +201,6 @@ class _$InitialImpl implements _Initial {
     TResult Function(BarberLoading value)? barberLoading,
     TResult Function(BarberSuccess value)? barberSuccess,
     TResult Function(BarberError value)? barberError,
-    TResult Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult Function(BarberDetailsError value)? barberDetailsError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -299,10 +261,6 @@ class _$BarberLoadingImpl implements BarberLoading {
             BarberDetailResponseModel barberDetailResponseModel)
         barberSuccess,
     required TResult Function(ErrorHandler errorHandler) barberError,
-    required TResult Function() barberDetailsLoading,
-    required TResult Function(BarberDetailData barberDetailData)
-        barberDetailsSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberDetailsError,
   }) {
     return barberLoading();
   }
@@ -315,9 +273,6 @@ class _$BarberLoadingImpl implements BarberLoading {
     TResult? Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult? Function(ErrorHandler errorHandler)? barberError,
-    TResult? Function()? barberDetailsLoading,
-    TResult? Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberDetailsError,
   }) {
     return barberLoading?.call();
   }
@@ -330,9 +285,6 @@ class _$BarberLoadingImpl implements BarberLoading {
     TResult Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult Function(ErrorHandler errorHandler)? barberError,
-    TResult Function()? barberDetailsLoading,
-    TResult Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberDetailsError,
     required TResult orElse(),
   }) {
     if (barberLoading != null) {
@@ -348,9 +300,6 @@ class _$BarberLoadingImpl implements BarberLoading {
     required TResult Function(BarberLoading value) barberLoading,
     required TResult Function(BarberSuccess value) barberSuccess,
     required TResult Function(BarberError value) barberError,
-    required TResult Function(BarberDetailsLoading value) barberDetailsLoading,
-    required TResult Function(BarberDetailsSuccess value) barberDetailsSuccess,
-    required TResult Function(BarberDetailsError value) barberDetailsError,
   }) {
     return barberLoading(this);
   }
@@ -362,9 +311,6 @@ class _$BarberLoadingImpl implements BarberLoading {
     TResult? Function(BarberLoading value)? barberLoading,
     TResult? Function(BarberSuccess value)? barberSuccess,
     TResult? Function(BarberError value)? barberError,
-    TResult? Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult? Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult? Function(BarberDetailsError value)? barberDetailsError,
   }) {
     return barberLoading?.call(this);
   }
@@ -376,9 +322,6 @@ class _$BarberLoadingImpl implements BarberLoading {
     TResult Function(BarberLoading value)? barberLoading,
     TResult Function(BarberSuccess value)? barberSuccess,
     TResult Function(BarberError value)? barberError,
-    TResult Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult Function(BarberDetailsError value)? barberDetailsError,
     required TResult orElse(),
   }) {
     if (barberLoading != null) {
@@ -468,10 +411,6 @@ class _$BarberSuccessImpl implements BarberSuccess {
             BarberDetailResponseModel barberDetailResponseModel)
         barberSuccess,
     required TResult Function(ErrorHandler errorHandler) barberError,
-    required TResult Function() barberDetailsLoading,
-    required TResult Function(BarberDetailData barberDetailData)
-        barberDetailsSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberDetailsError,
   }) {
     return barberSuccess(barberDetailResponseModel);
   }
@@ -484,9 +423,6 @@ class _$BarberSuccessImpl implements BarberSuccess {
     TResult? Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult? Function(ErrorHandler errorHandler)? barberError,
-    TResult? Function()? barberDetailsLoading,
-    TResult? Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberDetailsError,
   }) {
     return barberSuccess?.call(barberDetailResponseModel);
   }
@@ -499,9 +435,6 @@ class _$BarberSuccessImpl implements BarberSuccess {
     TResult Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult Function(ErrorHandler errorHandler)? barberError,
-    TResult Function()? barberDetailsLoading,
-    TResult Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberDetailsError,
     required TResult orElse(),
   }) {
     if (barberSuccess != null) {
@@ -517,9 +450,6 @@ class _$BarberSuccessImpl implements BarberSuccess {
     required TResult Function(BarberLoading value) barberLoading,
     required TResult Function(BarberSuccess value) barberSuccess,
     required TResult Function(BarberError value) barberError,
-    required TResult Function(BarberDetailsLoading value) barberDetailsLoading,
-    required TResult Function(BarberDetailsSuccess value) barberDetailsSuccess,
-    required TResult Function(BarberDetailsError value) barberDetailsError,
   }) {
     return barberSuccess(this);
   }
@@ -531,9 +461,6 @@ class _$BarberSuccessImpl implements BarberSuccess {
     TResult? Function(BarberLoading value)? barberLoading,
     TResult? Function(BarberSuccess value)? barberSuccess,
     TResult? Function(BarberError value)? barberError,
-    TResult? Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult? Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult? Function(BarberDetailsError value)? barberDetailsError,
   }) {
     return barberSuccess?.call(this);
   }
@@ -545,9 +472,6 @@ class _$BarberSuccessImpl implements BarberSuccess {
     TResult Function(BarberLoading value)? barberLoading,
     TResult Function(BarberSuccess value)? barberSuccess,
     TResult Function(BarberError value)? barberError,
-    TResult Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult Function(BarberDetailsError value)? barberDetailsError,
     required TResult orElse(),
   }) {
     if (barberSuccess != null) {
@@ -646,10 +570,6 @@ class _$BarberErrorImpl implements BarberError {
             BarberDetailResponseModel barberDetailResponseModel)
         barberSuccess,
     required TResult Function(ErrorHandler errorHandler) barberError,
-    required TResult Function() barberDetailsLoading,
-    required TResult Function(BarberDetailData barberDetailData)
-        barberDetailsSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberDetailsError,
   }) {
     return barberError(errorHandler);
   }
@@ -662,9 +582,6 @@ class _$BarberErrorImpl implements BarberError {
     TResult? Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult? Function(ErrorHandler errorHandler)? barberError,
-    TResult? Function()? barberDetailsLoading,
-    TResult? Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberDetailsError,
   }) {
     return barberError?.call(errorHandler);
   }
@@ -677,9 +594,6 @@ class _$BarberErrorImpl implements BarberError {
     TResult Function(BarberDetailResponseModel barberDetailResponseModel)?
         barberSuccess,
     TResult Function(ErrorHandler errorHandler)? barberError,
-    TResult Function()? barberDetailsLoading,
-    TResult Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberDetailsError,
     required TResult orElse(),
   }) {
     if (barberError != null) {
@@ -695,9 +609,6 @@ class _$BarberErrorImpl implements BarberError {
     required TResult Function(BarberLoading value) barberLoading,
     required TResult Function(BarberSuccess value) barberSuccess,
     required TResult Function(BarberError value) barberError,
-    required TResult Function(BarberDetailsLoading value) barberDetailsLoading,
-    required TResult Function(BarberDetailsSuccess value) barberDetailsSuccess,
-    required TResult Function(BarberDetailsError value) barberDetailsError,
   }) {
     return barberError(this);
   }
@@ -709,9 +620,6 @@ class _$BarberErrorImpl implements BarberError {
     TResult? Function(BarberLoading value)? barberLoading,
     TResult? Function(BarberSuccess value)? barberSuccess,
     TResult? Function(BarberError value)? barberError,
-    TResult? Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult? Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult? Function(BarberDetailsError value)? barberDetailsError,
   }) {
     return barberError?.call(this);
   }
@@ -723,9 +631,6 @@ class _$BarberErrorImpl implements BarberError {
     TResult Function(BarberLoading value)? barberLoading,
     TResult Function(BarberSuccess value)? barberSuccess,
     TResult Function(BarberError value)? barberError,
-    TResult Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult Function(BarberDetailsError value)? barberDetailsError,
     required TResult orElse(),
   }) {
     if (barberError != null) {
@@ -745,503 +650,5 @@ abstract class BarberError implements BarberState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BarberErrorImplCopyWith<_$BarberErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$BarberDetailsLoadingImplCopyWith<$Res> {
-  factory _$$BarberDetailsLoadingImplCopyWith(_$BarberDetailsLoadingImpl value,
-          $Res Function(_$BarberDetailsLoadingImpl) then) =
-      __$$BarberDetailsLoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$BarberDetailsLoadingImplCopyWithImpl<$Res>
-    extends _$BarberStateCopyWithImpl<$Res, _$BarberDetailsLoadingImpl>
-    implements _$$BarberDetailsLoadingImplCopyWith<$Res> {
-  __$$BarberDetailsLoadingImplCopyWithImpl(_$BarberDetailsLoadingImpl _value,
-      $Res Function(_$BarberDetailsLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of BarberState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$BarberDetailsLoadingImpl implements BarberDetailsLoading {
-  const _$BarberDetailsLoadingImpl();
-
-  @override
-  String toString() {
-    return 'BarberState.barberDetailsLoading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BarberDetailsLoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() barberLoading,
-    required TResult Function(
-            BarberDetailResponseModel barberDetailResponseModel)
-        barberSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberError,
-    required TResult Function() barberDetailsLoading,
-    required TResult Function(BarberDetailData barberDetailData)
-        barberDetailsSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberDetailsError,
-  }) {
-    return barberDetailsLoading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? barberLoading,
-    TResult? Function(BarberDetailResponseModel barberDetailResponseModel)?
-        barberSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberError,
-    TResult? Function()? barberDetailsLoading,
-    TResult? Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberDetailsError,
-  }) {
-    return barberDetailsLoading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? barberLoading,
-    TResult Function(BarberDetailResponseModel barberDetailResponseModel)?
-        barberSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberError,
-    TResult Function()? barberDetailsLoading,
-    TResult Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberDetailsError,
-    required TResult orElse(),
-  }) {
-    if (barberDetailsLoading != null) {
-      return barberDetailsLoading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(BarberLoading value) barberLoading,
-    required TResult Function(BarberSuccess value) barberSuccess,
-    required TResult Function(BarberError value) barberError,
-    required TResult Function(BarberDetailsLoading value) barberDetailsLoading,
-    required TResult Function(BarberDetailsSuccess value) barberDetailsSuccess,
-    required TResult Function(BarberDetailsError value) barberDetailsError,
-  }) {
-    return barberDetailsLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(BarberLoading value)? barberLoading,
-    TResult? Function(BarberSuccess value)? barberSuccess,
-    TResult? Function(BarberError value)? barberError,
-    TResult? Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult? Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult? Function(BarberDetailsError value)? barberDetailsError,
-  }) {
-    return barberDetailsLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(BarberLoading value)? barberLoading,
-    TResult Function(BarberSuccess value)? barberSuccess,
-    TResult Function(BarberError value)? barberError,
-    TResult Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult Function(BarberDetailsError value)? barberDetailsError,
-    required TResult orElse(),
-  }) {
-    if (barberDetailsLoading != null) {
-      return barberDetailsLoading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class BarberDetailsLoading implements BarberState {
-  const factory BarberDetailsLoading() = _$BarberDetailsLoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$BarberDetailsSuccessImplCopyWith<$Res> {
-  factory _$$BarberDetailsSuccessImplCopyWith(_$BarberDetailsSuccessImpl value,
-          $Res Function(_$BarberDetailsSuccessImpl) then) =
-      __$$BarberDetailsSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({BarberDetailData barberDetailData});
-}
-
-/// @nodoc
-class __$$BarberDetailsSuccessImplCopyWithImpl<$Res>
-    extends _$BarberStateCopyWithImpl<$Res, _$BarberDetailsSuccessImpl>
-    implements _$$BarberDetailsSuccessImplCopyWith<$Res> {
-  __$$BarberDetailsSuccessImplCopyWithImpl(_$BarberDetailsSuccessImpl _value,
-      $Res Function(_$BarberDetailsSuccessImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of BarberState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? barberDetailData = null,
-  }) {
-    return _then(_$BarberDetailsSuccessImpl(
-      null == barberDetailData
-          ? _value.barberDetailData
-          : barberDetailData // ignore: cast_nullable_to_non_nullable
-              as BarberDetailData,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$BarberDetailsSuccessImpl implements BarberDetailsSuccess {
-  const _$BarberDetailsSuccessImpl(this.barberDetailData);
-
-  @override
-  final BarberDetailData barberDetailData;
-
-  @override
-  String toString() {
-    return 'BarberState.barberDetailsSuccess(barberDetailData: $barberDetailData)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BarberDetailsSuccessImpl &&
-            (identical(other.barberDetailData, barberDetailData) ||
-                other.barberDetailData == barberDetailData));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, barberDetailData);
-
-  /// Create a copy of BarberState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BarberDetailsSuccessImplCopyWith<_$BarberDetailsSuccessImpl>
-      get copyWith =>
-          __$$BarberDetailsSuccessImplCopyWithImpl<_$BarberDetailsSuccessImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() barberLoading,
-    required TResult Function(
-            BarberDetailResponseModel barberDetailResponseModel)
-        barberSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberError,
-    required TResult Function() barberDetailsLoading,
-    required TResult Function(BarberDetailData barberDetailData)
-        barberDetailsSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberDetailsError,
-  }) {
-    return barberDetailsSuccess(barberDetailData);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? barberLoading,
-    TResult? Function(BarberDetailResponseModel barberDetailResponseModel)?
-        barberSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberError,
-    TResult? Function()? barberDetailsLoading,
-    TResult? Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberDetailsError,
-  }) {
-    return barberDetailsSuccess?.call(barberDetailData);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? barberLoading,
-    TResult Function(BarberDetailResponseModel barberDetailResponseModel)?
-        barberSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberError,
-    TResult Function()? barberDetailsLoading,
-    TResult Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberDetailsError,
-    required TResult orElse(),
-  }) {
-    if (barberDetailsSuccess != null) {
-      return barberDetailsSuccess(barberDetailData);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(BarberLoading value) barberLoading,
-    required TResult Function(BarberSuccess value) barberSuccess,
-    required TResult Function(BarberError value) barberError,
-    required TResult Function(BarberDetailsLoading value) barberDetailsLoading,
-    required TResult Function(BarberDetailsSuccess value) barberDetailsSuccess,
-    required TResult Function(BarberDetailsError value) barberDetailsError,
-  }) {
-    return barberDetailsSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(BarberLoading value)? barberLoading,
-    TResult? Function(BarberSuccess value)? barberSuccess,
-    TResult? Function(BarberError value)? barberError,
-    TResult? Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult? Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult? Function(BarberDetailsError value)? barberDetailsError,
-  }) {
-    return barberDetailsSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(BarberLoading value)? barberLoading,
-    TResult Function(BarberSuccess value)? barberSuccess,
-    TResult Function(BarberError value)? barberError,
-    TResult Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult Function(BarberDetailsError value)? barberDetailsError,
-    required TResult orElse(),
-  }) {
-    if (barberDetailsSuccess != null) {
-      return barberDetailsSuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class BarberDetailsSuccess implements BarberState {
-  const factory BarberDetailsSuccess(final BarberDetailData barberDetailData) =
-      _$BarberDetailsSuccessImpl;
-
-  BarberDetailData get barberDetailData;
-
-  /// Create a copy of BarberState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BarberDetailsSuccessImplCopyWith<_$BarberDetailsSuccessImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$BarberDetailsErrorImplCopyWith<$Res> {
-  factory _$$BarberDetailsErrorImplCopyWith(_$BarberDetailsErrorImpl value,
-          $Res Function(_$BarberDetailsErrorImpl) then) =
-      __$$BarberDetailsErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
-}
-
-/// @nodoc
-class __$$BarberDetailsErrorImplCopyWithImpl<$Res>
-    extends _$BarberStateCopyWithImpl<$Res, _$BarberDetailsErrorImpl>
-    implements _$$BarberDetailsErrorImplCopyWith<$Res> {
-  __$$BarberDetailsErrorImplCopyWithImpl(_$BarberDetailsErrorImpl _value,
-      $Res Function(_$BarberDetailsErrorImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of BarberState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$BarberDetailsErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$BarberDetailsErrorImpl implements BarberDetailsError {
-  const _$BarberDetailsErrorImpl(this.errorHandler);
-
-  @override
-  final ErrorHandler errorHandler;
-
-  @override
-  String toString() {
-    return 'BarberState.barberDetailsError(errorHandler: $errorHandler)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BarberDetailsErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
-
-  /// Create a copy of BarberState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BarberDetailsErrorImplCopyWith<_$BarberDetailsErrorImpl> get copyWith =>
-      __$$BarberDetailsErrorImplCopyWithImpl<_$BarberDetailsErrorImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() barberLoading,
-    required TResult Function(
-            BarberDetailResponseModel barberDetailResponseModel)
-        barberSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberError,
-    required TResult Function() barberDetailsLoading,
-    required TResult Function(BarberDetailData barberDetailData)
-        barberDetailsSuccess,
-    required TResult Function(ErrorHandler errorHandler) barberDetailsError,
-  }) {
-    return barberDetailsError(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? barberLoading,
-    TResult? Function(BarberDetailResponseModel barberDetailResponseModel)?
-        barberSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberError,
-    TResult? Function()? barberDetailsLoading,
-    TResult? Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barberDetailsError,
-  }) {
-    return barberDetailsError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? barberLoading,
-    TResult Function(BarberDetailResponseModel barberDetailResponseModel)?
-        barberSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberError,
-    TResult Function()? barberDetailsLoading,
-    TResult Function(BarberDetailData barberDetailData)? barberDetailsSuccess,
-    TResult Function(ErrorHandler errorHandler)? barberDetailsError,
-    required TResult orElse(),
-  }) {
-    if (barberDetailsError != null) {
-      return barberDetailsError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(BarberLoading value) barberLoading,
-    required TResult Function(BarberSuccess value) barberSuccess,
-    required TResult Function(BarberError value) barberError,
-    required TResult Function(BarberDetailsLoading value) barberDetailsLoading,
-    required TResult Function(BarberDetailsSuccess value) barberDetailsSuccess,
-    required TResult Function(BarberDetailsError value) barberDetailsError,
-  }) {
-    return barberDetailsError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(BarberLoading value)? barberLoading,
-    TResult? Function(BarberSuccess value)? barberSuccess,
-    TResult? Function(BarberError value)? barberError,
-    TResult? Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult? Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult? Function(BarberDetailsError value)? barberDetailsError,
-  }) {
-    return barberDetailsError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(BarberLoading value)? barberLoading,
-    TResult Function(BarberSuccess value)? barberSuccess,
-    TResult Function(BarberError value)? barberError,
-    TResult Function(BarberDetailsLoading value)? barberDetailsLoading,
-    TResult Function(BarberDetailsSuccess value)? barberDetailsSuccess,
-    TResult Function(BarberDetailsError value)? barberDetailsError,
-    required TResult orElse(),
-  }) {
-    if (barberDetailsError != null) {
-      return barberDetailsError(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class BarberDetailsError implements BarberState {
-  const factory BarberDetailsError(final ErrorHandler errorHandler) =
-      _$BarberDetailsErrorImpl;
-
-  ErrorHandler get errorHandler;
-
-  /// Create a copy of BarberState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BarberDetailsErrorImplCopyWith<_$BarberDetailsErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

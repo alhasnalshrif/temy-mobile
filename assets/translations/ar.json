@@ -3,11 +3,18 @@
   "login": "تسجيل الدخول",
   "logout": "تسجيل الخروج",
   "next_appointment": "الموعد التالي",
+  "leave_feedback": "ترك تعليق",
+  "success_message": "تم الحجز بنجاح!",
+  "load_error": "فشل تحميل المواعيد المتاحة",
+  "resend_code_success": "تم إعادة إرسال رمز التحقق",
+  "error": "خطأ",
   "common": {
     "no_date": "لا يوجد تاريخ",
     "no_time": "لا يوجد وقت",
     "not_available": "غير متاح",
-    "got_it": "فهمت"
+    "got_it": "فهمت",
+    "save": "حفظ",
+    "retry": "إعادة المحاولة"
   },
   "default_booking": {
     "title": "الحجز الافتراضي",
@@ -23,12 +30,19 @@
     "removed": "تم إزالة الحجز الافتراضي",
     "best_choice": "لخدمتك، لقد اخترت الأفضل دائمًا"
   },
+  "navigation": {
+    "home": "الرئيسية",
+    "booking": "الحجوزات",
+    "profile": "الملف الشخصي",
+    "categories": "الاقسام",
+    "barbers": "الحلاقين"
+  },
   "barber": {
     "details": "تفاصيل الحلاق",
     "no_services": "لا توجد خدمات متاحة.",
     "no_schedule": "لا توجد معلومات جدولة متاحة.",
     "select_time_slot": "اختر فترة زمنية",
-    "book_now": " تاكيد الحجز",
+    "book_now": "تأكيد الحجز",
     "service_tab": "الخدمة",
     "schedule_tab": "المواعيد",
     "about_tab": "معلومات",
@@ -68,13 +82,6 @@
     "book_appointment": "احجز موعدًا",
     "explore_services": "استكشف الخدمات"
   },
-  "navigation": {
-    "home": "الرئيسية",
-    "booking": "الحجوزات",
-    "profile": "الملف الشخصي",
-    "categories": "الاقسام",
-    "barbers": "الحلاقين"
-  },
   "auth": {
     "terms_agreement": "بتسجيل الدخول، فإنك توافق على",
     "terms_and_conditions": "الشروط والأحكام",
@@ -108,24 +115,12 @@
     "success_message": "تهانينا، تم التحقق من حسابك بنجاح!",
     "continue_to_login": "المتابعة لتسجيل الدخول",
     "error_title": "خطأ",
-    "got_it": "فهمت",
-    "leave_feedback": "ترك تعليق",
-    "success_message": "تم الحجز بنجاح!",
-    "load_error": "فشل تحميل المواعيد المتاحة",
-    "resend_code_success": "تم إعادة إرسال رمز التحقق",
-    "error": "خطأ",
-    "default_booking": {
-      "title": "الحجز الافتراضي",
-      "save_as_default": "حفظ كافتراضي",
-      "book_now": "حجز الآن",
-      "saved_as_default": "تم حفظ الحجز كافتراضي",
-      "services": "خدمات",
-      "hour": "ساعة"
-    }
+    "got_it": "فهمت"
   },
   "profile": {
     "title": "الملف الشخصي",
     "notifications": "الإشعارات",
+    "notification_history": "سجل الإشعارات",
     "language": "اللغة",
     "arabic": "العربية",
     "english": "English",
@@ -135,5 +130,27 @@
     "about": "عنا",
     "user_data_error": "لا يمكن تحميل بيانات المستخدم للتعديل",
     "data_unavailable": "البيانات غير متوفرة حالياً"
+  },
+  "notifications": {
+    "history": "سجل الإشعارات",
+    "settings": "إعدادات الإشعارات",
+    "no_history": "لا توجد إشعارات بعد",
+    "general": "عام",
+    "booking_notifications": "إشعارات الحجوزات",
+    "marketing": "التسويق",
+    "push_notifications": "الإشعارات الفورية",
+    "push_notifications_desc": "استقبال الإشعارات على جهازك",
+    "booking_reminders": "تذكير بالمواعيد",
+    "booking_reminders_desc": "احصل على إشعارات حول المواعيد القادمة",
+    "promotional_notifications": "الإشعارات الترويجية",
+    "promotional_notifications_desc": "استقبال العروض والمحتوى الترويجي",
+    "push_disabled_warning": "عند إيقاف الإشعارات الفورية، لن تتلقى أي إشعارات بما في ذلك تذكير بالمواعيد.",
+    "info_title": "حول الإشعارات",
+    "info_description": "يمكنك إدارة تفضيلات الإشعارات هنا. سيتم حفظ التغييرات تلقائياً.",
+    "settings_saved": "تم حفظ إعدادات الإشعارات بنجاح",
+    "booking_confirmed": "تأكيد الحجز",
+    "booking_reminder": "تذكير بالموعد",
+    "booking_cancelled": "إلغاء الحجز",
+    "promotion": "عرض ترويجي"
   }
 }

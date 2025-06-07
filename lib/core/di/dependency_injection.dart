@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:temy_barber/core/networking/api_service.dart';
 import 'package:temy_barber/core/networking/dio_factory.dart';
+import 'package:temy_barber/core/services/notification_service.dart';
 import 'package:temy_barber/features/barber/data/apis/barber_api_services.dart';
 import 'package:temy_barber/features/barber/data/repos/barber_repo.dart';
 import 'package:temy_barber/features/booking/data/apis/booking_api_services.dart';
@@ -13,7 +14,9 @@ import 'package:temy_barber/features/home/data/apis/home_api_services.dart';
 import 'package:temy_barber/features/home/data/repos/home_repo.dart';
 import 'package:temy_barber/features/profile/data/apis/profile_api_services.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
+import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/update_profile_cubit.dart';
+import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_services.dart';
 import 'package:get_it/get_it.dart';
 
@@ -60,7 +63,8 @@ Future<void> setupGetIt() async {
 
   getIt.registerLazySingleton<CategoryBarberApiServices>(
       () => CategoryBarberApiServices(dio));
-  getIt.registerLazySingleton<CategoryBarberRepo>(() => CategoryBarberRepo(getIt()));
+  getIt.registerLazySingleton<CategoryBarberRepo>(
+      () => CategoryBarberRepo(getIt()));
 
   getIt.registerLazySingleton<CategoryApiServices>(
       () => CategoryApiServices(dio));
@@ -72,7 +76,17 @@ Future<void> setupGetIt() async {
   getIt
       .registerLazySingleton<BookingApiServices>(() => BookingApiServices(dio));
   getIt.registerLazySingleton<BookingRepo>(() => BookingRepo(getIt()));
-  
-  getIt.registerFactory<UpdateProfileCubit>(
-      () => UpdateProfileCubit(getIt())); // Add this line
+
+  getIt.registerFactory<UpdateProfileCubit>(() => UpdateProfileCubit(getIt()));
+
+  // Notification Service
+  getIt.registerLazySingleton<NotificationService>(
+      () => NotificationService.instance);
+
+  // Notification Cubit
+  getIt.registerFactory<NotificationCubit>(
+      () => NotificationCubit(getIt(), getIt()));
+
+  // Profile Cubit
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt(), getIt()));
 }

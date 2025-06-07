@@ -14,6 +14,9 @@ import 'package:temy_barber/features/login/ui/login_screen.dart';
 import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
+import 'package:temy_barber/features/profile/ui/notification_history_screen.dart';
+import 'package:temy_barber/features/profile/ui/notification_settings_screen.dart';
+import 'package:temy_barber/features/profile/ui/notification_test_screen.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/ui/booking_confirmation.dart';
 import 'package:temy_barber/features/reservations/ui/invoice_screen.dart';
@@ -65,6 +68,18 @@ class AppRouter {
             currentUser: userResponse,
           ),
         );
+      case Routes.notificationHistoryScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationHistoryScreen(),
+        );
+      case Routes.notificationSettingsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationSettingsScreen(),
+        );
+      case Routes.notificationTestScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationTestScreen(),
+        );
       case Routes.invoiceScreen:
         final reservationResponse =
             settings.arguments as ReservationResponseModel;
@@ -91,8 +106,7 @@ class AppRouter {
       case Routes.categoryScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) =>
-                CategoryCubit(getIt())..getCategory(),
+            create: (context) => CategoryCubit(getIt())..getCategory(),
             child: const CategoryScreen(),
           ),
         );
@@ -100,8 +114,8 @@ class AppRouter {
         final categoryId = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) =>
-                CategoryBarberCubit(getIt(), categoryId!)..getCategoryWithBarbers(),
+            create: (context) => CategoryBarberCubit(getIt(), categoryId!)
+              ..getCategoryWithBarbers(),
             child: const CategoryBarbersScreen(),
           ),
         );

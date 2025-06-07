@@ -2,6 +2,8 @@ import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/profile/data/apis/profile_api_services.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
+import 'package:temy_barber/features/profile/data/models/notification_request.dart';
+import 'package:temy_barber/features/profile/data/models/notification_response.dart';
 
 class ProfileRepo {
   final ProfileApiServices _profileApiServices;
@@ -21,6 +23,59 @@ class ProfileRepo {
       Map<String, dynamic> updateData) async {
     try {
       final response = await _profileApiServices.updateProfile(updateData);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  // Notification methods
+  Future<ApiResult<NotificationResponse>> updateDeviceToken(
+      NotificationTokenRequest request) async {
+    try {
+      final response = await _profileApiServices.updateDeviceToken(request);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<NotificationResponse>> updateNotificationSettings(
+      NotificationSettingsRequest request) async {
+    try {
+      final response =
+          await _profileApiServices.updateNotificationSettings(request);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<NotificationSettingsResponse>>
+      getNotificationSettings() async {
+    try {
+      final response = await _profileApiServices.getNotificationSettings();
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<NotificationHistoryResponse>>
+      getNotificationHistory() async {
+    try {
+      final response = await _profileApiServices.getNotificationHistory();
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<NotificationResponse>> markNotificationAsRead(
+      int notificationId) async {
+    try {
+      final response =
+          await _profileApiServices.markNotificationAsRead(notificationId);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

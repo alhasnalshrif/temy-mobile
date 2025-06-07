@@ -3,6 +3,7 @@ import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/core/services/notification_service.dart';
 import 'package:temy_barber/temy_app.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -14,6 +15,9 @@ void main() async {
 
   setupGetIt();
   await checkedIfUserLoggedIn();
+
+  // Initialize OneSignal notifications
+  await getIt<NotificationService>().initialize();
 
   // Load saved language preference
   String savedLanguage =
