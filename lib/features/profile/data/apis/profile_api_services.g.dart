@@ -14,7 +14,7 @@ class _ProfileApiServices implements ProfileApiServices {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://192.168.1.8:8080/api/v1/';
+    baseUrl ??= 'https://barber.codepeak.software/api/v1/';
   }
 
   final Dio _dio;
@@ -104,7 +104,7 @@ class _ProfileApiServices implements ProfileApiServices {
     )
         .compose(
           _dio.options,
-          'users/device-token',
+          'notifications/devices/register',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -125,120 +125,21 @@ class _ProfileApiServices implements ProfileApiServices {
   }
 
   @override
-  Future<NotificationResponse> updateNotificationSettings(
-      NotificationSettingsRequest request) async {
+  Future<NotificationResponse> registerDevice(
+      Map<String, dynamic> deviceData) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = request;
+    final _data = <String, dynamic>{};
+    _data.addAll(deviceData);
     final _options = _setStreamType<NotificationResponse>(Options(
-      method: 'PUT',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'users/notification-settings',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late NotificationResponse _value;
-    try {
-      _value = NotificationResponse.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<NotificationSettingsResponse> getNotificationSettings() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<NotificationSettingsResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'users/notification-settings',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late NotificationSettingsResponse _value;
-    try {
-      _value = NotificationSettingsResponse.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<NotificationHistoryResponse> getNotificationHistory() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<NotificationHistoryResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'users/notifications',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late NotificationHistoryResponse _value;
-    try {
-      _value = NotificationHistoryResponse.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<NotificationResponse> markNotificationAsRead(
-      int notificationId) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<NotificationResponse>(Options(
-      method: 'PUT',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'users/notifications/${notificationId}/read',
+          'notifications/devices/register',
           queryParameters: queryParameters,
           data: _data,
         )

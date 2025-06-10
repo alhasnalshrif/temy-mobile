@@ -14,8 +14,6 @@ class Routes {
   static const String bookingConfirmationScreen = '/bookingConfirmationScreen';
   static const String invoiceScreen = '/invoiceScreen';
   static const String updateProfileScreen = '/updateProfileScreen';
-  static const String notificationHistoryScreen = '/notificationHistoryScreen';
   static const String notificationSettingsScreen =
       '/notificationSettingsScreen';
-  static const String notificationTestScreen = '/notificationTestScreen';
 }

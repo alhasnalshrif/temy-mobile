@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:temy_barber/features/profile/data/models/notification_request.dart';
 import 'package:temy_barber/features/profile/data/models/notification_response.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
-import 'dart:io' show Platform;
+import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/core/helpers/constants.dart';
 import 'dart:developer';
 
 part 'notification_cubit.freezed.dart';
@@ -22,8 +22,6 @@ class NotificationCubit extends Cubit<NotificationState> {
     emit(const NotificationState.loading());
 
     try {
-      // Get current notification settings from server
-      await getNotificationSettings();
 
       // Update device token on server
       await _updateDeviceTokenOnServer();
@@ -31,50 +29,33 @@ class NotificationCubit extends Cubit<NotificationState> {
       log('Failed to initialize notifications: $error');
       emit(NotificationState.error(error.toString()));
     }
-  }
-
-  /// Update device token on server
+  }  /// Update device token on server
   Future<void> _updateDeviceTokenOnServer() async {
     try {
-      final token = await _notificationService.getPushToken();
       final playerId = await _notificationService.getPlayerId();
+      final userId = await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
 
-      if (token != null) {
-        final request = NotificationTokenRequest(
-          deviceToken: token,
-          playerId: playerId,
-          platform: Platform.isAndroid ? 'android' : 'ios',
-        );
+      log('Retrieved playerId: ${playerId ?? "null"}');
+      log('Retrieved userId: ${userId ?? "null"}');
 
-        final result = await _profileRepo.updateDeviceToken(request);
+      if (playerId != null && userId != null && userId.isNotEmpty) {
+        final result = await _profileRepo.registerDevice(userId, playerId);
         result.when(
           success: (response) {
-            log('Device token updated successfully: ${response.message}');
+            log('Device registered successfully: ${response.message}');
           },
           failure: (error) {
-            log('Failed to update device token: ${error.apiErrorModel.message}');
+            log('Failed to register device: ${error.apiErrorModel.message}');
+            // Don't throw error, just log it
           },
         );
+      } else {
+        log('Missing userId or playerId, skipping device registration');
       }
     } catch (error) {
-      log('Error updating device token: $error');
+      log('Error registering device: $error');
+      // Don't rethrow error to prevent app crashes
     }
-  }
-
-  /// Get notification settings from server
-  Future<void> getNotificationSettings() async {
-    emit(const NotificationState.loading());
-
-    final result = await _profileRepo.getNotificationSettings();
-    result.when(
-      success: (settings) {
-        emit(NotificationState.settingsLoaded(settings));
-      },
-      failure: (error) {
-        emit(NotificationState.error(error.apiErrorModel.message ??
-            'Failed to load notification settings'));
-      },
-    );
   }
 
   /// Update notification settings
@@ -88,61 +69,14 @@ class NotificationCubit extends Cubit<NotificationState> {
     try {
       // Update local notification service
       await _notificationService.setNotificationEnabled(pushNotifications);
-
-      // Update server settings
-      final request = NotificationSettingsRequest(
-        pushNotifications: pushNotifications,
-        bookingReminders: bookingReminders,
-        promotionalNotifications: promotionalNotifications,
-      );
-
-      final result = await _profileRepo.updateNotificationSettings(request);
-      result.when(
-        success: (response) {
-          emit(NotificationState.settingsUpdated(response));
-          // Refresh settings
-          getNotificationSettings();
-        },
-        failure: (error) {
-          emit(NotificationState.error(error.apiErrorModel.message ??
-              'Failed to update notification settings'));
-        },
-      );
     } catch (error) {
       emit(NotificationState.error(error.toString()));
     }
   }
 
   /// Get notification history
-  Future<void> getNotificationHistory() async {
-    emit(const NotificationState.loading());
-
-    final result = await _profileRepo.getNotificationHistory();
-    result.when(
-      success: (history) {
-        emit(NotificationState.historyLoaded(history));
-      },
-      failure: (error) {
-        emit(NotificationState.error(error.apiErrorModel.message ??
-            'Failed to load notification history'));
-      },
-    );
-  }
 
   /// Mark notification as read
-  Future<void> markNotificationAsRead(int notificationId) async {
-    final result = await _profileRepo.markNotificationAsRead(notificationId);
-    result.when(
-      success: (response) {
-        log('Notification marked as read: ${response.message}');
-        // Refresh notification history
-        getNotificationHistory();
-      },
-      failure: (error) {
-        log('Failed to mark notification as read: ${error.apiErrorModel.message}');
-      },
-    );
-  }
 
   /// Request notification permission
   Future<void> requestNotificationPermission() async {
@@ -176,24 +110,55 @@ class NotificationCubit extends Cubit<NotificationState> {
       emit(NotificationState.error(error.toString()));
     }
   }
-
   /// Set user ID for OneSignal (call after login)
   Future<void> setUserId(String userId) async {
     try {
       await _notificationService.setUserId(userId);
+      
+      // Add a small delay to allow OneSignal to process the login
+      await Future.delayed(const Duration(seconds: 2));
+      
       // Update device token after setting user ID
       await _updateDeviceTokenOnServer();
     } catch (error) {
       log('Failed to set user ID: $error');
     }
-  }
-
-  /// Logout user from OneSignal (call after logout)
+  }  /// Logout user from OneSignal (call after logout)
   Future<void> logoutUser() async {
     try {
       await _notificationService.logoutUser();
     } catch (error) {
       log('Failed to logout user: $error');
     }
+  }
+
+  /// Retry device token registration (useful for debugging)
+  Future<void> retryDeviceRegistration() async {
+    emit(const NotificationState.loading());
+    try {
+      await _updateDeviceTokenOnServer();
+      emit(NotificationState.settingsUpdated(
+        const NotificationResponse(
+          status: 'success',
+          message: 'Device registration retried successfully'
+        )
+      ));
+    } catch (error) {
+      emit(NotificationState.error(error.toString()));
+    }
+  }
+
+  // Add methods for notification settings and history management
+  Future<void> getNotificationSettings() async {
+    // TODO: Implement when backend API is ready
+    emit(const NotificationState.loading());
+    // For now, emit mock data
+    emit(const NotificationState.settingsLoaded(
+      const NotificationSettingsResponse(
+        pushNotifications: true,
+        bookingReminders: true,
+        promotionalNotifications: false,
+      )
+    ));
   }
 }

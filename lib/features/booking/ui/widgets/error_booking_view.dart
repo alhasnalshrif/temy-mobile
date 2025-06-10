@@ -20,7 +20,7 @@ class ErrorBookingView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'common.error_title'.tr(),
+            'verification.error_title'.tr(),
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -29,7 +29,7 @@ class ErrorBookingView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'booking.error_loading_info'.tr(),
+            'verification.error_loading_info'.tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.grey[600],
@@ -48,7 +48,7 @@ class ErrorBookingView extends StatelessWidget {
               context.read<BookingCubit>().getBooking();
             },
             child: Text(
-              'common.try_again'.tr(),
+              'verification.try_again'.tr(),
               style: const TextStyle(
                 color: Colors.white,
               ),

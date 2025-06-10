@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
+import 'package:temy_barber/features/login/logic/cubit/login_state.dart';
+import 'package:temy_barber/core/widgets/shimmer_loading.dart';
+import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
+import 'package:temy_barber/core/di/dependency_injection.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 
 import '../../../core/helpers/spacing.dart';
 import '../../../core/theme/styles.dart';
 import '../../../core/widgets/app_text_button.dart';
+import '../../../core/routing/routes.dart';
 import 'widgets/dont_have_account_text.dart';
 import 'widgets/email_and_password.dart';
-import 'widgets/login_bloc_listener.dart';
 import 'widgets/terms_and_conditions_text.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -104,7 +109,70 @@ class LoginScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: DontHaveAccountText(),
           ),
-          const LoginBlocListener(),
+          // Using direct approach to avoid Provider issues with NotificationCubit
+          BlocListener<LoginCubit, LoginState>(
+            listenWhen: (previous, current) =>
+                current is Loading || current is Success || current is Error,
+            listener: (context, state) {
+              state.whenOrNull(
+                loading: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => Center(
+                      child: ShimmerLoading.circular(
+                        size: 50,
+                      ),
+                    ),
+                  );
+                },
+                success: (loginResponse) {
+                  Navigator.of(context).pop(); // Close loading dialog
+
+                  // Set user ID for OneSignal directly from GetIt
+                  final userId = loginResponse.data?.user?.id;
+                  if (userId != null) {
+                    try {
+                      final notificationCubit = getIt<NotificationCubit>();
+                      notificationCubit.setUserId(userId);
+                    } catch (e) {
+                      debugPrint('Could not access NotificationCubit: $e');
+                    }
+                  }
+
+                  context.pushReplacementNamed(Routes.dashboardScreen);
+                },
+                error: (error) {
+                  Navigator.of(context).pop(); // Close loading dialog
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      icon: const Icon(
+                        Icons.error,
+                        color: Colors.red,
+                        size: 32,
+                      ),
+                      content: Text(
+                        error,
+                        style: TextStyles.font15DarkBlueMedium,
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'common.got_it'.tr(),
+                            style: TextStyles.font14BlueSemiBold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            child: const SizedBox.shrink(),
+          ),
         ],
       ),
     );

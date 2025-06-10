@@ -14,7 +14,7 @@ class _ReservationApiServices implements ReservationApiServices {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://192.168.1.8:8080/api/v1/';
+    baseUrl ??= 'https://barber.codepeak.software/api/v1/';
   }
 
   final Dio _dio;

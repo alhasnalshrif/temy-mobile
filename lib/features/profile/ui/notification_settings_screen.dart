@@ -27,7 +27,6 @@ class _NotificationSettingsScreenState
   void initState() {
     super.initState();
     notificationCubit = getIt<NotificationCubit>();
-    notificationCubit.getNotificationSettings();
   }
 
   @override

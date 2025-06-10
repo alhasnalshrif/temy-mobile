@@ -41,94 +41,87 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-        onPopInvoked: (didPop) {
-          // Clear all reservations when navigating back
-          if (didPop) {
+    return BlocListener<ReservationCubit, ReservationState>(
+      listener: (context, state) {
+        state.maybeWhen(
+          reservationLoading: () {
+            _showLoadingDialog(context);
+          },
+          reservationSuccess: (response, arguments) {
+            // Dismiss loading dialog if it's showing
+            Navigator.of(context, rootNavigator: true).pop();
+    
+            // Clear all reservations when successful
             _multiReservationManager.clearReservations();
-          }
-        },
-        child: BlocListener<ReservationCubit, ReservationState>(
-          listener: (context, state) {
-            state.maybeWhen(
-              reservationLoading: () {
-                _showLoadingDialog(context);
-              },
-              reservationSuccess: (response, arguments) {
-                // Dismiss loading dialog if it's showing
-                Navigator.of(context, rootNavigator: true).pop();
-
-                // Clear all reservations when successful
-                _multiReservationManager.clearReservations();
-
-                // Navigate to invoice screen
-                Navigator.pushReplacementNamed(
-                  context,
-                  Routes.invoiceScreen,
-                  arguments: response,
-                );
-              },
-              reservationError: (error) {
-                // Dismiss loading dialog if it's showing
-                Navigator.of(context, rootNavigator: true).pop();
-
-                // Show error message
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(error.toString()),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              },
-              orElse: () {},
+    
+            // Navigate to invoice screen
+            Navigator.pushReplacementNamed(
+              context,
+              Routes.invoiceScreen,
+              arguments: response,
             );
           },
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(
-                'تأكيد الحجز',
-                style: TextStyles.font16DarkBold,
+          reservationError: (error) {
+            // Dismiss loading dialog if it's showing
+            Navigator.of(context, rootNavigator: true).pop();
+    
+            // Show error message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(error.toString()),
+                backgroundColor: Colors.red,
               ),
-              centerTitle: true,
-              backgroundColor: Colors.white,
-              surfaceTintColor: Colors.white,
-              elevation: 0,
-              shadowColor: Colors.transparent,
-            ),
-            backgroundColor: Colors.white,
-            body: SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _buildHeader(),
-                            const SizedBox(height: 16),
-                            _buildOrderSummary(),
-                            const SizedBox(height: 16),
-                            _buildBarberInfo(),
-                            const SizedBox(height: 16),
-                            _buildAppointmentInfo(),
-                            const SizedBox(height: 16),
-                            _buildPaymentInfo(),
-                            // Add padding at the bottom for better scrolling
-                            const SizedBox(height: 16),
-                          ],
-                        ),
-                      ),
+            );
+          },
+          orElse: () {},
+        );
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'تأكيد الحجز',
+            style: TextStyles.font16DarkBold,
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          elevation: 0,
+          shadowColor: Colors.transparent,
+        ),
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildHeader(),
+                        const SizedBox(height: 16),
+                        _buildOrderSummary(),
+                        const SizedBox(height: 16),
+                        _buildBarberInfo(),
+                        const SizedBox(height: 16),
+                        _buildAppointmentInfo(),
+                        const SizedBox(height: 16),
+                        _buildPaymentInfo(),
+                        // Add padding at the bottom for better scrolling
+                        const SizedBox(height: 16),
+                      ],
                     ),
                   ),
-                  _buildBottomButtons(context),
-                ],
+                ),
               ),
-            ),
+              _buildBottomButtons(context),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   // Show loading dialog

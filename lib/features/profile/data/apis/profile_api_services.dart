@@ -16,23 +16,14 @@ abstract class ProfileApiServices {
   Future<UserProfile> getProfile();
   @PUT(HomeApiConstants.profileUpdate)
   Future<UserProfile> updateProfile(@Body() Map<String, dynamic> updateData);
-
   // Notification endpoints
   @POST(HomeApiConstants.updateDeviceToken)
   Future<NotificationResponse> updateDeviceToken(
       @Body() NotificationTokenRequest request);
 
-  @PUT(HomeApiConstants.notificationSettings)
-  Future<NotificationResponse> updateNotificationSettings(
-      @Body() NotificationSettingsRequest request);
+  @POST(HomeApiConstants.updateDeviceToken)
+  Future<NotificationResponse> registerDevice(
+      @Body() Map<String, dynamic> deviceData);
 
-  @GET(HomeApiConstants.notificationSettings)
-  Future<NotificationSettingsResponse> getNotificationSettings();
-
-  @GET(HomeApiConstants.notificationHistory)
-  Future<NotificationHistoryResponse> getNotificationHistory();
-
-  @PUT(HomeApiConstants.markNotificationRead)
-  Future<NotificationResponse> markNotificationAsRead(
-      @Path("id") int notificationId);
+ 
 }

@@ -13,10 +13,9 @@ import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
 import 'package:temy_barber/features/login/ui/login_screen.dart';
 import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
+import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
-import 'package:temy_barber/features/profile/ui/notification_history_screen.dart';
 import 'package:temy_barber/features/profile/ui/notification_settings_screen.dart';
-import 'package:temy_barber/features/profile/ui/notification_test_screen.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/ui/booking_confirmation.dart';
 import 'package:temy_barber/features/reservations/ui/invoice_screen.dart';
@@ -37,8 +36,11 @@ class AppRouter {
         );
       case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<LoginCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<LoginCubit>()),
+              BlocProvider(create: (context) => getIt<NotificationCubit>()),
+            ],
             child: const LoginScreen(),
           ),
         );
@@ -68,18 +70,12 @@ class AppRouter {
             currentUser: userResponse,
           ),
         );
-      case Routes.notificationHistoryScreen:
-        return MaterialPageRoute(
-          builder: (_) => const NotificationHistoryScreen(),
-        );
+  
       case Routes.notificationSettingsScreen:
         return MaterialPageRoute(
           builder: (_) => const NotificationSettingsScreen(),
         );
-      case Routes.notificationTestScreen:
-        return MaterialPageRoute(
-          builder: (_) => const NotificationTestScreen(),
-        );
+     
       case Routes.invoiceScreen:
         final reservationResponse =
             settings.arguments as ReservationResponseModel;

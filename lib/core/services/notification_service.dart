@@ -4,6 +4,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter/foundation.dart';
 import '../routing/routes.dart';
 import '../config/notification_config.dart';
+import '../utils/temy_sentry_utils.dart';
 
 class NotificationService {
   static String get _oneSignalAppId => NotificationConfig.oneSignalAppId;
@@ -12,52 +13,103 @@ class NotificationService {
   static NotificationService get instance =>
       _instance ??= NotificationService._();
 
-  NotificationService._();
-
-  /// Initialize OneSignal
+  NotificationService._();  /// Initialize OneSignal
   Future<void> initialize() async {
     try {
       // Check if OneSignal is configured
       if (!NotificationConfig.isConfigured) {
         log('⚠️ OneSignal App ID not configured. Please update NotificationConfig.oneSignalAppId');
+        await TemySentryUtils.trackOneSignalInit(
+          success: false,
+          error: 'OneSignal App ID not configured',
+        );
         return;
       }
 
-      // Initialize OneSignal
-      OneSignal.initialize(_oneSignalAppId);
+      log('🚀 Initializing OneSignal with App ID: ${_oneSignalAppId.substring(0, 8)}...');
+      
+      // Initialize OneSignal with proper error handling
+      try {
+        OneSignal.initialize(_oneSignalAppId);
+        log('✅ OneSignal.initialize() completed');
+      } catch (e) {
+        log('❌ OneSignal.initialize() failed: $e');
+        throw Exception('OneSignal initialization failed: $e');
+      }
 
       // Set the log level for debugging (remove in production)
       if (kDebugMode && NotificationConfig.enableDebugLogging) {
-        OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+        try {
+          OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+          log('🔧 OneSignal debug logging enabled');
+        } catch (e) {
+          log('⚠️ Failed to set OneSignal debug level: $e');
+        }
       }
 
-      // Request notification permission
+      // Setup notification handlers first
+      _setupNotificationHandlers();
+      log('📱 Notification handlers setup completed');
+
+      // Add a delay to ensure OneSignal is fully initialized
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      // Request notification permission with better error handling
       await requestNotificationPermission();
 
-      // Setup notification handlers
-      _setupNotificationHandlers();
-
       log('✅ OneSignal initialized successfully with App ID: ${_oneSignalAppId.substring(0, 8)}...');
+      
+      // Track successful initialization
+      await TemySentryUtils.trackOneSignalInit(
+        success: true,
+        appId: _oneSignalAppId,
+        version: 'onesignal_flutter ^5.3.3',
+      );
     } catch (e) {
       log('❌ Failed to initialize OneSignal: $e');
+      
+      // Track initialization failure
+      await TemySentryUtils.trackOneSignalInit(
+        success: false,
+        error: e.toString(),
+        appId: _oneSignalAppId,
+      );
+      
+      // Don't rethrow - allow app to continue without notifications
+      log('📱 App will continue without push notifications');
     }
-  }
-
-  /// Request notification permission with enhanced error handling
+  }  /// Request notification permission with enhanced error handling
   Future<bool> requestNotificationPermission() async {
     try {
+      log('📱 Requesting notification permission...');
+      
+      // Check if OneSignal is properly initialized before requesting permission
+      await Future.delayed(const Duration(milliseconds: 100));
+      
       final permission = await OneSignal.Notifications.requestPermission(true);
-      log('Notification permission granted: $permission');
+      log('Notification permission granted: $permission');      // Track permission result
+      await TemySentryUtils.trackNotificationEvent(
+        'permission_request_result',
+        permissionStatus: permission ? 'granted' : 'denied',
+      );
 
       if (!permission) {
         log('Notification permission denied by user');
         // Handle permission denied scenario
         await _handlePermissionDenied();
+      } else {
+        log('✅ Notification permission granted successfully');
       }
 
       return permission;
     } catch (e) {
       log('Failed to request notification permission: $e');
+      
+      // Track permission error
+      await TemySentryUtils.trackNotificationEvent(
+        'permission_request_error',      error: e.toString(),
+      );
+      
       await _handlePermissionError(e.toString());
       return false;
     }
@@ -159,14 +211,22 @@ class NotificationService {
       log('Failed to set OneSignal user ID: $e');
     }
   }
-
   /// Logout user from OneSignal (call this after user logout)
   Future<void> logoutUser() async {
     try {
+      // Clear user-specific OneSignal data
       await OneSignal.logout();
-      log('OneSignal user logged out');
+      
+      // Clear any user-specific tags
+      await removeTags(['user_id', 'user_type', 'language']);
+      
+      // Disable notifications temporarily during logout
+      await setNotificationEnabled(false);
+      
+      log('✅ OneSignal user logged out successfully');
     } catch (e) {
-      log('Failed to logout OneSignal user: $e');
+      log('❌ Failed to logout OneSignal user: $e');
+      // Continue with logout even if OneSignal fails
     }
   }
 
@@ -258,6 +318,46 @@ class NotificationService {
       log('Error checking first time permission: $e');
       return true;
     }
+  }
+
+  /// Test OneSignal functionality (for debugging)
+  Future<Map<String, dynamic>> testOneSignalStatus() async {
+    final status = <String, dynamic>{
+      'isConfigured': NotificationConfig.isConfigured,
+      'appId': NotificationConfig.oneSignalAppId.substring(0, 8) + '...',
+      'timestamp': DateTime.now().toIso8601String(),
+    };
+    
+    try {
+      // Test basic OneSignal functionality
+      final hasPermission = await areNotificationsEnabled();
+      status['hasPermission'] = hasPermission;
+      
+      // Try to get device info
+      try {
+        final playerId = await getPlayerId();
+        final pushToken = await getPushToken();
+        
+        status['playerId'] = playerId != null ? 'Available' : 'Not available';
+        status['pushToken'] = pushToken != null ? 'Available' : 'Not available';
+      } catch (e) {
+        status['deviceInfoError'] = e.toString();
+      }
+      
+      status['status'] = 'working';
+    } catch (e) {
+      status['status'] = 'error';
+      status['error'] = e.toString();
+      
+      // Report to Sentry
+      await TemySentryUtils.trackNotificationEvent(
+        'onesignal_status_test_failed',
+        error: e.toString(),
+        additionalData: status,
+      );
+    }
+    
+    return status;
   }
 
   // Navigation methods - Deep linking for notification actions

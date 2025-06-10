@@ -28,7 +28,6 @@ class ProfileRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
-
   // Notification methods
   Future<ApiResult<NotificationResponse>> updateDeviceToken(
       NotificationTokenRequest request) async {
@@ -40,42 +39,13 @@ class ProfileRepo {
     }
   }
 
-  Future<ApiResult<NotificationResponse>> updateNotificationSettings(
-      NotificationSettingsRequest request) async {
+  Future<ApiResult<NotificationResponse>> registerDevice(
+      String userId, String playerId) async {
     try {
-      final response =
-          await _profileApiServices.updateNotificationSettings(request);
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
-  }
-
-  Future<ApiResult<NotificationSettingsResponse>>
-      getNotificationSettings() async {
-    try {
-      final response = await _profileApiServices.getNotificationSettings();
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
-  }
-
-  Future<ApiResult<NotificationHistoryResponse>>
-      getNotificationHistory() async {
-    try {
-      final response = await _profileApiServices.getNotificationHistory();
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
-  }
-
-  Future<ApiResult<NotificationResponse>> markNotificationAsRead(
-      int notificationId) async {
-    try {
-      final response =
-          await _profileApiServices.markNotificationAsRead(notificationId);
+      final response = await _profileApiServices.registerDevice({
+        'userId': userId,
+        'playerId': playerId,
+      });
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

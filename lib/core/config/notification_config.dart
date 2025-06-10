@@ -34,10 +34,9 @@ class NotificationConfig {
     'services': '/services',
     'profile': '/profile',
   };
-
   /// Validate if OneSignal App ID is configured
   static bool get isConfigured =>
-      oneSignalAppId != "cf73d402-32e3-452e-8d58-bfe6e2129923";
+      oneSignalAppId.isNotEmpty && oneSignalAppId != "YOUR_ONESIGNAL_APP_ID";
 
   /// Get notification icon for different types
   static String getNotificationIcon(String type) {

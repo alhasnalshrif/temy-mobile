@@ -1,7 +1,12 @@
 {
   "welcome": "مرحبا",
   "login": "تسجيل الدخول",
-  "logout": "تسجيل الخروج",
+  "logout": {
+    "logout": "تسجيل الخروج",
+    "confirm_title": "تأكيد تسجيل الخروج",
+    "confirm_message": "هل أنت متأكد من تسجيل الخروج؟",
+    "processing": "جارٍ تسجيل الخروج..."
+  },
   "next_appointment": "الموعد التالي",
   "leave_feedback": "ترك تعليق",
   "success_message": "تم الحجز بنجاح!",
@@ -115,9 +120,12 @@
     "success_message": "تهانينا، تم التحقق من حسابك بنجاح!",
     "continue_to_login": "المتابعة لتسجيل الدخول",
     "error_title": "خطأ",
+    "try_again": "حاول مرة أخرى",
+    "error_loading_info": "فشل تحميل معلومات التحقق",
     "got_it": "فهمت"
   },
   "profile": {
+    "notification_settings": "إعدادات الإشعارات",
     "title": "الملف الشخصي",
     "notifications": "الإشعارات",
     "notification_history": "سجل الإشعارات",

@@ -1,7 +1,12 @@
 {
     "welcome": "welcome",
     "login": "login",
-    "logout": "logout",
+    "logout": {
+        "logout": "Logout",
+        "confirm_title": "Confirm Logout",
+        "confirm_message": "Are you sure you want to logout?",
+        "processing": "Logging out..."
+    },
     "next_appointment": "Next Appointment",
     "default_booking": {
         "title": "Default Booking",
@@ -107,8 +112,12 @@
         "success_message": "Congratulations, your account has been verified successfully!",
         "continue_to_login": "Continue to Login",
         "error_title": "Error",
+        "try_again": "Please try again",
+        "error_loading_info": "Failed to load verification information",
         "got_it": "Got it"
-    },    "profile": {
+    },
+    "profile": {
+        "notification_settings": "Notification Settings",
         "title": "Profile",
         "notifications": "Notifications",
         "notification_history": "Notification History",
@@ -140,15 +149,16 @@
         "info_description": "You can manage your notification preferences here. Changes will be saved automatically.",
         "settings_saved": "Notification settings saved successfully",
         "booking_confirmed": "Booking Confirmed",
-        "booking_reminder": "Booking Reminder",        "booking_cancelled": "Booking Cancelled",
+        "booking_reminder": "Booking Reminder",
+        "booking_cancelled": "Booking Cancelled",
         "promotion": "Promotion"
-    },
-    "common": {
+    },    "common": {
         "no_date": "No date",
         "no_time": "No time",
         "not_available": "N/A",
         "got_it": "Got it",
         "save": "Save",
-        "retry": "Retry"
+        "retry": "Retry",
+        "cancel": "Cancel"
     }
 }

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/core/networking/sentry_dio_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {
@@ -33,11 +34,13 @@ class DioFactory {
           'Bearer ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}'
     };
   }
-
   static void setTokenIntoHeaderAfterLogin(String token) async {
     dio?.options.headers = {'authorization': 'Bearer $token'};
   }
 
+  static void clearTokenFromHeader() {
+    dio?.options.headers.remove('authorization');
+  }
   static void addDioInterceptor() {
     dio?.interceptors.add(
       PrettyDioLogger(
@@ -46,5 +49,8 @@ class DioFactory {
         responseHeader: true,
       ),
     );
+    
+    // Add Sentry interceptor for error tracking
+    dio?.interceptors.add(SentryDioInterceptor());
   }
 }

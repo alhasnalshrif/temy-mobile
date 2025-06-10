@@ -33,7 +33,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     notificationCubit = getIt<NotificationCubit>();
     _loadSavedLanguage();
-    _loadNotificationSettings();
   }
 
   Future<void> _loadSavedLanguage() async {
@@ -52,10 +51,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       currentLanguage = languageCode;
     });
-  }
-
-  Future<void> _loadNotificationSettings() async {
-    notificationCubit.getNotificationSettings();
   }
 
   void _toggleNotifications(bool value) {
@@ -179,19 +174,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               verticalSpace(30),
               Container(
                 width: size.width,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
-                      spreadRadius: 0,
-                    ),
-                  ],
                 ),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -199,148 +187,91 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Enhanced Notification Settings Section
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      child: BlocBuilder<NotificationCubit, NotificationState>(
-                        bloc: notificationCubit,
-                        builder: (context, state) {
-                          bool isLoading = false;
+                    // Container(
+                    //   margin: const EdgeInsets.only(bottom: 12),
+                    //   child: BlocBuilder<NotificationCubit, NotificationState>(
+                    //     bloc: notificationCubit,
+                    //     builder: (context, state) {
+                    //       bool isLoading = false;
 
-                          if (state.runtimeType
-                              .toString()
-                              .contains('SettingsLoaded')) {
-                            final settingsState = state as dynamic;
-                            notificationsEnabled =
-                                settingsState.settings.pushNotifications;
-                          } else if (state.runtimeType
-                              .toString()
-                              .contains('Loading')) {
-                            isLoading = true;
-                          }
+                    //       if (state.runtimeType
+                    //           .toString()
+                    //           .contains('SettingsLoaded')) {
+                    //         final settingsState = state as dynamic;
+                    //         notificationsEnabled =
+                    //             settingsState.settings.pushNotifications;
+                    //       } else if (state.runtimeType
+                    //           .toString()
+                    //           .contains('Loading')) {
+                    //         isLoading = true;
+                    //       }
 
-                          return Column(
-                            children: [
-                              // Notification Toggle
-                              SwitchListTile(
-                                activeColor: ColorsManager.mainBlue,
-                                activeTrackColor:
-                                    ColorsManager.mainBlue.withOpacity(0.2),
-                                trackOutlineColor: WidgetStateProperty.all(
-                                    ColorsManager.mainBlue),
-                                value: notificationsEnabled,
-                                onChanged:
-                                    isLoading ? null : _toggleNotifications,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                title: Row(
-                                  children: [
-                                    const Icon(Icons.notifications_outlined,
-                                        color: ColorsManager.mainBlue),
-                                    horizontalSpace(12),
-                                    Text(
-                                      'profile.notifications'.tr(),
-                                      style: TextStyles.font16DarkBold,
-                                    ),
-                                    if (isLoading) ...[
-                                      horizontalSpace(8),
-                                      const SizedBox(
-                                        width: 16,
-                                        height: 16,
-                                        child: CircularProgressIndicator(
-                                            strokeWidth: 2),
-                                      ),
-                                    ],
-                                  ],
-                                ),
-                              ),
-                              // Notification Settings Button
-                              ListTile(
-                                onTap: () => Navigator.pushNamed(
-                                    context, Routes.notificationSettingsScreen),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                title: Row(
-                                  children: [
-                                    const Icon(Icons.settings_outlined,
-                                        color: ColorsManager.mainBlue),
-                                    horizontalSpace(12),
-                                    Text(
-                                      'profile.notification_settings'.tr(),
-                                      style: TextStyles.font16DarkBold,
-                                    ),
-                                  ],
-                                ),
-                                trailing: const Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: ColorsManager.mainBlue,
-                                  size: 16,
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                    // Notification History Button
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      child: ListTile(
-                        onTap: () => Navigator.pushNamed(
-                            context, Routes.notificationHistoryScreen),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        title: Row(
-                          children: [
-                            const Icon(Icons.history,
-                                color: ColorsManager.mainBlue),
-                            horizontalSpace(12),
-                            Text(
-                              'profile.notification_history'.tr(),
-                              style: TextStyles.font16DarkBold,
-                            ),
-                          ],
-                        ),
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios,
-                          color: ColorsManager.mainBlue,
-                          size: 16,
-                        ),
-                      ),
-                    ),
-                    // Development Test Button (only in debug mode)
-                    if (kDebugMode)
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 12),
-                        child: ListTile(
-                          onTap: () => Navigator.pushNamed(
-                              context, Routes.notificationTestScreen),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          tileColor: Colors.orange.shade50,
-                          title: Row(
-                            children: [
-                              const Icon(Icons.bug_report,
-                                  color: Colors.orange),
-                              horizontalSpace(12),
-                              Text(
-                                'Notification Testing (Dev)',
-                                style: TextStyles.font16DarkBold.copyWith(
-                                  color: Colors.orange.shade700,
-                                ),
-                              ),
-                            ],
-                          ),
-                          trailing: const Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.orange,
-                            size: 16,
-                          ),
-                        ),
-                      ),
+                    //       return Column(
+                    //         children: [
+                    //           // Notification Toggle
+                    //           SwitchListTile(
+                    //             activeColor: ColorsManager.mainBlue,
+                    //             activeTrackColor:
+                    //                 ColorsManager.mainBlue.withOpacity(0.2),
+                    //             trackOutlineColor: WidgetStateProperty.all(
+                    //                 ColorsManager.mainBlue),
+                    //             value: notificationsEnabled,
+                    //             onChanged:
+                    //                 isLoading ? null : _toggleNotifications,
+                    //             shape: RoundedRectangleBorder(
+                    //               borderRadius: BorderRadius.circular(12),
+                    //             ),
+                    //             title: Row(
+                    //               children: [
+                    //                 const Icon(Icons.notifications_outlined,
+                    //                     color: ColorsManager.mainBlue),
+                    //                 horizontalSpace(12),
+                    //                 Text(
+                    //                   'profile.notifications'.tr(),
+                    //                   style: TextStyles.font16DarkBold,
+                    //                 ),
+                    //                 if (isLoading) ...[
+                    //                   horizontalSpace(8),
+                    //                   const SizedBox(
+                    //                     width: 16,
+                    //                     height: 16,
+                    //                     child: CircularProgressIndicator(
+                    //                         strokeWidth: 2),
+                    //                   ),
+                    //                 ],
+                    //               ],
+                    //             ),
+                    //           ),
+                    //           // Notification Settings Button
+                    //           ListTile(
+                    //             onTap: () => Navigator.pushNamed(
+                    //                 context, Routes.notificationSettingsScreen),
+                    //             shape: RoundedRectangleBorder(
+                    //               borderRadius: BorderRadius.circular(12),
+                    //             ),
+                    //             title: Row(
+                    //               children: [
+                    //                 const Icon(Icons.settings_outlined,
+                    //                     color: ColorsManager.mainBlue),
+                    //                 horizontalSpace(12),
+                    //                 Text(
+                    //                   'profile.notification_settings'.tr(),
+                    //                   style: TextStyles.font16DarkBold,
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //             trailing: const Icon(
+                    //               Icons.arrow_forward_ios,
+                    //               color: ColorsManager.mainBlue,
+                    //               size: 16,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
+
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Row(
@@ -459,9 +390,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: () {
-                                context.read<ProfileCubit>().logout();
-                                context.pushNamed(Routes.loginScreen);
+                              onPressed: () async {
+                                // Show confirmation dialog
+                                final shouldLogout = await showDialog<bool>(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text('logout.confirm_title'.tr()),
+                                    content:
+                                        Text('logout.confirm_message'.tr()),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child:
+                                            Text('default_booking.cancel'.tr()),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(true),
+                                        style: TextButton.styleFrom(
+                                          foregroundColor: Colors.red,
+                                        ),
+                                        child: Text('logout.logout'.tr()),
+                                      ),
+                                    ],
+                                  ),
+                                );
+
+                                if (shouldLogout == true) {
+                                  context.read<ProfileCubit>().logout();
+                                  context
+                                      .pushReplacementNamed(Routes.loginScreen);
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: ColorsManager.mainBlue,
@@ -473,7 +433,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     const EdgeInsets.symmetric(vertical: 16),
                               ),
                               child: Text(
-                                'logout'.tr(),
+                                'logout.logout'.tr(),
                                 style: TextStyles.font16WhiteSemiBold,
                               ),
                             ),
