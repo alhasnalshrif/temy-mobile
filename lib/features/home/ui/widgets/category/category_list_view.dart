@@ -28,7 +28,7 @@ class CategoryListView extends StatelessWidget {
     } else if (screenWidth > 400) {
       crossAxisCount = 3; // Normal phones
     } else {
-      crossAxisCount = 2; // Small phones
+      crossAxisCount = 3; // Small phones
     }
 
     // Calculate the number of items to show
