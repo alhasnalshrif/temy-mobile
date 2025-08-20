@@ -17,4 +17,5 @@ class Routes {
   static const String notificationSettingsScreen =
       '/notificationSettingsScreen';
   static const String deleteAccountScreen = '/deleteAccountScreen';
+  static const String privacyPolicyScreen = '/privacyPolicyScreen';
 }

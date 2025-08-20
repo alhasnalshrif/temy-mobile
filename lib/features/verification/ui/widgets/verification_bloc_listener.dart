@@ -42,6 +42,7 @@ class VerificationBlocListener extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white,
           title: Text('verification.success_title'.tr()),
           content: SingleChildScrollView(
             child: ListBody(
@@ -73,6 +74,7 @@ class VerificationBlocListener extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
         icon: const Icon(
           Icons.error,
           color: Colors.red,

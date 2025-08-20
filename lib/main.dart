@@ -66,7 +66,7 @@ void main() async {
       options.dsn =
           'https://60d5c02ce39df76817718e6ca4f61aa5@o4508048971792384.ingest.de.sentry.io/4509471265456208';
       options.environment = kDebugMode ? 'development' : 'production';
-      options.debug = kDebugMode;
+      options.debug = false; // Reduce debug logging noise
 
       // Performance monitoring
       options.tracesSampleRate =
@@ -76,6 +76,8 @@ void main() async {
       options.attachStacktrace = true;
       options.enableAutoSessionTracking = true;
       options.autoAppStart = true;
+      options.enableUserInteractionBreadcrumbs =
+          false; // Disable UI interaction breadcrumbs
 
       // Capture options
       options.captureFailedRequests = true;

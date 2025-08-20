@@ -954,6 +954,8 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+            backgroundColor: Colors.white,
+
         title: const Text("حذف جميع الحجوزات"),
         content: const Text("هل أنت متأكد من حذف جميع الحجوزات المضافة؟"),
         actions: [

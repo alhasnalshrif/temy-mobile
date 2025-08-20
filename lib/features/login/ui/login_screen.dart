@@ -146,6 +146,8 @@ class LoginScreen extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
+            backgroundColor: Colors.white,
+
                       icon: const Icon(
                         Icons.error,
                         color: Colors.red,

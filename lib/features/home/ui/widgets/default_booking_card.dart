@@ -61,7 +61,8 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
     }
 
     final barberData = _defaultReservation!['barber'];
-    final services = List<Map<String, dynamic>>.from(_defaultReservation!['services']);
+    final services =
+        List<Map<String, dynamic>>.from(_defaultReservation!['services']);
     final totalPrice = _defaultReservation!['totalPrice'].toDouble();
 
     int totalDuration = 0;
@@ -79,7 +80,7 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
         return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            backgroundColor: ColorsManager.lightBlue,
+            backgroundColor: Colors.white,
             title: Text('default_booking.remove_title'.tr()),
             content: Text('default_booking.remove_confirmation'.tr()),
             actions: [
@@ -174,7 +175,8 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                   const SizedBox(height: 4),
                   ElevatedButton(
                     onPressed: () {
-                      List<BarberService> barberServices = services.map((service) {
+                      List<BarberService> barberServices =
+                          services.map((service) {
                         return BarberService(
                           id: service['id'],
                           name: service['name'],

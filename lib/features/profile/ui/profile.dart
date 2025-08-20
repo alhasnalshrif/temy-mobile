@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
@@ -27,12 +26,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String currentLanguage = 'ar';
   bool notificationsEnabled = true;
   late NotificationCubit notificationCubit;
+  bool _isDeleteDialogShown = false;
 
   @override
   void initState() {
     super.initState();
     notificationCubit = getIt<NotificationCubit>();
     _loadSavedLanguage();
+  }
+
+  @override
+  void dispose() {
+    // Clean up any resources if needed and reset dialog flag
+    _isDeleteDialogShown = false;
+    super.dispose();
   }
 
   Future<void> _loadSavedLanguage() async {
@@ -51,17 +58,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       currentLanguage = languageCode;
     });
-  }
-
-  void _toggleNotifications(bool value) {
-    setState(() {
-      notificationsEnabled = value;
-    });
-    notificationCubit.updateNotificationSettings(
-      pushNotifications: value,
-      bookingReminders: value,
-      promotionalNotifications: value,
-    );
   }
 
   @override
@@ -368,7 +364,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     _buildProfileTile(
                       'profile.privacy'.tr(),
                       Icons.lock_outline,
-                      onTap: () {},
+                      onTap: () {
+                        context.pushNamed(Routes.privacyPolicyScreen);
+                      },
                     ),
                     _buildProfileTile(
                       'profile.help'.tr(),
@@ -402,7 +400,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 // Show confirmation dialog
                                 final shouldLogout = await showDialog<bool>(
                                   context: context,
-                                  builder: (context) => AlertDialog(
+                                  builder: (dialogContext) => AlertDialog(
+                                    backgroundColor: Colors.white,
+
+                                    key:
+                                        UniqueKey(), // Add unique key to prevent GlobalKey conflicts
                                     title: Text('logout.confirm_title'.tr()),
                                     content:
                                         Text('logout.confirm_message'.tr()),
@@ -426,9 +428,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 );
 
                                 if (shouldLogout == true) {
-                                  context.read<ProfileCubit>().logout();
-                                  context
-                                      .pushReplacementNamed(Routes.loginScreen);
+                                  await context.read<ProfileCubit>().logout();
+                                  if (context.mounted) {
+                                    context.pushReplacementNamed(
+                                        Routes.loginScreen);
+                                  }
                                 }
                               },
                               style: ElevatedButton.styleFrom(
@@ -528,161 +532,154 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _showDeleteAccountDialog(BuildContext context) {
-    final TextEditingController confirmationController =
-        TextEditingController();
-    bool canDelete = false;
+    if (_isDeleteDialogShown) return; // Prevent multiple dialogs
+
+    _isDeleteDialogShown = true;
 
     // Capture the ProfileCubit from the original context
     final ProfileCubit profileCubit = context.read<ProfileCubit>();
 
+    void closeDialog() {
+      if (mounted) {
+        setState(() {
+          _isDeleteDialogShown = false;
+        });
+      }
+    }
+
     showDialog(
       context: context,
-      barrierDismissible: false,
-      builder: (dialogContext) => StatefulBuilder(
-        builder: (context, setState) => BlocProvider<ProfileCubit>.value(
-          value: profileCubit,
-          child: AlertDialog(
-            title: Row(
-              children: [
-                const Icon(Icons.warning, color: Colors.red, size: 28),
-                horizontalSpace(8),
-                Expanded(
-                  child: Text(
-                    'delete_account.warning_title'.tr(),
-                    style:
-                        TextStyles.font18DarkBold.copyWith(color: Colors.red),
-                  ),
-                ),
-              ],
-            ),
-            content: SizedBox(
-              width: double.maxFinite,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+      barrierDismissible: true, // Allow dismissing by tapping outside
+      builder: (dialogContext) {
+        return PopScope(
+          onPopInvokedWithResult: (didPop, result) {
+            if (didPop) {
+              closeDialog();
+            }
+          },
+          child: BlocProvider<ProfileCubit>.value(
+            value: profileCubit,
+            child: AlertDialog(
+              backgroundColor: Colors.white,
+              title: Row(
                 children: [
-                  Text(
-                    'delete_account.warning_message'.tr(),
-                    style: TextStyles.font14DarkBlueMedium,
-                  ),
-                  verticalSpace(20),
-                  Text(
-                    'delete_account.confirmation_text'.tr(),
-                    style: TextStyles.font14DarkBlueMedium
-                        .copyWith(color: Colors.red),
-                  ),
-                  verticalSpace(8),
-                  TextField(
-                    controller: confirmationController,
-                    onChanged: (value) {
-                      setState(() {
-                        canDelete =
-                            value.toUpperCase() == 'DELETE' || value == 'حذف';
-                      });
-                    },
-                    decoration: InputDecoration(
-                      hintText: currentLanguage == 'ar'
-                          ? 'اكتب: حذف'
-                          : 'Type: DELETE',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Colors.red, width: 2),
-                      ),
+                  const Icon(Icons.warning, color: Colors.red, size: 28),
+                  horizontalSpace(8),
+                  Expanded(
+                    child: Text(
+                      'delete_account.warning_title'.tr(),
+                      style:
+                          TextStyles.font18DarkBold.copyWith(color: Colors.red),
                     ),
                   ),
                 ],
               ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  confirmationController.dispose();
-                  Navigator.of(dialogContext).pop();
-                },
-                child: Text(
-                  'delete_account.cancel_button'.tr(),
-                  style: TextStyles.font14BlueSemiBold,
+              content: SizedBox(
+                width: double.maxFinite,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'delete_account.warning_message'.tr(),
+                      style: TextStyles.font14DarkBlueMedium,
+                    ),
+                  ],
                 ),
               ),
-              BlocConsumer<ProfileCubit, ProfileState>(
-                listener: (context, state) {
-                  state.maybeMap(
-                    deleteSuccess: (successState) {
-                      confirmationController.dispose();
-                      Navigator.of(dialogContext).pop(); // Close dialog
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    closeDialog();
+                    Navigator.of(dialogContext).pop();
+                  },
+                  child: Text(
+                    'delete_account.cancel_button'.tr(),
+                    style: TextStyles.font14BlueSemiBold,
+                  ),
+                ),
+                BlocConsumer<ProfileCubit, ProfileState>(
+                  listener: (context, state) async {
+                    state.maybeMap(
+                      deleteSuccess: (successState) {
+                        closeDialog();
+                        Navigator.of(dialogContext).pop(); // Close dialog
 
-                      // Show success message
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(successState.message),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
-
-                      // Navigate to login screen
-                      context.pushReplacementNamed(Routes.loginScreen);
-                    },
-                    deleteError: (errorState) {
-                      confirmationController.dispose();
-                      Navigator.of(dialogContext).pop(); // Close dialog
-
-                      // Show error message
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                              errorState.errorHandler.apiErrorModel.message ??
-                                  'delete_account.delete_failed'.tr()),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    },
-                    orElse: () {},
-                  );
-                },
-                builder: (context, state) {
-                  final isLoading = state.maybeMap(
-                    deleteLoading: (_) => true,
-                    orElse: () => false,
-                  );
-
-                  return ElevatedButton(
-                    onPressed: (canDelete && !isLoading)
-                        ? () {
-                            context.read<ProfileCubit>().deleteAccount();
-                          }
-                        : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      disabledBackgroundColor: Colors.grey.shade300,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: isLoading
-                        ? SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                        : Text(
-                            'delete_account.confirm_button'.tr(),
-                            style: TextStyles.font16WhiteSemiBold,
+                        // Show success message
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(successState.message),
+                            backgroundColor: Colors.green,
                           ),
-                  );
-                },
-              ),
-            ],
+                        );
+
+                        // Perform logout after successful delete and wait to finish
+                        context.read<ProfileCubit>().logout();
+
+                        // Navigate to login screen
+                        if (context.mounted) {
+                          context.pushReplacementNamed(Routes.loginScreen);
+                        }
+                      },
+                      deleteError: (errorState) {
+                        closeDialog();
+                        Navigator.of(dialogContext).pop(); // Close dialog
+
+                        // Show error message
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                errorState.errorHandler.apiErrorModel.message ??
+                                    'delete_account.delete_failed'.tr()),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      },
+                      orElse: () {},
+                    );
+                  },
+                  builder: (context, state) {
+                    final isLoading = state.maybeMap(
+                      deleteLoading: (_) => true,
+                      orElse: () => false,
+                    );
+
+                    return ElevatedButton(
+                      onPressed: !isLoading
+                          ? () {
+                              context.read<ProfileCubit>().deleteAccount();
+                            }
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                        disabledBackgroundColor: Colors.grey.shade300,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: isLoading
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
+                            )
+                          : Text(
+                              'delete_account.confirm_button'.tr(),
+                              style: TextStyles.font16WhiteSemiBold,
+                            ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

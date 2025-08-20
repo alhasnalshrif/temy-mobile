@@ -16,6 +16,7 @@ import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
 import 'package:temy_barber/features/profile/ui/notification_settings_screen.dart';
+import 'package:temy_barber/features/profile/ui/privacy_policy_screen.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/ui/booking_confirmation.dart';
 import 'package:temy_barber/features/reservations/ui/invoice_screen.dart';
@@ -70,12 +71,16 @@ class AppRouter {
             currentUser: userResponse,
           ),
         );
-  
+
       case Routes.notificationSettingsScreen:
         return MaterialPageRoute(
           builder: (_) => const NotificationSettingsScreen(),
         );
-     
+      case Routes.privacyPolicyScreen:
+        return MaterialPageRoute(
+          builder: (_) => const PrivacyPolicyScreen(),
+        );
+
       case Routes.invoiceScreen:
         final reservationResponse =
             settings.arguments as ReservationResponseModel;

@@ -30,7 +30,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   /// Enhanced logout with comprehensive data cleanup
-  void logout() async {
+  Future<void> logout() async {
     emit(const ProfileState.profileLoading());
 
     try {
