@@ -27,6 +27,24 @@ class LoginBlocListener extends StatelessWidget {
           success: (loginResponse) {
             context.pop();
 
+            // Check if user is verified
+            final user = loginResponse.data?.user;
+            final isVerified = user?.verified ?? false;
+
+            if (!isVerified) {
+              // User is not verified, navigate to verification screen
+              final phoneNumber = user?.phone ?? '';
+              context.pushReplacementNamed(
+                Routes.verificationScreen,
+                arguments: {
+                  'phoneNumber': phoneNumber,
+                  'shouldAutoResend': true,
+                  'comingFromLogin': true,
+                },
+              );
+              return;
+            }
+
             // Set user ID for OneSignal after successful login
             final userId = loginResponse.data?.user?.id;
             if (userId != null) {
@@ -67,8 +85,7 @@ class LoginBlocListener extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-            backgroundColor: Colors.white,
-
+        backgroundColor: Colors.white,
         icon: const Icon(
           Icons.error,
           color: Colors.red,

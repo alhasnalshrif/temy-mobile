@@ -18,9 +18,17 @@ class VerificationCubit extends Cubit<VerificationState> {
   // Phone number that needs verification
   String? phoneNumber;
 
+  // Whether user came from login (vs signup)
+  bool comingFromLogin = false;
+
   // Set the phone number that needs verification
   void setPhoneNumber(String phone) {
     phoneNumber = phone;
+  }
+
+  // Set whether user came from login
+  void setComingFromLogin(bool fromLogin) {
+    comingFromLogin = fromLogin;
   }
 
   // Verify the code

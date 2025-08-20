@@ -53,11 +53,32 @@ class AppRouter {
           ),
         );
       case Routes.verificationScreen:
-        final phoneNumber = settings.arguments as String;
+        // Handle both old format (String) and new format (Map)
+        final arguments = settings.arguments;
+        String phoneNumber;
+        bool shouldAutoResend = false;
+        bool comingFromLogin = false;
+
+        if (arguments is String) {
+          // Old format from signup
+          phoneNumber = arguments;
+        } else if (arguments is Map<String, dynamic>) {
+          // New format from login
+          phoneNumber = arguments['phoneNumber'] as String? ?? '';
+          shouldAutoResend = arguments['shouldAutoResend'] as bool? ?? false;
+          comingFromLogin = arguments['comingFromLogin'] as bool? ?? false;
+        } else {
+          phoneNumber = '';
+        }
+
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<VerificationCubit>(),
-            child: VerificationScreen(phoneNumber: phoneNumber),
+            child: VerificationScreen(
+              phoneNumber: phoneNumber,
+              shouldAutoResend: shouldAutoResend,
+              comingFromLogin: comingFromLogin,
+            ),
           ),
         );
       case Routes.dashboardScreen:

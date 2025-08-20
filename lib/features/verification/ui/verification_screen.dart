@@ -9,19 +9,41 @@ import 'package:temy_barber/features/verification/logic/verification_cubit.dart'
 import 'package:temy_barber/features/verification/ui/widgets/verification_bloc_listener.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class VerificationScreen extends StatelessWidget {
+class VerificationScreen extends StatefulWidget {
   final String phoneNumber;
+  final bool shouldAutoResend;
+  final bool comingFromLogin;
 
   const VerificationScreen({
     super.key,
     required this.phoneNumber,
+    this.shouldAutoResend = false,
+    this.comingFromLogin = false,
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Set the phone number for verification when the screen is built
-    context.read<VerificationCubit>().setPhoneNumber(phoneNumber);
+  State<VerificationScreen> createState() => _VerificationScreenState();
+}
 
+class _VerificationScreenState extends State<VerificationScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Set the phone number for verification when the screen is built
+    final cubit = context.read<VerificationCubit>();
+    cubit.setPhoneNumber(widget.phoneNumber);
+    cubit.setComingFromLogin(widget.comingFromLogin);
+
+    // Auto-resend OTP if coming from login screen for unverified user
+    if (widget.shouldAutoResend) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        cubit.resendCode();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('التحقق من الحساب', style: TextStyles.font18WhiteBold),
@@ -44,7 +66,7 @@ class VerificationScreen extends StatelessWidget {
                 ),
                 verticalSpace(12),
                 Text(
-                  'لقد أرسلنا رمز التحقق إلى رقم هاتفك $phoneNumber',
+                  'لقد أرسلنا رمز التحقق إلى رقم هاتفك ${widget.phoneNumber}',
                   style: TextStyles.font16GrayRegular,
                   textAlign: TextAlign.center,
                 ),
@@ -92,8 +114,9 @@ class VerificationScreen extends StatelessWidget {
 
                             // Show a snackbar to indicate the code was resent
                             ScaffoldMessenger.of(context).showSnackBar(
-                               SnackBar(
-                                content: Text('verification.resend_code_success'.tr()),
+                              SnackBar(
+                                content: Text(
+                                    'verification.resend_code_success'.tr()),
                                 backgroundColor: Colors.green,
                               ),
                             );
