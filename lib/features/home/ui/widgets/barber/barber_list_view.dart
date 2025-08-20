@@ -19,17 +19,7 @@ class CategoryListView extends StatelessWidget {
   Widget build(BuildContext context) {
     // Calculate crossAxisCount based on screen width with better breakpoints
     final double screenWidth = MediaQuery.of(context).size.width;
-    late final int crossAxisCount;
 
-    if (screenWidth > 900) {
-      crossAxisCount = 6; // Very large screens
-    } else if (screenWidth > 600) {
-      crossAxisCount = 4; // Tablet size
-    } else if (screenWidth > 400) {
-      crossAxisCount = 3; // Normal phones
-    } else {
-      crossAxisCount = 2; // Small phones
-    }
 
     // Calculate the number of items to show
     final int itemCount = categoryDataList.length;
@@ -37,27 +27,19 @@ class CategoryListView extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: GridView.builder(
+      child: ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 4),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          childAspectRatio: 0.85, // Better aspect ratio for category items
-          crossAxisSpacing: spacing,
-          mainAxisSpacing: spacing * 1.5,
-        ),
         itemCount: itemCount,
+        separatorBuilder: (context, index) => SizedBox(height: spacing * 1.5),
         itemBuilder: (context, index) {
-          // Calculate a staggered animation delay based on index
           return CategoryListViewItem(
             categoryResponseModel: categoryDataList[index],
             indexItem: index,
-            radius: (screenWidth / crossAxisCount) * 0.3, // Responsive radius
+            radius: screenWidth * 0.12, // responsive radius for list layout
             onTap: () {
-              // Navigate to CategoryScreen with category id
               debugPrint('Category tapped: ${categoryDataList[index]?.name}');
-
               Navigator.of(context).pushNamed(
                 Routes.barberScreen,
                 arguments: categoryDataList[index]?.id ?? '',

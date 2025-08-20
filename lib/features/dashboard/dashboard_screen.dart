@@ -54,6 +54,7 @@ class _MyDashboardState extends State<DashboardScreen> {
           BlocProvider(
             create: (context) => HomeCubit(getIt())
               ..getCategories()
+              ..getBarbers()
               ..getBanners(),
           ),
           BlocProvider.value(

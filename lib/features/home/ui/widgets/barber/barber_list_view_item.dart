@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:temy_barber/features/home/data/models/barber_response.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:temy_barber/features/home/data/models/barber_response.dart';
 
+/// A widget that displays a single barber item with a circular image and name.
 class CategoryListViewItem extends StatelessWidget {
   final BarberData? categoryResponseModel;
   final int indexItem;
@@ -27,35 +28,61 @@ class CategoryListViewItem extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         behavior: HitTestBehavior.opaque,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _CategoryImage(
-                imageUrl: categoryResponseModel?.avatar,
-                radius: radius,
-                backgroundColor: backgroundColor,
-              ),
-              const SizedBox(height: 8),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: radius * 2.5),
-                child: Text(
-                  categoryResponseModel?.name ?? 'Service',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.grey[800],
-                        height: 1.2,
-                        fontWeight: FontWeight.w500,
-                      ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
+        child: _buildAnimatedContainer(context),
+      ),
+    );
+  }
+
+  Widget _buildAnimatedContainer(BuildContext context) {
+    return AnimatedScale(
+      duration: const Duration(milliseconds: 100),
+      scale: onTap != null ? 1.0 : 0.98,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _CategoryImage(
+              imageUrl: categoryResponseModel?.avatar,
+              radius: radius,
+              backgroundColor: backgroundColor,
+            ),
+            const SizedBox(width: 12),
+            _buildCategoryName(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryName(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: radius * 2.5),
+      child: Text(
+        categoryResponseModel?.name ?? 'Service',
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.grey[900],
+              height: 1.3,
+              fontWeight: FontWeight.w600,
+              fontSize: 14 / textScale,
+            ),
+        textAlign: TextAlign.start,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
@@ -81,17 +108,18 @@ class _CategoryImage extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+          colors: [
+            Colors.grey[300]!,
+            Colors.grey[100]!,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
+      padding: const EdgeInsets.all(2),
+      child: ClipOval(
         child: hasImage
             ? CachedNetworkImage(
                 imageUrl: imageUrl!,
@@ -102,15 +130,7 @@ class _CategoryImage extends StatelessWidget {
                 placeholder: (context, url) => _buildShimmer(size),
                 errorWidget: (context, url, error) => _buildError(size),
               )
-            : Container(
-                color: backgroundColor,
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: size,
-                  height: size,
-                  fit: BoxFit.cover,
-                ),
-              ),
+            : _buildFallback(size),
       ),
     );
   }
@@ -128,12 +148,25 @@ class _CategoryImage extends StatelessWidget {
   Widget _buildError(double size) => Container(
         width: size,
         height: size,
-        color: Colors.grey[100],
+        color: Colors.grey[200],
         child: Center(
           child: Icon(
-            Icons.error_outline,
+            Icons.broken_image,
             size: radius * 0.8,
-            color: Colors.red.withOpacity(0.7),
+            color: Colors.red.withOpacity(0.6),
+          ),
+        ),
+      );
+
+  Widget _buildFallback(double size) => Container(
+        width: size,
+        height: size,
+        color: backgroundColor,
+        child: Center(
+          child: Icon(
+            Icons.category,
+            size: radius * 0.8,
+            color: Colors.grey[600],
           ),
         ),
       );

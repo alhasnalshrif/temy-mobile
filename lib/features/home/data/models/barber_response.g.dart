@@ -21,6 +21,34 @@ Map<String, dynamic> _$BarberResponseModelToJson(
       'data': instance.barberDataList,
     };
 
+WorkingHours _$WorkingHoursFromJson(Map<String, dynamic> json) => WorkingHours(
+      restTime: json['restTime'] == null
+          ? null
+          : RestTime.fromJson(json['restTime'] as Map<String, dynamic>),
+      start: json['start'] as String?,
+      end: json['end'] as String?,
+      daysOff:
+          (json['daysOff'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$WorkingHoursToJson(WorkingHours instance) =>
+    <String, dynamic>{
+      'restTime': instance.restTime,
+      'start': instance.start,
+      'end': instance.end,
+      'daysOff': instance.daysOff,
+    };
+
+RestTime _$RestTimeFromJson(Map<String, dynamic> json) => RestTime(
+      start: json['start'] as String?,
+      end: json['end'] as String?,
+    );
+
+Map<String, dynamic> _$RestTimeToJson(RestTime instance) => <String, dynamic>{
+      'start': instance.start,
+      'end': instance.end,
+    };
+
 BarberData _$BarberDataFromJson(Map<String, dynamic> json) => BarberData(
       id: json['_id'] as String?,
       name: json['name'] as String?,
@@ -35,6 +63,10 @@ BarberData _$BarberDataFromJson(Map<String, dynamic> json) => BarberData(
       averageRating: (json['averageRating'] as num?)?.toDouble(),
       numberOfReviews: (json['numberOfReviews'] as num?)?.toInt(),
       version: (json['__v'] as num?)?.toInt(),
+      workingHours: json['workingHours'] == null
+          ? null
+          : WorkingHours.fromJson(json['workingHours'] as Map<String, dynamic>),
+      featured: json['featured'] as bool?,
     );
 
 Map<String, dynamic> _$BarberDataToJson(BarberData instance) =>
@@ -50,4 +82,6 @@ Map<String, dynamic> _$BarberDataToJson(BarberData instance) =>
       'averageRating': instance.averageRating,
       'numberOfReviews': instance.numberOfReviews,
       '__v': instance.version,
+      'workingHours': instance.workingHours,
+      'featured': instance.featured,
     };

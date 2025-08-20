@@ -19,17 +19,6 @@ class CategoryListView extends StatelessWidget {
   Widget build(BuildContext context) {
     // Calculate crossAxisCount based on screen width with better breakpoints
     final double screenWidth = MediaQuery.of(context).size.width;
-    late final int crossAxisCount;
-
-    if (screenWidth > 900) {
-      crossAxisCount = 6; // Very large screens
-    } else if (screenWidth > 600) {
-      crossAxisCount = 4; // Tablet size
-    } else if (screenWidth > 400) {
-      crossAxisCount = 3; // Normal phones
-    } else {
-      crossAxisCount = 3; // Small phones
-    }
 
     // Calculate the number of items to show
     final int itemCount = categoryDataList.length;
@@ -42,7 +31,7 @@ class CategoryListView extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 4),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
+          crossAxisCount: 3,
           childAspectRatio: 0.85, // Better aspect ratio for category items
           crossAxisSpacing: spacing,
           mainAxisSpacing: spacing * 1.5,
@@ -53,7 +42,7 @@ class CategoryListView extends StatelessWidget {
           return CategoryListViewItem(
             categoryResponseModel: categoryDataList[index],
             indexItem: index,
-            radius: (screenWidth / crossAxisCount) * 0.3, // Responsive radius
+            radius: (screenWidth / 3) * 0.3, // Responsive radius
             onTap: () {
               debugPrint('Category tapped: ${categoryDataList[index].name}');
 

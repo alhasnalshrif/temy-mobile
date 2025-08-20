@@ -9,6 +9,8 @@ import 'package:temy_barber/features/home/ui/widgets/home_top_bar.dart';
 import 'package:temy_barber/features/home/ui/widgets/next_booking_card.dart';
 import 'package:temy_barber/features/home/ui/widgets/default_booking_card.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
+import 'package:temy_barber/features/home/ui/widgets/barber_sea_all.dart';
+import 'package:temy_barber/features/home/ui/widgets/barber/barber_bloc_builder.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -42,6 +44,10 @@ class HomeScreen extends StatelessWidget {
                   const DoctorSpecialitySeaAll(),
                   verticalSpace(10),
                   const CategoryBlocBuilder(),
+                  verticalSpace(24),
+                  const BarberSeaAll(),
+                  verticalSpace(10),
+                  const HomeBlocBuilder(),
                 ],
               ),
             ),

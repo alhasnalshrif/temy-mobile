@@ -16,7 +16,12 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('privacy.title'.tr()),
+        title: Text(
+          'privacy'.tr(),
+          style: const TextStyle(color: Colors.white),
+        ),
+        // the arrow white
+        leading: const Icon(Icons.arrow_back, color: Colors.white),
         backgroundColor: ColorsManager.mainBlue,
       ),
       body: SafeArea(
@@ -25,12 +30,6 @@ class PrivacyPolicyScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'privacy.last_updated'.tr(),
-                style: bodyStyle.copyWith(fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: 16),
-
               _section(
                 title: '1. Information We Collect',
                 body: '''

@@ -51,7 +51,7 @@ class HomeCubit extends Cubit<HomeState> {
     // Fetch barbers and banners data in parallel
     await Future.wait([
       _refreshCategories(),
-      // _refreshBarbers(),
+      _refreshBarbers(),
       _refreshBanners(),
     ]);
   }
