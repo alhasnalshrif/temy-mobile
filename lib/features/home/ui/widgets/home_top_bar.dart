@@ -15,18 +15,16 @@ class HomeTopBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Hi, Alhasn',
+              'Temy Barber',
               style: TextStyles.font18DarkBlueBold,
             ),
           ],
         ),
         const Spacer(),
-        CircleAvatar(
-            radius: 24,
-            backgroundColor: ColorsManager.moreLighterGray,
-            child: SvgPicture.asset(
-              'assets/svgs/notifications.svg',
-            )),
+        Image(image: AssetImage('assets/images/logo.png'), height: 40),
+        // child: SvgPicture.asset(
+        //   'assets/svgs/notifications.svg',
+        // )
       ],
     );
   }
