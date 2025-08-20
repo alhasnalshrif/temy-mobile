@@ -18,4 +18,6 @@ class Routes {
       '/notificationSettingsScreen';
   static const String deleteAccountScreen = '/deleteAccountScreen';
   static const String privacyPolicyScreen = '/privacyPolicyScreen';
+  static const String aboutScreen = '/aboutScreen';
+  static const String helpScreen = '/helpScreen';
 }

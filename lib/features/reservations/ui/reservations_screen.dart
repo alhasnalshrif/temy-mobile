@@ -283,7 +283,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                       children: [
                         // Save as Default button
                         Expanded(
-                          flex: 1,
+                          flex: 3,
                           child: AnimatedOpacity(
                             opacity: canBook &&
                                     state.maybeWhen(
@@ -320,7 +320,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                     color: ColorsManager.mainBlue,
                                     width: 1.5,
                                   ),
@@ -332,9 +332,9 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                               ),
                               child: Text(
                                 'default_booking.save_as_default'.tr(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: ColorsManager.mainBlue,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -344,7 +344,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                         const SizedBox(width: 12),
                         // Next button
                         Expanded(
-                          flex: 2,
+                          flex: 5,
                           child: AnimatedOpacity(
                             opacity: canBook &&
                                     state.maybeWhen(

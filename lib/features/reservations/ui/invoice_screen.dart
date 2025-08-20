@@ -302,7 +302,7 @@ class InvoiceScreen extends StatelessWidget {
                 );
               },
               child: Text(
-                'الصفحه الريسيه',
+                'الصفحه الرئيسيه',
                 style: TextStyles.font16WhiteMedium,
               ),
             ),

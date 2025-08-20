@@ -14,6 +14,8 @@ import 'package:temy_barber/features/login/ui/login_screen.dart';
 import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
+import 'package:temy_barber/features/profile/ui/about_screen.dart';
+import 'package:temy_barber/features/profile/ui/help_screen.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
 import 'package:temy_barber/features/profile/ui/notification_settings_screen.dart';
 import 'package:temy_barber/features/profile/ui/privacy_policy_screen.dart';
@@ -100,6 +102,14 @@ class AppRouter {
       case Routes.privacyPolicyScreen:
         return MaterialPageRoute(
           builder: (_) => const PrivacyPolicyScreen(),
+        );
+      case Routes.helpScreen:
+        return MaterialPageRoute(
+          builder: (_) => const HelpScreen(),
+        );
+      case Routes.aboutScreen:
+        return MaterialPageRoute(
+          builder: (_) => const AboutScreen(),
         );
 
       case Routes.invoiceScreen:

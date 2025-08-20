@@ -166,144 +166,145 @@ class TimeSlotSection extends StatelessWidget {
     // Get optimized time slots based on service duration
     final validStartingSlots = _getOptimizedTimeSlots(timeSlots, totalDuration);
 
-    return Container(
-      height: 300,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: Colors.white,
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Text(
-                'الوقت المتاح',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            const Text(
+              'الوقت المتاح',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(width: 8),
+            if (totalDuration > 0)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: ColorsManager.lightBlue,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  'مدة الخدمة: $totalDuration دقيقة',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: ColorsManager.mainBlue,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-              const SizedBox(width: 8),
-              if (totalDuration > 0)
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: ColorsManager.lightBlue,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    'مدة الخدمة: $totalDuration دقيقة',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: ColorsManager.mainBlue,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        isLoading
+            ? SizedBox(
+                height: 100,
+                child: Center(
+                  // Replace CircularProgressIndicator with ShimmerLoading
+                  child: ShimmerLoading.rectangular(height: 60),
                 ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: isLoading
-                ? Center(
-                    // Replace CircularProgressIndicator with ShimmerLoading
-                    child: ShimmerLoading.rectangular(height: 100),
+              )
+            : validStartingSlots.isEmpty
+                ? const SizedBox(
+                    height: 100,
+                    child: Center(
+                      child: Text(
+                        'لا توجد أوقات متاحة في هذا اليوم',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
                   )
-                : validStartingSlots.isEmpty
-                    ? const Center(
-                        child: Text(
-                          'لا توجد أوقات متاحة في هذا اليوم',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      )
-                    : GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          childAspectRatio: 1.5,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
-                        ),
-                        itemCount: validStartingSlots.length,
-                        itemBuilder: (context, index) {
-                          final slotData = validStartingSlots[index];
-                          final slot = slotData['slot'] as reservation.TimeSlot;
-                          final isAvailable = slotData['available'] as bool;
-                          final isSelected = selectedTime == slot.time;
+                : SizedBox(
+                    height: ((validStartingSlots.length / 4).ceil() * 60.0) +
+                        20, // Calculate height based on rows
+                    child: GridView.builder(
+                      physics:
+                          const NeverScrollableScrollPhysics(), // Disable internal scrolling
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        childAspectRatio: 1.5,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                      ),
+                      itemCount: validStartingSlots.length,
+                      itemBuilder: (context, index) {
+                        final slotData = validStartingSlots[index];
+                        final slot = slotData['slot'] as reservation.TimeSlot;
+                        final isAvailable = slotData['available'] as bool;
+                        final isSelected = selectedTime == slot.time;
 
-                          // Build each time slot widget
-                          return GestureDetector(
-                            onTap: isAvailable
-                                ? () => onTimeSelected(slot.time)
-                                : null,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? ColorsManager.mainBlue
-                                    : isAvailable
-                                        ? ColorsManager.lightBlue
-                                        : Colors.grey[200],
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  slot.time,
-                                  style: TextStyle(
-                                    color: isSelected
-                                        ? Colors.white
-                                        : isAvailable
-                                            ? ColorsManager.mainBlue
-                                            : Colors.grey,
-                                    fontWeight: isSelected
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                  ),
+                        // Build each time slot widget
+                        return GestureDetector(
+                          onTap: isAvailable
+                              ? () => onTimeSelected(slot.time)
+                              : null,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? ColorsManager.mainBlue
+                                  : isAvailable
+                                      ? ColorsManager.lightBlue
+                                      : Colors.grey[200],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(
+                              child: Text(
+                                slot.time,
+                                style: TextStyle(
+                                  color: isSelected
+                                      ? Colors.white
+                                      : isAvailable
+                                          ? ColorsManager.mainBlue
+                                          : Colors.grey,
+                                  fontWeight: isSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
                                 ),
                               ),
                             ),
-                          );
-                        },
-                      ),
-          ),
-          if (selectedTime != null) ...[
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 8,
-              ),
-              decoration: BoxDecoration(
-                color: ColorsManager.lightBlue,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.access_time,
-                    color: ColorsManager.mainBlue,
-                    size: 16,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'الحجز: $selectedTime - ${_getEndTime(selectedTime!, totalDuration)}',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: ColorsManager.mainBlue,
-                      fontWeight: FontWeight.w500,
+                          ),
+                        );
+                      },
                     ),
                   ),
-                ],
-              ),
+        if (selectedTime != null) ...[
+          const SizedBox(height: 16),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 8,
             ),
-          ],
+            decoration: BoxDecoration(
+              color: ColorsManager.lightBlue,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.access_time,
+                  color: ColorsManager.mainBlue,
+                  size: 16,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'الحجز: $selectedTime - ${_getEndTime(selectedTime!, totalDuration)}',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: ColorsManager.mainBlue,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
-      ),
+      ],
     );
   }
 }

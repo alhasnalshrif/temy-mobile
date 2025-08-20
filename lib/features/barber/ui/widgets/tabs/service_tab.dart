@@ -58,7 +58,7 @@ class ServiceTab extends StatelessWidget {
                           vertical: 8, horizontal: 12),
                       title: Text(
                         service.name,
-                        style: TextStyles.font18DarkSemiBold,
+                        style: TextStyles.font14BlueSemiBold,
                       ),
                       // subtitle: Text(
                       //   service.description,
@@ -89,7 +89,8 @@ class ServiceTab extends StatelessWidget {
                           ),
                           if (isSelected)
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
                               child: Container(
                                 padding: const EdgeInsets.all(2),
                                 decoration: BoxDecoration(

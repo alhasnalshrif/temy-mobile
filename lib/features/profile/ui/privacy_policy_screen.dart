@@ -16,12 +16,11 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         title: Text(
           'privacy'.tr(),
-          style: const TextStyle(color: Colors.white),
         ),
-        // the arrow white
-        leading: const Icon(Icons.arrow_back, color: Colors.white),
+       
         backgroundColor: ColorsManager.mainBlue,
       ),
       body: SafeArea(

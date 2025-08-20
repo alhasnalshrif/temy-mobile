@@ -371,12 +371,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     _buildProfileTile(
                       'profile.help'.tr(),
                       Icons.help_outline,
-                      onTap: () {},
+                      onTap: () {
+                        context.pushNamed(Routes.helpScreen);
+                      },
                     ),
                     _buildProfileTile(
                       'profile.about'.tr(),
                       Icons.info_outline,
-                      onTap: () {},
+                      onTap: () {
+                        context.pushNamed(Routes.aboutScreen);
+
+                      },
                     ),
                     // Add delete account option
                     _buildDangerTile(
