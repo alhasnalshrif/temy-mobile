@@ -380,6 +380,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Icons.info_outline,
                       onTap: () {},
                     ),
+                    // Add delete account option
+                    _buildDangerTile(
+                      'profile.delete_account'.tr(),
+                      Icons.delete_forever_outlined,
+                      onTap: () {
+                        _showDeleteAccountDialog(context);
+                      },
+                    ),
                     verticalSpace(20),
                     TweenAnimationBuilder<double>(
                       tween: Tween(begin: 0.95, end: 1.0),
@@ -479,6 +487,199 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: ColorsManager.mainBlue,
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDangerTile(String title, IconData icon,
+      {required VoidCallback onTap}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            splashColor: Colors.red.withOpacity(0.1),
+            highlightColor: Colors.red.withOpacity(0.05),
+            child: ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              tileColor: Colors.red.withOpacity(0.05),
+              leading: Icon(icon, color: Colors.red),
+              title: Text(
+                title,
+                style: TextStyles.font16DarkBold.copyWith(color: Colors.red),
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+                color: Colors.red,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showDeleteAccountDialog(BuildContext context) {
+    final TextEditingController confirmationController =
+        TextEditingController();
+    bool canDelete = false;
+
+    // Capture the ProfileCubit from the original context
+    final ProfileCubit profileCubit = context.read<ProfileCubit>();
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setState) => BlocProvider<ProfileCubit>.value(
+          value: profileCubit,
+          child: AlertDialog(
+            title: Row(
+              children: [
+                const Icon(Icons.warning, color: Colors.red, size: 28),
+                horizontalSpace(8),
+                Expanded(
+                  child: Text(
+                    'delete_account.warning_title'.tr(),
+                    style:
+                        TextStyles.font18DarkBold.copyWith(color: Colors.red),
+                  ),
+                ),
+              ],
+            ),
+            content: SizedBox(
+              width: double.maxFinite,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'delete_account.warning_message'.tr(),
+                    style: TextStyles.font14DarkBlueMedium,
+                  ),
+                  verticalSpace(20),
+                  Text(
+                    'delete_account.confirmation_text'.tr(),
+                    style: TextStyles.font14DarkBlueMedium
+                        .copyWith(color: Colors.red),
+                  ),
+                  verticalSpace(8),
+                  TextField(
+                    controller: confirmationController,
+                    onChanged: (value) {
+                      setState(() {
+                        canDelete =
+                            value.toUpperCase() == 'DELETE' || value == 'حذف';
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: currentLanguage == 'ar'
+                          ? 'اكتب: حذف'
+                          : 'Type: DELETE',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.red, width: 2),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  confirmationController.dispose();
+                  Navigator.of(dialogContext).pop();
+                },
+                child: Text(
+                  'delete_account.cancel_button'.tr(),
+                  style: TextStyles.font14BlueSemiBold,
+                ),
+              ),
+              BlocConsumer<ProfileCubit, ProfileState>(
+                listener: (context, state) {
+                  state.maybeMap(
+                    deleteSuccess: (successState) {
+                      confirmationController.dispose();
+                      Navigator.of(dialogContext).pop(); // Close dialog
+
+                      // Show success message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(successState.message),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+
+                      // Navigate to login screen
+                      context.pushReplacementNamed(Routes.loginScreen);
+                    },
+                    deleteError: (errorState) {
+                      confirmationController.dispose();
+                      Navigator.of(dialogContext).pop(); // Close dialog
+
+                      // Show error message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              errorState.errorHandler.apiErrorModel.message ??
+                                  'delete_account.delete_failed'.tr()),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    },
+                    orElse: () {},
+                  );
+                },
+                builder: (context, state) {
+                  final isLoading = state.maybeMap(
+                    deleteLoading: (_) => true,
+                    orElse: () => false,
+                  );
+
+                  return ElevatedButton(
+                    onPressed: (canDelete && !isLoading)
+                        ? () {
+                            context.read<ProfileCubit>().deleteAccount();
+                          }
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      disabledBackgroundColor: Colors.grey.shade300,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: isLoading
+                        ? SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                          )
+                        : Text(
+                            'delete_account.confirm_button'.tr(),
+                            style: TextStyles.font16WhiteSemiBold,
+                          ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),

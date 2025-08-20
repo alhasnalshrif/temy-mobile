@@ -7,6 +7,7 @@ import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
+import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:temy_barber/core/utils/notification_helper.dart';
 import 'package:temy_barber/temy_app.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -19,11 +20,21 @@ void main() async {
 
   setupGetIt();
   await checkedIfUserLoggedIn();
+
+  // Initialize Permission Manager
+  try {
+    log('🔐 Initializing Permission Manager...');
+    await PermissionManager.instance.initialize();
+    log('✅ Permission Manager initialized successfully');
+  } catch (e) {
+    log('❌ Permission Manager initialization failed: $e');
+  }
+
   // Development-specific notification checks
   if (kDebugMode) {
     // Check OneSignal configuration in development
     NotificationHelper.checkConfiguration();
-    
+
     // Uncomment for testing notifications in development
     // await NotificationHelper.testNotifications();
   }
@@ -52,18 +63,20 @@ void main() async {
   await SentryFlutter.init(
     (options) {
       // TODO: Replace with your actual Sentry DSN from sentry.io
-      options.dsn = 'https://60d5c02ce39df76817718e6ca4f61aa5@o4508048971792384.ingest.de.sentry.io/4509471265456208';
+      options.dsn =
+          'https://60d5c02ce39df76817718e6ca4f61aa5@o4508048971792384.ingest.de.sentry.io/4509471265456208';
       options.environment = kDebugMode ? 'development' : 'production';
       options.debug = kDebugMode;
-      
+
       // Performance monitoring
-      options.tracesSampleRate = kDebugMode ? 1.0 : 0.1; // 100% in debug, 10% in production
-      
+      options.tracesSampleRate =
+          kDebugMode ? 1.0 : 0.1; // 100% in debug, 10% in production
+
       // Error tracking options
       options.attachStacktrace = true;
       options.enableAutoSessionTracking = true;
       options.autoAppStart = true;
-      
+
       // Capture options
       options.captureFailedRequests = true;
       options.maxBreadcrumbs = 100;

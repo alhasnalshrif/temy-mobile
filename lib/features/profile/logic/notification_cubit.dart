@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:temy_barber/features/profile/data/models/notification_response.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
+import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'dart:developer';
@@ -22,18 +23,20 @@ class NotificationCubit extends Cubit<NotificationState> {
     emit(const NotificationState.loading());
 
     try {
-
       // Update device token on server
       await _updateDeviceTokenOnServer();
     } catch (error) {
       log('Failed to initialize notifications: $error');
       emit(NotificationState.error(error.toString()));
     }
-  }  /// Update device token on server
+  }
+
+  /// Update device token on server
   Future<void> _updateDeviceTokenOnServer() async {
     try {
       final playerId = await _notificationService.getPlayerId();
-      final userId = await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
+      final userId =
+          await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
 
       log('Retrieved playerId: ${playerId ?? "null"}');
       log('Retrieved userId: ${userId ?? "null"}');
@@ -84,7 +87,7 @@ class NotificationCubit extends Cubit<NotificationState> {
 
     try {
       final granted =
-          await _notificationService.requestNotificationPermission();
+          await PermissionManager.instance.requestNotificationPermission();
       if (granted) {
         emit(const NotificationState.permissionGranted());
         // Initialize notifications after permission granted
@@ -100,7 +103,8 @@ class NotificationCubit extends Cubit<NotificationState> {
   /// Check notification permission status
   Future<void> checkNotificationPermission() async {
     try {
-      final enabled = await _notificationService.areNotificationsEnabled();
+      final enabled =
+          await PermissionManager.instance.getNotificationPermissionStatus();
       if (enabled) {
         emit(const NotificationState.permissionGranted());
       } else {
@@ -110,20 +114,23 @@ class NotificationCubit extends Cubit<NotificationState> {
       emit(NotificationState.error(error.toString()));
     }
   }
+
   /// Set user ID for OneSignal (call after login)
   Future<void> setUserId(String userId) async {
     try {
       await _notificationService.setUserId(userId);
-      
+
       // Add a small delay to allow OneSignal to process the login
       await Future.delayed(const Duration(seconds: 2));
-      
+
       // Update device token after setting user ID
       await _updateDeviceTokenOnServer();
     } catch (error) {
       log('Failed to set user ID: $error');
     }
-  }  /// Logout user from OneSignal (call after logout)
+  }
+
+  /// Logout user from OneSignal (call after logout)
   Future<void> logoutUser() async {
     try {
       await _notificationService.logoutUser();
@@ -137,12 +144,9 @@ class NotificationCubit extends Cubit<NotificationState> {
     emit(const NotificationState.loading());
     try {
       await _updateDeviceTokenOnServer();
-      emit(NotificationState.settingsUpdated(
-        const NotificationResponse(
+      emit(NotificationState.settingsUpdated(const NotificationResponse(
           status: 'success',
-          message: 'Device registration retried successfully'
-        )
-      ));
+          message: 'Device registration retried successfully')));
     } catch (error) {
       emit(NotificationState.error(error.toString()));
     }
@@ -154,11 +158,10 @@ class NotificationCubit extends Cubit<NotificationState> {
     emit(const NotificationState.loading());
     // For now, emit mock data
     emit(const NotificationState.settingsLoaded(
-      const NotificationSettingsResponse(
-        pushNotifications: true,
-        bookingReminders: true,
-        promotionalNotifications: false,
-      )
-    ));
+        const NotificationSettingsResponse(
+      pushNotifications: true,
+      bookingReminders: true,
+      promotionalNotifications: false,
+    )));
   }
 }

@@ -22,6 +22,9 @@ mixin _$ProfileState {
     required TResult Function() profileLoading,
     required TResult Function(UserProfile userProfile) profileSuccess,
     required TResult Function(ErrorHandler errorHandler) profileError,
+    required TResult Function() deleteLoading,
+    required TResult Function(String message) deleteSuccess,
+    required TResult Function(ErrorHandler errorHandler) deleteError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +33,9 @@ mixin _$ProfileState {
     TResult? Function()? profileLoading,
     TResult? Function(UserProfile userProfile)? profileSuccess,
     TResult? Function(ErrorHandler errorHandler)? profileError,
+    TResult? Function()? deleteLoading,
+    TResult? Function(String message)? deleteSuccess,
+    TResult? Function(ErrorHandler errorHandler)? deleteError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +44,9 @@ mixin _$ProfileState {
     TResult Function()? profileLoading,
     TResult Function(UserProfile userProfile)? profileSuccess,
     TResult Function(ErrorHandler errorHandler)? profileError,
+    TResult Function()? deleteLoading,
+    TResult Function(String message)? deleteSuccess,
+    TResult Function(ErrorHandler errorHandler)? deleteError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +56,9 @@ mixin _$ProfileState {
     required TResult Function(ProfileLoading value) profileLoading,
     required TResult Function(ProfileSuccess value) profileSuccess,
     required TResult Function(ProfileError value) profileError,
+    required TResult Function(DeleteLoading value) deleteLoading,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(DeleteError value) deleteError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +67,9 @@ mixin _$ProfileState {
     TResult? Function(ProfileLoading value)? profileLoading,
     TResult? Function(ProfileSuccess value)? profileSuccess,
     TResult? Function(ProfileError value)? profileError,
+    TResult? Function(DeleteLoading value)? deleteLoading,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(DeleteError value)? deleteError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +78,9 @@ mixin _$ProfileState {
     TResult Function(ProfileLoading value)? profileLoading,
     TResult Function(ProfileSuccess value)? profileSuccess,
     TResult Function(ProfileError value)? profileError,
+    TResult Function(DeleteLoading value)? deleteLoading,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(DeleteError value)? deleteError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +152,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function() profileLoading,
     required TResult Function(UserProfile userProfile) profileSuccess,
     required TResult Function(ErrorHandler errorHandler) profileError,
+    required TResult Function() deleteLoading,
+    required TResult Function(String message) deleteSuccess,
+    required TResult Function(ErrorHandler errorHandler) deleteError,
   }) {
     return initial();
   }
@@ -145,6 +166,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? profileLoading,
     TResult? Function(UserProfile userProfile)? profileSuccess,
     TResult? Function(ErrorHandler errorHandler)? profileError,
+    TResult? Function()? deleteLoading,
+    TResult? Function(String message)? deleteSuccess,
+    TResult? Function(ErrorHandler errorHandler)? deleteError,
   }) {
     return initial?.call();
   }
@@ -156,6 +180,9 @@ class _$InitialImpl implements _Initial {
     TResult Function()? profileLoading,
     TResult Function(UserProfile userProfile)? profileSuccess,
     TResult Function(ErrorHandler errorHandler)? profileError,
+    TResult Function()? deleteLoading,
+    TResult Function(String message)? deleteSuccess,
+    TResult Function(ErrorHandler errorHandler)? deleteError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -171,6 +198,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function(ProfileLoading value) profileLoading,
     required TResult Function(ProfileSuccess value) profileSuccess,
     required TResult Function(ProfileError value) profileError,
+    required TResult Function(DeleteLoading value) deleteLoading,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(DeleteError value) deleteError,
   }) {
     return initial(this);
   }
@@ -182,6 +212,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(ProfileLoading value)? profileLoading,
     TResult? Function(ProfileSuccess value)? profileSuccess,
     TResult? Function(ProfileError value)? profileError,
+    TResult? Function(DeleteLoading value)? deleteLoading,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(DeleteError value)? deleteError,
   }) {
     return initial?.call(this);
   }
@@ -193,6 +226,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(ProfileLoading value)? profileLoading,
     TResult Function(ProfileSuccess value)? profileSuccess,
     TResult Function(ProfileError value)? profileError,
+    TResult Function(DeleteLoading value)? deleteLoading,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(DeleteError value)? deleteError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -251,6 +287,9 @@ class _$ProfileLoadingImpl implements ProfileLoading {
     required TResult Function() profileLoading,
     required TResult Function(UserProfile userProfile) profileSuccess,
     required TResult Function(ErrorHandler errorHandler) profileError,
+    required TResult Function() deleteLoading,
+    required TResult Function(String message) deleteSuccess,
+    required TResult Function(ErrorHandler errorHandler) deleteError,
   }) {
     return profileLoading();
   }
@@ -262,6 +301,9 @@ class _$ProfileLoadingImpl implements ProfileLoading {
     TResult? Function()? profileLoading,
     TResult? Function(UserProfile userProfile)? profileSuccess,
     TResult? Function(ErrorHandler errorHandler)? profileError,
+    TResult? Function()? deleteLoading,
+    TResult? Function(String message)? deleteSuccess,
+    TResult? Function(ErrorHandler errorHandler)? deleteError,
   }) {
     return profileLoading?.call();
   }
@@ -273,6 +315,9 @@ class _$ProfileLoadingImpl implements ProfileLoading {
     TResult Function()? profileLoading,
     TResult Function(UserProfile userProfile)? profileSuccess,
     TResult Function(ErrorHandler errorHandler)? profileError,
+    TResult Function()? deleteLoading,
+    TResult Function(String message)? deleteSuccess,
+    TResult Function(ErrorHandler errorHandler)? deleteError,
     required TResult orElse(),
   }) {
     if (profileLoading != null) {
@@ -288,6 +333,9 @@ class _$ProfileLoadingImpl implements ProfileLoading {
     required TResult Function(ProfileLoading value) profileLoading,
     required TResult Function(ProfileSuccess value) profileSuccess,
     required TResult Function(ProfileError value) profileError,
+    required TResult Function(DeleteLoading value) deleteLoading,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(DeleteError value) deleteError,
   }) {
     return profileLoading(this);
   }
@@ -299,6 +347,9 @@ class _$ProfileLoadingImpl implements ProfileLoading {
     TResult? Function(ProfileLoading value)? profileLoading,
     TResult? Function(ProfileSuccess value)? profileSuccess,
     TResult? Function(ProfileError value)? profileError,
+    TResult? Function(DeleteLoading value)? deleteLoading,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(DeleteError value)? deleteError,
   }) {
     return profileLoading?.call(this);
   }
@@ -310,6 +361,9 @@ class _$ProfileLoadingImpl implements ProfileLoading {
     TResult Function(ProfileLoading value)? profileLoading,
     TResult Function(ProfileSuccess value)? profileSuccess,
     TResult Function(ProfileError value)? profileError,
+    TResult Function(DeleteLoading value)? deleteLoading,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(DeleteError value)? deleteError,
     required TResult orElse(),
   }) {
     if (profileLoading != null) {
@@ -397,6 +451,9 @@ class _$ProfileSuccessImpl implements ProfileSuccess {
     required TResult Function() profileLoading,
     required TResult Function(UserProfile userProfile) profileSuccess,
     required TResult Function(ErrorHandler errorHandler) profileError,
+    required TResult Function() deleteLoading,
+    required TResult Function(String message) deleteSuccess,
+    required TResult Function(ErrorHandler errorHandler) deleteError,
   }) {
     return profileSuccess(userProfile);
   }
@@ -408,6 +465,9 @@ class _$ProfileSuccessImpl implements ProfileSuccess {
     TResult? Function()? profileLoading,
     TResult? Function(UserProfile userProfile)? profileSuccess,
     TResult? Function(ErrorHandler errorHandler)? profileError,
+    TResult? Function()? deleteLoading,
+    TResult? Function(String message)? deleteSuccess,
+    TResult? Function(ErrorHandler errorHandler)? deleteError,
   }) {
     return profileSuccess?.call(userProfile);
   }
@@ -419,6 +479,9 @@ class _$ProfileSuccessImpl implements ProfileSuccess {
     TResult Function()? profileLoading,
     TResult Function(UserProfile userProfile)? profileSuccess,
     TResult Function(ErrorHandler errorHandler)? profileError,
+    TResult Function()? deleteLoading,
+    TResult Function(String message)? deleteSuccess,
+    TResult Function(ErrorHandler errorHandler)? deleteError,
     required TResult orElse(),
   }) {
     if (profileSuccess != null) {
@@ -434,6 +497,9 @@ class _$ProfileSuccessImpl implements ProfileSuccess {
     required TResult Function(ProfileLoading value) profileLoading,
     required TResult Function(ProfileSuccess value) profileSuccess,
     required TResult Function(ProfileError value) profileError,
+    required TResult Function(DeleteLoading value) deleteLoading,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(DeleteError value) deleteError,
   }) {
     return profileSuccess(this);
   }
@@ -445,6 +511,9 @@ class _$ProfileSuccessImpl implements ProfileSuccess {
     TResult? Function(ProfileLoading value)? profileLoading,
     TResult? Function(ProfileSuccess value)? profileSuccess,
     TResult? Function(ProfileError value)? profileError,
+    TResult? Function(DeleteLoading value)? deleteLoading,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(DeleteError value)? deleteError,
   }) {
     return profileSuccess?.call(this);
   }
@@ -456,6 +525,9 @@ class _$ProfileSuccessImpl implements ProfileSuccess {
     TResult Function(ProfileLoading value)? profileLoading,
     TResult Function(ProfileSuccess value)? profileSuccess,
     TResult Function(ProfileError value)? profileError,
+    TResult Function(DeleteLoading value)? deleteLoading,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(DeleteError value)? deleteError,
     required TResult orElse(),
   }) {
     if (profileSuccess != null) {
@@ -551,6 +623,9 @@ class _$ProfileErrorImpl implements ProfileError {
     required TResult Function() profileLoading,
     required TResult Function(UserProfile userProfile) profileSuccess,
     required TResult Function(ErrorHandler errorHandler) profileError,
+    required TResult Function() deleteLoading,
+    required TResult Function(String message) deleteSuccess,
+    required TResult Function(ErrorHandler errorHandler) deleteError,
   }) {
     return profileError(errorHandler);
   }
@@ -562,6 +637,9 @@ class _$ProfileErrorImpl implements ProfileError {
     TResult? Function()? profileLoading,
     TResult? Function(UserProfile userProfile)? profileSuccess,
     TResult? Function(ErrorHandler errorHandler)? profileError,
+    TResult? Function()? deleteLoading,
+    TResult? Function(String message)? deleteSuccess,
+    TResult? Function(ErrorHandler errorHandler)? deleteError,
   }) {
     return profileError?.call(errorHandler);
   }
@@ -573,6 +651,9 @@ class _$ProfileErrorImpl implements ProfileError {
     TResult Function()? profileLoading,
     TResult Function(UserProfile userProfile)? profileSuccess,
     TResult Function(ErrorHandler errorHandler)? profileError,
+    TResult Function()? deleteLoading,
+    TResult Function(String message)? deleteSuccess,
+    TResult Function(ErrorHandler errorHandler)? deleteError,
     required TResult orElse(),
   }) {
     if (profileError != null) {
@@ -588,6 +669,9 @@ class _$ProfileErrorImpl implements ProfileError {
     required TResult Function(ProfileLoading value) profileLoading,
     required TResult Function(ProfileSuccess value) profileSuccess,
     required TResult Function(ProfileError value) profileError,
+    required TResult Function(DeleteLoading value) deleteLoading,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(DeleteError value) deleteError,
   }) {
     return profileError(this);
   }
@@ -599,6 +683,9 @@ class _$ProfileErrorImpl implements ProfileError {
     TResult? Function(ProfileLoading value)? profileLoading,
     TResult? Function(ProfileSuccess value)? profileSuccess,
     TResult? Function(ProfileError value)? profileError,
+    TResult? Function(DeleteLoading value)? deleteLoading,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(DeleteError value)? deleteError,
   }) {
     return profileError?.call(this);
   }
@@ -610,6 +697,9 @@ class _$ProfileErrorImpl implements ProfileError {
     TResult Function(ProfileLoading value)? profileLoading,
     TResult Function(ProfileSuccess value)? profileSuccess,
     TResult Function(ProfileError value)? profileError,
+    TResult Function(DeleteLoading value)? deleteLoading,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(DeleteError value)? deleteError,
     required TResult orElse(),
   }) {
     if (profileError != null) {
@@ -629,5 +719,482 @@ abstract class ProfileError implements ProfileState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileErrorImplCopyWith<_$ProfileErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteLoadingImplCopyWith<$Res> {
+  factory _$$DeleteLoadingImplCopyWith(
+          _$DeleteLoadingImpl value, $Res Function(_$DeleteLoadingImpl) then) =
+      __$$DeleteLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DeleteLoadingImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$DeleteLoadingImpl>
+    implements _$$DeleteLoadingImplCopyWith<$Res> {
+  __$$DeleteLoadingImplCopyWithImpl(
+      _$DeleteLoadingImpl _value, $Res Function(_$DeleteLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DeleteLoadingImpl implements DeleteLoading {
+  const _$DeleteLoadingImpl();
+
+  @override
+  String toString() {
+    return 'ProfileState.deleteLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DeleteLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() profileLoading,
+    required TResult Function(UserProfile userProfile) profileSuccess,
+    required TResult Function(ErrorHandler errorHandler) profileError,
+    required TResult Function() deleteLoading,
+    required TResult Function(String message) deleteSuccess,
+    required TResult Function(ErrorHandler errorHandler) deleteError,
+  }) {
+    return deleteLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? profileLoading,
+    TResult? Function(UserProfile userProfile)? profileSuccess,
+    TResult? Function(ErrorHandler errorHandler)? profileError,
+    TResult? Function()? deleteLoading,
+    TResult? Function(String message)? deleteSuccess,
+    TResult? Function(ErrorHandler errorHandler)? deleteError,
+  }) {
+    return deleteLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? profileLoading,
+    TResult Function(UserProfile userProfile)? profileSuccess,
+    TResult Function(ErrorHandler errorHandler)? profileError,
+    TResult Function()? deleteLoading,
+    TResult Function(String message)? deleteSuccess,
+    TResult Function(ErrorHandler errorHandler)? deleteError,
+    required TResult orElse(),
+  }) {
+    if (deleteLoading != null) {
+      return deleteLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ProfileLoading value) profileLoading,
+    required TResult Function(ProfileSuccess value) profileSuccess,
+    required TResult Function(ProfileError value) profileError,
+    required TResult Function(DeleteLoading value) deleteLoading,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(DeleteError value) deleteError,
+  }) {
+    return deleteLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ProfileLoading value)? profileLoading,
+    TResult? Function(ProfileSuccess value)? profileSuccess,
+    TResult? Function(ProfileError value)? profileError,
+    TResult? Function(DeleteLoading value)? deleteLoading,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(DeleteError value)? deleteError,
+  }) {
+    return deleteLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ProfileLoading value)? profileLoading,
+    TResult Function(ProfileSuccess value)? profileSuccess,
+    TResult Function(ProfileError value)? profileError,
+    TResult Function(DeleteLoading value)? deleteLoading,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(DeleteError value)? deleteError,
+    required TResult orElse(),
+  }) {
+    if (deleteLoading != null) {
+      return deleteLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteLoading implements ProfileState {
+  const factory DeleteLoading() = _$DeleteLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$DeleteSuccessImplCopyWith<$Res> {
+  factory _$$DeleteSuccessImplCopyWith(
+          _$DeleteSuccessImpl value, $Res Function(_$DeleteSuccessImpl) then) =
+      __$$DeleteSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$DeleteSuccessImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$DeleteSuccessImpl>
+    implements _$$DeleteSuccessImplCopyWith<$Res> {
+  __$$DeleteSuccessImplCopyWithImpl(
+      _$DeleteSuccessImpl _value, $Res Function(_$DeleteSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$DeleteSuccessImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteSuccessImpl implements DeleteSuccess {
+  const _$DeleteSuccessImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'ProfileState.deleteSuccess(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteSuccessImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteSuccessImplCopyWith<_$DeleteSuccessImpl> get copyWith =>
+      __$$DeleteSuccessImplCopyWithImpl<_$DeleteSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() profileLoading,
+    required TResult Function(UserProfile userProfile) profileSuccess,
+    required TResult Function(ErrorHandler errorHandler) profileError,
+    required TResult Function() deleteLoading,
+    required TResult Function(String message) deleteSuccess,
+    required TResult Function(ErrorHandler errorHandler) deleteError,
+  }) {
+    return deleteSuccess(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? profileLoading,
+    TResult? Function(UserProfile userProfile)? profileSuccess,
+    TResult? Function(ErrorHandler errorHandler)? profileError,
+    TResult? Function()? deleteLoading,
+    TResult? Function(String message)? deleteSuccess,
+    TResult? Function(ErrorHandler errorHandler)? deleteError,
+  }) {
+    return deleteSuccess?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? profileLoading,
+    TResult Function(UserProfile userProfile)? profileSuccess,
+    TResult Function(ErrorHandler errorHandler)? profileError,
+    TResult Function()? deleteLoading,
+    TResult Function(String message)? deleteSuccess,
+    TResult Function(ErrorHandler errorHandler)? deleteError,
+    required TResult orElse(),
+  }) {
+    if (deleteSuccess != null) {
+      return deleteSuccess(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ProfileLoading value) profileLoading,
+    required TResult Function(ProfileSuccess value) profileSuccess,
+    required TResult Function(ProfileError value) profileError,
+    required TResult Function(DeleteLoading value) deleteLoading,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(DeleteError value) deleteError,
+  }) {
+    return deleteSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ProfileLoading value)? profileLoading,
+    TResult? Function(ProfileSuccess value)? profileSuccess,
+    TResult? Function(ProfileError value)? profileError,
+    TResult? Function(DeleteLoading value)? deleteLoading,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(DeleteError value)? deleteError,
+  }) {
+    return deleteSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ProfileLoading value)? profileLoading,
+    TResult Function(ProfileSuccess value)? profileSuccess,
+    TResult Function(ProfileError value)? profileError,
+    TResult Function(DeleteLoading value)? deleteLoading,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(DeleteError value)? deleteError,
+    required TResult orElse(),
+  }) {
+    if (deleteSuccess != null) {
+      return deleteSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteSuccess implements ProfileState {
+  const factory DeleteSuccess(final String message) = _$DeleteSuccessImpl;
+
+  String get message;
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteSuccessImplCopyWith<_$DeleteSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteErrorImplCopyWith<$Res> {
+  factory _$$DeleteErrorImplCopyWith(
+          _$DeleteErrorImpl value, $Res Function(_$DeleteErrorImpl) then) =
+      __$$DeleteErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorHandler errorHandler});
+}
+
+/// @nodoc
+class __$$DeleteErrorImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$DeleteErrorImpl>
+    implements _$$DeleteErrorImplCopyWith<$Res> {
+  __$$DeleteErrorImplCopyWithImpl(
+      _$DeleteErrorImpl _value, $Res Function(_$DeleteErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorHandler = null,
+  }) {
+    return _then(_$DeleteErrorImpl(
+      null == errorHandler
+          ? _value.errorHandler
+          : errorHandler // ignore: cast_nullable_to_non_nullable
+              as ErrorHandler,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteErrorImpl implements DeleteError {
+  const _$DeleteErrorImpl(this.errorHandler);
+
+  @override
+  final ErrorHandler errorHandler;
+
+  @override
+  String toString() {
+    return 'ProfileState.deleteError(errorHandler: $errorHandler)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteErrorImpl &&
+            (identical(other.errorHandler, errorHandler) ||
+                other.errorHandler == errorHandler));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorHandler);
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteErrorImplCopyWith<_$DeleteErrorImpl> get copyWith =>
+      __$$DeleteErrorImplCopyWithImpl<_$DeleteErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() profileLoading,
+    required TResult Function(UserProfile userProfile) profileSuccess,
+    required TResult Function(ErrorHandler errorHandler) profileError,
+    required TResult Function() deleteLoading,
+    required TResult Function(String message) deleteSuccess,
+    required TResult Function(ErrorHandler errorHandler) deleteError,
+  }) {
+    return deleteError(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? profileLoading,
+    TResult? Function(UserProfile userProfile)? profileSuccess,
+    TResult? Function(ErrorHandler errorHandler)? profileError,
+    TResult? Function()? deleteLoading,
+    TResult? Function(String message)? deleteSuccess,
+    TResult? Function(ErrorHandler errorHandler)? deleteError,
+  }) {
+    return deleteError?.call(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? profileLoading,
+    TResult Function(UserProfile userProfile)? profileSuccess,
+    TResult Function(ErrorHandler errorHandler)? profileError,
+    TResult Function()? deleteLoading,
+    TResult Function(String message)? deleteSuccess,
+    TResult Function(ErrorHandler errorHandler)? deleteError,
+    required TResult orElse(),
+  }) {
+    if (deleteError != null) {
+      return deleteError(errorHandler);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ProfileLoading value) profileLoading,
+    required TResult Function(ProfileSuccess value) profileSuccess,
+    required TResult Function(ProfileError value) profileError,
+    required TResult Function(DeleteLoading value) deleteLoading,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(DeleteError value) deleteError,
+  }) {
+    return deleteError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ProfileLoading value)? profileLoading,
+    TResult? Function(ProfileSuccess value)? profileSuccess,
+    TResult? Function(ProfileError value)? profileError,
+    TResult? Function(DeleteLoading value)? deleteLoading,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(DeleteError value)? deleteError,
+  }) {
+    return deleteError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ProfileLoading value)? profileLoading,
+    TResult Function(ProfileSuccess value)? profileSuccess,
+    TResult Function(ProfileError value)? profileError,
+    TResult Function(DeleteLoading value)? deleteLoading,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(DeleteError value)? deleteError,
+    required TResult orElse(),
+  }) {
+    if (deleteError != null) {
+      return deleteError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteError implements ProfileState {
+  const factory DeleteError(final ErrorHandler errorHandler) =
+      _$DeleteErrorImpl;
+
+  ErrorHandler get errorHandler;
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteErrorImplCopyWith<_$DeleteErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

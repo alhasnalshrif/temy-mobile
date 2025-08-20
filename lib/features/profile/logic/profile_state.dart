@@ -15,4 +15,10 @@ class ProfileState with _$ProfileState {
 
   const factory ProfileState.profileError(ErrorHandler errorHandler) =
       ProfileError;
+
+  // Delete account states
+  const factory ProfileState.deleteLoading() = DeleteLoading;
+  const factory ProfileState.deleteSuccess(String message) = DeleteSuccess;
+  const factory ProfileState.deleteError(ErrorHandler errorHandler) =
+      DeleteError;
 }

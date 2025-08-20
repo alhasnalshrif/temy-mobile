@@ -128,6 +128,7 @@
         "privacy": "Privacy",
         "help": "Help",
         "about": "About",
+        "delete_account": "Delete Account",
         "user_data_error": "User data is not available for editing",
         "data_unavailable": "Data is currently unavailable"
     },
@@ -152,7 +153,19 @@
         "booking_reminder": "Booking Reminder",
         "booking_cancelled": "Booking Cancelled",
         "promotion": "Promotion"
-    },    "common": {
+    },
+    "delete_account": {
+        "title": "Delete Account",
+        "warning_title": "Permanent Account Deletion",
+        "warning_message": "Are you absolutely sure you want to delete your account? This action will permanently remove all your data, bookings, and preferences. This cannot be undone.",
+        "confirmation_text": "Type 'DELETE' to confirm",
+        "confirm_button": "Delete My Account",
+        "cancel_button": "Keep My Account",
+        "deleting": "Deleting account...",
+        "deleted_success": "Account deleted successfully",
+        "delete_failed": "Failed to delete account"
+    },
+    "common": {
         "no_date": "No date",
         "no_time": "No time",
         "not_available": "N/A",

@@ -83,10 +83,11 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<NotificationService>(
       () => NotificationService.instance);
 
-  // Notification Cubit
-  getIt.registerFactory<NotificationCubit>(
-      () => NotificationCubit(getIt(), getIt()));
-
   // Profile Cubit
-  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt(), getIt()));
+  getIt.registerFactory<ProfileCubit>(
+      () => ProfileCubit(getIt<ProfileRepo>(), getIt<NotificationService>()));
+
+  // Notification Cubit
+  getIt.registerFactory<NotificationCubit>(() =>
+      NotificationCubit(getIt<ProfileRepo>(), getIt<NotificationService>()));
 }

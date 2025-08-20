@@ -28,6 +28,16 @@ class ProfileRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
+
+  Future<ApiResult<UserProfile>> deleteProfile() async {
+    try {
+      final response = await _profileApiServices.deleteProfile();
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
   // Notification methods
   Future<ApiResult<NotificationResponse>> updateDeviceToken(
       NotificationTokenRequest request) async {

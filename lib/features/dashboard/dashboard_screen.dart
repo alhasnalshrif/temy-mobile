@@ -67,7 +67,7 @@ class _MyDashboardState extends State<DashboardScreen> {
         child: const BookingScreen(),
       ),
       BlocProvider(
-        create: (context) => ProfileCubit(getIt(), getIt())..getProfile(),
+        create: (context) => getIt<ProfileCubit>()..getProfile(),
         child: const ProfileScreen(),
       ),
     ];

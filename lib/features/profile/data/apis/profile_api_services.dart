@@ -14,8 +14,13 @@ abstract class ProfileApiServices {
 
   @GET(HomeApiConstants.profile)
   Future<UserProfile> getProfile();
+
   @PUT(HomeApiConstants.profileUpdate)
   Future<UserProfile> updateProfile(@Body() Map<String, dynamic> updateData);
+
+  @DELETE(HomeApiConstants.profileDelete)
+  Future<UserProfile> deleteProfile();
+
   // Notification endpoints
   @POST(HomeApiConstants.updateDeviceToken)
   Future<NotificationResponse> updateDeviceToken(
@@ -24,6 +29,4 @@ abstract class ProfileApiServices {
   @POST(HomeApiConstants.updateDeviceToken)
   Future<NotificationResponse> registerDevice(
       @Body() Map<String, dynamic> deviceData);
-
- 
 }
