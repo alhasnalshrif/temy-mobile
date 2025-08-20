@@ -58,7 +58,7 @@ class DateTimeSection extends StatelessWidget {
           children: [
             Text(
               "Date & Time",
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
@@ -71,7 +71,7 @@ class DateTimeSection extends StatelessWidget {
                 Text(
                   _formatDate(booking.date),
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 12,
                     color: Colors.grey[700],
                   ),
                 ),
@@ -79,7 +79,7 @@ class DateTimeSection extends StatelessWidget {
                 Text(
                   'at ${booking.startTime} ($durationText)',
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 12,
                     color: Colors.grey[700],
                   ),
                 ),

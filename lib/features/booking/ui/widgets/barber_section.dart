@@ -21,6 +21,7 @@ class BarberSection extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
+          
           radius: 28,
           backgroundImage: (avatarUrl != null && avatarUrl!.isNotEmpty)
               ? NetworkImage(avatarUrl!)
@@ -37,11 +38,10 @@ class BarberSection extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
-             
               const SizedBox(height: 4),
               Row(
                 children: [
@@ -50,7 +50,7 @@ class BarberSection extends StatelessWidget {
                   Text(
                     '$rating ($reviewCount)', // Use passed rating and review count
                     style: const TextStyle(
-                      fontSize: 14,
+                      fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

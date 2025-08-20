@@ -77,20 +77,7 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
                 ),
                 verticalSpace(16),
                 // Single booking status stepper for filtering
-                if (_showActiveBookings)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: BookingStatusStepper(
-                      status: _selectedStatus,
-                      onStatusTap: (String status) {
-                        setState(() {
-                          // Toggle selection - if already selected, show all
-                          _selectedStatus =
-                              _selectedStatus == status ? "all" : status;
-                        });
-                      },
-                    ),
-                  ),
+
                 verticalSpace(16),
                 if (bookingsToShow.isEmpty)
                   Padding(

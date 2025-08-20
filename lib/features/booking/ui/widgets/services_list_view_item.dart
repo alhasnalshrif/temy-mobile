@@ -16,7 +16,7 @@ class ServicesListViewItem extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       title: Text(
         service?.name ?? '',
-        style: TextStyles.font18DarkSemiBold,
+        style: TextStyles.font14DarkBlueMedium,
       ),
       subtitle: Text(
         service?.description ?? '',

@@ -130,11 +130,12 @@ class _ServicesListViewState extends State<ServicesListView> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.list_alt, size: 18, color: Colors.grey),
+                    const Icon(Icons.view_list_rounded,
+                        size: 18, color: Colors.grey),
                     const SizedBox(width: 8),
                     Text(
                       '${widget.booking.length} ${'booking.services'.tr()}',
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
@@ -142,7 +143,7 @@ class _ServicesListViewState extends State<ServicesListView> {
                   children: [
                     Text(
                       'EGP ${_calculateTotalPrice().toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                     ),
