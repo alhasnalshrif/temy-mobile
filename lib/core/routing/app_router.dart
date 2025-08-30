@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 import 'package:temy_barber/features/barber/logic/barber_cubit.dart';
 import 'package:temy_barber/features/barber/ui/barber_screen.dart';
@@ -28,7 +30,6 @@ import 'package:temy_barber/features/sign_up/ui/sign_up_screen.dart';
 import 'package:temy_barber/features/verification/logic/verification_cubit.dart';
 import 'package:temy_barber/features/verification/ui/verification_screen.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
-import '../di/dependency_injection.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -55,9 +56,9 @@ class AppRouter {
           ),
         );
       case Routes.verificationScreen:
-        // Handle both old format (String) and new format (Map)
+        // Handle both old format (String) and new format (Map) for arguments
         final arguments = settings.arguments;
-        String phoneNumber;
+        String phoneNumber = '';
         bool shouldAutoResend = false;
         bool comingFromLogin = false;
 
@@ -69,8 +70,6 @@ class AppRouter {
           phoneNumber = arguments['phoneNumber'] as String? ?? '';
           shouldAutoResend = arguments['shouldAutoResend'] as bool? ?? false;
           comingFromLogin = arguments['comingFromLogin'] as bool? ?? false;
-        } else {
-          phoneNumber = '';
         }
 
         return MaterialPageRoute(
@@ -94,7 +93,6 @@ class AppRouter {
             currentUser: userResponse,
           ),
         );
-
       case Routes.notificationSettingsScreen:
         return MaterialPageRoute(
           builder: (_) => const NotificationSettingsScreen(),
@@ -111,10 +109,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const AboutScreen(),
         );
-
       case Routes.invoiceScreen:
-        final reservationResponse =
-            settings.arguments as ReservationResponseModel;
+        final reservationResponse = settings.arguments as ReservationResponseModel;
         return MaterialPageRoute(
           builder: (_) => InvoiceScreen(arguments: reservationResponse),
         );
@@ -134,7 +130,6 @@ class AppRouter {
             child: BookingConfirmation(arguments: args),
           ),
         );
-
       case Routes.categoryScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -146,8 +141,7 @@ class AppRouter {
         final categoryId = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => CategoryBarberCubit(getIt(), categoryId!)
-              ..getCategoryWithBarbers(),
+            create: (context) => CategoryBarberCubit(getIt(), categoryId!)..getCategoryWithBarbers(),
             child: const CategoryBarbersScreen(),
           ),
         );
@@ -155,14 +149,14 @@ class AppRouter {
         final barberId = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) =>
-                BarberCubit(getIt(), barberId!)..getBarberDetail(),
+            create: (context) => BarberCubit(getIt(), barberId!)..getBarberDetail(),
             child: const BarberScreen(),
           ),
         );
       default:
+        // Handle unknown routes gracefully by redirecting to login if not logged in
         return MaterialPageRoute(
-          builder: (_) => const DashboardScreen(),
+          builder: (_) => isLoggedInUser ? const DashboardScreen() : const LoginScreen(),
         );
     }
   }
