@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
@@ -16,43 +17,52 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'auth.signup.title'.tr(),
-                  style: TextStyles.font26BlueBold,
-                ),
-                verticalSpace(12),
-                Text(
-                  'auth.signup.subtitle'.tr(),
-                  style: TextStyles.font16GrayRegular,
-                ),
-                verticalSpace(36),
-                Column(
-                  children: [
-                    const SignupForm(),
-                    verticalSpace(40),
-                    AppTextButton(
-                      buttonText: 'auth.signup.button'.tr(),
-                      textStyle: TextStyles.font16WhiteSemiBold,
-                      onPressed: () {
-                        validateThenDoSignup(context);
-                      },
-                    ),
-                    verticalSpace(16),
-                    const TermsAndConditionsText(),
-                    verticalSpace(30),
-                    const AlreadyHaveAccountText(),
-                    const SignupBlocListener(),
-                  ],
-                ),
-              ],
+    return PopScope(
+      canPop: false, // Prevent back navigation
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          // Exit the app when back button is pressed
+          SystemNavigator.pop();
+        }
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'auth.signup.title'.tr(),
+                    style: TextStyles.font26BlueBold,
+                  ),
+                  verticalSpace(12),
+                  Text(
+                    'auth.signup.subtitle'.tr(),
+                    style: TextStyles.font16GrayRegular,
+                  ),
+                  verticalSpace(36),
+                  Column(
+                    children: [
+                      const SignupForm(),
+                      verticalSpace(40),
+                      AppTextButton(
+                        buttonText: 'auth.signup.button'.tr(),
+                        textStyle: TextStyles.font16WhiteSemiBold,
+                        onPressed: () {
+                          validateThenDoSignup(context);
+                        },
+                      ),
+                      verticalSpace(16),
+                      const TermsAndConditionsText(),
+                      verticalSpace(30),
+                      const AlreadyHaveAccountText(),
+                      const SignupBlocListener(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
