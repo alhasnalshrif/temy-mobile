@@ -27,14 +27,14 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(success: (loginResponse) async {
-      await saveuserToken(
+      await saveUserToken(
           loginResponse.token ?? '', loginResponse.data!.user?.id ?? '');
       emit(LoginState.success(loginResponse));
     }, failure: (error) {
       emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
     });
   }
-  Future<void> saveuserToken(String token, String id) async {
+  Future<void> saveUserToken(String token, String id) async {
     // save token to shared preferences
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.userId, id);

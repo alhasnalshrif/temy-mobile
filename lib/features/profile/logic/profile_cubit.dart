@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
@@ -6,6 +7,7 @@ import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
+import '../../../core/routing/routes.dart';
 import 'profile_state.dart';
 import 'dart:developer';
 
@@ -69,7 +71,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   /// Delete user account permanently
-  void deleteAccount() async {
+  void deleteAccount(dialogContext) async {
     emit(const ProfileState.deleteLoading());
 
     try {
@@ -81,8 +83,11 @@ class ProfileCubit extends Cubit<ProfileState> {
       response.when(
         success: (deletedProfile) {
           log('✅ Account deleted successfully on server');
+          Navigator.of(dialogContext).pushReplacementNamed(Routes.loginScreen);
+
           // Step 2: Perform comprehensive local cleanup
           _performCompleteCleanup();
+
           emit(ProfileState.deleteSuccess(
               deletedProfile.message ?? 'Account deleted successfully'));
         },

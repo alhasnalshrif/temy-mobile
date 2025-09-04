@@ -39,7 +39,9 @@ class VerificationBlocListener extends StatelessWidget {
               _handleLoginVerificationSuccess(context, verificationResponse);
             } else {
               // User came from signup, show success dialog and navigate to login
-              showSuccessDialog(context);
+              // showSuccessDialog(context);
+              // context.pushReplacementNamed(Routes.loginScreen);
+              context.pushReplacementNamed(Routes.homeScreen);
             }
           },
           error: (error) {
@@ -87,37 +89,37 @@ class VerificationBlocListener extends StatelessWidget {
     DioFactory.setTokenIntoHeaderAfterLogin(token);
   }
 
-  void showSuccessDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white,
-          title: Text('verification.success_title'.tr()),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('verification.success_message'.tr()),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: ColorsManager.mainBlue,
-                disabledForegroundColor: Colors.grey.withOpacity(0.38),
-              ),
-              onPressed: () {
-                context.pushReplacementNamed(Routes.loginScreen);
-              },
-              child: Text('verification.continue_to_login'.tr()),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // void showSuccessDialog(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         backgroundColor: Colors.white,
+  //         title: Text('verification.success_title'.tr()),
+  //         content: SingleChildScrollView(
+  //           child: ListBody(
+  //             children: <Widget>[
+  //               Text('verification.success_message'.tr()),
+  //             ],
+  //           ),
+  //         ),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             style: TextButton.styleFrom(
+  //               foregroundColor: Colors.white,
+  //               backgroundColor: ColorsManager.mainBlue,
+  //               disabledForegroundColor: Colors.grey.withOpacity(0.38),
+  //             ),
+  //             onPressed: () {
+  //               context.pushReplacementNamed(Routes.loginScreen);
+  //             },
+  //             child: Text('verification.continue_to_login'.tr()),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   void setupErrorState(BuildContext context, String error) {
     context.pop();

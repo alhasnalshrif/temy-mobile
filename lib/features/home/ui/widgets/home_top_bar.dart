@@ -21,10 +21,8 @@ class HomeTopBar extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        Image(image: AssetImage('assets/images/logo.png'), height: 40),
-        // child: SvgPicture.asset(
-        //   'assets/svgs/notifications.svg',
-        // )
+        const Image(image: AssetImage('assets/images/logo.png'), height: 40),
+
       ],
     );
   }

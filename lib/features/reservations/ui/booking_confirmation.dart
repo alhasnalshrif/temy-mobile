@@ -828,7 +828,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     );
 
     // Navigate to category screen to choose another service, replacing current screen
-    Navigator.pushReplacementNamed(
+    Navigator.pushNamed(
       context,
       Routes.categoryScreen,
     );

@@ -652,7 +652,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return ElevatedButton(
                       onPressed: !isLoading
                           ? () {
-                              context.read<ProfileCubit>().deleteAccount();
+                              context.read<ProfileCubit>().deleteAccount(dialogContext);
                             }
                           : null,
                       style: ElevatedButton.styleFrom(

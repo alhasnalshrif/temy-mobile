@@ -41,7 +41,7 @@ class VerificationCubit extends Cubit<VerificationState> {
     emit(const VerificationState.loading());
     final response = await _verificationRepo.verify(
       VerificationRequestBody(
-        phone: phoneNumber!,
+        // phone: phoneNumber!,
         verificationCode: codeController.text,
       ),
     );

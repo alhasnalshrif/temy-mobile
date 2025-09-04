@@ -3,11 +3,11 @@ part 'verification_request_body.g.dart';
 
 @JsonSerializable()
 class VerificationRequestBody {
-  final String phone;
+  // final String phone;
   final String verificationCode;
 
   VerificationRequestBody({
-    required this.phone,
+    // required this.phone,
     required this.verificationCode,
   });
 
