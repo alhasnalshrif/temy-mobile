@@ -134,10 +134,11 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
             }
 
             // Navigate to invoice screen with the updated arguments
-            Navigator.pushReplacementNamed(
+            Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.invoiceScreen,
               arguments: response,
+              (route) => false, // Remove all previous routes
             );
 
             ScaffoldMessenger.of(context).showSnackBar(

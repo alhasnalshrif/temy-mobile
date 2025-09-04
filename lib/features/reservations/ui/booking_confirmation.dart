@@ -55,10 +55,11 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             _multiReservationManager.clearReservations();
     
             // Navigate to invoice screen
-            Navigator.pushReplacementNamed(
+            Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.invoiceScreen,
               arguments: response,
+              (route) => false, // Remove all previous routes
             );
           },
           reservationError: (error) {
