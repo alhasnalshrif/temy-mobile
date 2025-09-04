@@ -141,7 +141,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'auth/resend-code',
+          'auth/resend-verification-code',
           queryParameters: queryParameters,
           data: _data,
         )

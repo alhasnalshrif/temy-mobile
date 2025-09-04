@@ -23,19 +23,18 @@ class InvoiceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.black,
-      statusBarIconBrightness: Brightness.light,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.black,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
 
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(
-          'الفاتورة',
-          style: TextStyles.font18WhiteSemiBold,
-        ),
+        title: Text('الفاتورة', style: TextStyles.font18WhiteSemiBold),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -91,11 +90,7 @@ class InvoiceScreen extends StatelessWidget {
       child: SizedBox(
         height: 120,
         child: Center(
-          child: Image.asset(
-            'assets/icons/check.png',
-            width: 100,
-            height: 100,
-          ),
+          child: Image.asset('assets/icons/check.png', width: 100, height: 100),
         ),
       ),
     );
@@ -105,8 +100,9 @@ class InvoiceScreen extends StatelessWidget {
     DateTime? reservationDate;
     if (_reservationData?.date != null) {
       try {
-        reservationDate =
-            DateFormat('yyyy-MM-dd').parse(_reservationData!.date);
+        reservationDate = DateFormat(
+          'yyyy-MM-dd',
+        ).parse(_reservationData!.date);
       } catch (e) {
         print("Error parsing date: $e");
       }
@@ -140,15 +136,12 @@ class InvoiceScreen extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
-                ]
+                ],
               ],
             ),
           ),
           if (shortDateStr.isNotEmpty)
-            Text(
-              shortDateStr,
-              style: TextStyles.font14GrayRegular,
-            ),
+            Text(shortDateStr, style: TextStyles.font14GrayRegular),
         ],
       ),
     );
@@ -158,8 +151,9 @@ class InvoiceScreen extends StatelessWidget {
     DateTime? reservationDate;
     if (_reservationData?.date != null) {
       try {
-        reservationDate =
-            DateFormat('yyyy-MM-dd').parse(_reservationData!.date);
+        reservationDate = DateFormat(
+          'yyyy-MM-dd',
+        ).parse(_reservationData!.date);
       } catch (e) {
         print("Error parsing date: $e");
       }
@@ -170,8 +164,10 @@ class InvoiceScreen extends StatelessWidget {
         : 'غير محدد';
 
     final timeStr = _reservationData?.startTime != null
-        ? app_date_utils.formatTimeOfDayString(_reservationData!.startTime,
-            locale: 'en_US')
+        ? app_date_utils.formatTimeOfDayString(
+            _reservationData!.startTime,
+            locale: 'en_US',
+          )
         : 'غير محدد';
 
     return Padding(
@@ -188,10 +184,7 @@ class InvoiceScreen extends StatelessWidget {
                 color: Colors.black54,
               ),
               const SizedBox(width: 12),
-              Text(
-                "التاريخ والوقت",
-                style: TextStyles.font16DarkBold,
-              ),
+              Text("التاريخ والوقت", style: TextStyles.font16DarkBold),
             ],
           ),
           const SizedBox(height: 12),
@@ -217,28 +210,31 @@ class InvoiceScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
-            child: Text(
-              "تفاصيل الدفع",
-              style: TextStyles.font16DarkBold,
-            ),
+            child: Text("تفاصيل الدفع", style: TextStyles.font16DarkBold),
           ),
           const SizedBox(height: 8),
           if (services.isNotEmpty)
             ...services.map(
-                (service) => _buildServiceItem(service.name, service.price))
+              (service) => _buildServiceItem(service.name, service.price),
+            )
           else
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text("لا توجد خدمات محددة",
-                  style: TextStyles.font14GrayRegular),
+              child: Text(
+                "لا توجد خدمات محددة",
+                style: TextStyles.font14GrayRegular,
+              ),
             ),
         ],
       ),
     );
   }
 
-  Widget _buildServiceItem(String name, double price,
-      {bool isDiscount = false}) {
+  Widget _buildServiceItem(
+    String name,
+    double price, {
+    bool isDiscount = false,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
@@ -268,10 +264,7 @@ class InvoiceScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "المجموع",
-            style: TextStyles.font18DarkBlueBold,
-          ),
+          Text("المجموع", style: TextStyles.font18DarkBlueBold),
           Text(
             "${totalPrice.toInt()} EGP",
             style: TextStyles.font18DarkBlueBold,
@@ -296,10 +289,7 @@ class InvoiceScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.pushReplacementNamed(
-                  context,
-                  Routes.dashboardScreen,
-                );
+                Navigator.pushReplacementNamed(context, Routes.dashboardScreen);
               },
               child: Text(
                 'الصفحه الرئيسيه',
@@ -337,31 +327,52 @@ class InvoiceScreen extends StatelessWidget {
   Future<void> _generateAndSharePDF() async {
     final pdf = pw.Document();
 
+    // load Cairo font from assets
+    final fontData = await rootBundle.load('assets/fonts/Cairo-Regular.ttf');
+    final cairo = pw.Font.ttf(fontData.buffer.asUint8List() as ByteData);
+
     pdf.addPage(
       pw.Page(
-        build: (pw.Context context) {
-          return pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              pw.Text("الفاتورة", style: const pw.TextStyle(fontSize: 24)),
-              pw.SizedBox(height: 16),
-              pw.Text("تفاصيل الحجز:", style: const pw.TextStyle(fontSize: 18)),
-              pw.SizedBox(height: 8),
-              pw.Text(
-                  "اسم الحلاق: ${_reservationData?.barber.name ?? "اسم الحلاق"}"),
-              pw.Text("التاريخ: ${_reservationData?.date ?? "غير محدد"}"),
-              pw.Text("الوقت: ${_reservationData?.startTime ?? "غير محدد"}"),
-              pw.SizedBox(height: 16),
-              pw.Text("الخدمات:", style: const pw.TextStyle(fontSize: 18)),
-              pw.SizedBox(height: 8),
-              ...?_reservationData?.services.map((service) =>
-                  pw.Text("${service.name} - ${service.price.toInt()} EGP")),
-              pw.SizedBox(height: 16),
-              pw.Text("المجموع: ${_reservationData?.totalPrice.toInt()} EGP",
-                  style: const pw.TextStyle(fontSize: 18)),
-            ],
-          );
-        },
+      build: (pw.Context context) {
+        return pw.Directionality(
+        textDirection: pw.TextDirection.rtl,
+        child: pw.DefaultTextStyle(
+          style: pw.TextStyle(font: cairo, fontSize: 12),
+          child: pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            pw.Text("الفاتورة",
+              style: pw.TextStyle(font: cairo, fontSize: 24)),
+            pw.SizedBox(height: 16),
+            pw.Text("تفاصيل الحجز:",
+              style: pw.TextStyle(font: cairo, fontSize: 18)),
+            pw.SizedBox(height: 8),
+            pw.Text(
+            "اسم الحلاق: ${_reservationData?.barber.name ?? "اسم الحلاق"}",
+            ),
+            pw.Text("التاريخ: ${_reservationData?.date ?? "غير محدد"}"),
+            pw.Text("الوقت: ${_reservationData?.startTime ?? "غير محدد"}"),
+            pw.SizedBox(height: 16),
+            pw.Text("الخدمات:",
+              style: pw.TextStyle(font: cairo, fontSize: 18)),
+            pw.SizedBox(height: 8),
+            if (_reservationData?.services != null)
+            ..._reservationData!.services.map(
+              (service) => pw.Text(
+              "${service.name} - ${service.price.toInt()} EGP",
+              style: pw.TextStyle(font: cairo, fontSize: 12),
+              ),
+            ),
+            pw.SizedBox(height: 16),
+            pw.Text(
+            "المجموع: ${_reservationData?.totalPrice.toInt()} EGP",
+            style: pw.TextStyle(font: cairo, fontSize: 18),
+            ),
+          ],
+          ),
+        ),
+        );
+      },
       ),
     );
 
@@ -369,6 +380,6 @@ class InvoiceScreen extends StatelessWidget {
     final file = File("${output.path}/invoice.pdf");
     await file.writeAsBytes(await pdf.save());
 
-    await Share.shareFiles([file.path], text: "الفاتورة");
+    await Share.shareXFiles([XFile(file.path)], text: "الفاتورة");
   }
 }

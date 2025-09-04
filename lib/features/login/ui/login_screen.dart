@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
@@ -22,52 +23,60 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        color: Colors.black,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Top gradient section with logo and welcome text
-            const SizedBox(height: 60),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'auth.welcome_back'.tr(),
-                    style: TextStyles.font28WhiteBold,
-                  ),
-                  verticalSpace(16),
-                  Image.asset(
-                    'assets/images/logo.png',
-                    height: 60,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-            verticalSpace(20),
-            // White bottom section with rounded corners
-            Expanded(
-              child: Container(
-                width: size.width,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(60),
-                  ),
+    return PopScope(
+      canPop: false, // Prevent back navigation
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          // Exit the app when back button is pressed
+          SystemNavigator.pop();
+        }
+      },
+      child: Scaffold(
+        body: Container(
+          width: double.infinity,
+          color: Colors.black,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Top gradient section with logo and welcome text
+              const SizedBox(height: 60),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'auth.welcome_back'.tr(),
+                      style: TextStyles.font28WhiteBold,
+                    ),
+                    verticalSpace(16),
+                    Image.asset(
+                      'assets/images/logo.png',
+                      height: 60,
+                      color: Colors.white,
+                    ),
+                  ],
                 ),
-                padding: const EdgeInsets.all(30),
-                child: _buildLoginForm(context),
               ),
-            ),
-          ],
+              verticalSpace(20),
+              // White bottom section with rounded corners
+              Expanded(
+                child: Container(
+                  width: size.width,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(60),
+                      topRight: Radius.circular(60),
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(30),
+                  child: _buildLoginForm(context),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -118,11 +127,8 @@ class LoginScreen extends StatelessWidget {
                 loading: () {
                   showDialog(
                     context: context,
-                    builder: (context) => Center(
-                      child: ShimmerLoading.circular(
-                        size: 50,
-                      ),
-                    ),
+                    builder: (context) =>
+                        Center(child: ShimmerLoading.circular(size: 50)),
                   );
                 },
                 success: (loginResponse) {
@@ -146,7 +152,7 @@ class LoginScreen extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-            backgroundColor: Colors.white,
+                      backgroundColor: Colors.white,
 
                       icon: const Icon(
                         Icons.error,
