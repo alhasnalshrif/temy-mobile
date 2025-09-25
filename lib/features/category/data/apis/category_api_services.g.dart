@@ -14,7 +14,7 @@ class _CategoryApiServices implements CategoryApiServices {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://barber.codepeak.software/api/v1/';
+    baseUrl ??= 'https://backend.temybarber.com/api/v1/';
   }
 
   final Dio _dio;

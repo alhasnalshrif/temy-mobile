@@ -24,20 +24,26 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool hasMinLength = false;
 
   late TextEditingController passwordController;
+  bool _isInitialized = false;
+  VoidCallback? _passwordListener;
 
   @override
-  void initState() {
-    super.initState();
-    passwordController = context.read<LoginCubit>().passwordController;
-    setupPasswordControllerListener();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isInitialized) {
+      passwordController = context.read<LoginCubit>().passwordController;
+      setupPasswordControllerListener();
+      _isInitialized = true;
+    }
   }
 
   void setupPasswordControllerListener() {
-    passwordController.addListener(() {
+    _passwordListener = () {
       setState(() {
         hasMinLength = AppRegex.hasMinLength(passwordController.text);
       });
-    });
+    };
+    passwordController.addListener(_passwordListener!);
   }
 
   @override
@@ -50,10 +56,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'رقم الهاتف',
-                style: TextStyles.font14Blue2SemiBold,
-              ),
+              Text('رقم الهاتف', style: TextStyles.font14Blue2SemiBold),
               verticalSpace(8),
               AppTextFormField(
                 hintText: '01012345678',
@@ -73,10 +76,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'الرقم السري',
-                style: TextStyles.font14Blue2SemiBold,
-              ),
+              Text('الرقم السري', style: TextStyles.font14Blue2SemiBold),
               verticalSpace(8),
               AppTextFormField(
                 controller: context.read<LoginCubit>().passwordController,
@@ -101,7 +101,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             ],
           ),
           verticalSpace(24),
-     
         ],
       ),
     );
@@ -109,7 +108,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
   @override
   void dispose() {
-    passwordController.dispose();
+    // Remove the specific listener if it was added
+    if (_isInitialized && _passwordListener != null) {
+      passwordController.removeListener(_passwordListener!);
+    }
     super.dispose();
   }
 }

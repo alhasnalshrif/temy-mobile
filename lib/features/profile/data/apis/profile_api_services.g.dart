@@ -14,7 +14,7 @@ class _ProfileApiServices implements ProfileApiServices {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://barber.codepeak.software/api/v1/';
+    baseUrl ??= 'https://backend.temybarber.com/api/v1/';
   }
 
   final Dio _dio;
