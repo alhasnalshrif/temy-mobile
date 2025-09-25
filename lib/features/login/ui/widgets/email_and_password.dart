@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/app_regex.dart';
 import 'package:temy_barber/core/theme/styles.dart';
@@ -28,28 +29,52 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   VoidCallback? _passwordListener;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!_isInitialized) {
-      passwordController = context.read<LoginCubit>().passwordController;
+  void initState() {
+    super.initState();
+    // Move the initialization to initState and use a post-frame callback
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _initializeControllers();
+      }
+    });
+  }
+
+  void _initializeControllers() {
+    try {
+      final loginCubit = context.read<LoginCubit>();
+      passwordController = loginCubit.passwordController;
       setupPasswordControllerListener();
-      _isInitialized = true;
+      setState(() {
+        _isInitialized = true;
+      });
+    } catch (e) {
+      // If we can't access the cubit, try again in the next frame
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && !_isInitialized) {
+          _initializeControllers();
+        }
+      });
     }
   }
 
   void setupPasswordControllerListener() {
     _passwordListener = () {
-      setState(() {
-        hasMinLength = AppRegex.hasMinLength(passwordController.text);
-      });
+      if (mounted) {
+        setState(() {
+          hasMinLength = AppRegex.hasMinLength(passwordController.text);
+        });
+      }
     };
     passwordController.addListener(_passwordListener!);
   }
 
   @override
   Widget build(BuildContext context) {
+    // Access the LoginCubit directly since it's provided by BlocProvider
+    final loginCubit = context.read<LoginCubit>();
+
     return Form(
-      key: context.read<LoginCubit>().formKey,
+      key: loginCubit.formKey,
       child: Column(
         children: [
           Column(
@@ -60,6 +85,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               verticalSpace(8),
               AppTextFormField(
                 hintText: '01012345678',
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||
@@ -67,7 +96,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                     return 'Please enter a valid phone number';
                   }
                 },
-                controller: context.read<LoginCubit>().emailController,
+                controller: loginCubit.emailController,
               ),
             ],
           ),
@@ -79,7 +108,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               Text('الرقم السري', style: TextStyles.font14Blue2SemiBold),
               verticalSpace(8),
               AppTextFormField(
-                controller: context.read<LoginCubit>().passwordController,
+                controller: loginCubit.passwordController,
                 hintText: '*********',
                 isObscureText: isObscureText,
                 suffixIcon: GestureDetector(

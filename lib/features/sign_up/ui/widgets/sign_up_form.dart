@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/app_regex.dart';
@@ -88,6 +89,10 @@ class _SignupFormState extends State<SignupForm> {
               verticalSpace(8),
               AppTextFormField(
                 hintText: 'auth.signup.phone_placeholder'.tr(),
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||

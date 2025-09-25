@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 
@@ -15,6 +16,8 @@ class AppTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final Function(String?) validator;
   final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+
   const AppTextFormField({
     super.key,
     this.contentPadding,
@@ -22,6 +25,7 @@ class AppTextFormField extends StatelessWidget {
     this.enabledBorder,
     this.inputTextStyle,
     this.hintStyle,
+    this.inputFormatters,
     required this.hintText,
     this.isObscureText,
     this.suffixIcon,
@@ -36,6 +40,7 @@ class AppTextFormField extends StatelessWidget {
     return TextFormField(
       keyboardType: keyboardType ?? TextInputType.text,
       controller: controller,
+      inputFormatters: inputFormatters ?? [],
       decoration: InputDecoration(
         isDense: true,
         contentPadding: contentPadding ??
