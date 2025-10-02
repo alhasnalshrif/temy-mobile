@@ -4,9 +4,9 @@ import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/networking/dio_factory.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
-import 'package:temy_barber/features/login/data/models/login_request_body.dart';
-import 'package:temy_barber/features/login/data/repos/login_repo.dart';
-import 'package:temy_barber/features/login/logic/cubit/login_state.dart';
+import 'package:temy_barber/features/auth/data/models/login_request_body.dart';
+import 'package:temy_barber/features/auth/data/repos/login_repo.dart';
+import 'package:temy_barber/features/auth/logic/cubit/login_state.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 
 class LoginCubit extends Cubit<LoginState> {

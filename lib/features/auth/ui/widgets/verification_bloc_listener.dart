@@ -11,8 +11,8 @@ import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/networking/dio_factory.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
-import 'package:temy_barber/features/verification/logic/verification_cubit.dart';
-import 'package:temy_barber/features/verification/logic/verification_state.dart';
+import 'package:temy_barber/features/auth/logic/verification_cubit.dart';
+import 'package:temy_barber/features/auth/logic/verification_state.dart';
 
 class VerificationBlocListener extends StatelessWidget {
   const VerificationBlocListener({super.key});

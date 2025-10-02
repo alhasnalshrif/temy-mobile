@@ -5,8 +5,8 @@ import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/widgets/app_text_button.dart';
 import 'package:temy_barber/core/widgets/app_text_form_field.dart';
-import 'package:temy_barber/features/verification/logic/verification_cubit.dart';
-import 'package:temy_barber/features/verification/ui/widgets/verification_bloc_listener.dart';
+import 'package:temy_barber/features/auth/logic/verification_cubit.dart';
+import 'package:temy_barber/features/auth/ui/widgets/verification_bloc_listener.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class VerificationScreen extends StatefulWidget {

@@ -20,13 +20,13 @@ import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_services.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../features/login/data/repos/login_repo.dart';
-import '../../features/login/logic/cubit/login_cubit.dart';
-import '../../features/sign_up/data/repos/sign_up_repo.dart';
-import '../../features/sign_up/logic/sign_up_cubit.dart';
+import '../../features/auth/data/repos/login_repo.dart';
+import '../../features/auth/logic/cubit/login_cubit.dart';
+import '../../features/auth/data/repos/sign_up_repo.dart';
+import '../../features/auth/logic/sign_up_cubit.dart';
 import '../../features/reservations/data/repos/reservation_repo.dart';
-import '../../features/verification/data/repos/verification_repo.dart';
-import '../../features/verification/logic/verification_cubit.dart';
+import '../../features/auth/data/repos/verification_repo.dart';
+import '../../features/auth/logic/verification_cubit.dart';
 
 final getIt = GetIt.instance;
 

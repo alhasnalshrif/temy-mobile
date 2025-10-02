@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
-import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
-import 'package:temy_barber/features/login/logic/cubit/login_state.dart';
+import 'package:temy_barber/features/auth/logic/cubit/login_cubit.dart';
+import 'package:temy_barber/features/auth/logic/cubit/login_state.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
