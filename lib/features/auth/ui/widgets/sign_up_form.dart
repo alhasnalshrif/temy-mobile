@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/app_regex.dart';
-import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
+import 'package:temy_barber/features/auth/logic/sign_up_cubit.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/widgets/app_text_form_field.dart';

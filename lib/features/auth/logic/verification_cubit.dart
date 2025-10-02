@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/features/verification/data/repos/verification_repo.dart';
-import 'package:temy_barber/features/verification/logic/verification_state.dart';
+import 'package:temy_barber/features/auth/data/repos/verification_repo.dart';
+import 'package:temy_barber/features/auth/logic/verification_state.dart';
 
 import '../data/models/verification_request_body.dart';
 import '../data/models/resend_code_request_body.dart';

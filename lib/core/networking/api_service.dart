@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:temy_barber/core/networking/api_constants.dart';
-import 'package:temy_barber/features/login/data/models/login_request_body.dart';
-import 'package:temy_barber/features/login/data/models/login_response.dart';
+import 'package:temy_barber/features/auth/data/models/login_request_body.dart';
+import 'package:temy_barber/features/auth/data/models/login_response.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../features/sign_up/data/models/sign_up_request_body.dart';
-import '../../features/sign_up/data/models/sign_up_response.dart';
-import '../../features/verification/data/models/resend_code_request_body.dart';
-import '../../features/verification/data/models/verification_request_body.dart';
+import '../../features/auth/data/models/sign_up_request_body.dart';
+import '../../features/auth/data/models/sign_up_response.dart';
+import '../../features/auth/data/models/resend_code_request_body.dart';
+import '../../features/auth/data/models/verification_request_body.dart';
 
 part 'api_service.g.dart';
 

@@ -11,8 +11,8 @@ import 'package:temy_barber/features/category/ui/category_screen.dart';
 import 'package:temy_barber/features/category_barbers/logic/category_cubit.dart';
 import 'package:temy_barber/features/category_barbers/ui/category_screen.dart';
 import 'package:temy_barber/features/dashboard/dashboard_screen.dart';
-import 'package:temy_barber/features/login/logic/cubit/login_cubit.dart';
-import 'package:temy_barber/features/login/ui/login_screen.dart';
+import 'package:temy_barber/features/auth/logic/cubit/login_cubit.dart';
+import 'package:temy_barber/features/auth/ui/login_screen.dart';
 import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
@@ -25,10 +25,10 @@ import 'package:temy_barber/features/reservations/data/models/reservation_respon
 import 'package:temy_barber/features/reservations/ui/booking_confirmation.dart';
 import 'package:temy_barber/features/reservations/ui/invoice_screen.dart';
 import 'package:temy_barber/features/reservations/ui/reservations_screen.dart';
-import 'package:temy_barber/features/sign_up/logic/sign_up_cubit.dart';
-import 'package:temy_barber/features/sign_up/ui/sign_up_screen.dart';
-import 'package:temy_barber/features/verification/logic/verification_cubit.dart';
-import 'package:temy_barber/features/verification/ui/verification_screen.dart';
+import 'package:temy_barber/features/auth/logic/sign_up_cubit.dart';
+import 'package:temy_barber/features/auth/ui/sign_up_screen.dart';
+import 'package:temy_barber/features/auth/logic/verification_cubit.dart';
+import 'package:temy_barber/features/auth/ui/verification_screen.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 
 class AppRouter {

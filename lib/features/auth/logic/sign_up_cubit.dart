@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/features/sign_up/data/repos/sign_up_repo.dart';
-import 'package:temy_barber/features/sign_up/logic/sign_up_state.dart';
+import 'package:temy_barber/features/auth/data/repos/sign_up_repo.dart';
+import 'package:temy_barber/features/auth/logic/sign_up_state.dart';
 
 import '../../../core/di/dependency_injection.dart';
 import '../../../core/helpers/constants.dart';
