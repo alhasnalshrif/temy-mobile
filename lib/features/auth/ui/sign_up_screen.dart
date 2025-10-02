@@ -8,7 +8,7 @@ import 'package:temy_barber/features/auth/ui/widgets/sign_up_form.dart';
 import '../../../core/helpers/spacing.dart';
 import '../../../core/theme/styles.dart';
 import '../../../core/widgets/app_text_button.dart';
-import '../../login/ui/widgets/terms_and_conditions_text.dart';
+import 'widgets/terms_and_conditions_text.dart';
 import '../logic/sign_up_cubit.dart';
 import 'widgets/already_have_account_text.dart';
 

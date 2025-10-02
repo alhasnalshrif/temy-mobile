@@ -134,6 +134,25 @@ class LoginScreen extends StatelessWidget {
                 success: (loginResponse) {
                   Navigator.of(context).pop(); // Close loading dialog
 
+                  // Check if user is verified
+                  final user = loginResponse.data?.user;
+                  final isVerified = user?.verified ?? false;
+
+                  if (!isVerified) {
+                    // User is not verified, navigate to verification screen
+                    final phoneNumber = user?.phone ?? '';
+                    context.pushReplacementNamed(
+                      Routes.verificationScreen,
+                      arguments: {
+                        'phoneNumber': phoneNumber,
+                        'shouldAutoResend':
+                            true, // Auto-resend code for unverified login
+                        'comingFromLogin': true,
+                      },
+                    );
+                    return;
+                  }
+
                   // Set user ID for OneSignal directly from GetIt
                   final userId = loginResponse.data?.user?.id;
                   if (userId != null) {
