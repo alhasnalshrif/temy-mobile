@@ -16,6 +16,7 @@ import '../../../core/routing/routes.dart';
 import 'widgets/dont_have_account_text.dart';
 import 'widgets/email_and_password.dart';
 import 'widgets/terms_and_conditions_text.dart';
+import 'widgets/login_bloc_listener.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -32,51 +33,57 @@ class LoginScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        body: Container(
-          width: double.infinity,
-          color: Colors.black,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Top gradient section with logo and welcome text
-              const SizedBox(height: 60),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'auth.welcome_back'.tr(),
-                      style: TextStyles.font28WhiteBold,
-                    ),
-                    verticalSpace(16),
-                    Image.asset(
-                      'assets/images/logo.png',
-                      height: 60,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-              ),
-              verticalSpace(20),
-              // White bottom section with rounded corners
-              Expanded(
-                child: Container(
-                  width: size.width,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(60),
-                      topRight: Radius.circular(60),
+        body: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              color: Colors.black,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Top gradient section with logo and welcome text
+                  const SizedBox(height: 60),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'auth.welcome_back'.tr(),
+                          style: TextStyles.font28WhiteBold,
+                        ),
+                        verticalSpace(16),
+                        Image.asset(
+                          'assets/images/logo.png',
+                          height: 60,
+                          color: Colors.white,
+                        ),
+                      ],
                     ),
                   ),
-                  padding: const EdgeInsets.all(30),
-                  child: _buildLoginForm(context),
-                ),
+                  verticalSpace(20),
+                  // White bottom section with rounded corners
+                  Expanded(
+                    child: Container(
+                      width: size.width,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(60),
+                          topRight: Radius.circular(60),
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(30),
+                      child: _buildLoginForm(context),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            // Place LoginBlocListener here at the top level where it has access to LoginCubit
+            const LoginBlocListener(),
+          ],
         ),
       ),
     );
@@ -117,88 +124,6 @@ class LoginScreen extends StatelessWidget {
           const Align(
             alignment: Alignment.center,
             child: DontHaveAccountText(),
-          ),
-          // Using direct approach to avoid Provider issues with NotificationCubit
-          BlocListener<LoginCubit, LoginState>(
-            listenWhen: (previous, current) =>
-                current is Loading || current is Success || current is Error,
-            listener: (context, state) {
-              state.whenOrNull(
-                loading: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) =>
-                        Center(child: ShimmerLoading.circular(size: 50)),
-                  );
-                },
-                success: (loginResponse) {
-                  Navigator.of(context).pop(); // Close loading dialog
-
-                  // Check if user is verified
-                  final user = loginResponse.data?.user;
-                  final isVerified = user?.verified ?? false;
-
-                  if (!isVerified) {
-                    // User is not verified, navigate to verification screen
-                    final phoneNumber = user?.phone ?? '';
-                    context.pushReplacementNamed(
-                      Routes.verificationScreen,
-                      arguments: {
-                        'phoneNumber': phoneNumber,
-                        'shouldAutoResend':
-                            true, // Auto-resend code for unverified login
-                        'comingFromLogin': true,
-                      },
-                    );
-                    return;
-                  }
-
-                  // Set user ID for OneSignal directly from GetIt
-                  final userId = loginResponse.data?.user?.id;
-                  if (userId != null) {
-                    try {
-                      final notificationCubit = getIt<NotificationCubit>();
-                      notificationCubit.setUserId(userId);
-                    } catch (e) {
-                      debugPrint('Could not access NotificationCubit: $e');
-                    }
-                  }
-
-                  context.pushReplacementNamed(Routes.dashboardScreen);
-                },
-                error: (error) {
-                  Navigator.of(context).pop(); // Close loading dialog
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      backgroundColor: Colors.white,
-
-                      icon: const Icon(
-                        Icons.error,
-                        color: Colors.red,
-                        size: 32,
-                      ),
-                      content: Text(
-                        error,
-                        style: TextStyles.font15DarkBlueMedium,
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'common.got_it'.tr(),
-                            style: TextStyles.font14BlueSemiBold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-            child: const SizedBox.shrink(),
           ),
         ],
       ),

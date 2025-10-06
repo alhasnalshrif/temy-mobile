@@ -73,30 +73,34 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
           'avatar': barberData!.avatar,
         },
         'services': selectedServices
-            .map((service) => {
-                  'id': service.id,
-                  'name': service.name,
-                  'price': service.price,
-                  'duration': service.duration,
-                  'category': service.category,
-                  'imageCover': service.imageCover,
-                })
+            .map(
+              (service) => {
+                'id': service.id,
+                'name': service.name,
+                'price': service.price,
+                'duration': service.duration,
+                'category': service.category,
+                'imageCover': service.imageCover,
+              },
+            )
             .toList(),
         'totalPrice': totalPrice,
       };
 
       // Save as JSON string
       await prefs.setString(
-          'default_reservation', jsonEncode(defaultReservation));
+        'default_reservation',
+        jsonEncode(defaultReservation),
+      );
     }
   }
 
   void _fetchAvailableTimeSlots() {
     if (barberData?.id != null) {
       context.read<ReservationCubit>().getAvailableTimeSlots(
-            barberId: barberData!.id,
-            date: selectedDate,
-          );
+        barberId: barberData!.id,
+        date: selectedDate,
+      );
     }
   }
 
@@ -109,9 +113,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
         canPop: false, // Prevent dismissing with back button
         child: Center(
           // Replace CircularProgressIndicator with ShimmerLoading
-          child: ShimmerLoading.circular(
-            size: 50,
-          ), // Example shimmer
+          child: ShimmerLoading.circular(size: 50), // Example shimmer
         ),
       ),
     );
@@ -189,8 +191,9 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
             });
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content:
-                    Text('${'booking.load_error'.tr()}: ${error.toString()}'),
+                content: Text(
+                  '${'booking.load_error'.tr()}: ${error.toString()}',
+                ),
                 behavior: SnackBarBehavior.floating,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -206,10 +209,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(
-                'تفاصيل الحجز',
-                style: TextStyles.font18DarkBlueBold,
-              ),
+              title: Text('تفاصيل الحجز', style: TextStyles.font18DarkBlueBold),
               backgroundColor: Colors.white,
               surfaceTintColor: Colors.white,
               elevation: 1,
@@ -232,9 +232,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ServicesSection(
-                              services: selectedServices,
-                            ),
+                            ServicesSection(services: selectedServices),
                             const SizedBox(height: 24),
                             CalendarSection(
                               maxBookingDays: maxBookingDays,
@@ -263,9 +261,23 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                               isLoading: _isLoadingTimeSlots,
                               timeSlotsData: _timeSlotsData,
                               onTimeSelected: (time) {
+                                final previousSelection = _selectedTime;
                                 setState(() {
                                   _selectedTime = time;
                                 });
+
+                                if (previousSelection != null && time == null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: const Text(
+                                        'الوقت المختار لا يتوافق مع مدة الخدمات المختارة',
+                                      ),
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor:
+                                          Colors.red[700] ?? Colors.red,
+                                    ),
+                                  );
+                                }
                               },
                             ),
                             const SizedBox(height: 24),
@@ -277,16 +289,15 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                   ),
                   Container(
                     padding: const EdgeInsets.all(16),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
+                    decoration: const BoxDecoration(color: Colors.white),
                     child: Row(
                       children: [
                         // Save as Default button
                         Expanded(
                           flex: 3,
                           child: AnimatedOpacity(
-                            opacity: canBook &&
+                            opacity:
+                                canBook &&
                                     state.maybeWhen(
                                       reservationLoading: () => false,
                                       orElse: () => true,
@@ -295,19 +306,22 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                                 : 0.7,
                             duration: const Duration(milliseconds: 200),
                             child: ElevatedButton(
-                              onPressed: canBook &&
+                              onPressed:
+                                  canBook &&
                                       state.maybeWhen(
                                         reservationLoading: () => false,
                                         orElse: () => true,
                                       )
                                   ? () {
                                       _saveAsDefault();
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                              'default_booking.saved_as_default'
-                                                  .tr()),
+                                            'default_booking.saved_as_default'
+                                                .tr(),
+                                          ),
                                           behavior: SnackBarBehavior.floating,
                                           backgroundColor: Colors.green[700],
                                         ),
@@ -347,7 +361,8 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                         Expanded(
                           flex: 5,
                           child: AnimatedOpacity(
-                            opacity: canBook &&
+                            opacity:
+                                canBook &&
                                     state.maybeWhen(
                                       reservationLoading: () => false,
                                       orElse: () => true,
@@ -356,7 +371,8 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                                 : 0.7,
                             duration: const Duration(milliseconds: 200),
                             child: ElevatedButton(
-                              onPressed: canBook &&
+                              onPressed:
+                                  canBook &&
                                       state.maybeWhen(
                                         reservationLoading: () => false,
                                         orElse: () => true,

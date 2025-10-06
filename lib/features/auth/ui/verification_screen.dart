@@ -34,9 +34,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
     cubit.setPhoneNumber(widget.phoneNumber);
     cubit.setComingFromLogin(widget.comingFromLogin);
 
+    debugPrint('=== Verification Screen Initialized ===');
+    debugPrint('Phone Number: ${widget.phoneNumber}');
+    debugPrint('Should Auto Resend: ${widget.shouldAutoResend}');
+    debugPrint('Coming From Login: ${widget.comingFromLogin}');
+
     // Auto-resend OTP if coming from login screen for unverified user
     if (widget.shouldAutoResend) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
+        debugPrint('Auto-resending verification code...');
         cubit.resendCode();
       });
     }
@@ -46,6 +52,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        // the back button remove
+        automaticallyImplyLeading: false,
         title: Text('التحقق من الحساب', style: TextStyles.font18WhiteBold),
         backgroundColor: ColorsManager.mainBlue,
       ),
@@ -56,8 +65,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(Icons.verified_user_outlined,
-                    size: 80, color: ColorsManager.mainBlue),
+                const Icon(
+                  Icons.verified_user_outlined,
+                  size: 80,
+                  color: ColorsManager.mainBlue,
+                ),
                 verticalSpace(24),
                 Text(
                   'تحقق من هاتفك',
@@ -88,8 +100,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       AppTextFormField(
                         hintText: '123456',
                         keyboardType: TextInputType.number,
-                        controller:
-                            context.read<VerificationCubit>().codeController,
+                        controller: context
+                            .read<VerificationCubit>()
+                            .codeController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'الرجاء إدخال رمز التحقق';
@@ -116,7 +129,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                    'verification.resend_code_success'.tr()),
+                                  'verification.resend_code_success'.tr(),
+                                ),
                                 backgroundColor: Colors.green,
                               ),
                             );

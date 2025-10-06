@@ -8,11 +8,6 @@ import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
-// Add imports for PDF generation and sharing
-import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
-import 'dart:io';
 
 class InvoiceScreen extends StatelessWidget {
   final ReservationResponseModel? arguments;
@@ -297,89 +292,8 @@ class InvoiceScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  side: const BorderSide(color: ColorsManager.mainBlue),
-                ),
-              ),
-              onPressed: () async {
-                await _generateAndSharePDF();
-              },
-              child: Text(
-                'مشاركة الفاتورة',
-                style: TextStyles.font16DarkBold.copyWith(
-                  color: ColorsManager.mainBlue,
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
-  }
-
-  Future<void> _generateAndSharePDF() async {
-    final pdf = pw.Document();
-
-    // load Cairo font from assets
-    final fontData = await rootBundle.load('assets/fonts/Cairo-Regular.ttf');
-    final cairo = pw.Font.ttf(fontData.buffer.asUint8List() as ByteData);
-
-    pdf.addPage(
-      pw.Page(
-      build: (pw.Context context) {
-        return pw.Directionality(
-        textDirection: pw.TextDirection.rtl,
-        child: pw.DefaultTextStyle(
-          style: pw.TextStyle(font: cairo, fontSize: 12),
-          child: pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
-          children: [
-            pw.Text("الفاتورة",
-              style: pw.TextStyle(font: cairo, fontSize: 24)),
-            pw.SizedBox(height: 16),
-            pw.Text("تفاصيل الحجز:",
-              style: pw.TextStyle(font: cairo, fontSize: 18)),
-            pw.SizedBox(height: 8),
-            pw.Text(
-            "اسم الحلاق: ${_reservationData?.barber.name ?? "اسم الحلاق"}",
-            ),
-            pw.Text("التاريخ: ${_reservationData?.date ?? "غير محدد"}"),
-            pw.Text("الوقت: ${_reservationData?.startTime ?? "غير محدد"}"),
-            pw.SizedBox(height: 16),
-            pw.Text("الخدمات:",
-              style: pw.TextStyle(font: cairo, fontSize: 18)),
-            pw.SizedBox(height: 8),
-            if (_reservationData?.services != null)
-            ..._reservationData!.services.map(
-              (service) => pw.Text(
-              "${service.name} - ${service.price.toInt()} EGP",
-              style: pw.TextStyle(font: cairo, fontSize: 12),
-              ),
-            ),
-            pw.SizedBox(height: 16),
-            pw.Text(
-            "المجموع: ${_reservationData?.totalPrice.toInt()} EGP",
-            style: pw.TextStyle(font: cairo, fontSize: 18),
-            ),
-          ],
-          ),
-        ),
-        );
-      },
-      ),
-    );
-
-    final output = await getTemporaryDirectory();
-    final file = File("${output.path}/invoice.pdf");
-    await file.writeAsBytes(await pdf.save());
-
-    await Share.shareXFiles([XFile(file.path)], text: "الفاتورة");
   }
 }

@@ -9,7 +9,7 @@ import '../data/models/resend_code_request_body.dart';
 class VerificationCubit extends Cubit<VerificationState> {
   final VerificationRepo _verificationRepo;
   VerificationCubit(this._verificationRepo)
-      : super(const VerificationState.initial());
+    : super(const VerificationState.initial());
 
   // Controller for verification code input
   final TextEditingController codeController = TextEditingController();
@@ -46,34 +46,50 @@ class VerificationCubit extends Cubit<VerificationState> {
       ),
     );
 
-    response.when(success: (verificationResponse) {
-      emit(VerificationState.success(verificationResponse));
-    }, failure: (error) {
-      emit(VerificationState.error(
-          error: error.apiErrorModel.message ?? 'Verification failed'));
-    });
+    response.when(
+      success: (verificationResponse) {
+        emit(VerificationState.success(verificationResponse));
+      },
+      failure: (error) {
+        emit(
+          VerificationState.error(
+            error: error.apiErrorModel.message ?? 'Verification failed',
+          ),
+        );
+      },
+    );
   }
 
   // Resend verification code
   void resendCode() async {
     if (phoneNumber == null || phoneNumber!.isEmpty) {
+      debugPrint('ERROR: Phone number is missing for resend');
       emit(const VerificationState.error(error: 'Phone number is missing'));
       return;
     }
 
+    debugPrint('Resending verification code to: $phoneNumber');
     emit(const VerificationState.loading());
     final response = await _verificationRepo.resendCode(
-      ResendCodeRequestBody(
-        phone: phoneNumber!,
-      ),
+      ResendCodeRequestBody(phone: phoneNumber!),
     );
 
-    response.when(success: (resendResponse) {
-      emit(const VerificationState.initial());
-    }, failure: (error) {
-      emit(VerificationState.error(
-          error: error.apiErrorModel.message ?? 'Failed to resend code'));
-    });
+    response.when(
+      success: (resendResponse) {
+        debugPrint('Verification code resent successfully');
+        emit(const VerificationState.initial());
+      },
+      failure: (error) {
+        debugPrint(
+          'Failed to resend verification code: ${error.apiErrorModel.message}',
+        );
+        emit(
+          VerificationState.error(
+            error: error.apiErrorModel.message ?? 'Failed to resend code',
+          ),
+        );
+      },
+    );
   }
 
   @override

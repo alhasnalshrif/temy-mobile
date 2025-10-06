@@ -31,17 +31,31 @@ class LoginBlocListener extends StatelessWidget {
             final user = loginResponse.data?.user;
             final isVerified = user?.verified ?? false;
 
+            debugPrint('Login successful. User verified: $isVerified');
+
             if (!isVerified) {
               // User is not verified, navigate to verification screen
               final phoneNumber = user?.phone ?? '';
-              context.pushReplacementNamed(
-                Routes.verificationScreen,
-                arguments: {
-                  'phoneNumber': phoneNumber,
-                  'shouldAutoResend': true,
-                  'comingFromLogin': true,
-                },
+              final countryCode = user?.countryCode ?? '';
+              final fullPhone = '$countryCode$phoneNumber';
+
+              debugPrint(
+                'User not verified. Navigating to verification screen with phone: $fullPhone',
               );
+
+              // Navigate after the current frame to avoid build scope errors
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (context.mounted) {
+                  context.pushReplacementNamed(
+                    Routes.verificationScreen,
+                    arguments: {
+                      'phoneNumber': fullPhone,
+                      'shouldAutoResend': true,
+                      'comingFromLogin': true,
+                    },
+                  );
+                }
+              });
               return;
             }
 
@@ -73,9 +87,7 @@ class LoginBlocListener extends StatelessWidget {
       context: context,
       builder: (context) => Center(
         // Replace CircularProgressIndicator with ShimmerLoading
-        child: ShimmerLoading.circular(
-          size: 50,
-        ), // Example shimmer
+        child: ShimmerLoading.circular(size: 50), // Example shimmer
       ),
     );
   }
@@ -86,15 +98,8 @@ class LoginBlocListener extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font15DarkBlueMedium,
-        ),
+        icon: const Icon(Icons.error, color: Colors.red, size: 32),
+        content: Text(error, style: TextStyles.font15DarkBlueMedium),
         actions: [
           TextButton(
             onPressed: () {

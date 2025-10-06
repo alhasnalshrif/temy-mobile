@@ -35,9 +35,7 @@ class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.onBoardingScreen:
-        return MaterialPageRoute(
-          builder: (_) => const OnboardingScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
@@ -83,34 +81,25 @@ class AppRouter {
           ),
         );
       case Routes.dashboardScreen:
-        return MaterialPageRoute(
-          builder: (_) => const DashboardScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const DashboardScreen());
       case Routes.updateProfileScreen:
         final userResponse = settings.arguments as User;
         return MaterialPageRoute(
-          builder: (_) => UpdateProfileScreen(
-            currentUser: userResponse,
-          ),
+          builder: (_) => UpdateProfileScreen(currentUser: userResponse),
         );
       case Routes.notificationSettingsScreen:
         return MaterialPageRoute(
           builder: (_) => const NotificationSettingsScreen(),
         );
       case Routes.privacyPolicyScreen:
-        return MaterialPageRoute(
-          builder: (_) => const PrivacyPolicyScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen());
       case Routes.helpScreen:
-        return MaterialPageRoute(
-          builder: (_) => const HelpScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const HelpScreen());
       case Routes.aboutScreen:
-        return MaterialPageRoute(
-          builder: (_) => const AboutScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const AboutScreen());
       case Routes.invoiceScreen:
-        final reservationResponse = settings.arguments as ReservationResponseModel;
+        final reservationResponse =
+            settings.arguments as ReservationResponseModel;
         return MaterialPageRoute(
           builder: (_) => InvoiceScreen(arguments: reservationResponse),
         );
@@ -141,7 +130,9 @@ class AppRouter {
         final categoryId = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => CategoryBarberCubit(getIt(), categoryId!)..getCategoryWithBarbers(),
+            create: (context) =>
+                CategoryBarberCubit(getIt(), categoryId!)
+                  ..getCategoryWithBarbers(),
             child: const CategoryBarbersScreen(),
           ),
         );
@@ -149,14 +140,25 @@ class AppRouter {
         final barberId = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => BarberCubit(getIt(), barberId!)..getBarberDetail(),
+            create: (context) =>
+                BarberCubit(getIt(), barberId!)..getBarberDetail(),
             child: const BarberScreen(),
           ),
         );
       default:
         // Handle unknown routes gracefully by redirecting to login if not logged in
         return MaterialPageRoute(
-          builder: (_) => isLoggedInUser ? const DashboardScreen() : const LoginScreen(),
+          builder: (_) => isLoggedInUser
+              ? const DashboardScreen()
+              : MultiBlocProvider(
+                  providers: [
+                    BlocProvider(create: (context) => getIt<LoginCubit>()),
+                    BlocProvider(
+                      create: (context) => getIt<NotificationCubit>(),
+                    ),
+                  ],
+                  child: const LoginScreen(),
+                ),
         );
     }
   }

@@ -12,7 +12,7 @@ class TimeSlotSection extends StatelessWidget {
   final BarberDetailData? barberData;
   final String? selectedTime;
   final int totalDuration;
-  final Function(String) onTimeSelected;
+  final ValueChanged<String?> onTimeSelected;
   final bool isLoading;
   final TimeSlotsResponse? timeSlotsData;
 
@@ -28,7 +28,10 @@ class TimeSlotSection extends StatelessWidget {
 
   // Helper method to check if consecutive slots are available for the duration
   bool _areSlotsAvailable(
-      List<reservation.TimeSlot> slots, int startIndex, int requiredSlots) {
+    List<reservation.TimeSlot> slots,
+    int startIndex,
+    int requiredSlots,
+  ) {
     if (startIndex + requiredSlots > slots.length) {
       return false;
     }
@@ -41,37 +44,39 @@ class TimeSlotSection extends StatelessWidget {
     return true;
   }
 
-  // Find the next available slot after encountering an unavailable one
-  int _findNextAvailableSlotIndex(
-      List<reservation.TimeSlot> slots, int currentIndex) {
-    for (int i = currentIndex; i < slots.length; i++) {
-      if (slots[i].isAvailable) {
-        return i;
-      }
-    }
-    return slots.length; // No more available slots
-  }
-
   // Convert barber.TimeSlot to reservation.TimeSlot
   reservation.TimeSlot _convertBarberTimeSlot(barber.TimeSlot slot) {
     return reservation.TimeSlot(time: slot.time, isAvailable: slot.isAvailable);
   }
 
+  String _sanitizeTimeString(String time) {
+    var normalized = time;
+
+    if (normalized.contains('T')) {
+      final dateTimeParts = normalized.split('T');
+      if (dateTimeParts.length > 1) {
+        normalized = dateTimeParts[1];
+      }
+    }
+
+    if (normalized.contains(' ')) {
+      normalized = normalized.split(' ').first;
+    }
+
+    if (normalized.length >= 5 && normalized.contains(':')) {
+      normalized = normalized.substring(0, 5);
+    }
+
+    return normalized;
+  }
+
   // Get the formatted end time based on start time and duration
   String _getEndTime(String startTime, int durationMinutes) {
     try {
-      // Handle ISO format (if time is in format like 2025-04-15T07:00:00)
-      if (startTime.contains('T')) {
-        final dateTimeParts = startTime.split('T');
-        if (dateTimeParts.length > 1) {
-          startTime = dateTimeParts[1].substring(0, 5); // Extract HH:MM
-        }
-      }
-
-      // Now handle HH:MM format
-      final parts = startTime.split(':');
+      final normalizedStart = _sanitizeTimeString(startTime);
+      final parts = normalizedStart.split(':');
       if (parts.length < 2) {
-        return startTime; // Return original if we can't parse
+        return normalizedStart; // Return sanitized if we can't parse
       }
 
       int hours = int.tryParse(parts[0]) ?? 0;
@@ -85,13 +90,47 @@ class TimeSlotSection extends StatelessWidget {
       return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
     } catch (e) {
       debugPrint('Error calculating end time: $e');
-      return startTime; // Return original time if there's an error
+      return _sanitizeTimeString(
+        startTime,
+      ); // Return sanitized time if there's an error
+    }
+  }
+
+  String _formatTimeForDisplay(String time) {
+    try {
+      final sanitized = _sanitizeTimeString(time);
+      final parts = sanitized.split(':');
+      if (parts.length < 2) {
+        return sanitized;
+      }
+
+      final rawHour = int.tryParse(parts[0]) ?? 0;
+      final minutes = int.tryParse(parts[1]) ?? 0;
+
+      final isNoon = rawHour == 12 && minutes == 0;
+      final isAm = rawHour < 12;
+      final period = isNoon ? 'ظ' : (isAm ? 'ص' : 'م');
+
+      int displayHour = rawHour % 12;
+      if (displayHour == 0) {
+        displayHour = 12;
+      }
+
+      final formattedHour = displayHour.toString().padLeft(2, '0');
+      final formattedMinutes = minutes.toString().padLeft(2, '0');
+
+      return '$formattedHour:$formattedMinutes $period';
+    } catch (e) {
+      debugPrint('Error formatting time display: $e');
+      return time;
     }
   }
 
   // Finds optimized slots based on the required duration
   List<Map<String, dynamic>> _getOptimizedTimeSlots(
-      List<reservation.TimeSlot> slots, int totalDuration) {
+    List<reservation.TimeSlot> slots,
+    int totalDuration,
+  ) {
     // Each slot is assumed to be 15 minutes
     const slotDurationMinutes = 15;
 
@@ -109,10 +148,13 @@ class TimeSlotSection extends StatelessWidget {
 
       if (canStartHere) {
         // This is a valid starting point for the service
+        final endTime = _getEndTime(slot.time, totalDuration);
         validStartingSlots.add({
           'slot': slot,
           'available': true,
-          'endTime': _getEndTime(slot.time, totalDuration),
+          'endTime': endTime,
+          'displayStart': _formatTimeForDisplay(slot.time),
+          'displayEnd': _formatTimeForDisplay(endTime),
           'durationBlocks': requiredSlots,
         });
 
@@ -132,6 +174,7 @@ class TimeSlotSection extends StatelessWidget {
           'slot': slot,
           'available': false,
           'endTime': null,
+          'displayStart': _formatTimeForDisplay(slot.time),
           'reason': 'Insufficient consecutive availability',
         });
 
@@ -143,11 +186,12 @@ class TimeSlotSection extends StatelessWidget {
           'slot': slot,
           'available': false,
           'endTime': null,
+          'displayStart': _formatTimeForDisplay(slot.time),
           'reason': 'Unavailable time slot',
         });
 
-        // Skip to the next available slot
-        i = _findNextAvailableSlotIndex(slots, i + 1);
+        // Move to the next slot to ensure all slots appear in the grid
+        i += 1;
       }
     }
 
@@ -157,7 +201,8 @@ class TimeSlotSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Convert barber slots to reservation slots if needed
-    final List<reservation.TimeSlot> timeSlots = timeSlotsData?.data.slots ??
+    final List<reservation.TimeSlot> timeSlots =
+        timeSlotsData?.data.slots ??
         (barberData?.availability.slots
                 .map((slot) => _convertBarberTimeSlot(slot))
                 .toList() ??
@@ -166,6 +211,26 @@ class TimeSlotSection extends StatelessWidget {
     // Get optimized time slots based on service duration
     final validStartingSlots = _getOptimizedTimeSlots(timeSlots, totalDuration);
 
+    final hasValidSelectedTime =
+        selectedTime != null &&
+        validStartingSlots.any((slotData) {
+          if (slotData['available'] != true) {
+            return false;
+          }
+          final reservation.TimeSlot slot =
+              slotData['slot'] as reservation.TimeSlot;
+          return slot.time == selectedTime;
+        });
+
+    if (selectedTime != null && !hasValidSelectedTime) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!context.mounted) {
+          return;
+        }
+        onTimeSelected(null);
+      });
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -173,10 +238,7 @@ class TimeSlotSection extends StatelessWidget {
           children: [
             const Text(
               'الوقت المتاح',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 8),
             if (totalDuration > 0)
@@ -207,79 +269,108 @@ class TimeSlotSection extends StatelessWidget {
                 ),
               )
             : validStartingSlots.isEmpty
-                ? const SizedBox(
-                    height: 100,
-                    child: Center(
-                      child: Text(
-                        'لا توجد أوقات متاحة في هذا اليوم',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  )
-                : SizedBox(
-                    height: ((validStartingSlots.length / 4).ceil() * 60.0) +
-                        20, // Calculate height based on rows
-                    child: GridView.builder(
-                      physics:
-                          const NeverScrollableScrollPhysics(), // Disable internal scrolling
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        childAspectRatio: 1.5,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
-                      ),
-                      itemCount: validStartingSlots.length,
-                      itemBuilder: (context, index) {
-                        final slotData = validStartingSlots[index];
-                        final slot = slotData['slot'] as reservation.TimeSlot;
-                        final isAvailable = slotData['available'] as bool;
-                        final isSelected = selectedTime == slot.time;
+            ? const SizedBox(
+                height: 100,
+                child: Center(
+                  child: Text(
+                    'لا توجد أوقات متاحة في هذا اليوم',
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ),
+              )
+            : SizedBox(
+                height:
+                    ((validStartingSlots.length / 4).ceil() * 66.0) +
+                    40, // Calculate height based on rows
+                child: GridView.builder(
+                  physics:
+                      const NeverScrollableScrollPhysics(), // Disable internal scrolling
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    childAspectRatio: 1.5,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                  ),
+                  itemCount: validStartingSlots.length,
+                  itemBuilder: (context, index) {
+                    final slotData = validStartingSlots[index];
+                    final slot = slotData['slot'] as reservation.TimeSlot;
+                    final isAvailable = slotData['available'] as bool;
+                    final isSelected = selectedTime == slot.time;
+                    final displayStart =
+                        slotData['displayStart'] as String? ??
+                        _formatTimeForDisplay(slot.time);
+                    final displayEnd = slotData['displayEnd'] as String?;
 
-                        // Build each time slot widget
-                        return GestureDetector(
-                          onTap: isAvailable
-                              ? () => onTimeSelected(slot.time)
-                              : null,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: isSelected
-                                  ? ColorsManager.mainBlue
-                                  : isAvailable
-                                      ? ColorsManager.lightBlue
-                                      : Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Center(
-                              child: Text(
-                                slot.time,
+                    // Build each time slot widget
+                    return GestureDetector(
+                      onTap: isAvailable
+                          ? () => onTimeSelected(slot.time)
+                          : null,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? ColorsManager.mainBlue
+                              : isAvailable
+                              ? ColorsManager.lightBlue
+                              : Colors.grey[200],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                displayStart,
                                 style: TextStyle(
                                   color: isSelected
                                       ? Colors.white
                                       : isAvailable
-                                          ? ColorsManager.mainBlue
-                                          : Colors.grey,
+                                      ? ColorsManager.mainBlue
+                                      : Colors.grey,
                                   fontWeight: isSelected
                                       ? FontWeight.bold
-                                      : FontWeight.normal,
+                                      : FontWeight.w500,
                                 ),
                               ),
-                            ),
+                              if (isAvailable && displayEnd != null)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Text(
+                                    displayEnd,
+                                    style: TextStyle(
+                                      color: isSelected
+                                          ? Colors.white70
+                                          : ColorsManager.mainBlue,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              if (!isAvailable)
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 4),
+                                  child: Text(
+                                    'غير متاح بالكامل',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
-                        );
-                      },
-                    ),
-                  ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
         if (selectedTime != null) ...[
           const SizedBox(height: 16),
           Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 8,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: ColorsManager.lightBlue,
               borderRadius: BorderRadius.circular(8),
@@ -293,7 +384,15 @@ class TimeSlotSection extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'الحجز: $selectedTime - ${_getEndTime(selectedTime!, totalDuration)}',
+                  () {
+                    final selectionStartDisplay = _formatTimeForDisplay(
+                      selectedTime!,
+                    );
+                    final selectionEndDisplay = _formatTimeForDisplay(
+                      _getEndTime(selectedTime!, totalDuration),
+                    );
+                    return 'الحجز: $selectionStartDisplay - $selectionEndDisplay';
+                  }(),
                   style: const TextStyle(
                     fontSize: 14,
                     color: ColorsManager.mainBlue,
