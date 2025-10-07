@@ -126,6 +126,46 @@ class TimeSlotSection extends StatelessWidget {
     }
   }
 
+  // Helper method to check if booking fits within working hours
+  bool _fitsWithinWorkingHours(String startTime, int durationMinutes) {
+    if (barberData?.workingHours == null) {
+      return true; // If no working hours data, allow all slots
+    }
+
+    try {
+      final workingEnd = _sanitizeTimeString(barberData!.workingHours.end);
+      final normalizedStart = _sanitizeTimeString(startTime);
+
+      // Parse times
+      final startParts = normalizedStart.split(':');
+      final endParts = workingEnd.split(':');
+
+      if (startParts.length < 2 || endParts.length < 2) {
+        return true; // Can't validate, allow the slot
+      }
+
+      int startHours = int.tryParse(startParts[0]) ?? 0;
+      int startMinutes = int.tryParse(startParts[1]) ?? 0;
+      int workingEndHours = int.tryParse(endParts[0]) ?? 0;
+      int workingEndMinutes = int.tryParse(endParts[1]) ?? 0;
+
+      // Calculate booking end time
+      int bookingEndMinutes = startMinutes + durationMinutes;
+      int bookingEndHours = startHours + (bookingEndMinutes ~/ 60);
+      bookingEndMinutes = bookingEndMinutes % 60;
+
+      // Convert to total minutes for comparison
+      int bookingEndTotalMinutes = (bookingEndHours * 60) + bookingEndMinutes;
+      int workingEndTotalMinutes = (workingEndHours * 60) + workingEndMinutes;
+
+      // Check if booking ends before or at working hours end
+      return bookingEndTotalMinutes <= workingEndTotalMinutes;
+    } catch (e) {
+      debugPrint('Error validating working hours: $e');
+      return true; // On error, allow the slot
+    }
+  }
+
   // Finds optimized slots based on the required duration
   List<Map<String, dynamic>> _getOptimizedTimeSlots(
     List<reservation.TimeSlot> slots,
@@ -146,7 +186,13 @@ class TimeSlotSection extends StatelessWidget {
       final canStartHere = _areSlotsAvailable(slots, i, requiredSlots);
       final slot = slots[i];
 
-      if (canStartHere) {
+      // Also check if booking fits within working hours
+      final fitsInWorkingHours = _fitsWithinWorkingHours(
+        slot.time,
+        totalDuration,
+      );
+
+      if (canStartHere && fitsInWorkingHours) {
         // This is a valid starting point for the service
         final endTime = _getEndTime(slot.time, totalDuration);
         validStartingSlots.add({
@@ -156,6 +202,18 @@ class TimeSlotSection extends StatelessWidget {
           'displayStart': _formatTimeForDisplay(slot.time),
           'displayEnd': _formatTimeForDisplay(endTime),
           'durationBlocks': requiredSlots,
+        });
+
+        // Move to the next slot
+        i += 1;
+      } else if (slot.isAvailable && !fitsInWorkingHours) {
+        // Slot is available but booking would extend beyond working hours
+        validStartingSlots.add({
+          'slot': slot,
+          'available': false,
+          'endTime': null,
+          'displayStart': _formatTimeForDisplay(slot.time),
+          'reason': 'يتجاوز ساعات العمل',
         });
 
         // Move to the next slot
@@ -278,93 +336,123 @@ class TimeSlotSection extends StatelessWidget {
                   ),
                 ),
               )
-            : SizedBox(
-                height:
-                    ((validStartingSlots.length / 4).ceil() * 66.0) +
-                    40, // Calculate height based on rows
-                child: GridView.builder(
-                  physics:
-                      const NeverScrollableScrollPhysics(), // Disable internal scrolling
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: 1.5,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemCount: validStartingSlots.length,
-                  itemBuilder: (context, index) {
-                    final slotData = validStartingSlots[index];
-                    final slot = slotData['slot'] as reservation.TimeSlot;
-                    final isAvailable = slotData['available'] as bool;
-                    final isSelected = selectedTime == slot.time;
-                    final displayStart =
-                        slotData['displayStart'] as String? ??
-                        _formatTimeForDisplay(slot.time);
-                    final displayEnd = slotData['displayEnd'] as String?;
+            : LayoutBuilder(
+                builder: (context, constraints) {
+                  // Calculate responsive dimensions
+                  final screenWidth = MediaQuery.of(context).size.width;
+                  final availableWidth = constraints.maxWidth > 0
+                      ? constraints.maxWidth
+                      : screenWidth - 32; // Default padding
 
-                    // Build each time slot widget
-                    return GestureDetector(
-                      onTap: isAvailable
-                          ? () => onTimeSelected(slot.time)
-                          : null,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? ColorsManager.mainBlue
-                              : isAvailable
-                              ? ColorsManager.lightBlue
-                              : Colors.grey[200],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                displayStart,
-                                style: TextStyle(
-                                  color: isSelected
-                                      ? Colors.white
-                                      : isAvailable
-                                      ? ColorsManager.mainBlue
-                                      : Colors.grey,
-                                  fontWeight: isSelected
-                                      ? FontWeight.bold
-                                      : FontWeight.w500,
-                                ),
-                              ),
-                              if (isAvailable && displayEnd != null)
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 4),
-                                  child: Text(
-                                    displayEnd,
+                  // Calculate item dimensions
+                  const crossAxisCount = 4;
+                  const crossAxisSpacing = 8.0;
+                  const mainAxisSpacing = 8.0;
+
+                  final totalSpacing = crossAxisSpacing * (crossAxisCount - 1);
+                  final itemWidth =
+                      (availableWidth - totalSpacing) / crossAxisCount;
+                  final itemHeight =
+                      itemWidth / 1.5; // Based on childAspectRatio
+
+                  // Calculate total height
+                  final rows = (validStartingSlots.length / crossAxisCount)
+                      .ceil();
+                  final totalHeight =
+                      (rows * itemHeight) +
+                      ((rows - 1) * mainAxisSpacing) +
+                      40; // Extra padding
+
+                  return SizedBox(
+                    height: totalHeight,
+                    child: GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            childAspectRatio: 1.5,
+                            crossAxisSpacing: crossAxisSpacing,
+                            mainAxisSpacing: mainAxisSpacing,
+                          ),
+                      itemCount: validStartingSlots.length,
+                      itemBuilder: (context, index) {
+                        final slotData = validStartingSlots[index];
+                        final slot = slotData['slot'] as reservation.TimeSlot;
+                        final isAvailable = slotData['available'] as bool;
+                        final isSelected = selectedTime == slot.time;
+                        final displayStart =
+                            slotData['displayStart'] as String? ??
+                            _formatTimeForDisplay(slot.time);
+                        final displayEnd = slotData['displayEnd'] as String?;
+                        final unavailableReason = slotData['reason'] as String?;
+
+                        // Build each time slot widget
+                        return GestureDetector(
+                          onTap: isAvailable
+                              ? () => onTimeSelected(slot.time)
+                              : null,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? ColorsManager.mainBlue
+                                  : isAvailable
+                                  ? ColorsManager.lightBlue
+                                  : Colors.grey[200],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    displayStart,
                                     style: TextStyle(
                                       color: isSelected
-                                          ? Colors.white70
-                                          : ColorsManager.mainBlue,
+                                          ? Colors.white
+                                          : isAvailable
+                                          ? ColorsManager.mainBlue
+                                          : Colors.grey,
+                                      fontWeight: isSelected
+                                          ? FontWeight.bold
+                                          : FontWeight.w500,
                                       fontSize: 12,
-                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                ),
-                              if (!isAvailable)
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 4),
-                                  child: Text(
-                                    'غير متاح بالكامل',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 11,
+                                  if (isAvailable && displayEnd != null)
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4),
+                                      child: Text(
+                                        displayEnd,
+                                        style: TextStyle(
+                                          color: isSelected
+                                              ? Colors.white70
+                                              : ColorsManager.mainBlue,
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                            ],
+                                  if (!isAvailable)
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4),
+                                      child: Text(
+                                        unavailableReason ?? 'غير متاح',
+                                        style: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 9,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
 
         if (selectedTime != null) ...[

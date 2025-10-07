@@ -69,7 +69,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(error.toString()),
+                content: Text(error.apiErrorModel.message.toString()),
                 backgroundColor: Colors.red,
               ),
             );
