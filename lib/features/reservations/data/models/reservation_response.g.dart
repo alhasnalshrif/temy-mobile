@@ -44,12 +44,12 @@ ServiceModel _$ServiceModelFromJson(Map<String, dynamic> json) => ServiceModel(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      imageCover: json['imageCover'] as String,
-      category: json['category'] as String,
-      available: json['available'] as bool,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
-      version: (json['__v'] as num).toInt(),
+      imageCover: json['imageCover'] as String?,
+      category: json['category'] as String?,
+      available: json['available'] as bool?,
+      createdAt: json['createdAt'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      version: (json['__v'] as num?)?.toInt(),
       barbers: json['barbers'] as List<dynamic>? ?? [],
       description: json['description'] as String?,
     );
@@ -74,7 +74,9 @@ Map<String, dynamic> _$ServiceModelToJson(ServiceModel instance) =>
 ReservationData _$ReservationDataFromJson(Map<String, dynamic> json) =>
     ReservationData(
       id: json['_id'] as String,
-      user: json['user'] as String,
+      user: json['user'] as String?,
+      userName: json['userName'] as String?,
+      userPhone: json['userPhone'] as String?,
       barber: BarberModel.fromJson(json['barber'] as Map<String, dynamic>),
       services: (json['services'] as List<dynamic>)
           .map((e) => ServiceModel.fromJson(e as Map<String, dynamic>))
@@ -84,15 +86,24 @@ ReservationData _$ReservationDataFromJson(Map<String, dynamic> json) =>
       totalDuration: (json['totalDuration'] as num).toInt(),
       status: json['status'] as String,
       totalPrice: (json['totalPrice'] as num).toDouble(),
+      note: json['note'] as String?,
       createdAt: json['createdAt'] as String,
       updatedAt: json['updatedAt'] as String,
       version: (json['__v'] as num).toInt(),
+      isQueueReservation: json['is_queue_reservation'] as bool?,
+      queueNumber: (json['queue_number'] as num?)?.toInt(),
+      queuePosition: (json['queue_position'] as num?)?.toInt(),
+      queueStatus: json['queue_status'] as String?,
+      joinedQueueAt: json['joined_queue_at'] as String?,
+      startedServiceAt: json['started_service_at'] as String?,
     );
 
 Map<String, dynamic> _$ReservationDataToJson(ReservationData instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'user': instance.user,
+      'userName': instance.userName,
+      'userPhone': instance.userPhone,
       'barber': instance.barber,
       'services': instance.services,
       'date': instance.date,
@@ -100,7 +111,14 @@ Map<String, dynamic> _$ReservationDataToJson(ReservationData instance) =>
       'totalDuration': instance.totalDuration,
       'status': instance.status,
       'totalPrice': instance.totalPrice,
+      'note': instance.note,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       '__v': instance.version,
+      'is_queue_reservation': instance.isQueueReservation,
+      'queue_number': instance.queueNumber,
+      'queue_position': instance.queuePosition,
+      'queue_status': instance.queueStatus,
+      'joined_queue_at': instance.joinedQueueAt,
+      'started_service_at': instance.startedServiceAt,
     };

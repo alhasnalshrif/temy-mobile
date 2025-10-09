@@ -12,14 +12,13 @@ import 'package:temy_barber/features/barber/data/models/reservation_arguments.da
 import 'package:temy_barber/features/reservations/logic/simple_multi_reservation_manager.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_state.dart';
+import 'package:temy_barber/features/reservations/data/models/queue_response.dart';
+import 'package:temy_barber/features/auth/ui/widgets/guest_info_dialog.dart';
 
 class BookingConfirmation extends StatefulWidget {
   final ReservationArguments arguments;
 
-  const BookingConfirmation({
-    super.key,
-    required this.arguments,
-  });
+  const BookingConfirmation({super.key, required this.arguments});
 
   @override
   State<BookingConfirmation> createState() => _BookingConfirmationState();
@@ -31,6 +30,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       MultiReservationManager();
   // Getter to access widget.arguments more concisely
   ReservationArguments get arguments => widget.arguments;
+  bool get isQueueMode => arguments.isQueueMode ?? false;
 
   @override
   void dispose() {
@@ -47,14 +47,19 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
           reservationLoading: () {
             _showLoadingDialog(context);
           },
-          reservationSuccess: (response, arguments) {
+          reservationSuccess: (response, reservationArgs) {
+            print('🎉 reservationSuccess called!');
+
             // Dismiss loading dialog if it's showing
             Navigator.of(context, rootNavigator: true).pop();
-    
+            print('✅ Loading dialog dismissed');
+
             // Clear all reservations when successful
             _multiReservationManager.clearReservations();
-    
-            // Navigate to invoice screen
+
+            // Debug print to check response values
+            // Navigate directly to invoice screen for all reservations
+            print('✅ Navigating to invoice screen');
             Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.invoiceScreen,
@@ -65,7 +70,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
           reservationError: (error) {
             // Dismiss loading dialog if it's showing
             Navigator.of(context, rootNavigator: true).pop();
-    
+
             // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -79,10 +84,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'تأكيد الحجز',
-            style: TextStyles.font16DarkBold,
-          ),
+          title: Text('تأكيد الحجز', style: TextStyles.font16DarkBold),
           centerTitle: true,
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
@@ -97,7 +99,9 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
+                      horizontal: 16.0,
+                      vertical: 8.0,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -132,12 +136,17 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       barrierDismissible: false,
       builder: (context) => PopScope(
         canPop: false,
-        child: Center(
-          child: ShimmerLoading.circular(
-            size: 50,
-          ),
-        ),
+        child: Center(child: ShimmerLoading.circular(size: 50)),
       ),
+    );
+  }
+
+  // Show guest information dialog
+  Future<GuestInfo?> _showGuestInfoDialog(BuildContext context) async {
+    return await showDialog<GuestInfo>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const GuestInfoDialog(),
     );
   }
 
@@ -172,16 +181,18 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     final List<ReservationArguments> existingReservations =
         _multiReservationManager.reservations;
 
-    if (existingReservations.isNotEmpty) {
+    if (!isQueueMode && existingReservations.isNotEmpty) {
       // Multi-booking mode: display all existing reservations + the current one
       final List<ReservationArguments> allReservations = [
         ...existingReservations,
-        arguments
+        arguments,
       ];
 
       // Calculate grand total
-      final double grandTotal =
-          allReservations.fold(0.0, (total, res) => total + res.totalPrice);
+      final double grandTotal = allReservations.fold(
+        0.0,
+        (total, res) => total + res.totalPrice,
+      );
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -223,9 +234,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               }
 
               return Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 12,
-                ),
+                margin: const EdgeInsets.symmetric(vertical: 12),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -252,18 +261,23 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                                color: Colors.grey.shade200, width: 1.5),
+                              color: Colors.grey.shade200,
+                              width: 1.5,
+                            ),
                           ),
                           child: CircleAvatar(
                             radius: 20,
                             backgroundColor: Colors.grey.shade100,
-                            backgroundImage: reservation.barberData?.avatar !=
-                                    null
+                            backgroundImage:
+                                reservation.barberData?.avatar != null
                                 ? NetworkImage(reservation.barberData!.avatar)
                                 : null,
                             child: reservation.barberData?.avatar == null
-                                ? const Icon(Icons.person,
-                                    size: 20, color: Colors.grey)
+                                ? const Icon(
+                                    Icons.person,
+                                    size: 20,
+                                    color: Colors.grey,
+                                  )
                                 : null,
                           ),
                         ),
@@ -320,31 +334,30 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
                     // Services section
                     if (reservation.selectedServices.isNotEmpty) ...[
-                      ...reservation.selectedServices.map((service) => Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 6),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    service.name,
-                                    style: TextStyles.font14DarkBlueMedium
-                                        .copyWith(
-                                      color: Colors.black87,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                      ...reservation.selectedServices.map(
+                        (service) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  service.name,
+                                  style: TextStyles.font14DarkBlueMedium
+                                      .copyWith(color: Colors.black87),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                Text(
-                                  "${service.price.toStringAsFixed(0)} جنية",
-                                  style:
-                                      TextStyles.font14DarkBlueMedium.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: ColorsManager.mainBlue,
-                                  ),
+                              ),
+                              Text(
+                                "${service.price.toStringAsFixed(0)} جنية",
+                                style: TextStyles.font14DarkBlueMedium.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: ColorsManager.mainBlue,
                                 ),
-                              ],
-                            ),
-                          )),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ] else ...[
                       Text(
                         "لا توجد خدمات محددة",
@@ -371,8 +384,9 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                                 ),
                               ),
                               Text(
-                                  "${reservation.totalPrice.toStringAsFixed(2)} جنية",
-                                  style: TextStyles.font18DarkBlueBold),
+                                "${reservation.totalPrice.toStringAsFixed(2)} جنية",
+                                style: TextStyles.font18DarkBlueBold,
+                              ),
                             ],
                           ),
                         ],
@@ -395,10 +409,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "المجموع الكلي",
-                  style: TextStyles.font16DarkBold,
-                ),
+                Text("المجموع الكلي", style: TextStyles.font16DarkBold),
                 Text(
                   "${grandTotal.toStringAsFixed(2)} جنية",
                   style: TextStyles.font16DarkBold.copyWith(
@@ -415,10 +426,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "ملخص الخدمات",
-            style: TextStyles.font16DarkBold,
-          ),
+          Text("ملخص الخدمات", style: TextStyles.font16DarkBold),
           const SizedBox(height: 12),
 
           // Services in a more compact container
@@ -450,14 +458,16 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                         ),
                         Text(
                           "${service.duration} دقيقة",
-                          style: TextStyles.font14GrayRegular
-                              .copyWith(fontSize: 12),
+                          style: TextStyles.font14GrayRegular.copyWith(
+                            fontSize: 12,
+                          ),
                         ),
                         const SizedBox(width: 12),
                         Text(
                           "${service.price.toStringAsFixed(2)} جنية",
-                          style: TextStyles.font14DarkBlueMedium
-                              .copyWith(fontWeight: FontWeight.bold),
+                          style: TextStyles.font14DarkBlueMedium.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     );
@@ -470,10 +480,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "المجموع",
-                      style: TextStyles.font16DarkBold,
-                    ),
+                    Text("المجموع", style: TextStyles.font16DarkBold),
                     Text(
                       "${arguments.totalPrice.toStringAsFixed(2)} جنية",
                       style: TextStyles.font16DarkBold.copyWith(
@@ -492,8 +499,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
   Widget _buildBarberInfo() {
     if (arguments.barberData == null) {
-      return const SizedBox
-          .shrink(); // Don't show this section if barber data is missing
+      return const SizedBox.shrink(); // Don't show this section if barber data is missing
     }
 
     return Container(
@@ -524,22 +530,20 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               children: [
                 Text(
                   "الحلاق: ${arguments.barberData?.name ?? "غير محدد"}",
-                  style: TextStyles.font14DarkBlueMedium
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: TextStyles.font14DarkBlueMedium.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 if (arguments.barberData?.rating != null)
                   Row(
                     children: [
-                      const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 14,
-                      ),
+                      const Icon(Icons.star, color: Colors.amber, size: 14),
                       const SizedBox(width: 4),
                       Text(
                         arguments.barberData!.rating.toString(),
-                        style:
-                            TextStyles.font14GrayRegular.copyWith(fontSize: 12),
+                        style: TextStyles.font14GrayRegular.copyWith(
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -556,8 +560,10 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       return const SizedBox.shrink(); // Don't display if no date/time selected
     }
 
-    String formattedDate =
-        DateFormat('EEEE, d MMMM', 'ar').format(arguments.selectedDate!);
+    String formattedDate = DateFormat(
+      'EEEE, d MMMM',
+      'ar',
+    ).format(arguments.selectedDate!);
 
     return Container(
       padding: const EdgeInsets.all(12),
@@ -627,10 +633,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             ),
           ),
           const SizedBox(width: 12),
-          Text(
-            "الدفع عند الوصول",
-            style: TextStyles.font14DarkBlueMedium,
-          ),
+          Text("الدفع عند الوصول", style: TextStyles.font14DarkBlueMedium),
           const Spacer(),
           const Icon(
             Icons.check_circle,
@@ -662,89 +665,52 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Multi-booking button
-          Container(
-            margin: const EdgeInsets.only(bottom: 12),
-            decoration: BoxDecoration(
-              color: ColorsManager.lightBlue.withOpacity(0.4),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () => _addToMultipleReservations(context),
+          // Multi-booking button - hide in queue mode
+          if (!isQueueMode)
+            Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              decoration: BoxDecoration(
+                color: ColorsManager.lightBlue.withOpacity(0.4),
                 borderRadius: BorderRadius.circular(12),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.add_circle_outline,
-                        color: ColorsManager.mainBlue,
-                        size: 22,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          "إضافة حجز آخر",
-                          style: TextStyles.font14DarkBlueMedium.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: ColorsManager.mainBlue,
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () => _addToMultipleReservations(context),
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.add_circle_outline,
+                          color: ColorsManager.mainBlue,
+                          size: 22,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            "إضافة حجز آخر",
+                            style: TextStyles.font14DarkBlueMedium.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: ColorsManager.mainBlue,
+                            ),
                           ),
                         ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        size: 16,
-                        color: ColorsManager.mainBlue.withOpacity(0.7),
-                      ),
-                    ],
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 16,
+                          color: ColorsManager.mainBlue.withOpacity(0.7),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-
-          // Clear all reservations button - only show when there are multiple reservations
-          // if (_multiReservationManager.reservations.isNotEmpty)
-          //   Container(
-          //     margin: const EdgeInsets.only(bottom: 16),
-          //     decoration: BoxDecoration(
-          //       color: Colors.red.withOpacity(0.1),
-          //       borderRadius: BorderRadius.circular(12),
-          //     ),
-          //     child: Material(
-          //       color: Colors.transparent,
-          //       child: InkWell(
-          //         onTap: _clearAllReservations,
-          //         borderRadius: BorderRadius.circular(12),
-          //         child: Padding(
-          //           padding: const EdgeInsets.symmetric(
-          //               vertical: 12, horizontal: 16),
-          //           child: Row(
-          //             children: [
-          //               const Icon(
-          //                 Icons.delete_outline,
-          //                 color: Colors.red,
-          //                 size: 22,
-          //               ),
-          //               const SizedBox(width: 12),
-          //               Expanded(
-          //                 child: Text(
-          //                   "حذف جميع الحجوزات",
-          //                   style: TextStyles.font14DarkBlueMedium.copyWith(
-          //                     fontWeight: FontWeight.bold,
-          //                     color: Colors.red,
-          //                   ),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
 
           // Main action buttons
           Row(
@@ -754,10 +720,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                 flex: 3,
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    size: 16,
-                  ),
+                  icon: const Icon(Icons.arrow_back_ios, size: 16),
                   label: const Text("تعديل"),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -781,9 +744,11 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                   onPressed: () => _confirmMultipleReservations(context),
                   icon: const Icon(Icons.check_circle_outline),
                   label: Text(
-                    _multiReservationManager.reservations.isEmpty
+                    isQueueMode
                         ? "تأكيد الحجز"
-                        : "تأكيد الحجوزات (${_multiReservationManager.reservations.length + 1})",
+                        : (_multiReservationManager.reservations.isEmpty
+                              ? "تأكيد الحجز"
+                              : "تأكيد الحجوزات (${_multiReservationManager.reservations.length + 1})"),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorsManager.mainBlue,
@@ -829,17 +794,21 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     );
 
     // Navigate to category screen to choose another service, replacing current screen
-    Navigator.pushNamed(
-      context,
-      Routes.categoryScreen,
-    );
+    Navigator.pushNamed(context, Routes.categoryScreen);
   }
 
   // Method to confirm multiple reservations or a single reservation
   void _confirmMultipleReservations(BuildContext context) async {
+    // Queue mode: bypass multi-reservation logic
+    if (isQueueMode) {
+      _confirmBooking(context);
+      return;
+    }
+
     // Get user ID from SharedPreferences
-    final userId =
-        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
+    final userId = await SharedPrefHelper.getSecuredString(
+      SharedPrefKeys.userId,
+    );
 
     if (userId.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -864,14 +833,15 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
         return;
       } // Prepare reservations data for API call
       final reservationsData = _multiReservationManager.getReservationsData(
-          currentReservation: arguments);
+        currentReservation: arguments,
+      );
 
       // Call the cubit to make multiple reservations
       context.read<ReservationCubit>().postMultipleReservations(
-            userId: userId,
-            reservationsData: reservationsData,
-            arguments: arguments, // Pass the current arguments for UI purposes
-          );
+        userId: userId,
+        reservationsData: reservationsData,
+        arguments: arguments, // Pass the current arguments for UI purposes
+      );
 
       // Clearing the manager should be handled by the ReservationCubit upon successful submission.
       // manager.clearReservations(); // Removed from here
@@ -882,8 +852,12 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   }
 
   void _confirmBooking(BuildContext context) async {
-    // Get the required data to make the reservation
-    if (arguments.selectedDate == null || arguments.selectedTime == null) {
+    // For queue mode, only services are required
+    // For time-slot mode, date and time are required
+    final isQueueMode = arguments.isQueueMode ?? false;
+
+    if (!isQueueMode &&
+        (arguments.selectedDate == null || arguments.selectedTime == null)) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("الرجاء تحديد التاريخ والوقت"),
@@ -894,24 +868,26 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     }
 
     // Get user ID from SharedPreferences
-    final userId =
-        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
-    // No mounted check needed in stateless widget
+    final userId = await SharedPrefHelper.getSecuredString(
+      SharedPrefKeys.userId,
+    );
 
+    // If user is not logged in, show guest info dialog
+    GuestInfo? guestInfo;
     if (userId.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("عذراً، يجب تسجيل الدخول أولاً"),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
+      if (!mounted) return;
+
+      // Show guest information dialog
+      guestInfo = await _showGuestInfoDialog(context);
+
+      // If user cancels the dialog, return
+      if (guestInfo == null) {
+        return;
+      }
     }
 
     final serviceIds = arguments.selectedServices.map((s) => s.id).toList();
     final barberId = arguments.barberData?.id ?? '';
-    final date =
-        '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
 
     // Create updated arguments object
     final updatedArguments = ReservationArguments(
@@ -920,18 +896,34 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       totalPrice: arguments.totalPrice,
       selectedDate: arguments.selectedDate,
       selectedTime: arguments.selectedTime,
+      isQueueMode: isQueueMode,
     );
 
-    // Call the reservation cubit to make the reservation
-    // The state handling is now done in the BlocListener
-    context.read<ReservationCubit>().postReservation(
-          userId: userId ?? '', // Add null check
-          serviceIds: serviceIds,
-          barberId: barberId,
-          date: date,
-          startTime: arguments.selectedTime!,
-          arguments: updatedArguments,
-        );
+    // Call the appropriate API based on mode
+    if (isQueueMode) {
+      // Queue mode: Join the queue
+      context.read<ReservationCubit>().joinQueue(
+        barberId: barberId,
+        serviceIds: serviceIds,
+        userId: userId.isNotEmpty ? userId : null,
+        guest: guestInfo, // Pass guest info if user is not logged in
+        arguments: updatedArguments,
+      );
+    } else {
+      // Time-slot mode: Make a regular reservation
+      final date =
+          '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
+
+      context.read<ReservationCubit>().postReservation(
+        userId: userId.isNotEmpty ? userId : null,
+        serviceIds: serviceIds,
+        barberId: barberId,
+        date: date,
+        startTime: arguments.selectedTime!,
+        guest: guestInfo, // Pass guest info if user is not logged in
+        arguments: updatedArguments,
+      );
+    }
   }
 
   // Method to remove a reservation
@@ -946,43 +938,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
         content: Text("تم حذف الحجز بنجاح"),
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
-      ),
-    );
-  }
-
-  // Method to clear all reservations
-  void _clearAllReservations() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            backgroundColor: Colors.white,
-
-        title: const Text("حذف جميع الحجوزات"),
-        content: const Text("هل أنت متأكد من حذف جميع الحجوزات المضافة؟"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("إلغاء"),
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                _multiReservationManager.clearReservations();
-              });
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("تم حذف جميع الحجوزات"),
-                  backgroundColor: Colors.green,
-                ),
-              );
-            },
-            child: const Text(
-              "حذف",
-              style: TextStyle(color: Colors.red),
-            ),
-          ),
-        ],
       ),
     );
   }

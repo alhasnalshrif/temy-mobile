@@ -86,7 +86,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   
   # Code generation tools - moved to dev_dependencies since they're only needed during development
-  # dart run build_runner build --delete-conflicting-outputs
+  # flutter pub run build_runner build --delete-conflicting-outputs
    
   build_runner: ^2.5.4
   freezed: ^2.5.7

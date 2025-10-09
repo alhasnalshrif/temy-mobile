@@ -61,8 +61,9 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
     }
 
     final barberData = _defaultReservation!['barber'];
-    final services =
-        List<Map<String, dynamic>>.from(_defaultReservation!['services']);
+    final services = List<Map<String, dynamic>>.from(
+      _defaultReservation!['services'],
+    );
     final totalPrice = _defaultReservation!['totalPrice'].toDouble();
 
     int totalDuration = 0;
@@ -111,7 +112,9 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
       ),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+
         decoration: BoxDecoration(
+          border: Border.all(color: ColorsManager.mainBlue, width: 1),
           color: ColorsManager.lightBlue,
           borderRadius: BorderRadius.circular(12),
         ),
@@ -139,23 +142,20 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                     Text(
                       'default_booking.best_choice'.tr(),
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       barberData['name'] ?? 'مصفف الشعر',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       '${services.length} ${'default_booking.services'.tr()} · ${(totalDuration / 60).ceil()} ${'default_booking.hour'.tr()}',
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 11,
-                      ),
+                      style: TextStyle(color: Colors.grey[600], fontSize: 11),
                     ),
                   ],
                 ),
@@ -168,15 +168,16 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                   Text(
                     ' $totalPrice جنيه',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: ColorsManager.mainBlue,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: ColorsManager.mainBlue,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   ElevatedButton(
                     onPressed: () {
-                      List<BarberService> barberServices =
-                          services.map((service) {
+                      List<BarberService> barberServices = services.map((
+                        service,
+                      ) {
                         return BarberService(
                           id: service['id'],
                           name: service['name'],
@@ -198,10 +199,7 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                           end: '21:00',
                           daysOff: [],
                         ),
-                        rating: Rating(
-                          average: 0,
-                          total: 0,
-                        ),
+                        rating: Rating(average: 0, total: 0),
                         services: [],
                         availability: Availability(
                           date: DateTime.now().toString(),

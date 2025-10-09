@@ -13,15 +13,26 @@ part 'reservations_api_services.g.dart';
 abstract class ReservationApiServices {
   factory ReservationApiServices(Dio dio) = _ReservationApiServices;
 
+  // Authenticated user reservation
   @POST(ReservationsApiConstants.reservations)
   Future<ReservationResponseModel> postReservations(
-      @Body() ReservationRequestModel reservationRequest);
+    @Body() ReservationRequestModel reservationRequest,
+  );
+
+  // Guest user reservation (no auth required)
+  @POST(ReservationsApiConstants.guestReservations)
+  Future<ReservationResponseModel> postGuestReservation(
+    @Body() ReservationRequestModel reservationRequest,
+  );
 
   @POST('${ReservationsApiConstants.reservations}/multiple')
   Future<MultipleReservationResponseModel> postMultipleReservations(
-      @Body() List<ReservationRequestModel> reservationsRequest);
+    @Body() List<ReservationRequestModel> reservationsRequest,
+  );
 
   @GET('${ReservationsApiConstants.reservations}/available-slots')
   Future<TimeSlotsResponse> getAvailableTimeSlots(
-      @Query('barberId') String barberId, @Query('date') String date);
+    @Query('barberId') String barberId,
+    @Query('date') String date,
+  );
 }

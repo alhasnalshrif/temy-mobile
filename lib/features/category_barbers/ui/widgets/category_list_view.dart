@@ -16,15 +16,16 @@ class CategoryBarberListView extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final int itemCount =
-        barberDataList.length > maxItems ? maxItems : barberDataList.length;
+    final int itemCount = barberDataList.length > maxItems
+        ? maxItems
+        : barberDataList.length;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         itemCount: itemCount,
         separatorBuilder: (context, index) => SizedBox(height: spacing),
         itemBuilder: (context, index) {
@@ -34,7 +35,7 @@ class CategoryBarberListView extends StatelessWidget {
             radius: 36, // Fixed size for better consistency
             onTap: () {
               debugPrint('Category tapped: ${barberDataList[index]?.name}');
-          
+
               Navigator.of(context).pushNamed(
                 Routes.barberScreen,
                 arguments: barberDataList[index]?.id,

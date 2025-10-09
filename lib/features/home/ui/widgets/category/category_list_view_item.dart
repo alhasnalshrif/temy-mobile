@@ -44,10 +44,10 @@ class CategoryListViewItem extends StatelessWidget {
                 child: Text(
                   categoryResponseModel.name ?? 'Service',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.grey[800],
-                        height: 1.2,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    color: Colors.grey[800],
+                    height: 1.2,
+                    fontWeight: FontWeight.w500,
+                  ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -82,13 +82,13 @@ class _CategoryImage extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.black.withOpacity(0.05),
+        //     blurRadius: 8,
+        //     offset: const Offset(0, 2),
+        //   ),
+        // ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
@@ -99,6 +99,7 @@ class _CategoryImage extends StatelessWidget {
                 height: size,
                 fit: BoxFit.cover,
                 fadeInDuration: const Duration(milliseconds: 300),
+
                 placeholder: (context, url) => _buildShimmer(size),
                 errorWidget: (context, url, error) => _buildError(size),
               )
@@ -116,25 +117,21 @@ class _CategoryImage extends StatelessWidget {
   }
 
   Widget _buildShimmer(double size) => Shimmer.fromColors(
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!,
-        child: Container(
-          width: size,
-          height: size,
-          color: Colors.white,
-        ),
-      );
+    baseColor: Colors.grey[300]!,
+    highlightColor: Colors.grey[100]!,
+    child: Container(width: size, height: size, color: Colors.white),
+  );
 
   Widget _buildError(double size) => Container(
-        width: size,
-        height: size,
-        color: Colors.grey[100],
-        child: Center(
-          child: Icon(
-            Icons.error_outline,
-            size: radius * 0.8,
-            color: Colors.red.withOpacity(0.7),
-          ),
-        ),
-      );
+    width: size,
+    height: size,
+    color: Colors.grey[100],
+    child: Center(
+      child: Icon(
+        Icons.error_outline,
+        size: radius * 0.8,
+        color: Colors.red.withOpacity(0.7),
+      ),
+    ),
+  );
 }

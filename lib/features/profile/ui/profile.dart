@@ -27,12 +27,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool notificationsEnabled = true;
   late NotificationCubit notificationCubit;
   bool _isDeleteDialogShown = false;
+  bool _isGuest = true;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     notificationCubit = getIt<NotificationCubit>();
+    _checkLoginStatus();
     _loadSavedLanguage();
+  }
+
+  Future<void> _checkLoginStatus() async {
+    final token = await SharedPrefHelper.getSecuredString(
+      SharedPrefKeys.userToken,
+    );
+    setState(() {
+      _isGuest = token.isEmpty;
+      _isLoading = false;
+    });
   }
 
   @override
@@ -43,8 +56,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _loadSavedLanguage() async {
-    final savedLanguage =
-        await SharedPrefHelper.getString(SharedPrefKeys.language);
+    final savedLanguage = await SharedPrefHelper.getString(
+      SharedPrefKeys.language,
+    );
     if (savedLanguage.isNotEmpty) {
       setState(() {
         currentLanguage = savedLanguage;
@@ -62,12 +76,117 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context)
-        .size; // Setting status bar to black with white icons for profile screen
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.black,
-      statusBarIconBrightness: Brightness.light,
-    ));
+    final size = MediaQuery.of(
+      context,
+    ).size; // Setting status bar to black with white icons for profile screen
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.black,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
+
+    if (_isLoading) {
+      return Scaffold(
+        body: Container(
+          width: double.infinity,
+          color: Colors.white,
+          child: const Center(
+            child: CircularProgressIndicator(color: ColorsManager.mainBlue),
+          ),
+        ),
+      );
+    }
+
+    if (_isGuest) {
+      return Scaffold(
+        body: Container(
+          width: double.infinity,
+          color: Colors.white,
+          child: SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'profile.title'.tr(),
+                        style: TextStyles.font18WhiteSemiBold,
+                      ),
+                      Image.asset(
+                        'assets/images/logo.png',
+                        height: 30,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.lock_outline,
+                            size: 80,
+                            color: ColorsManager.mainBlue.withOpacity(0.5),
+                          ),
+                          const SizedBox(height: 24),
+                          Text(
+                            'auth.login_required_title'.tr(),
+                            style: TextStyles.font24BlackBold.copyWith(
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            'auth.login_required_message'.tr(),
+                            style: TextStyles.font14GrayRegular.copyWith(
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 32),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                context.pushReplacementNamed(
+                                  Routes.loginScreen,
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: ColorsManager.mainBlue,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: Text(
+                                'auth.login_button'.tr(),
+                                style: TextStyles.font16WhiteSemiBold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -119,7 +238,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   return Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
                     child: Row(
                       children: [
                         Hero(
@@ -142,7 +263,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               backgroundImage: avatarUrl != null
                                   ? NetworkImage(avatarUrl!)
                                   : const AssetImage('assets/images/temy.png')
-                                      as ImageProvider,
+                                        as ImageProvider,
                             ),
                           ),
                         ),
@@ -150,10 +271,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              userName,
-                              style: TextStyles.font24WhiteBold,
-                            ),
+                            Text(userName, style: TextStyles.font24WhiteBold),
                             Text(
                               phoneNumber,
                               style: TextStyles.font16WhiteSemiBold.copyWith(
@@ -177,8 +295,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     topRight: Radius.circular(25),
                   ),
                 ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 24,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -267,7 +387,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     //     },
                     //   ),
                     // ),
-
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Row(
@@ -275,8 +394,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.language,
-                                  color: ColorsManager.mainBlue),
+                              const Icon(
+                                Icons.language,
+                                color: ColorsManager.mainBlue,
+                              ),
                               horizontalSpace(12),
                               Text(
                                 'profile.language'.tr(),
@@ -341,21 +462,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         state.maybeMap(
                           profileSuccess: (successState) {
                             if (successState.userProfile.user != null) {
-                              context.pushNamed(Routes.updateProfileScreen,
-                                  arguments: successState.userProfile.user!);
+                              context.pushNamed(
+                                Routes.updateProfileScreen,
+                                arguments: successState.userProfile.user!,
+                              );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                    content:
-                                        Text('profile.user_data_error'.tr())),
+                                  content: Text('profile.user_data_error'.tr()),
+                                ),
                               );
                             }
                           },
                           orElse: () {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                  content:
-                                      Text('profile.data_unavailable'.tr())),
+                                content: Text('profile.data_unavailable'.tr()),
+                              ),
                             );
                           },
                         );
@@ -380,7 +503,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Icons.info_outline,
                       onTap: () {
                         context.pushNamed(Routes.aboutScreen);
-
                       },
                     ),
                     // Add delete account option
@@ -411,14 +533,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     key:
                                         UniqueKey(), // Add unique key to prevent GlobalKey conflicts
                                     title: Text('logout.confirm_title'.tr()),
-                                    content:
-                                        Text('logout.confirm_message'.tr()),
+                                    content: Text(
+                                      'logout.confirm_message'.tr(),
+                                    ),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
                                             Navigator.of(context).pop(false),
-                                        child:
-                                            Text('default_booking.cancel'.tr()),
+                                        child: Text(
+                                          'default_booking.cancel'.tr(),
+                                        ),
                                       ),
                                       TextButton(
                                         onPressed: () =>
@@ -436,7 +560,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   await context.read<ProfileCubit>().logout();
                                   if (context.mounted) {
                                     context.pushReplacementNamed(
-                                        Routes.loginScreen);
+                                      Routes.loginScreen,
+                                    );
                                   }
                                 }
                               },
@@ -446,8 +571,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
                               ),
                               child: Text(
                                 'logout.logout'.tr(),
@@ -468,8 +594,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildProfileTile(String title, IconData icon,
-      {required VoidCallback onTap}) {
+  Widget _buildProfileTile(
+    String title,
+    IconData icon, {
+    required VoidCallback onTap,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: ClipRRect(
@@ -486,10 +615,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               tileColor: Colors.white,
               leading: Icon(icon, color: ColorsManager.mainBlue),
-              title: Text(
-                title,
-                style: TextStyles.font16DarkBold,
-              ),
+              title: Text(title, style: TextStyles.font16DarkBold),
               trailing: const Icon(
                 Icons.arrow_forward_ios,
                 size: 16,
@@ -502,8 +628,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildDangerTile(String title, IconData icon,
-      {required VoidCallback onTap}) {
+  Widget _buildDangerTile(
+    String title,
+    IconData icon, {
+    required VoidCallback onTap,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: ClipRRect(
@@ -573,8 +702,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Expanded(
                     child: Text(
                       'delete_account.warning_title'.tr(),
-                      style:
-                          TextStyles.font18DarkBold.copyWith(color: Colors.red),
+                      style: TextStyles.font18DarkBold.copyWith(
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ],
@@ -634,8 +764,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                                errorState.errorHandler.apiErrorModel.message ??
-                                    'delete_account.delete_failed'.tr()),
+                              errorState.errorHandler.apiErrorModel.message ??
+                                  'delete_account.delete_failed'.tr(),
+                            ),
                             backgroundColor: Colors.red,
                           ),
                         );
@@ -652,7 +783,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return ElevatedButton(
                       onPressed: !isLoading
                           ? () {
-                              context.read<ProfileCubit>().deleteAccount(dialogContext);
+                              context.read<ProfileCubit>().deleteAccount(
+                                dialogContext,
+                              );
                             }
                           : null,
                       style: ElevatedButton.styleFrom(
@@ -669,8 +802,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 16,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
                               ),
                             )
                           : Text(

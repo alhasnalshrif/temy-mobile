@@ -18,6 +18,8 @@ import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/update_profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_services.dart';
+import 'package:temy_barber/features/reservations/data/apis/queue_api_services.dart';
+import 'package:temy_barber/features/reservations/logic/queue_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/auth/data/repos/login_repo.dart';
@@ -44,50 +46,64 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
 
   // verification
-  getIt
-      .registerLazySingleton<VerificationRepo>(() => VerificationRepo(getIt()));
+  getIt.registerLazySingleton<VerificationRepo>(
+    () => VerificationRepo(getIt()),
+  );
   getIt.registerFactory<VerificationCubit>(() => VerificationCubit(getIt()));
 
   // reservation
   getIt.registerLazySingleton<ReservationApiServices>(
-      () => ReservationApiServices(dio));
-  getIt.registerLazySingleton<ReservationRepo>(() => ReservationRepo(getIt()));
+    () => ReservationApiServices(dio),
+  );
+  getIt.registerLazySingleton<QueueApiServices>(() => QueueApiServices(dio));
+  getIt.registerLazySingleton<ReservationRepo>(
+    () => ReservationRepo(getIt(), getIt()),
+  );
+  getIt.registerFactory<QueueCubit>(() => QueueCubit(getIt()));
 
   // home
   getIt.registerLazySingleton<HomeApiServices>(() => HomeApiServices(dio));
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
 
-  getIt
-      .registerLazySingleton<ProfileApiServices>(() => ProfileApiServices(dio));
+  getIt.registerLazySingleton<ProfileApiServices>(
+    () => ProfileApiServices(dio),
+  );
   getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
 
   getIt.registerLazySingleton<CategoryBarberApiServices>(
-      () => CategoryBarberApiServices(dio));
+    () => CategoryBarberApiServices(dio),
+  );
   getIt.registerLazySingleton<CategoryBarberRepo>(
-      () => CategoryBarberRepo(getIt()));
+    () => CategoryBarberRepo(getIt()),
+  );
 
   getIt.registerLazySingleton<CategoryApiServices>(
-      () => CategoryApiServices(dio));
+    () => CategoryApiServices(dio),
+  );
   getIt.registerLazySingleton<CategoryRepo>(() => CategoryRepo(getIt()));
 
   getIt.registerLazySingleton<BarberApiServices>(() => BarberApiServices(dio));
   getIt.registerLazySingleton<BarberRepo>(() => BarberRepo(getIt()));
 
-  getIt
-      .registerLazySingleton<BookingApiServices>(() => BookingApiServices(dio));
+  getIt.registerLazySingleton<BookingApiServices>(
+    () => BookingApiServices(dio),
+  );
   getIt.registerLazySingleton<BookingRepo>(() => BookingRepo(getIt()));
 
   getIt.registerFactory<UpdateProfileCubit>(() => UpdateProfileCubit(getIt()));
 
   // Notification Service
   getIt.registerLazySingleton<NotificationService>(
-      () => NotificationService.instance);
+    () => NotificationService.instance,
+  );
 
   // Profile Cubit
   getIt.registerFactory<ProfileCubit>(
-      () => ProfileCubit(getIt<ProfileRepo>(), getIt<NotificationService>()));
+    () => ProfileCubit(getIt<ProfileRepo>(), getIt<NotificationService>()),
+  );
 
   // Notification Cubit
-  getIt.registerFactory<NotificationCubit>(() =>
-      NotificationCubit(getIt<ProfileRepo>(), getIt<NotificationService>()));
+  getIt.registerFactory<NotificationCubit>(
+    () => NotificationCubit(getIt<ProfileRepo>(), getIt<NotificationService>()),
+  );
 }

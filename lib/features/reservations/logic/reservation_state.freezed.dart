@@ -28,6 +28,10 @@ mixin _$ReservationState {
     required TResult Function(TimeSlotsResponse timeSlotsResponse)
         timeSlotsSuccess,
     required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +45,10 @@ mixin _$ReservationState {
     TResult? Function()? timeSlotsLoading,
     TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +62,10 @@ mixin _$ReservationState {
     TResult Function()? timeSlotsLoading,
     TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -66,6 +78,9 @@ mixin _$ReservationState {
     required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
     required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
     required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +92,9 @@ mixin _$ReservationState {
     TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +106,9 @@ mixin _$ReservationState {
     TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -165,6 +186,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function(TimeSlotsResponse timeSlotsResponse)
         timeSlotsSuccess,
     required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
   }) {
     return initial();
   }
@@ -181,6 +206,10 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? timeSlotsLoading,
     TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
   }) {
     return initial?.call();
   }
@@ -197,6 +226,10 @@ class _$InitialImpl implements _Initial {
     TResult Function()? timeSlotsLoading,
     TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -215,6 +248,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
     required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
     required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
   }) {
     return initial(this);
   }
@@ -229,6 +265,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
   }) {
     return initial?.call(this);
   }
@@ -243,6 +282,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -307,6 +349,10 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     required TResult Function(TimeSlotsResponse timeSlotsResponse)
         timeSlotsSuccess,
     required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
   }) {
     return reservationLoading();
   }
@@ -323,6 +369,10 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     TResult? Function()? timeSlotsLoading,
     TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
   }) {
     return reservationLoading?.call();
   }
@@ -339,6 +389,10 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     TResult Function()? timeSlotsLoading,
     TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (reservationLoading != null) {
@@ -357,6 +411,9 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
     required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
     required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
   }) {
     return reservationLoading(this);
   }
@@ -371,6 +428,9 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
   }) {
     return reservationLoading?.call(this);
   }
@@ -385,6 +445,9 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (reservationLoading != null) {
@@ -492,6 +555,10 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     required TResult Function(TimeSlotsResponse timeSlotsResponse)
         timeSlotsSuccess,
     required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
   }) {
     return reservationSuccess(reservationRequestModel, arguments);
   }
@@ -508,6 +575,10 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     TResult? Function()? timeSlotsLoading,
     TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
   }) {
     return reservationSuccess?.call(reservationRequestModel, arguments);
   }
@@ -524,6 +595,10 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     TResult Function()? timeSlotsLoading,
     TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (reservationSuccess != null) {
@@ -542,6 +617,9 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
     required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
     required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
   }) {
     return reservationSuccess(this);
   }
@@ -556,6 +634,9 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
   }) {
     return reservationSuccess?.call(this);
   }
@@ -570,6 +651,9 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (reservationSuccess != null) {
@@ -674,6 +758,10 @@ class _$ReservationErrorImpl implements ReservationError {
     required TResult Function(TimeSlotsResponse timeSlotsResponse)
         timeSlotsSuccess,
     required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
   }) {
     return reservationError(errorHandler);
   }
@@ -690,6 +778,10 @@ class _$ReservationErrorImpl implements ReservationError {
     TResult? Function()? timeSlotsLoading,
     TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
   }) {
     return reservationError?.call(errorHandler);
   }
@@ -706,6 +798,10 @@ class _$ReservationErrorImpl implements ReservationError {
     TResult Function()? timeSlotsLoading,
     TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (reservationError != null) {
@@ -724,6 +820,9 @@ class _$ReservationErrorImpl implements ReservationError {
     required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
     required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
     required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
   }) {
     return reservationError(this);
   }
@@ -738,6 +837,9 @@ class _$ReservationErrorImpl implements ReservationError {
     TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
   }) {
     return reservationError?.call(this);
   }
@@ -752,6 +854,9 @@ class _$ReservationErrorImpl implements ReservationError {
     TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (reservationError != null) {
@@ -825,6 +930,10 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     required TResult Function(TimeSlotsResponse timeSlotsResponse)
         timeSlotsSuccess,
     required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
   }) {
     return timeSlotsLoading();
   }
@@ -841,6 +950,10 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     TResult? Function()? timeSlotsLoading,
     TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
   }) {
     return timeSlotsLoading?.call();
   }
@@ -857,6 +970,10 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     TResult Function()? timeSlotsLoading,
     TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (timeSlotsLoading != null) {
@@ -875,6 +992,9 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
     required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
     required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
   }) {
     return timeSlotsLoading(this);
   }
@@ -889,6 +1009,9 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
   }) {
     return timeSlotsLoading?.call(this);
   }
@@ -903,6 +1026,9 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (timeSlotsLoading != null) {
@@ -996,6 +1122,10 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     required TResult Function(TimeSlotsResponse timeSlotsResponse)
         timeSlotsSuccess,
     required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
   }) {
     return timeSlotsSuccess(timeSlotsResponse);
   }
@@ -1012,6 +1142,10 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     TResult? Function()? timeSlotsLoading,
     TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
   }) {
     return timeSlotsSuccess?.call(timeSlotsResponse);
   }
@@ -1028,6 +1162,10 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     TResult Function()? timeSlotsLoading,
     TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (timeSlotsSuccess != null) {
@@ -1046,6 +1184,9 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
     required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
     required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
   }) {
     return timeSlotsSuccess(this);
   }
@@ -1060,6 +1201,9 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
   }) {
     return timeSlotsSuccess?.call(this);
   }
@@ -1074,6 +1218,9 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (timeSlotsSuccess != null) {
@@ -1176,6 +1323,10 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     required TResult Function(TimeSlotsResponse timeSlotsResponse)
         timeSlotsSuccess,
     required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
   }) {
     return timeSlotsError(errorHandler);
   }
@@ -1192,6 +1343,10 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     TResult? Function()? timeSlotsLoading,
     TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
   }) {
     return timeSlotsError?.call(errorHandler);
   }
@@ -1208,6 +1363,10 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     TResult Function()? timeSlotsLoading,
     TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
     TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (timeSlotsError != null) {
@@ -1226,6 +1385,9 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
     required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
     required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
   }) {
     return timeSlotsError(this);
   }
@@ -1240,6 +1402,9 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
   }) {
     return timeSlotsError?.call(this);
   }
@@ -1254,6 +1419,9 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
     TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
     TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
     required TResult orElse(),
   }) {
     if (timeSlotsError != null) {
@@ -1273,5 +1441,586 @@ abstract class TimeSlotsError implements ReservationState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TimeSlotsErrorImplCopyWith<_$TimeSlotsErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$QueueSettingsLoadingImplCopyWith<$Res> {
+  factory _$$QueueSettingsLoadingImplCopyWith(_$QueueSettingsLoadingImpl value,
+          $Res Function(_$QueueSettingsLoadingImpl) then) =
+      __$$QueueSettingsLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$QueueSettingsLoadingImplCopyWithImpl<$Res>
+    extends _$ReservationStateCopyWithImpl<$Res, _$QueueSettingsLoadingImpl>
+    implements _$$QueueSettingsLoadingImplCopyWith<$Res> {
+  __$$QueueSettingsLoadingImplCopyWithImpl(_$QueueSettingsLoadingImpl _value,
+      $Res Function(_$QueueSettingsLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$QueueSettingsLoadingImpl implements QueueSettingsLoading {
+  const _$QueueSettingsLoadingImpl();
+
+  @override
+  String toString() {
+    return 'ReservationState.queueSettingsLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QueueSettingsLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() reservationLoading,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)
+        reservationSuccess,
+    required TResult Function(ErrorHandler errorHandler) reservationError,
+    required TResult Function() timeSlotsLoading,
+    required TResult Function(TimeSlotsResponse timeSlotsResponse)
+        timeSlotsSuccess,
+    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+  }) {
+    return queueSettingsLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? reservationLoading,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? reservationError,
+    TResult? Function()? timeSlotsLoading,
+    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+  }) {
+    return queueSettingsLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? reservationLoading,
+    TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult Function(ErrorHandler errorHandler)? reservationError,
+    TResult Function()? timeSlotsLoading,
+    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    required TResult orElse(),
+  }) {
+    if (queueSettingsLoading != null) {
+      return queueSettingsLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ReservationLoading value) reservationLoading,
+    required TResult Function(ReservationSuccess value) reservationSuccess,
+    required TResult Function(ReservationError value) reservationError,
+    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
+    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
+    required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
+  }) {
+    return queueSettingsLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ReservationLoading value)? reservationLoading,
+    TResult? Function(ReservationSuccess value)? reservationSuccess,
+    TResult? Function(ReservationError value)? reservationError,
+    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
+  }) {
+    return queueSettingsLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ReservationLoading value)? reservationLoading,
+    TResult Function(ReservationSuccess value)? reservationSuccess,
+    TResult Function(ReservationError value)? reservationError,
+    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
+    required TResult orElse(),
+  }) {
+    if (queueSettingsLoading != null) {
+      return queueSettingsLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QueueSettingsLoading implements ReservationState {
+  const factory QueueSettingsLoading() = _$QueueSettingsLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$QueueSettingsSuccessImplCopyWith<$Res> {
+  factory _$$QueueSettingsSuccessImplCopyWith(_$QueueSettingsSuccessImpl value,
+          $Res Function(_$QueueSettingsSuccessImpl) then) =
+      __$$QueueSettingsSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({QueueSettingsResponse settingsResponse});
+
+  $QueueSettingsResponseCopyWith<$Res> get settingsResponse;
+}
+
+/// @nodoc
+class __$$QueueSettingsSuccessImplCopyWithImpl<$Res>
+    extends _$ReservationStateCopyWithImpl<$Res, _$QueueSettingsSuccessImpl>
+    implements _$$QueueSettingsSuccessImplCopyWith<$Res> {
+  __$$QueueSettingsSuccessImplCopyWithImpl(_$QueueSettingsSuccessImpl _value,
+      $Res Function(_$QueueSettingsSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? settingsResponse = null,
+  }) {
+    return _then(_$QueueSettingsSuccessImpl(
+      null == settingsResponse
+          ? _value.settingsResponse
+          : settingsResponse // ignore: cast_nullable_to_non_nullable
+              as QueueSettingsResponse,
+    ));
+  }
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $QueueSettingsResponseCopyWith<$Res> get settingsResponse {
+    return $QueueSettingsResponseCopyWith<$Res>(_value.settingsResponse,
+        (value) {
+      return _then(_value.copyWith(settingsResponse: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$QueueSettingsSuccessImpl implements QueueSettingsSuccess {
+  const _$QueueSettingsSuccessImpl(this.settingsResponse);
+
+  @override
+  final QueueSettingsResponse settingsResponse;
+
+  @override
+  String toString() {
+    return 'ReservationState.queueSettingsSuccess(settingsResponse: $settingsResponse)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QueueSettingsSuccessImpl &&
+            (identical(other.settingsResponse, settingsResponse) ||
+                other.settingsResponse == settingsResponse));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, settingsResponse);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$QueueSettingsSuccessImplCopyWith<_$QueueSettingsSuccessImpl>
+      get copyWith =>
+          __$$QueueSettingsSuccessImplCopyWithImpl<_$QueueSettingsSuccessImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() reservationLoading,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)
+        reservationSuccess,
+    required TResult Function(ErrorHandler errorHandler) reservationError,
+    required TResult Function() timeSlotsLoading,
+    required TResult Function(TimeSlotsResponse timeSlotsResponse)
+        timeSlotsSuccess,
+    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+  }) {
+    return queueSettingsSuccess(settingsResponse);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? reservationLoading,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? reservationError,
+    TResult? Function()? timeSlotsLoading,
+    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+  }) {
+    return queueSettingsSuccess?.call(settingsResponse);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? reservationLoading,
+    TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult Function(ErrorHandler errorHandler)? reservationError,
+    TResult Function()? timeSlotsLoading,
+    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    required TResult orElse(),
+  }) {
+    if (queueSettingsSuccess != null) {
+      return queueSettingsSuccess(settingsResponse);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ReservationLoading value) reservationLoading,
+    required TResult Function(ReservationSuccess value) reservationSuccess,
+    required TResult Function(ReservationError value) reservationError,
+    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
+    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
+    required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
+  }) {
+    return queueSettingsSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ReservationLoading value)? reservationLoading,
+    TResult? Function(ReservationSuccess value)? reservationSuccess,
+    TResult? Function(ReservationError value)? reservationError,
+    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
+  }) {
+    return queueSettingsSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ReservationLoading value)? reservationLoading,
+    TResult Function(ReservationSuccess value)? reservationSuccess,
+    TResult Function(ReservationError value)? reservationError,
+    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
+    required TResult orElse(),
+  }) {
+    if (queueSettingsSuccess != null) {
+      return queueSettingsSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QueueSettingsSuccess implements ReservationState {
+  const factory QueueSettingsSuccess(
+          final QueueSettingsResponse settingsResponse) =
+      _$QueueSettingsSuccessImpl;
+
+  QueueSettingsResponse get settingsResponse;
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$QueueSettingsSuccessImplCopyWith<_$QueueSettingsSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$QueueSettingsErrorImplCopyWith<$Res> {
+  factory _$$QueueSettingsErrorImplCopyWith(_$QueueSettingsErrorImpl value,
+          $Res Function(_$QueueSettingsErrorImpl) then) =
+      __$$QueueSettingsErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorHandler errorHandler});
+}
+
+/// @nodoc
+class __$$QueueSettingsErrorImplCopyWithImpl<$Res>
+    extends _$ReservationStateCopyWithImpl<$Res, _$QueueSettingsErrorImpl>
+    implements _$$QueueSettingsErrorImplCopyWith<$Res> {
+  __$$QueueSettingsErrorImplCopyWithImpl(_$QueueSettingsErrorImpl _value,
+      $Res Function(_$QueueSettingsErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorHandler = null,
+  }) {
+    return _then(_$QueueSettingsErrorImpl(
+      null == errorHandler
+          ? _value.errorHandler
+          : errorHandler // ignore: cast_nullable_to_non_nullable
+              as ErrorHandler,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$QueueSettingsErrorImpl implements QueueSettingsError {
+  const _$QueueSettingsErrorImpl(this.errorHandler);
+
+  @override
+  final ErrorHandler errorHandler;
+
+  @override
+  String toString() {
+    return 'ReservationState.queueSettingsError(errorHandler: $errorHandler)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QueueSettingsErrorImpl &&
+            (identical(other.errorHandler, errorHandler) ||
+                other.errorHandler == errorHandler));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorHandler);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$QueueSettingsErrorImplCopyWith<_$QueueSettingsErrorImpl> get copyWith =>
+      __$$QueueSettingsErrorImplCopyWithImpl<_$QueueSettingsErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() reservationLoading,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)
+        reservationSuccess,
+    required TResult Function(ErrorHandler errorHandler) reservationError,
+    required TResult Function() timeSlotsLoading,
+    required TResult Function(TimeSlotsResponse timeSlotsResponse)
+        timeSlotsSuccess,
+    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+  }) {
+    return queueSettingsError(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? reservationLoading,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? reservationError,
+    TResult? Function()? timeSlotsLoading,
+    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+  }) {
+    return queueSettingsError?.call(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? reservationLoading,
+    TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult Function(ErrorHandler errorHandler)? reservationError,
+    TResult Function()? timeSlotsLoading,
+    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    required TResult orElse(),
+  }) {
+    if (queueSettingsError != null) {
+      return queueSettingsError(errorHandler);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ReservationLoading value) reservationLoading,
+    required TResult Function(ReservationSuccess value) reservationSuccess,
+    required TResult Function(ReservationError value) reservationError,
+    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
+    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
+    required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
+  }) {
+    return queueSettingsError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ReservationLoading value)? reservationLoading,
+    TResult? Function(ReservationSuccess value)? reservationSuccess,
+    TResult? Function(ReservationError value)? reservationError,
+    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
+  }) {
+    return queueSettingsError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ReservationLoading value)? reservationLoading,
+    TResult Function(ReservationSuccess value)? reservationSuccess,
+    TResult Function(ReservationError value)? reservationError,
+    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
+    required TResult orElse(),
+  }) {
+    if (queueSettingsError != null) {
+      return queueSettingsError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QueueSettingsError implements ReservationState {
+  const factory QueueSettingsError(final ErrorHandler errorHandler) =
+      _$QueueSettingsErrorImpl;
+
+  ErrorHandler get errorHandler;
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$QueueSettingsErrorImplCopyWith<_$QueueSettingsErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,20 +1,23 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 import 'package:temy_barber/features/reservations/data/repos/reservation_repo.dart';
+import 'package:temy_barber/features/reservations/data/models/queue_response.dart';
 import 'reservation_state.dart';
 
 class ReservationCubit extends Cubit<ReservationState> {
   final ReservationRepo _reservationRepo;
 
   ReservationCubit(this._reservationRepo)
-      : super(const ReservationState.initial());
+    : super(const ReservationState.initial());
 
   void postReservation({
-    required String userId,
+    String? userId,
     required List<String> serviceIds,
     required String barberId,
     required String date,
     required String startTime,
+    GuestInfo? guest,
+    String? note,
     ReservationArguments? arguments,
   }) async {
     emit(const ReservationState.reservationLoading());
@@ -24,13 +27,17 @@ class ReservationCubit extends Cubit<ReservationState> {
       barberId: barberId,
       date: date,
       startTime: startTime,
+      guest: guest,
+      note: note,
     );
     response.when(
       success: (reservationResponse) {
-        emit(ReservationState.reservationSuccess(
-          reservationResponse,
-          arguments: arguments,
-        ));
+        emit(
+          ReservationState.reservationSuccess(
+            reservationResponse,
+            arguments: arguments,
+          ),
+        );
       },
       failure: (error) {
         emit(ReservationState.reservationError(error));
@@ -52,10 +59,12 @@ class ReservationCubit extends Cubit<ReservationState> {
       success: (reservationResponse) {
         // Handle the response - we've already converted the multiple reservation response
         // to a standard reservation response in the repository
-        emit(ReservationState.reservationSuccess(
-          reservationResponse,
-          arguments: arguments,
-        ));
+        emit(
+          ReservationState.reservationSuccess(
+            reservationResponse,
+            arguments: arguments,
+          ),
+        );
       },
       failure: (error) {
         emit(ReservationState.reservationError(error));
@@ -84,6 +93,71 @@ class ReservationCubit extends Cubit<ReservationState> {
       },
       failure: (error) {
         emit(ReservationState.timeSlotsError(error));
+      },
+    );
+  }
+
+  void joinQueue({
+    required String barberId,
+    required List<String> serviceIds,
+    String? userId,
+    GuestInfo? guest,
+    String? note,
+    ReservationArguments? arguments,
+  }) async {
+    print('🟡 ReservationCubit: joinQueue called');
+    emit(const ReservationState.reservationLoading());
+
+    print('🟡 ReservationCubit: Calling repo.joinQueue...');
+    final response = await _reservationRepo.joinQueue(
+      barberId: barberId,
+      serviceIds: serviceIds,
+      userId: userId,
+      guest: guest,
+      note: note,
+    );
+
+    print('🟡 ReservationCubit: Response received from repo');
+    response.when(
+      success: (reservationResponse) {
+        print('✅ ReservationCubit: Success case - emitting reservationSuccess');
+        print(
+          '✅ Queue data: queueNumber=${reservationResponse.data.queueNumber}, isQueue=${reservationResponse.data.isQueueReservation}',
+        );
+        emit(
+          ReservationState.reservationSuccess(
+            reservationResponse,
+            arguments: arguments,
+          ),
+        );
+        print('✅ ReservationCubit: State emitted successfully');
+      },
+      failure: (error) {
+        print('❌ ReservationCubit: Failure case - emitting reservationError');
+        print('❌ Error: ${error.apiErrorModel.message}');
+        emit(ReservationState.reservationError(error));
+      },
+    );
+  }
+
+  void getQueueSettings() async {
+    print('🔍 ReservationCubit: getQueueSettings called');
+    emit(const ReservationState.queueSettingsLoading());
+
+    final response = await _reservationRepo.getQueueSettings();
+
+    response.when(
+      success: (settingsResponse) {
+        print(
+          '✅ ReservationCubit: Settings received - isQueueMode: ${settingsResponse.data.isQueueMode}',
+        );
+        emit(ReservationState.queueSettingsSuccess(settingsResponse));
+      },
+      failure: (error) {
+        print(
+          '❌ ReservationCubit: Settings error: ${error.apiErrorModel.message}',
+        );
+        emit(ReservationState.queueSettingsError(error));
       },
     );
   }

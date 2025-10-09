@@ -41,6 +41,12 @@ BookingData _$BookingDataFromJson(Map<String, dynamic> json) => BookingData(
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
       version: (json['__v'] as num?)?.toInt(),
+      isQueueReservation: json['is_queue_reservation'] as bool?,
+      queueNumber: (json['queue_number'] as num?)?.toInt(),
+      queuePosition: (json['queue_position'] as num?)?.toInt(),
+      queueStatus: json['queue_status'] as String?,
+      joinedQueueAt: json['joined_queue_at'] as String?,
+      startedServiceAt: json['started_service_at'] as String?,
     );
 
 Map<String, dynamic> _$BookingDataToJson(BookingData instance) =>
@@ -57,6 +63,12 @@ Map<String, dynamic> _$BookingDataToJson(BookingData instance) =>
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       '__v': instance.version,
+      'is_queue_reservation': instance.isQueueReservation,
+      'queue_number': instance.queueNumber,
+      'queue_position': instance.queuePosition,
+      'queue_status': instance.queueStatus,
+      'joined_queue_at': instance.joinedQueueAt,
+      'started_service_at': instance.startedServiceAt,
     };
 
 BarberData _$BarberDataFromJson(Map<String, dynamic> json) => BarberData(

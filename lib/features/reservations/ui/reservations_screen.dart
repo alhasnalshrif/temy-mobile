@@ -34,6 +34,8 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   bool _isLoadingDialogShowing = false;
   TimeSlotsResponse? _timeSlotsData;
   bool _isLoadingTimeSlots = false;
+  bool _isQueueMode = false; // Track if queue mode is enabled
+  bool _isLoadingSettings = true; // Track if settings are being loaded
 
   // Maximum number of days ahead that can be booked
   final int maxBookingDays = 30; // You can adjust this value as needed
@@ -47,8 +49,17 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   // Get total duration of selected services in minutes
   int get totalDuration =>
       selectedServices.fold(0, (sum, service) => sum + service.duration);
+
   // Check if booking is possible
-  bool get canBook => _selectedTime != null && selectedServices.isNotEmpty;
+  // For queue mode: only services needed
+  // For time-slot mode: services + selected time needed
+  bool get canBook {
+    if (_isQueueMode) {
+      return selectedServices.isNotEmpty;
+    } else {
+      return _selectedTime != null && selectedServices.isNotEmpty;
+    }
+  }
 
   @override
   void initState() {
@@ -56,8 +67,21 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     selectedDate = DateTime.now();
     currentMonth = DateTime(selectedDate.year, selectedDate.month, 1);
 
+    print(
+      '🔍 ReservationsScreen: initState - Initial _isQueueMode: $_isQueueMode',
+    );
+
+    // Fetch queue settings first to determine the mode
+    _fetchQueueSettings();
+
     // Fetch time slots for the initial date when screen loads
     _fetchAvailableTimeSlots();
+  }
+
+  // Fetch queue settings to check if queue mode is enabled
+  void _fetchQueueSettings() {
+    print('🔍 ReservationsScreen: Fetching queue settings...');
+    context.read<ReservationCubit>().getQueueSettings();
   }
 
   // Save current reservation as default
@@ -124,6 +148,28 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     return BlocListener<ReservationCubit, ReservationState>(
       listener: (context, state) {
         state.maybeWhen(
+          queueSettingsLoading: () {
+            print('🔍 ReservationsScreen: Queue settings loading...');
+            setState(() {
+              _isLoadingSettings = true;
+            });
+          },
+          queueSettingsSuccess: (settingsResponse) {
+            print('✅ ReservationsScreen: Queue settings success!');
+            print('   isQueueMode: ${settingsResponse.data.isQueueMode}');
+            setState(() {
+              _isLoadingSettings = false;
+              _isQueueMode = settingsResponse.data.isQueueMode;
+            });
+            print('   Updated _isQueueMode to: $_isQueueMode');
+          },
+          queueSettingsError: (error) {
+            print('❌ ReservationsScreen: Queue settings error: $error');
+            setState(() {
+              _isLoadingSettings = false;
+              _isQueueMode = false; // Default to time-slot mode on error
+            });
+          },
           reservationLoading: () {
             if (!_isLoadingDialogShowing) {
               _showLoadingDialog(context);
@@ -232,54 +278,113 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // DEBUG: Show current mode
                             ServicesSection(services: selectedServices),
                             const SizedBox(height: 24),
-                            CalendarSection(
-                              maxBookingDays: maxBookingDays,
-                              initialDate: selectedDate,
-                              initialMonth: currentMonth,
-                              onDateSelected: (date) {
-                                setState(() {
-                                  selectedDate = date;
-                                  // Reset time selection when date changes
-                                  _selectedTime = null;
-                                });
-                                // Fetch time slots for the new selected date
-                                _fetchAvailableTimeSlots();
-                              },
-                              onMonthChanged: (month) {
-                                setState(() {
-                                  currentMonth = month;
-                                });
-                              },
-                            ),
-                            const SizedBox(height: 24),
-                            TimeSlotSection(
-                              totalDuration: totalDuration,
-                              barberData: barberData,
-                              selectedTime: _selectedTime,
-                              isLoading: _isLoadingTimeSlots,
-                              timeSlotsData: _timeSlotsData,
-                              onTimeSelected: (time) {
-                                final previousSelection = _selectedTime;
-                                setState(() {
-                                  _selectedTime = time;
-                                });
 
-                                if (previousSelection != null && time == null) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: const Text(
-                                        'الوقت المختار لا يتوافق مع مدة الخدمات المختارة',
-                                      ),
-                                      behavior: SnackBarBehavior.floating,
-                                      backgroundColor:
-                                          Colors.red[700] ?? Colors.red,
+                            // Show EITHER Queue Mode OR Time-Slot Reservation
+                            if (_isQueueMode) ...[
+                              // Queue Mode UI
+                              Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: ColorsManager.mainBlue.withOpacity(
+                                    0.1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: ColorsManager.mainBlue,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.people_outline,
+                                          color: ColorsManager.mainBlue,
+                                          size: 24,
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Expanded(
+                                          child: Text(
+                                            'booking.queue_mode'.tr(),
+                                            style: TextStyles.font18DarkBlueBold
+                                                .copyWith(
+                                                  color: ColorsManager.mainBlue,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  );
-                                }
-                              },
-                            ),
+                                    const SizedBox(height: 12),
+                                    Text(
+                                      'booking.queue_mode_description'.tr(),
+                                      style: TextStyles.font14GrayRegular,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      '${'booking.queue_mode_benefit_1'.tr()}\n'
+                                      '${'booking.queue_mode_benefit_2'.tr()}\n',
+                                      style: TextStyles.font14GrayRegular
+                                          .copyWith(height: 1.5),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ] else ...[
+                              // Time-Slot Reservation UI
+                              CalendarSection(
+                                maxBookingDays: maxBookingDays,
+                                initialDate: selectedDate,
+                                initialMonth: currentMonth,
+                                onDateSelected: (date) {
+                                  setState(() {
+                                    selectedDate = date;
+                                    // Reset time selection when date changes
+                                    _selectedTime = null;
+                                  });
+                                  // Fetch time slots for the new selected date
+                                  _fetchAvailableTimeSlots();
+                                },
+                                onMonthChanged: (month) {
+                                  setState(() {
+                                    currentMonth = month;
+                                  });
+                                },
+                              ),
+                              const SizedBox(height: 24),
+                              TimeSlotSection(
+                                totalDuration: totalDuration,
+                                barberData: barberData,
+                                selectedTime: _selectedTime,
+                                isLoading: _isLoadingTimeSlots,
+                                timeSlotsData: _timeSlotsData,
+                                onTimeSelected: (time) {
+                                  final previousSelection = _selectedTime;
+                                  setState(() {
+                                    _selectedTime = time;
+                                  });
+
+                                  if (previousSelection != null &&
+                                      time == null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: const Text(
+                                          'الوقت المختار لا يتوافق مع مدة الخدمات المختارة',
+                                        ),
+                                        behavior: SnackBarBehavior.floating,
+                                        backgroundColor:
+                                            Colors.red[700] ?? Colors.red,
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
+
                             const SizedBox(height: 24),
                             TotalSection(totalPrice: totalPrice),
                           ],
@@ -384,6 +489,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                                         selectedDate: selectedDate,
                                         selectedTime: _selectedTime,
                                         totalPrice: totalPrice,
+                                        isQueueMode: _isQueueMode,
                                       );
                                       Navigator.pushNamed(
                                         context,

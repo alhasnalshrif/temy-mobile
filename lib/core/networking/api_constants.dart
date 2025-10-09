@@ -1,5 +1,5 @@
 class ApiConstants {
-  // static const String apiBaseUrl = "http://192.168.1.8:8080/api/v1/";
+  // static const String apiBaseUrl = "http://192.168.1.4:8080/api/v1/";
   static const String apiBaseUrl = "https://backend.temybarber.com/api/v1/";
 
   static const String login = "auth/login";

@@ -53,6 +53,14 @@
         "screen_title": "Booking",
         "tab_active": "Active booking",
         "tab_history": "History",
+        "active": "Active",
+        "history": "History",
+        "no_active": "You don't have any active bookings at the moment",
+        "no_history": "You don't have any past bookings yet",
+        "error_loading": "Error loading bookings",
+        "retry": "Retry",
+        "no": "No",
+        "yes": "Yes",
         "no_services": "No services available at the moment",
         "services": "All Services",
         "service_selected": "Service selected",
@@ -77,7 +85,16 @@
         "empty_active": "You don't have any active bookings at the moment",
         "empty_history": "You don't have any past bookings yet.",
         "book_appointment": "Book an Appointment",
-        "explore_services": "Explore Services"
+        "explore_services": "Explore Services",
+        "queue_reservations": "Queue Reservations",
+        "timeslot_reservations": "Time-Slot Reservations",
+        "queue_position": "Your Position",
+        "people_ahead": "People Ahead",
+        "people": "people",
+        "queue_mode": "Queue Mode",
+        "queue_mode_description": "You will join the waiting queue. No specific time slot needed.",
+        "queue_mode_benefit_1": "• Join the queue and wait for your turn",
+        "queue_mode_benefit_2": "• You'll be notified when it's your turn"
     },
     "auth": {
         "terms_agreement": "By logging, you agree to our",
@@ -88,6 +105,19 @@
         "forgot_password": "Forgot password?",
         "login_button": "Login",
         "enter_credentials": "Enter your credentials here to login",
+        "continue_as_guest": "Continue as Guest",
+        "login_required_title": "Login Required",
+        "login_required_message": "Please login to access this feature",
+        "guest_booking": "Guest Booking",
+        "guest_booking_subtitle": "Please enter your information to complete the booking",
+        "full_name": "Full Name",
+        "enter_full_name": "Enter your full name",
+        "name_required": "Name is required",
+        "name_too_short": "Name must be at least 3 characters",
+        "phone_number": "Phone Number",
+        "enter_phone_number": "Enter your phone number",
+        "phone_required": "Phone number is required",
+        "phone_invalid": "Please enter a valid phone number",
         "signup": {
             "title": "Create Account",
             "subtitle": "Enter all your data to create an account",
@@ -172,6 +202,7 @@
         "got_it": "Got it",
         "save": "Save",
         "retry": "Retry",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "continue": "Continue"
     }
 }

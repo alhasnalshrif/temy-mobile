@@ -21,6 +21,7 @@ class BookingCard extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
+
       backgroundColor: Colors.white,
       builder: (BuildContext dialogContext) {
         return Padding(
@@ -36,19 +37,19 @@ class BookingCard extends StatelessWidget {
             children: [
               Text(
                 'booking.cancel_title'.tr(),
-                style:
-                    Theme.of(dialogContext).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
+                style: Theme.of(dialogContext).textTheme.headlineSmall
+                    ?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 12.0),
               Text(
                 'booking.cancel_message'.tr(),
-                style: Theme.of(dialogContext).textTheme.bodyMedium?.copyWith(
-                      color: Colors.black54,
-                    ),
+                style: Theme.of(
+                  dialogContext,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24.0),
@@ -67,12 +68,9 @@ class BookingCard extends StatelessWidget {
                       ),
                       child: Text(
                         'booking.keep_booking'.tr(),
-                        style: Theme.of(dialogContext)
-                            .textTheme
-                            .labelLarge
-                            ?.copyWith(
-                              color: Colors.black87,
-                            ),
+                        style: Theme.of(
+                          dialogContext,
+                        ).textTheme.labelLarge?.copyWith(color: Colors.black87),
                       ),
                     ),
                   ),
@@ -82,9 +80,9 @@ class BookingCard extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(dialogContext).pop();
                         if (booking.id != null) {
-                          context
-                              .read<BookingCubit>()
-                              .cancelBooking(booking.id!);
+                          context.read<BookingCubit>().cancelBooking(
+                            booking.id!,
+                          );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -103,12 +101,9 @@ class BookingCard extends StatelessWidget {
                       ),
                       child: Text(
                         'booking.confirm_cancel'.tr(),
-                        style: Theme.of(dialogContext)
-                            .textTheme
-                            .labelLarge
-                            ?.copyWith(
-                              color: Colors.white,
-                            ),
+                        style: Theme.of(
+                          dialogContext,
+                        ).textTheme.labelLarge?.copyWith(color: Colors.white),
                       ),
                     ),
                   ),
@@ -130,6 +125,9 @@ class BookingCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
+
+        border: Border.all(color: Colors.grey.withOpacity(0.2)),
+
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -149,7 +147,8 @@ class BookingCard extends StatelessWidget {
             children: [
               Expanded(
                 child: BarberSection(
-                  name: booking.barber?.name ??
+                  name:
+                      booking.barber?.name ??
                       'booking.default_barber_name'.tr(),
                   avatarUrl: booking.barber?.avatar,
                   location: 'booking.default_location'.tr(),
@@ -164,7 +163,9 @@ class BookingCard extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 8),
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

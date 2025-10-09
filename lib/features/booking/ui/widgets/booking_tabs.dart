@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 
 class BookingTabs extends StatelessWidget {
@@ -25,9 +26,17 @@ class BookingTabs extends StatelessWidget {
         child: Row(
           children: [
             _buildTabItem(
-                context, 'Active booking', showActiveBookings, onActiveTap),
+              context,
+              'booking.active'.tr(),
+              showActiveBookings,
+              onActiveTap,
+            ),
             _buildTabItem(
-                context, 'History', !showActiveBookings, onHistoryTap),
+              context,
+              'booking.history'.tr(),
+              !showActiveBookings,
+              onHistoryTap,
+            ),
           ],
         ),
       ),
@@ -35,7 +44,11 @@ class BookingTabs extends StatelessWidget {
   }
 
   Widget _buildTabItem(
-      BuildContext context, String title, bool isSelected, VoidCallback onTap) {
+    BuildContext context,
+    String title,
+    bool isSelected,
+    VoidCallback onTap,
+  ) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,

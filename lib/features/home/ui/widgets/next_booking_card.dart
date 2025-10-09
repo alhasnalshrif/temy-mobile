@@ -121,7 +121,8 @@ class NextBookingCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(
-                              12), // Rounded container for icon
+                            12,
+                          ), // Rounded container for icon
                         ),
                         child: const Icon(
                           Icons.calendar_today_rounded,
@@ -138,7 +139,38 @@ class NextBookingCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  verticalSpace(16),
+                  verticalSpace(8),
+
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(
+                        16,
+                      ), // Increased border radius
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.access_time_rounded,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        horizontalSpace(6),
+                        Text(
+                          '$formattedDate • $formattedTime',
+                          style: TextStyles.font13BlueRegular.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  verticalSpace(8),
                   Row(
                     children: [
                       // Barber Avatar with enhanced styling
@@ -146,8 +178,9 @@ class NextBookingCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                              color: Colors.white.withOpacity(0.3),
-                              width: 2), // Added border
+                            color: Colors.white.withOpacity(0.3),
+                            width: 2,
+                          ), // Added border
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.2),
@@ -158,12 +191,14 @@ class NextBookingCard extends StatelessWidget {
                         ),
                         child: CircleAvatar(
                           radius: 24,
-                          backgroundImage: booking.barber?.avatar != null &&
+                          backgroundImage:
+                              booking.barber?.avatar != null &&
                                   booking.barber!.avatar!.isNotEmpty
                               ? NetworkImage(booking.barber!.avatar!)
                               : null,
                           backgroundColor: Colors.grey[300],
-                          child: booking.barber?.avatar == null ||
+                          child:
+                              booking.barber?.avatar == null ||
                                   booking.barber!.avatar!.isEmpty
                               ? const Icon(Icons.person, color: Colors.white)
                               : null,
@@ -171,54 +206,25 @@ class NextBookingCard extends StatelessWidget {
                       ),
                       horizontalSpace(12),
                       // Barber details
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              barberName,
-                              style: TextStyles.font16WhiteSemiBold,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            barberName,
+                            style: TextStyles.font16WhiteSemiBold,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          verticalSpace(4),
+                          Text(
+                            serviceName,
+                            style: TextStyles.font13GrayRegular.copyWith(
+                              color: Colors.white70,
                             ),
-                            verticalSpace(4),
-                            Text(
-                              serviceName,
-                              style: TextStyles.font13GrayRegular.copyWith(
-                                color: Colors.white70,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                              16), // Increased border radius
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Icons.access_time_rounded,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                            horizontalSpace(6),
-                            Text(
-                              '$formattedDate • $formattedTime',
-                              style: TextStyles.font13BlueRegular.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
                     ],
                   ),

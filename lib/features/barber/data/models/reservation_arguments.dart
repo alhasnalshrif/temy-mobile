@@ -6,6 +6,7 @@ class ReservationArguments {
   final double totalPrice;
   final DateTime? selectedDate;
   final String? selectedTime;
+  final bool? isQueueMode; // Added to track if this is a queue reservation
 
   ReservationArguments({
     required this.selectedServices,
@@ -13,5 +14,6 @@ class ReservationArguments {
     required this.totalPrice,
     this.selectedDate,
     this.selectedTime,
+    this.isQueueMode,
   });
 }

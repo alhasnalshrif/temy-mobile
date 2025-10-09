@@ -92,19 +92,23 @@ class InvoiceScreen extends StatelessWidget {
   }
 
   Widget _buildBarberInfo() {
-    DateTime? reservationDate;
-    if (_reservationData?.date != null) {
+    final isQueueReservation = _reservationData?.isQueueReservation ?? false;
+
+    String? shortDateStr;
+    if (!isQueueReservation && _reservationData?.date != null) {
+      DateTime? reservationDate;
       try {
         reservationDate = DateFormat(
           'yyyy-MM-dd',
         ).parse(_reservationData!.date);
+        shortDateStr = DateFormat(
+          'EEE, dd MMM',
+          'en_US',
+        ).format(reservationDate);
       } catch (e) {
         print("Error parsing date: $e");
       }
     }
-    final shortDateStr = reservationDate != null
-        ? DateFormat('EEE, dd MMM', 'en_US').format(reservationDate)
-        : '';
 
     final serviceNames =
         _reservationData?.services.map((s) => s.name).join(', ') ?? '';
@@ -135,7 +139,7 @@ class InvoiceScreen extends StatelessWidget {
               ],
             ),
           ),
-          if (shortDateStr.isNotEmpty)
+          if (shortDateStr != null && shortDateStr.isNotEmpty)
             Text(shortDateStr, style: TextStyles.font14GrayRegular),
         ],
       ),
@@ -143,6 +147,64 @@ class InvoiceScreen extends StatelessWidget {
   }
 
   Widget _buildDateTimeSection() {
+    // Check if this is a queue reservation
+    final isQueueReservation = _reservationData?.isQueueReservation ?? false;
+
+    if (isQueueReservation) {
+      // For queue reservations, show queue information instead of date/time
+      final queueNumber = _reservationData?.queueNumber;
+      final queuePosition = _reservationData?.queuePosition;
+      final displayNumber = queueNumber ?? queuePosition;
+
+      return Container(
+        decoration: BoxDecoration(
+          // color: Colors.grey[200],
+          color: ColorsManager.mainBlue.withOpacity(0.1),
+          border: Border.all(color: ColorsManager.mainBlue),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.people_outline,
+                  size: 20,
+                  color: Colors.black54,
+                ),
+                const SizedBox(width: 12),
+                Text("معلومات الطابور", style: TextStyles.font16DarkBold),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.only(right: 32.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (displayNumber != null)
+                    Text(
+                      "رقمك في الطابور: #$displayNumber",
+                      style: TextStyles.font14BlueSemiBold,
+                    ),
+                  if (queuePosition != null && queuePosition > 0) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      "عدد الأشخاص قبلك: ${queuePosition - 1}",
+                      style: TextStyles.font14BlueSemiBold,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    // For regular reservations, show date/time
     DateTime? reservationDate;
     if (_reservationData?.date != null) {
       try {
@@ -232,22 +294,11 @@ class InvoiceScreen extends StatelessWidget {
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            name,
-            style: isDiscount
-                ? TextStyles.font14GrayRegular.copyWith(color: Colors.red)
-                : TextStyles.font14GrayRegular,
-          ),
-          Text(
-            "${isDiscount ? '-' : ''}${price.toInt()} EGP",
-            style: isDiscount
-                ? TextStyles.font14GrayRegular.copyWith(color: Colors.red)
-                : TextStyles.font14DarkBlueMedium,
-          ),
-        ],
+      child: Text(
+        "$name - ${isDiscount ? '-' : ''}${price.toInt()} EGP",
+        style: isDiscount
+            ? TextStyles.font14GrayRegular.copyWith(color: Colors.red)
+            : TextStyles.font14GrayRegular,
       ),
     );
   }
@@ -256,14 +307,21 @@ class InvoiceScreen extends StatelessWidget {
     final totalPrice = _reservationData?.totalPrice ?? 0.0;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Text("المجموع", style: TextStyles.font18DarkBlueBold),
-          Text(
-            "${totalPrice.toInt()} EGP",
-            style: TextStyles.font18DarkBlueBold,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("المجموع", style: TextStyles.font18DarkBlueBold),
+              Text(
+                "${totalPrice.toInt()} EGP",
+                style: TextStyles.font18DarkBlueBold,
+              ),
+            ],
           ),
+          // divider
+          const SizedBox(height: 8),
+          Divider(color: Colors.grey[300], height: 1, thickness: 1),
         ],
       ),
     );

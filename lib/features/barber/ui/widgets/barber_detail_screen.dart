@@ -14,10 +14,7 @@ import 'package:easy_localization/easy_localization.dart';
 class BarberScreenItem extends StatefulWidget {
   final BarberDetailData? serviceResponseModel;
 
-  const BarberScreenItem({
-    super.key,
-    this.serviceResponseModel,
-  });
+  const BarberScreenItem({super.key, this.serviceResponseModel});
 
   @override
   State<BarberScreenItem> createState() => _BarberScreenItemState();
@@ -61,11 +58,13 @@ class _BarberScreenItemState extends State<BarberScreenItem>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         title: Text(
           widget.serviceResponseModel?.name ?? 'barber.details'.tr(),
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: ColorsManager.background,
+        backgroundColor: ColorsManager.mainBlue,
+        // backgroundColor: ColorsManager.background,
         elevation: 0,
       ),
       backgroundColor: ColorsManager.background,
@@ -101,9 +100,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BarberImage(
-            imageUrl: barber?.avatar,
-          ),
+          BarberImage(imageUrl: barber?.avatar),
           const SizedBox(width: 16),
           // Name and details
           Expanded(
@@ -142,8 +139,10 @@ class _BarberScreenItemState extends State<BarberScreenItem>
         color: ColorsManager.mainBlue.withOpacity(0.1),
         border: Border.all(color: Theme.of(context).primaryColor, width: 1.5),
       ),
-      indicatorPadding:
-          const EdgeInsets.symmetric(vertical: 12, horizontal: -10),
+      indicatorPadding: const EdgeInsets.symmetric(
+        vertical: 12,
+        horizontal: -10,
+      ),
       labelPadding: const EdgeInsets.symmetric(vertical: 8.0),
       dividerHeight: 0,
       tabs: [
@@ -203,9 +202,9 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                   ? 'barber.book_now'.tr()
                   : '${'barber.book_now'.tr()} (${_priceText(_selectedTotalPrice)})',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),

@@ -10,11 +10,7 @@ class BookingResponseModel {
   @JsonKey(name: 'data')
   final List<BookingData>? bookingDataList;
 
-  BookingResponseModel({
-    this.status,
-    this.results,
-    this.bookingDataList,
-  });
+  BookingResponseModel({this.status, this.results, this.bookingDataList});
 
   factory BookingResponseModel.fromJson(Map<String, dynamic> json) =>
       _$BookingResponseModelFromJson(json);
@@ -44,6 +40,25 @@ class BookingData {
   @JsonKey(name: '__v')
   final int? version;
 
+  // Queue-specific fields
+  @JsonKey(name: 'is_queue_reservation')
+  final bool? isQueueReservation;
+
+  @JsonKey(name: 'queue_number')
+  final int? queueNumber;
+
+  @JsonKey(name: 'queue_position')
+  final int? queuePosition;
+
+  @JsonKey(name: 'queue_status')
+  final String? queueStatus; // waiting | in_service | completed | skipped
+
+  @JsonKey(name: 'joined_queue_at')
+  final String? joinedQueueAt;
+
+  @JsonKey(name: 'started_service_at')
+  final String? startedServiceAt;
+
   BookingData({
     this.id,
     this.user,
@@ -57,6 +72,12 @@ class BookingData {
     this.createdAt,
     this.updatedAt,
     this.version,
+    this.isQueueReservation,
+    this.queueNumber,
+    this.queuePosition,
+    this.queueStatus,
+    this.joinedQueueAt,
+    this.startedServiceAt,
   });
 
   factory BookingData.fromJson(Map<String, dynamic> json) =>
@@ -73,11 +94,7 @@ class BarberData {
   final String? name;
   final String? avatar;
 
-  BarberData({
-    this.id,
-    this.name,
-    this.avatar,
-  });
+  BarberData({this.id, this.name, this.avatar});
 
   factory BarberData.fromJson(Map<String, dynamic> json) =>
       _$BarberDataFromJson(json);

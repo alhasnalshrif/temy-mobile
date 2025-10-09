@@ -125,6 +125,22 @@ class LoginScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: DontHaveAccountText(),
           ),
+          const SizedBox(height: 20),
+          // Guest Booking Option
+          Center(
+            child: TextButton(
+              onPressed: () {
+                // Navigate to home/booking as guest
+                context.pushReplacementNamed(Routes.dashboardScreen);
+              },
+              child: Text(
+                'auth.continue_as_guest'.tr(),
+                style: TextStyles.font13GrayRegular.copyWith(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
