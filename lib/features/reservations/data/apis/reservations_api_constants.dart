@@ -1,6 +1,9 @@
 class ReservationsApiConstants {
   static const String reservations = 'reservations';
-  static const String guestReservations = 'reservations/guest';
+  static const String guestRequestVerification =
+      'reservations/guest/request-verification';
+  static const String guestVerifyAndCreate =
+      'reservations/guest/verify-and-create';
   static const String queue = 'queue';
   static const String queueJoin = 'queue/join';
   static const String queueGuestJoin = 'queue/guest/join';

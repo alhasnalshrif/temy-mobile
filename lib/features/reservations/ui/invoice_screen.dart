@@ -53,6 +53,7 @@ class InvoiceScreen extends StatelessWidget {
                         style: TextStyles.font18DarkBlueBold,
                       ),
                     ),
+                    _buildGuestNotificationBanner(),
                     Expanded(
                       child: ListView(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -87,6 +88,88 @@ class InvoiceScreen extends StatelessWidget {
         child: Center(
           child: Image.asset('assets/icons/check.png', width: 100, height: 100),
         ),
+      ),
+    );
+  }
+
+  Widget _buildGuestNotificationBanner() {
+    // Check if this is a guest reservation (user is null but userName/userPhone exist)
+    final isGuest =
+        _reservationData?.user == null && _reservationData?.userName != null;
+
+    if (!isGuest) return const SizedBox.shrink();
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            ColorsManager.mainBlue.withOpacity(0.1),
+            ColorsManager.lightBlue.withOpacity(0.3),
+          ],
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+        ),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: ColorsManager.mainBlue.withOpacity(0.3),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.green.withOpacity(0.2),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.check_circle,
+              color: Colors.green,
+              size: 24,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "حجز ضيف",
+                  style: TextStyles.font16DarkBold.copyWith(
+                    color: ColorsManager.mainBlue,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "تم إرسال تفاصيل الحجز إلى رقم الواتساب الخاص بك",
+                  style: TextStyles.font14GrayRegular.copyWith(fontSize: 13),
+                ),
+                if (_reservationData?.userPhone != null) ...[
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.phone_android,
+                        size: 14,
+                        color: ColorsManager.mainBlue,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        _reservationData!.userPhone!,
+                        style: TextStyles.font14BlueSemiBold.copyWith(
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

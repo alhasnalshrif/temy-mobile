@@ -32,6 +32,14 @@ mixin _$ReservationState {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,6 +57,14 @@ mixin _$ReservationState {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +82,14 @@ mixin _$ReservationState {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -81,6 +105,14 @@ mixin _$ReservationState {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,6 +127,12 @@ mixin _$ReservationState {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -109,6 +147,12 @@ mixin _$ReservationState {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -190,6 +234,14 @@ class _$InitialImpl implements _Initial {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return initial();
   }
@@ -210,6 +262,14 @@ class _$InitialImpl implements _Initial {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return initial?.call();
   }
@@ -230,6 +290,14 @@ class _$InitialImpl implements _Initial {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -251,6 +319,14 @@ class _$InitialImpl implements _Initial {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return initial(this);
   }
@@ -268,6 +344,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return initial?.call(this);
   }
@@ -285,6 +367,12 @@ class _$InitialImpl implements _Initial {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -353,6 +441,14 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return reservationLoading();
   }
@@ -373,6 +469,14 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return reservationLoading?.call();
   }
@@ -393,6 +497,14 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (reservationLoading != null) {
@@ -414,6 +526,14 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return reservationLoading(this);
   }
@@ -431,6 +551,12 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return reservationLoading?.call(this);
   }
@@ -448,6 +574,12 @@ class _$ReservationLoadingImpl implements ReservationLoading {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (reservationLoading != null) {
@@ -559,6 +691,14 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return reservationSuccess(reservationRequestModel, arguments);
   }
@@ -579,6 +719,14 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return reservationSuccess?.call(reservationRequestModel, arguments);
   }
@@ -599,6 +747,14 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (reservationSuccess != null) {
@@ -620,6 +776,14 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return reservationSuccess(this);
   }
@@ -637,6 +801,12 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return reservationSuccess?.call(this);
   }
@@ -654,6 +824,12 @@ class _$ReservationSuccessImpl implements ReservationSuccess {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (reservationSuccess != null) {
@@ -762,6 +938,14 @@ class _$ReservationErrorImpl implements ReservationError {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return reservationError(errorHandler);
   }
@@ -782,6 +966,14 @@ class _$ReservationErrorImpl implements ReservationError {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return reservationError?.call(errorHandler);
   }
@@ -802,6 +994,14 @@ class _$ReservationErrorImpl implements ReservationError {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (reservationError != null) {
@@ -823,6 +1023,14 @@ class _$ReservationErrorImpl implements ReservationError {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return reservationError(this);
   }
@@ -840,6 +1048,12 @@ class _$ReservationErrorImpl implements ReservationError {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return reservationError?.call(this);
   }
@@ -857,6 +1071,12 @@ class _$ReservationErrorImpl implements ReservationError {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (reservationError != null) {
@@ -934,6 +1154,14 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return timeSlotsLoading();
   }
@@ -954,6 +1182,14 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return timeSlotsLoading?.call();
   }
@@ -974,6 +1210,14 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (timeSlotsLoading != null) {
@@ -995,6 +1239,14 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return timeSlotsLoading(this);
   }
@@ -1012,6 +1264,12 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return timeSlotsLoading?.call(this);
   }
@@ -1029,6 +1287,12 @@ class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (timeSlotsLoading != null) {
@@ -1126,6 +1390,14 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return timeSlotsSuccess(timeSlotsResponse);
   }
@@ -1146,6 +1418,14 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return timeSlotsSuccess?.call(timeSlotsResponse);
   }
@@ -1166,6 +1446,14 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (timeSlotsSuccess != null) {
@@ -1187,6 +1475,14 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return timeSlotsSuccess(this);
   }
@@ -1204,6 +1500,12 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return timeSlotsSuccess?.call(this);
   }
@@ -1221,6 +1523,12 @@ class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (timeSlotsSuccess != null) {
@@ -1327,6 +1635,14 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return timeSlotsError(errorHandler);
   }
@@ -1347,6 +1663,14 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return timeSlotsError?.call(errorHandler);
   }
@@ -1367,6 +1691,14 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (timeSlotsError != null) {
@@ -1388,6 +1720,14 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return timeSlotsError(this);
   }
@@ -1405,6 +1745,12 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return timeSlotsError?.call(this);
   }
@@ -1422,6 +1768,12 @@ class _$TimeSlotsErrorImpl implements TimeSlotsError {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (timeSlotsError != null) {
@@ -1500,6 +1852,14 @@ class _$QueueSettingsLoadingImpl implements QueueSettingsLoading {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return queueSettingsLoading();
   }
@@ -1520,6 +1880,14 @@ class _$QueueSettingsLoadingImpl implements QueueSettingsLoading {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return queueSettingsLoading?.call();
   }
@@ -1540,6 +1908,14 @@ class _$QueueSettingsLoadingImpl implements QueueSettingsLoading {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (queueSettingsLoading != null) {
@@ -1561,6 +1937,14 @@ class _$QueueSettingsLoadingImpl implements QueueSettingsLoading {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return queueSettingsLoading(this);
   }
@@ -1578,6 +1962,12 @@ class _$QueueSettingsLoadingImpl implements QueueSettingsLoading {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return queueSettingsLoading?.call(this);
   }
@@ -1595,6 +1985,12 @@ class _$QueueSettingsLoadingImpl implements QueueSettingsLoading {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (queueSettingsLoading != null) {
@@ -1706,6 +2102,14 @@ class _$QueueSettingsSuccessImpl implements QueueSettingsSuccess {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return queueSettingsSuccess(settingsResponse);
   }
@@ -1726,6 +2130,14 @@ class _$QueueSettingsSuccessImpl implements QueueSettingsSuccess {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return queueSettingsSuccess?.call(settingsResponse);
   }
@@ -1746,6 +2158,14 @@ class _$QueueSettingsSuccessImpl implements QueueSettingsSuccess {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (queueSettingsSuccess != null) {
@@ -1767,6 +2187,14 @@ class _$QueueSettingsSuccessImpl implements QueueSettingsSuccess {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return queueSettingsSuccess(this);
   }
@@ -1784,6 +2212,12 @@ class _$QueueSettingsSuccessImpl implements QueueSettingsSuccess {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return queueSettingsSuccess?.call(this);
   }
@@ -1801,6 +2235,12 @@ class _$QueueSettingsSuccessImpl implements QueueSettingsSuccess {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (queueSettingsSuccess != null) {
@@ -1908,6 +2348,14 @@ class _$QueueSettingsErrorImpl implements QueueSettingsError {
     required TResult Function(QueueSettingsResponse settingsResponse)
         queueSettingsSuccess,
     required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
   }) {
     return queueSettingsError(errorHandler);
   }
@@ -1928,6 +2376,14 @@ class _$QueueSettingsErrorImpl implements QueueSettingsError {
     TResult? Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
   }) {
     return queueSettingsError?.call(errorHandler);
   }
@@ -1948,6 +2404,14 @@ class _$QueueSettingsErrorImpl implements QueueSettingsError {
     TResult Function(QueueSettingsResponse settingsResponse)?
         queueSettingsSuccess,
     TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (queueSettingsError != null) {
@@ -1969,6 +2433,14 @@ class _$QueueSettingsErrorImpl implements QueueSettingsError {
     required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
     required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
     required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
   }) {
     return queueSettingsError(this);
   }
@@ -1986,6 +2458,12 @@ class _$QueueSettingsErrorImpl implements QueueSettingsError {
     TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
   }) {
     return queueSettingsError?.call(this);
   }
@@ -2003,6 +2481,12 @@ class _$QueueSettingsErrorImpl implements QueueSettingsError {
     TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
     TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
     TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
     required TResult orElse(),
   }) {
     if (queueSettingsError != null) {
@@ -2023,4 +2507,1418 @@ abstract class QueueSettingsError implements ReservationState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QueueSettingsErrorImplCopyWith<_$QueueSettingsErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OtpRequestLoadingImplCopyWith<$Res> {
+  factory _$$OtpRequestLoadingImplCopyWith(_$OtpRequestLoadingImpl value,
+          $Res Function(_$OtpRequestLoadingImpl) then) =
+      __$$OtpRequestLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OtpRequestLoadingImplCopyWithImpl<$Res>
+    extends _$ReservationStateCopyWithImpl<$Res, _$OtpRequestLoadingImpl>
+    implements _$$OtpRequestLoadingImplCopyWith<$Res> {
+  __$$OtpRequestLoadingImplCopyWithImpl(_$OtpRequestLoadingImpl _value,
+      $Res Function(_$OtpRequestLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$OtpRequestLoadingImpl implements OtpRequestLoading {
+  const _$OtpRequestLoadingImpl();
+
+  @override
+  String toString() {
+    return 'ReservationState.otpRequestLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OtpRequestLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() reservationLoading,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)
+        reservationSuccess,
+    required TResult Function(ErrorHandler errorHandler) reservationError,
+    required TResult Function() timeSlotsLoading,
+    required TResult Function(TimeSlotsResponse timeSlotsResponse)
+        timeSlotsSuccess,
+    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
+  }) {
+    return otpRequestLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? reservationLoading,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? reservationError,
+    TResult? Function()? timeSlotsLoading,
+    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
+  }) {
+    return otpRequestLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? reservationLoading,
+    TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult Function(ErrorHandler errorHandler)? reservationError,
+    TResult Function()? timeSlotsLoading,
+    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpRequestLoading != null) {
+      return otpRequestLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ReservationLoading value) reservationLoading,
+    required TResult Function(ReservationSuccess value) reservationSuccess,
+    required TResult Function(ReservationError value) reservationError,
+    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
+    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
+    required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
+  }) {
+    return otpRequestLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ReservationLoading value)? reservationLoading,
+    TResult? Function(ReservationSuccess value)? reservationSuccess,
+    TResult? Function(ReservationError value)? reservationError,
+    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
+  }) {
+    return otpRequestLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ReservationLoading value)? reservationLoading,
+    TResult Function(ReservationSuccess value)? reservationSuccess,
+    TResult Function(ReservationError value)? reservationError,
+    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpRequestLoading != null) {
+      return otpRequestLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OtpRequestLoading implements ReservationState {
+  const factory OtpRequestLoading() = _$OtpRequestLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$OtpRequestSuccessImplCopyWith<$Res> {
+  factory _$$OtpRequestSuccessImplCopyWith(_$OtpRequestSuccessImpl value,
+          $Res Function(_$OtpRequestSuccessImpl) then) =
+      __$$OtpRequestSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({OtpResponse otpResponse});
+}
+
+/// @nodoc
+class __$$OtpRequestSuccessImplCopyWithImpl<$Res>
+    extends _$ReservationStateCopyWithImpl<$Res, _$OtpRequestSuccessImpl>
+    implements _$$OtpRequestSuccessImplCopyWith<$Res> {
+  __$$OtpRequestSuccessImplCopyWithImpl(_$OtpRequestSuccessImpl _value,
+      $Res Function(_$OtpRequestSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? otpResponse = null,
+  }) {
+    return _then(_$OtpRequestSuccessImpl(
+      null == otpResponse
+          ? _value.otpResponse
+          : otpResponse // ignore: cast_nullable_to_non_nullable
+              as OtpResponse,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OtpRequestSuccessImpl implements OtpRequestSuccess {
+  const _$OtpRequestSuccessImpl(this.otpResponse);
+
+  @override
+  final OtpResponse otpResponse;
+
+  @override
+  String toString() {
+    return 'ReservationState.otpRequestSuccess(otpResponse: $otpResponse)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OtpRequestSuccessImpl &&
+            (identical(other.otpResponse, otpResponse) ||
+                other.otpResponse == otpResponse));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, otpResponse);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OtpRequestSuccessImplCopyWith<_$OtpRequestSuccessImpl> get copyWith =>
+      __$$OtpRequestSuccessImplCopyWithImpl<_$OtpRequestSuccessImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() reservationLoading,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)
+        reservationSuccess,
+    required TResult Function(ErrorHandler errorHandler) reservationError,
+    required TResult Function() timeSlotsLoading,
+    required TResult Function(TimeSlotsResponse timeSlotsResponse)
+        timeSlotsSuccess,
+    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
+  }) {
+    return otpRequestSuccess(otpResponse);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? reservationLoading,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? reservationError,
+    TResult? Function()? timeSlotsLoading,
+    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
+  }) {
+    return otpRequestSuccess?.call(otpResponse);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? reservationLoading,
+    TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult Function(ErrorHandler errorHandler)? reservationError,
+    TResult Function()? timeSlotsLoading,
+    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpRequestSuccess != null) {
+      return otpRequestSuccess(otpResponse);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ReservationLoading value) reservationLoading,
+    required TResult Function(ReservationSuccess value) reservationSuccess,
+    required TResult Function(ReservationError value) reservationError,
+    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
+    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
+    required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
+  }) {
+    return otpRequestSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ReservationLoading value)? reservationLoading,
+    TResult? Function(ReservationSuccess value)? reservationSuccess,
+    TResult? Function(ReservationError value)? reservationError,
+    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
+  }) {
+    return otpRequestSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ReservationLoading value)? reservationLoading,
+    TResult Function(ReservationSuccess value)? reservationSuccess,
+    TResult Function(ReservationError value)? reservationError,
+    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpRequestSuccess != null) {
+      return otpRequestSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OtpRequestSuccess implements ReservationState {
+  const factory OtpRequestSuccess(final OtpResponse otpResponse) =
+      _$OtpRequestSuccessImpl;
+
+  OtpResponse get otpResponse;
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OtpRequestSuccessImplCopyWith<_$OtpRequestSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OtpRequestErrorImplCopyWith<$Res> {
+  factory _$$OtpRequestErrorImplCopyWith(_$OtpRequestErrorImpl value,
+          $Res Function(_$OtpRequestErrorImpl) then) =
+      __$$OtpRequestErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorHandler errorHandler});
+}
+
+/// @nodoc
+class __$$OtpRequestErrorImplCopyWithImpl<$Res>
+    extends _$ReservationStateCopyWithImpl<$Res, _$OtpRequestErrorImpl>
+    implements _$$OtpRequestErrorImplCopyWith<$Res> {
+  __$$OtpRequestErrorImplCopyWithImpl(
+      _$OtpRequestErrorImpl _value, $Res Function(_$OtpRequestErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorHandler = null,
+  }) {
+    return _then(_$OtpRequestErrorImpl(
+      null == errorHandler
+          ? _value.errorHandler
+          : errorHandler // ignore: cast_nullable_to_non_nullable
+              as ErrorHandler,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OtpRequestErrorImpl implements OtpRequestError {
+  const _$OtpRequestErrorImpl(this.errorHandler);
+
+  @override
+  final ErrorHandler errorHandler;
+
+  @override
+  String toString() {
+    return 'ReservationState.otpRequestError(errorHandler: $errorHandler)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OtpRequestErrorImpl &&
+            (identical(other.errorHandler, errorHandler) ||
+                other.errorHandler == errorHandler));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorHandler);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OtpRequestErrorImplCopyWith<_$OtpRequestErrorImpl> get copyWith =>
+      __$$OtpRequestErrorImplCopyWithImpl<_$OtpRequestErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() reservationLoading,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)
+        reservationSuccess,
+    required TResult Function(ErrorHandler errorHandler) reservationError,
+    required TResult Function() timeSlotsLoading,
+    required TResult Function(TimeSlotsResponse timeSlotsResponse)
+        timeSlotsSuccess,
+    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
+  }) {
+    return otpRequestError(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? reservationLoading,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? reservationError,
+    TResult? Function()? timeSlotsLoading,
+    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
+  }) {
+    return otpRequestError?.call(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? reservationLoading,
+    TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult Function(ErrorHandler errorHandler)? reservationError,
+    TResult Function()? timeSlotsLoading,
+    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpRequestError != null) {
+      return otpRequestError(errorHandler);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ReservationLoading value) reservationLoading,
+    required TResult Function(ReservationSuccess value) reservationSuccess,
+    required TResult Function(ReservationError value) reservationError,
+    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
+    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
+    required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
+  }) {
+    return otpRequestError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ReservationLoading value)? reservationLoading,
+    TResult? Function(ReservationSuccess value)? reservationSuccess,
+    TResult? Function(ReservationError value)? reservationError,
+    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
+  }) {
+    return otpRequestError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ReservationLoading value)? reservationLoading,
+    TResult Function(ReservationSuccess value)? reservationSuccess,
+    TResult Function(ReservationError value)? reservationError,
+    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpRequestError != null) {
+      return otpRequestError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OtpRequestError implements ReservationState {
+  const factory OtpRequestError(final ErrorHandler errorHandler) =
+      _$OtpRequestErrorImpl;
+
+  ErrorHandler get errorHandler;
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OtpRequestErrorImplCopyWith<_$OtpRequestErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OtpVerificationLoadingImplCopyWith<$Res> {
+  factory _$$OtpVerificationLoadingImplCopyWith(
+          _$OtpVerificationLoadingImpl value,
+          $Res Function(_$OtpVerificationLoadingImpl) then) =
+      __$$OtpVerificationLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OtpVerificationLoadingImplCopyWithImpl<$Res>
+    extends _$ReservationStateCopyWithImpl<$Res, _$OtpVerificationLoadingImpl>
+    implements _$$OtpVerificationLoadingImplCopyWith<$Res> {
+  __$$OtpVerificationLoadingImplCopyWithImpl(
+      _$OtpVerificationLoadingImpl _value,
+      $Res Function(_$OtpVerificationLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$OtpVerificationLoadingImpl implements OtpVerificationLoading {
+  const _$OtpVerificationLoadingImpl();
+
+  @override
+  String toString() {
+    return 'ReservationState.otpVerificationLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OtpVerificationLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() reservationLoading,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)
+        reservationSuccess,
+    required TResult Function(ErrorHandler errorHandler) reservationError,
+    required TResult Function() timeSlotsLoading,
+    required TResult Function(TimeSlotsResponse timeSlotsResponse)
+        timeSlotsSuccess,
+    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
+  }) {
+    return otpVerificationLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? reservationLoading,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? reservationError,
+    TResult? Function()? timeSlotsLoading,
+    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
+  }) {
+    return otpVerificationLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? reservationLoading,
+    TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult Function(ErrorHandler errorHandler)? reservationError,
+    TResult Function()? timeSlotsLoading,
+    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpVerificationLoading != null) {
+      return otpVerificationLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ReservationLoading value) reservationLoading,
+    required TResult Function(ReservationSuccess value) reservationSuccess,
+    required TResult Function(ReservationError value) reservationError,
+    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
+    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
+    required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
+  }) {
+    return otpVerificationLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ReservationLoading value)? reservationLoading,
+    TResult? Function(ReservationSuccess value)? reservationSuccess,
+    TResult? Function(ReservationError value)? reservationError,
+    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
+  }) {
+    return otpVerificationLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ReservationLoading value)? reservationLoading,
+    TResult Function(ReservationSuccess value)? reservationSuccess,
+    TResult Function(ReservationError value)? reservationError,
+    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpVerificationLoading != null) {
+      return otpVerificationLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OtpVerificationLoading implements ReservationState {
+  const factory OtpVerificationLoading() = _$OtpVerificationLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$OtpVerificationSuccessImplCopyWith<$Res> {
+  factory _$$OtpVerificationSuccessImplCopyWith(
+          _$OtpVerificationSuccessImpl value,
+          $Res Function(_$OtpVerificationSuccessImpl) then) =
+      __$$OtpVerificationSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {ReservationResponseModel reservationResponse,
+      ReservationArguments? arguments});
+}
+
+/// @nodoc
+class __$$OtpVerificationSuccessImplCopyWithImpl<$Res>
+    extends _$ReservationStateCopyWithImpl<$Res, _$OtpVerificationSuccessImpl>
+    implements _$$OtpVerificationSuccessImplCopyWith<$Res> {
+  __$$OtpVerificationSuccessImplCopyWithImpl(
+      _$OtpVerificationSuccessImpl _value,
+      $Res Function(_$OtpVerificationSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? reservationResponse = null,
+    Object? arguments = freezed,
+  }) {
+    return _then(_$OtpVerificationSuccessImpl(
+      null == reservationResponse
+          ? _value.reservationResponse
+          : reservationResponse // ignore: cast_nullable_to_non_nullable
+              as ReservationResponseModel,
+      arguments: freezed == arguments
+          ? _value.arguments
+          : arguments // ignore: cast_nullable_to_non_nullable
+              as ReservationArguments?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OtpVerificationSuccessImpl implements OtpVerificationSuccess {
+  const _$OtpVerificationSuccessImpl(this.reservationResponse,
+      {this.arguments});
+
+  @override
+  final ReservationResponseModel reservationResponse;
+  @override
+  final ReservationArguments? arguments;
+
+  @override
+  String toString() {
+    return 'ReservationState.otpVerificationSuccess(reservationResponse: $reservationResponse, arguments: $arguments)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OtpVerificationSuccessImpl &&
+            (identical(other.reservationResponse, reservationResponse) ||
+                other.reservationResponse == reservationResponse) &&
+            (identical(other.arguments, arguments) ||
+                other.arguments == arguments));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, reservationResponse, arguments);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OtpVerificationSuccessImplCopyWith<_$OtpVerificationSuccessImpl>
+      get copyWith => __$$OtpVerificationSuccessImplCopyWithImpl<
+          _$OtpVerificationSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() reservationLoading,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)
+        reservationSuccess,
+    required TResult Function(ErrorHandler errorHandler) reservationError,
+    required TResult Function() timeSlotsLoading,
+    required TResult Function(TimeSlotsResponse timeSlotsResponse)
+        timeSlotsSuccess,
+    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
+  }) {
+    return otpVerificationSuccess(reservationResponse, arguments);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? reservationLoading,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? reservationError,
+    TResult? Function()? timeSlotsLoading,
+    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
+  }) {
+    return otpVerificationSuccess?.call(reservationResponse, arguments);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? reservationLoading,
+    TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult Function(ErrorHandler errorHandler)? reservationError,
+    TResult Function()? timeSlotsLoading,
+    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpVerificationSuccess != null) {
+      return otpVerificationSuccess(reservationResponse, arguments);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ReservationLoading value) reservationLoading,
+    required TResult Function(ReservationSuccess value) reservationSuccess,
+    required TResult Function(ReservationError value) reservationError,
+    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
+    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
+    required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
+  }) {
+    return otpVerificationSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ReservationLoading value)? reservationLoading,
+    TResult? Function(ReservationSuccess value)? reservationSuccess,
+    TResult? Function(ReservationError value)? reservationError,
+    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
+  }) {
+    return otpVerificationSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ReservationLoading value)? reservationLoading,
+    TResult Function(ReservationSuccess value)? reservationSuccess,
+    TResult Function(ReservationError value)? reservationError,
+    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpVerificationSuccess != null) {
+      return otpVerificationSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OtpVerificationSuccess implements ReservationState {
+  const factory OtpVerificationSuccess(
+      final ReservationResponseModel reservationResponse,
+      {final ReservationArguments? arguments}) = _$OtpVerificationSuccessImpl;
+
+  ReservationResponseModel get reservationResponse;
+  ReservationArguments? get arguments;
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OtpVerificationSuccessImplCopyWith<_$OtpVerificationSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OtpVerificationErrorImplCopyWith<$Res> {
+  factory _$$OtpVerificationErrorImplCopyWith(_$OtpVerificationErrorImpl value,
+          $Res Function(_$OtpVerificationErrorImpl) then) =
+      __$$OtpVerificationErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorHandler errorHandler});
+}
+
+/// @nodoc
+class __$$OtpVerificationErrorImplCopyWithImpl<$Res>
+    extends _$ReservationStateCopyWithImpl<$Res, _$OtpVerificationErrorImpl>
+    implements _$$OtpVerificationErrorImplCopyWith<$Res> {
+  __$$OtpVerificationErrorImplCopyWithImpl(_$OtpVerificationErrorImpl _value,
+      $Res Function(_$OtpVerificationErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorHandler = null,
+  }) {
+    return _then(_$OtpVerificationErrorImpl(
+      null == errorHandler
+          ? _value.errorHandler
+          : errorHandler // ignore: cast_nullable_to_non_nullable
+              as ErrorHandler,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OtpVerificationErrorImpl implements OtpVerificationError {
+  const _$OtpVerificationErrorImpl(this.errorHandler);
+
+  @override
+  final ErrorHandler errorHandler;
+
+  @override
+  String toString() {
+    return 'ReservationState.otpVerificationError(errorHandler: $errorHandler)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OtpVerificationErrorImpl &&
+            (identical(other.errorHandler, errorHandler) ||
+                other.errorHandler == errorHandler));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorHandler);
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OtpVerificationErrorImplCopyWith<_$OtpVerificationErrorImpl>
+      get copyWith =>
+          __$$OtpVerificationErrorImplCopyWithImpl<_$OtpVerificationErrorImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() reservationLoading,
+    required TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)
+        reservationSuccess,
+    required TResult Function(ErrorHandler errorHandler) reservationError,
+    required TResult Function() timeSlotsLoading,
+    required TResult Function(TimeSlotsResponse timeSlotsResponse)
+        timeSlotsSuccess,
+    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
+    required TResult Function() queueSettingsLoading,
+    required TResult Function(QueueSettingsResponse settingsResponse)
+        queueSettingsSuccess,
+    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
+    required TResult Function() otpRequestLoading,
+    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpRequestError,
+    required TResult Function() otpVerificationLoading,
+    required TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)
+        otpVerificationSuccess,
+    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
+  }) {
+    return otpVerificationError(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? reservationLoading,
+    TResult? Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? reservationError,
+    TResult? Function()? timeSlotsLoading,
+    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult? Function()? queueSettingsLoading,
+    TResult? Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult? Function()? otpRequestLoading,
+    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult? Function()? otpVerificationLoading,
+    TResult? Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
+  }) {
+    return otpVerificationError?.call(errorHandler);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? reservationLoading,
+    TResult Function(ReservationResponseModel reservationRequestModel,
+            ReservationArguments? arguments)?
+        reservationSuccess,
+    TResult Function(ErrorHandler errorHandler)? reservationError,
+    TResult Function()? timeSlotsLoading,
+    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
+    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
+    TResult Function()? queueSettingsLoading,
+    TResult Function(QueueSettingsResponse settingsResponse)?
+        queueSettingsSuccess,
+    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
+    TResult Function()? otpRequestLoading,
+    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpRequestError,
+    TResult Function()? otpVerificationLoading,
+    TResult Function(ReservationResponseModel reservationResponse,
+            ReservationArguments? arguments)?
+        otpVerificationSuccess,
+    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpVerificationError != null) {
+      return otpVerificationError(errorHandler);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ReservationLoading value) reservationLoading,
+    required TResult Function(ReservationSuccess value) reservationSuccess,
+    required TResult Function(ReservationError value) reservationError,
+    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
+    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
+    required TResult Function(TimeSlotsError value) timeSlotsError,
+    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
+    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
+    required TResult Function(QueueSettingsError value) queueSettingsError,
+    required TResult Function(OtpRequestLoading value) otpRequestLoading,
+    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
+    required TResult Function(OtpRequestError value) otpRequestError,
+    required TResult Function(OtpVerificationLoading value)
+        otpVerificationLoading,
+    required TResult Function(OtpVerificationSuccess value)
+        otpVerificationSuccess,
+    required TResult Function(OtpVerificationError value) otpVerificationError,
+  }) {
+    return otpVerificationError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ReservationLoading value)? reservationLoading,
+    TResult? Function(ReservationSuccess value)? reservationSuccess,
+    TResult? Function(ReservationError value)? reservationError,
+    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult? Function(TimeSlotsError value)? timeSlotsError,
+    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult? Function(QueueSettingsError value)? queueSettingsError,
+    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult? Function(OtpRequestError value)? otpRequestError,
+    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult? Function(OtpVerificationError value)? otpVerificationError,
+  }) {
+    return otpVerificationError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ReservationLoading value)? reservationLoading,
+    TResult Function(ReservationSuccess value)? reservationSuccess,
+    TResult Function(ReservationError value)? reservationError,
+    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
+    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
+    TResult Function(TimeSlotsError value)? timeSlotsError,
+    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
+    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
+    TResult Function(QueueSettingsError value)? queueSettingsError,
+    TResult Function(OtpRequestLoading value)? otpRequestLoading,
+    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
+    TResult Function(OtpRequestError value)? otpRequestError,
+    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
+    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
+    TResult Function(OtpVerificationError value)? otpVerificationError,
+    required TResult orElse(),
+  }) {
+    if (otpVerificationError != null) {
+      return otpVerificationError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OtpVerificationError implements ReservationState {
+  const factory OtpVerificationError(final ErrorHandler errorHandler) =
+      _$OtpVerificationErrorImpl;
+
+  ErrorHandler get errorHandler;
+
+  /// Create a copy of ReservationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OtpVerificationErrorImplCopyWith<_$OtpVerificationErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -161,4 +161,71 @@ class ReservationCubit extends Cubit<ReservationState> {
       },
     );
   }
+
+  // OTP verification methods for guest reservations
+  void requestGuestVerification({required String phone}) async {
+    print('🔍 ReservationCubit: requestGuestVerification called');
+    emit(const ReservationState.otpRequestLoading());
+
+    final response = await _reservationRepo.requestGuestVerification(
+      phone: phone,
+    );
+
+    response.when(
+      success: (otpResponse) {
+        print('✅ ReservationCubit: OTP request successful');
+        emit(ReservationState.otpRequestSuccess(otpResponse));
+      },
+      failure: (error) {
+        print(
+          '❌ ReservationCubit: OTP request error: ${error.apiErrorModel.message}',
+        );
+        emit(ReservationState.otpRequestError(error));
+      },
+    );
+  }
+
+  void verifyAndCreateGuestReservation({
+    required String phone,
+    required String otp,
+    required String userName,
+    required String barberId,
+    required List<String> serviceIds,
+    required String date,
+    required String startTime,
+    String? note,
+    ReservationArguments? arguments,
+  }) async {
+    print('🔍 ReservationCubit: verifyAndCreateGuestReservation called');
+    emit(const ReservationState.otpVerificationLoading());
+
+    final response = await _reservationRepo.verifyAndCreateGuestReservation(
+      phone: phone,
+      otp: otp,
+      userName: userName,
+      barberId: barberId,
+      serviceIds: serviceIds,
+      date: date,
+      startTime: startTime,
+      note: note,
+    );
+
+    response.when(
+      success: (reservationResponse) {
+        print('✅ ReservationCubit: Guest reservation created successfully');
+        emit(
+          ReservationState.otpVerificationSuccess(
+            reservationResponse,
+            arguments: arguments,
+          ),
+        );
+      },
+      failure: (error) {
+        print(
+          '❌ ReservationCubit: Guest reservation error: ${error.apiErrorModel.message}',
+        );
+        emit(ReservationState.otpVerificationError(error));
+      },
+    );
+  }
 }

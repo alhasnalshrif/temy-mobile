@@ -79,6 +79,40 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               ),
             );
           },
+          otpVerificationLoading: () {
+            _showLoadingDialog(context);
+          },
+          otpVerificationSuccess: (response, reservationArgs) {
+            print('🎉 OTP verification and reservation success!');
+
+            // Dismiss loading dialog if it's showing
+            Navigator.of(context, rootNavigator: true).pop();
+
+            // Clear all reservations when successful
+            _multiReservationManager.clearReservations();
+
+            // Navigate to invoice screen
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.invoiceScreen,
+              arguments: response,
+              (route) => false,
+            );
+          },
+          otpVerificationError: (error) {
+            // Dismiss loading dialog if it's showing
+            Navigator.of(context, rootNavigator: true).pop();
+
+            // Show error message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  error.apiErrorModel.message ?? 'فشل التحقق من رمز OTP',
+                ),
+                backgroundColor: Colors.red,
+              ),
+            );
+          },
           orElse: () {},
         );
       },
@@ -142,11 +176,14 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   }
 
   // Show guest information dialog
-  Future<GuestInfo?> _showGuestInfoDialog(BuildContext context) async {
-    return await showDialog<GuestInfo>(
+  Future<dynamic> _showGuestInfoDialog(BuildContext context) async {
+    return await showDialog<dynamic>(
       context: context,
       barrierDismissible: false,
-      builder: (context) => const GuestInfoDialog(),
+      builder: (dialogContext) => BlocProvider.value(
+        value: context.read<ReservationCubit>(),
+        child: const GuestInfoDialog(),
+      ),
     );
   }
 
@@ -810,15 +847,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       SharedPrefKeys.userId,
     );
 
-    if (userId.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("عذراً، يجب تسجيل الدخول أولاً"),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    } // Check if we have multiple reservations
+    // Check if we have multiple reservations
     if (_multiReservationManager.reservations.isNotEmpty) {
       // We have multiple reservations, add the current one and submit all
 
@@ -831,7 +860,21 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
           ),
         );
         return;
-      } // Prepare reservations data for API call
+      }
+
+      // // For multiple reservations, currently only authenticated users are supported
+      // // This is because the backend multiple reservation endpoint requires userId
+      // if (userId.isEmpty) {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       content: Text("الحجوزات المتعددة متاحة فقط للمستخدمين المسجلين"),
+      //       backgroundColor: Colors.orange,
+      //     ),
+      //   );
+      //   return;
+      // }
+
+      // Prepare reservations data for API call
       final reservationsData = _multiReservationManager.getReservationsData(
         currentReservation: arguments,
       );
@@ -846,7 +889,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       // Clearing the manager should be handled by the ReservationCubit upon successful submission.
       // manager.clearReservations(); // Removed from here
     } else {
-      // Just a single reservation, use the standard method
+      // Just a single reservation, use the standard method (supports both guest and logged-in users)
       _confirmBooking(context);
     }
   }
@@ -872,16 +915,37 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       SharedPrefKeys.userId,
     );
 
-    // If user is not logged in, show guest info dialog
+    // If user is not logged in, show guest info dialog with OTP flow
+    String? otp;
     GuestInfo? guestInfo;
     if (userId.isEmpty) {
       if (!mounted) return;
 
-      // Show guest information dialog
-      guestInfo = await _showGuestInfoDialog(context);
+      // Show guest information dialog which will handle OTP flow
+      final dynamic result = await _showGuestInfoDialog(context);
 
       // If user cancels the dialog, return
-      if (guestInfo == null) {
+      if (result == null) {
+        return;
+      }
+
+      // Extract guest info and OTP from the result
+      if (result is Map) {
+        guestInfo = result['guestInfo'] as GuestInfo?;
+        otp = result['otp'] as String?;
+      } else if (result is GuestInfo) {
+        // Fallback for old behavior (without OTP)
+        guestInfo = result;
+      }
+
+      // Validate we got both guest info and OTP
+      if (guestInfo == null || otp == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("فشل الحصول على معلومات الضيف أو رمز التحقق"),
+            backgroundColor: Colors.red,
+          ),
+        );
         return;
       }
     }
@@ -899,30 +963,48 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       isQueueMode: isQueueMode,
     );
 
-    // Call the appropriate API based on mode
-    if (isQueueMode) {
-      // Queue mode: Join the queue
-      context.read<ReservationCubit>().joinQueue(
-        barberId: barberId,
-        serviceIds: serviceIds,
-        userId: userId.isNotEmpty ? userId : null,
-        guest: guestInfo, // Pass guest info if user is not logged in
-        arguments: updatedArguments,
-      );
-    } else {
-      // Time-slot mode: Make a regular reservation
+    // For guest users with OTP, use the OTP verification API
+    if (userId.isEmpty && guestInfo != null && otp != null) {
+      // Time-slot mode: Make a reservation with OTP verification
       final date =
           '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
 
-      context.read<ReservationCubit>().postReservation(
-        userId: userId.isNotEmpty ? userId : null,
-        serviceIds: serviceIds,
+      context.read<ReservationCubit>().verifyAndCreateGuestReservation(
+        phone: guestInfo.phone,
+        otp: otp,
+        userName: guestInfo.name,
         barberId: barberId,
+        serviceIds: serviceIds,
         date: date,
         startTime: arguments.selectedTime!,
-        guest: guestInfo, // Pass guest info if user is not logged in
         arguments: updatedArguments,
       );
+    } else {
+      // Call the appropriate API based on mode (for logged-in users)
+      if (isQueueMode) {
+        // Queue mode: Join the queue
+        context.read<ReservationCubit>().joinQueue(
+          barberId: barberId,
+          serviceIds: serviceIds,
+          userId: userId.isNotEmpty ? userId : null,
+          guest: guestInfo, // Pass guest info if user is not logged in
+          arguments: updatedArguments,
+        );
+      } else {
+        // Time-slot mode: Make a regular reservation
+        final date =
+            '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
+
+        context.read<ReservationCubit>().postReservation(
+          userId: userId.isNotEmpty ? userId : null,
+          serviceIds: serviceIds,
+          barberId: barberId,
+          date: date,
+          startTime: arguments.selectedTime!,
+          guest: guestInfo, // Pass guest info if user is not logged in
+          arguments: updatedArguments,
+        );
+      }
     }
   }
 

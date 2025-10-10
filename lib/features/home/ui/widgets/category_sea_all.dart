@@ -7,16 +7,15 @@ class DoctorSpecialitySeaAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      Text(
-        'navigation.categories'.tr(),
-        style: TextStyles.font18DarkBold,
-      ),
-      const Spacer(),
-      Text(
-        'See all',
-        style: TextStyles.font13BlueRegular,
-      ),
-    ]);
+    return Row(
+      children: [
+        Text('navigation.categories'.tr(), style: TextStyles.font18DarkBold),
+        const Spacer(),
+        // Text(
+        //   'See all',
+        //   style: TextStyles.font13BlueRegular,
+        // ),
+      ],
+    );
   }
 }

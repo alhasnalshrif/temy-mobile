@@ -4,6 +4,8 @@ import 'package:temy_barber/features/reservations/data/models/multiple_reservati
 import 'package:temy_barber/features/reservations/data/models/reservation_detail_request.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
+import 'package:temy_barber/features/reservations/data/models/otp_request.dart';
+import 'package:temy_barber/features/reservations/data/models/otp_response.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_constants.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -19,12 +21,6 @@ abstract class ReservationApiServices {
     @Body() ReservationRequestModel reservationRequest,
   );
 
-  // Guest user reservation (no auth required)
-  @POST(ReservationsApiConstants.guestReservations)
-  Future<ReservationResponseModel> postGuestReservation(
-    @Body() ReservationRequestModel reservationRequest,
-  );
-
   @POST('${ReservationsApiConstants.reservations}/multiple')
   Future<MultipleReservationResponseModel> postMultipleReservations(
     @Body() List<ReservationRequestModel> reservationsRequest,
@@ -34,5 +30,14 @@ abstract class ReservationApiServices {
   Future<TimeSlotsResponse> getAvailableTimeSlots(
     @Query('barberId') String barberId,
     @Query('date') String date,
+  );
+
+  // Guest OTP verification endpoints
+  @POST(ReservationsApiConstants.guestRequestVerification)
+  Future<OtpResponse> requestGuestVerification(@Body() OtpRequest otpRequest);
+
+  @POST(ReservationsApiConstants.guestVerifyAndCreate)
+  Future<ReservationResponseModel> verifyAndCreateGuestReservation(
+    @Body() VerifyOtpAndReserveRequest verifyRequest,
   );
 }

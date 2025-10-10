@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          margin: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+          margin: const EdgeInsets.fromLTRB(8, 16, 8, 28),
           child: Stack(
             children: [
               RefreshIndicator(

@@ -118,6 +118,13 @@
         "enter_phone_number": "Enter your phone number",
         "phone_required": "Phone number is required",
         "phone_invalid": "Please enter a valid phone number",
+        "verify_otp": "Verify Code",
+        "otp_sent_to": "Verification code sent to",
+        "otp_required": "Please enter verification code",
+        "otp_invalid_length": "Verification code must be 6 digits",
+        "resend_otp": "Resend Code",
+        "otp_wait_before_resend": "Please wait before resending code",
+        "verify": "Verify",
         "signup": {
             "title": "Create Account",
             "subtitle": "Enter all your data to create an account",

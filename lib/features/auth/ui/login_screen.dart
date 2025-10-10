@@ -135,9 +135,7 @@ class LoginScreen extends StatelessWidget {
               },
               child: Text(
                 'auth.continue_as_guest'.tr(),
-                style: TextStyles.font13GrayRegular.copyWith(
-                  decoration: TextDecoration.underline,
-                ),
+                style: TextStyles.font16DarkBold,
               ),
             ),
           ),

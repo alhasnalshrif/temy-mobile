@@ -8,6 +8,8 @@ import 'package:temy_barber/features/reservations/data/models/reservation_respon
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
 import 'package:temy_barber/features/reservations/data/models/queue_response.dart';
 import 'package:temy_barber/features/reservations/data/models/queue_settings_response.dart';
+import 'package:temy_barber/features/reservations/data/models/otp_request.dart';
+import 'package:temy_barber/features/reservations/data/models/otp_response.dart';
 
 class ReservationRepo {
   final ReservationApiServices _reservationApiServices;
@@ -40,13 +42,11 @@ class ReservationRepo {
         note: note,
       );
 
-      // Use guest endpoint if user is not logged in (userId is null AND guest is provided)
-      final isGuestBooking = guest != null && userId == null;
-      print('   Using guest endpoint: $isGuestBooking');
-
-      final response = isGuestBooking
-          ? await _reservationApiServices.postGuestReservation(requestModel)
-          : await _reservationApiServices.postReservations(requestModel);
+      // Always use the standard reservations endpoint
+      // Guest reservations now use the OTP verification flow
+      final response = await _reservationApiServices.postReservations(
+        requestModel,
+      );
 
       return ApiResult.success(response);
     } catch (error) {
@@ -200,6 +200,61 @@ class ReservationRepo {
       print('❌ ReservationRepo: Error caught!');
       print('   Error type: ${error.runtimeType}');
       print('   Error message: $error');
+      print('   Stack trace: $stackTrace');
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  // OTP verification methods for guest reservations
+  Future<ApiResult<OtpResponse>> requestGuestVerification({
+    required String phone,
+  }) async {
+    try {
+      print('🔵 ReservationRepo: Requesting OTP for phone: $phone');
+      final response = await _reservationApiServices.requestGuestVerification(
+        OtpRequest(phone: phone),
+      );
+      print('✅ ReservationRepo: OTP request successful');
+      return ApiResult.success(response);
+    } catch (error, stackTrace) {
+      print('❌ ReservationRepo: OTP request error!');
+      print('   Error: $error');
+      print('   Stack trace: $stackTrace');
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<ReservationResponseModel>> verifyAndCreateGuestReservation({
+    required String phone,
+    required String otp,
+    required String userName,
+    required String barberId,
+    required List<String> serviceIds,
+    required String date,
+    required String startTime,
+    String? note,
+  }) async {
+    try {
+      print('🔵 ReservationRepo: Verifying OTP and creating reservation...');
+      print('   Phone: $phone, OTP: $otp');
+      final response = await _reservationApiServices
+          .verifyAndCreateGuestReservation(
+            VerifyOtpAndReserveRequest(
+              phone: phone,
+              otp: otp,
+              userName: userName,
+              barberId: barberId,
+              serviceIds: serviceIds,
+              date: date,
+              startTime: startTime,
+              note: note,
+            ),
+          );
+      print('✅ ReservationRepo: Guest reservation created successfully');
+      return ApiResult.success(response);
+    } catch (error, stackTrace) {
+      print('❌ ReservationRepo: Guest reservation error!');
+      print('   Error: $error');
       print('   Stack trace: $stackTrace');
       return ApiResult.failure(ErrorHandler.handle(error));
     }

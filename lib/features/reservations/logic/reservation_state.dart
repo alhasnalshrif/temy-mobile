@@ -3,6 +3,7 @@ import 'package:temy_barber/features/barber/data/models/reservation_arguments.da
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
 import 'package:temy_barber/features/reservations/data/models/queue_settings_response.dart';
+import 'package:temy_barber/features/reservations/data/models/otp_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'reservation_state.freezed.dart';
@@ -35,4 +36,21 @@ class ReservationState with _$ReservationState {
   ) = QueueSettingsSuccess;
   const factory ReservationState.queueSettingsError(ErrorHandler errorHandler) =
       QueueSettingsError;
+
+  // OTP Verification for Guest Reservations
+  const factory ReservationState.otpRequestLoading() = OtpRequestLoading;
+  const factory ReservationState.otpRequestSuccess(OtpResponse otpResponse) =
+      OtpRequestSuccess;
+  const factory ReservationState.otpRequestError(ErrorHandler errorHandler) =
+      OtpRequestError;
+
+  const factory ReservationState.otpVerificationLoading() =
+      OtpVerificationLoading;
+  const factory ReservationState.otpVerificationSuccess(
+    ReservationResponseModel reservationResponse, {
+    ReservationArguments? arguments,
+  }) = OtpVerificationSuccess;
+  const factory ReservationState.otpVerificationError(
+    ErrorHandler errorHandler,
+  ) = OtpVerificationError;
 }

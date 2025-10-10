@@ -128,6 +128,13 @@
     "enter_phone_number": "أدخل رقم هاتفك",
     "phone_required": "رقم الهاتف مطلوب",
     "phone_invalid": "الرجاء إدخال رقم هاتف صحيح",
+    "verify_otp": "التحقق من الرمز",
+    "otp_sent_to": "تم إرسال رمز التحقق إلى",
+    "otp_required": "الرجاء إدخال رمز التحقق",
+    "otp_invalid_length": "رمز التحقق يجب أن يكون 6 أرقام",
+    "resend_otp": "إعادة إرسال الرمز",
+    "otp_wait_before_resend": "الرجاء الانتظار قبل إعادة إرسال الرمز",
+    "verify": "تحقق",
     "signup": {
       "title": "انشي حساب",
       "subtitle": "ادخل جميع بياناتك لانشاء حساب",
