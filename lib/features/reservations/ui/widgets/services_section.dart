@@ -6,10 +6,7 @@ import 'package:temy_barber/features/barber/data/models/barber_detail_response.d
 class ServicesSection extends StatelessWidget {
   final List<BarberService> services;
 
-  const ServicesSection({
-    super.key,
-    required this.services,
-  });
+  const ServicesSection({super.key, required this.services});
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +25,14 @@ class ServicesSection extends StatelessWidget {
               children: [
                 const Text(
                   'الخدمات المطلوبة',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(width: 8),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
                     color: ColorsManager.lightBlue,
                     borderRadius: BorderRadius.circular(12),
@@ -67,10 +63,7 @@ class ServicesSection extends StatelessWidget {
                     const SizedBox(height: 16),
                     Text(
                       'لم يتم اختيار أي خدمات',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                     ),
                   ],
                 ),
@@ -93,7 +86,9 @@ class ServicesSection extends StatelessWidget {
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 12.0),
+                    horizontal: 16.0,
+                    vertical: 12.0,
+                  ),
                   child: Row(
                     children: [
                       Container(
@@ -109,10 +104,12 @@ class ServicesSection extends StatelessWidget {
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) =>
                                 Container(
-                              color: Colors.grey[200],
-                              child: Image.asset('assets/images/temy.png',
-                                  fit: BoxFit.fitWidth),
-                            ),
+                                  color: Colors.grey[200],
+                                  child: Image.asset(
+                                    'assets/images/temy.png',
+                                    fit: BoxFit.fitWidth,
+                                  ),
+                                ),
                           ),
                         ),
                       ),
@@ -126,15 +123,6 @@ class ServicesSection extends StatelessWidget {
                               style: TextStyles.font16DarkBold,
                             ),
                             const SizedBox(height: 4),
-                            // Text(
-                            //   service.description,
-                            //   maxLines: 1,
-                            //   overflow: TextOverflow.ellipsis,
-                            //   style: TextStyle(
-                            //     color: Colors.grey[600],
-                            //     fontSize: 12,
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -149,7 +137,9 @@ class ServicesSection extends StatelessWidget {
                           const SizedBox(height: 4),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 2),
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
                               color: ColorsManager.thirdfMain,
                               borderRadius: BorderRadius.circular(6),

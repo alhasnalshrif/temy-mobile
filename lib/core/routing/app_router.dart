@@ -13,6 +13,10 @@ import 'package:temy_barber/features/category_barbers/ui/category_screen.dart';
 import 'package:temy_barber/features/dashboard/dashboard_screen.dart';
 import 'package:temy_barber/features/auth/logic/cubit/login_cubit.dart';
 import 'package:temy_barber/features/auth/ui/login_screen.dart';
+import 'package:temy_barber/features/auth/logic/forgot_password/forgot_password_cubit.dart';
+import 'package:temy_barber/features/auth/ui/forgot_password_screen.dart';
+import 'package:temy_barber/features/auth/logic/reset_password/reset_password_cubit.dart';
+import 'package:temy_barber/features/auth/ui/reset_password_screen.dart';
 import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
@@ -97,6 +101,21 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HelpScreen());
       case Routes.aboutScreen:
         return MaterialPageRoute(builder: (_) => const AboutScreen());
+      case Routes.forgotPasswordScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ForgotPasswordCubit>(),
+            child: const ForgotPasswordScreen(),
+          ),
+        );
+      case Routes.resetPasswordScreen:
+        final phoneNumber = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ResetPasswordCubit>(),
+            child: ResetPasswordScreen(phoneNumber: phoneNumber),
+          ),
+        );
       case Routes.invoiceScreen:
         final reservationResponse =
             settings.arguments as ReservationResponseModel;

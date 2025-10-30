@@ -24,12 +24,7 @@ class NextBookingCard extends StatelessWidget {
             }
 
             final nextBooking = activeBookings.first;
-            return GestureDetector(
-              onTap: () {
-                _navigateToBookingTab(context);
-              },
-              child: _buildBookingCard(context, nextBooking),
-            );
+            return _buildBookingCard(context, nextBooking);
           },
           orElse: () {
             return Container();
@@ -37,10 +32,6 @@ class NextBookingCard extends StatelessWidget {
         );
       },
     );
-  }
-
-  void _navigateToBookingTab(BuildContext context) {
-    Navigator.of(context).pushNamed('/dashboard', arguments: 1);
   }
 
   Widget _buildBookingCard(BuildContext context, BookingData booking) {

@@ -29,6 +29,9 @@ import '../../features/auth/logic/sign_up_cubit.dart';
 import '../../features/reservations/data/repos/reservation_repo.dart';
 import '../../features/auth/data/repos/verification_repo.dart';
 import '../../features/auth/logic/verification_cubit.dart';
+import '../../features/auth/data/repos/forgot_password_repo.dart';
+import '../../features/auth/logic/forgot_password/forgot_password_cubit.dart';
+import '../../features/auth/logic/reset_password/reset_password_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -50,6 +53,13 @@ Future<void> setupGetIt() async {
     () => VerificationRepo(getIt()),
   );
   getIt.registerFactory<VerificationCubit>(() => VerificationCubit(getIt()));
+
+  // forgot password
+  getIt.registerLazySingleton<ForgotPasswordRepo>(
+    () => ForgotPasswordRepo(getIt()),
+  );
+  getIt.registerFactory<ForgotPasswordCubit>(() => ForgotPasswordCubit(getIt()));
+  getIt.registerFactory<ResetPasswordCubit>(() => ResetPasswordCubit(getIt()));
 
   // reservation
   getIt.registerLazySingleton<ReservationApiServices>(

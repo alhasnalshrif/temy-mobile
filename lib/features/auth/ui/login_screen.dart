@@ -104,7 +104,7 @@ class LoginScreen extends StatelessWidget {
           verticalSpace(24),
           GestureDetector(
             onTap: () {
-              // TODO: Navigate to forgot password screen
+              Navigator.pushNamed(context, Routes.forgotPasswordScreen);
             },
             child: Text(
               'auth.forgot_password'.tr(),

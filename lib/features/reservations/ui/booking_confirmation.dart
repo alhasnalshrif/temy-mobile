@@ -25,16 +25,13 @@ class BookingConfirmation extends StatefulWidget {
 }
 
 class _BookingConfirmationState extends State<BookingConfirmation> {
-  // Create instance of MultiReservationManager
   final MultiReservationManager _multiReservationManager =
       MultiReservationManager();
-  // Getter to access widget.arguments more concisely
   ReservationArguments get arguments => widget.arguments;
   bool get isQueueMode => arguments.isQueueMode ?? false;
 
   @override
   void dispose() {
-    // Clear all multi-reservation data when navigating away from this screen
     _multiReservationManager.clearReservations();
     super.dispose();
   }
@@ -48,30 +45,17 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             _showLoadingDialog(context);
           },
           reservationSuccess: (response, reservationArgs) {
-            print('🎉 reservationSuccess called!');
-
-            // Dismiss loading dialog if it's showing
             Navigator.of(context, rootNavigator: true).pop();
-            print('✅ Loading dialog dismissed');
-
-            // Clear all reservations when successful
             _multiReservationManager.clearReservations();
-
-            // Debug print to check response values
-            // Navigate directly to invoice screen for all reservations
-            print('✅ Navigating to invoice screen');
             Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.invoiceScreen,
               arguments: response,
-              (route) => false, // Remove all previous routes
+              (route) => false,
             );
           },
           reservationError: (error) {
-            // Dismiss loading dialog if it's showing
             Navigator.of(context, rootNavigator: true).pop();
-
-            // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(error.apiErrorModel.message.toString()),
@@ -83,15 +67,8 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             _showLoadingDialog(context);
           },
           otpVerificationSuccess: (response, reservationArgs) {
-            print('🎉 OTP verification and reservation success!');
-
-            // Dismiss loading dialog if it's showing
             Navigator.of(context, rootNavigator: true).pop();
-
-            // Clear all reservations when successful
             _multiReservationManager.clearReservations();
-
-            // Navigate to invoice screen
             Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.invoiceScreen,
@@ -100,10 +77,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             );
           },
           otpVerificationError: (error) {
-            // Dismiss loading dialog if it's showing
             Navigator.of(context, rootNavigator: true).pop();
-
-            // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
@@ -148,7 +122,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                         _buildAppointmentInfo(),
                         const SizedBox(height: 16),
                         _buildPaymentInfo(),
-                        // Add padding at the bottom for better scrolling
                         const SizedBox(height: 16),
                       ],
                     ),
@@ -163,7 +136,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     );
   }
 
-  // Show loading dialog
   void _showLoadingDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -175,7 +147,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     );
   }
 
-  // Show guest information dialog
   Future<dynamic> _showGuestInfoDialog(BuildContext context) async {
     return await showDialog<dynamic>(
       context: context,
@@ -219,13 +190,11 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
         _multiReservationManager.reservations;
 
     if (!isQueueMode && existingReservations.isNotEmpty) {
-      // Multi-booking mode: display all existing reservations + the current one
       final List<ReservationArguments> allReservations = [
         ...existingReservations,
         arguments,
       ];
 
-      // Calculate grand total
       final double grandTotal = allReservations.fold(
         0.0,
         (total, res) => total + res.totalPrice,
@@ -234,7 +203,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header with total
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -253,7 +221,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
           ),
           const SizedBox(height: 12),
 
-          // Reservations list - more compact
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -262,7 +229,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               final isCurrentReservation = index == allReservations.length - 1;
               final reservation = allReservations[index];
 
-              // Format date/time
               String dateTime = "";
               if (reservation.selectedDate != null &&
                   reservation.selectedTime != null) {
@@ -289,11 +255,9 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Header row
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Barber avatar with subtle border
                         Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
@@ -320,7 +284,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                         ),
                         const SizedBox(width: 12),
 
-                        // Barber name and date
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -342,7 +305,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                           ),
                         ),
 
-                        // Delete button with modern styling
                         if (!isCurrentReservation)
                           IconButton(
                             onPressed: () => _removeReservation(index),
@@ -369,7 +331,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
                     const SizedBox(height: 16),
 
-                    // Services section
                     if (reservation.selectedServices.isNotEmpty) ...[
                       ...reservation.selectedServices.map(
                         (service) => Padding(
@@ -404,7 +365,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                       ),
                     ],
 
-                    // Total price with divider
                     Padding(
                       padding: const EdgeInsets.only(top: 12),
                       child: Column(
@@ -435,7 +395,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             },
           ),
 
-          // Grand total display - simplified
           Container(
             margin: const EdgeInsets.only(top: 8),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
@@ -459,14 +418,11 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
         ],
       );
     } else {
-      // Single reservation mode - simplified
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text("ملخص الخدمات", style: TextStyles.font16DarkBold),
           const SizedBox(height: 12),
-
-          // Services in a more compact container
           Container(
             padding: const EdgeInsets.all(12.0),
             decoration: BoxDecoration(
@@ -477,7 +433,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Services list
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -510,10 +465,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                     );
                   },
                 ),
-
                 const Divider(height: 24),
-
-                // Total
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -536,7 +488,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
   Widget _buildBarberInfo() {
     if (arguments.barberData == null) {
-      return const SizedBox.shrink(); // Don't show this section if barber data is missing
+      return const SizedBox.shrink();
     }
 
     return Container(
@@ -548,7 +500,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       ),
       child: Row(
         children: [
-          // Barber avatar
           CircleAvatar(
             radius: 20,
             backgroundImage: arguments.barberData?.avatar != null
@@ -559,8 +510,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                 : null,
           ),
           const SizedBox(width: 12),
-
-          // Barber details
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -577,7 +526,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                       const Icon(Icons.star, color: Colors.amber, size: 14),
                       const SizedBox(width: 4),
                       Text(
-                        arguments.barberData!.rating.toString(),
+                        arguments.barberData!.rating.average.toString(),
                         style: TextStyles.font14GrayRegular.copyWith(
                           fontSize: 12,
                         ),
@@ -594,7 +543,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
   Widget _buildAppointmentInfo() {
     if (arguments.selectedDate == null || arguments.selectedTime == null) {
-      return const SizedBox.shrink(); // Don't display if no date/time selected
+      return const SizedBox.shrink();
     }
 
     String formattedDate = DateFormat(
@@ -685,24 +634,15 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   Widget _buildBottomButtons(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 10,
-            offset: const Offset(0, -3),
-          ),
-        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Multi-booking button - hide in queue mode
           if (!isQueueMode)
             Container(
               margin: const EdgeInsets.only(bottom: 12),
@@ -749,10 +689,8 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               ),
             ),
 
-          // Main action buttons
           Row(
             children: [
-              // Back/Edit button
               Expanded(
                 flex: 3,
                 child: OutlinedButton.icon(
@@ -809,7 +747,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     );
   }
 
-  // Method to add the current reservation to multiple reservations
   void _addToMultipleReservations(BuildContext context) async {
     if (arguments.selectedDate == null || arguments.selectedTime == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -822,7 +759,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     }
     _multiReservationManager.addReservation(arguments);
 
-    // Show confirmation snackbar
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text("تم إضافة الحجز، يمكنك الآن اختيار خدمات أخرى"),
@@ -830,28 +766,20 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       ),
     );
 
-    // Navigate to category screen to choose another service, replacing current screen
     Navigator.pushNamed(context, Routes.categoryScreen);
   }
 
-  // Method to confirm multiple reservations or a single reservation
   void _confirmMultipleReservations(BuildContext context) async {
-    // Queue mode: bypass multi-reservation logic
     if (isQueueMode) {
       _confirmBooking(context);
       return;
     }
 
-    // Get user ID from SharedPreferences
     final userId = await SharedPrefHelper.getSecuredString(
       SharedPrefKeys.userId,
     );
 
-    // Check if we have multiple reservations
     if (_multiReservationManager.reservations.isNotEmpty) {
-      // We have multiple reservations, add the current one and submit all
-
-      // Check current reservation has date and time
       if (arguments.selectedDate == null || arguments.selectedTime == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -862,41 +790,21 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
         return;
       }
 
-      // // For multiple reservations, currently only authenticated users are supported
-      // // This is because the backend multiple reservation endpoint requires userId
-      // if (userId.isEmpty) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(
-      //       content: Text("الحجوزات المتعددة متاحة فقط للمستخدمين المسجلين"),
-      //       backgroundColor: Colors.orange,
-      //     ),
-      //   );
-      //   return;
-      // }
-
-      // Prepare reservations data for API call
       final reservationsData = _multiReservationManager.getReservationsData(
         currentReservation: arguments,
       );
 
-      // Call the cubit to make multiple reservations
       context.read<ReservationCubit>().postMultipleReservations(
         userId: userId,
         reservationsData: reservationsData,
         arguments: arguments, // Pass the current arguments for UI purposes
       );
-
-      // Clearing the manager should be handled by the ReservationCubit upon successful submission.
-      // manager.clearReservations(); // Removed from here
     } else {
-      // Just a single reservation, use the standard method (supports both guest and logged-in users)
       _confirmBooking(context);
     }
   }
 
   void _confirmBooking(BuildContext context) async {
-    // For queue mode, only services are required
-    // For time-slot mode, date and time are required
     final isQueueMode = arguments.isQueueMode ?? false;
 
     if (!isQueueMode &&
@@ -910,35 +818,28 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       return;
     }
 
-    // Get user ID from SharedPreferences
     final userId = await SharedPrefHelper.getSecuredString(
       SharedPrefKeys.userId,
     );
 
-    // If user is not logged in, show guest info dialog with OTP flow
     String? otp;
     GuestInfo? guestInfo;
     if (userId.isEmpty) {
       if (!mounted) return;
 
-      // Show guest information dialog which will handle OTP flow
       final dynamic result = await _showGuestInfoDialog(context);
 
-      // If user cancels the dialog, return
       if (result == null) {
         return;
       }
 
-      // Extract guest info and OTP from the result
       if (result is Map) {
         guestInfo = result['guestInfo'] as GuestInfo?;
         otp = result['otp'] as String?;
       } else if (result is GuestInfo) {
-        // Fallback for old behavior (without OTP)
         guestInfo = result;
       }
 
-      // Validate we got both guest info and OTP
       if (guestInfo == null || otp == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -952,8 +853,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
     final serviceIds = arguments.selectedServices.map((s) => s.id).toList();
     final barberId = arguments.barberData?.id ?? '';
-
-    // Create updated arguments object
     final updatedArguments = ReservationArguments(
       selectedServices: arguments.selectedServices,
       barberData: arguments.barberData,
@@ -963,9 +862,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       isQueueMode: isQueueMode,
     );
 
-    // For guest users with OTP, use the OTP verification API
     if (userId.isEmpty && guestInfo != null && otp != null) {
-      // Time-slot mode: Make a reservation with OTP verification
       final date =
           '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
 
@@ -980,9 +877,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
         arguments: updatedArguments,
       );
     } else {
-      // Call the appropriate API based on mode (for logged-in users)
       if (isQueueMode) {
-        // Queue mode: Join the queue
         context.read<ReservationCubit>().joinQueue(
           barberId: barberId,
           serviceIds: serviceIds,
@@ -991,7 +886,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
           arguments: updatedArguments,
         );
       } else {
-        // Time-slot mode: Make a regular reservation
         final date =
             '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
 
@@ -1001,20 +895,17 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
           barberId: barberId,
           date: date,
           startTime: arguments.selectedTime!,
-          guest: guestInfo, // Pass guest info if user is not logged in
+          guest: guestInfo,
           arguments: updatedArguments,
         );
       }
     }
   }
 
-  // Method to remove a reservation
   void _removeReservation(int index) {
     setState(() {
       _multiReservationManager.removeReservationAt(index);
     });
-
-    // Show confirmation message
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text("تم حذف الحجز بنجاح"),

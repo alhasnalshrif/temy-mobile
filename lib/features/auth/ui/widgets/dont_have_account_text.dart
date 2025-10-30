@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
@@ -10,23 +11,23 @@ class DontHaveAccountText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        children: [
-          TextSpan(
-            text: 'Don\'t have an account?',
-            style: TextStyles.font13DarkBlueRegular,
-          ),
-          TextSpan(
-            text: ' Sign Up',
-            style: TextStyles.font13BlueSemiBold,
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                context.pushReplacementNamed(Routes.signUpScreen);
-              },
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        context.pushReplacementNamed(Routes.signUpScreen);
+      },
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          style: TextStyles.font13DarkBlueRegular,
+          children: [
+            TextSpan(text: 'auth.signup.dont_have_account'.tr()),
+            const TextSpan(text: ' '),
+            TextSpan(
+              text: 'auth.signup.button'.tr(),
+              style: TextStyles.font13BlueSemiBold,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -8,6 +8,10 @@ import '../../features/auth/data/models/sign_up_request_body.dart';
 import '../../features/auth/data/models/sign_up_response.dart';
 import '../../features/auth/data/models/resend_code_request_body.dart';
 import '../../features/auth/data/models/verification_request_body.dart';
+import '../../features/auth/data/models/forgot_password_request_body.dart';
+import '../../features/auth/data/models/forgot_password_response.dart';
+import '../../features/auth/data/models/reset_password_request_body.dart';
+import '../../features/auth/data/models/reset_password_response.dart';
 
 part 'api_service.g.dart';
 
@@ -33,5 +37,15 @@ abstract class ApiService {
   @POST(ApiConstants.resendCode)
   Future<SignupResponse> resendVerificationCode(
     @Body() ResendCodeRequestBody resendCodeRequestBody,
+  );
+  
+  @POST(ApiConstants.requestPasswordReset)
+  Future<ForgotPasswordResponse> requestPasswordReset(
+    @Body() ForgotPasswordRequestBody forgotPasswordRequestBody,
+  );
+  
+  @POST(ApiConstants.resetPassword)
+  Future<ResetPasswordResponse> resetPassword(
+    @Body() ResetPasswordRequestBody resetPasswordRequestBody,
   );
 }

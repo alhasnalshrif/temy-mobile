@@ -125,6 +125,28 @@
         "resend_otp": "Resend Code",
         "otp_wait_before_resend": "Please wait before resending code",
         "verify": "Verify",
+        "forgot_password_title": "Forgot Password",
+        "forgot_password_subtitle": "Enter your phone number to receive a password reset code",
+        "send_reset_code": "Send Reset Code",
+        "reset_password": "Reset Password",
+        "reset_password_title": "Reset Your Password",
+        "reset_password_subtitle": "Enter the verification code and your new password",
+        "verification_code": "Verification Code",
+        "enter_verification_code": "Enter verification code",
+        "code_required": "Verification code is required",
+        "new_password": "New Password",
+        "enter_new_password": "Enter new password",
+        "password_required": "Password is required",
+        "password_validation_message": "Password must be at least 8 characters with letters and numbers",
+        "confirm_password": "Confirm Password",
+        "confirm_new_password": "Confirm new password",
+        "confirm_password_required": "Please confirm your password",
+        "passwords_do_not_match": "Passwords do not match",
+        "reset_password_button": "Reset Password",
+        "reset_success": "Password reset successful",
+        "reset_error": "Failed to reset password",
+        "request_success": "Reset code sent successfully",
+        "request_error": "Failed to send reset code",
         "signup": {
             "title": "Create Account",
             "subtitle": "Enter all your data to create an account",
@@ -141,7 +163,8 @@
             "password_confirmation_placeholder": "Password Confirmation",
             "password_confirmation_error": "Please enter a valid password",
             "button": "Sign Up",
-            "already_have_account": "Already have an account?"
+            "already_have_account": "Already have an account?",
+            "dont_have_account": "Don't have an account?"
         }
     },
     "verification": {
