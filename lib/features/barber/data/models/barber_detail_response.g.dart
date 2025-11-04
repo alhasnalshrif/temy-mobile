@@ -57,8 +57,9 @@ Map<String, dynamic> _$BarberDetailDataToJson(BarberDetailData instance) =>
 WorkingHours _$WorkingHoursFromJson(Map<String, dynamic> json) => WorkingHours(
       start: json['start'] as String,
       end: json['end'] as String,
-      daysOff:
-          (json['daysOff'] as List<dynamic>).map((e) => e as String).toList(),
+      daysOff: (json['daysOff'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
     );
 
 Map<String, dynamic> _$WorkingHoursToJson(WorkingHours instance) =>
@@ -86,7 +87,7 @@ BarberService _$BarberServiceFromJson(Map<String, dynamic> json) =>
       price: (json['price'] as num).toInt(),
       duration: (json['duration'] as num).toInt(),
       category: json['category'] as String,
-      imageCover: json['imageCover'] as String,
+      imageCover: json['imageCover'] as String?,
     );
 
 Map<String, dynamic> _$BarberServiceToJson(BarberService instance) =>

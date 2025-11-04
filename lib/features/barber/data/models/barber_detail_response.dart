@@ -7,10 +7,7 @@ class BarberDetailResponseModel {
   final String status;
   final BarberDetailData data;
 
-  BarberDetailResponseModel({
-    required this.status,
-    required this.data,
-  });
+  BarberDetailResponseModel({required this.status, required this.data});
 
   factory BarberDetailResponseModel.fromJson(Map<String, dynamic> json) =>
       _$BarberDetailResponseModelFromJson(json);
@@ -56,13 +53,9 @@ class BarberDetailData {
 class WorkingHours {
   final String start;
   final String end;
-  final List<String> daysOff;
+  final List<int> daysOff;
 
-  WorkingHours({
-    required this.start,
-    required this.end,
-    required this.daysOff,
-  });
+  WorkingHours({required this.start, required this.end, required this.daysOff});
 
   factory WorkingHours.fromJson(Map<String, dynamic> json) =>
       _$WorkingHoursFromJson(json);
@@ -75,10 +68,7 @@ class Rating {
   final double average;
   final int total;
 
-  Rating({
-    required this.average,
-    required this.total,
-  });
+  Rating({required this.average, required this.total});
 
   factory Rating.fromJson(Map<String, dynamic> json) => _$RatingFromJson(json);
 
@@ -94,7 +84,7 @@ class BarberService {
   final int price;
   final int duration;
   final String category;
-  final String imageCover;
+  final String? imageCover;
 
   BarberService({
     required this.id,
@@ -103,7 +93,7 @@ class BarberService {
     required this.price,
     required this.duration,
     required this.category,
-    required this.imageCover,
+    this.imageCover,
   });
 
   factory BarberService.fromJson(Map<String, dynamic> json) =>
@@ -136,10 +126,7 @@ class TimeSlot {
   final String time;
   final bool isAvailable;
 
-  TimeSlot({
-    required this.time,
-    required this.isAvailable,
-  });
+  TimeSlot({required this.time, required this.isAvailable});
 
   factory TimeSlot.fromJson(Map<String, dynamic> json) =>
       _$TimeSlotFromJson(json);
