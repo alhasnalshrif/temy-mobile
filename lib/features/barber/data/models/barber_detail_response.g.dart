@@ -7,18 +7,15 @@ part of 'barber_detail_response.dart';
 // **************************************************************************
 
 BarberDetailResponseModel _$BarberDetailResponseModelFromJson(
-        Map<String, dynamic> json) =>
-    BarberDetailResponseModel(
-      status: json['status'] as String,
-      data: BarberDetailData.fromJson(json['data'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => BarberDetailResponseModel(
+  status: json['status'] as String,
+  data: BarberDetailData.fromJson(json['data'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$BarberDetailResponseModelToJson(
-        BarberDetailResponseModel instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'data': instance.data,
-    };
+  BarberDetailResponseModel instance,
+) => <String, dynamic>{'status': instance.status, 'data': instance.data};
 
 BarberDetailData _$BarberDetailDataFromJson(Map<String, dynamic> json) =>
     BarberDetailData(
@@ -30,14 +27,16 @@ BarberDetailData _$BarberDetailDataFromJson(Map<String, dynamic> json) =>
           .map((e) => e as String)
           .toList(),
       maxReservationDays: (json['max_reservation_days'] as num).toInt(),
-      workingHours:
-          WorkingHours.fromJson(json['workingHours'] as Map<String, dynamic>),
+      workingHours: WorkingHours.fromJson(
+        json['workingHours'] as Map<String, dynamic>,
+      ),
       rating: Rating.fromJson(json['rating'] as Map<String, dynamic>),
       services: (json['services'] as List<dynamic>)
           .map((e) => BarberService.fromJson(e as Map<String, dynamic>))
           .toList(),
-      availability:
-          Availability.fromJson(json['availability'] as Map<String, dynamic>),
+      availability: Availability.fromJson(
+        json['availability'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$BarberDetailDataToJson(BarberDetailData instance) =>
@@ -55,12 +54,12 @@ Map<String, dynamic> _$BarberDetailDataToJson(BarberDetailData instance) =>
     };
 
 WorkingHours _$WorkingHoursFromJson(Map<String, dynamic> json) => WorkingHours(
-      start: json['start'] as String,
-      end: json['end'] as String,
-      daysOff: (json['daysOff'] as List<dynamic>)
-          .map((e) => (e as num).toInt())
-          .toList(),
-    );
+  start: json['start'] as String,
+  end: json['end'] as String,
+  daysOff: (json['daysOff'] as List<dynamic>)
+      .map((e) => (e as num).toInt())
+      .toList(),
+);
 
 Map<String, dynamic> _$WorkingHoursToJson(WorkingHours instance) =>
     <String, dynamic>{
@@ -70,14 +69,14 @@ Map<String, dynamic> _$WorkingHoursToJson(WorkingHours instance) =>
     };
 
 Rating _$RatingFromJson(Map<String, dynamic> json) => Rating(
-      average: (json['average'] as num).toDouble(),
-      total: (json['total'] as num).toInt(),
-    );
+  average: (json['average'] as num).toDouble(),
+  total: (json['total'] as num).toInt(),
+);
 
 Map<String, dynamic> _$RatingToJson(Rating instance) => <String, dynamic>{
-      'average': instance.average,
-      'total': instance.total,
-    };
+  'average': instance.average,
+  'total': instance.total,
+};
 
 BarberService _$BarberServiceFromJson(Map<String, dynamic> json) =>
     BarberService(
@@ -102,12 +101,12 @@ Map<String, dynamic> _$BarberServiceToJson(BarberService instance) =>
     };
 
 Availability _$AvailabilityFromJson(Map<String, dynamic> json) => Availability(
-      date: json['date'] as String,
-      slots: (json['slots'] as List<dynamic>)
-          .map((e) => TimeSlot.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      isDayOff: json['isDayOff'] as bool? ?? false,
-    );
+  date: json['date'] as String,
+  slots: (json['slots'] as List<dynamic>)
+      .map((e) => TimeSlot.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  isDayOff: json['isDayOff'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$AvailabilityToJson(Availability instance) =>
     <String, dynamic>{
@@ -117,14 +116,14 @@ Map<String, dynamic> _$AvailabilityToJson(Availability instance) =>
     };
 
 TimeSlot _$TimeSlotFromJson(Map<String, dynamic> json) => TimeSlot(
-      time: json['time'] as String,
-      isAvailable: json['isAvailable'] as bool,
-    );
+  time: json['time'] as String,
+  isAvailable: json['isAvailable'] as bool,
+);
 
 Map<String, dynamic> _$TimeSlotToJson(TimeSlot instance) => <String, dynamic>{
-      'time': instance.time,
-      'isAvailable': instance.isAvailable,
-    };
+  'time': instance.time,
+  'isAvailable': instance.isAvailable,
+};
 
 BarberReview _$BarberReviewFromJson(Map<String, dynamic> json) =>
     BarberReview();

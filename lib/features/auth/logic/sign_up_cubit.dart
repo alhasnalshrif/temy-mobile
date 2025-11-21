@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/auth/data/repos/sign_up_repo.dart';
 import 'package:temy_barber/features/auth/logic/sign_up_state.dart';
 

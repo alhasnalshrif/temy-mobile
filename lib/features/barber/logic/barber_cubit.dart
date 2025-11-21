@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/barber/data/repos/barber_repo.dart';
 import 'barber_state.dart';
 

@@ -38,7 +38,7 @@ dependencies:
   # State management
   flutter_bloc: ^8.1.6
   # Code generator (mainly used with cubit & retrofit)
-  freezed_annotation: ^2.4.1
+  freezed_annotation: ^3.1.0
   # for dependency injection
   get_it: ^7.7.0
   # Automatically generate code for converting to and from JSON by annotating Dart classes
@@ -89,9 +89,9 @@ dev_dependencies:
   # flutter pub run build_runner build --delete-conflicting-outputs
    
   build_runner: ^2.5.4
-  freezed: ^2.5.7
+  freezed: ^3.2.3
   json_serializable: ^6.9.0
-  retrofit_generator: ^8.2.1
+  retrofit_generator: ^10.2.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

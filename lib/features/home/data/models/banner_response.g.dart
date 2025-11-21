@@ -13,20 +13,21 @@ BannerResponseModel _$BannerResponseModelFromJson(Map<String, dynamic> json) =>
       paginationResult: json['paginationResult'] == null
           ? null
           : PaginationResult.fromJson(
-              json['paginationResult'] as Map<String, dynamic>),
+              json['paginationResult'] as Map<String, dynamic>,
+            ),
       bannerDataList: (json['data'] as List<dynamic>?)
           ?.map((e) => BannerData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$BannerResponseModelToJson(
-        BannerResponseModel instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'results': instance.results,
-      'paginationResult': instance.paginationResult,
-      'data': instance.bannerDataList,
-    };
+  BannerResponseModel instance,
+) => <String, dynamic>{
+  'status': instance.status,
+  'results': instance.results,
+  'paginationResult': instance.paginationResult,
+  'data': instance.bannerDataList,
+};
 
 PaginationResult _$PaginationResultFromJson(Map<String, dynamic> json) =>
     PaginationResult(
@@ -42,11 +43,8 @@ Map<String, dynamic> _$PaginationResultToJson(PaginationResult instance) =>
       'numberOfPages': instance.numberOfPages,
     };
 
-BannerData _$BannerDataFromJson(Map<String, dynamic> json) => BannerData(
-      image: json['image'] as String?,
-    );
+BannerData _$BannerDataFromJson(Map<String, dynamic> json) =>
+    BannerData(image: json['image'] as String?);
 
 Map<String, dynamic> _$BannerDataToJson(BannerData instance) =>
-    <String, dynamic>{
-      'image': instance.image,
-    };
+    <String, dynamic>{'image': instance.image};

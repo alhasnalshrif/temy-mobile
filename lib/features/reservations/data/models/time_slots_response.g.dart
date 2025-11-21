@@ -13,10 +13,7 @@ TimeSlotsResponse _$TimeSlotsResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$TimeSlotsResponseToJson(TimeSlotsResponse instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'data': instance.data,
-    };
+    <String, dynamic>{'status': instance.status, 'data': instance.data};
 
 TimeSlotsData _$TimeSlotsDataFromJson(Map<String, dynamic> json) =>
     TimeSlotsData(
@@ -24,8 +21,9 @@ TimeSlotsData _$TimeSlotsDataFromJson(Map<String, dynamic> json) =>
           .map((e) => TimeSlot.fromJson(e as Map<String, dynamic>))
           .toList(),
       isDayOff: json['isDayOff'] as bool,
-      workingHours:
-          WorkingHours.fromJson(json['workingHours'] as Map<String, dynamic>),
+      workingHours: WorkingHours.fromJson(
+        json['workingHours'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$TimeSlotsDataToJson(TimeSlotsData instance) =>
@@ -36,22 +34,17 @@ Map<String, dynamic> _$TimeSlotsDataToJson(TimeSlotsData instance) =>
     };
 
 TimeSlot _$TimeSlotFromJson(Map<String, dynamic> json) => TimeSlot(
-      time: json['time'] as String,
-      isAvailable: json['isAvailable'] as bool,
-    );
+  time: json['time'] as String,
+  isAvailable: json['isAvailable'] as bool,
+);
 
 Map<String, dynamic> _$TimeSlotToJson(TimeSlot instance) => <String, dynamic>{
-      'time': instance.time,
-      'isAvailable': instance.isAvailable,
-    };
+  'time': instance.time,
+  'isAvailable': instance.isAvailable,
+};
 
-WorkingHours _$WorkingHoursFromJson(Map<String, dynamic> json) => WorkingHours(
-      start: json['start'] as String,
-      end: json['end'] as String,
-    );
+WorkingHours _$WorkingHoursFromJson(Map<String, dynamic> json) =>
+    WorkingHours(start: json['start'] as String, end: json['end'] as String);
 
 Map<String, dynamic> _$WorkingHoursToJson(WorkingHours instance) =>
-    <String, dynamic>{
-      'start': instance.start,
-      'end': instance.end,
-    };
+    <String, dynamic>{'start': instance.start, 'end': instance.end};

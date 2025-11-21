@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,1930 +9,744 @@ part of 'home_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$HomeState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeState()';
+}
+
+
 }
 
 /// @nodoc
-abstract class $HomeStateCopyWith<$Res> {
-  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
-      _$HomeStateCopyWithImpl<$Res, HomeState>;
+class $HomeStateCopyWith<$Res>  {
+$HomeStateCopyWith(HomeState _, $Res Function(HomeState) __);
 }
 
-/// @nodoc
-class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
-    implements $HomeStateCopyWith<$Res> {
-  _$HomeStateCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+/// Adds pattern-matching-related methods to [HomeState].
+extension HomeStatePatterns on HomeState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( CategoriesLoading value)?  categoriesLoading,TResult Function( CategoriesSuccess value)?  categoriesSuccess,TResult Function( CategoriesError value)?  categoriesError,TResult Function( BarbersLoading value)?  barbersLoading,TResult Function( BarbersSuccess value)?  barbersSuccess,TResult Function( BarbersError value)?  barbersError,TResult Function( BannersLoading value)?  bannersLoading,TResult Function( BannersSuccess value)?  bannersSuccess,TResult Function( BannersError value)?  bannersError,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial(_that);case CategoriesLoading() when categoriesLoading != null:
+return categoriesLoading(_that);case CategoriesSuccess() when categoriesSuccess != null:
+return categoriesSuccess(_that);case CategoriesError() when categoriesError != null:
+return categoriesError(_that);case BarbersLoading() when barbersLoading != null:
+return barbersLoading(_that);case BarbersSuccess() when barbersSuccess != null:
+return barbersSuccess(_that);case BarbersError() when barbersError != null:
+return barbersError(_that);case BannersLoading() when bannersLoading != null:
+return bannersLoading(_that);case BannersSuccess() when bannersSuccess != null:
+return bannersSuccess(_that);case BannersError() when bannersError != null:
+return bannersError(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( CategoriesLoading value)  categoriesLoading,required TResult Function( CategoriesSuccess value)  categoriesSuccess,required TResult Function( CategoriesError value)  categoriesError,required TResult Function( BarbersLoading value)  barbersLoading,required TResult Function( BarbersSuccess value)  barbersSuccess,required TResult Function( BarbersError value)  barbersError,required TResult Function( BannersLoading value)  bannersLoading,required TResult Function( BannersSuccess value)  bannersSuccess,required TResult Function( BannersError value)  bannersError,}){
+final _that = this;
+switch (_that) {
+case _Initial():
+return initial(_that);case CategoriesLoading():
+return categoriesLoading(_that);case CategoriesSuccess():
+return categoriesSuccess(_that);case CategoriesError():
+return categoriesError(_that);case BarbersLoading():
+return barbersLoading(_that);case BarbersSuccess():
+return barbersSuccess(_that);case BarbersError():
+return barbersError(_that);case BannersLoading():
+return bannersLoading(_that);case BannersSuccess():
+return bannersSuccess(_that);case BannersError():
+return bannersError(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( CategoriesLoading value)?  categoriesLoading,TResult? Function( CategoriesSuccess value)?  categoriesSuccess,TResult? Function( CategoriesError value)?  categoriesError,TResult? Function( BarbersLoading value)?  barbersLoading,TResult? Function( BarbersSuccess value)?  barbersSuccess,TResult? Function( BarbersError value)?  barbersError,TResult? Function( BannersLoading value)?  bannersLoading,TResult? Function( BannersSuccess value)?  bannersSuccess,TResult? Function( BannersError value)?  bannersError,}){
+final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial(_that);case CategoriesLoading() when categoriesLoading != null:
+return categoriesLoading(_that);case CategoriesSuccess() when categoriesSuccess != null:
+return categoriesSuccess(_that);case CategoriesError() when categoriesError != null:
+return categoriesError(_that);case BarbersLoading() when barbersLoading != null:
+return barbersLoading(_that);case BarbersSuccess() when barbersSuccess != null:
+return barbersSuccess(_that);case BarbersError() when barbersError != null:
+return barbersError(_that);case BannersLoading() when bannersLoading != null:
+return bannersLoading(_that);case BannersSuccess() when bannersSuccess != null:
+return bannersSuccess(_that);case BannersError() when bannersError != null:
+return bannersError(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  categoriesLoading,TResult Function( CategoryResponseModel categoriesResponseModel)?  categoriesSuccess,TResult Function( ErrorHandler errorHandler)?  categoriesError,TResult Function()?  barbersLoading,TResult Function( BarberResponseModel barbersResponseModel)?  barbersSuccess,TResult Function( ErrorHandler errorHandler)?  barbersError,TResult Function()?  bannersLoading,TResult Function( BannerResponseModel bannersResponseModel)?  bannersSuccess,TResult Function( ErrorHandler errorHandler)?  bannersError,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial();case CategoriesLoading() when categoriesLoading != null:
+return categoriesLoading();case CategoriesSuccess() when categoriesSuccess != null:
+return categoriesSuccess(_that.categoriesResponseModel);case CategoriesError() when categoriesError != null:
+return categoriesError(_that.errorHandler);case BarbersLoading() when barbersLoading != null:
+return barbersLoading();case BarbersSuccess() when barbersSuccess != null:
+return barbersSuccess(_that.barbersResponseModel);case BarbersError() when barbersError != null:
+return barbersError(_that.errorHandler);case BannersLoading() when bannersLoading != null:
+return bannersLoading();case BannersSuccess() when bannersSuccess != null:
+return bannersSuccess(_that.bannersResponseModel);case BannersError() when bannersError != null:
+return bannersError(_that.errorHandler);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  categoriesLoading,required TResult Function( CategoryResponseModel categoriesResponseModel)  categoriesSuccess,required TResult Function( ErrorHandler errorHandler)  categoriesError,required TResult Function()  barbersLoading,required TResult Function( BarberResponseModel barbersResponseModel)  barbersSuccess,required TResult Function( ErrorHandler errorHandler)  barbersError,required TResult Function()  bannersLoading,required TResult Function( BannerResponseModel bannersResponseModel)  bannersSuccess,required TResult Function( ErrorHandler errorHandler)  bannersError,}) {final _that = this;
+switch (_that) {
+case _Initial():
+return initial();case CategoriesLoading():
+return categoriesLoading();case CategoriesSuccess():
+return categoriesSuccess(_that.categoriesResponseModel);case CategoriesError():
+return categoriesError(_that.errorHandler);case BarbersLoading():
+return barbersLoading();case BarbersSuccess():
+return barbersSuccess(_that.barbersResponseModel);case BarbersError():
+return barbersError(_that.errorHandler);case BannersLoading():
+return bannersLoading();case BannersSuccess():
+return bannersSuccess(_that.bannersResponseModel);case BannersError():
+return bannersError(_that.errorHandler);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  categoriesLoading,TResult? Function( CategoryResponseModel categoriesResponseModel)?  categoriesSuccess,TResult? Function( ErrorHandler errorHandler)?  categoriesError,TResult? Function()?  barbersLoading,TResult? Function( BarberResponseModel barbersResponseModel)?  barbersSuccess,TResult? Function( ErrorHandler errorHandler)?  barbersError,TResult? Function()?  bannersLoading,TResult? Function( BannerResponseModel bannersResponseModel)?  bannersSuccess,TResult? Function( ErrorHandler errorHandler)?  bannersError,}) {final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial();case CategoriesLoading() when categoriesLoading != null:
+return categoriesLoading();case CategoriesSuccess() when categoriesSuccess != null:
+return categoriesSuccess(_that.categoriesResponseModel);case CategoriesError() when categoriesError != null:
+return categoriesError(_that.errorHandler);case BarbersLoading() when barbersLoading != null:
+return barbersLoading();case BarbersSuccess() when barbersSuccess != null:
+return barbersSuccess(_that.barbersResponseModel);case BarbersError() when barbersError != null:
+return barbersError(_that.errorHandler);case BannersLoading() when bannersLoading != null:
+return bannersLoading();case BannersSuccess() when bannersSuccess != null:
+return bannersSuccess(_that.bannersResponseModel);case BannersError() when bannersError != null:
+return bannersError(_that.errorHandler);case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'HomeState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements HomeState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$CategoriesLoadingImplCopyWith<$Res> {
-  factory _$$CategoriesLoadingImplCopyWith(_$CategoriesLoadingImpl value,
-          $Res Function(_$CategoriesLoadingImpl) then) =
-      __$$CategoriesLoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CategoriesLoadingImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$CategoriesLoadingImpl>
-    implements _$$CategoriesLoadingImplCopyWith<$Res> {
-  __$$CategoriesLoadingImplCopyWithImpl(_$CategoriesLoadingImpl _value,
-      $Res Function(_$CategoriesLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$CategoriesLoadingImpl implements CategoriesLoading {
-  const _$CategoriesLoadingImpl();
 
-  @override
-  String toString() {
-    return 'HomeState.categoriesLoading()';
-  }
+class _Initial implements HomeState {
+  const _Initial();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CategoriesLoadingImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return categoriesLoading();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return categoriesLoading?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (categoriesLoading != null) {
-      return categoriesLoading();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return categoriesLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return categoriesLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (categoriesLoading != null) {
-      return categoriesLoading(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
 }
 
-abstract class CategoriesLoading implements HomeState {
-  const factory CategoriesLoading() = _$CategoriesLoadingImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeState.initial()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class CategoriesLoading implements HomeState {
+  const CategoriesLoading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoriesLoading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeState.categoriesLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class CategoriesSuccess implements HomeState {
+  const CategoriesSuccess(this.categoriesResponseModel);
+  
+
+ final  CategoryResponseModel categoriesResponseModel;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CategoriesSuccessCopyWith<CategoriesSuccess> get copyWith => _$CategoriesSuccessCopyWithImpl<CategoriesSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoriesSuccess&&(identical(other.categoriesResponseModel, categoriesResponseModel) || other.categoriesResponseModel == categoriesResponseModel));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,categoriesResponseModel);
+
+@override
+String toString() {
+  return 'HomeState.categoriesSuccess(categoriesResponseModel: $categoriesResponseModel)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$CategoriesSuccessImplCopyWith<$Res> {
-  factory _$$CategoriesSuccessImplCopyWith(_$CategoriesSuccessImpl value,
-          $Res Function(_$CategoriesSuccessImpl) then) =
-      __$$CategoriesSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CategoryResponseModel categoriesResponseModel});
+abstract mixin class $CategoriesSuccessCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $CategoriesSuccessCopyWith(CategoriesSuccess value, $Res Function(CategoriesSuccess) _then) = _$CategoriesSuccessCopyWithImpl;
+@useResult
+$Res call({
+ CategoryResponseModel categoriesResponseModel
+});
+
+
+
+
+}
+/// @nodoc
+class _$CategoriesSuccessCopyWithImpl<$Res>
+    implements $CategoriesSuccessCopyWith<$Res> {
+  _$CategoriesSuccessCopyWithImpl(this._self, this._then);
+
+  final CategoriesSuccess _self;
+  final $Res Function(CategoriesSuccess) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? categoriesResponseModel = null,}) {
+  return _then(CategoriesSuccess(
+null == categoriesResponseModel ? _self.categoriesResponseModel : categoriesResponseModel // ignore: cast_nullable_to_non_nullable
+as CategoryResponseModel,
+  ));
 }
 
-/// @nodoc
-class __$$CategoriesSuccessImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$CategoriesSuccessImpl>
-    implements _$$CategoriesSuccessImplCopyWith<$Res> {
-  __$$CategoriesSuccessImplCopyWithImpl(_$CategoriesSuccessImpl _value,
-      $Res Function(_$CategoriesSuccessImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? categoriesResponseModel = null,
-  }) {
-    return _then(_$CategoriesSuccessImpl(
-      null == categoriesResponseModel
-          ? _value.categoriesResponseModel
-          : categoriesResponseModel // ignore: cast_nullable_to_non_nullable
-              as CategoryResponseModel,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$CategoriesSuccessImpl implements CategoriesSuccess {
-  const _$CategoriesSuccessImpl(this.categoriesResponseModel);
 
-  @override
-  final CategoryResponseModel categoriesResponseModel;
+class CategoriesError implements HomeState {
+  const CategoriesError(this.errorHandler);
+  
 
-  @override
-  String toString() {
-    return 'HomeState.categoriesSuccess(categoriesResponseModel: $categoriesResponseModel)';
-  }
+ final  ErrorHandler errorHandler;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CategoriesSuccessImpl &&
-            (identical(
-                    other.categoriesResponseModel, categoriesResponseModel) ||
-                other.categoriesResponseModel == categoriesResponseModel));
-  }
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CategoriesErrorCopyWith<CategoriesError> get copyWith => _$CategoriesErrorCopyWithImpl<CategoriesError>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, categoriesResponseModel);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CategoriesSuccessImplCopyWith<_$CategoriesSuccessImpl> get copyWith =>
-      __$$CategoriesSuccessImplCopyWithImpl<_$CategoriesSuccessImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return categoriesSuccess(categoriesResponseModel);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return categoriesSuccess?.call(categoriesResponseModel);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (categoriesSuccess != null) {
-      return categoriesSuccess(categoriesResponseModel);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return categoriesSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return categoriesSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (categoriesSuccess != null) {
-      return categoriesSuccess(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoriesError&&(identical(other.errorHandler, errorHandler) || other.errorHandler == errorHandler));
 }
 
-abstract class CategoriesSuccess implements HomeState {
-  const factory CategoriesSuccess(
-          final CategoryResponseModel categoriesResponseModel) =
-      _$CategoriesSuccessImpl;
 
-  CategoryResponseModel get categoriesResponseModel;
+@override
+int get hashCode => Object.hash(runtimeType,errorHandler);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CategoriesSuccessImplCopyWith<_$CategoriesSuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'HomeState.categoriesError(errorHandler: $errorHandler)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$CategoriesErrorImplCopyWith<$Res> {
-  factory _$$CategoriesErrorImplCopyWith(_$CategoriesErrorImpl value,
-          $Res Function(_$CategoriesErrorImpl) then) =
-      __$$CategoriesErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
+abstract mixin class $CategoriesErrorCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $CategoriesErrorCopyWith(CategoriesError value, $Res Function(CategoriesError) _then) = _$CategoriesErrorCopyWithImpl;
+@useResult
+$Res call({
+ ErrorHandler errorHandler
+});
+
+
+
+
+}
+/// @nodoc
+class _$CategoriesErrorCopyWithImpl<$Res>
+    implements $CategoriesErrorCopyWith<$Res> {
+  _$CategoriesErrorCopyWithImpl(this._self, this._then);
+
+  final CategoriesError _self;
+  final $Res Function(CategoriesError) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errorHandler = null,}) {
+  return _then(CategoriesError(
+null == errorHandler ? _self.errorHandler : errorHandler // ignore: cast_nullable_to_non_nullable
+as ErrorHandler,
+  ));
 }
 
-/// @nodoc
-class __$$CategoriesErrorImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$CategoriesErrorImpl>
-    implements _$$CategoriesErrorImplCopyWith<$Res> {
-  __$$CategoriesErrorImplCopyWithImpl(
-      _$CategoriesErrorImpl _value, $Res Function(_$CategoriesErrorImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$CategoriesErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$CategoriesErrorImpl implements CategoriesError {
-  const _$CategoriesErrorImpl(this.errorHandler);
 
-  @override
-  final ErrorHandler errorHandler;
+class BarbersLoading implements HomeState {
+  const BarbersLoading();
+  
 
-  @override
-  String toString() {
-    return 'HomeState.categoriesError(errorHandler: $errorHandler)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CategoriesErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CategoriesErrorImplCopyWith<_$CategoriesErrorImpl> get copyWith =>
-      __$$CategoriesErrorImplCopyWithImpl<_$CategoriesErrorImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return categoriesError(errorHandler);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return categoriesError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (categoriesError != null) {
-      return categoriesError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return categoriesError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return categoriesError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (categoriesError != null) {
-      return categoriesError(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BarbersLoading);
 }
 
-abstract class CategoriesError implements HomeState {
-  const factory CategoriesError(final ErrorHandler errorHandler) =
-      _$CategoriesErrorImpl;
 
-  ErrorHandler get errorHandler;
+@override
+int get hashCode => runtimeType.hashCode;
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CategoriesErrorImplCopyWith<_$CategoriesErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'HomeState.barbersLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class BarbersSuccess implements HomeState {
+  const BarbersSuccess(this.barbersResponseModel);
+  
+
+ final  BarberResponseModel barbersResponseModel;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BarbersSuccessCopyWith<BarbersSuccess> get copyWith => _$BarbersSuccessCopyWithImpl<BarbersSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BarbersSuccess&&(identical(other.barbersResponseModel, barbersResponseModel) || other.barbersResponseModel == barbersResponseModel));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,barbersResponseModel);
+
+@override
+String toString() {
+  return 'HomeState.barbersSuccess(barbersResponseModel: $barbersResponseModel)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$BarbersLoadingImplCopyWith<$Res> {
-  factory _$$BarbersLoadingImplCopyWith(_$BarbersLoadingImpl value,
-          $Res Function(_$BarbersLoadingImpl) then) =
-      __$$BarbersLoadingImplCopyWithImpl<$Res>;
+abstract mixin class $BarbersSuccessCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $BarbersSuccessCopyWith(BarbersSuccess value, $Res Function(BarbersSuccess) _then) = _$BarbersSuccessCopyWithImpl;
+@useResult
+$Res call({
+ BarberResponseModel barbersResponseModel
+});
+
+
+
+
+}
+/// @nodoc
+class _$BarbersSuccessCopyWithImpl<$Res>
+    implements $BarbersSuccessCopyWith<$Res> {
+  _$BarbersSuccessCopyWithImpl(this._self, this._then);
+
+  final BarbersSuccess _self;
+  final $Res Function(BarbersSuccess) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? barbersResponseModel = null,}) {
+  return _then(BarbersSuccess(
+null == barbersResponseModel ? _self.barbersResponseModel : barbersResponseModel // ignore: cast_nullable_to_non_nullable
+as BarberResponseModel,
+  ));
 }
 
-/// @nodoc
-class __$$BarbersLoadingImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$BarbersLoadingImpl>
-    implements _$$BarbersLoadingImplCopyWith<$Res> {
-  __$$BarbersLoadingImplCopyWithImpl(
-      _$BarbersLoadingImpl _value, $Res Function(_$BarbersLoadingImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$BarbersLoadingImpl implements BarbersLoading {
-  const _$BarbersLoadingImpl();
 
-  @override
-  String toString() {
-    return 'HomeState.barbersLoading()';
-  }
+class BarbersError implements HomeState {
+  const BarbersError(this.errorHandler);
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BarbersLoadingImpl);
-  }
+ final  ErrorHandler errorHandler;
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BarbersErrorCopyWith<BarbersError> get copyWith => _$BarbersErrorCopyWithImpl<BarbersError>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return barbersLoading();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return barbersLoading?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (barbersLoading != null) {
-      return barbersLoading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return barbersLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return barbersLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (barbersLoading != null) {
-      return barbersLoading(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BarbersError&&(identical(other.errorHandler, errorHandler) || other.errorHandler == errorHandler));
 }
 
-abstract class BarbersLoading implements HomeState {
-  const factory BarbersLoading() = _$BarbersLoadingImpl;
+
+@override
+int get hashCode => Object.hash(runtimeType,errorHandler);
+
+@override
+String toString() {
+  return 'HomeState.barbersError(errorHandler: $errorHandler)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$BarbersSuccessImplCopyWith<$Res> {
-  factory _$$BarbersSuccessImplCopyWith(_$BarbersSuccessImpl value,
-          $Res Function(_$BarbersSuccessImpl) then) =
-      __$$BarbersSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({BarberResponseModel barbersResponseModel});
+abstract mixin class $BarbersErrorCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $BarbersErrorCopyWith(BarbersError value, $Res Function(BarbersError) _then) = _$BarbersErrorCopyWithImpl;
+@useResult
+$Res call({
+ ErrorHandler errorHandler
+});
+
+
+
+
+}
+/// @nodoc
+class _$BarbersErrorCopyWithImpl<$Res>
+    implements $BarbersErrorCopyWith<$Res> {
+  _$BarbersErrorCopyWithImpl(this._self, this._then);
+
+  final BarbersError _self;
+  final $Res Function(BarbersError) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errorHandler = null,}) {
+  return _then(BarbersError(
+null == errorHandler ? _self.errorHandler : errorHandler // ignore: cast_nullable_to_non_nullable
+as ErrorHandler,
+  ));
 }
 
-/// @nodoc
-class __$$BarbersSuccessImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$BarbersSuccessImpl>
-    implements _$$BarbersSuccessImplCopyWith<$Res> {
-  __$$BarbersSuccessImplCopyWithImpl(
-      _$BarbersSuccessImpl _value, $Res Function(_$BarbersSuccessImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? barbersResponseModel = null,
-  }) {
-    return _then(_$BarbersSuccessImpl(
-      null == barbersResponseModel
-          ? _value.barbersResponseModel
-          : barbersResponseModel // ignore: cast_nullable_to_non_nullable
-              as BarberResponseModel,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$BarbersSuccessImpl implements BarbersSuccess {
-  const _$BarbersSuccessImpl(this.barbersResponseModel);
 
-  @override
-  final BarberResponseModel barbersResponseModel;
+class BannersLoading implements HomeState {
+  const BannersLoading();
+  
 
-  @override
-  String toString() {
-    return 'HomeState.barbersSuccess(barbersResponseModel: $barbersResponseModel)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BarbersSuccessImpl &&
-            (identical(other.barbersResponseModel, barbersResponseModel) ||
-                other.barbersResponseModel == barbersResponseModel));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, barbersResponseModel);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BarbersSuccessImplCopyWith<_$BarbersSuccessImpl> get copyWith =>
-      __$$BarbersSuccessImplCopyWithImpl<_$BarbersSuccessImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return barbersSuccess(barbersResponseModel);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return barbersSuccess?.call(barbersResponseModel);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (barbersSuccess != null) {
-      return barbersSuccess(barbersResponseModel);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return barbersSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return barbersSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (barbersSuccess != null) {
-      return barbersSuccess(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BannersLoading);
 }
 
-abstract class BarbersSuccess implements HomeState {
-  const factory BarbersSuccess(final BarberResponseModel barbersResponseModel) =
-      _$BarbersSuccessImpl;
 
-  BarberResponseModel get barbersResponseModel;
+@override
+int get hashCode => runtimeType.hashCode;
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BarbersSuccessImplCopyWith<_$BarbersSuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'HomeState.bannersLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class BannersSuccess implements HomeState {
+  const BannersSuccess(this.bannersResponseModel);
+  
+
+ final  BannerResponseModel bannersResponseModel;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BannersSuccessCopyWith<BannersSuccess> get copyWith => _$BannersSuccessCopyWithImpl<BannersSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BannersSuccess&&(identical(other.bannersResponseModel, bannersResponseModel) || other.bannersResponseModel == bannersResponseModel));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,bannersResponseModel);
+
+@override
+String toString() {
+  return 'HomeState.bannersSuccess(bannersResponseModel: $bannersResponseModel)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$BarbersErrorImplCopyWith<$Res> {
-  factory _$$BarbersErrorImplCopyWith(
-          _$BarbersErrorImpl value, $Res Function(_$BarbersErrorImpl) then) =
-      __$$BarbersErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
+abstract mixin class $BannersSuccessCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $BannersSuccessCopyWith(BannersSuccess value, $Res Function(BannersSuccess) _then) = _$BannersSuccessCopyWithImpl;
+@useResult
+$Res call({
+ BannerResponseModel bannersResponseModel
+});
+
+
+
+
+}
+/// @nodoc
+class _$BannersSuccessCopyWithImpl<$Res>
+    implements $BannersSuccessCopyWith<$Res> {
+  _$BannersSuccessCopyWithImpl(this._self, this._then);
+
+  final BannersSuccess _self;
+  final $Res Function(BannersSuccess) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? bannersResponseModel = null,}) {
+  return _then(BannersSuccess(
+null == bannersResponseModel ? _self.bannersResponseModel : bannersResponseModel // ignore: cast_nullable_to_non_nullable
+as BannerResponseModel,
+  ));
 }
 
-/// @nodoc
-class __$$BarbersErrorImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$BarbersErrorImpl>
-    implements _$$BarbersErrorImplCopyWith<$Res> {
-  __$$BarbersErrorImplCopyWithImpl(
-      _$BarbersErrorImpl _value, $Res Function(_$BarbersErrorImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$BarbersErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$BarbersErrorImpl implements BarbersError {
-  const _$BarbersErrorImpl(this.errorHandler);
 
-  @override
-  final ErrorHandler errorHandler;
+class BannersError implements HomeState {
+  const BannersError(this.errorHandler);
+  
 
-  @override
-  String toString() {
-    return 'HomeState.barbersError(errorHandler: $errorHandler)';
-  }
+ final  ErrorHandler errorHandler;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BarbersErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BannersErrorCopyWith<BannersError> get copyWith => _$BannersErrorCopyWithImpl<BannersError>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BarbersErrorImplCopyWith<_$BarbersErrorImpl> get copyWith =>
-      __$$BarbersErrorImplCopyWithImpl<_$BarbersErrorImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return barbersError(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return barbersError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (barbersError != null) {
-      return barbersError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return barbersError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return barbersError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (barbersError != null) {
-      return barbersError(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BannersError&&(identical(other.errorHandler, errorHandler) || other.errorHandler == errorHandler));
 }
 
-abstract class BarbersError implements HomeState {
-  const factory BarbersError(final ErrorHandler errorHandler) =
-      _$BarbersErrorImpl;
 
-  ErrorHandler get errorHandler;
+@override
+int get hashCode => Object.hash(runtimeType,errorHandler);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BarbersErrorImplCopyWith<_$BarbersErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'HomeState.bannersError(errorHandler: $errorHandler)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$BannersLoadingImplCopyWith<$Res> {
-  factory _$$BannersLoadingImplCopyWith(_$BannersLoadingImpl value,
-          $Res Function(_$BannersLoadingImpl) then) =
-      __$$BannersLoadingImplCopyWithImpl<$Res>;
-}
+abstract mixin class $BannersErrorCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $BannersErrorCopyWith(BannersError value, $Res Function(BannersError) _then) = _$BannersErrorCopyWithImpl;
+@useResult
+$Res call({
+ ErrorHandler errorHandler
+});
 
+
+
+
+}
 /// @nodoc
-class __$$BannersLoadingImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$BannersLoadingImpl>
-    implements _$$BannersLoadingImplCopyWith<$Res> {
-  __$$BannersLoadingImplCopyWithImpl(
-      _$BannersLoadingImpl _value, $Res Function(_$BannersLoadingImpl) _then)
-      : super(_value, _then);
+class _$BannersErrorCopyWithImpl<$Res>
+    implements $BannersErrorCopyWith<$Res> {
+  _$BannersErrorCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
+  final BannersError _self;
+  final $Res Function(BannersError) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errorHandler = null,}) {
+  return _then(BannersError(
+null == errorHandler ? _self.errorHandler : errorHandler // ignore: cast_nullable_to_non_nullable
+as ErrorHandler,
+  ));
 }
 
-/// @nodoc
 
-class _$BannersLoadingImpl implements BannersLoading {
-  const _$BannersLoadingImpl();
-
-  @override
-  String toString() {
-    return 'HomeState.bannersLoading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BannersLoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return bannersLoading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return bannersLoading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (bannersLoading != null) {
-      return bannersLoading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return bannersLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return bannersLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (bannersLoading != null) {
-      return bannersLoading(this);
-    }
-    return orElse();
-  }
 }
 
-abstract class BannersLoading implements HomeState {
-  const factory BannersLoading() = _$BannersLoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$BannersSuccessImplCopyWith<$Res> {
-  factory _$$BannersSuccessImplCopyWith(_$BannersSuccessImpl value,
-          $Res Function(_$BannersSuccessImpl) then) =
-      __$$BannersSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({BannerResponseModel bannersResponseModel});
-}
-
-/// @nodoc
-class __$$BannersSuccessImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$BannersSuccessImpl>
-    implements _$$BannersSuccessImplCopyWith<$Res> {
-  __$$BannersSuccessImplCopyWithImpl(
-      _$BannersSuccessImpl _value, $Res Function(_$BannersSuccessImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? bannersResponseModel = null,
-  }) {
-    return _then(_$BannersSuccessImpl(
-      null == bannersResponseModel
-          ? _value.bannersResponseModel
-          : bannersResponseModel // ignore: cast_nullable_to_non_nullable
-              as BannerResponseModel,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$BannersSuccessImpl implements BannersSuccess {
-  const _$BannersSuccessImpl(this.bannersResponseModel);
-
-  @override
-  final BannerResponseModel bannersResponseModel;
-
-  @override
-  String toString() {
-    return 'HomeState.bannersSuccess(bannersResponseModel: $bannersResponseModel)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BannersSuccessImpl &&
-            (identical(other.bannersResponseModel, bannersResponseModel) ||
-                other.bannersResponseModel == bannersResponseModel));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, bannersResponseModel);
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BannersSuccessImplCopyWith<_$BannersSuccessImpl> get copyWith =>
-      __$$BannersSuccessImplCopyWithImpl<_$BannersSuccessImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return bannersSuccess(bannersResponseModel);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return bannersSuccess?.call(bannersResponseModel);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (bannersSuccess != null) {
-      return bannersSuccess(bannersResponseModel);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return bannersSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return bannersSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (bannersSuccess != null) {
-      return bannersSuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class BannersSuccess implements HomeState {
-  const factory BannersSuccess(final BannerResponseModel bannersResponseModel) =
-      _$BannersSuccessImpl;
-
-  BannerResponseModel get bannersResponseModel;
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BannersSuccessImplCopyWith<_$BannersSuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$BannersErrorImplCopyWith<$Res> {
-  factory _$$BannersErrorImplCopyWith(
-          _$BannersErrorImpl value, $Res Function(_$BannersErrorImpl) then) =
-      __$$BannersErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
-}
-
-/// @nodoc
-class __$$BannersErrorImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$BannersErrorImpl>
-    implements _$$BannersErrorImplCopyWith<$Res> {
-  __$$BannersErrorImplCopyWithImpl(
-      _$BannersErrorImpl _value, $Res Function(_$BannersErrorImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$BannersErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$BannersErrorImpl implements BannersError {
-  const _$BannersErrorImpl(this.errorHandler);
-
-  @override
-  final ErrorHandler errorHandler;
-
-  @override
-  String toString() {
-    return 'HomeState.bannersError(errorHandler: $errorHandler)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BannersErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BannersErrorImplCopyWith<_$BannersErrorImpl> get copyWith =>
-      __$$BannersErrorImplCopyWithImpl<_$BannersErrorImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() categoriesLoading,
-    required TResult Function(CategoryResponseModel categoriesResponseModel)
-        categoriesSuccess,
-    required TResult Function(ErrorHandler errorHandler) categoriesError,
-    required TResult Function() barbersLoading,
-    required TResult Function(BarberResponseModel barbersResponseModel)
-        barbersSuccess,
-    required TResult Function(ErrorHandler errorHandler) barbersError,
-    required TResult Function() bannersLoading,
-    required TResult Function(BannerResponseModel bannersResponseModel)
-        bannersSuccess,
-    required TResult Function(ErrorHandler errorHandler) bannersError,
-  }) {
-    return bannersError(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? categoriesLoading,
-    TResult? Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult? Function(ErrorHandler errorHandler)? categoriesError,
-    TResult? Function()? barbersLoading,
-    TResult? Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? barbersError,
-    TResult? Function()? bannersLoading,
-    TResult? Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult? Function(ErrorHandler errorHandler)? bannersError,
-  }) {
-    return bannersError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? categoriesLoading,
-    TResult Function(CategoryResponseModel categoriesResponseModel)?
-        categoriesSuccess,
-    TResult Function(ErrorHandler errorHandler)? categoriesError,
-    TResult Function()? barbersLoading,
-    TResult Function(BarberResponseModel barbersResponseModel)? barbersSuccess,
-    TResult Function(ErrorHandler errorHandler)? barbersError,
-    TResult Function()? bannersLoading,
-    TResult Function(BannerResponseModel bannersResponseModel)? bannersSuccess,
-    TResult Function(ErrorHandler errorHandler)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (bannersError != null) {
-      return bannersError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesSuccess value) categoriesSuccess,
-    required TResult Function(CategoriesError value) categoriesError,
-    required TResult Function(BarbersLoading value) barbersLoading,
-    required TResult Function(BarbersSuccess value) barbersSuccess,
-    required TResult Function(BarbersError value) barbersError,
-    required TResult Function(BannersLoading value) bannersLoading,
-    required TResult Function(BannersSuccess value) bannersSuccess,
-    required TResult Function(BannersError value) bannersError,
-  }) {
-    return bannersError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(CategoriesLoading value)? categoriesLoading,
-    TResult? Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult? Function(CategoriesError value)? categoriesError,
-    TResult? Function(BarbersLoading value)? barbersLoading,
-    TResult? Function(BarbersSuccess value)? barbersSuccess,
-    TResult? Function(BarbersError value)? barbersError,
-    TResult? Function(BannersLoading value)? bannersLoading,
-    TResult? Function(BannersSuccess value)? bannersSuccess,
-    TResult? Function(BannersError value)? bannersError,
-  }) {
-    return bannersError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesSuccess value)? categoriesSuccess,
-    TResult Function(CategoriesError value)? categoriesError,
-    TResult Function(BarbersLoading value)? barbersLoading,
-    TResult Function(BarbersSuccess value)? barbersSuccess,
-    TResult Function(BarbersError value)? barbersError,
-    TResult Function(BannersLoading value)? bannersLoading,
-    TResult Function(BannersSuccess value)? bannersSuccess,
-    TResult Function(BannersError value)? bannersError,
-    required TResult orElse(),
-  }) {
-    if (bannersError != null) {
-      return bannersError(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class BannersError implements HomeState {
-  const factory BannersError(final ErrorHandler errorHandler) =
-      _$BannersErrorImpl;
-
-  ErrorHandler get errorHandler;
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BannersErrorImplCopyWith<_$BannersErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

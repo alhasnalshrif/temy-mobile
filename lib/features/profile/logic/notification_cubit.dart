@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/profile/data/models/notification_response.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import 'package:temy_barber/core/services/notification_service.dart';

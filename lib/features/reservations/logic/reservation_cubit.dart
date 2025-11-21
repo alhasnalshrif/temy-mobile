@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 import 'package:temy_barber/features/reservations/data/repos/reservation_repo.dart';
 import 'package:temy_barber/features/reservations/data/models/queue_response.dart';

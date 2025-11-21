@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,3916 +9,1121 @@ part of 'reservation_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$ReservationState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReservationState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ReservationState()';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ReservationStateCopyWith<$Res> {
-  factory $ReservationStateCopyWith(
-          ReservationState value, $Res Function(ReservationState) then) =
-      _$ReservationStateCopyWithImpl<$Res, ReservationState>;
+class $ReservationStateCopyWith<$Res>  {
+$ReservationStateCopyWith(ReservationState _, $Res Function(ReservationState) __);
 }
 
-/// @nodoc
-class _$ReservationStateCopyWithImpl<$Res, $Val extends ReservationState>
-    implements $ReservationStateCopyWith<$Res> {
-  _$ReservationStateCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+/// Adds pattern-matching-related methods to [ReservationState].
+extension ReservationStatePatterns on ReservationState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( ReservationLoading value)?  reservationLoading,TResult Function( ReservationSuccess value)?  reservationSuccess,TResult Function( ReservationError value)?  reservationError,TResult Function( TimeSlotsLoading value)?  timeSlotsLoading,TResult Function( TimeSlotsSuccess value)?  timeSlotsSuccess,TResult Function( TimeSlotsError value)?  timeSlotsError,TResult Function( QueueSettingsLoading value)?  queueSettingsLoading,TResult Function( QueueSettingsSuccess value)?  queueSettingsSuccess,TResult Function( QueueSettingsError value)?  queueSettingsError,TResult Function( OtpRequestLoading value)?  otpRequestLoading,TResult Function( OtpRequestSuccess value)?  otpRequestSuccess,TResult Function( OtpRequestError value)?  otpRequestError,TResult Function( OtpVerificationLoading value)?  otpVerificationLoading,TResult Function( OtpVerificationSuccess value)?  otpVerificationSuccess,TResult Function( OtpVerificationError value)?  otpVerificationError,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial(_that);case ReservationLoading() when reservationLoading != null:
+return reservationLoading(_that);case ReservationSuccess() when reservationSuccess != null:
+return reservationSuccess(_that);case ReservationError() when reservationError != null:
+return reservationError(_that);case TimeSlotsLoading() when timeSlotsLoading != null:
+return timeSlotsLoading(_that);case TimeSlotsSuccess() when timeSlotsSuccess != null:
+return timeSlotsSuccess(_that);case TimeSlotsError() when timeSlotsError != null:
+return timeSlotsError(_that);case QueueSettingsLoading() when queueSettingsLoading != null:
+return queueSettingsLoading(_that);case QueueSettingsSuccess() when queueSettingsSuccess != null:
+return queueSettingsSuccess(_that);case QueueSettingsError() when queueSettingsError != null:
+return queueSettingsError(_that);case OtpRequestLoading() when otpRequestLoading != null:
+return otpRequestLoading(_that);case OtpRequestSuccess() when otpRequestSuccess != null:
+return otpRequestSuccess(_that);case OtpRequestError() when otpRequestError != null:
+return otpRequestError(_that);case OtpVerificationLoading() when otpVerificationLoading != null:
+return otpVerificationLoading(_that);case OtpVerificationSuccess() when otpVerificationSuccess != null:
+return otpVerificationSuccess(_that);case OtpVerificationError() when otpVerificationError != null:
+return otpVerificationError(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( ReservationLoading value)  reservationLoading,required TResult Function( ReservationSuccess value)  reservationSuccess,required TResult Function( ReservationError value)  reservationError,required TResult Function( TimeSlotsLoading value)  timeSlotsLoading,required TResult Function( TimeSlotsSuccess value)  timeSlotsSuccess,required TResult Function( TimeSlotsError value)  timeSlotsError,required TResult Function( QueueSettingsLoading value)  queueSettingsLoading,required TResult Function( QueueSettingsSuccess value)  queueSettingsSuccess,required TResult Function( QueueSettingsError value)  queueSettingsError,required TResult Function( OtpRequestLoading value)  otpRequestLoading,required TResult Function( OtpRequestSuccess value)  otpRequestSuccess,required TResult Function( OtpRequestError value)  otpRequestError,required TResult Function( OtpVerificationLoading value)  otpVerificationLoading,required TResult Function( OtpVerificationSuccess value)  otpVerificationSuccess,required TResult Function( OtpVerificationError value)  otpVerificationError,}){
+final _that = this;
+switch (_that) {
+case _Initial():
+return initial(_that);case ReservationLoading():
+return reservationLoading(_that);case ReservationSuccess():
+return reservationSuccess(_that);case ReservationError():
+return reservationError(_that);case TimeSlotsLoading():
+return timeSlotsLoading(_that);case TimeSlotsSuccess():
+return timeSlotsSuccess(_that);case TimeSlotsError():
+return timeSlotsError(_that);case QueueSettingsLoading():
+return queueSettingsLoading(_that);case QueueSettingsSuccess():
+return queueSettingsSuccess(_that);case QueueSettingsError():
+return queueSettingsError(_that);case OtpRequestLoading():
+return otpRequestLoading(_that);case OtpRequestSuccess():
+return otpRequestSuccess(_that);case OtpRequestError():
+return otpRequestError(_that);case OtpVerificationLoading():
+return otpVerificationLoading(_that);case OtpVerificationSuccess():
+return otpVerificationSuccess(_that);case OtpVerificationError():
+return otpVerificationError(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( ReservationLoading value)?  reservationLoading,TResult? Function( ReservationSuccess value)?  reservationSuccess,TResult? Function( ReservationError value)?  reservationError,TResult? Function( TimeSlotsLoading value)?  timeSlotsLoading,TResult? Function( TimeSlotsSuccess value)?  timeSlotsSuccess,TResult? Function( TimeSlotsError value)?  timeSlotsError,TResult? Function( QueueSettingsLoading value)?  queueSettingsLoading,TResult? Function( QueueSettingsSuccess value)?  queueSettingsSuccess,TResult? Function( QueueSettingsError value)?  queueSettingsError,TResult? Function( OtpRequestLoading value)?  otpRequestLoading,TResult? Function( OtpRequestSuccess value)?  otpRequestSuccess,TResult? Function( OtpRequestError value)?  otpRequestError,TResult? Function( OtpVerificationLoading value)?  otpVerificationLoading,TResult? Function( OtpVerificationSuccess value)?  otpVerificationSuccess,TResult? Function( OtpVerificationError value)?  otpVerificationError,}){
+final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial(_that);case ReservationLoading() when reservationLoading != null:
+return reservationLoading(_that);case ReservationSuccess() when reservationSuccess != null:
+return reservationSuccess(_that);case ReservationError() when reservationError != null:
+return reservationError(_that);case TimeSlotsLoading() when timeSlotsLoading != null:
+return timeSlotsLoading(_that);case TimeSlotsSuccess() when timeSlotsSuccess != null:
+return timeSlotsSuccess(_that);case TimeSlotsError() when timeSlotsError != null:
+return timeSlotsError(_that);case QueueSettingsLoading() when queueSettingsLoading != null:
+return queueSettingsLoading(_that);case QueueSettingsSuccess() when queueSettingsSuccess != null:
+return queueSettingsSuccess(_that);case QueueSettingsError() when queueSettingsError != null:
+return queueSettingsError(_that);case OtpRequestLoading() when otpRequestLoading != null:
+return otpRequestLoading(_that);case OtpRequestSuccess() when otpRequestSuccess != null:
+return otpRequestSuccess(_that);case OtpRequestError() when otpRequestError != null:
+return otpRequestError(_that);case OtpVerificationLoading() when otpVerificationLoading != null:
+return otpVerificationLoading(_that);case OtpVerificationSuccess() when otpVerificationSuccess != null:
+return otpVerificationSuccess(_that);case OtpVerificationError() when otpVerificationError != null:
+return otpVerificationError(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  reservationLoading,TResult Function( ReservationResponseModel reservationRequestModel,  ReservationArguments? arguments)?  reservationSuccess,TResult Function( ErrorHandler errorHandler)?  reservationError,TResult Function()?  timeSlotsLoading,TResult Function( TimeSlotsResponse timeSlotsResponse)?  timeSlotsSuccess,TResult Function( ErrorHandler errorHandler)?  timeSlotsError,TResult Function()?  queueSettingsLoading,TResult Function( QueueSettingsResponse settingsResponse)?  queueSettingsSuccess,TResult Function( ErrorHandler errorHandler)?  queueSettingsError,TResult Function()?  otpRequestLoading,TResult Function( OtpResponse otpResponse)?  otpRequestSuccess,TResult Function( ErrorHandler errorHandler)?  otpRequestError,TResult Function()?  otpVerificationLoading,TResult Function( ReservationResponseModel reservationResponse,  ReservationArguments? arguments)?  otpVerificationSuccess,TResult Function( ErrorHandler errorHandler)?  otpVerificationError,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial();case ReservationLoading() when reservationLoading != null:
+return reservationLoading();case ReservationSuccess() when reservationSuccess != null:
+return reservationSuccess(_that.reservationRequestModel,_that.arguments);case ReservationError() when reservationError != null:
+return reservationError(_that.errorHandler);case TimeSlotsLoading() when timeSlotsLoading != null:
+return timeSlotsLoading();case TimeSlotsSuccess() when timeSlotsSuccess != null:
+return timeSlotsSuccess(_that.timeSlotsResponse);case TimeSlotsError() when timeSlotsError != null:
+return timeSlotsError(_that.errorHandler);case QueueSettingsLoading() when queueSettingsLoading != null:
+return queueSettingsLoading();case QueueSettingsSuccess() when queueSettingsSuccess != null:
+return queueSettingsSuccess(_that.settingsResponse);case QueueSettingsError() when queueSettingsError != null:
+return queueSettingsError(_that.errorHandler);case OtpRequestLoading() when otpRequestLoading != null:
+return otpRequestLoading();case OtpRequestSuccess() when otpRequestSuccess != null:
+return otpRequestSuccess(_that.otpResponse);case OtpRequestError() when otpRequestError != null:
+return otpRequestError(_that.errorHandler);case OtpVerificationLoading() when otpVerificationLoading != null:
+return otpVerificationLoading();case OtpVerificationSuccess() when otpVerificationSuccess != null:
+return otpVerificationSuccess(_that.reservationResponse,_that.arguments);case OtpVerificationError() when otpVerificationError != null:
+return otpVerificationError(_that.errorHandler);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  reservationLoading,required TResult Function( ReservationResponseModel reservationRequestModel,  ReservationArguments? arguments)  reservationSuccess,required TResult Function( ErrorHandler errorHandler)  reservationError,required TResult Function()  timeSlotsLoading,required TResult Function( TimeSlotsResponse timeSlotsResponse)  timeSlotsSuccess,required TResult Function( ErrorHandler errorHandler)  timeSlotsError,required TResult Function()  queueSettingsLoading,required TResult Function( QueueSettingsResponse settingsResponse)  queueSettingsSuccess,required TResult Function( ErrorHandler errorHandler)  queueSettingsError,required TResult Function()  otpRequestLoading,required TResult Function( OtpResponse otpResponse)  otpRequestSuccess,required TResult Function( ErrorHandler errorHandler)  otpRequestError,required TResult Function()  otpVerificationLoading,required TResult Function( ReservationResponseModel reservationResponse,  ReservationArguments? arguments)  otpVerificationSuccess,required TResult Function( ErrorHandler errorHandler)  otpVerificationError,}) {final _that = this;
+switch (_that) {
+case _Initial():
+return initial();case ReservationLoading():
+return reservationLoading();case ReservationSuccess():
+return reservationSuccess(_that.reservationRequestModel,_that.arguments);case ReservationError():
+return reservationError(_that.errorHandler);case TimeSlotsLoading():
+return timeSlotsLoading();case TimeSlotsSuccess():
+return timeSlotsSuccess(_that.timeSlotsResponse);case TimeSlotsError():
+return timeSlotsError(_that.errorHandler);case QueueSettingsLoading():
+return queueSettingsLoading();case QueueSettingsSuccess():
+return queueSettingsSuccess(_that.settingsResponse);case QueueSettingsError():
+return queueSettingsError(_that.errorHandler);case OtpRequestLoading():
+return otpRequestLoading();case OtpRequestSuccess():
+return otpRequestSuccess(_that.otpResponse);case OtpRequestError():
+return otpRequestError(_that.errorHandler);case OtpVerificationLoading():
+return otpVerificationLoading();case OtpVerificationSuccess():
+return otpVerificationSuccess(_that.reservationResponse,_that.arguments);case OtpVerificationError():
+return otpVerificationError(_that.errorHandler);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  reservationLoading,TResult? Function( ReservationResponseModel reservationRequestModel,  ReservationArguments? arguments)?  reservationSuccess,TResult? Function( ErrorHandler errorHandler)?  reservationError,TResult? Function()?  timeSlotsLoading,TResult? Function( TimeSlotsResponse timeSlotsResponse)?  timeSlotsSuccess,TResult? Function( ErrorHandler errorHandler)?  timeSlotsError,TResult? Function()?  queueSettingsLoading,TResult? Function( QueueSettingsResponse settingsResponse)?  queueSettingsSuccess,TResult? Function( ErrorHandler errorHandler)?  queueSettingsError,TResult? Function()?  otpRequestLoading,TResult? Function( OtpResponse otpResponse)?  otpRequestSuccess,TResult? Function( ErrorHandler errorHandler)?  otpRequestError,TResult? Function()?  otpVerificationLoading,TResult? Function( ReservationResponseModel reservationResponse,  ReservationArguments? arguments)?  otpVerificationSuccess,TResult? Function( ErrorHandler errorHandler)?  otpVerificationError,}) {final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial();case ReservationLoading() when reservationLoading != null:
+return reservationLoading();case ReservationSuccess() when reservationSuccess != null:
+return reservationSuccess(_that.reservationRequestModel,_that.arguments);case ReservationError() when reservationError != null:
+return reservationError(_that.errorHandler);case TimeSlotsLoading() when timeSlotsLoading != null:
+return timeSlotsLoading();case TimeSlotsSuccess() when timeSlotsSuccess != null:
+return timeSlotsSuccess(_that.timeSlotsResponse);case TimeSlotsError() when timeSlotsError != null:
+return timeSlotsError(_that.errorHandler);case QueueSettingsLoading() when queueSettingsLoading != null:
+return queueSettingsLoading();case QueueSettingsSuccess() when queueSettingsSuccess != null:
+return queueSettingsSuccess(_that.settingsResponse);case QueueSettingsError() when queueSettingsError != null:
+return queueSettingsError(_that.errorHandler);case OtpRequestLoading() when otpRequestLoading != null:
+return otpRequestLoading();case OtpRequestSuccess() when otpRequestSuccess != null:
+return otpRequestSuccess(_that.otpResponse);case OtpRequestError() when otpRequestError != null:
+return otpRequestError(_that.errorHandler);case OtpVerificationLoading() when otpVerificationLoading != null:
+return otpVerificationLoading();case OtpVerificationSuccess() when otpVerificationSuccess != null:
+return otpVerificationSuccess(_that.reservationResponse,_that.arguments);case OtpVerificationError() when otpVerificationError != null:
+return otpVerificationError(_that.errorHandler);case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'ReservationState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements ReservationState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$ReservationLoadingImplCopyWith<$Res> {
-  factory _$$ReservationLoadingImplCopyWith(_$ReservationLoadingImpl value,
-          $Res Function(_$ReservationLoadingImpl) then) =
-      __$$ReservationLoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ReservationLoadingImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$ReservationLoadingImpl>
-    implements _$$ReservationLoadingImplCopyWith<$Res> {
-  __$$ReservationLoadingImplCopyWithImpl(_$ReservationLoadingImpl _value,
-      $Res Function(_$ReservationLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ReservationLoadingImpl implements ReservationLoading {
-  const _$ReservationLoadingImpl();
 
-  @override
-  String toString() {
-    return 'ReservationState.reservationLoading()';
-  }
+class _Initial implements ReservationState {
+  const _Initial();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ReservationLoadingImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return reservationLoading();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return reservationLoading?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (reservationLoading != null) {
-      return reservationLoading();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return reservationLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return reservationLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (reservationLoading != null) {
-      return reservationLoading(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
 }
 
-abstract class ReservationLoading implements ReservationState {
-  const factory ReservationLoading() = _$ReservationLoadingImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ReservationState.initial()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class ReservationLoading implements ReservationState {
+  const ReservationLoading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReservationLoading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ReservationState.reservationLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class ReservationSuccess implements ReservationState {
+  const ReservationSuccess(this.reservationRequestModel, {this.arguments});
+  
+
+ final  ReservationResponseModel reservationRequestModel;
+ final  ReservationArguments? arguments;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ReservationSuccessCopyWith<ReservationSuccess> get copyWith => _$ReservationSuccessCopyWithImpl<ReservationSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReservationSuccess&&(identical(other.reservationRequestModel, reservationRequestModel) || other.reservationRequestModel == reservationRequestModel)&&(identical(other.arguments, arguments) || other.arguments == arguments));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,reservationRequestModel,arguments);
+
+@override
+String toString() {
+  return 'ReservationState.reservationSuccess(reservationRequestModel: $reservationRequestModel, arguments: $arguments)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ReservationSuccessImplCopyWith<$Res> {
-  factory _$$ReservationSuccessImplCopyWith(_$ReservationSuccessImpl value,
-          $Res Function(_$ReservationSuccessImpl) then) =
-      __$$ReservationSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {ReservationResponseModel reservationRequestModel,
-      ReservationArguments? arguments});
+abstract mixin class $ReservationSuccessCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $ReservationSuccessCopyWith(ReservationSuccess value, $Res Function(ReservationSuccess) _then) = _$ReservationSuccessCopyWithImpl;
+@useResult
+$Res call({
+ ReservationResponseModel reservationRequestModel, ReservationArguments? arguments
+});
+
+
+
+
+}
+/// @nodoc
+class _$ReservationSuccessCopyWithImpl<$Res>
+    implements $ReservationSuccessCopyWith<$Res> {
+  _$ReservationSuccessCopyWithImpl(this._self, this._then);
+
+  final ReservationSuccess _self;
+  final $Res Function(ReservationSuccess) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? reservationRequestModel = null,Object? arguments = freezed,}) {
+  return _then(ReservationSuccess(
+null == reservationRequestModel ? _self.reservationRequestModel : reservationRequestModel // ignore: cast_nullable_to_non_nullable
+as ReservationResponseModel,arguments: freezed == arguments ? _self.arguments : arguments // ignore: cast_nullable_to_non_nullable
+as ReservationArguments?,
+  ));
 }
 
-/// @nodoc
-class __$$ReservationSuccessImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$ReservationSuccessImpl>
-    implements _$$ReservationSuccessImplCopyWith<$Res> {
-  __$$ReservationSuccessImplCopyWithImpl(_$ReservationSuccessImpl _value,
-      $Res Function(_$ReservationSuccessImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? reservationRequestModel = null,
-    Object? arguments = freezed,
-  }) {
-    return _then(_$ReservationSuccessImpl(
-      null == reservationRequestModel
-          ? _value.reservationRequestModel
-          : reservationRequestModel // ignore: cast_nullable_to_non_nullable
-              as ReservationResponseModel,
-      arguments: freezed == arguments
-          ? _value.arguments
-          : arguments // ignore: cast_nullable_to_non_nullable
-              as ReservationArguments?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ReservationSuccessImpl implements ReservationSuccess {
-  const _$ReservationSuccessImpl(this.reservationRequestModel,
-      {this.arguments});
 
-  @override
-  final ReservationResponseModel reservationRequestModel;
-  @override
-  final ReservationArguments? arguments;
+class ReservationError implements ReservationState {
+  const ReservationError(this.errorHandler);
+  
 
-  @override
-  String toString() {
-    return 'ReservationState.reservationSuccess(reservationRequestModel: $reservationRequestModel, arguments: $arguments)';
-  }
+ final  ErrorHandler errorHandler;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ReservationSuccessImpl &&
-            (identical(
-                    other.reservationRequestModel, reservationRequestModel) ||
-                other.reservationRequestModel == reservationRequestModel) &&
-            (identical(other.arguments, arguments) ||
-                other.arguments == arguments));
-  }
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ReservationErrorCopyWith<ReservationError> get copyWith => _$ReservationErrorCopyWithImpl<ReservationError>(this, _$identity);
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, reservationRequestModel, arguments);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ReservationSuccessImplCopyWith<_$ReservationSuccessImpl> get copyWith =>
-      __$$ReservationSuccessImplCopyWithImpl<_$ReservationSuccessImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return reservationSuccess(reservationRequestModel, arguments);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return reservationSuccess?.call(reservationRequestModel, arguments);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (reservationSuccess != null) {
-      return reservationSuccess(reservationRequestModel, arguments);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return reservationSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return reservationSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (reservationSuccess != null) {
-      return reservationSuccess(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReservationError&&(identical(other.errorHandler, errorHandler) || other.errorHandler == errorHandler));
 }
 
-abstract class ReservationSuccess implements ReservationState {
-  const factory ReservationSuccess(
-      final ReservationResponseModel reservationRequestModel,
-      {final ReservationArguments? arguments}) = _$ReservationSuccessImpl;
 
-  ReservationResponseModel get reservationRequestModel;
-  ReservationArguments? get arguments;
+@override
+int get hashCode => Object.hash(runtimeType,errorHandler);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ReservationSuccessImplCopyWith<_$ReservationSuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'ReservationState.reservationError(errorHandler: $errorHandler)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ReservationErrorImplCopyWith<$Res> {
-  factory _$$ReservationErrorImplCopyWith(_$ReservationErrorImpl value,
-          $Res Function(_$ReservationErrorImpl) then) =
-      __$$ReservationErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
+abstract mixin class $ReservationErrorCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $ReservationErrorCopyWith(ReservationError value, $Res Function(ReservationError) _then) = _$ReservationErrorCopyWithImpl;
+@useResult
+$Res call({
+ ErrorHandler errorHandler
+});
+
+
+
+
+}
+/// @nodoc
+class _$ReservationErrorCopyWithImpl<$Res>
+    implements $ReservationErrorCopyWith<$Res> {
+  _$ReservationErrorCopyWithImpl(this._self, this._then);
+
+  final ReservationError _self;
+  final $Res Function(ReservationError) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errorHandler = null,}) {
+  return _then(ReservationError(
+null == errorHandler ? _self.errorHandler : errorHandler // ignore: cast_nullable_to_non_nullable
+as ErrorHandler,
+  ));
 }
 
-/// @nodoc
-class __$$ReservationErrorImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$ReservationErrorImpl>
-    implements _$$ReservationErrorImplCopyWith<$Res> {
-  __$$ReservationErrorImplCopyWithImpl(_$ReservationErrorImpl _value,
-      $Res Function(_$ReservationErrorImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$ReservationErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ReservationErrorImpl implements ReservationError {
-  const _$ReservationErrorImpl(this.errorHandler);
 
-  @override
-  final ErrorHandler errorHandler;
+class TimeSlotsLoading implements ReservationState {
+  const TimeSlotsLoading();
+  
 
-  @override
-  String toString() {
-    return 'ReservationState.reservationError(errorHandler: $errorHandler)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ReservationErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ReservationErrorImplCopyWith<_$ReservationErrorImpl> get copyWith =>
-      __$$ReservationErrorImplCopyWithImpl<_$ReservationErrorImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return reservationError(errorHandler);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return reservationError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (reservationError != null) {
-      return reservationError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return reservationError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return reservationError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (reservationError != null) {
-      return reservationError(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimeSlotsLoading);
 }
 
-abstract class ReservationError implements ReservationState {
-  const factory ReservationError(final ErrorHandler errorHandler) =
-      _$ReservationErrorImpl;
 
-  ErrorHandler get errorHandler;
+@override
+int get hashCode => runtimeType.hashCode;
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ReservationErrorImplCopyWith<_$ReservationErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'ReservationState.timeSlotsLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class TimeSlotsSuccess implements ReservationState {
+  const TimeSlotsSuccess(this.timeSlotsResponse);
+  
+
+ final  TimeSlotsResponse timeSlotsResponse;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TimeSlotsSuccessCopyWith<TimeSlotsSuccess> get copyWith => _$TimeSlotsSuccessCopyWithImpl<TimeSlotsSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimeSlotsSuccess&&(identical(other.timeSlotsResponse, timeSlotsResponse) || other.timeSlotsResponse == timeSlotsResponse));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,timeSlotsResponse);
+
+@override
+String toString() {
+  return 'ReservationState.timeSlotsSuccess(timeSlotsResponse: $timeSlotsResponse)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$TimeSlotsLoadingImplCopyWith<$Res> {
-  factory _$$TimeSlotsLoadingImplCopyWith(_$TimeSlotsLoadingImpl value,
-          $Res Function(_$TimeSlotsLoadingImpl) then) =
-      __$$TimeSlotsLoadingImplCopyWithImpl<$Res>;
+abstract mixin class $TimeSlotsSuccessCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $TimeSlotsSuccessCopyWith(TimeSlotsSuccess value, $Res Function(TimeSlotsSuccess) _then) = _$TimeSlotsSuccessCopyWithImpl;
+@useResult
+$Res call({
+ TimeSlotsResponse timeSlotsResponse
+});
+
+
+
+
+}
+/// @nodoc
+class _$TimeSlotsSuccessCopyWithImpl<$Res>
+    implements $TimeSlotsSuccessCopyWith<$Res> {
+  _$TimeSlotsSuccessCopyWithImpl(this._self, this._then);
+
+  final TimeSlotsSuccess _self;
+  final $Res Function(TimeSlotsSuccess) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? timeSlotsResponse = null,}) {
+  return _then(TimeSlotsSuccess(
+null == timeSlotsResponse ? _self.timeSlotsResponse : timeSlotsResponse // ignore: cast_nullable_to_non_nullable
+as TimeSlotsResponse,
+  ));
 }
 
-/// @nodoc
-class __$$TimeSlotsLoadingImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$TimeSlotsLoadingImpl>
-    implements _$$TimeSlotsLoadingImplCopyWith<$Res> {
-  __$$TimeSlotsLoadingImplCopyWithImpl(_$TimeSlotsLoadingImpl _value,
-      $Res Function(_$TimeSlotsLoadingImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$TimeSlotsLoadingImpl implements TimeSlotsLoading {
-  const _$TimeSlotsLoadingImpl();
 
-  @override
-  String toString() {
-    return 'ReservationState.timeSlotsLoading()';
-  }
+class TimeSlotsError implements ReservationState {
+  const TimeSlotsError(this.errorHandler);
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TimeSlotsLoadingImpl);
-  }
+ final  ErrorHandler errorHandler;
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TimeSlotsErrorCopyWith<TimeSlotsError> get copyWith => _$TimeSlotsErrorCopyWithImpl<TimeSlotsError>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return timeSlotsLoading();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return timeSlotsLoading?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (timeSlotsLoading != null) {
-      return timeSlotsLoading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return timeSlotsLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return timeSlotsLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (timeSlotsLoading != null) {
-      return timeSlotsLoading(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimeSlotsError&&(identical(other.errorHandler, errorHandler) || other.errorHandler == errorHandler));
 }
 
-abstract class TimeSlotsLoading implements ReservationState {
-  const factory TimeSlotsLoading() = _$TimeSlotsLoadingImpl;
+
+@override
+int get hashCode => Object.hash(runtimeType,errorHandler);
+
+@override
+String toString() {
+  return 'ReservationState.timeSlotsError(errorHandler: $errorHandler)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$TimeSlotsSuccessImplCopyWith<$Res> {
-  factory _$$TimeSlotsSuccessImplCopyWith(_$TimeSlotsSuccessImpl value,
-          $Res Function(_$TimeSlotsSuccessImpl) then) =
-      __$$TimeSlotsSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({TimeSlotsResponse timeSlotsResponse});
+abstract mixin class $TimeSlotsErrorCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $TimeSlotsErrorCopyWith(TimeSlotsError value, $Res Function(TimeSlotsError) _then) = _$TimeSlotsErrorCopyWithImpl;
+@useResult
+$Res call({
+ ErrorHandler errorHandler
+});
+
+
+
+
+}
+/// @nodoc
+class _$TimeSlotsErrorCopyWithImpl<$Res>
+    implements $TimeSlotsErrorCopyWith<$Res> {
+  _$TimeSlotsErrorCopyWithImpl(this._self, this._then);
+
+  final TimeSlotsError _self;
+  final $Res Function(TimeSlotsError) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errorHandler = null,}) {
+  return _then(TimeSlotsError(
+null == errorHandler ? _self.errorHandler : errorHandler // ignore: cast_nullable_to_non_nullable
+as ErrorHandler,
+  ));
 }
 
-/// @nodoc
-class __$$TimeSlotsSuccessImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$TimeSlotsSuccessImpl>
-    implements _$$TimeSlotsSuccessImplCopyWith<$Res> {
-  __$$TimeSlotsSuccessImplCopyWithImpl(_$TimeSlotsSuccessImpl _value,
-      $Res Function(_$TimeSlotsSuccessImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? timeSlotsResponse = null,
-  }) {
-    return _then(_$TimeSlotsSuccessImpl(
-      null == timeSlotsResponse
-          ? _value.timeSlotsResponse
-          : timeSlotsResponse // ignore: cast_nullable_to_non_nullable
-              as TimeSlotsResponse,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$TimeSlotsSuccessImpl implements TimeSlotsSuccess {
-  const _$TimeSlotsSuccessImpl(this.timeSlotsResponse);
 
-  @override
-  final TimeSlotsResponse timeSlotsResponse;
+class QueueSettingsLoading implements ReservationState {
+  const QueueSettingsLoading();
+  
 
-  @override
-  String toString() {
-    return 'ReservationState.timeSlotsSuccess(timeSlotsResponse: $timeSlotsResponse)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TimeSlotsSuccessImpl &&
-            (identical(other.timeSlotsResponse, timeSlotsResponse) ||
-                other.timeSlotsResponse == timeSlotsResponse));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, timeSlotsResponse);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TimeSlotsSuccessImplCopyWith<_$TimeSlotsSuccessImpl> get copyWith =>
-      __$$TimeSlotsSuccessImplCopyWithImpl<_$TimeSlotsSuccessImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return timeSlotsSuccess(timeSlotsResponse);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return timeSlotsSuccess?.call(timeSlotsResponse);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (timeSlotsSuccess != null) {
-      return timeSlotsSuccess(timeSlotsResponse);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return timeSlotsSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return timeSlotsSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (timeSlotsSuccess != null) {
-      return timeSlotsSuccess(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QueueSettingsLoading);
 }
 
-abstract class TimeSlotsSuccess implements ReservationState {
-  const factory TimeSlotsSuccess(final TimeSlotsResponse timeSlotsResponse) =
-      _$TimeSlotsSuccessImpl;
 
-  TimeSlotsResponse get timeSlotsResponse;
+@override
+int get hashCode => runtimeType.hashCode;
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TimeSlotsSuccessImplCopyWith<_$TimeSlotsSuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'ReservationState.queueSettingsLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class QueueSettingsSuccess implements ReservationState {
+  const QueueSettingsSuccess(this.settingsResponse);
+  
+
+ final  QueueSettingsResponse settingsResponse;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$QueueSettingsSuccessCopyWith<QueueSettingsSuccess> get copyWith => _$QueueSettingsSuccessCopyWithImpl<QueueSettingsSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QueueSettingsSuccess&&(identical(other.settingsResponse, settingsResponse) || other.settingsResponse == settingsResponse));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,settingsResponse);
+
+@override
+String toString() {
+  return 'ReservationState.queueSettingsSuccess(settingsResponse: $settingsResponse)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$TimeSlotsErrorImplCopyWith<$Res> {
-  factory _$$TimeSlotsErrorImplCopyWith(_$TimeSlotsErrorImpl value,
-          $Res Function(_$TimeSlotsErrorImpl) then) =
-      __$$TimeSlotsErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
+abstract mixin class $QueueSettingsSuccessCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $QueueSettingsSuccessCopyWith(QueueSettingsSuccess value, $Res Function(QueueSettingsSuccess) _then) = _$QueueSettingsSuccessCopyWithImpl;
+@useResult
+$Res call({
+ QueueSettingsResponse settingsResponse
+});
+
+
+$QueueSettingsResponseCopyWith<$Res> get settingsResponse;
+
+}
+/// @nodoc
+class _$QueueSettingsSuccessCopyWithImpl<$Res>
+    implements $QueueSettingsSuccessCopyWith<$Res> {
+  _$QueueSettingsSuccessCopyWithImpl(this._self, this._then);
+
+  final QueueSettingsSuccess _self;
+  final $Res Function(QueueSettingsSuccess) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? settingsResponse = null,}) {
+  return _then(QueueSettingsSuccess(
+null == settingsResponse ? _self.settingsResponse : settingsResponse // ignore: cast_nullable_to_non_nullable
+as QueueSettingsResponse,
+  ));
 }
 
-/// @nodoc
-class __$$TimeSlotsErrorImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$TimeSlotsErrorImpl>
-    implements _$$TimeSlotsErrorImplCopyWith<$Res> {
-  __$$TimeSlotsErrorImplCopyWithImpl(
-      _$TimeSlotsErrorImpl _value, $Res Function(_$TimeSlotsErrorImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$TimeSlotsErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$QueueSettingsResponseCopyWith<$Res> get settingsResponse {
+  
+  return $QueueSettingsResponseCopyWith<$Res>(_self.settingsResponse, (value) {
+    return _then(_self.copyWith(settingsResponse: value));
+  });
+}
 }
 
 /// @nodoc
 
-class _$TimeSlotsErrorImpl implements TimeSlotsError {
-  const _$TimeSlotsErrorImpl(this.errorHandler);
 
-  @override
-  final ErrorHandler errorHandler;
+class QueueSettingsError implements ReservationState {
+  const QueueSettingsError(this.errorHandler);
+  
 
-  @override
-  String toString() {
-    return 'ReservationState.timeSlotsError(errorHandler: $errorHandler)';
-  }
+ final  ErrorHandler errorHandler;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TimeSlotsErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$QueueSettingsErrorCopyWith<QueueSettingsError> get copyWith => _$QueueSettingsErrorCopyWithImpl<QueueSettingsError>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TimeSlotsErrorImplCopyWith<_$TimeSlotsErrorImpl> get copyWith =>
-      __$$TimeSlotsErrorImplCopyWithImpl<_$TimeSlotsErrorImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return timeSlotsError(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return timeSlotsError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (timeSlotsError != null) {
-      return timeSlotsError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return timeSlotsError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return timeSlotsError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (timeSlotsError != null) {
-      return timeSlotsError(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QueueSettingsError&&(identical(other.errorHandler, errorHandler) || other.errorHandler == errorHandler));
 }
 
-abstract class TimeSlotsError implements ReservationState {
-  const factory TimeSlotsError(final ErrorHandler errorHandler) =
-      _$TimeSlotsErrorImpl;
 
-  ErrorHandler get errorHandler;
+@override
+int get hashCode => Object.hash(runtimeType,errorHandler);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TimeSlotsErrorImplCopyWith<_$TimeSlotsErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'ReservationState.queueSettingsError(errorHandler: $errorHandler)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$QueueSettingsLoadingImplCopyWith<$Res> {
-  factory _$$QueueSettingsLoadingImplCopyWith(_$QueueSettingsLoadingImpl value,
-          $Res Function(_$QueueSettingsLoadingImpl) then) =
-      __$$QueueSettingsLoadingImplCopyWithImpl<$Res>;
+abstract mixin class $QueueSettingsErrorCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $QueueSettingsErrorCopyWith(QueueSettingsError value, $Res Function(QueueSettingsError) _then) = _$QueueSettingsErrorCopyWithImpl;
+@useResult
+$Res call({
+ ErrorHandler errorHandler
+});
+
+
+
+
+}
+/// @nodoc
+class _$QueueSettingsErrorCopyWithImpl<$Res>
+    implements $QueueSettingsErrorCopyWith<$Res> {
+  _$QueueSettingsErrorCopyWithImpl(this._self, this._then);
+
+  final QueueSettingsError _self;
+  final $Res Function(QueueSettingsError) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errorHandler = null,}) {
+  return _then(QueueSettingsError(
+null == errorHandler ? _self.errorHandler : errorHandler // ignore: cast_nullable_to_non_nullable
+as ErrorHandler,
+  ));
 }
 
-/// @nodoc
-class __$$QueueSettingsLoadingImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$QueueSettingsLoadingImpl>
-    implements _$$QueueSettingsLoadingImplCopyWith<$Res> {
-  __$$QueueSettingsLoadingImplCopyWithImpl(_$QueueSettingsLoadingImpl _value,
-      $Res Function(_$QueueSettingsLoadingImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$QueueSettingsLoadingImpl implements QueueSettingsLoading {
-  const _$QueueSettingsLoadingImpl();
 
-  @override
-  String toString() {
-    return 'ReservationState.queueSettingsLoading()';
-  }
+class OtpRequestLoading implements ReservationState {
+  const OtpRequestLoading();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$QueueSettingsLoadingImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return queueSettingsLoading();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return queueSettingsLoading?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (queueSettingsLoading != null) {
-      return queueSettingsLoading();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return queueSettingsLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return queueSettingsLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (queueSettingsLoading != null) {
-      return queueSettingsLoading(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpRequestLoading);
 }
 
-abstract class QueueSettingsLoading implements ReservationState {
-  const factory QueueSettingsLoading() = _$QueueSettingsLoadingImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ReservationState.otpRequestLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class OtpRequestSuccess implements ReservationState {
+  const OtpRequestSuccess(this.otpResponse);
+  
+
+ final  OtpResponse otpResponse;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OtpRequestSuccessCopyWith<OtpRequestSuccess> get copyWith => _$OtpRequestSuccessCopyWithImpl<OtpRequestSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpRequestSuccess&&(identical(other.otpResponse, otpResponse) || other.otpResponse == otpResponse));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,otpResponse);
+
+@override
+String toString() {
+  return 'ReservationState.otpRequestSuccess(otpResponse: $otpResponse)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$QueueSettingsSuccessImplCopyWith<$Res> {
-  factory _$$QueueSettingsSuccessImplCopyWith(_$QueueSettingsSuccessImpl value,
-          $Res Function(_$QueueSettingsSuccessImpl) then) =
-      __$$QueueSettingsSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({QueueSettingsResponse settingsResponse});
+abstract mixin class $OtpRequestSuccessCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $OtpRequestSuccessCopyWith(OtpRequestSuccess value, $Res Function(OtpRequestSuccess) _then) = _$OtpRequestSuccessCopyWithImpl;
+@useResult
+$Res call({
+ OtpResponse otpResponse
+});
 
-  $QueueSettingsResponseCopyWith<$Res> get settingsResponse;
+
+
+
+}
+/// @nodoc
+class _$OtpRequestSuccessCopyWithImpl<$Res>
+    implements $OtpRequestSuccessCopyWith<$Res> {
+  _$OtpRequestSuccessCopyWithImpl(this._self, this._then);
+
+  final OtpRequestSuccess _self;
+  final $Res Function(OtpRequestSuccess) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? otpResponse = null,}) {
+  return _then(OtpRequestSuccess(
+null == otpResponse ? _self.otpResponse : otpResponse // ignore: cast_nullable_to_non_nullable
+as OtpResponse,
+  ));
 }
 
-/// @nodoc
-class __$$QueueSettingsSuccessImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$QueueSettingsSuccessImpl>
-    implements _$$QueueSettingsSuccessImplCopyWith<$Res> {
-  __$$QueueSettingsSuccessImplCopyWithImpl(_$QueueSettingsSuccessImpl _value,
-      $Res Function(_$QueueSettingsSuccessImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? settingsResponse = null,
-  }) {
-    return _then(_$QueueSettingsSuccessImpl(
-      null == settingsResponse
-          ? _value.settingsResponse
-          : settingsResponse // ignore: cast_nullable_to_non_nullable
-              as QueueSettingsResponse,
-    ));
-  }
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $QueueSettingsResponseCopyWith<$Res> get settingsResponse {
-    return $QueueSettingsResponseCopyWith<$Res>(_value.settingsResponse,
-        (value) {
-      return _then(_value.copyWith(settingsResponse: value));
-    });
-  }
 }
 
 /// @nodoc
 
-class _$QueueSettingsSuccessImpl implements QueueSettingsSuccess {
-  const _$QueueSettingsSuccessImpl(this.settingsResponse);
 
-  @override
-  final QueueSettingsResponse settingsResponse;
+class OtpRequestError implements ReservationState {
+  const OtpRequestError(this.errorHandler);
+  
 
-  @override
-  String toString() {
-    return 'ReservationState.queueSettingsSuccess(settingsResponse: $settingsResponse)';
-  }
+ final  ErrorHandler errorHandler;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$QueueSettingsSuccessImpl &&
-            (identical(other.settingsResponse, settingsResponse) ||
-                other.settingsResponse == settingsResponse));
-  }
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OtpRequestErrorCopyWith<OtpRequestError> get copyWith => _$OtpRequestErrorCopyWithImpl<OtpRequestError>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, settingsResponse);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$QueueSettingsSuccessImplCopyWith<_$QueueSettingsSuccessImpl>
-      get copyWith =>
-          __$$QueueSettingsSuccessImplCopyWithImpl<_$QueueSettingsSuccessImpl>(
-              this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return queueSettingsSuccess(settingsResponse);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return queueSettingsSuccess?.call(settingsResponse);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (queueSettingsSuccess != null) {
-      return queueSettingsSuccess(settingsResponse);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return queueSettingsSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return queueSettingsSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (queueSettingsSuccess != null) {
-      return queueSettingsSuccess(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpRequestError&&(identical(other.errorHandler, errorHandler) || other.errorHandler == errorHandler));
 }
 
-abstract class QueueSettingsSuccess implements ReservationState {
-  const factory QueueSettingsSuccess(
-          final QueueSettingsResponse settingsResponse) =
-      _$QueueSettingsSuccessImpl;
 
-  QueueSettingsResponse get settingsResponse;
+@override
+int get hashCode => Object.hash(runtimeType,errorHandler);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$QueueSettingsSuccessImplCopyWith<_$QueueSettingsSuccessImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'ReservationState.otpRequestError(errorHandler: $errorHandler)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$QueueSettingsErrorImplCopyWith<$Res> {
-  factory _$$QueueSettingsErrorImplCopyWith(_$QueueSettingsErrorImpl value,
-          $Res Function(_$QueueSettingsErrorImpl) then) =
-      __$$QueueSettingsErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
+abstract mixin class $OtpRequestErrorCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $OtpRequestErrorCopyWith(OtpRequestError value, $Res Function(OtpRequestError) _then) = _$OtpRequestErrorCopyWithImpl;
+@useResult
+$Res call({
+ ErrorHandler errorHandler
+});
+
+
+
+
+}
+/// @nodoc
+class _$OtpRequestErrorCopyWithImpl<$Res>
+    implements $OtpRequestErrorCopyWith<$Res> {
+  _$OtpRequestErrorCopyWithImpl(this._self, this._then);
+
+  final OtpRequestError _self;
+  final $Res Function(OtpRequestError) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errorHandler = null,}) {
+  return _then(OtpRequestError(
+null == errorHandler ? _self.errorHandler : errorHandler // ignore: cast_nullable_to_non_nullable
+as ErrorHandler,
+  ));
 }
 
-/// @nodoc
-class __$$QueueSettingsErrorImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$QueueSettingsErrorImpl>
-    implements _$$QueueSettingsErrorImplCopyWith<$Res> {
-  __$$QueueSettingsErrorImplCopyWithImpl(_$QueueSettingsErrorImpl _value,
-      $Res Function(_$QueueSettingsErrorImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$QueueSettingsErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$QueueSettingsErrorImpl implements QueueSettingsError {
-  const _$QueueSettingsErrorImpl(this.errorHandler);
 
-  @override
-  final ErrorHandler errorHandler;
+class OtpVerificationLoading implements ReservationState {
+  const OtpVerificationLoading();
+  
 
-  @override
-  String toString() {
-    return 'ReservationState.queueSettingsError(errorHandler: $errorHandler)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$QueueSettingsErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$QueueSettingsErrorImplCopyWith<_$QueueSettingsErrorImpl> get copyWith =>
-      __$$QueueSettingsErrorImplCopyWithImpl<_$QueueSettingsErrorImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return queueSettingsError(errorHandler);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return queueSettingsError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (queueSettingsError != null) {
-      return queueSettingsError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return queueSettingsError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return queueSettingsError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (queueSettingsError != null) {
-      return queueSettingsError(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpVerificationLoading);
 }
 
-abstract class QueueSettingsError implements ReservationState {
-  const factory QueueSettingsError(final ErrorHandler errorHandler) =
-      _$QueueSettingsErrorImpl;
 
-  ErrorHandler get errorHandler;
+@override
+int get hashCode => runtimeType.hashCode;
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$QueueSettingsErrorImplCopyWith<_$QueueSettingsErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'ReservationState.otpVerificationLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class OtpVerificationSuccess implements ReservationState {
+  const OtpVerificationSuccess(this.reservationResponse, {this.arguments});
+  
+
+ final  ReservationResponseModel reservationResponse;
+ final  ReservationArguments? arguments;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OtpVerificationSuccessCopyWith<OtpVerificationSuccess> get copyWith => _$OtpVerificationSuccessCopyWithImpl<OtpVerificationSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpVerificationSuccess&&(identical(other.reservationResponse, reservationResponse) || other.reservationResponse == reservationResponse)&&(identical(other.arguments, arguments) || other.arguments == arguments));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,reservationResponse,arguments);
+
+@override
+String toString() {
+  return 'ReservationState.otpVerificationSuccess(reservationResponse: $reservationResponse, arguments: $arguments)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$OtpRequestLoadingImplCopyWith<$Res> {
-  factory _$$OtpRequestLoadingImplCopyWith(_$OtpRequestLoadingImpl value,
-          $Res Function(_$OtpRequestLoadingImpl) then) =
-      __$$OtpRequestLoadingImplCopyWithImpl<$Res>;
+abstract mixin class $OtpVerificationSuccessCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $OtpVerificationSuccessCopyWith(OtpVerificationSuccess value, $Res Function(OtpVerificationSuccess) _then) = _$OtpVerificationSuccessCopyWithImpl;
+@useResult
+$Res call({
+ ReservationResponseModel reservationResponse, ReservationArguments? arguments
+});
+
+
+
+
+}
+/// @nodoc
+class _$OtpVerificationSuccessCopyWithImpl<$Res>
+    implements $OtpVerificationSuccessCopyWith<$Res> {
+  _$OtpVerificationSuccessCopyWithImpl(this._self, this._then);
+
+  final OtpVerificationSuccess _self;
+  final $Res Function(OtpVerificationSuccess) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? reservationResponse = null,Object? arguments = freezed,}) {
+  return _then(OtpVerificationSuccess(
+null == reservationResponse ? _self.reservationResponse : reservationResponse // ignore: cast_nullable_to_non_nullable
+as ReservationResponseModel,arguments: freezed == arguments ? _self.arguments : arguments // ignore: cast_nullable_to_non_nullable
+as ReservationArguments?,
+  ));
 }
 
-/// @nodoc
-class __$$OtpRequestLoadingImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$OtpRequestLoadingImpl>
-    implements _$$OtpRequestLoadingImplCopyWith<$Res> {
-  __$$OtpRequestLoadingImplCopyWithImpl(_$OtpRequestLoadingImpl _value,
-      $Res Function(_$OtpRequestLoadingImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$OtpRequestLoadingImpl implements OtpRequestLoading {
-  const _$OtpRequestLoadingImpl();
 
-  @override
-  String toString() {
-    return 'ReservationState.otpRequestLoading()';
-  }
+class OtpVerificationError implements ReservationState {
+  const OtpVerificationError(this.errorHandler);
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OtpRequestLoadingImpl);
-  }
+ final  ErrorHandler errorHandler;
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OtpVerificationErrorCopyWith<OtpVerificationError> get copyWith => _$OtpVerificationErrorCopyWithImpl<OtpVerificationError>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return otpRequestLoading();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return otpRequestLoading?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpRequestLoading != null) {
-      return otpRequestLoading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return otpRequestLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return otpRequestLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpRequestLoading != null) {
-      return otpRequestLoading(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpVerificationError&&(identical(other.errorHandler, errorHandler) || other.errorHandler == errorHandler));
 }
 
-abstract class OtpRequestLoading implements ReservationState {
-  const factory OtpRequestLoading() = _$OtpRequestLoadingImpl;
+
+@override
+int get hashCode => Object.hash(runtimeType,errorHandler);
+
+@override
+String toString() {
+  return 'ReservationState.otpVerificationError(errorHandler: $errorHandler)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$OtpRequestSuccessImplCopyWith<$Res> {
-  factory _$$OtpRequestSuccessImplCopyWith(_$OtpRequestSuccessImpl value,
-          $Res Function(_$OtpRequestSuccessImpl) then) =
-      __$$OtpRequestSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({OtpResponse otpResponse});
-}
+abstract mixin class $OtpVerificationErrorCopyWith<$Res> implements $ReservationStateCopyWith<$Res> {
+  factory $OtpVerificationErrorCopyWith(OtpVerificationError value, $Res Function(OtpVerificationError) _then) = _$OtpVerificationErrorCopyWithImpl;
+@useResult
+$Res call({
+ ErrorHandler errorHandler
+});
 
+
+
+
+}
 /// @nodoc
-class __$$OtpRequestSuccessImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$OtpRequestSuccessImpl>
-    implements _$$OtpRequestSuccessImplCopyWith<$Res> {
-  __$$OtpRequestSuccessImplCopyWithImpl(_$OtpRequestSuccessImpl _value,
-      $Res Function(_$OtpRequestSuccessImpl) _then)
-      : super(_value, _then);
+class _$OtpVerificationErrorCopyWithImpl<$Res>
+    implements $OtpVerificationErrorCopyWith<$Res> {
+  _$OtpVerificationErrorCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? otpResponse = null,
-  }) {
-    return _then(_$OtpRequestSuccessImpl(
-      null == otpResponse
-          ? _value.otpResponse
-          : otpResponse // ignore: cast_nullable_to_non_nullable
-              as OtpResponse,
-    ));
-  }
+  final OtpVerificationError _self;
+  final $Res Function(OtpVerificationError) _then;
+
+/// Create a copy of ReservationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errorHandler = null,}) {
+  return _then(OtpVerificationError(
+null == errorHandler ? _self.errorHandler : errorHandler // ignore: cast_nullable_to_non_nullable
+as ErrorHandler,
+  ));
 }
 
-/// @nodoc
 
-class _$OtpRequestSuccessImpl implements OtpRequestSuccess {
-  const _$OtpRequestSuccessImpl(this.otpResponse);
-
-  @override
-  final OtpResponse otpResponse;
-
-  @override
-  String toString() {
-    return 'ReservationState.otpRequestSuccess(otpResponse: $otpResponse)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$OtpRequestSuccessImpl &&
-            (identical(other.otpResponse, otpResponse) ||
-                other.otpResponse == otpResponse));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, otpResponse);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$OtpRequestSuccessImplCopyWith<_$OtpRequestSuccessImpl> get copyWith =>
-      __$$OtpRequestSuccessImplCopyWithImpl<_$OtpRequestSuccessImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return otpRequestSuccess(otpResponse);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return otpRequestSuccess?.call(otpResponse);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpRequestSuccess != null) {
-      return otpRequestSuccess(otpResponse);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return otpRequestSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return otpRequestSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpRequestSuccess != null) {
-      return otpRequestSuccess(this);
-    }
-    return orElse();
-  }
 }
 
-abstract class OtpRequestSuccess implements ReservationState {
-  const factory OtpRequestSuccess(final OtpResponse otpResponse) =
-      _$OtpRequestSuccessImpl;
-
-  OtpResponse get otpResponse;
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OtpRequestSuccessImplCopyWith<_$OtpRequestSuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$OtpRequestErrorImplCopyWith<$Res> {
-  factory _$$OtpRequestErrorImplCopyWith(_$OtpRequestErrorImpl value,
-          $Res Function(_$OtpRequestErrorImpl) then) =
-      __$$OtpRequestErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
-}
-
-/// @nodoc
-class __$$OtpRequestErrorImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$OtpRequestErrorImpl>
-    implements _$$OtpRequestErrorImplCopyWith<$Res> {
-  __$$OtpRequestErrorImplCopyWithImpl(
-      _$OtpRequestErrorImpl _value, $Res Function(_$OtpRequestErrorImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$OtpRequestErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$OtpRequestErrorImpl implements OtpRequestError {
-  const _$OtpRequestErrorImpl(this.errorHandler);
-
-  @override
-  final ErrorHandler errorHandler;
-
-  @override
-  String toString() {
-    return 'ReservationState.otpRequestError(errorHandler: $errorHandler)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$OtpRequestErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$OtpRequestErrorImplCopyWith<_$OtpRequestErrorImpl> get copyWith =>
-      __$$OtpRequestErrorImplCopyWithImpl<_$OtpRequestErrorImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return otpRequestError(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return otpRequestError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpRequestError != null) {
-      return otpRequestError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return otpRequestError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return otpRequestError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpRequestError != null) {
-      return otpRequestError(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class OtpRequestError implements ReservationState {
-  const factory OtpRequestError(final ErrorHandler errorHandler) =
-      _$OtpRequestErrorImpl;
-
-  ErrorHandler get errorHandler;
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OtpRequestErrorImplCopyWith<_$OtpRequestErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$OtpVerificationLoadingImplCopyWith<$Res> {
-  factory _$$OtpVerificationLoadingImplCopyWith(
-          _$OtpVerificationLoadingImpl value,
-          $Res Function(_$OtpVerificationLoadingImpl) then) =
-      __$$OtpVerificationLoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$OtpVerificationLoadingImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$OtpVerificationLoadingImpl>
-    implements _$$OtpVerificationLoadingImplCopyWith<$Res> {
-  __$$OtpVerificationLoadingImplCopyWithImpl(
-      _$OtpVerificationLoadingImpl _value,
-      $Res Function(_$OtpVerificationLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$OtpVerificationLoadingImpl implements OtpVerificationLoading {
-  const _$OtpVerificationLoadingImpl();
-
-  @override
-  String toString() {
-    return 'ReservationState.otpVerificationLoading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$OtpVerificationLoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return otpVerificationLoading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return otpVerificationLoading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpVerificationLoading != null) {
-      return otpVerificationLoading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return otpVerificationLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return otpVerificationLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpVerificationLoading != null) {
-      return otpVerificationLoading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class OtpVerificationLoading implements ReservationState {
-  const factory OtpVerificationLoading() = _$OtpVerificationLoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$OtpVerificationSuccessImplCopyWith<$Res> {
-  factory _$$OtpVerificationSuccessImplCopyWith(
-          _$OtpVerificationSuccessImpl value,
-          $Res Function(_$OtpVerificationSuccessImpl) then) =
-      __$$OtpVerificationSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {ReservationResponseModel reservationResponse,
-      ReservationArguments? arguments});
-}
-
-/// @nodoc
-class __$$OtpVerificationSuccessImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$OtpVerificationSuccessImpl>
-    implements _$$OtpVerificationSuccessImplCopyWith<$Res> {
-  __$$OtpVerificationSuccessImplCopyWithImpl(
-      _$OtpVerificationSuccessImpl _value,
-      $Res Function(_$OtpVerificationSuccessImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? reservationResponse = null,
-    Object? arguments = freezed,
-  }) {
-    return _then(_$OtpVerificationSuccessImpl(
-      null == reservationResponse
-          ? _value.reservationResponse
-          : reservationResponse // ignore: cast_nullable_to_non_nullable
-              as ReservationResponseModel,
-      arguments: freezed == arguments
-          ? _value.arguments
-          : arguments // ignore: cast_nullable_to_non_nullable
-              as ReservationArguments?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$OtpVerificationSuccessImpl implements OtpVerificationSuccess {
-  const _$OtpVerificationSuccessImpl(this.reservationResponse,
-      {this.arguments});
-
-  @override
-  final ReservationResponseModel reservationResponse;
-  @override
-  final ReservationArguments? arguments;
-
-  @override
-  String toString() {
-    return 'ReservationState.otpVerificationSuccess(reservationResponse: $reservationResponse, arguments: $arguments)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$OtpVerificationSuccessImpl &&
-            (identical(other.reservationResponse, reservationResponse) ||
-                other.reservationResponse == reservationResponse) &&
-            (identical(other.arguments, arguments) ||
-                other.arguments == arguments));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, reservationResponse, arguments);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$OtpVerificationSuccessImplCopyWith<_$OtpVerificationSuccessImpl>
-      get copyWith => __$$OtpVerificationSuccessImplCopyWithImpl<
-          _$OtpVerificationSuccessImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return otpVerificationSuccess(reservationResponse, arguments);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return otpVerificationSuccess?.call(reservationResponse, arguments);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpVerificationSuccess != null) {
-      return otpVerificationSuccess(reservationResponse, arguments);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return otpVerificationSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return otpVerificationSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpVerificationSuccess != null) {
-      return otpVerificationSuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class OtpVerificationSuccess implements ReservationState {
-  const factory OtpVerificationSuccess(
-      final ReservationResponseModel reservationResponse,
-      {final ReservationArguments? arguments}) = _$OtpVerificationSuccessImpl;
-
-  ReservationResponseModel get reservationResponse;
-  ReservationArguments? get arguments;
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OtpVerificationSuccessImplCopyWith<_$OtpVerificationSuccessImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$OtpVerificationErrorImplCopyWith<$Res> {
-  factory _$$OtpVerificationErrorImplCopyWith(_$OtpVerificationErrorImpl value,
-          $Res Function(_$OtpVerificationErrorImpl) then) =
-      __$$OtpVerificationErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorHandler errorHandler});
-}
-
-/// @nodoc
-class __$$OtpVerificationErrorImplCopyWithImpl<$Res>
-    extends _$ReservationStateCopyWithImpl<$Res, _$OtpVerificationErrorImpl>
-    implements _$$OtpVerificationErrorImplCopyWith<$Res> {
-  __$$OtpVerificationErrorImplCopyWithImpl(_$OtpVerificationErrorImpl _value,
-      $Res Function(_$OtpVerificationErrorImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorHandler = null,
-  }) {
-    return _then(_$OtpVerificationErrorImpl(
-      null == errorHandler
-          ? _value.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$OtpVerificationErrorImpl implements OtpVerificationError {
-  const _$OtpVerificationErrorImpl(this.errorHandler);
-
-  @override
-  final ErrorHandler errorHandler;
-
-  @override
-  String toString() {
-    return 'ReservationState.otpVerificationError(errorHandler: $errorHandler)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$OtpVerificationErrorImpl &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$OtpVerificationErrorImplCopyWith<_$OtpVerificationErrorImpl>
-      get copyWith =>
-          __$$OtpVerificationErrorImplCopyWithImpl<_$OtpVerificationErrorImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() reservationLoading,
-    required TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)
-        reservationSuccess,
-    required TResult Function(ErrorHandler errorHandler) reservationError,
-    required TResult Function() timeSlotsLoading,
-    required TResult Function(TimeSlotsResponse timeSlotsResponse)
-        timeSlotsSuccess,
-    required TResult Function(ErrorHandler errorHandler) timeSlotsError,
-    required TResult Function() queueSettingsLoading,
-    required TResult Function(QueueSettingsResponse settingsResponse)
-        queueSettingsSuccess,
-    required TResult Function(ErrorHandler errorHandler) queueSettingsError,
-    required TResult Function() otpRequestLoading,
-    required TResult Function(OtpResponse otpResponse) otpRequestSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpRequestError,
-    required TResult Function() otpVerificationLoading,
-    required TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)
-        otpVerificationSuccess,
-    required TResult Function(ErrorHandler errorHandler) otpVerificationError,
-  }) {
-    return otpVerificationError(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? reservationLoading,
-    TResult? Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? reservationError,
-    TResult? Function()? timeSlotsLoading,
-    TResult? Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult? Function()? queueSettingsLoading,
-    TResult? Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult? Function()? otpRequestLoading,
-    TResult? Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult? Function()? otpVerificationLoading,
-    TResult? Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult? Function(ErrorHandler errorHandler)? otpVerificationError,
-  }) {
-    return otpVerificationError?.call(errorHandler);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? reservationLoading,
-    TResult Function(ReservationResponseModel reservationRequestModel,
-            ReservationArguments? arguments)?
-        reservationSuccess,
-    TResult Function(ErrorHandler errorHandler)? reservationError,
-    TResult Function()? timeSlotsLoading,
-    TResult Function(TimeSlotsResponse timeSlotsResponse)? timeSlotsSuccess,
-    TResult Function(ErrorHandler errorHandler)? timeSlotsError,
-    TResult Function()? queueSettingsLoading,
-    TResult Function(QueueSettingsResponse settingsResponse)?
-        queueSettingsSuccess,
-    TResult Function(ErrorHandler errorHandler)? queueSettingsError,
-    TResult Function()? otpRequestLoading,
-    TResult Function(OtpResponse otpResponse)? otpRequestSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpRequestError,
-    TResult Function()? otpVerificationLoading,
-    TResult Function(ReservationResponseModel reservationResponse,
-            ReservationArguments? arguments)?
-        otpVerificationSuccess,
-    TResult Function(ErrorHandler errorHandler)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpVerificationError != null) {
-      return otpVerificationError(errorHandler);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(ReservationLoading value) reservationLoading,
-    required TResult Function(ReservationSuccess value) reservationSuccess,
-    required TResult Function(ReservationError value) reservationError,
-    required TResult Function(TimeSlotsLoading value) timeSlotsLoading,
-    required TResult Function(TimeSlotsSuccess value) timeSlotsSuccess,
-    required TResult Function(TimeSlotsError value) timeSlotsError,
-    required TResult Function(QueueSettingsLoading value) queueSettingsLoading,
-    required TResult Function(QueueSettingsSuccess value) queueSettingsSuccess,
-    required TResult Function(QueueSettingsError value) queueSettingsError,
-    required TResult Function(OtpRequestLoading value) otpRequestLoading,
-    required TResult Function(OtpRequestSuccess value) otpRequestSuccess,
-    required TResult Function(OtpRequestError value) otpRequestError,
-    required TResult Function(OtpVerificationLoading value)
-        otpVerificationLoading,
-    required TResult Function(OtpVerificationSuccess value)
-        otpVerificationSuccess,
-    required TResult Function(OtpVerificationError value) otpVerificationError,
-  }) {
-    return otpVerificationError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(ReservationLoading value)? reservationLoading,
-    TResult? Function(ReservationSuccess value)? reservationSuccess,
-    TResult? Function(ReservationError value)? reservationError,
-    TResult? Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult? Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult? Function(TimeSlotsError value)? timeSlotsError,
-    TResult? Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult? Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult? Function(QueueSettingsError value)? queueSettingsError,
-    TResult? Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult? Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult? Function(OtpRequestError value)? otpRequestError,
-    TResult? Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult? Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult? Function(OtpVerificationError value)? otpVerificationError,
-  }) {
-    return otpVerificationError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(ReservationLoading value)? reservationLoading,
-    TResult Function(ReservationSuccess value)? reservationSuccess,
-    TResult Function(ReservationError value)? reservationError,
-    TResult Function(TimeSlotsLoading value)? timeSlotsLoading,
-    TResult Function(TimeSlotsSuccess value)? timeSlotsSuccess,
-    TResult Function(TimeSlotsError value)? timeSlotsError,
-    TResult Function(QueueSettingsLoading value)? queueSettingsLoading,
-    TResult Function(QueueSettingsSuccess value)? queueSettingsSuccess,
-    TResult Function(QueueSettingsError value)? queueSettingsError,
-    TResult Function(OtpRequestLoading value)? otpRequestLoading,
-    TResult Function(OtpRequestSuccess value)? otpRequestSuccess,
-    TResult Function(OtpRequestError value)? otpRequestError,
-    TResult Function(OtpVerificationLoading value)? otpVerificationLoading,
-    TResult Function(OtpVerificationSuccess value)? otpVerificationSuccess,
-    TResult Function(OtpVerificationError value)? otpVerificationError,
-    required TResult orElse(),
-  }) {
-    if (otpVerificationError != null) {
-      return otpVerificationError(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class OtpVerificationError implements ReservationState {
-  const factory OtpVerificationError(final ErrorHandler errorHandler) =
-      _$OtpVerificationErrorImpl;
-
-  ErrorHandler get errorHandler;
-
-  /// Create a copy of ReservationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OtpVerificationErrorImplCopyWith<_$OtpVerificationErrorImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

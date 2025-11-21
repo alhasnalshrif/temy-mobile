@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/reservations/data/repos/reservation_repo.dart';
 import 'package:temy_barber/features/reservations/data/models/queue_response.dart';
 import 'queue_state.dart';

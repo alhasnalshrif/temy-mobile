@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,1436 +9,627 @@ part of 'notification_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$NotificationState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(NotificationSettingsResponse settings)
-        settingsLoaded,
-    required TResult Function(NotificationResponse response) settingsUpdated,
-    required TResult Function(NotificationHistoryResponse history)
-        historyLoaded,
-    required TResult Function() permissionGranted,
-    required TResult Function() permissionDenied,
-    required TResult Function(String message) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult? Function(NotificationResponse response)? settingsUpdated,
-    TResult? Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult? Function()? permissionGranted,
-    TResult? Function()? permissionDenied,
-    TResult? Function(String message)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult Function(NotificationResponse response)? settingsUpdated,
-    TResult Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult Function()? permissionGranted,
-    TResult Function()? permissionDenied,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SettingsLoaded value) settingsLoaded,
-    required TResult Function(_SettingsUpdated value) settingsUpdated,
-    required TResult Function(_HistoryLoaded value) historyLoaded,
-    required TResult Function(_PermissionGranted value) permissionGranted,
-    required TResult Function(_PermissionDenied value) permissionDenied,
-    required TResult Function(_Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SettingsLoaded value)? settingsLoaded,
-    TResult? Function(_SettingsUpdated value)? settingsUpdated,
-    TResult? Function(_HistoryLoaded value)? historyLoaded,
-    TResult? Function(_PermissionGranted value)? permissionGranted,
-    TResult? Function(_PermissionDenied value)? permissionDenied,
-    TResult? Function(_Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SettingsLoaded value)? settingsLoaded,
-    TResult Function(_SettingsUpdated value)? settingsUpdated,
-    TResult Function(_HistoryLoaded value)? historyLoaded,
-    TResult Function(_PermissionGranted value)? permissionGranted,
-    TResult Function(_PermissionDenied value)? permissionDenied,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationState()';
+}
+
+
 }
 
 /// @nodoc
-abstract class $NotificationStateCopyWith<$Res> {
-  factory $NotificationStateCopyWith(
-          NotificationState value, $Res Function(NotificationState) then) =
-      _$NotificationStateCopyWithImpl<$Res, NotificationState>;
+class $NotificationStateCopyWith<$Res>  {
+$NotificationStateCopyWith(NotificationState _, $Res Function(NotificationState) __);
 }
 
-/// @nodoc
-class _$NotificationStateCopyWithImpl<$Res, $Val extends NotificationState>
-    implements $NotificationStateCopyWith<$Res> {
-  _$NotificationStateCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+/// Adds pattern-matching-related methods to [NotificationState].
+extension NotificationStatePatterns on NotificationState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _SettingsLoaded value)?  settingsLoaded,TResult Function( _SettingsUpdated value)?  settingsUpdated,TResult Function( _HistoryLoaded value)?  historyLoaded,TResult Function( _PermissionGranted value)?  permissionGranted,TResult Function( _PermissionDenied value)?  permissionDenied,TResult Function( _Error value)?  error,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _SettingsLoaded() when settingsLoaded != null:
+return settingsLoaded(_that);case _SettingsUpdated() when settingsUpdated != null:
+return settingsUpdated(_that);case _HistoryLoaded() when historyLoaded != null:
+return historyLoaded(_that);case _PermissionGranted() when permissionGranted != null:
+return permissionGranted(_that);case _PermissionDenied() when permissionDenied != null:
+return permissionDenied(_that);case _Error() when error != null:
+return error(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _SettingsLoaded value)  settingsLoaded,required TResult Function( _SettingsUpdated value)  settingsUpdated,required TResult Function( _HistoryLoaded value)  historyLoaded,required TResult Function( _PermissionGranted value)  permissionGranted,required TResult Function( _PermissionDenied value)  permissionDenied,required TResult Function( _Error value)  error,}){
+final _that = this;
+switch (_that) {
+case _Initial():
+return initial(_that);case _Loading():
+return loading(_that);case _SettingsLoaded():
+return settingsLoaded(_that);case _SettingsUpdated():
+return settingsUpdated(_that);case _HistoryLoaded():
+return historyLoaded(_that);case _PermissionGranted():
+return permissionGranted(_that);case _PermissionDenied():
+return permissionDenied(_that);case _Error():
+return error(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _SettingsLoaded value)?  settingsLoaded,TResult? Function( _SettingsUpdated value)?  settingsUpdated,TResult? Function( _HistoryLoaded value)?  historyLoaded,TResult? Function( _PermissionGranted value)?  permissionGranted,TResult? Function( _PermissionDenied value)?  permissionDenied,TResult? Function( _Error value)?  error,}){
+final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _SettingsLoaded() when settingsLoaded != null:
+return settingsLoaded(_that);case _SettingsUpdated() when settingsUpdated != null:
+return settingsUpdated(_that);case _HistoryLoaded() when historyLoaded != null:
+return historyLoaded(_that);case _PermissionGranted() when permissionGranted != null:
+return permissionGranted(_that);case _PermissionDenied() when permissionDenied != null:
+return permissionDenied(_that);case _Error() when error != null:
+return error(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( NotificationSettingsResponse settings)?  settingsLoaded,TResult Function( NotificationResponse response)?  settingsUpdated,TResult Function( NotificationHistoryResponse history)?  historyLoaded,TResult Function()?  permissionGranted,TResult Function()?  permissionDenied,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial();case _Loading() when loading != null:
+return loading();case _SettingsLoaded() when settingsLoaded != null:
+return settingsLoaded(_that.settings);case _SettingsUpdated() when settingsUpdated != null:
+return settingsUpdated(_that.response);case _HistoryLoaded() when historyLoaded != null:
+return historyLoaded(_that.history);case _PermissionGranted() when permissionGranted != null:
+return permissionGranted();case _PermissionDenied() when permissionDenied != null:
+return permissionDenied();case _Error() when error != null:
+return error(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( NotificationSettingsResponse settings)  settingsLoaded,required TResult Function( NotificationResponse response)  settingsUpdated,required TResult Function( NotificationHistoryResponse history)  historyLoaded,required TResult Function()  permissionGranted,required TResult Function()  permissionDenied,required TResult Function( String message)  error,}) {final _that = this;
+switch (_that) {
+case _Initial():
+return initial();case _Loading():
+return loading();case _SettingsLoaded():
+return settingsLoaded(_that.settings);case _SettingsUpdated():
+return settingsUpdated(_that.response);case _HistoryLoaded():
+return historyLoaded(_that.history);case _PermissionGranted():
+return permissionGranted();case _PermissionDenied():
+return permissionDenied();case _Error():
+return error(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( NotificationSettingsResponse settings)?  settingsLoaded,TResult? Function( NotificationResponse response)?  settingsUpdated,TResult? Function( NotificationHistoryResponse history)?  historyLoaded,TResult? Function()?  permissionGranted,TResult? Function()?  permissionDenied,TResult? Function( String message)?  error,}) {final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial();case _Loading() when loading != null:
+return loading();case _SettingsLoaded() when settingsLoaded != null:
+return settingsLoaded(_that.settings);case _SettingsUpdated() when settingsUpdated != null:
+return settingsUpdated(_that.response);case _HistoryLoaded() when historyLoaded != null:
+return historyLoaded(_that.history);case _PermissionGranted() when permissionGranted != null:
+return permissionGranted();case _PermissionDenied() when permissionDenied != null:
+return permissionDenied();case _Error() when error != null:
+return error(_that.message);case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$NotificationStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'NotificationState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(NotificationSettingsResponse settings)
-        settingsLoaded,
-    required TResult Function(NotificationResponse response) settingsUpdated,
-    required TResult Function(NotificationHistoryResponse history)
-        historyLoaded,
-    required TResult Function() permissionGranted,
-    required TResult Function() permissionDenied,
-    required TResult Function(String message) error,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult? Function(NotificationResponse response)? settingsUpdated,
-    TResult? Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult? Function()? permissionGranted,
-    TResult? Function()? permissionDenied,
-    TResult? Function(String message)? error,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult Function(NotificationResponse response)? settingsUpdated,
-    TResult Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult Function()? permissionGranted,
-    TResult Function()? permissionDenied,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SettingsLoaded value) settingsLoaded,
-    required TResult Function(_SettingsUpdated value) settingsUpdated,
-    required TResult Function(_HistoryLoaded value) historyLoaded,
-    required TResult Function(_PermissionGranted value) permissionGranted,
-    required TResult Function(_PermissionDenied value) permissionDenied,
-    required TResult Function(_Error value) error,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SettingsLoaded value)? settingsLoaded,
-    TResult? Function(_SettingsUpdated value)? settingsUpdated,
-    TResult? Function(_HistoryLoaded value)? historyLoaded,
-    TResult? Function(_PermissionGranted value)? permissionGranted,
-    TResult? Function(_PermissionDenied value)? permissionDenied,
-    TResult? Function(_Error value)? error,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SettingsLoaded value)? settingsLoaded,
-    TResult Function(_SettingsUpdated value)? settingsUpdated,
-    TResult Function(_HistoryLoaded value)? historyLoaded,
-    TResult Function(_PermissionGranted value)? permissionGranted,
-    TResult Function(_PermissionDenied value)? permissionDenied,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements NotificationState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$NotificationStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
 
-  @override
-  String toString() {
-    return 'NotificationState.loading()';
-  }
+class _Initial implements NotificationState {
+  const _Initial();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(NotificationSettingsResponse settings)
-        settingsLoaded,
-    required TResult Function(NotificationResponse response) settingsUpdated,
-    required TResult Function(NotificationHistoryResponse history)
-        historyLoaded,
-    required TResult Function() permissionGranted,
-    required TResult Function() permissionDenied,
-    required TResult Function(String message) error,
-  }) {
-    return loading();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult? Function(NotificationResponse response)? settingsUpdated,
-    TResult? Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult? Function()? permissionGranted,
-    TResult? Function()? permissionDenied,
-    TResult? Function(String message)? error,
-  }) {
-    return loading?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult Function(NotificationResponse response)? settingsUpdated,
-    TResult Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult Function()? permissionGranted,
-    TResult Function()? permissionDenied,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SettingsLoaded value) settingsLoaded,
-    required TResult Function(_SettingsUpdated value) settingsUpdated,
-    required TResult Function(_HistoryLoaded value) historyLoaded,
-    required TResult Function(_PermissionGranted value) permissionGranted,
-    required TResult Function(_PermissionDenied value) permissionDenied,
-    required TResult Function(_Error value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SettingsLoaded value)? settingsLoaded,
-    TResult? Function(_SettingsUpdated value)? settingsUpdated,
-    TResult? Function(_HistoryLoaded value)? historyLoaded,
-    TResult? Function(_PermissionGranted value)? permissionGranted,
-    TResult? Function(_PermissionDenied value)? permissionDenied,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SettingsLoaded value)? settingsLoaded,
-    TResult Function(_SettingsUpdated value)? settingsUpdated,
-    TResult Function(_HistoryLoaded value)? historyLoaded,
-    TResult Function(_PermissionGranted value)? permissionGranted,
-    TResult Function(_PermissionDenied value)? permissionDenied,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
 }
 
-abstract class _Loading implements NotificationState {
-  const factory _Loading() = _$LoadingImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationState.initial()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Loading implements NotificationState {
+  const _Loading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _SettingsLoaded implements NotificationState {
+  const _SettingsLoaded(this.settings);
+  
+
+ final  NotificationSettingsResponse settings;
+
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SettingsLoadedCopyWith<_SettingsLoaded> get copyWith => __$SettingsLoadedCopyWithImpl<_SettingsLoaded>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsLoaded&&(identical(other.settings, settings) || other.settings == settings));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,settings);
+
+@override
+String toString() {
+  return 'NotificationState.settingsLoaded(settings: $settings)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$SettingsLoadedImplCopyWith<$Res> {
-  factory _$$SettingsLoadedImplCopyWith(_$SettingsLoadedImpl value,
-          $Res Function(_$SettingsLoadedImpl) then) =
-      __$$SettingsLoadedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({NotificationSettingsResponse settings});
+abstract mixin class _$SettingsLoadedCopyWith<$Res> implements $NotificationStateCopyWith<$Res> {
+  factory _$SettingsLoadedCopyWith(_SettingsLoaded value, $Res Function(_SettingsLoaded) _then) = __$SettingsLoadedCopyWithImpl;
+@useResult
+$Res call({
+ NotificationSettingsResponse settings
+});
 
-  $NotificationSettingsResponseCopyWith<$Res> get settings;
+
+$NotificationSettingsResponseCopyWith<$Res> get settings;
+
+}
+/// @nodoc
+class __$SettingsLoadedCopyWithImpl<$Res>
+    implements _$SettingsLoadedCopyWith<$Res> {
+  __$SettingsLoadedCopyWithImpl(this._self, this._then);
+
+  final _SettingsLoaded _self;
+  final $Res Function(_SettingsLoaded) _then;
+
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? settings = null,}) {
+  return _then(_SettingsLoaded(
+null == settings ? _self.settings : settings // ignore: cast_nullable_to_non_nullable
+as NotificationSettingsResponse,
+  ));
 }
 
-/// @nodoc
-class __$$SettingsLoadedImplCopyWithImpl<$Res>
-    extends _$NotificationStateCopyWithImpl<$Res, _$SettingsLoadedImpl>
-    implements _$$SettingsLoadedImplCopyWith<$Res> {
-  __$$SettingsLoadedImplCopyWithImpl(
-      _$SettingsLoadedImpl _value, $Res Function(_$SettingsLoadedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? settings = null,
-  }) {
-    return _then(_$SettingsLoadedImpl(
-      null == settings
-          ? _value.settings
-          : settings // ignore: cast_nullable_to_non_nullable
-              as NotificationSettingsResponse,
-    ));
-  }
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $NotificationSettingsResponseCopyWith<$Res> get settings {
-    return $NotificationSettingsResponseCopyWith<$Res>(_value.settings,
-        (value) {
-      return _then(_value.copyWith(settings: value));
-    });
-  }
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$NotificationSettingsResponseCopyWith<$Res> get settings {
+  
+  return $NotificationSettingsResponseCopyWith<$Res>(_self.settings, (value) {
+    return _then(_self.copyWith(settings: value));
+  });
+}
 }
 
 /// @nodoc
 
-class _$SettingsLoadedImpl implements _SettingsLoaded {
-  const _$SettingsLoadedImpl(this.settings);
 
-  @override
-  final NotificationSettingsResponse settings;
+class _SettingsUpdated implements NotificationState {
+  const _SettingsUpdated(this.response);
+  
 
-  @override
-  String toString() {
-    return 'NotificationState.settingsLoaded(settings: $settings)';
-  }
+ final  NotificationResponse response;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SettingsLoadedImpl &&
-            (identical(other.settings, settings) ||
-                other.settings == settings));
-  }
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SettingsUpdatedCopyWith<_SettingsUpdated> get copyWith => __$SettingsUpdatedCopyWithImpl<_SettingsUpdated>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, settings);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SettingsLoadedImplCopyWith<_$SettingsLoadedImpl> get copyWith =>
-      __$$SettingsLoadedImplCopyWithImpl<_$SettingsLoadedImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(NotificationSettingsResponse settings)
-        settingsLoaded,
-    required TResult Function(NotificationResponse response) settingsUpdated,
-    required TResult Function(NotificationHistoryResponse history)
-        historyLoaded,
-    required TResult Function() permissionGranted,
-    required TResult Function() permissionDenied,
-    required TResult Function(String message) error,
-  }) {
-    return settingsLoaded(settings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult? Function(NotificationResponse response)? settingsUpdated,
-    TResult? Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult? Function()? permissionGranted,
-    TResult? Function()? permissionDenied,
-    TResult? Function(String message)? error,
-  }) {
-    return settingsLoaded?.call(settings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult Function(NotificationResponse response)? settingsUpdated,
-    TResult Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult Function()? permissionGranted,
-    TResult Function()? permissionDenied,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (settingsLoaded != null) {
-      return settingsLoaded(settings);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SettingsLoaded value) settingsLoaded,
-    required TResult Function(_SettingsUpdated value) settingsUpdated,
-    required TResult Function(_HistoryLoaded value) historyLoaded,
-    required TResult Function(_PermissionGranted value) permissionGranted,
-    required TResult Function(_PermissionDenied value) permissionDenied,
-    required TResult Function(_Error value) error,
-  }) {
-    return settingsLoaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SettingsLoaded value)? settingsLoaded,
-    TResult? Function(_SettingsUpdated value)? settingsUpdated,
-    TResult? Function(_HistoryLoaded value)? historyLoaded,
-    TResult? Function(_PermissionGranted value)? permissionGranted,
-    TResult? Function(_PermissionDenied value)? permissionDenied,
-    TResult? Function(_Error value)? error,
-  }) {
-    return settingsLoaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SettingsLoaded value)? settingsLoaded,
-    TResult Function(_SettingsUpdated value)? settingsUpdated,
-    TResult Function(_HistoryLoaded value)? historyLoaded,
-    TResult Function(_PermissionGranted value)? permissionGranted,
-    TResult Function(_PermissionDenied value)? permissionDenied,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (settingsLoaded != null) {
-      return settingsLoaded(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsUpdated&&(identical(other.response, response) || other.response == response));
 }
 
-abstract class _SettingsLoaded implements NotificationState {
-  const factory _SettingsLoaded(final NotificationSettingsResponse settings) =
-      _$SettingsLoadedImpl;
 
-  NotificationSettingsResponse get settings;
+@override
+int get hashCode => Object.hash(runtimeType,response);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SettingsLoadedImplCopyWith<_$SettingsLoadedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'NotificationState.settingsUpdated(response: $response)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$SettingsUpdatedImplCopyWith<$Res> {
-  factory _$$SettingsUpdatedImplCopyWith(_$SettingsUpdatedImpl value,
-          $Res Function(_$SettingsUpdatedImpl) then) =
-      __$$SettingsUpdatedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({NotificationResponse response});
+abstract mixin class _$SettingsUpdatedCopyWith<$Res> implements $NotificationStateCopyWith<$Res> {
+  factory _$SettingsUpdatedCopyWith(_SettingsUpdated value, $Res Function(_SettingsUpdated) _then) = __$SettingsUpdatedCopyWithImpl;
+@useResult
+$Res call({
+ NotificationResponse response
+});
 
-  $NotificationResponseCopyWith<$Res> get response;
+
+$NotificationResponseCopyWith<$Res> get response;
+
+}
+/// @nodoc
+class __$SettingsUpdatedCopyWithImpl<$Res>
+    implements _$SettingsUpdatedCopyWith<$Res> {
+  __$SettingsUpdatedCopyWithImpl(this._self, this._then);
+
+  final _SettingsUpdated _self;
+  final $Res Function(_SettingsUpdated) _then;
+
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? response = null,}) {
+  return _then(_SettingsUpdated(
+null == response ? _self.response : response // ignore: cast_nullable_to_non_nullable
+as NotificationResponse,
+  ));
 }
 
-/// @nodoc
-class __$$SettingsUpdatedImplCopyWithImpl<$Res>
-    extends _$NotificationStateCopyWithImpl<$Res, _$SettingsUpdatedImpl>
-    implements _$$SettingsUpdatedImplCopyWith<$Res> {
-  __$$SettingsUpdatedImplCopyWithImpl(
-      _$SettingsUpdatedImpl _value, $Res Function(_$SettingsUpdatedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? response = null,
-  }) {
-    return _then(_$SettingsUpdatedImpl(
-      null == response
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
-              as NotificationResponse,
-    ));
-  }
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $NotificationResponseCopyWith<$Res> get response {
-    return $NotificationResponseCopyWith<$Res>(_value.response, (value) {
-      return _then(_value.copyWith(response: value));
-    });
-  }
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$NotificationResponseCopyWith<$Res> get response {
+  
+  return $NotificationResponseCopyWith<$Res>(_self.response, (value) {
+    return _then(_self.copyWith(response: value));
+  });
+}
 }
 
 /// @nodoc
 
-class _$SettingsUpdatedImpl implements _SettingsUpdated {
-  const _$SettingsUpdatedImpl(this.response);
 
-  @override
-  final NotificationResponse response;
+class _HistoryLoaded implements NotificationState {
+  const _HistoryLoaded(this.history);
+  
 
-  @override
-  String toString() {
-    return 'NotificationState.settingsUpdated(response: $response)';
-  }
+ final  NotificationHistoryResponse history;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SettingsUpdatedImpl &&
-            (identical(other.response, response) ||
-                other.response == response));
-  }
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$HistoryLoadedCopyWith<_HistoryLoaded> get copyWith => __$HistoryLoadedCopyWithImpl<_HistoryLoaded>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, response);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SettingsUpdatedImplCopyWith<_$SettingsUpdatedImpl> get copyWith =>
-      __$$SettingsUpdatedImplCopyWithImpl<_$SettingsUpdatedImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(NotificationSettingsResponse settings)
-        settingsLoaded,
-    required TResult Function(NotificationResponse response) settingsUpdated,
-    required TResult Function(NotificationHistoryResponse history)
-        historyLoaded,
-    required TResult Function() permissionGranted,
-    required TResult Function() permissionDenied,
-    required TResult Function(String message) error,
-  }) {
-    return settingsUpdated(response);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult? Function(NotificationResponse response)? settingsUpdated,
-    TResult? Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult? Function()? permissionGranted,
-    TResult? Function()? permissionDenied,
-    TResult? Function(String message)? error,
-  }) {
-    return settingsUpdated?.call(response);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult Function(NotificationResponse response)? settingsUpdated,
-    TResult Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult Function()? permissionGranted,
-    TResult Function()? permissionDenied,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (settingsUpdated != null) {
-      return settingsUpdated(response);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SettingsLoaded value) settingsLoaded,
-    required TResult Function(_SettingsUpdated value) settingsUpdated,
-    required TResult Function(_HistoryLoaded value) historyLoaded,
-    required TResult Function(_PermissionGranted value) permissionGranted,
-    required TResult Function(_PermissionDenied value) permissionDenied,
-    required TResult Function(_Error value) error,
-  }) {
-    return settingsUpdated(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SettingsLoaded value)? settingsLoaded,
-    TResult? Function(_SettingsUpdated value)? settingsUpdated,
-    TResult? Function(_HistoryLoaded value)? historyLoaded,
-    TResult? Function(_PermissionGranted value)? permissionGranted,
-    TResult? Function(_PermissionDenied value)? permissionDenied,
-    TResult? Function(_Error value)? error,
-  }) {
-    return settingsUpdated?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SettingsLoaded value)? settingsLoaded,
-    TResult Function(_SettingsUpdated value)? settingsUpdated,
-    TResult Function(_HistoryLoaded value)? historyLoaded,
-    TResult Function(_PermissionGranted value)? permissionGranted,
-    TResult Function(_PermissionDenied value)? permissionDenied,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (settingsUpdated != null) {
-      return settingsUpdated(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HistoryLoaded&&(identical(other.history, history) || other.history == history));
 }
 
-abstract class _SettingsUpdated implements NotificationState {
-  const factory _SettingsUpdated(final NotificationResponse response) =
-      _$SettingsUpdatedImpl;
 
-  NotificationResponse get response;
+@override
+int get hashCode => Object.hash(runtimeType,history);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SettingsUpdatedImplCopyWith<_$SettingsUpdatedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'NotificationState.historyLoaded(history: $history)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$HistoryLoadedImplCopyWith<$Res> {
-  factory _$$HistoryLoadedImplCopyWith(
-          _$HistoryLoadedImpl value, $Res Function(_$HistoryLoadedImpl) then) =
-      __$$HistoryLoadedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({NotificationHistoryResponse history});
+abstract mixin class _$HistoryLoadedCopyWith<$Res> implements $NotificationStateCopyWith<$Res> {
+  factory _$HistoryLoadedCopyWith(_HistoryLoaded value, $Res Function(_HistoryLoaded) _then) = __$HistoryLoadedCopyWithImpl;
+@useResult
+$Res call({
+ NotificationHistoryResponse history
+});
 
-  $NotificationHistoryResponseCopyWith<$Res> get history;
+
+$NotificationHistoryResponseCopyWith<$Res> get history;
+
+}
+/// @nodoc
+class __$HistoryLoadedCopyWithImpl<$Res>
+    implements _$HistoryLoadedCopyWith<$Res> {
+  __$HistoryLoadedCopyWithImpl(this._self, this._then);
+
+  final _HistoryLoaded _self;
+  final $Res Function(_HistoryLoaded) _then;
+
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? history = null,}) {
+  return _then(_HistoryLoaded(
+null == history ? _self.history : history // ignore: cast_nullable_to_non_nullable
+as NotificationHistoryResponse,
+  ));
 }
 
-/// @nodoc
-class __$$HistoryLoadedImplCopyWithImpl<$Res>
-    extends _$NotificationStateCopyWithImpl<$Res, _$HistoryLoadedImpl>
-    implements _$$HistoryLoadedImplCopyWith<$Res> {
-  __$$HistoryLoadedImplCopyWithImpl(
-      _$HistoryLoadedImpl _value, $Res Function(_$HistoryLoadedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? history = null,
-  }) {
-    return _then(_$HistoryLoadedImpl(
-      null == history
-          ? _value.history
-          : history // ignore: cast_nullable_to_non_nullable
-              as NotificationHistoryResponse,
-    ));
-  }
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $NotificationHistoryResponseCopyWith<$Res> get history {
-    return $NotificationHistoryResponseCopyWith<$Res>(_value.history, (value) {
-      return _then(_value.copyWith(history: value));
-    });
-  }
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$NotificationHistoryResponseCopyWith<$Res> get history {
+  
+  return $NotificationHistoryResponseCopyWith<$Res>(_self.history, (value) {
+    return _then(_self.copyWith(history: value));
+  });
+}
 }
 
 /// @nodoc
 
-class _$HistoryLoadedImpl implements _HistoryLoaded {
-  const _$HistoryLoadedImpl(this.history);
 
-  @override
-  final NotificationHistoryResponse history;
+class _PermissionGranted implements NotificationState {
+  const _PermissionGranted();
+  
 
-  @override
-  String toString() {
-    return 'NotificationState.historyLoaded(history: $history)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$HistoryLoadedImpl &&
-            (identical(other.history, history) || other.history == history));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, history);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$HistoryLoadedImplCopyWith<_$HistoryLoadedImpl> get copyWith =>
-      __$$HistoryLoadedImplCopyWithImpl<_$HistoryLoadedImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(NotificationSettingsResponse settings)
-        settingsLoaded,
-    required TResult Function(NotificationResponse response) settingsUpdated,
-    required TResult Function(NotificationHistoryResponse history)
-        historyLoaded,
-    required TResult Function() permissionGranted,
-    required TResult Function() permissionDenied,
-    required TResult Function(String message) error,
-  }) {
-    return historyLoaded(history);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult? Function(NotificationResponse response)? settingsUpdated,
-    TResult? Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult? Function()? permissionGranted,
-    TResult? Function()? permissionDenied,
-    TResult? Function(String message)? error,
-  }) {
-    return historyLoaded?.call(history);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult Function(NotificationResponse response)? settingsUpdated,
-    TResult Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult Function()? permissionGranted,
-    TResult Function()? permissionDenied,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (historyLoaded != null) {
-      return historyLoaded(history);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SettingsLoaded value) settingsLoaded,
-    required TResult Function(_SettingsUpdated value) settingsUpdated,
-    required TResult Function(_HistoryLoaded value) historyLoaded,
-    required TResult Function(_PermissionGranted value) permissionGranted,
-    required TResult Function(_PermissionDenied value) permissionDenied,
-    required TResult Function(_Error value) error,
-  }) {
-    return historyLoaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SettingsLoaded value)? settingsLoaded,
-    TResult? Function(_SettingsUpdated value)? settingsUpdated,
-    TResult? Function(_HistoryLoaded value)? historyLoaded,
-    TResult? Function(_PermissionGranted value)? permissionGranted,
-    TResult? Function(_PermissionDenied value)? permissionDenied,
-    TResult? Function(_Error value)? error,
-  }) {
-    return historyLoaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SettingsLoaded value)? settingsLoaded,
-    TResult Function(_SettingsUpdated value)? settingsUpdated,
-    TResult Function(_HistoryLoaded value)? historyLoaded,
-    TResult Function(_PermissionGranted value)? permissionGranted,
-    TResult Function(_PermissionDenied value)? permissionDenied,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (historyLoaded != null) {
-      return historyLoaded(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PermissionGranted);
 }
 
-abstract class _HistoryLoaded implements NotificationState {
-  const factory _HistoryLoaded(final NotificationHistoryResponse history) =
-      _$HistoryLoadedImpl;
 
-  NotificationHistoryResponse get history;
+@override
+int get hashCode => runtimeType.hashCode;
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HistoryLoadedImplCopyWith<_$HistoryLoadedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'NotificationState.permissionGranted()';
 }
 
-/// @nodoc
-abstract class _$$PermissionGrantedImplCopyWith<$Res> {
-  factory _$$PermissionGrantedImplCopyWith(_$PermissionGrantedImpl value,
-          $Res Function(_$PermissionGrantedImpl) then) =
-      __$$PermissionGrantedImplCopyWithImpl<$Res>;
+
 }
 
-/// @nodoc
-class __$$PermissionGrantedImplCopyWithImpl<$Res>
-    extends _$NotificationStateCopyWithImpl<$Res, _$PermissionGrantedImpl>
-    implements _$$PermissionGrantedImplCopyWith<$Res> {
-  __$$PermissionGrantedImplCopyWithImpl(_$PermissionGrantedImpl _value,
-      $Res Function(_$PermissionGrantedImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-}
+
 
 /// @nodoc
 
-class _$PermissionGrantedImpl implements _PermissionGranted {
-  const _$PermissionGrantedImpl();
 
-  @override
-  String toString() {
-    return 'NotificationState.permissionGranted()';
-  }
+class _PermissionDenied implements NotificationState {
+  const _PermissionDenied();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PermissionGrantedImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(NotificationSettingsResponse settings)
-        settingsLoaded,
-    required TResult Function(NotificationResponse response) settingsUpdated,
-    required TResult Function(NotificationHistoryResponse history)
-        historyLoaded,
-    required TResult Function() permissionGranted,
-    required TResult Function() permissionDenied,
-    required TResult Function(String message) error,
-  }) {
-    return permissionGranted();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult? Function(NotificationResponse response)? settingsUpdated,
-    TResult? Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult? Function()? permissionGranted,
-    TResult? Function()? permissionDenied,
-    TResult? Function(String message)? error,
-  }) {
-    return permissionGranted?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult Function(NotificationResponse response)? settingsUpdated,
-    TResult Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult Function()? permissionGranted,
-    TResult Function()? permissionDenied,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (permissionGranted != null) {
-      return permissionGranted();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SettingsLoaded value) settingsLoaded,
-    required TResult Function(_SettingsUpdated value) settingsUpdated,
-    required TResult Function(_HistoryLoaded value) historyLoaded,
-    required TResult Function(_PermissionGranted value) permissionGranted,
-    required TResult Function(_PermissionDenied value) permissionDenied,
-    required TResult Function(_Error value) error,
-  }) {
-    return permissionGranted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SettingsLoaded value)? settingsLoaded,
-    TResult? Function(_SettingsUpdated value)? settingsUpdated,
-    TResult? Function(_HistoryLoaded value)? historyLoaded,
-    TResult? Function(_PermissionGranted value)? permissionGranted,
-    TResult? Function(_PermissionDenied value)? permissionDenied,
-    TResult? Function(_Error value)? error,
-  }) {
-    return permissionGranted?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SettingsLoaded value)? settingsLoaded,
-    TResult Function(_SettingsUpdated value)? settingsUpdated,
-    TResult Function(_HistoryLoaded value)? historyLoaded,
-    TResult Function(_PermissionGranted value)? permissionGranted,
-    TResult Function(_PermissionDenied value)? permissionDenied,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (permissionGranted != null) {
-      return permissionGranted(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PermissionDenied);
 }
 
-abstract class _PermissionGranted implements NotificationState {
-  const factory _PermissionGranted() = _$PermissionGrantedImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationState.permissionDenied()';
 }
 
-/// @nodoc
-abstract class _$$PermissionDeniedImplCopyWith<$Res> {
-  factory _$$PermissionDeniedImplCopyWith(_$PermissionDeniedImpl value,
-          $Res Function(_$PermissionDeniedImpl) then) =
-      __$$PermissionDeniedImplCopyWithImpl<$Res>;
+
 }
 
-/// @nodoc
-class __$$PermissionDeniedImplCopyWithImpl<$Res>
-    extends _$NotificationStateCopyWithImpl<$Res, _$PermissionDeniedImpl>
-    implements _$$PermissionDeniedImplCopyWith<$Res> {
-  __$$PermissionDeniedImplCopyWithImpl(_$PermissionDeniedImpl _value,
-      $Res Function(_$PermissionDeniedImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-}
+
 
 /// @nodoc
 
-class _$PermissionDeniedImpl implements _PermissionDenied {
-  const _$PermissionDeniedImpl();
 
-  @override
-  String toString() {
-    return 'NotificationState.permissionDenied()';
-  }
+class _Error implements NotificationState {
+  const _Error(this.message);
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PermissionDeniedImpl);
-  }
+ final  String message;
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(NotificationSettingsResponse settings)
-        settingsLoaded,
-    required TResult Function(NotificationResponse response) settingsUpdated,
-    required TResult Function(NotificationHistoryResponse history)
-        historyLoaded,
-    required TResult Function() permissionGranted,
-    required TResult Function() permissionDenied,
-    required TResult Function(String message) error,
-  }) {
-    return permissionDenied();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult? Function(NotificationResponse response)? settingsUpdated,
-    TResult? Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult? Function()? permissionGranted,
-    TResult? Function()? permissionDenied,
-    TResult? Function(String message)? error,
-  }) {
-    return permissionDenied?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult Function(NotificationResponse response)? settingsUpdated,
-    TResult Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult Function()? permissionGranted,
-    TResult Function()? permissionDenied,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (permissionDenied != null) {
-      return permissionDenied();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SettingsLoaded value) settingsLoaded,
-    required TResult Function(_SettingsUpdated value) settingsUpdated,
-    required TResult Function(_HistoryLoaded value) historyLoaded,
-    required TResult Function(_PermissionGranted value) permissionGranted,
-    required TResult Function(_PermissionDenied value) permissionDenied,
-    required TResult Function(_Error value) error,
-  }) {
-    return permissionDenied(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SettingsLoaded value)? settingsLoaded,
-    TResult? Function(_SettingsUpdated value)? settingsUpdated,
-    TResult? Function(_HistoryLoaded value)? historyLoaded,
-    TResult? Function(_PermissionGranted value)? permissionGranted,
-    TResult? Function(_PermissionDenied value)? permissionDenied,
-    TResult? Function(_Error value)? error,
-  }) {
-    return permissionDenied?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SettingsLoaded value)? settingsLoaded,
-    TResult Function(_SettingsUpdated value)? settingsUpdated,
-    TResult Function(_HistoryLoaded value)? historyLoaded,
-    TResult Function(_PermissionGranted value)? permissionGranted,
-    TResult Function(_PermissionDenied value)? permissionDenied,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (permissionDenied != null) {
-      return permissionDenied(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message));
 }
 
-abstract class _PermissionDenied implements NotificationState {
-  const factory _PermissionDenied() = _$PermissionDeniedImpl;
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'NotificationState.error(message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<$Res> {
-  factory _$$ErrorImplCopyWith(
-          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
-      __$$ErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
+abstract mixin class _$ErrorCopyWith<$Res> implements $NotificationStateCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
 
+
+
+
+}
 /// @nodoc
-class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$NotificationStateCopyWithImpl<$Res, _$ErrorImpl>
-    implements _$$ErrorImplCopyWith<$Res> {
-  __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
-      : super(_value, _then);
+class __$ErrorCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$ErrorImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+  final _Error _self;
+  final $Res Function(_Error) _then;
+
+/// Create a copy of NotificationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_Error(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'NotificationState.error(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(NotificationSettingsResponse settings)
-        settingsLoaded,
-    required TResult Function(NotificationResponse response) settingsUpdated,
-    required TResult Function(NotificationHistoryResponse history)
-        historyLoaded,
-    required TResult Function() permissionGranted,
-    required TResult Function() permissionDenied,
-    required TResult Function(String message) error,
-  }) {
-    return error(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult? Function(NotificationResponse response)? settingsUpdated,
-    TResult? Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult? Function()? permissionGranted,
-    TResult? Function()? permissionDenied,
-    TResult? Function(String message)? error,
-  }) {
-    return error?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(NotificationSettingsResponse settings)? settingsLoaded,
-    TResult Function(NotificationResponse response)? settingsUpdated,
-    TResult Function(NotificationHistoryResponse history)? historyLoaded,
-    TResult Function()? permissionGranted,
-    TResult Function()? permissionDenied,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SettingsLoaded value) settingsLoaded,
-    required TResult Function(_SettingsUpdated value) settingsUpdated,
-    required TResult Function(_HistoryLoaded value) historyLoaded,
-    required TResult Function(_PermissionGranted value) permissionGranted,
-    required TResult Function(_PermissionDenied value) permissionDenied,
-    required TResult Function(_Error value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SettingsLoaded value)? settingsLoaded,
-    TResult? Function(_SettingsUpdated value)? settingsUpdated,
-    TResult? Function(_HistoryLoaded value)? historyLoaded,
-    TResult? Function(_PermissionGranted value)? permissionGranted,
-    TResult? Function(_PermissionDenied value)? permissionDenied,
-    TResult? Function(_Error value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SettingsLoaded value)? settingsLoaded,
-    TResult Function(_SettingsUpdated value)? settingsUpdated,
-    TResult Function(_HistoryLoaded value)? historyLoaded,
-    TResult Function(_PermissionGranted value)? permissionGranted,
-    TResult Function(_PermissionDenied value)? permissionDenied,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
 }
 
-abstract class _Error implements NotificationState {
-  const factory _Error(final String message) = _$ErrorImpl;
-
-  String get message;
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on
