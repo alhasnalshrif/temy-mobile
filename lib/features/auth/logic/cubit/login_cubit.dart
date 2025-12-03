@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/auth/auth_service.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
-import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
-import 'package:temy_barber/core/networking/dio_factory.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/features/auth/data/models/login_request_body.dart';
 import 'package:temy_barber/features/auth/data/repos/login_repo.dart';
@@ -36,10 +35,11 @@ class LoginCubit extends Cubit<LoginState> {
     });
   }
   Future<void> saveUserToken(String token, String id) async {
-    // save token to shared preferences
-    await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
-    await SharedPrefHelper.setSecuredString(SharedPrefKeys.userId, id);
-    DioFactory.setTokenIntoHeaderAfterLogin(token);
+    // Use AuthService to save token with validation
+    await AuthService.instance.saveToken(token, userId: id);
+    
+    // Update global state
+    isLoggedInUser = true;
     
     // Update device token on server after successful login
     try {

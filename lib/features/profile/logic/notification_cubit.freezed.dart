@@ -320,7 +320,7 @@ $Res call({
 });
 
 
-$NotificationSettingsResponseCopyWith<$Res> get settings;
+
 
 }
 /// @nodoc
@@ -340,16 +340,7 @@ as NotificationSettingsResponse,
   ));
 }
 
-/// Create a copy of NotificationState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NotificationSettingsResponseCopyWith<$Res> get settings {
-  
-  return $NotificationSettingsResponseCopyWith<$Res>(_self.settings, (value) {
-    return _then(_self.copyWith(settings: value));
-  });
-}
+
 }
 
 /// @nodoc
@@ -395,7 +386,7 @@ $Res call({
 });
 
 
-$NotificationResponseCopyWith<$Res> get response;
+
 
 }
 /// @nodoc
@@ -415,16 +406,7 @@ as NotificationResponse,
   ));
 }
 
-/// Create a copy of NotificationState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NotificationResponseCopyWith<$Res> get response {
-  
-  return $NotificationResponseCopyWith<$Res>(_self.response, (value) {
-    return _then(_self.copyWith(response: value));
-  });
-}
+
 }
 
 /// @nodoc
@@ -470,7 +452,7 @@ $Res call({
 });
 
 
-$NotificationHistoryResponseCopyWith<$Res> get history;
+
 
 }
 /// @nodoc
@@ -490,16 +472,7 @@ as NotificationHistoryResponse,
   ));
 }
 
-/// Create a copy of NotificationState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NotificationHistoryResponseCopyWith<$Res> get history {
-  
-  return $NotificationHistoryResponseCopyWith<$Res>(_self.history, (value) {
-    return _then(_self.copyWith(history: value));
-  });
-}
+
 }
 
 /// @nodoc

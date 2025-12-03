@@ -1,38 +1,52 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'queue_settings_response.freezed.dart';
 part 'queue_settings_response.g.dart';
 
-@freezed
-class QueueSettingsResponse with _$QueueSettingsResponse {
-  const factory QueueSettingsResponse({
-    required String status,
-    required QueueSettingsData data,
-  }) = _QueueSettingsResponse;
+@JsonSerializable()
+class QueueSettingsResponse {
+  String? status;
+  QueueSettingsData? data;
+
+  QueueSettingsResponse({this.status, this.data});
 
   factory QueueSettingsResponse.fromJson(Map<String, dynamic> json) =>
       _$QueueSettingsResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$QueueSettingsResponseToJson(this);
 }
 
-@freezed
-class QueueSettingsData with _$QueueSettingsData {
-  const factory QueueSettingsData({
-    @JsonKey(name: 'is_queue_mode') required bool isQueueMode,
-    @JsonKey(name: 'queue_settings') required QueueSettings queueSettings,
-  }) = _QueueSettingsData;
+@JsonSerializable()
+class QueueSettingsData {
+  @JsonKey(name: 'is_queue_mode')
+  bool? isQueueMode;
+  @JsonKey(name: 'queue_settings')
+  QueueSettings? queueSettings;
+
+  QueueSettingsData({this.isQueueMode, this.queueSettings});
 
   factory QueueSettingsData.fromJson(Map<String, dynamic> json) =>
       _$QueueSettingsDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$QueueSettingsDataToJson(this);
 }
 
-@freezed
-class QueueSettings with _$QueueSettings {
-  const factory QueueSettings({
-    @JsonKey(name: 'max_queue_size') required int maxQueueSize,
-    @JsonKey(name: 'estimated_service_time') required int estimatedServiceTime,
-    @JsonKey(name: 'auto_advance_queue') required bool autoAdvanceQueue,
-  }) = _QueueSettings;
+@JsonSerializable()
+class QueueSettings {
+  @JsonKey(name: 'max_queue_size')
+  int? maxQueueSize;
+  @JsonKey(name: 'estimated_service_time')
+  int? estimatedServiceTime;
+  @JsonKey(name: 'auto_advance_queue')
+  bool? autoAdvanceQueue;
+
+  QueueSettings({
+    this.maxQueueSize,
+    this.estimatedServiceTime,
+    this.autoAdvanceQueue,
+  });
 
   factory QueueSettings.fromJson(Map<String, dynamic> json) =>
       _$QueueSettingsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$QueueSettingsToJson(this);
 }

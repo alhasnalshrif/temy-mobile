@@ -37,11 +37,11 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   bool _isQueueMode = false; // Track if queue mode is enabled
   bool _isLoadingSettings = true; // Track if settings are being loaded
 
-  // Maximum number of days ahead that can be booked
-  final int maxBookingDays = 30; // You can adjust this value as needed
-
   // Get barber and services data
   BarberDetailData? get barberData => widget.arguments?.barberData;
+
+  // Maximum number of days ahead that can be booked (from barber settings)
+  int get maxBookingDays => barberData?.maxReservationDays ?? 30;
   List<BarberService> get selectedServices =>
       widget.arguments?.selectedServices ?? [];
   double get totalPrice => widget.arguments?.totalPrice ?? 0.0;
@@ -156,10 +156,11 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
           },
           queueSettingsSuccess: (settingsResponse) {
             print('✅ ReservationsScreen: Queue settings success!');
-            print('   isQueueMode: ${settingsResponse.data.isQueueMode}');
+            print(
+                '   isQueueMode: ${settingsResponse.data?.isQueueMode}');
             setState(() {
               _isLoadingSettings = false;
-              _isQueueMode = settingsResponse.data.isQueueMode;
+              _isQueueMode = settingsResponse.data?.isQueueMode ?? false;
             });
             print('   Updated _isQueueMode to: $_isQueueMode');
           },
@@ -340,6 +341,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                                 maxBookingDays: maxBookingDays,
                                 initialDate: selectedDate,
                                 initialMonth: currentMonth,
+                                daysOff: barberData?.workingHours.daysOff,
                                 onDateSelected: (date) {
                                   setState(() {
                                     selectedDate = date;

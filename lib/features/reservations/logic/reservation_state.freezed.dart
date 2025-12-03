@@ -698,7 +698,7 @@ $Res call({
 });
 
 
-$QueueSettingsResponseCopyWith<$Res> get settingsResponse;
+
 
 }
 /// @nodoc
@@ -718,16 +718,7 @@ as QueueSettingsResponse,
   ));
 }
 
-/// Create a copy of ReservationState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$QueueSettingsResponseCopyWith<$Res> get settingsResponse {
-  
-  return $QueueSettingsResponseCopyWith<$Res>(_self.settingsResponse, (value) {
-    return _then(_self.copyWith(settingsResponse: value));
-  });
-}
+
 }
 
 /// @nodoc

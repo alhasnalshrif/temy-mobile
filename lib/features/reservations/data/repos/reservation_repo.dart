@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_services.dart';
@@ -194,12 +195,31 @@ class ReservationRepo {
       print('🔍 ReservationRepo: Calling queue settings API...');
       final response = await _queueApiServices.getQueueSettings();
       print('✅ ReservationRepo: API response received');
-      print('   Response data: ${response.data.isQueueMode}');
+      print('   Response data: ${response.data?.isQueueMode}');
       return ApiResult.success(response);
     } catch (error, stackTrace) {
       print('❌ ReservationRepo: Error caught!');
       print('   Error type: ${error.runtimeType}');
       print('   Error message: $error');
+      
+      // Handle 401 (unauthorized) - user not logged in
+      // Return default settings with queue mode disabled
+      if (error is DioException && error.response?.statusCode == 401) {
+        print('   ℹ️ User not authenticated, returning default settings');
+        final defaultResponse = QueueSettingsResponse(
+          status: 'success',
+          data: QueueSettingsData(
+            isQueueMode: false,
+            queueSettings: QueueSettings(
+              maxQueueSize: 0,
+              estimatedServiceTime: 0,
+              autoAdvanceQueue: false,
+            ),
+          ),
+        );
+        return ApiResult.success(defaultResponse);
+      }
+      
       print('   Stack trace: $stackTrace');
       return ApiResult.failure(ErrorHandler.handle(error));
     }

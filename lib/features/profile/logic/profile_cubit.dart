@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/auth/auth_service.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
-import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
-import 'package:temy_barber/core/networking/dio_factory.dart';
 import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
@@ -43,23 +42,15 @@ class ProfileCubit extends Cubit<ProfileState> {
       log('📱 Clearing notification data...');
       await _notificationService.logoutUser();
 
-      // Step 2: Clear HTTP authorization header
-      log('🔐 Clearing API authorization...');
-      DioFactory.clearTokenFromHeader();
+      // Step 2: Clear authentication using AuthService
+      log('🔐 Clearing authentication...');
+      await AuthService.instance.clearAuthentication();
 
-      // Step 3: Clear all shared preferences (both regular and secure)
-      log('🗑️ Clearing all local storage...');
-      await SharedPrefHelper.clearAllData();
-      await SharedPrefHelper.clearAllSecuredData();
-
-      // Step 4: Clear any cached app data
+      // Step 3: Clear any cached app data
       await _clearCachedData();
 
-      // Step 5: Reset notification permissions state
+      // Step 4: Reset notification permissions state
       await _resetNotificationState();
-
-      // Step 6: Update global login state
-      isLoggedInUser = false;
 
       log('✅ Logout completed successfully');
       emit(const ProfileState.initial());
@@ -114,21 +105,14 @@ class ProfileCubit extends Cubit<ProfileState> {
       // Clear all OneSignal data
       await _notificationService.logoutUser();
 
-      // Clear API headers
-      DioFactory.clearTokenFromHeader();
-
-      // Clear all local storage
-      await SharedPrefHelper.clearAllData();
-      await SharedPrefHelper.clearAllSecuredData();
+      // Clear authentication using AuthService
+      await AuthService.instance.clearAuthentication();
 
       // Clear cached data
       await _clearCachedData();
 
       // Reset notification state
       await _resetNotificationState();
-
-      // Reset global state
-      isLoggedInUser = false;
 
       log('✅ Complete cleanup finished');
     } catch (error) {
@@ -140,12 +124,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> _forceCleanup() async {
     try {
       log('🔄 Force cleanup in progress...');
-      DioFactory.clearTokenFromHeader();
-      await SharedPrefHelper.clearAllData();
-      await SharedPrefHelper.clearAllSecuredData();
+      await AuthService.instance.clearAuthentication();
       await _clearCachedData();
       await _resetNotificationState();
-      isLoggedInUser = false;
       log('✅ Force cleanup completed');
     } catch (error) {
       log('❌ Force cleanup error: $error');

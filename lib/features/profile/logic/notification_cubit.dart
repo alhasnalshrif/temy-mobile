@@ -145,7 +145,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     emit(const NotificationState.loading());
     try {
       await _updateDeviceTokenOnServer();
-      emit(NotificationState.settingsUpdated(const NotificationResponse(
+      emit(NotificationState.settingsUpdated( NotificationResponse(
           status: 'success',
           message: 'Device registration retried successfully')));
     } catch (error) {
@@ -158,8 +158,8 @@ class NotificationCubit extends Cubit<NotificationState> {
     // TODO: Implement when backend API is ready
     emit(const NotificationState.loading());
     // For now, emit mock data
-    emit(const NotificationState.settingsLoaded(
-        const NotificationSettingsResponse(
+    emit( NotificationState.settingsLoaded(
+         NotificationSettingsResponse(
       pushNotifications: true,
       bookingReminders: true,
       promotionalNotifications: false,

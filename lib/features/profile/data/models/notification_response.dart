@@ -1,55 +1,77 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'notification_response.freezed.dart';
 part 'notification_response.g.dart';
 
-@freezed
-class NotificationResponse with _$NotificationResponse {
-  const factory NotificationResponse({
-    @JsonKey(name: 'status') required String status,
-    @JsonKey(name: 'message') required String message,
-  }) = _NotificationResponse;
+@JsonSerializable()
+class NotificationResponse {
+  String? status;
+  String? message;
+
+  NotificationResponse({this.status, this.message});
 
   factory NotificationResponse.fromJson(Map<String, dynamic> json) =>
       _$NotificationResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificationResponseToJson(this);
 }
 
-@freezed
-class NotificationSettingsResponse with _$NotificationSettingsResponse {
-  const factory NotificationSettingsResponse({
-    @JsonKey(name: 'push_notifications') required bool pushNotifications,
-    @JsonKey(name: 'booking_reminders') required bool bookingReminders,
-    @JsonKey(name: 'promotional_notifications')
-    required bool promotionalNotifications,
-  }) = _NotificationSettingsResponse;
+@JsonSerializable()
+class NotificationSettingsResponse {
+  @JsonKey(name: 'push_notifications')
+  bool? pushNotifications;
+  @JsonKey(name: 'booking_reminders')
+  bool? bookingReminders;
+  @JsonKey(name: 'promotional_notifications')
+  bool? promotionalNotifications;
+
+  NotificationSettingsResponse({
+    this.pushNotifications,
+    this.bookingReminders,
+    this.promotionalNotifications,
+  });
 
   factory NotificationSettingsResponse.fromJson(Map<String, dynamic> json) =>
       _$NotificationSettingsResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificationSettingsResponseToJson(this);
 }
 
-@freezed
-class NotificationHistoryItem with _$NotificationHistoryItem {
-  const factory NotificationHistoryItem({
-    @JsonKey(name: 'id') required int id,
-    @JsonKey(name: 'title') required String title,
-    @JsonKey(name: 'body') required String body,
-    @JsonKey(name: 'type') required String type,
-    @JsonKey(name: 'data') Map<String, dynamic>? data,
-    @JsonKey(name: 'read_at') String? readAt,
-    @JsonKey(name: 'created_at') required String createdAt,
-  }) = _NotificationHistoryItem;
+@JsonSerializable()
+class NotificationHistoryItem {
+  int? id;
+  String? title;
+  String? body;
+  String? type;
+  Map<String, dynamic>? data;
+  @JsonKey(name: 'read_at')
+  String? readAt;
+  @JsonKey(name: 'created_at')
+  String? createdAt;
+
+  NotificationHistoryItem({
+    this.id,
+    this.title,
+    this.body,
+    this.type,
+    this.data,
+    this.readAt,
+    this.createdAt,
+  });
 
   factory NotificationHistoryItem.fromJson(Map<String, dynamic> json) =>
       _$NotificationHistoryItemFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificationHistoryItemToJson(this);
 }
 
-@freezed
-class NotificationHistoryResponse with _$NotificationHistoryResponse {
-  const factory NotificationHistoryResponse({
-    @JsonKey(name: 'notifications')
-    required List<NotificationHistoryItem> notifications,
-  }) = _NotificationHistoryResponse;
+@JsonSerializable()
+class NotificationHistoryResponse {
+  List<NotificationHistoryItem>? notifications;
+
+  NotificationHistoryResponse({this.notifications});
 
   factory NotificationHistoryResponse.fromJson(Map<String, dynamic> json) =>
       _$NotificationHistoryResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificationHistoryResponseToJson(this);
 }

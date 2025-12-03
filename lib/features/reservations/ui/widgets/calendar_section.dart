@@ -8,6 +8,7 @@ class CalendarSection extends StatefulWidget {
   final DateTime initialMonth;
   final Function(DateTime) onDateSelected;
   final Function(DateTime) onMonthChanged;
+  final List<int>? daysOff; // Days off indices (0=Sunday, 1=Monday, ..., 6=Saturday)
 
   const CalendarSection({
     super.key,
@@ -16,6 +17,7 @@ class CalendarSection extends StatefulWidget {
     required this.initialMonth,
     required this.onDateSelected,
     required this.onMonthChanged,
+    this.daysOff,
   });
 
   @override
@@ -105,6 +107,49 @@ class _CalendarSectionState extends State<CalendarSection>
         date.day == now.day;
   }
 
+  // Check if date is a day off for the barber
+  bool _isDayOff(DateTime date) {
+    if (widget.daysOff == null || widget.daysOff!.isEmpty) {
+      return false;
+    }
+
+    // Get day of week (DateTime: 1=Monday to 7=Sunday)
+    // Convert to our format (0=Sunday, 1=Monday, ..., 6=Saturday)
+    final dayIndex = date.weekday % 7; // 7 (Sunday) becomes 0
+    
+    return widget.daysOff!.contains(dayIndex);
+  }
+
+  // Get readable day shortcut for Arabic
+  String _getDayShortcut(int index) {
+    // Arabic day shortcuts (single letter, more readable)
+    const arabicDays = ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'];
+    return arabicDays[index];
+  }
+
+  // Get full day name for tooltip
+  String _getFullDayName(int index) {
+    const arabicFullDays = [
+      'الأحد',
+      'الإثنين', 
+      'الثلاثاء',
+      'الأربعاء',
+      'الخميس',
+      'الجمعة',
+      'السبت'
+    ];
+    return arabicFullDays[index];
+  }
+
+  // Check if day index is a day off (0=Sunday, 6=Saturday)
+  bool _isDayIndexOff(int dayIndex) {
+    if (widget.daysOff == null || widget.daysOff!.isEmpty) {
+      return false;
+    }
+    
+    return widget.daysOff!.contains(dayIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -187,31 +232,36 @@ class _CalendarSectionState extends State<CalendarSection>
   }
 
   Widget _buildCalendarDays() {
-    final List<String> days = [
-      'الأحد',
-      'الإثنين',
-      'الثلاثاء',
-      'الأربعاء',
-      'الخميس',
-      'الجمعة',
-      'السبت'
-    ];
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: days
-          .map((day) => SizedBox(
-                width: 30,
-                child: Text(
-                  day.substring(0, 2), // Just show first two letters
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: ColorsManager.gray,
-                  ),
+      children: List.generate(7, (index) {
+        final isDayOff = _isDayIndexOff(index);
+        final shortcut = _getDayShortcut(index);
+        final fullName = _getFullDayName(index);
+        
+        return Tooltip(
+          message: fullName + (isDayOff ? ' (إجازة)' : ''),
+          child: Container(
+            width: 36,
+            height: 28,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              color: isDayOff ? Colors.red.withOpacity(0.1) : Colors.transparent,
+            ),
+            child: Center(
+              child: Text(
+                shortcut,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: isDayOff ? Colors.red[400] : ColorsManager.gray,
                 ),
-              ))
-          .toList(),
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 
@@ -236,11 +286,12 @@ class _CalendarSectionState extends State<CalendarSection>
         children: dates.map((date) {
           final isSelected = _isSameDay(date, selectedDate);
           final isCurrentMonth = date.month == currentMonth.month;
-          final isSelectable = _isSelectable(date) && isCurrentMonth;
+          final isDayOff = _isDayOff(date);
+          final isSelectable = _isSelectable(date) && isCurrentMonth && !isDayOff;
           final isToday = _isToday(date);
 
           return GestureDetector(
-            onTap: (isSelectable && isCurrentMonth)
+            onTap: isSelectable
                 ? () {
                     setState(() {
                       selectedDate = date;
@@ -254,6 +305,7 @@ class _CalendarSectionState extends State<CalendarSection>
               isCurrentMonth: isCurrentMonth,
               isSelectable: isSelectable,
               isToday: isToday,
+              isDayOff: isDayOff,
             ),
           );
         }).toList(),
@@ -261,11 +313,14 @@ class _CalendarSectionState extends State<CalendarSection>
     );
   }
 
-  Widget _buildDateCell(String date,
-      {bool isSelected = false,
-      bool isCurrentMonth = true,
-      bool isSelectable = true,
-      bool isToday = false}) {
+  Widget _buildDateCell(
+    String date, {
+    bool isSelected = false,
+    bool isCurrentMonth = true,
+    bool isSelectable = true,
+    bool isToday = false,
+    bool isDayOff = false,
+  }) {
     // Base style for all date states
     BoxDecoration decoration = const BoxDecoration(
       shape: BoxShape.circle,
@@ -274,33 +329,53 @@ class _CalendarSectionState extends State<CalendarSection>
     Color textColor;
     FontWeight fontWeight = FontWeight.normal;
 
-    // Apply styling based on date state
+    // Apply styling based on date state (priority order matters)
     if (!isCurrentMonth) {
-      textColor = Colors.grey[350]!;
+      // Days from other months - very faded
+      textColor = Colors.grey[300]!;
+    } else if (isDayOff && isCurrentMonth) {
+      // Day off - show with red styling
+      textColor = Colors.red[300]!;
+      fontWeight = FontWeight.w500;
+      decoration = decoration.copyWith(
+        color: Colors.red.withOpacity(0.08),
+      );
     } else if (!isSelectable) {
+      // Past dates or out of booking range
       textColor = Colors.grey[400]!;
       decoration = decoration.copyWith(
-        border: Border.all(color: Colors.grey[300]!, width: 1),
+        border: Border.all(color: Colors.grey[200]!, width: 1),
       );
     } else if (isSelected) {
+      // Selected date
       textColor = Colors.white;
       fontWeight = FontWeight.bold;
       decoration = decoration.copyWith(
         color: ColorsManager.mainBlue,
+        boxShadow: [
+          BoxShadow(
+            color: ColorsManager.mainBlue.withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       );
     } else if (isToday) {
+      // Today's date
       textColor = ColorsManager.mainBlue;
       fontWeight = FontWeight.bold;
       decoration = decoration.copyWith(
-        border: Border.all(color: ColorsManager.mainBlue, width: 1.5),
+        border: Border.all(color: ColorsManager.mainBlue, width: 2),
       );
     } else {
+      // Normal selectable date
       textColor = Colors.black87;
     }
 
-    return Container(
-      width: 35,
-      height: 35,
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      width: 36,
+      height: 36,
       decoration: decoration,
       alignment: Alignment.center,
       child: Text(

@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:temy_barber/core/helpers/constants.dart';
-import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
+import 'package:temy_barber/core/auth/auth_interceptor.dart';
 import 'package:temy_barber/core/networking/sentry_dio_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -27,21 +26,34 @@ class DioFactory {
     }
   }
 
-  static void addDioHeader() async {
+  static void addDioHeader() {
     dio?.options.headers = {
       'Accept': 'application/json',
-      'authorization':
-          'Bearer ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}'
+      'Content-Type': 'application/json',
     };
+    // Note: Authorization header is now handled by AuthInterceptor
   }
-  static void setTokenIntoHeaderAfterLogin(String token) async {
-    dio?.options.headers = {'authorization': 'Bearer $token'};
+
+  static void setTokenIntoHeaderAfterLogin(String token) {
+    // This method is kept for backward compatibility
+    // The AuthInterceptor will handle token injection automatically
+    dio?.options.headers['authorization'] = 'Bearer $token';
   }
 
   static void clearTokenFromHeader() {
     dio?.options.headers.remove('authorization');
   }
+
   static void addDioInterceptor() {
+    // Clear existing interceptors to avoid duplicates
+    dio?.interceptors.clear();
+
+    // Add Auth interceptor first (handles token injection and 401 errors)
+    if (dio != null) {
+      dio!.interceptors.add(AuthInterceptor(dio!));
+    }
+
+    // Add Pretty Logger for debugging
     dio?.interceptors.add(
       PrettyDioLogger(
         requestBody: true,
@@ -49,7 +61,7 @@ class DioFactory {
         responseHeader: true,
       ),
     );
-    
+
     // Add Sentry interceptor for error tracking
     dio?.interceptors.add(SentryDioInterceptor());
   }

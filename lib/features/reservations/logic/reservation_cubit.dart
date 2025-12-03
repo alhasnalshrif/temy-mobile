@@ -150,7 +150,7 @@ class ReservationCubit extends Cubit<ReservationState> {
     response.when(
       success: (settingsResponse) {
         print(
-          '✅ ReservationCubit: Settings received - isQueueMode: ${settingsResponse.data.isQueueMode}',
+          '✅ ReservationCubit: Settings received - isQueueMode: ${settingsResponse.data?.isQueueMode}',
         );
         emit(ReservationState.queueSettingsSuccess(settingsResponse));
       },

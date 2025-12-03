@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:temy_barber/core/auth/auth_service.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
-import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
 import 'package:temy_barber/core/services/permission_manager.dart';
@@ -88,11 +88,43 @@ void main() async {
   );
 }
 
+/// Enhanced authentication check with JWT validation
 Future<void> checkedIfUserLoggedIn() async {
-  String? userToken = await SharedPrefHelper.getSecuredString(
-    SharedPrefKeys.userToken,
-  );
-  isLoggedInUser = !userToken.isNullOrEmpty();
+  log('🔐 Checking user authentication status...');
+  
+  try {
+    // Use AuthService to validate token
+    final isAuthenticated = await AuthService.instance.isAuthenticated();
+    
+    if (isAuthenticated) {
+      log('✅ User is authenticated with valid token');
+      isLoggedInUser = true;
+      
+      // Verify user ID is stored
+      final userId = await AuthService.instance.getUserId();
+      if (userId != null) {
+        log('👤 User ID: $userId');
+      }
+    } else {
+      log('❌ User is not authenticated or token is invalid');
+      isLoggedInUser = false;
+      
+      // Clear any stale authentication data
+      await AuthService.instance.clearAuthentication();
+    }
+  } catch (e) {
+    log('❌ Error checking authentication: $e');
+    isLoggedInUser = false;
+    
+    // Clear authentication on error
+    try {
+      await AuthService.instance.clearAuthentication();
+    } catch (clearError) {
+      log('❌ Error clearing authentication: $clearError');
+    }
+  }
+  
+  log('🔐 Authentication check complete. isLoggedInUser: $isLoggedInUser');
 }
 
 class TemyApp extends StatelessWidget {
