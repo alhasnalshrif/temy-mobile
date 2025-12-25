@@ -6,6 +6,7 @@ A Flutter-based mobile application for barber shop management and booking.
 
 - [SDK Compliance Documentation](SDK_COMPLIANCE.md) - Comprehensive documentation of all third-party SDKs
 - [Google Play SDK Answers](GOOGLE_PLAY_SDK_ANSWERS.md) - Quick answers for Google Play Console submissions
+- [SDK Compliance Guide](SDK_COMPLIANCE_GUIDE.md) - How to use the SDK compliance documentation
 
 ## Compliance
 
