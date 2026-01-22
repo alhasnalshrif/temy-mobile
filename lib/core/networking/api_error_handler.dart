@@ -16,7 +16,7 @@ enum DataSource {
   sendTimeout,
   cacheError,
   noInternetConnection,
-  default_
+  default_,
 }
 
 class ResponseCode {
@@ -53,13 +53,13 @@ class ResponseMessage {
   static const String notFound = ApiErrors.notFoundError;
   static const String internalServerError = ApiErrors.internalServerError;
 
-  // Local error messages
-  static String connectTimeout = ApiErrors.timeoutError;
+  // Local error messages - using localization keys
+  static String connectTimeout = "errors.connection_timeout";
   static String cancel = ApiErrors.defaultError;
-  static String receiveTimeout = ApiErrors.timeoutError; // Fixed spelling
-  static String sendTimeout = ApiErrors.timeoutError;
+  static String receiveTimeout = "errors.connection_timeout";
+  static String sendTimeout = "errors.connection_timeout";
   static String cacheError = ApiErrors.cacheError;
-  static String noInternetConnection = ApiErrors.noInternetError;
+  static String noInternetConnection = "errors.network_unreachable";
   static String default_ = ApiErrors.defaultError;
 }
 
@@ -68,49 +68,69 @@ extension DataSourceExtension on DataSource {
     switch (this) {
       case DataSource.noContent:
         return ApiErrorModel(
-            code: ResponseCode.noContent, message: ResponseMessage.noContent);
+          code: ResponseCode.noContent,
+          message: ResponseMessage.noContent,
+        );
       case DataSource.badRequest:
         return ApiErrorModel(
-            code: ResponseCode.badRequest, message: ResponseMessage.badRequest);
+          code: ResponseCode.badRequest,
+          message: ResponseMessage.badRequest,
+        );
       case DataSource.forbidden:
         return ApiErrorModel(
-            code: ResponseCode.forbidden, message: ResponseMessage.forbidden);
+          code: ResponseCode.forbidden,
+          message: ResponseMessage.forbidden,
+        );
       case DataSource.unauthorized:
         return ApiErrorModel(
-            code: ResponseCode.unauthorized,
-            message: ResponseMessage.unauthorized);
+          code: ResponseCode.unauthorized,
+          message: ResponseMessage.unauthorized,
+        );
       case DataSource.notFound:
         return ApiErrorModel(
-            code: ResponseCode.notFound, message: ResponseMessage.notFound);
+          code: ResponseCode.notFound,
+          message: ResponseMessage.notFound,
+        );
       case DataSource.internalServerError:
         return ApiErrorModel(
-            code: ResponseCode.internalServerError,
-            message: ResponseMessage.internalServerError);
+          code: ResponseCode.internalServerError,
+          message: ResponseMessage.internalServerError,
+        );
       case DataSource.connectTimeout:
         return ApiErrorModel(
-            code: ResponseCode.connectTimeout,
-            message: ResponseMessage.connectTimeout);
+          code: ResponseCode.connectTimeout,
+          message: ResponseMessage.connectTimeout,
+        );
       case DataSource.cancel:
         return ApiErrorModel(
-            code: ResponseCode.cancel, message: ResponseMessage.cancel);
+          code: ResponseCode.cancel,
+          message: ResponseMessage.cancel,
+        );
       case DataSource.receiveTimeout: // Fixed spelling
         return ApiErrorModel(
-            code: ResponseCode.receiveTimeout,
-            message: ResponseMessage.receiveTimeout);
+          code: ResponseCode.receiveTimeout,
+          message: ResponseMessage.receiveTimeout,
+        );
       case DataSource.sendTimeout:
         return ApiErrorModel(
-            code: ResponseCode.sendTimeout,
-            message: ResponseMessage.sendTimeout);
+          code: ResponseCode.sendTimeout,
+          message: ResponseMessage.sendTimeout,
+        );
       case DataSource.cacheError:
         return ApiErrorModel(
-            code: ResponseCode.cacheError, message: ResponseMessage.cacheError);
+          code: ResponseCode.cacheError,
+          message: ResponseMessage.cacheError,
+        );
       case DataSource.noInternetConnection:
         return ApiErrorModel(
-            code: ResponseCode.noInternetConnection,
-            message: ResponseMessage.noInternetConnection);
+          code: ResponseCode.noInternetConnection,
+          message: ResponseMessage.noInternetConnection,
+        );
       case DataSource.default_:
         return ApiErrorModel(
-            code: ResponseCode.default_, message: ResponseMessage.default_);
+          code: ResponseCode.default_,
+          message: ResponseMessage.default_,
+        );
     }
   }
 }
@@ -158,10 +178,11 @@ ApiErrorModel _handleResponseError(DioException error) {
         error.response!.statusCode == ResponseCode.noContent) {
       // Return success with no content for these status codes
       return ApiErrorModel(
-          code: error.response!.statusCode!,
-          message: error.response!.statusCode == ResponseCode.success
-              ? "Success"
-              : ResponseMessage.noContent);
+        code: error.response!.statusCode!,
+        message: error.response!.statusCode == ResponseCode.success
+            ? "Success"
+            : ResponseMessage.noContent,
+      );
     }
 
     // Try to parse error from response

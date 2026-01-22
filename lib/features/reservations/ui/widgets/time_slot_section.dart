@@ -31,15 +31,19 @@ class TimeSlotSection extends StatelessWidget {
     if (slots.length < 2) return 5; // Default to 5 minutes if not enough slots
 
     try {
-      final firstTime = _timeStringToMinutes(_sanitizeTimeString(slots[0].time));
-      final secondTime = _timeStringToMinutes(_sanitizeTimeString(slots[1].time));
-      
+      final firstTime = _timeStringToMinutes(
+        _sanitizeTimeString(slots[0].time),
+      );
+      final secondTime = _timeStringToMinutes(
+        _sanitizeTimeString(slots[1].time),
+      );
+
       // Handle case where second time is on the next day (e.g., 23:55 -> 00:00)
       int diff = secondTime - firstTime;
       if (diff < 0) {
         diff += 24 * 60; // Add a full day in minutes
       }
-      
+
       return diff > 0 ? diff : 5; // Fallback to 5 minutes if calculation fails
     } catch (e) {
       debugPrint('Error calculating slot duration: $e');
@@ -51,10 +55,10 @@ class TimeSlotSection extends StatelessWidget {
   int _timeStringToMinutes(String timeString) {
     final parts = timeString.split(':');
     if (parts.length < 2) return 0;
-    
+
     final hours = int.tryParse(parts[0]) ?? 0;
     final minutes = int.tryParse(parts[1]) ?? 0;
-    
+
     return (hours * 60) + minutes;
   }
 
@@ -122,7 +126,9 @@ class TimeSlotSection extends StatelessWidget {
       return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
     } catch (e) {
       debugPrint('Error calculating end time: $e');
-      return _sanitizeTimeString(startTime); // Return sanitized time if there's an error
+      return _sanitizeTimeString(
+        startTime,
+      ); // Return sanitized time if there's an error
     }
   }
 
@@ -156,84 +162,35 @@ class TimeSlotSection extends StatelessWidget {
     }
   }
 
-  // Helper method to check if booking fits within working hours
-  bool _fitsWithinWorkingHours(String startTime, int durationMinutes) {
-    if (barberData?.workingHours == null && timeSlotsData?.data.workingHours == null) {
-      return true; // If no working hours data, allow all slots
-    }
-
-    try {
-      // Use timeSlotsData if available, otherwise fall back to barberData
-      final workingHoursEnd = timeSlotsData?.data.workingHours?.end ?? 
-                             barberData?.workingHours.end ?? "23:59";
-      
-      final workingEnd = _sanitizeTimeString(workingHoursEnd);
-      final normalizedStart = _sanitizeTimeString(startTime);
-
-      // Parse times to minutes for easier comparison
-      final startTotalMinutes = _timeStringToMinutes(normalizedStart);
-      final workingEndTotalMinutes = _timeStringToMinutes(workingEnd);
-      
-      // Calculate booking end time in minutes
-      int bookingEndTotalMinutes = startTotalMinutes + durationMinutes;
-      
-      // Handle midnight crossing for working hours (e.g., end time is 00:30)
-      bool workingHoursCrossesMidnight = workingEndTotalMinutes < _timeStringToMinutes("12:00");
-      
-      if (workingHoursCrossesMidnight) {
-        // If working hours cross midnight, add a day's worth of minutes to the end time
-        if (startTotalMinutes < workingEndTotalMinutes) {
-          // Start time is after midnight but before end time
-          return bookingEndTotalMinutes <= workingEndTotalMinutes;
-        } else {
-          // Start time is before midnight
-          return bookingEndTotalMinutes <= (workingEndTotalMinutes + 24 * 60);
-        }
-      } else {
-        // Regular case - no midnight crossing
-        return bookingEndTotalMinutes <= workingEndTotalMinutes;
-      }
-    } catch (e) {
-      debugPrint('Error validating working hours: $e');
-      return true; // On error, allow the slot
-    }
-  }
-
   // Finds optimized slots based on the required duration
   List<Map<String, dynamic>> _getOptimizedTimeSlots(
     List<reservation.TimeSlot> slots,
     int totalDuration,
   ) {
     if (slots.isEmpty) return [];
-    
+
     // Calculate the actual slot duration based on the time difference
     final slotDurationMinutes = _calculateSlotDuration(slots);
-    
+
     // Calculate how many slots we need based on the actual slot duration
     final requiredSlots = (totalDuration / slotDurationMinutes).ceil();
-    
+
     // Create a list of valid starting slots based on duration
     final List<Map<String, dynamic>> validStartingSlots = [];
-    
+
     // Skip slots that are too close to each other to reduce visual clutter
     // For 5-minute intervals, we'll show every 3rd slot by default unless duration is small
     int skipFactor = 1;
     if (totalDuration < 15) skipFactor = 1; // Show all slots for short services
-    
+
     int i = 0;
     while (i < slots.length) {
       final slot = slots[i];
-      
+
       // Check if there are enough consecutive available slots from this position
       final canStartHere = _areSlotsAvailable(slots, i, requiredSlots);
-      
-      // Also check if booking fits within working hours
-      final fitsInWorkingHours = _fitsWithinWorkingHours(
-        slot.time,
-        totalDuration,
-      );
-      
-      if (canStartHere && fitsInWorkingHours) {
+
+      if (canStartHere) {
         // This is a valid starting point for the service
         final endTime = _getEndTime(slot.time, totalDuration);
         validStartingSlots.add({
@@ -244,21 +201,9 @@ class TimeSlotSection extends StatelessWidget {
           'displayEnd': _formatTimeForDisplay(endTime),
           'durationBlocks': requiredSlots,
         });
-        
+
         // Skip to reduce visual clutter (for 5-minute intervals)
         i += skipFactor;
-      } else if (slot.isAvailable && !fitsInWorkingHours) {
-        // Only add some unavailable slots to reduce clutter
-        if (i % skipFactor == 0) {
-          validStartingSlots.add({
-            'slot': slot,
-            'available': false,
-            'endTime': null,
-            'displayStart': _formatTimeForDisplay(slot.time),
-            'reason': 'يتجاوز ساعات العمل',
-          });
-        }
-        i += 1;
       } else if (!slot.isAvailable) {
         // Skip unavailable slots entirely to reduce clutter
         i += 1;
@@ -276,7 +221,7 @@ class TimeSlotSection extends StatelessWidget {
         i += 1;
       }
     }
-    
+
     return validStartingSlots;
   }
 
@@ -345,9 +290,7 @@ class TimeSlotSection extends StatelessWidget {
         isLoading
             ? SizedBox(
                 height: 100,
-                child: Center(
-                  child: ShimmerLoading.rectangular(height: 60),
-                ),
+                child: Center(child: ShimmerLoading.rectangular(height: 60)),
               )
             : validStartingSlots.isEmpty
             ? const SizedBox(
@@ -379,26 +322,26 @@ class TimeSlotSection extends StatelessWidget {
                       itemWidth / 1.5; // Based on childAspectRatio
 
                   // Calculate total height
-                  final rows = (validStartingSlots.length / crossAxisCount).ceil();
+                  final rows = (validStartingSlots.length / crossAxisCount)
+                      .ceil();
 
-final totalHeight =
-    (rows * itemHeight) +
-    ((rows - 1) * mainAxisSpacing) +
-    40; // Extra padding
+                  final totalHeight =
+                      (rows * itemHeight) +
+                      ((rows - 1) * mainAxisSpacing) +
+                      40; // Extra padding
 
-return SizedBox(
-  height: totalHeight,
-  child: GridView.builder(
-    physics: const NeverScrollableScrollPhysics(),
-    gridDelegate:
-        SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          childAspectRatio: 1.5,
-          crossAxisSpacing: crossAxisSpacing,
-          mainAxisSpacing: mainAxisSpacing,
-        ),
-    itemCount: validStartingSlots.length,
-    itemBuilder: (context, index) {
+                  return SizedBox(
+                    height: totalHeight,
+                    child: GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        childAspectRatio: 1.5,
+                        crossAxisSpacing: crossAxisSpacing,
+                        mainAxisSpacing: mainAxisSpacing,
+                      ),
+                      itemCount: validStartingSlots.length,
+                      itemBuilder: (context, index) {
                         final slotData = validStartingSlots[index];
                         final slot = slotData['slot'] as reservation.TimeSlot;
                         final isAvailable = slotData['available'] as bool;

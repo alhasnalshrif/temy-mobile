@@ -23,7 +23,8 @@ class CategoryBlocBuilder extends StatelessWidget {
           },
           categoriesSuccess: (categoriesResponseModel) {
             var categoriesList = categoriesResponseModel
-                .categoriesResponseModel.categoryDataList;
+                .categoriesResponseModel
+                .categoryDataList;
             return setupSuccess(categoriesList);
           },
           categoriesError: (errorHandler) => setupError(context),
@@ -36,22 +37,18 @@ class CategoryBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return Center(
-      child: ShimmerLoading.rectangular(height: 200),
-    );
+    return Center(child: ShimmerLoading.rectangular(height: 200));
   }
 
   Widget setupSuccess(categoriesList) {
     return Column(
-      children: [
-        CategoryListView(categoryDataList: categoriesList),
-      ],
+      children: [CategoryListView(categoryDataList: categoriesList)],
     );
   }
 
-  Widget setupError(context) {
+  Widget setupError(BuildContext context) {
     return NoInternetPage(
-      onRetry: () => context.read<HomeCubit>().refreshHomeData(),
+      onRetry: () => BlocProvider.of<HomeCubit>(context).refreshHomeData(),
     );
   }
 }

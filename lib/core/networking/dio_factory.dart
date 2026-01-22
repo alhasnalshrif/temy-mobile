@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:temy_barber/core/auth/auth_interceptor.dart';
 import 'package:temy_barber/core/networking/sentry_dio_interceptor.dart';
+import 'package:temy_barber/core/networking/network_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {
@@ -48,7 +49,10 @@ class DioFactory {
     // Clear existing interceptors to avoid duplicates
     dio?.interceptors.clear();
 
-    // Add Auth interceptor first (handles token injection and 401 errors)
+    // Add Network interceptor first (checks connectivity before requests)
+    dio?.interceptors.add(NetworkInterceptor());
+
+    // Add Auth interceptor (handles token injection and 401 errors)
     if (dio != null) {
       dio!.interceptors.add(AuthInterceptor(dio!));
     }

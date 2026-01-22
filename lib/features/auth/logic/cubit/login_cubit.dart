@@ -26,21 +26,27 @@ class LoginCubit extends Cubit<LoginState> {
         password: passwordController.text,
       ),
     );
-    response.when(success: (loginResponse) async {
-      await saveUserToken(
-          loginResponse.token ?? '', loginResponse.data!.user?.id ?? '');
-      emit(LoginState.success(loginResponse));
-    }, failure: (error) {
-      emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
-    });
+    response.when(
+      success: (loginResponse) async {
+        await saveUserToken(
+          loginResponse.token ?? '',
+          loginResponse.data!.user?.id ?? '',
+        );
+        emit(LoginState.success(loginResponse));
+      },
+      failure: (error) {
+        emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
+      },
+    );
   }
+
   Future<void> saveUserToken(String token, String id) async {
     // Use AuthService to save token with validation
     await AuthService.instance.saveToken(token, userId: id);
-    
+
     // Update global state
     isLoggedInUser = true;
-    
+
     // Update device token on server after successful login
     try {
       final notificationCubit = getIt<NotificationCubit>();

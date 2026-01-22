@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:temy_barber/core/networking/api_service.dart';
 import 'package:temy_barber/core/networking/dio_factory.dart';
+import 'package:temy_barber/core/networking/network_service.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
 import 'package:temy_barber/features/barber/data/apis/barber_api_services.dart';
 import 'package:temy_barber/features/barber/data/repos/barber_repo.dart';
@@ -40,6 +41,9 @@ Future<void> setupGetIt() async {
   Dio dio = DioFactory.getDio();
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
 
+  // Network Service
+  getIt.registerLazySingleton<NetworkService>(() => NetworkService.instance);
+
   // login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
@@ -58,7 +62,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<ForgotPasswordRepo>(
     () => ForgotPasswordRepo(getIt()),
   );
-  getIt.registerFactory<ForgotPasswordCubit>(() => ForgotPasswordCubit(getIt()));
+  getIt.registerFactory<ForgotPasswordCubit>(
+    () => ForgotPasswordCubit(getIt()),
+  );
   getIt.registerFactory<ResetPasswordCubit>(() => ResetPasswordCubit(getIt()));
 
   // reservation

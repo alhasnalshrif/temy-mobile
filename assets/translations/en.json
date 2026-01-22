@@ -234,5 +234,11 @@
         "retry": "Retry",
         "cancel": "Cancel",
         "continue": "Continue"
+    },
+    "errors": {
+        "no_internet_connection": "No internet connection",
+        "network_unreachable": "Network unreachable. Please check your connection",
+        "connection_timeout": "Connection timeout. Please try again",
+        "connection_failed": "Connection failed. Please check your internet connection"
     }
 }

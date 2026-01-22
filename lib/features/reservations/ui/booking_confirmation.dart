@@ -148,10 +148,13 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   }
 
   Future<dynamic> _showGuestInfoDialog(BuildContext context) async {
-    return await showDialog<dynamic>(
+    return await showModalBottomSheet<dynamic>(
       context: context,
-      barrierDismissible: false,
-      builder: (dialogContext) => BlocProvider.value(
+      isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) => BlocProvider.value(
         value: context.read<ReservationCubit>(),
         child: const GuestInfoDialog(),
       ),
@@ -262,7 +265,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: Colors.grey.shade200,
+                              color: ColorsManager.lightBlue,
                               width: 1.5,
                             ),
                           ),
@@ -270,10 +273,15 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                             radius: 20,
                             backgroundColor: Colors.grey.shade100,
                             backgroundImage:
-                                reservation.barberData?.avatar != null
+                                reservation.barberData?.avatar != null &&
+                                    reservation.barberData!.avatar.isNotEmpty &&
+                                    reservation.barberData!.avatar != 'null'
                                 ? NetworkImage(reservation.barberData!.avatar)
                                 : null,
-                            child: reservation.barberData?.avatar == null
+                            child:
+                                reservation.barberData?.avatar == null ||
+                                    reservation.barberData!.avatar.isEmpty ||
+                                    reservation.barberData!.avatar == 'null'
                                 ? const Icon(
                                     Icons.person,
                                     size: 20,
@@ -369,7 +377,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                       padding: const EdgeInsets.only(top: 12),
                       child: Column(
                         children: [
-                          Divider(color: Colors.grey.shade200, height: 24),
+                          Divider(color: ColorsManager.lightBlue, height: 24),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -426,7 +434,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
           Container(
             padding: const EdgeInsets.all(12.0),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade200),
+              border: Border.all(color: ColorsManager.lightBlue),
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
             ),
@@ -465,7 +473,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                     );
                   },
                 ),
-                const Divider(height: 24),
+                const Divider(height: 24, color: ColorsManager.lightBlue),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -494,7 +502,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: ColorsManager.lightBlue),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -502,11 +510,18 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
         children: [
           CircleAvatar(
             radius: 20,
-            backgroundImage: arguments.barberData?.avatar != null
+            backgroundColor: Colors.grey.shade100,
+            backgroundImage:
+                arguments.barberData?.avatar != null &&
+                    arguments.barberData!.avatar.isNotEmpty &&
+                    arguments.barberData!.avatar != 'null'
                 ? NetworkImage(arguments.barberData!.avatar)
                 : null,
-            child: arguments.barberData?.avatar == null
-                ? const Icon(Icons.person, size: 20)
+            child:
+                arguments.barberData?.avatar == null ||
+                    arguments.barberData!.avatar.isEmpty ||
+                    arguments.barberData!.avatar == 'null'
+                ? const Icon(Icons.person, size: 20, color: Colors.grey)
                 : null,
           ),
           const SizedBox(width: 12),
@@ -554,7 +569,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: ColorsManager.lightBlue),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -600,7 +615,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: ColorsManager.lightBlue),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -863,6 +878,11 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     );
 
     if (userId.isEmpty && guestInfo != null && otp != null) {
+      print('✅ BookingConfirmation: Guest booking with OTP');
+      print('   Phone: ${guestInfo.phone}');
+      print('   Name: ${guestInfo.name}');
+      print('   OTP: $otp');
+
       final date =
           '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
 

@@ -156,8 +156,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
           },
           queueSettingsSuccess: (settingsResponse) {
             print('✅ ReservationsScreen: Queue settings success!');
-            print(
-                '   isQueueMode: ${settingsResponse.data?.isQueueMode}');
+            print('   isQueueMode: ${settingsResponse.data?.isQueueMode}');
             setState(() {
               _isLoadingSettings = false;
               _isQueueMode = settingsResponse.data?.isQueueMode ?? false;
@@ -450,7 +449,8 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                                 padding: EdgeInsets.zero,
                                 surfaceTintColor: Colors.transparent,
                                 shadowColor: Colors.transparent,
-                                disabledBackgroundColor: Colors.grey.shade200,
+                                disabledBackgroundColor:
+                                    ColorsManager.lightBlue,
                               ),
                               child: Text(
                                 'default_booking.save_as_default'.tr(),

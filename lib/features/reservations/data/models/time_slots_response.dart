@@ -24,12 +24,12 @@ class TimeSlotsResponse {
 class TimeSlotsData {
   final List<TimeSlot> slots;
   final bool isDayOff;
-  final WorkingHours workingHours;
+  // final WorkingHours workingHours;
 
   TimeSlotsData({
     required this.slots,
     required this.isDayOff,
-    required this.workingHours,
+    // required this.workingHours,
   });
 
   // The generated factory name will change due to class rename

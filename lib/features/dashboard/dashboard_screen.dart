@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/theme/colors.dart';
@@ -87,113 +88,125 @@ class _MyDashboardState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _profileCubit,
-      child: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: [
-              IndexedStack(index: _selectedIndex, children: _widgetOptions),
-              // Add verification check listener at dashboard level
-              BlocListener<ProfileCubit, ProfileState>(
-                listenWhen: (previous, current) => current is ProfileSuccess,
-                listener: (context, state) {
-                  if (state is ProfileSuccess) {
-                    final user = state.userProfile.user;
-                    final isVerified = user?.verified ?? true;
+    return PopScope(
+      canPop: false, // Prevent back navigation to login
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          // Exit the app when back button is pressed
+          SystemNavigator.pop();
+        }
+      },
+      child: BlocProvider.value(
+        value: _profileCubit,
+        child: Scaffold(
+          body: SafeArea(
+            child: Stack(
+              children: [
+                IndexedStack(index: _selectedIndex, children: _widgetOptions),
+                // Add verification check listener at dashboard level
+                BlocListener<ProfileCubit, ProfileState>(
+                  listenWhen: (previous, current) => current is ProfileSuccess,
+                  listener: (context, state) {
+                    if (state is ProfileSuccess) {
+                      final user = state.userProfile.user;
+                      final isVerified = user?.verified ?? true;
 
-                    debugPrint('=== Dashboard: User Profile Loaded ===');
-                    debugPrint('User verified: $isVerified');
+                      debugPrint('=== Dashboard: User Profile Loaded ===');
+                      debugPrint('User verified: $isVerified');
 
-                    if (!isVerified) {
-                      final phoneNumber = user?.phone ?? '';
-                      final countryCode = user?.countryCode ?? '';
-                      final fullPhone = '$countryCode$phoneNumber';
+                      if (!isVerified) {
+                        final phoneNumber = user?.phone ?? '';
+                        final countryCode = user?.countryCode ?? '';
+                        final fullPhone = '$countryCode$phoneNumber';
 
-                      debugPrint(
-                        'User not verified. Redirecting to verification screen',
-                      );
-                      debugPrint('Phone: $fullPhone');
+                        debugPrint(
+                          'User not verified. Redirecting to verification screen',
+                        );
+                        debugPrint('Phone: $fullPhone');
 
-                      // Navigate after the current frame to avoid build scope errors
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        if (context.mounted) {
-                          context.pushReplacementNamed(
-                            Routes.verificationScreen,
-                            arguments: {
-                              'phoneNumber': fullPhone,
-                              'shouldAutoResend': true,
-                              'comingFromLogin': true,
-                            },
-                          );
-                        }
-                      });
+                        // Navigate after the current frame to avoid build scope errors
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          if (context.mounted) {
+                            context.pushReplacementNamed(
+                              Routes.verificationScreen,
+                              arguments: {
+                                'phoneNumber': fullPhone,
+                                'shouldAutoResend': true,
+                                'comingFromLogin': true,
+                              },
+                            );
+                          }
+                        });
+                      }
                     }
-                  }
-                },
-                child: const SizedBox.shrink(),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: NavigationBarTheme(
-          data: NavigationBarThemeData(
-            backgroundColor: Colors.white,
-            indicatorColor: Colors.white,
-            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-            labelTextStyle: WidgetStateProperty.all(
-              TextStyles.font13BlueRegular,
+                  },
+                  child: const SizedBox.shrink(),
+                ),
+              ],
             ),
-            surfaceTintColor: Colors.transparent,
-            shadowColor: Colors.white,
           ),
-          child: NavigationBar(
-            selectedIndex: _selectedIndex,
-            destinations: [
-              NavigationDestination(
-                icon: Image.asset(
-                  'assets/icons/home.png',
-                  height: 40,
-                  width: 40,
-                ),
-                selectedIcon: Image.asset(
-                  'assets/icons/home.png',
-                  height: 40,
-                  width: 40,
-                  color: ColorsManager.mainBlue,
-                ),
-                label: 'navigation.home'.tr(),
+          bottomNavigationBar: NavigationBarTheme(
+            data: NavigationBarThemeData(
+              backgroundColor: Colors.white,
+              indicatorColor: Colors.white,
+              labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+              labelTextStyle: WidgetStateProperty.all(
+                TextStyles.font13BlueRegular,
               ),
-              NavigationDestination(
-                icon: Image.asset(
-                  'assets/icons/calendar.png',
-                  height: 40,
-                  width: 40,
-                ),
-                selectedIcon: Image.asset(
-                  'assets/icons/calendar.png',
-                  height: 40,
-                  width: 40,
-                  color: ColorsManager.mainBlue,
-                ),
-                label: 'navigation.booking'.tr(),
+              surfaceTintColor: Colors.transparent,
+              shadowColor: Colors.white,
+            ),
+            child: SizedBox(
+              height: 80,
+              child: NavigationBar(
+                selectedIndex: _selectedIndex,
+                destinations: [
+                  NavigationDestination(
+                    icon: Image.asset(
+                      'assets/icons/home.png',
+                      height: 24,
+                      width: 24,
+                    ),
+                    selectedIcon: Image.asset(
+                      'assets/icons/home.png',
+                      height: 24,
+                      width: 24,
+                      color: ColorsManager.mainBlue,
+                    ),
+                    label: 'navigation.home'.tr(),
+                  ),
+                  NavigationDestination(
+                    icon: Image.asset(
+                      'assets/icons/calendar.png',
+                      height: 24,
+                      width: 24,
+                    ),
+                    selectedIcon: Image.asset(
+                      'assets/icons/calendar.png',
+                      height: 24,
+                      width: 24,
+                      color: ColorsManager.mainBlue,
+                    ),
+                    label: 'navigation.booking'.tr(),
+                  ),
+                  NavigationDestination(
+                    icon: Image.asset(
+                      'assets/icons/user.png',
+                      height: 24,
+                      width: 24,
+                    ),
+                    selectedIcon: Image.asset(
+                      'assets/icons/user.png',
+                      height: 24,
+                      width: 24,
+                      color: ColorsManager.mainBlue,
+                    ),
+                    label: 'navigation.profile'.tr(),
+                  ),
+                ],
+                onDestinationSelected: _onItemTapped,
               ),
-              NavigationDestination(
-                icon: Image.asset(
-                  'assets/icons/user.png',
-                  height: 40,
-                  width: 40,
-                ),
-                selectedIcon: Image.asset(
-                  'assets/icons/user.png',
-                  height: 40,
-                  width: 40,
-                  color: ColorsManager.mainBlue,
-                ),
-                label: 'navigation.profile'.tr(),
-              ),
-            ],
-            onDestinationSelected: _onItemTapped,
+            ),
           ),
         ),
       ),

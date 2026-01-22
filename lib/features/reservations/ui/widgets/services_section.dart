@@ -120,7 +120,7 @@ class ServicesSection extends StatelessWidget {
                           children: [
                             Text(
                               service.name,
-                              style: TextStyles.font16DarkBold,
+                              style: TextStyles.font15DarkBlueMedium,
                             ),
                             const SizedBox(height: 4),
                           ],

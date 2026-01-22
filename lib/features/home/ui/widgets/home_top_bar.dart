@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/theme/colors.dart';
 import '../../../../core/theme/styles.dart';
 
 class HomeTopBar extends StatelessWidget {
@@ -13,16 +11,10 @@ class HomeTopBar extends StatelessWidget {
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Temy Barber',
-              style: TextStyles.font18DarkBlueBold,
-            ),
-          ],
+          children: [Text('Temy Barber', style: TextStyles.font18DarkBlueBold)],
         ),
         const Spacer(),
         const Image(image: AssetImage('assets/images/logo.png'), height: 40),
-
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -7,7 +8,7 @@ class ServiceTab extends StatelessWidget {
   final BarberDetailData? serviceResponseModel;
   final Set<BarberService>? selectedServices;
   final void Function(BarberService service, double price, bool selected)?
-      onServiceSelected;
+  onServiceSelected;
 
   const ServiceTab({
     super.key,
@@ -22,89 +23,142 @@ class ServiceTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: services.isEmpty
-          ? Center(child: Text('barber.no_services'.tr()))
+          ? Center(
+              child: Text(
+                'barber.no_services'.tr(),
+                style: TextStyles.font16GrayRegular,
+              ),
+            )
           : ListView.separated(
               itemCount: services.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 12),
+              separatorBuilder: (_, __) => const SizedBox(height: 16),
               itemBuilder: (context, index) {
                 final service = services[index];
-                final isSelected = selectedServices?.any((selectedService) =>
-                        selectedService.id == service.id) ??
+                final isSelected =
+                    selectedServices?.any(
+                      (selectedService) => selectedService.id == service.id,
+                    ) ??
                     false;
-                return InkWell(
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: onServiceSelected == null
-                      ? null
-                      : () => onServiceSelected!(
-                            service,
-                            service.price.toDouble(),
-                            !isSelected,
-                          ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? Theme.of(context).primaryColor.withOpacity(0.08)
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: isSelected
-                            ? Theme.of(context).primaryColor
-                            : Colors.grey[300]!,
-                        width: isSelected ? 2 : 0,
-                      ),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 12),
-                      title: Text(
-                        service.name,
-                        style: TextStyles.font14BlueSemiBold,
-                      ),
-                      // subtitle: Text(
-                      //   service.description,
-                      //   maxLines: 2,
-                      //   overflow: TextOverflow.ellipsis,
-                      //   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      //         color: Colors.grey[600],
-                      //       ),
-                      // ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                'barber.price'
-                                    .tr(args: [service.price.toString()]),
-                                style: TextStyles.font16DarkBold,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                  'barber.duration'
-                                      .tr(args: [service.duration.toString()]),
-                                  style: TextStyles.font14DarkBlueMedium),
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeInOut,
+                  decoration: BoxDecoration(
+                    gradient: isSelected
+                        ? LinearGradient(
+                            colors: [
+                              ColorsManager.mainBlue.withOpacity(0.08),
+                              ColorsManager.secondMain.withOpacity(0.05),
                             ],
-                          ),
-                          if (isSelected)
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: Container(
-                                padding: const EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Theme.of(context).primaryColor,
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          )
+                        : null,
+                    color: isSelected ? null : Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: isSelected
+                          ? ColorsManager.mainBlue
+                          : ColorsManager.lighterGray,
+                      width: isSelected ? 2 : 1.5,
+                    ),
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: onServiceSelected == null
+                          ? null
+                          : () => onServiceSelected!(
+                              service,
+                              service.price.toDouble(),
+                              !isSelected,
+                            ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          children: [
+                            // Selection indicator with gradient
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              width: 28,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? ColorsManager.mainBlue
+                                    : ColorsManager.moreLighterGray,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: isSelected
+                                      ? Colors.transparent
+                                      : ColorsManager.lightGray,
+                                  width: 1,
                                 ),
-                                child: const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: 18,
-                                ),
+                              ),
+                              child: isSelected
+                                  ? const Icon(
+                                      Icons.check_rounded,
+                                      color: Colors.white,
+                                      size: 18,
+                                    )
+                                  : null,
+                            ),
+                            const SizedBox(width: 16),
+                            // Service details
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    service.name,
+                                    style: isSelected
+                                        ? TextStyles.font16DarkBold
+                                        : TextStyles.font15DarkBlueMedium,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.access_time_rounded,
+                                        size: 16,
+                                        color: ColorsManager.gray,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        'barber.duration'.tr(
+                                          args: [service.duration.toString()],
+                                        ),
+                                        style: TextStyles.font13GrayRegular,
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
-                        ],
+                            const SizedBox(width: 12),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? ColorsManager.mainBlue
+                                    : ColorsManager.thirdfMain,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                'barber.price'.tr(
+                                  args: [service.price.toString()],
+                                ),
+                                style: isSelected
+                                    ? TextStyles.font16WhiteSemiBold
+                                    : TextStyles.font14BlueSemiBold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

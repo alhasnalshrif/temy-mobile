@@ -3,10 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/auth/logic/cubit/login_cubit.dart';
-import 'package:temy_barber/features/auth/logic/cubit/login_state.dart';
-import 'package:temy_barber/core/widgets/shimmer_loading.dart';
-import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
-import 'package:temy_barber/core/di/dependency_injection.dart';
+
 import 'package:temy_barber/core/helpers/extensions.dart';
 
 import '../../../core/helpers/spacing.dart';

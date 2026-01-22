@@ -240,7 +240,7 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: ColorsManager.lightBlue,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Row(
