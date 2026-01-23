@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/booking/ui/widgets/barber_section.dart';
@@ -174,11 +175,11 @@ class BookingCard extends StatelessWidget {
                     ),
                     onPressed: () => _showCancelConfirmation(context),
                     child: Text(
-                      'cancel'.tr(),
+                      'common.cancel'.tr(),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -187,7 +188,7 @@ class BookingCard extends StatelessWidget {
             ],
           ),
           verticalSpace(16),
-          const Divider(),
+          const Divider(color: ColorsManager.lightBlue),
           verticalSpace(16),
           DateTimeSection(booking: booking),
           verticalSpace(16),

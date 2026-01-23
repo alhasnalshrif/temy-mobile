@@ -8,10 +8,7 @@ import 'package:shimmer/shimmer.dart';
 class BannerCarousel extends StatefulWidget {
   final List<BannerData> banners;
 
-  const BannerCarousel({
-    super.key,
-    required this.banners,
-  });
+  const BannerCarousel({super.key, required this.banners});
 
   @override
   State<BannerCarousel> createState() => _BannerCarouselState();
@@ -22,12 +19,15 @@ class _BannerCarouselState extends State<BannerCarousel> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bannerHeight = _getResponsiveBannerHeight(screenWidth);
+
     return Column(
       children: [
         CarouselSlider.builder(
           itemCount: widget.banners.length,
           options: CarouselOptions(
-            height: 160,
+            height: bannerHeight,
             viewportFraction: 1,
             autoPlay: true,
             enlargeCenterPage: true,
@@ -61,6 +61,12 @@ class _BannerCarouselState extends State<BannerCarousel> {
         ),
       ],
     );
+  }
+
+  double _getResponsiveBannerHeight(double screenWidth) {
+    if (screenWidth >= 1024) return 300; // Desktop
+    if (screenWidth >= 600) return 220; // Tablet
+    return 160; // Mobile
   }
 }
 
@@ -102,10 +108,7 @@ class _BannerItem extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
-      child: Container(
-        width: double.infinity,
-        color: Colors.white,
-      ),
+      child: Container(width: double.infinity, color: Colors.white),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TotalSection extends StatelessWidget {
   final double totalPrice;
@@ -39,8 +40,8 @@ class TotalSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'الإجمالي',
+              Text(
+                'common.total'.tr(),
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Row(

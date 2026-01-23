@@ -36,7 +36,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
 
     final phone = _phoneController.text.trim();
 
-    // Request OTP from the backend
+    // Request OTP from the backend for reservation
     context.read<ReservationCubit>().requestGuestVerification(phone: phone);
   }
 
@@ -50,7 +50,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
       builder: (context) => OtpVerificationDialog(
         phoneNumber: phone,
         onResendOtp: () {
-          // Request OTP again
+          // Request OTP again for reservation
           context.read<ReservationCubit>().requestGuestVerification(
             phone: phone,
           );
@@ -198,6 +198,37 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    verticalSpace(12),
+                    // Add button to manually enter OTP
+                    Center(
+                      child: TextButton.icon(
+                        onPressed: () {
+                          final phone = _phoneController.text.trim();
+                          final name = _nameController.text.trim();
+                          if (phone.isNotEmpty && name.isNotEmpty) {
+                            _showOtpDialog(phone, name);
+                          }
+                        },
+                        icon: const Icon(Icons.dialpad, size: 20),
+                        label: Text(
+                          'Enter OTP Code',
+                          style: TextStyles.font14DarkBlueMedium,
+                        ),
+                        style: TextButton.styleFrom(
+                          foregroundColor: ColorsManager.mainBlue,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 12,
+                          ),
+                          backgroundColor: ColorsManager.lightBlue.withOpacity(
+                            0.3,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                       ),
                     ),
                     verticalSpace(16),

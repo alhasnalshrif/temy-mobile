@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/category_barbers/data/models/category_response.dart';
 
 /// A widget that displays a single category item in a list with an image and name.
@@ -92,7 +93,6 @@ class CategoryListViewItem extends StatelessWidget {
   }
 }
 
-/// A widget that displays the category image with a gradient border.
 class _CategoryImage extends StatelessWidget {
   final String? imageUrl;
   final double radius;
@@ -112,13 +112,9 @@ class _CategoryImage extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        gradient: LinearGradient(
-          colors: [Colors.grey[300]!, Colors.grey[100]!],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: ColorsManager.lightBlue,
       ),
       padding: const EdgeInsets.all(2),
       child: ClipOval(

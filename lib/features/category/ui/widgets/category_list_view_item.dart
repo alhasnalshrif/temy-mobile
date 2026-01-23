@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/category/data/models/categories_list_response.dart';
 
 /// A widget that displays a single category item in a list with an image and name.
@@ -77,11 +78,11 @@ class CategoryListViewItem extends StatelessWidget {
       child: Text(
         serviceResponseModel?.name ?? 'Service',
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.grey[900],
-              height: 1.3,
-              fontWeight: FontWeight.w600,
-              fontSize: 14 / textScale,
-            ),
+          color: Colors.grey[900],
+          height: 1.3,
+          fontWeight: FontWeight.w600,
+          fontSize: 14 / textScale,
+        ),
         textAlign: TextAlign.start,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
@@ -90,7 +91,6 @@ class CategoryListViewItem extends StatelessWidget {
   }
 }
 
-/// A widget that displays the category image with a gradient border.
 class _CategoryImage extends StatelessWidget {
   final String? imageUrl;
   final double radius;
@@ -110,16 +110,9 @@ class _CategoryImage extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        gradient: LinearGradient(
-          colors: [
-            Colors.grey[300]!,
-            Colors.grey[100]!,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: ColorsManager.lightBlue,
       ),
       padding: const EdgeInsets.all(2),
       child: ClipOval(
@@ -140,40 +133,32 @@ class _CategoryImage extends StatelessWidget {
 
   /// Builds a shimmer effect for loading images.
   Widget _buildShimmer(double size) => Shimmer.fromColors(
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!,
-        child: Container(
-          width: size,
-          height: size,
-          color: Colors.white,
-        ),
-      );
+    baseColor: Colors.grey[300]!,
+    highlightColor: Colors.grey[100]!,
+    child: Container(width: size, height: size, color: Colors.white),
+  );
 
   /// Builds an error widget for failed image loads.
   Widget _buildError(double size) => Container(
-        width: size,
-        height: size,
-        color: Colors.grey[200],
-        child: Center(
-          child: Icon(
-            Icons.broken_image,
-            size: radius * 0.8,
-            color: Colors.red.withOpacity(0.6),
-          ),
-        ),
-      );
+    width: size,
+    height: size,
+    color: Colors.grey[200],
+    child: Center(
+      child: Icon(
+        Icons.broken_image,
+        size: radius * 0.8,
+        color: Colors.red.withOpacity(0.6),
+      ),
+    ),
+  );
 
   /// Builds a fallback widget for missing images.
   Widget _buildFallback(double size) => Container(
-        width: size,
-        height: size,
-        color: backgroundColor,
-        child: Center(
-          child: Icon(
-            Icons.category,
-            size: radius * 0.8,
-            color: Colors.grey[600],
-          ),
-        ),
-      );
+    width: size,
+    height: size,
+    color: backgroundColor,
+    child: Center(
+      child: Icon(Icons.category, size: radius * 0.8, color: Colors.grey[600]),
+    ),
+  );
 }

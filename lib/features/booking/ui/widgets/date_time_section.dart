@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
@@ -38,7 +39,7 @@ class DateTimeSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Date & Time",
+              "booking.date_time".tr(),
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,

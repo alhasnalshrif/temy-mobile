@@ -7,6 +7,7 @@ import 'package:temy_barber/features/barber/data/models/barber_detail_response.d
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart'
     as reservation;
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TimeSlotSection extends StatelessWidget {
   final BarberDetailData? barberData;
@@ -263,8 +264,8 @@ class TimeSlotSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Text(
-              'الوقت المتاح',
+            Text(
+              'time_slots.available_time'.tr(),
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 8),
@@ -276,7 +277,9 @@ class TimeSlotSection extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  'مدة الخدمة: $totalDuration دقيقة',
+                  'time_slots.service_duration'.tr(
+                    args: [totalDuration.toString()],
+                  ),
                   style: const TextStyle(
                     fontSize: 12,
                     color: ColorsManager.mainBlue,
@@ -293,12 +296,12 @@ class TimeSlotSection extends StatelessWidget {
                 child: Center(child: ShimmerLoading.rectangular(height: 60)),
               )
             : validStartingSlots.isEmpty
-            ? const SizedBox(
+            ? SizedBox(
                 height: 100,
                 child: Center(
                   child: Text(
-                    'لا توجد أوقات متاحة في هذا اليوم',
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    'time_slots.no_slots'.tr(),
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                 ),
               )
@@ -402,7 +405,8 @@ class TimeSlotSection extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 4),
                                       child: Text(
-                                        unavailableReason ?? 'غير متاح',
+                                        unavailableReason ??
+                                            'time_slots.unavailable'.tr(),
                                         style: const TextStyle(
                                           color: Colors.grey,
                                           fontSize: 9,
@@ -445,7 +449,7 @@ class TimeSlotSection extends StatelessWidget {
                     final selectionEndDisplay = _formatTimeForDisplay(
                       _getEndTime(selectedTime!, totalDuration),
                     );
-                    return 'الحجز: $selectionStartDisplay - $selectionEndDisplay';
+                    return '${'time_slots.booking_summary'.tr(args: [selectionStartDisplay, selectionEndDisplay])}';
                   }(),
                   style: const TextStyle(
                     fontSize: 14,

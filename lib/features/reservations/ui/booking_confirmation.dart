@@ -92,7 +92,10 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('تأكيد الحجز', style: TextStyles.font16DarkBold),
+          title: Text(
+            'booking_confirmation.title'.tr(),
+            style: TextStyles.font16DarkBold,
+          ),
           centerTitle: true,
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
@@ -179,7 +182,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              "الرجاء مراجعة تفاصيل الحجز قبل التأكيد",
+              'booking_confirmation.review_details'.tr(),
               style: TextStyles.font14DarkBlueMedium,
             ),
           ),
@@ -210,7 +213,9 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "ملخص الحجوزات (${allReservations.length})",
+                'booking_confirmation.summary'.tr(
+                  args: [allReservations.length.toString()],
+                ),
                 style: TextStyles.font16DarkBold,
               ),
               Text(
@@ -297,7 +302,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                reservation.barberData?.name ?? 'حلاق غير محدد',
+                                'booking_confirmation.unknown_barber'.tr(),
                                 style: TextStyles.font18DarkBlueBold,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -328,7 +333,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                                 color: Colors.red,
                               ),
                             ),
-                            tooltip: "حذف الحجز",
+                            tooltip: 'booking_confirmation.remove_tooltip'.tr(),
                             style: IconButton.styleFrom(
                               padding: EdgeInsets.zero,
                               visualDensity: VisualDensity.compact,
@@ -366,7 +371,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                       ),
                     ] else ...[
                       Text(
-                        "لا توجد خدمات محددة",
+                        'booking_confirmation.no_services'.tr(),
                         style: TextStyles.font14GrayRegular.copyWith(
                           color: Colors.grey.shade500,
                         ),
@@ -382,7 +387,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "الإجمالي",
+                                'common.total'.tr(),
                                 style: TextStyles.font14DarkBlueMedium.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black87,
@@ -429,7 +434,10 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("ملخص الخدمات", style: TextStyles.font16DarkBold),
+          Text(
+            'booking_confirmation.summary_services'.tr(),
+            style: TextStyles.font16DarkBold,
+          ),
           const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.all(12.0),
@@ -445,7 +453,8 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: arguments.selectedServices.length,
-                  separatorBuilder: (_, __) => const Divider(height: 12),
+                  separatorBuilder: (_, __) =>
+                      const Divider(height: 12, color: ColorsManager.lightBlue),
                   itemBuilder: (context, index) {
                     final service = arguments.selectedServices[index];
                     return Row(
@@ -477,7 +486,10 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("المجموع", style: TextStyles.font16DarkBold),
+                    Text(
+                      'booking_confirmation.total_final'.tr(),
+                      style: TextStyles.font16DarkBold,
+                    ),
                     Text(
                       "${arguments.totalPrice.toStringAsFixed(2)} جنية",
                       style: TextStyles.font16DarkBold.copyWith(
@@ -530,24 +542,11 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "الحلاق: ${arguments.barberData?.name ?? "غير محدد"}",
+                  "${'booking_confirmation.barber_label'.tr()}: ${arguments.barberData?.name ?? 'booking_confirmation.unknown_barber'.tr()}",
                   style: TextStyles.font14DarkBlueMedium.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                if (arguments.barberData?.rating != null)
-                  Row(
-                    children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 14),
-                      const SizedBox(width: 4),
-                      Text(
-                        arguments.barberData!.rating.average.toString(),
-                        style: TextStyles.font14GrayRegular.copyWith(
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
               ],
             ),
           ),
@@ -581,11 +580,18 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               color: ColorsManager.lightBlue,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(
-              Icons.calendar_today,
+            child: Image.asset(
+              'assets/icons/calendar.png',
               color: ColorsManager.mainBlue,
-              size: 18,
+              width: 18,
+              height: 18,
             ),
+
+            // child: const Icon(
+            //   Icons.calendar_today,
+            //   color: ColorsManager.mainBlue,
+            //   size: 18,
+            // ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -593,7 +599,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "موعد الحجز:",
+                  'booking_confirmation.date_label'.tr(),
                   style: TextStyles.font14DarkBlueMedium.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -634,7 +640,10 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             ),
           ),
           const SizedBox(width: 12),
-          Text("الدفع عند الوصول", style: TextStyles.font14DarkBlueMedium),
+          Text(
+            'booking_confirmation.payment_on_arrival'.tr(),
+            style: TextStyles.font14DarkBlueMedium,
+          ),
           const Spacer(),
           const Icon(
             Icons.check_circle,
@@ -685,7 +694,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            "إضافة حجز آخر",
+                            'booking_confirmation.add_another'.tr(),
                             style: TextStyles.font14DarkBlueMedium.copyWith(
                               fontWeight: FontWeight.bold,
                               color: ColorsManager.mainBlue,
@@ -711,7 +720,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.arrow_back_ios, size: 16),
-                  label: const Text("تعديل"),
+                  label: Text('booking_confirmation.edit'.tr()),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     foregroundColor: ColorsManager.mainBlue,
@@ -735,10 +744,18 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
                   icon: const Icon(Icons.check_circle_outline),
                   label: Text(
                     isQueueMode
-                        ? "تأكيد الحجز"
+                        ? 'booking_confirmation.confirm_booking'.tr()
                         : (_multiReservationManager.reservations.isEmpty
-                              ? "تأكيد الحجز"
-                              : "تأكيد الحجوزات (${_multiReservationManager.reservations.length + 1})"),
+                              ? 'booking_confirmation.confirm_booking'.tr()
+                              : 'booking_confirmation.confirm_all'.tr(
+                                  args: [
+                                    (_multiReservationManager
+                                                .reservations
+                                                .length +
+                                            1)
+                                        .toString(),
+                                  ],
+                                )),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorsManager.mainBlue,
@@ -775,8 +792,8 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     _multiReservationManager.addReservation(arguments);
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("تم إضافة الحجز، يمكنك الآن اختيار خدمات أخرى"),
+      SnackBar(
+        content: Text('booking_confirmation.booking_added'.tr()),
         backgroundColor: Colors.green,
       ),
     );
@@ -797,8 +814,8 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     if (_multiReservationManager.reservations.isNotEmpty) {
       if (arguments.selectedDate == null || arguments.selectedTime == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("الرجاء تحديد التاريخ والوقت للحجز الحالي"),
+          SnackBar(
+            content: Text('booking_confirmation.select_date_current'.tr()),
             backgroundColor: Colors.red,
           ),
         );
@@ -877,25 +894,43 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
       isQueueMode: isQueueMode,
     );
 
-    if (userId.isEmpty && guestInfo != null && otp != null) {
-      print('✅ BookingConfirmation: Guest booking with OTP');
-      print('   Phone: ${guestInfo.phone}');
-      print('   Name: ${guestInfo.name}');
-      print('   OTP: $otp');
+    if (userId.isEmpty && guestInfo != null) {
+      // For queue mode, guest users join directly without OTP
+      // For reservation mode, OTP is required
+      if (isQueueMode) {
+        // Queue guest booking - direct join without OTP
+        context.read<ReservationCubit>().joinQueue(
+          barberId: barberId,
+          serviceIds: serviceIds,
+          userId: null,
+          guest: guestInfo,
+          arguments: updatedArguments,
+        );
+      } else if (otp != null) {
+        // Regular reservation guest booking with OTP verification
+        final date =
+            '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
 
-      final date =
-          '${arguments.selectedDate!.year}-${arguments.selectedDate!.month.toString().padLeft(2, '0')}-${arguments.selectedDate!.day.toString().padLeft(2, '0')}';
-
-      context.read<ReservationCubit>().verifyAndCreateGuestReservation(
-        phone: guestInfo.phone,
-        otp: otp,
-        userName: guestInfo.name,
-        barberId: barberId,
-        serviceIds: serviceIds,
-        date: date,
-        startTime: arguments.selectedTime!,
-        arguments: updatedArguments,
-      );
+        context.read<ReservationCubit>().verifyAndCreateGuestReservation(
+          phone: guestInfo.phone,
+          otp: otp,
+          userName: guestInfo.name,
+          barberId: barberId,
+          serviceIds: serviceIds,
+          date: date,
+          startTime: arguments.selectedTime!,
+          arguments: updatedArguments,
+        );
+      } else {
+        // Reservation mode but no OTP - this shouldn't happen
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("فشل الحصول على رمز التحقق"),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
     } else {
       if (isQueueMode) {
         context.read<ReservationCubit>().joinQueue(

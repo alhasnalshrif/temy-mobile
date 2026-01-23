@@ -3,7 +3,6 @@ import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/reservations/data/apis/reservations_api_services.dart';
 import 'package:temy_barber/features/reservations/data/apis/queue_api_services.dart';
-import 'package:temy_barber/features/reservations/data/models/multiple_reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_detail_request.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
@@ -28,11 +27,6 @@ class ReservationRepo {
     String? note,
   }) async {
     try {
-      print('🔵 ReservationRepo: Calling postReservation API...');
-      print('   userId: $userId');
-      print('   guest: $guest');
-      print('   Is guest: ${guest != null && userId == null}');
-
       final requestModel = ReservationRequestModel(
         user: userId,
         serviceIds: serviceIds,
@@ -78,9 +72,7 @@ class ReservationRepo {
       // Convert the multiple reservation response to a standard reservation response
       final response = multiResponse.toReservationResponseModel();
       return ApiResult.success(response);
-    } catch (error, stackTrace) {
-      print('Error in postMultipleReservations: $error');
-      print('Stack trace: $stackTrace');
+    } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
@@ -111,13 +103,6 @@ class ReservationRepo {
     String? note,
   }) async {
     try {
-      print('🔵 ReservationRepo: Calling joinQueue API...');
-      print('   userId: $userId');
-      print('   guest: $guest');
-      print('   guest != null: ${guest != null}');
-      print('   userId == null: ${userId == null}');
-      print('   Is guest: ${guest != null && userId == null}');
-
       final request = JoinQueueRequest(
         barberId: barberId,
         serviceIds: serviceIds,
@@ -128,22 +113,13 @@ class ReservationRepo {
 
       // Use guest endpoint if user is not logged in (userId is null AND guest is provided)
       final isGuestBooking = guest != null && userId == null;
-      print('   Using guest endpoint: $isGuestBooking');
 
       final response = isGuestBooking
           ? await _queueApiServices.joinQueueGuest(request)
           : await _queueApiServices.joinQueue(request);
 
-      print('✅ ReservationRepo: joinQueue API success!');
-      print('   Response status: ${response.status}');
-      print('   Queue number: ${response.data.queueNumber}');
-      print('   Is queue reservation: ${response.data.isQueueReservation}');
       return ApiResult.success(response);
-    } catch (error, stackTrace) {
-      print('❌ ReservationRepo: joinQueue API error!');
-      print('   Error type: ${error.runtimeType}');
-      print('   Error: $error');
-      print('   Stack trace: $stackTrace');
+    } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
@@ -192,20 +168,13 @@ class ReservationRepo {
 
   Future<ApiResult<QueueSettingsResponse>> getQueueSettings() async {
     try {
-      print('🔍 ReservationRepo: Calling queue settings API...');
       final response = await _queueApiServices.getQueueSettings();
-      print('✅ ReservationRepo: API response received');
-      print('   Response data: ${response.data?.isQueueMode}');
+
       return ApiResult.success(response);
     } catch (error, stackTrace) {
-      print('❌ ReservationRepo: Error caught!');
-      print('   Error type: ${error.runtimeType}');
-      print('   Error message: $error');
-      
       // Handle 401 (unauthorized) - user not logged in
       // Return default settings with queue mode disabled
       if (error is DioException && error.response?.statusCode == 401) {
-        print('   ℹ️ User not authenticated, returning default settings');
         final defaultResponse = QueueSettingsResponse(
           status: 'success',
           data: QueueSettingsData(
@@ -219,8 +188,7 @@ class ReservationRepo {
         );
         return ApiResult.success(defaultResponse);
       }
-      
-      print('   Stack trace: $stackTrace');
+
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
@@ -230,16 +198,11 @@ class ReservationRepo {
     required String phone,
   }) async {
     try {
-      print('🔵 ReservationRepo: Requesting OTP for phone: $phone');
       final response = await _reservationApiServices.requestGuestVerification(
         OtpRequest(phone: phone),
       );
-      print('✅ ReservationRepo: OTP request successful');
       return ApiResult.success(response);
     } catch (error, stackTrace) {
-      print('❌ ReservationRepo: OTP request error!');
-      print('   Error: $error');
-      print('   Stack trace: $stackTrace');
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
@@ -255,8 +218,6 @@ class ReservationRepo {
     String? note,
   }) async {
     try {
-      print('🔵 ReservationRepo: Verifying OTP and creating reservation...');
-      print('   Phone: $phone, OTP: $otp');
       final response = await _reservationApiServices
           .verifyAndCreateGuestReservation(
             VerifyOtpAndReserveRequest(
@@ -270,12 +231,8 @@ class ReservationRepo {
               note: note,
             ),
           );
-      print('✅ ReservationRepo: Guest reservation created successfully');
       return ApiResult.success(response);
     } catch (error, stackTrace) {
-      print('❌ ReservationRepo: Guest reservation error!');
-      print('   Error: $error');
-      print('   Stack trace: $stackTrace');
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }

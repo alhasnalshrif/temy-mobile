@@ -21,17 +21,10 @@ TimeSlotsData _$TimeSlotsDataFromJson(Map<String, dynamic> json) =>
           .map((e) => TimeSlot.fromJson(e as Map<String, dynamic>))
           .toList(),
       isDayOff: json['isDayOff'] as bool,
-      // workingHours: WorkingHours.fromJson(
-      //   json['workingHours'] as Map<String, dynamic>,
-      // ),
     );
 
 Map<String, dynamic> _$TimeSlotsDataToJson(TimeSlotsData instance) =>
-    <String, dynamic>{
-      'slots': instance.slots,
-      'isDayOff': instance.isDayOff,
-      // 'workingHours': instance.workingHours,
-    };
+    <String, dynamic>{'slots': instance.slots, 'isDayOff': instance.isDayOff};
 
 TimeSlot _$TimeSlotFromJson(Map<String, dynamic> json) => TimeSlot(
   time: json['time'] as String,

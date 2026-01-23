@@ -13,15 +13,62 @@ import 'package:temy_barber/core/utils/notification_helper.dart';
 import 'package:temy_barber/core/routing/app_router.dart';
 import 'package:temy_barber/core/routing/routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/ui/maintenance_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
+import 'package:temy_barber/features/settings/data/repos/settings_repo.dart';
+import 'package:temy_barber/features/settings/data/models/settings_response.dart';
+import 'package:url_strategy/url_strategy.dart'; // Import url_strategy
+import 'package:temy_barber/core/ui/responsive_center.dart'; // Import ResponsiveCenter
 
 bool isLoggedInUser = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy(); // Set URL strategy
   await EasyLocalization.ensureInitialized();
 
   setupGetIt();
+
+  // Check for maintenance mode
+  SettingsData? settingsData;
+  try {
+    final settingsRepo = getIt<SettingsRepo>();
+    final settingsResponse = await settingsRepo.getSettings();
+
+    settingsResponse.when(
+      success: (data) {
+        settingsData = data.data;
+      },
+      failure: (error) {
+        log('❌ Failed to fetch settings: $error');
+      },
+    );
+  } catch (e) {
+    log('❌ Error checking settings: $e');
+  }
+
+  // If maintenance mode is active, show MaintenanceScreen
+  if (settingsData?.maintenance == true) {
+    runApp(
+      EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('ar')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('ar'),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: MaintenanceScreen(
+            logo: settingsData?.logo,
+            about: settingsData?.about,
+            phone: settingsData?.phone,
+            address: settingsData?.address,
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+
   await checkedIfUserLoggedIn();
 
   // Initialize Permission Manager
@@ -39,9 +86,12 @@ void main() async {
   }
 
   try {
-    log('🚀 Starting OneSignal initialization...');
-    await getIt<NotificationService>().initialize();
-    log('✅ OneSignal initialization completed');
+    if (!kIsWeb) {
+      // Skip OneSignal on web
+      log('🚀 Starting OneSignal initialization...');
+      await getIt<NotificationService>().initialize();
+      log('✅ OneSignal initialization completed');
+    }
   } catch (e) {
     log('❌ OneSignal initialization failed: $e');
     // Continue app execution even if OneSignal fails
@@ -91,15 +141,15 @@ void main() async {
 /// Enhanced authentication check with JWT validation
 Future<void> checkedIfUserLoggedIn() async {
   log('🔐 Checking user authentication status...');
-  
+
   try {
     // Use AuthService to validate token
     final isAuthenticated = await AuthService.instance.isAuthenticated();
-    
+
     if (isAuthenticated) {
       log('✅ User is authenticated with valid token');
       isLoggedInUser = true;
-      
+
       // Verify user ID is stored
       final userId = await AuthService.instance.getUserId();
       if (userId != null) {
@@ -108,14 +158,14 @@ Future<void> checkedIfUserLoggedIn() async {
     } else {
       log('❌ User is not authenticated or token is invalid');
       isLoggedInUser = false;
-      
+
       // Clear any stale authentication data
       await AuthService.instance.clearAuthentication();
     }
   } catch (e) {
     log('❌ Error checking authentication: $e');
     isLoggedInUser = false;
-    
+
     // Clear authentication on error
     try {
       await AuthService.instance.clearAuthentication();
@@ -123,7 +173,7 @@ Future<void> checkedIfUserLoggedIn() async {
       log('❌ Error clearing authentication: $clearError');
     }
   }
-  
+
   log('🔐 Authentication check complete. isLoggedInUser: $isLoggedInUser');
 }
 

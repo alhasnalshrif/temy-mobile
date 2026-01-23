@@ -17,7 +17,7 @@ import 'package:temy_barber/features/auth/logic/forgot_password/forgot_password_
 import 'package:temy_barber/features/auth/ui/forgot_password_screen.dart';
 import 'package:temy_barber/features/auth/logic/reset_password/reset_password_cubit.dart';
 import 'package:temy_barber/features/auth/ui/reset_password_screen.dart';
-import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
+// import 'package:temy_barber/features/onboarding/onboarding_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/features/profile/ui/about_screen.dart';
@@ -38,8 +38,8 @@ import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.onBoardingScreen:
-        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+      // case Routes.onBoardingScreen:
+      //   return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(

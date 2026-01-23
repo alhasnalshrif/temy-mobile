@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/theme/colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/widgets/app_text_button.dart';
 import 'package:temy_barber/features/reservations/logic/queue_cubit.dart';
 import 'package:temy_barber/features/reservations/logic/queue_state.dart';
@@ -53,7 +54,7 @@ class _QueueSectionState extends State<QueueSection> {
                   Text(state.error, textAlign: TextAlign.center),
                   const SizedBox(height: 16),
                   AppTextButton(
-                    buttonText: 'Retry',
+                    buttonText: 'queue.retry'.tr(),
                     textStyle: const TextStyle(color: Colors.white),
                     onPressed: () {
                       context.read<QueueCubit>().getQueueStatus(
@@ -86,13 +87,13 @@ class _QueueSectionState extends State<QueueSection> {
                 ),
                 child: Column(
                   children: [
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.people, color: Colors.white),
                         SizedBox(width: 8),
                         Text(
-                          'Live Queue Status',
+                          'queue.live_status'.tr(),
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -123,12 +124,12 @@ class _QueueSectionState extends State<QueueSection> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Icon(Icons.cut, color: Colors.green, size: 24),
                             SizedBox(width: 8),
                             Text(
-                              'Now Serving',
+                              'queue.now_serving'.tr(),
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -142,7 +143,7 @@ class _QueueSectionState extends State<QueueSection> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Queue #${currentCustomer.queueNumber}',
+                              '${'queue.queue_number_label'.tr()} #${currentCustomer.queueNumber}',
                               style: const TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
@@ -153,14 +154,23 @@ class _QueueSectionState extends State<QueueSection> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '${currentCustomer.totalDuration} min',
+                                  'queue.service_duration'.tr(
+                                    args: [
+                                      currentCustomer.totalDuration.toString(),
+                                    ],
+                                  ),
                                   style: const TextStyle(
                                     fontSize: 16,
                                     color: Colors.grey,
                                   ),
                                 ),
                                 Text(
-                                  '${currentCustomer.services.length} service(s)',
+                                  'queue.service_count'.tr(
+                                    args: [
+                                      currentCustomer.services.length
+                                          .toString(),
+                                    ],
+                                  ),
                                   style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.grey,
@@ -186,17 +196,17 @@ class _QueueSectionState extends State<QueueSection> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'People Waiting',
-                                style: TextStyle(
+                                'queue.people_waiting'.tr(),
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.grey,
                                 ),
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                             ],
                           ),
                           Text(
@@ -213,12 +223,14 @@ class _QueueSectionState extends State<QueueSection> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Est. Wait Time per Person',
+                          Text(
+                            'queue.est_wait_time'.tr(),
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                           Text(
-                            '~${queueData.estimatedServiceTime} min',
+                            'queue.est_wait'.tr(
+                              args: [queueData.estimatedServiceTime.toString()],
+                            ),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -234,8 +246,8 @@ class _QueueSectionState extends State<QueueSection> {
 
               // Waiting Customers List
               if (waitingCount > 0) ...[
-                const Text(
-                  'Waiting Queue',
+                Text(
+                  'queue.waiting_queue'.tr(),
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
@@ -260,11 +272,11 @@ class _QueueSectionState extends State<QueueSection> {
                         ),
                       ),
                       title: Text(
-                        'Queue Position ${index + 1}',
+                        'queue.position'.tr(args: [(index + 1).toString()]),
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-                        '${customer.services.length} service(s) • ${customer.totalDuration} min',
+                        '${'queue.service_count'.tr(args: [customer.services.length.toString()])} • ${'queue.service_duration'.tr(args: [customer.totalDuration.toString()])}',
                       ),
                       trailing: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -276,7 +288,9 @@ class _QueueSectionState extends State<QueueSection> {
                             color: Colors.grey,
                           ),
                           Text(
-                            '~$estimatedWait min',
+                            'queue.est_wait'.tr(
+                              args: [estimatedWait.toString()],
+                            ),
                             style: const TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -290,7 +304,9 @@ class _QueueSectionState extends State<QueueSection> {
                 if (waitingCount > 5) ...[
                   const SizedBox(height: 8),
                   Text(
-                    'And ${waitingCount - 5} more waiting...',
+                    'queue.more_waiting'.tr(
+                      args: [(waitingCount - 5).toString()],
+                    ),
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.grey,
@@ -311,7 +327,7 @@ class _QueueSectionState extends State<QueueSection> {
                   );
                 },
                 icon: const Icon(Icons.refresh),
-                label: const Text('Refresh Queue'),
+                label: Text('queue.refresh'.tr()),
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                 ),

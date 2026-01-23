@@ -135,17 +135,12 @@ class _BookingScreenState extends State<BookingScreen> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: ColorsManager.mainBlue,
-        elevation: 0,
+        foregroundColor: Colors.white,
+        title: Text('booking.screen_title'.tr()),
         centerTitle: true,
-        title: Text(
-          'booking.screen_title'.tr(),
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        backgroundColor: ColorsManager.mainBlue,
         automaticallyImplyLeading: false,
       ),
       body: RefreshIndicator(

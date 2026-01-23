@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
@@ -73,7 +72,7 @@ class NextBookingCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16), // Increased border radius
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withAlpha(10),
             spreadRadius: 0,
             blurRadius: 10,
             offset: const Offset(0, 4),
@@ -81,14 +80,14 @@ class NextBookingCard extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        // Added ClipRRect to ensure content respects the rounded corners
         borderRadius: BorderRadius.circular(16), // Same radius as container
         child: Stack(
           children: [
             // Red circle design element
             Positioned(
               top: -16,
-              left: -16,
+              left: context.locale.languageCode == 'ar' ? -16 : null,
+              right: context.locale.languageCode == 'ar' ? null : -16,
               child: Container(
                 width: 50,
                 height: 50,
@@ -110,15 +109,15 @@ class NextBookingCard extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.15),
+                          color: Colors.white.withAlpha(15),
                           borderRadius: BorderRadius.circular(
                             12,
                           ), // Rounded container for icon
                         ),
-                        child: const Icon(
-                          Icons.calendar_today_rounded,
-                          color: Colors.white,
-                          size: 16,
+                        child: Image.asset(
+                          'assets/icons/calendar_outline.png',
+                          width: 24,
+                          height: 24,
                         ),
                       ),
                       horizontalSpace(8),
@@ -138,7 +137,7 @@ class NextBookingCard extends StatelessWidget {
                       vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.white.withAlpha(10),
                       borderRadius: BorderRadius.circular(
                         16,
                       ), // Increased border radius
@@ -169,12 +168,12 @@ class NextBookingCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: Colors.white.withOpacity(0.3),
+                            color: Colors.white.withAlpha(30),
                             width: 2,
                           ), // Added border
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
+                              color: Colors.black.withAlpha(10),
                               blurRadius: 8,
                               spreadRadius: 0,
                             ),

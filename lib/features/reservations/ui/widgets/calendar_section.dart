@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:temy_barber/core/theme/colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CalendarSection extends StatefulWidget {
   final int maxBookingDays;
@@ -8,7 +9,8 @@ class CalendarSection extends StatefulWidget {
   final DateTime initialMonth;
   final Function(DateTime) onDateSelected;
   final Function(DateTime) onMonthChanged;
-  final List<int>? daysOff; // Days off indices (0=Sunday, 1=Monday, ..., 6=Saturday)
+  final List<int>?
+  daysOff; // Days off indices (0=Sunday, 1=Monday, ..., 6=Saturday)
 
   const CalendarSection({
     super.key,
@@ -116,7 +118,7 @@ class _CalendarSectionState extends State<CalendarSection>
     // Get day of week (DateTime: 1=Monday to 7=Sunday)
     // Convert to our format (0=Sunday, 1=Monday, ..., 6=Saturday)
     final dayIndex = date.weekday % 7; // 7 (Sunday) becomes 0
-    
+
     return widget.daysOff!.contains(dayIndex);
   }
 
@@ -131,12 +133,12 @@ class _CalendarSectionState extends State<CalendarSection>
   String _getFullDayName(int index) {
     const arabicFullDays = [
       'الأحد',
-      'الإثنين', 
+      'الإثنين',
       'الثلاثاء',
       'الأربعاء',
       'الخميس',
       'الجمعة',
-      'السبت'
+      'السبت',
     ];
     return arabicFullDays[index];
   }
@@ -146,7 +148,7 @@ class _CalendarSectionState extends State<CalendarSection>
     if (widget.daysOff == null || widget.daysOff!.isEmpty) {
       return false;
     }
-    
+
     return widget.daysOff!.contains(dayIndex);
   }
 
@@ -158,12 +160,9 @@ class _CalendarSectionState extends State<CalendarSection>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'اليوم',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Text(
+              'calendar.today'.tr(),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -176,7 +175,9 @@ class _CalendarSectionState extends State<CalendarSection>
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    'متاح الحجز خلال ${widget.maxBookingDays} يوم',
+                    'calendar.booking_available_days'.tr(
+                      args: ['${widget.maxBookingDays}'],
+                    ),
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -220,10 +221,7 @@ class _CalendarSectionState extends State<CalendarSection>
               const SizedBox(height: 16),
               _buildCalendarDays(),
               const SizedBox(height: 12),
-              FadeTransition(
-                opacity: _animation,
-                child: _buildCalendarDates(),
-              ),
+              FadeTransition(opacity: _animation, child: _buildCalendarDates()),
             ],
           ),
         ),
@@ -238,15 +236,17 @@ class _CalendarSectionState extends State<CalendarSection>
         final isDayOff = _isDayIndexOff(index);
         final shortcut = _getDayShortcut(index);
         final fullName = _getFullDayName(index);
-        
+
         return Tooltip(
-          message: fullName + (isDayOff ? ' (إجازة)' : ''),
+          message: fullName + (isDayOff ? ' ${'calendar.day_off'.tr()}' : ''),
           child: Container(
             width: 36,
             height: 28,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
-              color: isDayOff ? Colors.red.withOpacity(0.1) : Colors.transparent,
+              color: isDayOff
+                  ? Colors.red.withOpacity(0.1)
+                  : Colors.transparent,
             ),
             child: Center(
               child: Text(
@@ -270,8 +270,10 @@ class _CalendarSectionState extends State<CalendarSection>
     final List<Widget> rows = [];
 
     for (var i = 0; i < days.length; i += 7) {
-      final rowDays =
-          days.sublist(i, i + 7 > days.length ? days.length : i + 7);
+      final rowDays = days.sublist(
+        i,
+        i + 7 > days.length ? days.length : i + 7,
+      );
       rows.add(_buildCalendarRow(rowDays));
     }
 
@@ -287,7 +289,8 @@ class _CalendarSectionState extends State<CalendarSection>
           final isSelected = _isSameDay(date, selectedDate);
           final isCurrentMonth = date.month == currentMonth.month;
           final isDayOff = _isDayOff(date);
-          final isSelectable = _isSelectable(date) && isCurrentMonth && !isDayOff;
+          final isSelectable =
+              _isSelectable(date) && isCurrentMonth && !isDayOff;
           final isToday = _isToday(date);
 
           return GestureDetector(
@@ -322,9 +325,7 @@ class _CalendarSectionState extends State<CalendarSection>
     bool isDayOff = false,
   }) {
     // Base style for all date states
-    BoxDecoration decoration = const BoxDecoration(
-      shape: BoxShape.circle,
-    );
+    BoxDecoration decoration = const BoxDecoration(shape: BoxShape.circle);
 
     Color textColor;
     FontWeight fontWeight = FontWeight.normal;
@@ -337,9 +338,7 @@ class _CalendarSectionState extends State<CalendarSection>
       // Day off - show with red styling
       textColor = Colors.red[300]!;
       fontWeight = FontWeight.w500;
-      decoration = decoration.copyWith(
-        color: Colors.red.withOpacity(0.08),
-      );
+      decoration = decoration.copyWith(color: Colors.red.withOpacity(0.08));
     } else if (!isSelectable) {
       // Past dates or out of booking range
       textColor = Colors.grey[400]!;

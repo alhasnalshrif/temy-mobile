@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/booking/logic/booking_state.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_card.dart';
@@ -153,7 +154,11 @@ class _BookingBlocBuilderWithQueueState
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.event_busy, size: 80, color: Colors.grey[300]),
+            const Icon(
+              Icons.event_busy,
+              size: 80,
+              color: ColorsManager.thirdfMain,
+            ),
             verticalSpace(16),
             Text(
               _showActiveBookings

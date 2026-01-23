@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/widgets/app_text_button.dart';
@@ -43,7 +44,7 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Queue Status - ${widget.barberName}'),
+        title: Text('${'queue.live_status'.tr()} - ${widget.barberName}'),
         backgroundColor: ColorsManager.mainBlue,
         foregroundColor: Colors.white,
       ),
@@ -106,22 +107,22 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
     switch (status) {
       case 'waiting':
         statusColor = Colors.orange;
-        statusText = 'Waiting in Queue';
+        statusText = 'queue.status_waiting'.tr();
         statusIcon = Icons.hourglass_empty;
         break;
       case 'in_service':
         statusColor = Colors.green;
-        statusText = 'Your Turn - In Service';
+        statusText = 'queue.status_in_service'.tr();
         statusIcon = Icons.cut;
         break;
       case 'completed':
         statusColor = Colors.blue;
-        statusText = 'Service Completed';
+        statusText = 'queue.status_completed'.tr();
         statusIcon = Icons.check_circle;
         break;
       default:
         statusColor = Colors.grey;
-        statusText = 'Unknown Status';
+        statusText = 'queue.status_unknown'.tr();
         statusIcon = Icons.help_outline;
     }
 
@@ -162,7 +163,7 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
             // Queue Number
             _buildInfoCard(
               icon: Icons.confirmation_number,
-              title: 'Queue Number',
+              title: 'queue.queue_number_label'.tr(),
               value: '#${reservation.queueNumber}',
               color: ColorsManager.mainBlue,
             ),
@@ -172,7 +173,7 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
             if (status == 'waiting') ...[
               _buildInfoCard(
                 icon: Icons.people,
-                title: 'People Ahead',
+                title: 'queue.people_waiting'.tr(),
                 value: '$peopleAhead',
                 color: Colors.orange,
               ),
@@ -186,12 +187,12 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Icon(Icons.cut, color: ColorsManager.mainBlue),
                         SizedBox(width: 8),
                         Text(
-                          'Services',
+                          'invoice.services'.tr(),
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -208,7 +209,9 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
                           children: [
                             Text(service.name),
                             Text(
-                              '${service.duration} min',
+                              'queue.service_duration'.tr(
+                                args: [service.duration.toString()],
+                              ),
                               style: const TextStyle(color: Colors.grey),
                             ),
                           ],
@@ -219,12 +222,14 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Total Duration',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        Text(
+                          'queue.total_duration'.tr(),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          '${reservation.totalDuration} min',
+                          'queue.service_duration'.tr(
+                            args: [reservation.totalDuration.toString()],
+                          ),
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -243,14 +248,14 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
                 color: ColorsManager.lightBlue,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.refresh, size: 16, color: Colors.grey),
-                  SizedBox(width: 8),
+                  const Icon(Icons.refresh, size: 16, color: Colors.grey),
+                  const SizedBox(width: 8),
                   Text(
-                    'Auto-updating every 10 seconds',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                    'queue.auto_update'.tr(),
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                 ],
               ),

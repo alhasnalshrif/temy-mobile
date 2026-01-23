@@ -39,6 +39,7 @@ class TextStyles {
     color: ColorsManager.mainBlue,
   );
 
+
   static TextStyle font26BlueBold = const TextStyle(
     fontSize: 26,
     fontWeight: FontWeightHelper.bold,
@@ -128,6 +129,12 @@ class TextStyles {
     color: ColorsManager.mainBlue,
   );
 
+  static TextStyle font14BlueBold = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.mainBlue,
+  );
+
   static TextStyle font14Blue2SemiBold = const TextStyle(
     fontSize: 14,
     fontWeight: FontWeightHelper.semiBold,
@@ -191,6 +198,4 @@ class TextStyles {
     fontWeight: FontWeightHelper.medium,
     color: Colors.grey,
   );
-
-
 }

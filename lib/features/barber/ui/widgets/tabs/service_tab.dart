@@ -43,17 +43,9 @@ class ServiceTab extends StatelessWidget {
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.easeInOut,
                   decoration: BoxDecoration(
-                    gradient: isSelected
-                        ? LinearGradient(
-                            colors: [
-                              ColorsManager.mainBlue.withOpacity(0.08),
-                              ColorsManager.secondMain.withOpacity(0.05),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          )
-                        : null,
-                    color: isSelected ? null : Colors.white,
+                    color: isSelected
+                        ? ColorsManager.mainBlue.withAlpha(5)
+                        : Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: isSelected
@@ -62,6 +54,7 @@ class ServiceTab extends StatelessWidget {
                       width: isSelected ? 2 : 1.5,
                     ),
                   ),
+
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
@@ -77,7 +70,6 @@ class ServiceTab extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: Row(
                           children: [
-                            // Selection indicator with gradient
                             AnimatedContainer(
                               duration: const Duration(milliseconds: 200),
                               width: 28,

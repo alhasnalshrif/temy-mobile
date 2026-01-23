@@ -10,6 +10,7 @@ import 'package:temy_barber/features/barber/ui/widgets/tabs/schedule_tab.dart';
 import 'package:temy_barber/features/barber/ui/widgets/tabs/service_tab.dart';
 import 'package:temy_barber/features/barber/ui/widgets/sliver_tab_bar_delegate.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temy_barber/core/utils/responsive_utils.dart';
 
 class BarberScreenItem extends StatefulWidget {
   final BarberDetailData? serviceResponseModel;
@@ -64,36 +65,139 @@ class _BarberScreenItemState extends State<BarberScreenItem>
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         backgroundColor: ColorsManager.mainBlue,
-        // backgroundColor: ColorsManager.background,
         elevation: 0,
       ),
       backgroundColor: ColorsManager.background,
-      body: Column(
+      body: ResponsiveBuilder(
+        mobile: _buildMobileLayout(),
+        tablet:
+            _buildDesktopLayout(), // Tablet can share desktop layout or be separate
+        desktop: _buildDesktopLayout(),
+      ),
+    );
+  }
+
+  Widget _buildMobileLayout() {
+    return Column(
+      children: [
+        Expanded(
+          child: DefaultTabController(
+            length: 3,
+            child: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                SliverToBoxAdapter(child: _buildHeader()),
+                SliverPersistentHeader(
+                  delegate: SliverTabBarDelegate(tabBar: _buildTabBar()),
+                  pinned: true,
+                ),
+              ],
+              body: _buildTabContent(),
+            ),
+          ),
+        ),
+        _buildBookingButton(),
+      ],
+    );
+  }
+
+  Widget _buildDesktopLayout() {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Left Column: Barber Info & Booking Action (30%)
           Expanded(
-            child: DefaultTabController(
-              length: 3,
-              child: NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                  SliverToBoxAdapter(child: _buildHeader()),
-                  SliverPersistentHeader(
-                    delegate: SliverTabBarDelegate(tabBar: _buildTabBar()),
-                    pinned: true,
+            flex: 3,
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
                   ),
                 ],
-                body: _buildTabContent(),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildHeader(isDesktop: true),
+                  const SizedBox(height: 24),
+                  _buildBookingButton(),
+                ],
               ),
             ),
           ),
-          _buildBookingButton(),
+          const SizedBox(width: 24),
+          // Right Column: Tabs & Content (70%)
+          Expanded(
+            flex: 7,
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: DefaultTabController(
+                length: 3,
+                child: Column(
+                  children: [
+                    _buildTabBar(),
+                    const SizedBox(height: 16),
+                    Expanded(child: _buildTabContent()),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader({bool isDesktop = false}) {
     final textTheme = Theme.of(context).textTheme;
     final barber = widget.serviceResponseModel;
+
+    if (isDesktop) {
+      return Column(
+        children: [
+          Container(
+            height: 120,
+            width: 120,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: ColorsManager.mainBlue, width: 2),
+              image: DecorationImage(
+                image: NetworkImage(barber?.avatar ?? ''),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            barber?.name ?? 'barber.name'.tr(),
+            style: textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          RatingDisplay(rating: 5.0, reviewCount: barber?.rating.total ?? 0),
+        ],
+      );
+    }
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
@@ -117,7 +221,8 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                 ),
                 const SizedBox(height: 8),
                 RatingDisplay(
-                  rating: barber?.rating.average ?? 0.0,
+                  rating: 5.0,
+                  // rating: barber?.rating.average ?? 0.0,
                   reviewCount: barber?.rating.total ?? 0,
                 ),
               ],

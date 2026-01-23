@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 
 class ServicesSection extends StatelessWidget {
@@ -23,9 +24,12 @@ class ServicesSection extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                const Text(
-                  'الخدمات المطلوبة',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Text(
+                  'booking.required_services'.tr(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Container(
@@ -62,7 +66,7 @@ class ServicesSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'لم يتم اختيار أي خدمات',
+                      'booking.no_services_selected'.tr(),
                       style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                     ),
                   ],
@@ -74,10 +78,10 @@ class ServicesSection extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: serviceList.length,
-              separatorBuilder: (_, __) => Divider(
+              separatorBuilder: (_, __) => const Divider(
                 height: 1,
                 thickness: 1,
-                color: Colors.grey[100],
+                color: ColorsManager.lightBlue,
                 indent: 16,
                 endIndent: 16,
               ),
@@ -145,7 +149,7 @@ class ServicesSection extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
-                              '${service.duration} دقيقة',
+                              '${service.duration} ${'booking.min'.tr()}',
                               style: const TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w500,
