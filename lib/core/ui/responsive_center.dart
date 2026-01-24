@@ -30,16 +30,7 @@ class ResponsiveCenter extends StatelessWidget {
               constraints: BoxConstraints(maxWidth: maxWidth),
               child: ClipRect(
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 10,
-                        offset: const Offset(0, 0),
-                      ),
-                    ],
-                  ),
+                  decoration: const BoxDecoration(color: Colors.white),
                   child: child,
                 ),
               ),

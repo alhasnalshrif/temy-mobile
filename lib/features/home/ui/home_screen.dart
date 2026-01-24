@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
-import 'package:temy_barber/core/routing/routes.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
 import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/ui/widgets/banner/banner_bloc_builder.dart';
@@ -118,13 +116,6 @@ class HomeScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 15,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
                 ),
                 padding: const EdgeInsets.all(24),
                 child: const DefaultBookingCard(),
@@ -134,13 +125,6 @@ class HomeScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 15,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
                 ),
                 padding: const EdgeInsets.all(24),
                 child: const NextBookingCard(),
@@ -149,13 +133,6 @@ class HomeScreen extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.08),
-                      blurRadius: 20,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
                 ),
                 clipBehavior: Clip.hardEdge,
                 child: const BannerBlocBuilder(),
@@ -193,9 +170,9 @@ class HomeScreen extends StatelessWidget {
 
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (context.mounted) {
-                context.pushReplacementNamed(
-                  Routes.verificationScreen,
-                  arguments: {
+                context.goNamed(
+                  AppRoutes.verificationName,
+                  extra: {
                     'phoneNumber': fullPhone,
                     'shouldAutoResend': true,
                     'comingFromLogin': true,

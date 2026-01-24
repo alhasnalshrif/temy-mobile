@@ -2,7 +2,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter/foundation.dart';
-import '../routing/routes.dart';
+import '../routing/app_routes.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 import '../config/notification_config.dart';
 import '../utils/temy_sentry_utils.dart';
 
@@ -13,12 +14,16 @@ class NotificationService {
   static NotificationService get instance =>
       _instance ??= NotificationService._();
 
-  NotificationService._();  /// Initialize OneSignal
+  NotificationService._();
+
+  /// Initialize OneSignal
   Future<void> initialize() async {
     try {
       // Check if OneSignal is configured
       if (!NotificationConfig.isConfigured) {
-        log('⚠️ OneSignal App ID not configured. Please update NotificationConfig.oneSignalAppId');
+        log(
+          '⚠️ OneSignal App ID not configured. Please update NotificationConfig.oneSignalAppId',
+        );
         await TemySentryUtils.trackOneSignalInit(
           success: false,
           error: 'OneSignal App ID not configured',
@@ -26,8 +31,10 @@ class NotificationService {
         return;
       }
 
-      log('🚀 Initializing OneSignal with App ID: ${_oneSignalAppId.substring(0, 8)}...');
-      
+      log(
+        '🚀 Initializing OneSignal with App ID: ${_oneSignalAppId.substring(0, 8)}...',
+      );
+
       // Initialize OneSignal with proper error handling
       try {
         OneSignal.initialize(_oneSignalAppId);
@@ -57,8 +64,10 @@ class NotificationService {
       // Request notification permission with better error handling
       await requestNotificationPermission();
 
-      log('✅ OneSignal initialized successfully with App ID: ${_oneSignalAppId.substring(0, 8)}...');
-      
+      log(
+        '✅ OneSignal initialized successfully with App ID: ${_oneSignalAppId.substring(0, 8)}...',
+      );
+
       // Track successful initialization
       await TemySentryUtils.trackOneSignalInit(
         success: true,
@@ -67,27 +76,31 @@ class NotificationService {
       );
     } catch (e) {
       log('❌ Failed to initialize OneSignal: $e');
-      
+
       // Track initialization failure
       await TemySentryUtils.trackOneSignalInit(
         success: false,
         error: e.toString(),
         appId: _oneSignalAppId,
       );
-      
+
       // Don't rethrow - allow app to continue without notifications
       log('📱 App will continue without push notifications');
     }
-  }  /// Request notification permission with enhanced error handling
+  }
+
+  /// Request notification permission with enhanced error handling
   Future<bool> requestNotificationPermission() async {
     try {
       log('📱 Requesting notification permission...');
-      
+
       // Check if OneSignal is properly initialized before requesting permission
       await Future.delayed(const Duration(milliseconds: 100));
-      
+
       final permission = await OneSignal.Notifications.requestPermission(true);
-      log('Notification permission granted: $permission');      // Track permission result
+      log(
+        'Notification permission granted: $permission',
+      ); // Track permission result
       await TemySentryUtils.trackNotificationEvent(
         'permission_request_result',
         permissionStatus: permission ? 'granted' : 'denied',
@@ -104,12 +117,13 @@ class NotificationService {
       return permission;
     } catch (e) {
       log('Failed to request notification permission: $e');
-      
+
       // Track permission error
       await TemySentryUtils.trackNotificationEvent(
-        'permission_request_error',      error: e.toString(),
+        'permission_request_error',
+        error: e.toString(),
       );
-      
+
       await _handlePermissionError(e.toString());
       return false;
     }
@@ -119,7 +133,9 @@ class NotificationService {
   Future<void> _handlePermissionDenied() async {
     try {
       // You can show a dialog or navigate to app settings
-      log('User denied notification permission - consider showing explanation dialog');
+      log(
+        'User denied notification permission - consider showing explanation dialog',
+      );
       // Optionally store this state to show explanation later
       // await SharedPreferences.getInstance().then((prefs) =>
       //   prefs.setBool('notification_permission_denied', true));
@@ -145,7 +161,7 @@ class NotificationService {
   /// Check if notifications are enabled
   Future<bool> areNotificationsEnabled() async {
     try {
-      final permission = await OneSignal.Notifications.permission;
+      final permission = OneSignal.Notifications.permission;
       return permission;
     } catch (e) {
       log('Failed to check notification permission: $e');
@@ -163,7 +179,9 @@ class NotificationService {
 
     // Handle notification received while app is in foreground
     OneSignal.Notifications.addForegroundWillDisplayListener((event) {
-      log('Notification received in foreground: ${event.notification.notificationId}');
+      log(
+        'Notification received in foreground: ${event.notification.notificationId}',
+      );
       // You can choose to display the notification or handle it silently
       event.preventDefault();
       event.notification.display();
@@ -211,18 +229,19 @@ class NotificationService {
       log('Failed to set OneSignal user ID: $e');
     }
   }
+
   /// Logout user from OneSignal (call this after user logout)
   Future<void> logoutUser() async {
     try {
       // Clear user-specific OneSignal data
       await OneSignal.logout();
-      
+
       // Clear any user-specific tags
       await removeTags(['user_id', 'user_type', 'language']);
-      
+
       // Disable notifications temporarily during logout
       await setNotificationEnabled(false);
-      
+
       log('✅ OneSignal user logged out successfully');
     } catch (e) {
       log('❌ Failed to logout OneSignal user: $e');
@@ -324,31 +343,31 @@ class NotificationService {
   Future<Map<String, dynamic>> testOneSignalStatus() async {
     final status = <String, dynamic>{
       'isConfigured': NotificationConfig.isConfigured,
-      'appId': NotificationConfig.oneSignalAppId.substring(0, 8) + '...',
+      'appId': '${NotificationConfig.oneSignalAppId.substring(0, 8)}...',
       'timestamp': DateTime.now().toIso8601String(),
     };
-    
+
     try {
       // Test basic OneSignal functionality
       final hasPermission = await areNotificationsEnabled();
       status['hasPermission'] = hasPermission;
-      
+
       // Try to get device info
       try {
         final playerId = await getPlayerId();
         final pushToken = await getPushToken();
-        
+
         status['playerId'] = playerId != null ? 'Available' : 'Not available';
         status['pushToken'] = pushToken != null ? 'Available' : 'Not available';
       } catch (e) {
         status['deviceInfoError'] = e.toString();
       }
-      
+
       status['status'] = 'working';
     } catch (e) {
       status['status'] = 'error';
       status['error'] = e.toString();
-      
+
       // Report to Sentry
       await TemySentryUtils.trackNotificationEvent(
         'onesignal_status_test_failed',
@@ -356,7 +375,7 @@ class NotificationService {
         additionalData: status,
       );
     }
-    
+
     return status;
   }
 
@@ -366,9 +385,9 @@ class NotificationService {
     try {
       if (_navigatorKey?.currentContext != null) {
         // Navigate to booking tab in dashboard with specific booking
-        Navigator.of(_navigatorKey!.currentContext!).pushNamed(
-          Routes.dashboardScreen,
-          arguments: 1, // Index 1 is the booking tab
+        _navigatorKey!.currentContext!.goNamed(
+          AppRoutes.dashboardName,
+          extra: 1, // Index 1 is the booking tab
         );
       }
     } catch (e) {
@@ -382,9 +401,9 @@ class NotificationService {
     try {
       if (_navigatorKey?.currentContext != null) {
         // Navigate to booking tab in dashboard
-        Navigator.of(_navigatorKey!.currentContext!).pushNamed(
-          Routes.dashboardScreen,
-          arguments: 1, // Index 1 is the booking tab
+        _navigatorKey!.currentContext!.goNamed(
+          AppRoutes.dashboardName,
+          extra: 1, // Index 1 is the booking tab
         );
       }
     } catch (e) {
@@ -398,9 +417,7 @@ class NotificationService {
     try {
       if (_navigatorKey?.currentContext != null) {
         // Navigate to categories screen (promotions/services)
-        Navigator.of(_navigatorKey!.currentContext!).pushNamed(
-          Routes.categoryScreen,
-        );
+        _navigatorKey!.currentContext!.go(AppRoutes.Categories);
       }
     } catch (e) {
       log('Error navigating to promotions: $e');
@@ -413,11 +430,7 @@ class NotificationService {
     try {
       if (_navigatorKey?.currentContext != null) {
         // Navigate to dashboard (home tab)
-        Navigator.of(_navigatorKey!.currentContext!).pushNamedAndRemoveUntil(
-          Routes.dashboardScreen,
-          (route) => false, // Remove all previous routes
-          arguments: 0, // Index 0 is the home tab
-        );
+        _navigatorKey!.currentContext!.go(AppRoutes.Dashboard);
       }
     } catch (e) {
       log('Error navigating to home: $e');

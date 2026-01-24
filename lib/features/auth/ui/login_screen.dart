@@ -6,11 +6,11 @@ import 'package:temy_barber/features/auth/logic/cubit/login_cubit.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
 
 import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 
 import '../../../core/helpers/spacing.dart';
 import '../../../core/theme/styles.dart';
 import '../../../core/widgets/app_text_button.dart';
-import '../../../core/routing/routes.dart';
 import 'widgets/dont_have_account_text.dart';
 import 'widgets/email_and_password.dart';
 import 'widgets/terms_and_conditions_text.dart';
@@ -145,7 +145,6 @@ class LoginScreen extends StatelessWidget {
       children: [
         // Left side: Branding with larger logo
         Expanded(
-          flex: 1,
           child: Container(
             color: Colors.black,
             child: Center(
@@ -172,7 +171,6 @@ class LoginScreen extends StatelessWidget {
         ),
         // Right side: Form with constrained width
         Expanded(
-          flex: 1,
           child: Container(
             color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 48),
@@ -203,7 +201,7 @@ class LoginScreen extends StatelessWidget {
           verticalSpace(24),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, Routes.forgotPasswordScreen);
+              context.pushGoNamed(AppRoutes.forgotPasswordName);
             },
             child: Text(
               'auth.forgot_password'.tr(),
@@ -220,14 +218,13 @@ class LoginScreen extends StatelessWidget {
           const TermsAndConditionsText(),
           const SizedBox(height: 30),
           const Align(
-            alignment: Alignment.center,
             child: DontHaveAccountText(),
           ),
           const SizedBox(height: 20),
           Center(
             child: TextButton(
               onPressed: () {
-                context.pushReplacementNamed(Routes.dashboardScreen);
+                context.goNamed(AppRoutes.dashboardName);
               },
               child: Text(
                 'auth.continue_as_guest'.tr(),

@@ -130,14 +130,6 @@ class BookingCard extends StatelessWidget {
         border: Border.all(color: Colors.grey.withOpacity(0.2)),
 
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
       ),
       padding: const EdgeInsets.all(16),
       child: Column(

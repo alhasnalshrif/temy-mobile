@@ -20,14 +20,10 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   @POST(ApiConstants.login)
-  Future<LoginResponse> login(
-    @Body() LoginRequestBody loginRequestBody,
-  );
+  Future<LoginResponse> login(@Body() LoginRequestBody loginRequestBody);
 
   @POST(ApiConstants.signup)
-  Future<SignupResponse> signup(
-    @Body() SignupRequestBody signupRequestBody,
-  );
+  Future<SignupResponse> signup(@Body() SignupRequestBody signupRequestBody);
 
   @POST(ApiConstants.verify)
   Future<SignupResponse> verify(
@@ -38,12 +34,12 @@ abstract class ApiService {
   Future<SignupResponse> resendVerificationCode(
     @Body() ResendCodeRequestBody resendCodeRequestBody,
   );
-  
+
   @POST(ApiConstants.requestPasswordReset)
   Future<ForgotPasswordResponse> requestPasswordReset(
     @Body() ForgotPasswordRequestBody forgotPasswordRequestBody,
   );
-  
+
   @POST(ApiConstants.resetPassword)
   Future<ResetPasswordResponse> resetPassword(
     @Body() ResetPasswordRequestBody resetPasswordRequestBody,

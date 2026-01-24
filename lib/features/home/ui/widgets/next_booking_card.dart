@@ -70,14 +70,6 @@ class NextBookingCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(16), // Increased border radius
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(10),
-            spreadRadius: 0,
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16), // Same radius as container
@@ -171,13 +163,6 @@ class NextBookingCard extends StatelessWidget {
                             color: Colors.white.withAlpha(30),
                             width: 2,
                           ), // Added border
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withAlpha(10),
-                              blurRadius: 8,
-                              spreadRadius: 0,
-                            ),
-                          ],
                         ),
                         child: CircleAvatar(
                           radius: 24,

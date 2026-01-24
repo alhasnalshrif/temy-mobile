@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
@@ -8,7 +9,7 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 
 class DefaultBookingCard extends StatefulWidget {
-  const DefaultBookingCard({Key? key}) : super(key: key);
+  const DefaultBookingCard({super.key});
 
   @override
   State<DefaultBookingCard> createState() => _DefaultBookingCardState();
@@ -111,17 +112,16 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
         child: const Icon(Icons.delete, color: Colors.white),
       ),
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+        margin: const EdgeInsets.symmetric(vertical: 8),
 
         decoration: BoxDecoration(
-          border: Border.all(color: ColorsManager.mainBlue, width: 1),
+          border: Border.all(color: ColorsManager.mainBlue),
           color: ColorsManager.lightBlue,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
                 radius: 18,
@@ -212,10 +212,10 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                         barberData: barberDetail,
                         totalPrice: totalPrice,
                       );
-                      Navigator.pushNamed(
-                        context,
-                        Routes.reservationScreen,
-                        arguments: args,
+                      Navigator.of(context).pop();
+                      context.pushGoNamed(
+                        AppRoutes.reservationName,
+                        extra: args,
                       );
                     },
                     style: ElevatedButton.styleFrom(

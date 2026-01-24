@@ -47,17 +47,9 @@ class CategoryListViewItem extends StatelessWidget {
           border: Border.all(color: Colors.grey.withOpacity(0.2)),
 
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 5,
-              offset: const Offset(0, 1),
-            ),
-          ],
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _CategoryImage(
               imageUrl: serviceResponseModel?.avatar,

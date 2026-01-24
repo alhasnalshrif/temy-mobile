@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../theme/colors.dart';
 
 class AppTextButton extends StatelessWidget {
@@ -49,10 +48,7 @@ class AppTextButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(
-        buttonText,
-        style: textStyle,
-      ),
+      child: Text(buttonText, style: textStyle),
     );
   }
 }

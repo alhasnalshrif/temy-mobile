@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/features/category_barbers/data/models/service_response.dart';
 import 'package:temy_barber/features/home/ui/widgets/category/category_list_view_item.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 
 class CategoryListView extends StatelessWidget {
   final List<CategoryData> categoryDataList;
@@ -17,7 +18,6 @@ class CategoryListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Use LayoutBuilder for accurate width within parent padding
     return LayoutBuilder(
       builder: (context, constraints) {
         final double availableWidth = constraints.maxWidth - 8; // grid padding
@@ -26,7 +26,6 @@ class CategoryListView extends StatelessWidget {
             (availableWidth - spacing * (crossAxisCount - 1)) / crossAxisCount;
         final double cardRadius = itemWidth * 0.45;
 
-        // Calculate the number of items to show
         final int itemCount = categoryDataList.length;
 
         return Padding(
@@ -46,15 +45,17 @@ class CategoryListView extends StatelessWidget {
               return CategoryListViewItem(
                 categoryResponseModel: categoryDataList[index],
                 indexItem: index,
-                radius: cardRadius, // Responsive radius derived from grid cell
+                radius: cardRadius, 
                 onTap: () {
                   debugPrint(
                     'Category tapped: ${categoryDataList[index].name}',
                   );
 
-                  Navigator.of(context).pushNamed(
-                    Routes.categoryBarbersScreen,
-                    arguments: categoryDataList[index].id ?? '',
+                  context.pushGoNamed(
+                    AppRoutes.categoryBarbersName,
+                    pathParameters: {
+                      'categoryId': categoryDataList[index].id ?? '',
+                    },
                   );
                 },
               );

@@ -36,7 +36,6 @@ class CategoryWithBarbersBlocBuilder extends StatelessWidget {
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Avatar shimmer
             ShimmerLoading.circular(

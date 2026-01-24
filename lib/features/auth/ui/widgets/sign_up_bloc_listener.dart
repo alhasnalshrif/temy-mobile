@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/features/auth/logic/sign_up_cubit.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
-import '../../../../core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 import '../../logic/sign_up_state.dart';
 
 class SignupBlocListener extends StatelessWidget {
@@ -24,10 +24,11 @@ class SignupBlocListener extends StatelessWidget {
           signupSuccess: (signupResponse) {
             context.pop();
 
-            final phoneNumber =
-                context.read<SignupCubit>().phoneController.text;
-            context.pushNamed(Routes.verificationScreen,
-                arguments: phoneNumber);
+            final phoneNumber = context
+                .read<SignupCubit>()
+                .phoneController
+                .text;
+            context.pushGoNamed(AppRoutes.verificationName, extra: phoneNumber);
           },
           signupError: (error) {
             setupErrorState(context, error);
@@ -42,23 +43,17 @@ class SignupBlocListener extends StatelessWidget {
     context.pop();
     showDialog(
       context: context,
-      barrierDismissible: true,
       builder: (BuildContext context) {
         return Dialog(
           backgroundColor: Colors.white,
-          insetPadding:
-              const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 24,
+          ),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 20,
-                  offset: const Offset(0, 10),
-                ),
-              ],
             ),
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -73,9 +68,9 @@ class SignupBlocListener extends StatelessWidget {
                 Text(
                   'Error',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Colors.redAccent,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
@@ -84,12 +79,11 @@ class SignupBlocListener extends StatelessWidget {
                       ? error
                       : 'An unexpected error occurred.',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontSize: 16,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withOpacity(0.8),
-                      ),
+                    fontSize: 16,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withOpacity(0.8),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
@@ -112,7 +106,7 @@ class SignupBlocListener extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
                       ),
-                      elevation: 2,
+                      elevation: 0,
                     ),
                   ),
                 ),

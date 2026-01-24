@@ -39,7 +39,6 @@ class TextStyles {
     color: ColorsManager.mainBlue,
   );
 
-
   static TextStyle font26BlueBold = const TextStyle(
     fontSize: 26,
     fontWeight: FontWeightHelper.bold,

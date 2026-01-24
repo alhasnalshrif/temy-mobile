@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:temy_barber/core/auth/auth_service.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
@@ -10,8 +11,7 @@ import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
 import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:temy_barber/core/utils/notification_helper.dart';
-import 'package:temy_barber/core/routing/app_router.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_router_go.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/ui/maintenance_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -19,18 +19,14 @@ import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/settings/data/repos/settings_repo.dart';
 import 'package:temy_barber/features/settings/data/models/settings_response.dart';
 import 'package:url_strategy/url_strategy.dart'; // Import url_strategy
-import 'package:temy_barber/core/ui/responsive_center.dart'; // Import ResponsiveCenter
-
-bool isLoggedInUser = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setPathUrlStrategy(); // Set URL strategy
+  setPathUrlStrategy();
   await EasyLocalization.ensureInitialized();
 
   setupGetIt();
 
-  // Check for maintenance mode
   SettingsData? settingsData;
   try {
     final settingsRepo = getIt<SettingsRepo>();
@@ -41,11 +37,11 @@ void main() async {
         settingsData = data.data;
       },
       failure: (error) {
-        log('❌ Failed to fetch settings: $error');
+        log(' Failed to fetch settings: $error');
       },
     );
   } catch (e) {
-    log('❌ Error checking settings: $e');
+    log('Error checking settings: $e');
   }
 
   // If maintenance mode is active, show MaintenanceScreen
@@ -73,11 +69,9 @@ void main() async {
 
   // Initialize Permission Manager
   try {
-    log('🔐 Initializing Permission Manager...');
     await PermissionManager.instance.initialize();
-    log('✅ Permission Manager initialized successfully');
   } catch (e) {
-    log('❌ Permission Manager initialization failed: $e');
+    log(' Permission Manager initialization failed: $e');
   }
 
   if (kDebugMode) {
@@ -87,42 +81,32 @@ void main() async {
 
   try {
     if (!kIsWeb) {
-      // Skip OneSignal on web
-      log('🚀 Starting OneSignal initialization...');
       await getIt<NotificationService>().initialize();
-      log('✅ OneSignal initialization completed');
+      log(' OneSignal initialization completed');
     }
   } catch (e) {
-    log('❌ OneSignal initialization failed: $e');
-    // Continue app execution even if OneSignal fails
+    log('OneSignal initialization failed: $e');
   }
 
-  // Handle language preference (production behavior)
-  String savedLanguage = 'ar'; // Default to Arabic
+  String savedLanguage = 'ar';
   if (!kDebugMode) {
-    // In production, load saved language preference
     savedLanguage = await SharedPrefHelper.getString(SharedPrefKeys.language);
     if (savedLanguage.isEmpty) {
-      savedLanguage = 'ar'; // Default to Arabic if no language is saved
+      savedLanguage = 'ar';
       await SharedPrefHelper.setData(SharedPrefKeys.language, savedLanguage);
     }
   }
 
-  // Initialize Sentry for error tracking and monitoring
   await SentryFlutter.init(
     (options) {
       options.dsn =
           'https://60d5c02ce39df76817718e6ca4f61aa5@o4508048971792384.ingest.de.sentry.io/4509471265456208';
       options.environment = kDebugMode ? 'development' : 'production';
-      options.debug = false; // Reduce debug logging noise
-      options.tracesSampleRate = kDebugMode
-          ? 1.0
-          : 0.1; // 100% in debug, 10% in production
+      options.debug = false;
+      options.tracesSampleRate = kDebugMode ? 1.0 : 0.1;
       options.attachStacktrace = true;
       options.enableAutoSessionTracking = true;
-      options.autoAppStart = true;
-      options.enableUserInteractionBreadcrumbs =
-          false; // Disable UI interaction breadcrumbs
+      options.enableUserInteractionBreadcrumbs = false;
       options.captureFailedRequests = true;
       options.maxBreadcrumbs = 100;
     },
@@ -132,62 +116,60 @@ void main() async {
         path: 'assets/translations',
         fallbackLocale: const Locale('ar'),
         startLocale: Locale(savedLanguage),
-        child: TemyApp(appRouter: AppRouter()),
+        child: const TemyApp(),
       ),
     ),
   );
 }
 
-/// Enhanced authentication check with JWT validation
 Future<void> checkedIfUserLoggedIn() async {
   log('🔐 Checking user authentication status...');
 
   try {
-    // Use AuthService to validate token
     final isAuthenticated = await AuthService.instance.isAuthenticated();
 
     if (isAuthenticated) {
-      log('✅ User is authenticated with valid token');
       isLoggedInUser = true;
 
-      // Verify user ID is stored
       final userId = await AuthService.instance.getUserId();
       if (userId != null) {
-        log('👤 User ID: $userId');
+        log(' User ID: $userId');
       }
     } else {
-      log('❌ User is not authenticated or token is invalid');
       isLoggedInUser = false;
 
-      // Clear any stale authentication data
       await AuthService.instance.clearAuthentication();
     }
   } catch (e) {
-    log('❌ Error checking authentication: $e');
     isLoggedInUser = false;
 
-    // Clear authentication on error
     try {
       await AuthService.instance.clearAuthentication();
     } catch (clearError) {
-      log('❌ Error clearing authentication: $clearError');
+      log(' Error clearing authentication data: $clearError');
     }
   }
-
-  log('🔐 Authentication check complete. isLoggedInUser: $isLoggedInUser');
 }
 
-class TemyApp extends StatelessWidget {
-  final AppRouter appRouter;
-  const TemyApp({super.key, required this.appRouter});
+class TemyApp extends StatefulWidget {
+  const TemyApp({super.key});
 
-  // Global navigator key for deep linking navigation
-  static final GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey<NavigatorState>();
+  @override
+  State<TemyApp> createState() => _TemyAppState();
+}
+
+class _TemyAppState extends State<TemyApp> {
+  late final GoRouter _goRouter;
+
+  @override
+  void initState() {
+    super.initState();
+    _goRouter = AppRouterGo.createRouter(isLoggedIn: isLoggedInUser);
+    NotificationService.setNavigatorKey(AppRouterGo.navigatorKey);
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Set default status bar color to white with dark icons for all screens
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.white,
@@ -195,11 +177,8 @@ class TemyApp extends StatelessWidget {
       ),
     );
 
-    // Set navigator key for NotificationService
-    NotificationService.setNavigatorKey(navigatorKey);
-
-    return MaterialApp(
-      navigatorKey: navigatorKey, // Add navigator key
+    return MaterialApp.router(
+      routerConfig: _goRouter,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
@@ -208,7 +187,6 @@ class TemyApp extends StatelessWidget {
         primaryColor: ColorsManager.mainBlue,
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Cairo',
-        // Apply the white status bar style to the app theme
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.white,
@@ -217,10 +195,6 @@ class TemyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: isLoggedInUser
-          ? Routes.dashboardScreen
-          : Routes.loginScreen,
-      onGenerateRoute: appRouter.generateRoute,
     );
   }
 }

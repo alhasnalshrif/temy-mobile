@@ -80,9 +80,7 @@ class _QueueSectionState extends State<QueueSection> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [ColorsManager.mainBlue, Colors.blueAccent],
-                  ),
+                  color: ColorsManager.mainBlue,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -90,11 +88,11 @@ class _QueueSectionState extends State<QueueSection> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.people, color: Colors.white),
-                        SizedBox(width: 8),
+                        const Icon(Icons.people, color: Colors.white),
+                        const SizedBox(width: 8),
                         Text(
                           'queue.live_status'.tr(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -126,11 +124,11 @@ class _QueueSectionState extends State<QueueSection> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.cut, color: Colors.green, size: 24),
-                            SizedBox(width: 8),
+                            const Icon(Icons.cut, color: Colors.green, size: 24),
+                            const SizedBox(width: 8),
                             Text(
                               'queue.now_serving'.tr(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.green,
@@ -225,7 +223,7 @@ class _QueueSectionState extends State<QueueSection> {
                         children: [
                           Text(
                             'queue.est_wait_time'.tr(),
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: const TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                           Text(
                             'queue.est_wait'.tr(
@@ -248,7 +246,7 @@ class _QueueSectionState extends State<QueueSection> {
               if (waitingCount > 0) ...[
                 Text(
                   'queue.waiting_queue'.tr(),
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
                 ...queueData.waitingCustomers.take(5).toList().asMap().entries.map((

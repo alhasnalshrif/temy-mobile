@@ -5,7 +5,7 @@ import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/booking/ui/booking.dart';
@@ -125,7 +125,7 @@ class _MyDashboardState extends State<DashboardScreen> {
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
           labelTextStyle: WidgetStateProperty.all(TextStyles.font13BlueRegular),
           surfaceTintColor: Colors.transparent,
-          shadowColor: Colors.white,
+          shadowColor: Colors.transparent,
         ),
         child: SizedBox(
           height: 80,
@@ -149,16 +149,7 @@ class _MyDashboardState extends State<DashboardScreen> {
             Container(
               height: 80,
               padding: const EdgeInsets.symmetric(horizontal: 48),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
+              decoration: const BoxDecoration(color: Colors.white),
               child: Row(
                 children: [
                   // Logo
@@ -318,9 +309,9 @@ class _MyDashboardState extends State<DashboardScreen> {
 
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (context.mounted) {
-                context.pushReplacementNamed(
-                  Routes.verificationScreen,
-                  arguments: {
+                context.goNamed(
+                  AppRoutes.verificationName,
+                  extra: {
                     'phoneNumber': fullPhone,
                     'shouldAutoResend': true,
                     'comingFromLogin': true,

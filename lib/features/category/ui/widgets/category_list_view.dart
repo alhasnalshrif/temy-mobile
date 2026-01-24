@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/features/category/data/models/categories_list_response.dart';
 import 'package:temy_barber/features/category/ui/widgets/category_list_view_item.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 
 class CategoryBarberListView extends StatelessWidget {
   final List<CategoryItem?> barberDataList;
@@ -16,8 +17,9 @@ class CategoryBarberListView extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final int itemCount =
-        barberDataList.length > maxItems ? maxItems : barberDataList.length;
+    final int itemCount = barberDataList.length > maxItems
+        ? maxItems
+        : barberDataList.length;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -34,10 +36,10 @@ class CategoryBarberListView extends StatelessWidget {
             radius: 36, // Fixed size for better consistency
             onTap: () {
               debugPrint('Category tapped: ${barberDataList[index]?.name}');
-          
-              Navigator.of(context).pushNamed(
-                Routes.categoryBarbersScreen,
-                arguments: barberDataList[index]?.id,
+
+              context.pushGoNamed(
+                AppRoutes.categoryBarbersName,
+                pathParameters: {'categoryId': barberDataList[index]?.id ?? ''},
               );
             },
           );

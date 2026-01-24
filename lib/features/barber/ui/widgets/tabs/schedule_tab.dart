@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/utils/responsive_utils.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -28,78 +29,111 @@ class _ScheduleTabState extends State<ScheduleTab> {
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'barber.select_time_slot'.tr(),
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          const SizedBox(height: 8),
-          Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final crossAxisCount = ResponsiveUtils.isDesktop(context)
+            ? 5
+            : ResponsiveUtils.isTablet(context)
+            ? 4
+            : ResponsiveUtils.isMobile(context)
+            ? 3
+            : 2;
+
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.calendar_today, size: 18, color: Colors.grey[600]),
-              const SizedBox(width: 6),
               Text(
-                schedule.date,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey[700],
-                    ),
+                'barber.select_time_slot'.tr(),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
-              const SizedBox(width: 16),
-              Icon(Icons.access_time, size: 18, color: Colors.grey[600]),
-              const SizedBox(width: 6),
-              Text(
-                '${businessHours.start} - ${businessHours.end}',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey[700],
-                    ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 12,
+                runSpacing: 8,
+                children: [
+                  _InfoChip(icon: Icons.calendar_today, label: schedule.date),
+                  _InfoChip(
+                    icon: Icons.access_time,
+                    label: '${businessHours.start} - ${businessHours.end}',
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: GridView.builder(
+                  itemCount: timeSlots.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
+                    mainAxisSpacing: 18,
+                    crossAxisSpacing: 18,
+                    childAspectRatio: 2.6,
+                  ),
+                  itemBuilder: (context, index) {
+                    final slot = timeSlots[index];
+                    final isDisabled = !slot.isAvailable;
+                    return AnimatedOpacity(
+                      duration: const Duration(milliseconds: 200),
+                      opacity: isDisabled ? 0.5 : 1,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: ColorsManager.thirdfMain),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          slot.time,
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                color: isDisabled
+                                    ? Colors.grey[400]
+                                    : ColorsManager.darkBlue,
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 0.2,
+                              ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: GridView.builder(
-              itemCount: timeSlots.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 18,
-                crossAxisSpacing: 18,
-                childAspectRatio: 2.5,
-              ),
-              itemBuilder: (context, index) {
-                final slot = timeSlots[index];
-                final isDisabled = !slot.isAvailable;
-                return AnimatedOpacity(
-                  duration: const Duration(milliseconds: 200),
-                  opacity: isDisabled ? 0.5 : 1,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(
-                        color: ColorsManager.thirdfMain,
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      slot.time,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: isDisabled
-                                ? Colors.grey[400]
-                                : ColorsManager.darkBlue,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 0.2,
-                          ),
-                    ),
-                  ),
-                );
-              },
+        );
+      },
+    );
+  }
+}
+
+class _InfoChip extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const _InfoChip({required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: ColorsManager.mainBlue.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 16, color: ColorsManager.darkBlue),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: ColorsManager.darkBlue,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],

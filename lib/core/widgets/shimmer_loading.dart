@@ -18,7 +18,6 @@ class ShimmerCard extends StatelessWidget {
   final ShimmerDirection direction;
   final Color? baseColor;
   final Color? highlightColor;
-  final Gradient? gradient;
   final Curve animationCurve;
   final BorderRadius borderRadius;
   final double elevation;
@@ -40,7 +39,6 @@ class ShimmerCard extends StatelessWidget {
     this.direction = ShimmerDirection.ltr,
     this.baseColor,
     this.highlightColor,
-    this.gradient,
     this.animationCurve = Curves.easeInOut,
     this.borderRadius = const BorderRadius.all(Radius.circular(12)),
     this.elevation = 4,
@@ -77,7 +75,6 @@ class ShimmerCard extends StatelessWidget {
               highlightColor: shimmerHighlight,
               period: period,
               direction: direction,
-              gradient: gradient,
               animationCurve: animationCurve,
               borderRadius: BorderRadius.circular(8),
               enabled: enabled,
@@ -97,7 +94,6 @@ class ShimmerCard extends StatelessWidget {
                   highlightColor: shimmerHighlight,
                   period: period,
                   direction: direction,
-                  gradient: gradient,
                   animationCurve: animationCurve,
                   borderRadius: BorderRadius.circular(4),
                   enabled: enabled,
@@ -111,7 +107,6 @@ class ShimmerCard extends StatelessWidget {
                   highlightColor: shimmerHighlight,
                   period: period,
                   direction: direction,
-                  gradient: gradient,
                   animationCurve: animationCurve,
                   borderRadius: BorderRadius.circular(4),
                   enabled: enabled,
@@ -130,7 +125,6 @@ class ShimmerCard extends StatelessWidget {
                           highlightColor: shimmerHighlight,
                           period: period,
                           direction: direction,
-                          gradient: gradient,
                           animationCurve: animationCurve,
                           enabled: enabled,
                         ),
@@ -199,7 +193,6 @@ class ShimmerLoading extends StatelessWidget {
   final BoxDecoration? decoration;
   final Color? baseColor;
   final Color? highlightColor;
-  final Gradient? gradient;
   final Curve animationCurve;
   final Border? border;
   final String? semanticLabel;
@@ -215,7 +208,6 @@ class ShimmerLoading extends StatelessWidget {
     this.decoration,
     this.baseColor,
     this.highlightColor,
-    this.gradient,
     this.animationCurve = Curves.easeInOut,
     this.border,
     this.semanticLabel,
@@ -228,7 +220,6 @@ class ShimmerLoading extends StatelessWidget {
     required double height,
     Color? baseColor,
     Color? highlightColor,
-    Gradient? gradient,
     Duration period = const Duration(milliseconds: 1200),
     ShimmerDirection direction = ShimmerDirection.ltr,
     BoxDecoration? decoration,
@@ -245,7 +236,6 @@ class ShimmerLoading extends StatelessWidget {
       shapeBorder: RoundedRectangleBorder(borderRadius: borderRadius),
       baseColor: baseColor,
       highlightColor: highlightColor,
-      gradient: gradient,
       period: period,
       direction: direction,
       decoration: decoration,
@@ -261,7 +251,6 @@ class ShimmerLoading extends StatelessWidget {
     required double size,
     Color? baseColor,
     Color? highlightColor,
-    Gradient? gradient,
     Duration period = const Duration(milliseconds: 1200),
     ShimmerDirection direction = ShimmerDirection.ltr,
     BoxDecoration? decoration,
@@ -277,7 +266,6 @@ class ShimmerLoading extends StatelessWidget {
       shapeBorder: const CircleBorder(),
       baseColor: baseColor,
       highlightColor: highlightColor,
-      gradient: gradient,
       period: period,
       direction: direction,
       decoration: decoration,
@@ -305,41 +293,14 @@ class ShimmerLoading extends StatelessWidget {
     final defaultDecoration = ShapeDecoration(
       color: shimmerBase.withOpacity(0.6),
       shape: shapeBorder,
-      shadows: [
-        BoxShadow(
-          color: shimmerBase.withOpacity(0.15),
-          blurRadius: 8,
-          offset: const Offset(0, 4),
-          spreadRadius: 1,
-        ),
-      ],
     );
 
     Widget shimmerWidget = Container(
       width: effectiveWidth,
       height: height,
       decoration: decoration ?? defaultDecoration,
-      foregroundDecoration: border != null
-          ? ShapeDecoration(
-              shape: shapeBorder,
-              shadows: [
-                BoxShadow(
-                  color: shimmerBase.withOpacity(0.2),
-                  blurRadius: 4,
-                  spreadRadius: 1,
-                ),
-              ],
-            )
-          : null,
       clipBehavior: Clip.antiAlias,
     );
-
-    if (gradient != null) {
-      shimmerWidget = ShaderMask(
-        shaderCallback: (bounds) => gradient!.createShader(bounds),
-        child: shimmerWidget,
-      );
-    }
 
     if (enabled) {
       shimmerWidget = Shimmer.fromColors(
@@ -353,10 +314,7 @@ class ShimmerLoading extends StatelessWidget {
       );
     }
 
-    return Semantics(
-      label: semanticLabel,
-      child: shimmerWidget,
-    );
+    return Semantics(label: semanticLabel, child: shimmerWidget);
   }
 }
 

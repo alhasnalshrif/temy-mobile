@@ -5,10 +5,7 @@ import 'package:temy_barber/core/theme/styles.dart';
 class NoInternetPage extends StatelessWidget {
   final VoidCallback onRetry;
 
-  const NoInternetPage({
-    super.key,
-    required this.onRetry,
-  });
+  const NoInternetPage({super.key, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +37,10 @@ class NoInternetPage extends StatelessWidget {
               onPressed: onRetry,
               style: ElevatedButton.styleFrom(
                 backgroundColor: ColorsManager.mainBlue,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 12,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

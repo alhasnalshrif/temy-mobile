@@ -10,7 +10,7 @@ import 'package:temy_barber/features/booking/ui/widgets/booking_bloc_builder_wit
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -112,7 +112,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      context.pushReplacementNamed(Routes.loginScreen);
+                      context.goNamed(AppRoutes.loginName);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorsManager.mainBlue,

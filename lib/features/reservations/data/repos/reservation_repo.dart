@@ -171,7 +171,7 @@ class ReservationRepo {
       final response = await _queueApiServices.getQueueSettings();
 
       return ApiResult.success(response);
-    } catch (error, stackTrace) {
+    } catch (error) {
       // Handle 401 (unauthorized) - user not logged in
       // Return default settings with queue mode disabled
       if (error is DioException && error.response?.statusCode == 401) {
@@ -202,7 +202,7 @@ class ReservationRepo {
         OtpRequest(phone: phone),
       );
       return ApiResult.success(response);
-    } catch (error, stackTrace) {
+    } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
@@ -232,7 +232,7 @@ class ReservationRepo {
             ),
           );
       return ApiResult.success(response);
-    } catch (error, stackTrace) {
+    } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }

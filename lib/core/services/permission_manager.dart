@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
 
-/// Comprehensive permission management system for notifications
 class PermissionManager {
   PermissionManager._();
   static final PermissionManager _instance = PermissionManager._();
@@ -18,7 +17,6 @@ class PermissionManager {
   /// Initialize permission manager
   Future<void> initialize() async {
     try {
-      log('🔐 Initializing Permission Manager...');
       await _loadCachedPermissions();
       log('✅ Permission Manager initialized');
     } catch (e) {
@@ -45,8 +43,8 @@ class PermissionManager {
       }
 
       // Request the permission
-      final granted =
-          await _notificationService.requestNotificationPermission();
+      final granted = await _notificationService
+          .requestNotificationPermission();
 
       // Cache the result
       _notificationPermissionCache = granted;
@@ -110,7 +108,9 @@ class PermissionManager {
       // Also cache the timestamp
       const timestampKey = 'notification_permission_requested_time';
       await SharedPrefHelper.setData(
-          timestampKey, DateTime.now().millisecondsSinceEpoch);
+        timestampKey,
+        DateTime.now().millisecondsSinceEpoch,
+      );
     } catch (e) {
       log('Error caching permission request: $e');
     }
@@ -120,8 +120,8 @@ class PermissionManager {
   Future<void> _loadCachedPermissions() async {
     try {
       // Load current notification permission status
-      _notificationPermissionCache =
-          await _notificationService.areNotificationsEnabled();
+      _notificationPermissionCache = await _notificationService
+          .areNotificationsEnabled();
       _lastPermissionCheck = DateTime.now();
     } catch (e) {
       log('Error loading cached permissions: $e');
@@ -141,7 +141,7 @@ class PermissionManager {
         'notification_permission_requested_time',
         'notification_permission_denied_count',
         'notification_settings_opened',
-        'first_time_permission_request'
+        'first_time_permission_request',
       ];
 
       for (final key in permissionsToClean) {
@@ -273,6 +273,6 @@ class PermissionExplanation {
     required this.title,
     required this.message,
     this.actionText,
-    required this.shouldShowSettings,
+    this.shouldShowSettings = false,
   });
 }

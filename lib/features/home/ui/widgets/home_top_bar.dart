@@ -12,7 +12,6 @@ class HomeTopBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text('temy_barber'.tr(), style: TextStyles.font24BlackBold),
           ],

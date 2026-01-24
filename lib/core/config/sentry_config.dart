@@ -4,35 +4,35 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 class SentryConfig {
   // TODO: Replace with your actual Sentry DSN from sentry.io
   static const String _dsn = 'YOUR_SENTRY_DSN_HERE';
-  
+
   static Future<void> init() async {
-    await SentryFlutter.init(
-      (options) {
-        options.dsn = _dsn;
-        options.environment = kDebugMode ? 'development' : 'production';
-        options.debug = kDebugMode;
-        
-        // Performance monitoring
-        options.tracesSampleRate = kDebugMode ? 1.0 : 0.1; // 100% in debug, 10% in production
-        
-        // Error tracking options
-        options.attachStacktrace = true;
-        options.enableAutoSessionTracking = true;
-        options.autoAppStart = true;
-        
-        // Capture options
-        options.captureFailedRequests = true;
-        options.maxBreadcrumbs = 100;
-        
-        // Filter out sensitive information
-        options.beforeSend = (event, hint) {
-          // Filter out any sensitive data here if needed
-          return event;
-        };
-      },
-    );
+    await SentryFlutter.init((options) {
+      options.dsn = _dsn;
+      options.environment = kDebugMode ? 'development' : 'production';
+      options.debug = kDebugMode;
+
+      // Performance monitoring
+      options.tracesSampleRate = kDebugMode
+          ? 1.0
+          : 0.1; // 100% in debug, 10% in production
+
+      // Error tracking options
+      options.attachStacktrace = true;
+      options.enableAutoSessionTracking = true;
+      // Note: autoAppStart is deprecated, use removeIntegration to disable if needed
+
+      // Capture options
+      options.captureFailedRequests = true;
+      options.maxBreadcrumbs = 100;
+
+      // Filter out sensitive information
+      options.beforeSend = (event, hint) {
+        // Filter out any sensitive data here if needed
+        return event;
+      };
+    });
   }
-  
+
   /// Capture an exception manually
   static Future<void> captureException(
     dynamic exception, {
@@ -48,14 +48,12 @@ class SentryConfig {
           scope.setTag('custom_tag', tag);
         }
         if (extra != null) {
-          extra.forEach((key, value) {
-            scope.setExtra(key, value);
-          });
+          scope.setContexts('custom_data', extra);
         }
       },
     );
   }
-  
+
   /// Capture a message manually
   static Future<void> captureMessage(
     String message, {
@@ -71,14 +69,12 @@ class SentryConfig {
           scope.setTag('custom_tag', tag);
         }
         if (extra != null) {
-          extra.forEach((key, value) {
-            scope.setExtra(key, value);
-          });
+          scope.setContexts('custom_data', extra);
         }
       },
     );
   }
-  
+
   /// Add breadcrumb for debugging
   static void addBreadcrumb(String message, {String? category}) {
     Sentry.addBreadcrumb(
@@ -89,24 +85,22 @@ class SentryConfig {
       ),
     );
   }
-  
+
   /// Set user context
   static void setUser({
     String? id,
     String? email,
     String? username,
-    Map<String, dynamic>? extras,
+    Map<String, dynamic>? data,
   }) {
     Sentry.configureScope((scope) {
-      scope.setUser(SentryUser(
-        id: id,
-        email: email,
-        username: username,
-        extras: extras,
-      ));
+      scope.setUser(
+        SentryUser(id: id, email: email, username: username, data: data),
+      );
     });
   }
-    /// Clear user context (e.g., on logout)
+
+  /// Clear user context (e.g., on logout)
   static void clearUser() {
     Sentry.configureScope((scope) {
       scope.setUser(null);

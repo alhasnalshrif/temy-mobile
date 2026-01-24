@@ -134,14 +134,6 @@ class QueueBookingCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.withOpacity(0.2)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
       ),
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -406,7 +398,7 @@ class QueueBookingCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _getStatusColor(status).withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: _getStatusColor(status), width: 1),
+        border: Border.all(color: _getStatusColor(status)),
       ),
       child: Text(
         _getStatusText(status),

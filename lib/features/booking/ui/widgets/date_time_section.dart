@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
-import 'package:intl/intl.dart'; // Import intl package for date/time formatting
+// Import intl package for date/time formatting
 import 'package:temy_barber/core/utils/date_utils.dart' as app_date_utils;
 
 class DateTimeSection extends StatelessWidget {

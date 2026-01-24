@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:intl/intl.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/utils/date_utils.dart' as app_date_utils;
 
 import 'package:temy_barber/core/theme/colors.dart';
@@ -38,8 +38,7 @@ class InvoiceScreen extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.close, color: Colors.white),
-          onPressed: () =>
-              Navigator.pushReplacementNamed(context, Routes.dashboardScreen),
+          onPressed: () => context.goNamed(AppRoutes.dashboardName),
         ),
       ),
       body: Column(
@@ -438,7 +437,7 @@ class InvoiceScreen extends StatelessWidget {
             elevation: 0,
           ),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, Routes.dashboardScreen);
+            context.goNamed(AppRoutes.dashboardName);
           },
           child: Text(
             'invoice.back_to_home'.tr(),

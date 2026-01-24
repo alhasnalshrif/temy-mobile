@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/features/auth/logic/reset_password/reset_password_cubit.dart';
 import 'package:temy_barber/features/auth/logic/reset_password/reset_password_state.dart';
@@ -19,15 +20,14 @@ class ResetPasswordBlocListener extends StatelessWidget {
             showDialog(
               context: context,
               barrierDismissible: false,
-              builder: (context) => Center(
-                child: ShimmerLoading.circular(size: 50),
-              ),
+              builder: (context) =>
+                  Center(child: ShimmerLoading.circular(size: 50)),
             );
           },
           success: (response) {
             // Close loading dialog
             Navigator.pop(context);
-            
+
             // Show success message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -35,24 +35,17 @@ class ResetPasswordBlocListener extends StatelessWidget {
                 backgroundColor: Colors.green,
               ),
             );
-            
+
             // Navigate back to login screen
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              Routes.loginScreen,
-              (route) => false,
-            );
+            context.go(AppRoutes.Login);
           },
           error: (error) {
             // Close loading dialog
             Navigator.pop(context);
-            
+
             // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(error),
-                backgroundColor: Colors.red,
-              ),
+              SnackBar(content: Text(error), backgroundColor: Colors.red),
             );
           },
         );

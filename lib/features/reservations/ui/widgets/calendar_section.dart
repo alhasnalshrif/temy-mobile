@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -60,7 +59,7 @@ class _CalendarSectionState extends State<CalendarSection>
 
   // Get the days in the current month
   List<DateTime> _getDaysInMonth(DateTime month) {
-    final first = DateTime(month.year, month.month, 1);
+    final first = DateTime(month.year, month.month);
     final daysInMonth = DateTime(month.year, month.month + 1, 0).day;
 
     // Determine the first day to display (to fill the grid)
@@ -162,7 +161,7 @@ class _CalendarSectionState extends State<CalendarSection>
           children: [
             Text(
               'calendar.today'.tr(),
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -343,22 +342,13 @@ class _CalendarSectionState extends State<CalendarSection>
       // Past dates or out of booking range
       textColor = Colors.grey[400]!;
       decoration = decoration.copyWith(
-        border: Border.all(color: Colors.grey[200]!, width: 1),
+        border: Border.all(color: Colors.grey[200]!),
       );
     } else if (isSelected) {
       // Selected date
       textColor = Colors.white;
       fontWeight = FontWeight.bold;
-      decoration = decoration.copyWith(
-        color: ColorsManager.mainBlue,
-        boxShadow: [
-          BoxShadow(
-            color: ColorsManager.mainBlue.withOpacity(0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      );
+      decoration = decoration.copyWith(color: ColorsManager.mainBlue);
     } else if (isToday) {
       // Today's date
       textColor = ColorsManager.mainBlue;

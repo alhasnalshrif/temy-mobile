@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Run guard against gradients and shadows
+if command -v dart >/dev/null 2>&1; then
+  echo "Running UI style guard..."
+  dart tools/check_no_gradients_shadows.dart || {
+    echo "\nPre-commit blocked due to forbidden UI styling."
+    exit 1
+  }
+else
+  echo "Dart not found; skipping UI style guard."
+fi

@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/auth/auth_service.dart';
-import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
-import '../../../core/routing/routes.dart';
+import '../../../core/routing/app_routes.dart';
 import 'profile_state.dart';
 import 'dart:developer';
 
@@ -16,7 +14,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   final NotificationService _notificationService;
 
   ProfileCubit(this._homeRepo, this._notificationService)
-      : super(const ProfileState.initial());
+    : super(const ProfileState.initial());
 
   void getProfile() async {
     emit(const ProfileState.profileLoading());
@@ -75,13 +73,16 @@ class ProfileCubit extends Cubit<ProfileState> {
       response.when(
         success: (deletedProfile) {
           log('✅ Account deleted successfully on server');
-          Navigator.of(dialogContext).pushReplacementNamed(Routes.loginScreen);
+          dialogContext.goNamed(AppRoutes.loginName);
 
           // Step 2: Perform comprehensive local cleanup
           _performCompleteCleanup();
 
-          emit(ProfileState.deleteSuccess(
-              deletedProfile.message ?? 'Account deleted successfully'));
+          emit(
+            ProfileState.deleteSuccess(
+              deletedProfile.message ?? 'Account deleted successfully',
+            ),
+          );
         },
         failure: (error) {
           log('❌ Account deletion failed: ${error.apiErrorModel.message}');
@@ -90,10 +91,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
     } catch (error) {
       log('❌ Account deletion error: $error');
-      emit(ProfileState.deleteError(
-        // Create a basic error handler for unexpected errors
-        ErrorHandler.handle(error),
-      ));
+      emit(
+        ProfileState.deleteError(
+          // Create a basic error handler for unexpected errors
+          ErrorHandler.handle(error),
+        ),
+      );
     }
   }
 

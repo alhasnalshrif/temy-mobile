@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temy_barber/features/reservations/ui/widgets/common_widgets.dart';
 
+/// Displays the total price summary for the reservation
 class TotalSection extends StatelessWidget {
   final double totalPrice;
 
@@ -9,65 +11,41 @@ class TotalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
+    return CardContainer(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: [
-          //     const Text(
-          //       'مجموع الحساب',
-          //       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          //     ),
-          //     Text(
-          //       '${totalPrice.toStringAsFixed(0)} EGP',
-          //       style:
-          //           const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          //     ),
-          //   ],
-          // ),
-          // const SizedBox(height: 16),
-          // Container(
-          //   height: 1,
-          //   color: ColorsManager.thirdfMain,
-          // ),
-          // const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'common.total'.tr(),
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [
-                  Text(
-                    totalPrice.toStringAsFixed(0),
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: ColorsManager.mainBlue,
-                    ),
-                  ),
-                  const Text(
-                    ' EGP',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: ColorsManager.mainBlue,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          Text(
+            'common.total'.tr(),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
+          _buildPriceDisplay(),
         ],
       ),
+    );
+  }
+
+  Widget _buildPriceDisplay() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          totalPrice.toStringAsFixed(0),
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: ColorsManager.mainBlue,
+          ),
+        ),
+        const Text(
+          ' EGP',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: ColorsManager.mainBlue,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -34,6 +34,7 @@ class NotificationConfig {
     'services': '/services',
     'profile': '/profile',
   };
+
   /// Validate if OneSignal App ID is configured
   static bool get isConfigured =>
       oneSignalAppId.isNotEmpty && oneSignalAppId != "YOUR_ONESIGNAL_APP_ID";

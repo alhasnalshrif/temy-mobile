@@ -78,7 +78,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
       child: Column(
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('رقم الهاتف', style: TextStyles.font14Blue2SemiBold),
@@ -102,7 +101,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           ),
           verticalSpace(18),
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('الرقم السري', style: TextStyles.font14Blue2SemiBold),

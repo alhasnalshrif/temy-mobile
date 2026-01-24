@@ -1,6 +1,5 @@
 import 'dart:developer';
 import '../config/notification_config.dart';
-import '../services/notification_service.dart';
 
 /// Helper class for notification setup and testing
 class NotificationHelper {

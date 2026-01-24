@@ -49,7 +49,6 @@ class _SignupFormState extends State<SignupForm> {
       child: Column(
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -75,7 +74,6 @@ class _SignupFormState extends State<SignupForm> {
           ),
           verticalSpace(18),
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -107,7 +105,6 @@ class _SignupFormState extends State<SignupForm> {
           ),
           verticalSpace(18),
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -146,7 +143,6 @@ class _SignupFormState extends State<SignupForm> {
           ),
           verticalSpace(18),
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(

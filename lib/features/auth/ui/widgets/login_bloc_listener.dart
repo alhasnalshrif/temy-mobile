@@ -7,8 +7,7 @@ import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimme
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
-
-import '../../../../core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 import '../../../../core/theme/styles.dart';
 
 class LoginBlocListener extends StatelessWidget {
@@ -46,9 +45,9 @@ class LoginBlocListener extends StatelessWidget {
               // Navigate after the current frame to avoid build scope errors
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (context.mounted) {
-                  context.pushReplacementNamed(
-                    Routes.verificationScreen,
-                    arguments: {
+                  context.goNamed(
+                    AppRoutes.verificationName,
+                    extra: {
                       'phoneNumber': fullPhone,
                       'shouldAutoResend': true,
                       'comingFromLogin': true,
@@ -71,7 +70,7 @@ class LoginBlocListener extends StatelessWidget {
               }
             }
 
-            context.pushReplacementNamed(Routes.dashboardScreen);
+            context.goNamed(AppRoutes.dashboardName);
           },
           error: (error) {
             setupErrorState(context, error);

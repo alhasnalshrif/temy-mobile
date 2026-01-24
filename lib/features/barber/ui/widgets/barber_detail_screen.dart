@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
@@ -70,8 +70,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
       backgroundColor: ColorsManager.background,
       body: ResponsiveBuilder(
         mobile: _buildMobileLayout(),
-        tablet:
-            _buildDesktopLayout(), // Tablet can share desktop layout or be separate
+        tablet: _buildDesktopLayout(),
         desktop: _buildDesktopLayout(),
       ),
     );
@@ -101,67 +100,66 @@ class _BarberScreenItemState extends State<BarberScreenItem>
   }
 
   Widget _buildDesktopLayout() {
-    return Padding(
+    return Container(
+      color: ColorsManager.background,
+      alignment: Alignment.topCenter,
       padding: const EdgeInsets.all(24.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Left Column: Barber Info & Booking Action (30%)
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _buildHeader(isDesktop: true),
-                  const SizedBox(height: 24),
-                  _buildBookingButton(),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(width: 24),
-          // Right Column: Tabs & Content (70%)
-          Expanded(
-            flex: 7,
-            child: Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: DefaultTabController(
-                length: 3,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 1280),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Left Column: Barber Info & Booking Action (30%)
+            Expanded(
+              flex: 3,
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: ColorsManager.moreLighterGray),
+                ),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    _buildTabBar(),
-                    const SizedBox(height: 16),
-                    Expanded(child: _buildTabContent()),
+                    _buildHeader(isDesktop: true),
+                    const SizedBox(height: 24),
+                    const Divider(
+                      height: 1,
+                      color: ColorsManager.moreLighterGray,
+                    ),
+                    const SizedBox(height: 24),
+                    _buildBookingButton(),
                   ],
                 ),
               ),
             ),
-          ),
-        ],
+            const SizedBox(width: 24),
+            // Right Column: Tabs & Content (70%)
+            Expanded(
+              flex: 7,
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: ColorsManager.moreLighterGray),
+                ),
+                child: DefaultTabController(
+                  length: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildTabBar(),
+                      const SizedBox(height: 16),
+                      Expanded(child: _buildTabContent()),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -279,8 +277,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
       child: Material(
         color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(12),
-        elevation: 4,
-        shadowColor: Colors.black.withOpacity(0.2),
+        shadowColor: Colors.transparent,
         child: InkWell(
           onTap: _selectedServices.isEmpty
               ? null
@@ -291,11 +288,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                     barberData: widget.serviceResponseModel,
                     totalPrice: _selectedTotalPrice,
                   );
-                  Navigator.pushNamed(
-                    context,
-                    Routes.reservationScreen,
-                    arguments: args,
-                  );
+                  context.pushGoNamed('reservation', extra: args);
                 },
           borderRadius: BorderRadius.circular(12),
           child: Container(

@@ -102,7 +102,6 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
             key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Drag handle
                 Center(
@@ -120,7 +119,7 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
                 // Icon
                 Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: ColorsManager.lightBlue,
                     shape: BoxShape.circle,
                   ),

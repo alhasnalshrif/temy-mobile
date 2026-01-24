@@ -7,7 +7,7 @@ class MultiReservationManager {
 
   MultiReservationManager._internal();
 
-  List<ReservationArguments> _reservations = [];
+  final List<ReservationArguments> _reservations = [];
 
   List<ReservationArguments> get reservations => _reservations;
 

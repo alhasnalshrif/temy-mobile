@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
@@ -125,59 +125,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Expanded(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.lock_outline,
-                            size: 80,
-                            color: ColorsManager.mainBlue.withOpacity(0.5),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.lock_outline,
+                          size: 80,
+                          color: ColorsManager.mainBlue.withOpacity(0.5),
+                        ),
+                        const SizedBox(height: 24),
+                        Text(
+                          'auth.login_required_title'.tr(),
+                          style: TextStyles.font24BlackBold.copyWith(
+                            color: Colors.black,
                           ),
-                          const SizedBox(height: 24),
-                          Text(
-                            'auth.login_required_title'.tr(),
-                            style: TextStyles.font24BlackBold.copyWith(
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.center,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          'auth.login_required_message'.tr(),
+                          style: TextStyles.font14GrayRegular.copyWith(
+                            color: Colors.black,
                           ),
-                          const SizedBox(height: 12),
-                          Text(
-                            'auth.login_required_message'.tr(),
-                            style: TextStyles.font14GrayRegular.copyWith(
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 32),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                context.pushReplacementNamed(
-                                  Routes.loginScreen,
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: ColorsManager.mainBlue,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 16,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                              child: Text(
-                                'auth.login_button'.tr(),
-                                style: TextStyles.font16WhiteSemiBold,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 32),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              context.goNamed(AppRoutes.loginName);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorsManager.mainBlue,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
                             ),
+                            child: Text(
+                              'auth.login_button'.tr(),
+                              style: TextStyles.font16WhiteSemiBold,
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -249,13 +243,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(color: Colors.white, width: 2),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 8,
-                                  spreadRadius: 2,
-                                ),
-                              ],
                             ),
                             child: CircleAvatar(
                               backgroundColor: Colors.white,
@@ -264,6 +251,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ? NetworkImage(avatarUrl!)
                                   : const AssetImage('assets/images/temy.png')
                                         as ImageProvider,
+                              onBackgroundImageError: avatarUrl != null
+                                  ? (exception, stackTrace) {
+                                      // Handle network errors gracefully
+                                    }
+                                  : null,
                             ),
                           ),
                         ),
@@ -302,91 +294,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Enhanced Notification Settings Section
-                    // Container(
-                    //   margin: const EdgeInsets.only(bottom: 12),
-                    //   child: BlocBuilder<NotificationCubit, NotificationState>(
-                    //     bloc: notificationCubit,
-                    //     builder: (context, state) {
-                    //       bool isLoading = false;
-
-                    //       if (state.runtimeType
-                    //           .toString()
-                    //           .contains('SettingsLoaded')) {
-                    //         final settingsState = state as dynamic;
-                    //         notificationsEnabled =
-                    //             settingsState.settings.pushNotifications;
-                    //       } else if (state.runtimeType
-                    //           .toString()
-                    //           .contains('Loading')) {
-                    //         isLoading = true;
-                    //       }
-
-                    //       return Column(
-                    //         children: [
-                    //           // Notification Toggle
-                    //           SwitchListTile(
-                    //             activeColor: ColorsManager.mainBlue,
-                    //             activeTrackColor:
-                    //                 ColorsManager.mainBlue.withOpacity(0.2),
-                    //             trackOutlineColor: WidgetStateProperty.all(
-                    //                 ColorsManager.mainBlue),
-                    //             value: notificationsEnabled,
-                    //             onChanged:
-                    //                 isLoading ? null : _toggleNotifications,
-                    //             shape: RoundedRectangleBorder(
-                    //               borderRadius: BorderRadius.circular(12),
-                    //             ),
-                    //             title: Row(
-                    //               children: [
-                    //                 const Icon(Icons.notifications_outlined,
-                    //                     color: ColorsManager.mainBlue),
-                    //                 horizontalSpace(12),
-                    //                 Text(
-                    //                   'profile.notifications'.tr(),
-                    //                   style: TextStyles.font16DarkBold,
-                    //                 ),
-                    //                 if (isLoading) ...[
-                    //                   horizontalSpace(8),
-                    //                   const SizedBox(
-                    //                     width: 16,
-                    //                     height: 16,
-                    //                     child: CircularProgressIndicator(
-                    //                         strokeWidth: 2),
-                    //                   ),
-                    //                 ],
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           // Notification Settings Button
-                    //           ListTile(
-                    //             onTap: () => Navigator.pushNamed(
-                    //                 context, Routes.notificationSettingsScreen),
-                    //             shape: RoundedRectangleBorder(
-                    //               borderRadius: BorderRadius.circular(12),
-                    //             ),
-                    //             title: Row(
-                    //               children: [
-                    //                 const Icon(Icons.settings_outlined,
-                    //                     color: ColorsManager.mainBlue),
-                    //                 horizontalSpace(12),
-                    //                 Text(
-                    //                   'profile.notification_settings'.tr(),
-                    //                   style: TextStyles.font16DarkBold,
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //             trailing: const Icon(
-                    //               Icons.arrow_forward_ios,
-                    //               color: ColorsManager.mainBlue,
-                    //               size: 16,
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Row(
@@ -411,10 +318,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: Colors.grey.shade300,
-                                width: 1,
-                              ),
+                              border: Border.all(color: Colors.grey.shade300),
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
@@ -462,9 +366,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         state.maybeMap(
                           profileSuccess: (successState) {
                             if (successState.userProfile.user != null) {
-                              context.pushNamed(
-                                Routes.updateProfileScreen,
-                                arguments: successState.userProfile.user!,
+                              context.goNamed(
+                                AppRoutes.updateProfileName,
+                                extra: successState.userProfile.user!,
                               );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -488,21 +392,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'profile.privacy'.tr(),
                       Icons.lock_outline,
                       onTap: () {
-                        context.pushNamed(Routes.privacyPolicyScreen);
+                        context.goNamed(AppRoutes.privacyPolicyName);
                       },
                     ),
                     _buildProfileTile(
                       'profile.help'.tr(),
                       Icons.help_outline,
                       onTap: () {
-                        context.pushNamed(Routes.helpScreen);
+                        context.goNamed(AppRoutes.helpName);
                       },
                     ),
                     _buildProfileTile(
                       'profile.about'.tr(),
                       Icons.info_outline,
                       onTap: () {
-                        context.pushNamed(Routes.aboutScreen);
+                        context.goNamed(AppRoutes.aboutName);
                       },
                     ),
                     // Add delete account option
@@ -559,9 +463,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 if (shouldLogout == true) {
                                   await context.read<ProfileCubit>().logout();
                                   if (context.mounted) {
-                                    context.pushReplacementNamed(
-                                      Routes.loginScreen,
-                                    );
+                                    context.goNamed(AppRoutes.loginName);
                                   }
                                 }
                               },
@@ -683,7 +585,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     showDialog(
       context: context,
-      barrierDismissible: true, // Allow dismissing by tapping outside
       builder: (dialogContext) {
         return PopScope(
           onPopInvokedWithResult: (didPop, result) {
@@ -753,7 +654,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                         // Navigate to login screen
                         if (context.mounted) {
-                          context.pushReplacementNamed(Routes.loginScreen);
+                          context.goNamed(AppRoutes.loginName);
                         }
                       },
                       deleteError: (errorState) {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/features/category_barbers/data/models/category_response.dart';
 import 'package:temy_barber/features/category_barbers/ui/widgets/category_list_view_item.dart';
-import 'package:temy_barber/core/routing/routes.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 
 class CategoryBarberListView extends StatelessWidget {
   final List<BarberData?> barberDataList;
@@ -36,9 +37,9 @@ class CategoryBarberListView extends StatelessWidget {
             onTap: () {
               debugPrint('Category tapped: ${barberDataList[index]?.name}');
 
-              Navigator.of(context).pushNamed(
-                Routes.barberScreen,
-                arguments: barberDataList[index]?.id,
+              context.pushGoNamed(
+                AppRoutes.barberName,
+                pathParameters: {'barberId': barberDataList[index]?.id ?? ''},
               );
             },
           );

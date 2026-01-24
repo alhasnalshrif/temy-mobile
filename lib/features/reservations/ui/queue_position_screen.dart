@@ -29,7 +29,6 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
     // Start polling for queue position updates
     context.read<QueueCubit>().startPollingQueuePosition(
       widget.reservationId,
-      intervalSeconds: 10,
     );
   }
 
@@ -189,11 +188,11 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.cut, color: ColorsManager.mainBlue),
-                        SizedBox(width: 8),
+                        const Icon(Icons.cut, color: ColorsManager.mainBlue),
+                        const SizedBox(width: 8),
                         Text(
                           'invoice.services'.tr(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),

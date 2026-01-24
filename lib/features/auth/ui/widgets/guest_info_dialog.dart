@@ -45,7 +45,6 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
       context: context,
       isScrollControlled: true,
       isDismissible: false,
-      enableDrag: true,
       backgroundColor: Colors.transparent,
       builder: (context) => OtpVerificationDialog(
         phoneNumber: phone,
@@ -180,7 +179,6 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: ColorsManager.mainBlue.withOpacity(0.3),
-                          width: 1,
                         ),
                       ),
                       child: Row(
@@ -241,7 +239,6 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: Colors.red.withOpacity(0.3),
-                          width: 1,
                         ),
                       ),
                       child: Row(

@@ -26,7 +26,8 @@
         "no": "No",
         "next": "Next",
         "edit": "Edit",
-        "total": "Total"
+        "total": "Total",
+        "currency": "EGP"
     },
     "calendar": {
         "today": "Today",

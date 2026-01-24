@@ -8,7 +8,7 @@ import 'package:temy_barber/features/booking/logic/booking_state.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_card.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_shimmer.dart'; // Import optimized shimmer
 import 'package:temy_barber/features/booking/ui/widgets/booking_tabs.dart';
-import 'package:temy_barber/features/booking/ui/widgets/booking_status_stepper.dart'; // Import BookingStatusStepper
+// Import BookingStatusStepper
 import 'package:temy_barber/features/booking/ui/widgets/empty_booking_view.dart';
 import 'package:temy_barber/features/booking/ui/widgets/error_booking_view.dart';
 

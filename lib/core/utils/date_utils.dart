@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -12,14 +13,20 @@ String formatTimeOfDayString(String timeString, {String locale = 'ar'}) {
     // Create a DateTime object to use DateFormat for localization
     final now = DateTime.now();
     final dateTime = DateTime(
-        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+      now.year,
+      now.month,
+      now.day,
+      timeOfDay.hour,
+      timeOfDay.minute,
+    );
 
     // Use intl package for localized time formatting (e.g., "h:mm a")
-    final format =
-        DateFormat.jm(locale); // jm provides localized hour, minute, and AM/PM
+    final format = DateFormat.jm(
+      locale,
+    ); // jm provides localized hour, minute, and AM/PM
     return format.format(dateTime);
   } catch (e) {
-    print("Error formatting time string '$timeString': $e");
+    log("Error formatting time string '$timeString': $e");
     return timeString; // Return original string if formatting fails
   }
 }

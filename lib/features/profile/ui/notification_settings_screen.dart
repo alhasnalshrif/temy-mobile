@@ -44,8 +44,9 @@ class _NotificationSettingsScreenState
           BlocBuilder<NotificationCubit, NotificationState>(
             bloc: notificationCubit,
             builder: (context, state) {
-              final isLoading =
-                  state.runtimeType.toString().contains('Loading');
+              final isLoading = state.runtimeType.toString().contains(
+                'Loading',
+              );
               return TextButton(
                 onPressed: isLoading ? null : _saveSettings,
                 child: Text(
@@ -107,7 +108,8 @@ class _NotificationSettingsScreenState
                   ),
                   verticalSpace(24),
                   _buildSectionHeader(
-                      'notifications.booking_notifications'.tr()),
+                    'notifications.booking_notifications'.tr(),
+                  ),
                   verticalSpace(8),
                   _buildNotificationTile(
                     icon: Icons.schedule,
@@ -124,12 +126,12 @@ class _NotificationSettingsScreenState
                   _buildNotificationTile(
                     icon: Icons.local_offer,
                     title: 'notifications.promotional_notifications'.tr(),
-                    subtitle:
-                        'notifications.promotional_notifications_desc'.tr(),
+                    subtitle: 'notifications.promotional_notifications_desc'
+                        .tr(),
                     value: promotionalNotifications,
                     onChanged: pushNotifications
                         ? (value) =>
-                            setState(() => promotionalNotifications = value)
+                              setState(() => promotionalNotifications = value)
                         : null,
                   ),
                   if (!pushNotifications) ...[
@@ -139,8 +141,9 @@ class _NotificationSettingsScreenState
                       decoration: BoxDecoration(
                         color: Colors.orange.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
-                        border:
-                            Border.all(color: Colors.orange.withOpacity(0.3)),
+                        border: Border.all(
+                          color: Colors.orange.withOpacity(0.3),
+                        ),
                       ),
                       child: Row(
                         children: [
@@ -170,10 +173,7 @@ class _NotificationSettingsScreenState
   }
 
   Widget _buildSectionHeader(String title) {
-    return Text(
-      title,
-      style: TextStyles.font18DarkBold,
-    );
+    return Text(title, style: TextStyles.font18DarkBold);
   }
 
   Widget _buildNotificationTile({
@@ -190,14 +190,6 @@ class _NotificationSettingsScreenState
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: SwitchListTile(
         secondary: Icon(
@@ -218,7 +210,7 @@ class _NotificationSettingsScreenState
         ),
         value: value,
         onChanged: onChanged,
-        activeColor: ColorsManager.mainBlue,
+        activeThumbColor: ColorsManager.mainBlue,
         activeTrackColor: ColorsManager.mainBlue.withOpacity(0.2),
       ),
     );
@@ -237,7 +229,7 @@ class _NotificationSettingsScreenState
         children: [
           Row(
             children: [
-              Icon(Icons.info, color: ColorsManager.mainBlue),
+              const Icon(Icons.info, color: ColorsManager.mainBlue),
               horizontalSpace(8),
               Text(
                 'notifications.info_title'.tr(),

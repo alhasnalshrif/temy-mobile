@@ -67,13 +67,6 @@ class BookingShimmer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,7 +177,6 @@ class BookingShimmer extends StatelessWidget {
 
           // Show more button
           Align(
-            alignment: Alignment.center,
             child: Padding(
               padding: const EdgeInsets.only(top: 8),
               child: ShimmerLoading.rectangular(
