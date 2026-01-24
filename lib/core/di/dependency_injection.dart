@@ -3,6 +3,7 @@ import 'package:temy_barber/core/networking/api_service.dart';
 import 'package:temy_barber/core/networking/dio_factory.dart';
 import 'package:temy_barber/core/networking/network_service.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
+import 'package:temy_barber/core/services/cleanup_service.dart';
 import 'package:temy_barber/features/barber/data/apis/barber_api_services.dart';
 import 'package:temy_barber/features/barber/data/repos/barber_repo.dart';
 import 'package:temy_barber/features/booking/data/apis/booking_api_services.dart';
@@ -121,9 +122,14 @@ Future<void> setupGetIt() async {
     () => NotificationService.instance,
   );
 
+  // Cleanup Service
+  getIt.registerLazySingleton<CleanupService>(
+    () => CleanupService(getIt<NotificationService>()),
+  );
+
   // Profile Cubit
   getIt.registerFactory<ProfileCubit>(
-    () => ProfileCubit(getIt<ProfileRepo>(), getIt<NotificationService>()),
+    () => ProfileCubit(getIt<ProfileRepo>(), getIt<CleanupService>()),
   );
 
   // Notification Cubit

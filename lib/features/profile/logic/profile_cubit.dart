@@ -1,9 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/core/auth/auth_service.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/core/networking/api_error_handler.dart';
-import 'package:temy_barber/core/services/permission_manager.dart';
-import 'package:temy_barber/core/services/notification_service.dart';
+import 'package:temy_barber/core/services/cleanup_service.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import '../../../core/routing/app_routes.dart';
 import 'profile_state.dart';
@@ -11,9 +9,9 @@ import 'dart:developer';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepo _homeRepo;
-  final NotificationService _notificationService;
+  final CleanupService _cleanupService;
 
-  ProfileCubit(this._homeRepo, this._notificationService)
+  ProfileCubit(this._homeRepo, this._cleanupService)
     : super(const ProfileState.initial());
 
   void getProfile() async {
@@ -34,28 +32,16 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(const ProfileState.profileLoading());
 
     try {
-      log('🚀 Starting comprehensive logout process...');
+      log('🚀 Starting logout process...');
 
-      // Step 1: Logout from OneSignal
-      log('📱 Clearing notification data...');
-      await _notificationService.logoutUser();
-
-      // Step 2: Clear authentication using AuthService
-      log('🔐 Clearing authentication...');
-      await AuthService.instance.clearAuthentication();
-
-      // Step 3: Clear any cached app data
-      await _clearCachedData();
-
-      // Step 4: Reset notification permissions state
-      await _resetNotificationState();
+      // Use CleanupService for comprehensive cleanup
+      await _cleanupService.performLogoutCleanup();
 
       log('✅ Logout completed successfully');
       emit(const ProfileState.initial());
     } catch (error) {
       log('❌ Logout failed: $error');
-      // If logout fails, still clear local data and emit initial state
-      await _forceCleanup();
+      // If logout fails, still emit initial state
       emit(const ProfileState.initial());
     }
   }
@@ -75,8 +61,8 @@ class ProfileCubit extends Cubit<ProfileState> {
           log('✅ Account deleted successfully on server');
           dialogContext.goNamed(AppRoutes.loginName);
 
-          // Step 2: Perform comprehensive local cleanup
-          _performCompleteCleanup();
+          // Step 2: Use CleanupService for comprehensive cleanup
+          _cleanupService.performAccountDeletionCleanup();
 
           emit(
             ProfileState.deleteSuccess(
@@ -91,73 +77,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
     } catch (error) {
       log('❌ Account deletion error: $error');
-      emit(
-        ProfileState.deleteError(
-          // Create a basic error handler for unexpected errors
-          ErrorHandler.handle(error),
-        ),
-      );
-    }
-  }
-
-  /// Perform comprehensive cleanup after account deletion
-  Future<void> _performCompleteCleanup() async {
-    try {
-      log('🧹 Performing complete cleanup...');
-
-      // Clear all OneSignal data
-      await _notificationService.logoutUser();
-
-      // Clear authentication using AuthService
-      await AuthService.instance.clearAuthentication();
-
-      // Clear cached data
-      await _clearCachedData();
-
-      // Reset notification state
-      await _resetNotificationState();
-
-      log('✅ Complete cleanup finished');
-    } catch (error) {
-      log('❌ Cleanup error: $error');
-    }
-  }
-
-  /// Force cleanup in case of logout failure
-  Future<void> _forceCleanup() async {
-    try {
-      log('🔄 Force cleanup in progress...');
-      await AuthService.instance.clearAuthentication();
-      await _clearCachedData();
-      await _resetNotificationState();
-      log('✅ Force cleanup completed');
-    } catch (error) {
-      log('❌ Force cleanup error: $error');
-    }
-  }
-
-  /// Clear any cached application data
-  Future<void> _clearCachedData() async {
-    try {
-      // Clear any cached reservations, bookings, or other app-specific data
-      // This can be extended based on what your app caches locally
-      log('📱 Clearing cached app data...');
-
-      // Clear cached images, temporary files, etc. if needed
-      // For now, this is a placeholder for future cache clearing
-    } catch (error) {
-      log('❌ Error clearing cached data: $error');
-    }
-  }
-
-  /// Reset notification permission state
-  Future<void> _resetNotificationState() async {
-    try {
-      log('🔔 Resetting notification state...');
-      // Reset any notification-related states or permissions
-      await PermissionManager.instance.reset();
-    } catch (error) {
-      log('❌ Error resetting notification state: $error');
+      emit(ProfileState.deleteError(ErrorHandler.handle(error)));
     }
   }
 }

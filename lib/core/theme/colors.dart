@@ -21,4 +21,5 @@ class ColorsManager {
   static const Color shimmerHighlightDark = Color(0xFF616161);
 
   static const Color black = Color(0xFF000000);
+  static const Color red = Color(0xFFFF3B30); 
 }
