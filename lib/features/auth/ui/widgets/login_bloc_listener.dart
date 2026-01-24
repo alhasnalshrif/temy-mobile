@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/auth/logic/cubit/login_cubit.dart';
 import 'package:temy_barber/features/auth/logic/cubit/login_state.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
@@ -97,7 +98,7 @@ class LoginBlocListener extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        icon: const Icon(Icons.error, color: Colors.red, size: 32),
+        icon: const Icon(Icons.error, color: ColorsManager.red, size: 32),
         content: Text(error, style: TextStyles.font15DarkBlueMedium),
         actions: [
           TextButton(

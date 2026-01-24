@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/category_barbers/data/models/service_response.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -79,10 +80,7 @@ class _CategoryImage extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-      
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: hasImage
@@ -123,7 +121,7 @@ class _CategoryImage extends StatelessWidget {
       child: Icon(
         Icons.error_outline,
         size: radius * 0.8,
-        color: Colors.red.withOpacity(0.7),
+        color: ColorsManager.red.withAlpha(179),
       ),
     ),
   );

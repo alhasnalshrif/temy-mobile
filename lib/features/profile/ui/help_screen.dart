@@ -9,6 +9,8 @@ class HelpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isLargeScreen = size.width > 600;
     final titleStyle = TextStyles.font14DarkBlueMedium.copyWith(
       fontWeight: FontWeight.bold,
       fontSize: 16,
@@ -20,41 +22,48 @@ class HelpScreen extends StatelessWidget {
         foregroundColor: Colors.white,
         title: Text('help'.tr()),
         backgroundColor: ColorsManager.mainBlue,
+        centerTitle: isLargeScreen,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _section(
-                title: 'How to use the app',
-                body: '''
+        child: Center(
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: isLargeScreen ? 800 : double.infinity,
+            ),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(isLargeScreen ? 32 : 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _section(
+                    title: 'How to use the app',
+                    body: '''
 - Browse services and select your preferred option.
 - Book appointments easily through the app.
 - Manage your profile and preferences.''',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
-              ),
-              _section(
-                title: 'Need more help?',
-                body: '''
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                  _section(
+                    title: 'Need more help?',
+                    body: '''
 You can reach our support team any time.
 
 📞 Phone: 01064067843
 📧 Email: support@temybarber.com
                 ''',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
     );
   }
 }
-
 
 /// ----------------- REUSABLE SECTION -----------------
 Widget _section({

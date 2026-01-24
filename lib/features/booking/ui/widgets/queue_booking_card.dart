@@ -92,14 +92,14 @@ class QueueBookingCard extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('booking.error_cancel_no_id'.tr()),
-                              backgroundColor: Colors.red,
+                              backgroundColor: ColorsManager.red,
                             ),
                           );
                         }
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 12.0),
-                        backgroundColor: Colors.red,
+                        backgroundColor: ColorsManager.red,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
@@ -194,7 +194,7 @@ class QueueBookingCard extends StatelessWidget {
                     verticalSpace(8),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
+                        backgroundColor: ColorsManager.red,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 12,
                           vertical: 6,
@@ -225,14 +225,14 @@ class QueueBookingCard extends StatelessWidget {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.1),
+                        color: ColorsManager.red.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.red),
+                        border: Border.all(color: ColorsManager.red),
                       ),
                       child: Text(
                         isSkipped ? 'SKIPPED' : 'CANCELLED',
                         style: const TextStyle(
-                          color: Colors.red,
+                          color: ColorsManager.red,
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
                         ),
@@ -420,7 +420,7 @@ class QueueBookingCard extends StatelessWidget {
       case 'completed':
         return Colors.blue;
       case 'skipped':
-        return Colors.red;
+        return ColorsManager.red;
       default:
         return Colors.grey;
     }

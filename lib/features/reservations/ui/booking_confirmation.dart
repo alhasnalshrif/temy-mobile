@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
@@ -90,7 +91,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
   void _onError(String message) {
     Navigator.of(context, rootNavigator: true).pop();
-    _showSnackBar(message, Colors.red);
+    _showSnackBar(message, ColorsManager.red);
   }
 
   void _showSnackBar(String message, Color color) {
@@ -196,7 +197,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   void _handleAddAnotherReservation() {
     final validation = _viewModel.validateAddToMultiple();
     if (!validation.isValid) {
-      _showSnackBar(validation.errorMessage!.tr(), Colors.red);
+      _showSnackBar(validation.errorMessage!.tr(), ColorsManager.red);
       return;
     }
 
@@ -221,7 +222,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   Future<void> _confirmMultipleReservations() async {
     final validation = _viewModel.validateBooking();
     if (!validation.isValid) {
-      _showSnackBar(validation.errorMessage!.tr(), Colors.red);
+      _showSnackBar(validation.errorMessage!.tr(), ColorsManager.red);
       return;
     }
 
@@ -238,7 +239,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   Future<void> _confirmBooking() async {
     final validation = _viewModel.validateBooking();
     if (!validation.isValid) {
-      _showSnackBar(validation.errorMessage!.tr(), Colors.red);
+      _showSnackBar(validation.errorMessage!.tr(), ColorsManager.red);
       return;
     }
 
@@ -281,12 +282,18 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     }
 
     if (guestInfo == null) {
-      _showSnackBar('booking_confirmation.guest_info_error'.tr(), Colors.red);
+      _showSnackBar(
+        'booking_confirmation.guest_info_error'.tr(),
+        ColorsManager.red,
+      );
       return null;
     }
 
     if (!_viewModel.isQueueMode && otp == null) {
-      _showSnackBar('booking_confirmation.otp_required'.tr(), Colors.red);
+      _showSnackBar(
+        'booking_confirmation.otp_required'.tr(),
+        ColorsManager.red,
+      );
       return null;
     }
 

@@ -92,6 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final isLargeScreen = size.width > 600;
 
     // Set status bar styling
     SystemChrome.setSystemUIOverlayStyle(
@@ -115,18 +116,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     // Main profile screen for logged-in users
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Center(
         child: Container(
-          width: double.infinity,
-          color: Colors.black,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ProfileHeader(),
-              _buildProfileInfoSection(),
-              verticalSpace(30),
-              _buildProfileMenuSection(size),
-            ],
+          constraints: BoxConstraints(
+            maxWidth: isLargeScreen ? 800 : double.infinity,
+          ),
+          child: SingleChildScrollView(
+            child: Container(
+              width: double.infinity,
+              color: Colors.black,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const ProfileHeader(),
+                  _buildProfileInfoSection(),
+                  verticalSpace(30),
+                  _buildProfileMenuSection(size),
+                ],
+              ),
+            ),
           ),
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
@@ -84,7 +85,7 @@ class NextBookingCard extends StatelessWidget {
                 width: 50,
                 height: 50,
                 decoration: const BoxDecoration(
-                  color: Colors.red,
+                  color: ColorsManager.red,
                   shape: BoxShape.circle,
                 ),
               ),

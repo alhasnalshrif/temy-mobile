@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/profile_state.dart';
@@ -27,7 +28,7 @@ class ProfileDialogs {
           ),
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            style: TextButton.styleFrom(foregroundColor: ColorsManager.red),
             child: Text('logout.logout'.tr()),
           ),
         ],
@@ -58,13 +59,13 @@ class ProfileDialogs {
               backgroundColor: Colors.white,
               title: Row(
                 children: [
-                  const Icon(Icons.warning, color: Colors.red, size: 28),
+                  const Icon(Icons.warning, color: ColorsManager.red, size: 28),
                   horizontalSpace(8),
                   Expanded(
                     child: Text(
                       'delete_account.warning_title'.tr(),
                       style: TextStyles.font18DarkBold.copyWith(
-                        color: Colors.red,
+                        color: ColorsManager.red,
                       ),
                     ),
                   ),
@@ -128,7 +129,7 @@ class ProfileDialogs {
                               errorState.errorHandler.apiErrorModel.message ??
                                   'delete_account.delete_failed'.tr(),
                             ),
-                            backgroundColor: Colors.red,
+                            backgroundColor: ColorsManager.red,
                           ),
                         );
                       },
@@ -150,7 +151,7 @@ class ProfileDialogs {
                             }
                           : null,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
+                        backgroundColor: ColorsManager.red,
                         foregroundColor: Colors.white,
                         disabledBackgroundColor: Colors.grey.shade300,
                         shape: RoundedRectangleBorder(

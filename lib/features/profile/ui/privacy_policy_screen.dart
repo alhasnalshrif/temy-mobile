@@ -8,6 +8,8 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isLargeScreen = size.width > 600;
     final titleStyle = TextStyles.font14DarkBlueMedium.copyWith(
       fontWeight: FontWeight.bold,
       fontSize: 16,
@@ -17,64 +19,69 @@ class PrivacyPolicyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
-        title: Text(
-          'privacy'.tr(),
-        ),
-       
+        title: Text('privacy'.tr()),
+        centerTitle: isLargeScreen,
         backgroundColor: ColorsManager.mainBlue,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _section(
-                title: '1. Information We Collect',
-                body: '''
+        child: Center(
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: isLargeScreen ? 800 : double.infinity,
+            ),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(isLargeScreen ? 32 : 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _section(
+                    title: '1. Information We Collect',
+                    body: '''
 - Personal information you provide: name, phone number, email, profile picture.
 - Usage information: app usage, device identifiers, crash reports.''',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
-              ),
-              _section(
-                title: '2. How We Use Information',
-                body: '''
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                  _section(
+                    title: '2. How We Use Information',
+                    body: '''
 - To operate and improve the app, provide features, and communicate with you.
 - To detect, prevent, and address technical issues and abuse.''',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
-              ),
-              _section(
-                title: '3. Sharing',
-                body:
-                    'We do not sell your personal information. We may share with service providers who perform services on our behalf.',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
-              ),
-              _section(
-                title: '4. Security',
-                body:
-                    'We take reasonable measures to protect your information. However, no method of transmission is 100% secure.',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
-              ),
-              _section(
-                title: '5. Your Choices',
-                body: '''
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                  _section(
+                    title: '3. Sharing',
+                    body:
+                        'We do not sell your personal information. We may share with service providers who perform services on our behalf.',
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                  _section(
+                    title: '4. Security',
+                    body:
+                        'We take reasonable measures to protect your information. However, no method of transmission is 100% secure.',
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                  _section(
+                    title: '5. Your Choices',
+                    body: '''
 - You may delete your account by using the in-app delete account option.
 - You can control notification settings in the app.''',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                  _section(
+                    title: '6. Contact',
+                    body:
+                        'For questions about this policy, contact us via the support channels in the app.',
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                ],
               ),
-              _section(
-                title: '6. Contact',
-                body:
-                    'For questions about this policy, contact us via the support channels in the app.',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
-              ),
-            ],
+            ),
           ),
         ),
       ),

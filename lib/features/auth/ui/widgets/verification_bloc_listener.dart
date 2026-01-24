@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
@@ -38,14 +39,11 @@ class VerificationBlocListener extends StatelessWidget {
           },
           success: (verificationResponse) {
             _dismissActiveDialog(context);
-            // Check if user came from login
             final cubit = context.read<VerificationCubit>();
             if (cubit.comingFromLogin) {
-              // User came from login, save token and navigate to dashboard
               _handleLoginVerificationSuccess(context, verificationResponse);
             } else {
-              // User came from signup, show success dialog and navigate to login
-              // showSuccessDialog(context);
+           
               context.goNamed(AppRoutes.loginName);
             }
           },
@@ -70,7 +68,6 @@ class VerificationBlocListener extends StatelessWidget {
       if (token.isNotEmpty && userId.isNotEmpty) {
         await _saveUserToken(token, userId);
 
-        // Set user ID for OneSignal
         try {
           final notificationCubit = getIt<NotificationCubit>();
           await notificationCubit.setUserId(userId);
@@ -78,10 +75,9 @@ class VerificationBlocListener extends StatelessWidget {
           debugPrint('Could not access NotificationCubit: $e');
         }
 
-        // Navigate to dashboard
         context.goNamed(AppRoutes.dashboardName);
       } else {
-        // Something went wrong, show error
+        // Somethin went wrong, show error
         setupErrorState(context, 'Verification completed but login failed');
       }
     } catch (e) {
@@ -90,7 +86,6 @@ class VerificationBlocListener extends StatelessWidget {
   }
 
   Future<void> _saveUserToken(String token, String id) async {
-    // Save token to shared preferences
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.userId, id);
     DioFactory.setTokenIntoHeaderAfterLogin(token);
@@ -102,7 +97,7 @@ class VerificationBlocListener extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        icon: const Icon(Icons.error, color: Colors.red, size: 32),
+        icon: const Icon(Icons.error, color: ColorsManager.red, size: 32),
         content: Text(error, style: TextStyles.font15DarkBlueMedium),
         actions: [
           TextButton(

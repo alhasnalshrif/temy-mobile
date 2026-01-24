@@ -31,6 +31,9 @@ class _NotificationSettingsScreenState
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isLargeScreen = size.width > 600;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -39,6 +42,7 @@ class _NotificationSettingsScreenState
         ),
         backgroundColor: Colors.white,
         elevation: 0,
+        centerTitle: isLargeScreen,
         iconTheme: const IconThemeData(color: ColorsManager.mainBlue),
         actions: [
           BlocBuilder<NotificationCubit, NotificationState>(
@@ -83,7 +87,7 @@ class _NotificationSettingsScreenState
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(errorState.message),
-                backgroundColor: Colors.red,
+                backgroundColor: ColorsManager.red,
               ),
             );
           }
@@ -91,79 +95,88 @@ class _NotificationSettingsScreenState
         child: BlocBuilder<NotificationCubit, NotificationState>(
           bloc: notificationCubit,
           builder: (context, state) {
-            return SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSectionHeader('notifications.general'.tr()),
-                  verticalSpace(8),
-                  _buildNotificationTile(
-                    icon: Icons.notifications,
-                    title: 'notifications.push_notifications'.tr(),
-                    subtitle: 'notifications.push_notifications_desc'.tr(),
-                    value: pushNotifications,
-                    onChanged: (value) =>
-                        setState(() => pushNotifications = value),
-                  ),
-                  verticalSpace(24),
-                  _buildSectionHeader(
-                    'notifications.booking_notifications'.tr(),
-                  ),
-                  verticalSpace(8),
-                  _buildNotificationTile(
-                    icon: Icons.schedule,
-                    title: 'notifications.booking_reminders'.tr(),
-                    subtitle: 'notifications.booking_reminders_desc'.tr(),
-                    value: bookingReminders,
-                    onChanged: pushNotifications
-                        ? (value) => setState(() => bookingReminders = value)
-                        : null,
-                  ),
-                  verticalSpace(24),
-                  _buildSectionHeader('notifications.marketing'.tr()),
-                  verticalSpace(8),
-                  _buildNotificationTile(
-                    icon: Icons.local_offer,
-                    title: 'notifications.promotional_notifications'.tr(),
-                    subtitle: 'notifications.promotional_notifications_desc'
-                        .tr(),
-                    value: promotionalNotifications,
-                    onChanged: pushNotifications
-                        ? (value) =>
-                              setState(() => promotionalNotifications = value)
-                        : null,
-                  ),
-                  if (!pushNotifications) ...[
-                    verticalSpace(24),
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.orange.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: Colors.orange.withOpacity(0.3),
-                        ),
+            return Center(
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: isLargeScreen ? 800 : double.infinity,
+                ),
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.all(isLargeScreen ? 32 : 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildSectionHeader('notifications.general'.tr()),
+                      verticalSpace(8),
+                      _buildNotificationTile(
+                        icon: Icons.notifications,
+                        title: 'notifications.push_notifications'.tr(),
+                        subtitle: 'notifications.push_notifications_desc'.tr(),
+                        value: pushNotifications,
+                        onChanged: (value) =>
+                            setState(() => pushNotifications = value),
                       ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.warning, color: Colors.orange[700]),
-                          horizontalSpace(12),
-                          Expanded(
-                            child: Text(
-                              'notifications.push_disabled_warning'.tr(),
-                              style: TextStyles.font14GrayRegular.copyWith(
-                                color: Colors.orange[700],
-                              ),
+                      verticalSpace(24),
+                      _buildSectionHeader(
+                        'notifications.booking_notifications'.tr(),
+                      ),
+                      verticalSpace(8),
+                      _buildNotificationTile(
+                        icon: Icons.schedule,
+                        title: 'notifications.booking_reminders'.tr(),
+                        subtitle: 'notifications.booking_reminders_desc'.tr(),
+                        value: bookingReminders,
+                        onChanged: pushNotifications
+                            ? (value) =>
+                                  setState(() => bookingReminders = value)
+                            : null,
+                      ),
+                      verticalSpace(24),
+                      _buildSectionHeader('notifications.marketing'.tr()),
+                      verticalSpace(8),
+                      _buildNotificationTile(
+                        icon: Icons.local_offer,
+                        title: 'notifications.promotional_notifications'.tr(),
+                        subtitle: 'notifications.promotional_notifications_desc'
+                            .tr(),
+                        value: promotionalNotifications,
+                        onChanged: pushNotifications
+                            ? (value) => setState(
+                                () => promotionalNotifications = value,
+                              )
+                            : null,
+                      ),
+                      if (!pushNotifications) ...[
+                        verticalSpace(24),
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.orange.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.orange.withOpacity(0.3),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ],
-                  verticalSpace(32),
-                  _buildInfoSection(),
-                ],
+                          child: Row(
+                            children: [
+                              Icon(Icons.warning, color: Colors.orange[700]),
+                              horizontalSpace(12),
+                              Expanded(
+                                child: Text(
+                                  'notifications.push_disabled_warning'.tr(),
+                                  style: TextStyles.font14GrayRegular.copyWith(
+                                    color: Colors.orange[700],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                      verticalSpace(32),
+                      _buildInfoSection(),
+                    ],
+                  ),
+                ),
               ),
             );
           },

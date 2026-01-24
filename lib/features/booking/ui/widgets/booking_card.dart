@@ -88,14 +88,14 @@ class BookingCard extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('booking.error_cancel_no_id'.tr()),
-                              backgroundColor: Colors.red,
+                              backgroundColor: ColorsManager.red,
                             ),
                           );
                         }
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 12.0),
-                        backgroundColor: Colors.red,
+                        backgroundColor: ColorsManager.red,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
@@ -154,7 +154,7 @@ class BookingCard extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 4, left: 8),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                      backgroundColor: ColorsManager.red,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
                         vertical: 8,

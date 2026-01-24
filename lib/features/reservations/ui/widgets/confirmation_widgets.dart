@@ -560,10 +560,14 @@ class _ReservationCard extends StatelessWidget {
             icon: Container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.1),
+                color: ColorsManager.red.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.close, size: 18, color: Colors.red),
+              child: const Icon(
+                Icons.close,
+                size: 18,
+                color: ColorsManager.red,
+              ),
             ),
             tooltip: 'booking_confirmation.remove_tooltip'.tr(),
             style: IconButton.styleFrom(

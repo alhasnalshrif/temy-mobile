@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/auth/logic/sign_up_cubit.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
@@ -62,13 +63,13 @@ class SignupBlocListener extends StatelessWidget {
                 const Icon(
                   Icons.error_outline,
                   size: 48,
-                  color: Colors.redAccent,
+                  color: ColorsManager.red,
                 ),
                 const SizedBox(height: 12),
                 Text(
                   'Error',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.redAccent,
+                    color: ColorsManager.red,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,

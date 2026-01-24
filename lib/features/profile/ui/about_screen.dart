@@ -3,13 +3,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 
-
 /// ----------------- ABOUT SCREEN -----------------
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isLargeScreen = size.width > 600;
     final titleStyle = TextStyles.font14DarkBlueMedium.copyWith(
       fontWeight: FontWeight.bold,
       fontSize: 16,
@@ -21,37 +22,45 @@ class AboutScreen extends StatelessWidget {
         foregroundColor: Colors.white,
         title: Text('about'.tr()),
         backgroundColor: ColorsManager.mainBlue,
+        centerTitle: isLargeScreen,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _section(
-                title: 'About Temy Barber',
-                body:
-                    'Temy Barber is your trusted app for booking barber and grooming services quickly and easily.',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
-              ),
-              _section(
-                title: 'Our Mission',
-                body:
-                    'We aim to provide seamless grooming experiences with top-rated professionals at your convenience.',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
-              ),
-              _section(
-                title: 'Contact Us',
-                body: '''
+        child: Center(
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: isLargeScreen ? 800 : double.infinity,
+            ),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(isLargeScreen ? 32 : 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _section(
+                    title: 'About Temy Barber',
+                    body:
+                        'Temy Barber is your trusted app for booking barber and grooming services quickly and easily.',
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                  _section(
+                    title: 'Our Mission',
+                    body:
+                        'We aim to provide seamless grooming experiences with top-rated professionals at your convenience.',
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                  _section(
+                    title: 'Contact Us',
+                    body: '''
 📞 Phone: 01064067843
 🌐 Website: www.temybarber.com
                 ''',
-                titleStyle: titleStyle,
-                bodyStyle: bodyStyle,
+                    titleStyle: titleStyle,
+                    bodyStyle: bodyStyle,
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

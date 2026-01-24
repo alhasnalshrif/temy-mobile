@@ -235,17 +235,17 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.1),
+                        color: ColorsManager.red.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: Colors.red.withOpacity(0.3),
+                          color: ColorsManager.red.withOpacity(0.3),
                         ),
                       ),
                       child: Row(
                         children: [
                           const Icon(
                             Icons.error_outline,
-                            color: Colors.red,
+                            color: ColorsManager.red,
                             size: 24,
                           ),
                           horizontalSpace(12),
@@ -253,7 +253,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                             child: Text(
                               errorMessage ?? 'An error occurred',
                               style: TextStyles.font14GrayRegular.copyWith(
-                                color: Colors.red,
+                                color: ColorsManager.red,
                               ),
                             ),
                           ),
@@ -300,7 +300,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: const BorderSide(
-                                color: Colors.red,
+                                color: ColorsManager.red,
                                 width: 1.3,
                               ),
                             ),
@@ -349,7 +349,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: const BorderSide(
-                                color: Colors.red,
+                                color: ColorsManager.red,
                                 width: 1.3,
                               ),
                             ),

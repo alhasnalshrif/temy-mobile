@@ -244,7 +244,7 @@ class _CalendarSectionState extends State<CalendarSection>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
               color: isDayOff
-                  ? Colors.red.withOpacity(0.1)
+                  ? ColorsManager.red.withOpacity(0.1)
                   : Colors.transparent,
             ),
             child: Center(
@@ -254,7 +254,7 @@ class _CalendarSectionState extends State<CalendarSection>
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: isDayOff ? Colors.red[400] : ColorsManager.gray,
+                  color: isDayOff ? ColorsManager.red.withAlpha(200) : ColorsManager.lightBlue,
                 ),
               ),
             ),
@@ -335,9 +335,11 @@ class _CalendarSectionState extends State<CalendarSection>
       textColor = Colors.grey[300]!;
     } else if (isDayOff && isCurrentMonth) {
       // Day off - show with red styling
-      textColor = Colors.red[300]!;
+      textColor = ColorsManager.red.withAlpha(200);
       fontWeight = FontWeight.w500;
-      decoration = decoration.copyWith(color: Colors.red.withOpacity(0.08));
+      decoration = decoration.copyWith(
+        color: ColorsManager.red.withAlpha(20),
+      );
     } else if (!isSelectable) {
       // Past dates or out of booking range
       textColor = Colors.grey[400]!;

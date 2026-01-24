@@ -16,7 +16,7 @@ class ErrorBookingView extends StatelessWidget {
           Icon(
             Icons.error_outline,
             size: 64,
-            color: Colors.red[400],
+            color: ColorsManager.red.withAlpha(200),
           ),
           const SizedBox(height: 16),
           Text(
@@ -31,9 +31,7 @@ class ErrorBookingView extends StatelessWidget {
           Text(
             'verification.error_loading_info'.tr(),
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.grey[600],
-            ),
+            style: TextStyle(color: Colors.grey[600]),
           ),
           const SizedBox(height: 24),
           ElevatedButton(
@@ -49,9 +47,7 @@ class ErrorBookingView extends StatelessWidget {
             },
             child: Text(
               'verification.try_again'.tr(),
-              style: const TextStyle(
-                color: Colors.white,
-              ),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ],

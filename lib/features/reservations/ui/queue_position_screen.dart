@@ -27,9 +27,7 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
   void initState() {
     super.initState();
     // Start polling for queue position updates
-    context.read<QueueCubit>().startPollingQueuePosition(
-      widget.reservationId,
-    );
+    context.read<QueueCubit>().startPollingQueuePosition(widget.reservationId);
   }
 
   @override
@@ -68,7 +66,11 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                  const Icon(
+                    Icons.error_outline,
+                    size: 64,
+                    color: ColorsManager.red,
+                  ),
                   const SizedBox(height: 16),
                   Text('Error: $error'),
                   const SizedBox(height: 16),

@@ -139,7 +139,7 @@ class _CategoryImage extends StatelessWidget {
       child: Icon(
         Icons.broken_image,
         size: radius * 0.8,
-        color: Colors.red.withOpacity(0.6),
+        color: ColorsManager.red.withOpacity(0.6),
       ),
     ),
   );

@@ -125,7 +125,11 @@ class _BookingBlocBuilderWithQueueState
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, size: 60, color: Colors.red[300]),
+                Icon(
+                  Icons.error_outline,
+                  size: 60,
+                  color: ColorsManager.red.withAlpha(200),
+                ),
                 verticalSpace(16),
                 Text(
                   'booking.error_loading'.tr(),
@@ -192,7 +196,7 @@ class _BookingBlocBuilderWithQueueState
               },
               child: Text(
                 'booking.yes'.tr(),
-                style: const TextStyle(color: Colors.red),
+                style: const TextStyle(color: ColorsManager.red),
               ),
             ),
           ],

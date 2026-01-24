@@ -229,22 +229,24 @@ class DangerTile extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            splashColor: Colors.red.withOpacity(0.1),
-            highlightColor: Colors.red.withOpacity(0.05),
+            splashColor: ColorsManager.red.withOpacity(0.1),
+            highlightColor: ColorsManager.red.withOpacity(0.05),
             child: ListTile(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              tileColor: Colors.red.withOpacity(0.05),
-              leading: Icon(icon, color: Colors.red),
+              tileColor: ColorsManager.red.withOpacity(0.05),
+              leading: Icon(icon, color: ColorsManager.red),
               title: Text(
                 title,
-                style: TextStyles.font16DarkBold.copyWith(color: Colors.red),
+                style: TextStyles.font16DarkBold.copyWith(
+                  color: ColorsManager.red,
+                ),
               ),
               trailing: const Icon(
                 Icons.arrow_forward_ios,
                 size: 16,
-                color: Colors.red,
+                color: ColorsManager.red,
               ),
             ),
           ),
@@ -300,64 +302,72 @@ class GuestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isLargeScreen = size.width > 600;
+
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        color: Colors.white,
-        child: SafeArea(
-          child: Column(
-            children: [
-              const ProfileHeader(),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.lock_outline,
-                        size: 80,
-                        color: ColorsManager.mainBlue.withOpacity(0.5),
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'auth.login_required_title'.tr(),
-                        style: TextStyles.font24BlackBold.copyWith(
-                          color: Colors.black,
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints(
+            maxWidth: isLargeScreen ? 800 : double.infinity,
+          ),
+          width: double.infinity,
+          color: Colors.white,
+          child: SafeArea(
+            child: Column(
+              children: [
+                const ProfileHeader(),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(isLargeScreen ? 48.0 : 24.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.lock_outline,
+                          size: 80,
+                          color: ColorsManager.mainBlue.withOpacity(0.5),
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'auth.login_required_message'.tr(),
-                        style: TextStyles.font14GrayRegular.copyWith(
-                          color: Colors.black,
+                        const SizedBox(height: 24),
+                        Text(
+                          'auth.login_required_title'.tr(),
+                          style: TextStyles.font24BlackBold.copyWith(
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 32),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: onLoginPressed,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorsManager.mainBlue,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                        const SizedBox(height: 12),
+                        Text(
+                          'auth.login_required_message'.tr(),
+                          style: TextStyles.font14GrayRegular.copyWith(
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 32),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: onLoginPressed,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorsManager.mainBlue,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: Text(
+                              'auth.login_button'.tr(),
+                              style: TextStyles.font16WhiteSemiBold,
                             ),
                           ),
-                          child: Text(
-                            'auth.login_button'.tr(),
-                            style: TextStyles.font16WhiteSemiBold,
-                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

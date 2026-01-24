@@ -49,7 +49,11 @@ class _QueueSectionState extends State<QueueSection> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                  const Icon(
+                    Icons.error_outline,
+                    size: 48,
+                    color: ColorsManager.red,
+                  ),
                   const SizedBox(height: 8),
                   Text(state.error, textAlign: TextAlign.center),
                   const SizedBox(height: 16),
@@ -124,7 +128,11 @@ class _QueueSectionState extends State<QueueSection> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.cut, color: Colors.green, size: 24),
+                            const Icon(
+                              Icons.cut,
+                              color: Colors.green,
+                              size: 24,
+                            ),
                             const SizedBox(width: 8),
                             Text(
                               'queue.now_serving'.tr(),
@@ -223,7 +231,10 @@ class _QueueSectionState extends State<QueueSection> {
                         children: [
                           Text(
                             'queue.est_wait_time'.tr(),
-                            style: const TextStyle(fontSize: 14, color: Colors.grey),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey,
+                            ),
                           ),
                           Text(
                             'queue.est_wait'.tr(
@@ -246,7 +257,10 @@ class _QueueSectionState extends State<QueueSection> {
               if (waitingCount > 0) ...[
                 Text(
                   'queue.waiting_queue'.tr(),
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 ...queueData.waitingCustomers.take(5).toList().asMap().entries.map((

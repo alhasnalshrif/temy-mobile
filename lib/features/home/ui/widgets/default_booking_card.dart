@@ -50,7 +50,7 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
       SnackBar(
         content: Text('default_booking.removed'.tr()),
         behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.red[700],
+        backgroundColor: ColorsManager.red,
       ),
     );
   }
@@ -94,7 +94,7 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                 onPressed: () => Navigator.of(context).pop(true),
                 child: Text(
                   'default_booking.remove'.tr(),
-                  style: const TextStyle(color: Colors.red),
+                  style: const TextStyle(color: ColorsManager.red),
                 ),
               ),
             ],
@@ -104,7 +104,7 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
       background: Container(
         margin: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
-          color: Colors.red[700],
+          color: ColorsManager.red.withAlpha(200),
           borderRadius: BorderRadius.circular(12),
         ),
         alignment: Alignment.centerRight,

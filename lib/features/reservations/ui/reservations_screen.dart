@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
@@ -165,7 +166,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
         content: Text(message),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        backgroundColor: Colors.red[700],
+        backgroundColor: ColorsManager.red.withAlpha( 200),
       ),
     );
   }
