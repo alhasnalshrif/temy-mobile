@@ -328,5 +328,35 @@
         "network_unreachable": "Network unreachable",
         "connection_timeout": "Connection timeout",
         "connection_failed": "Connection failed"
+    },
+    "about": {
+        "title": "About Temy Barber",
+        "description": "Temy Barber is your trusted app for booking barber and grooming services quickly and easily.",
+        "mission_title": "Our Mission",
+        "mission_description": "We aim to provide seamless grooming experiences with top-rated professionals at your convenience.",
+        "contact_title": "Contact Us",
+        "contact_phone": "Phone: 01064067843",
+        "contact_website": "Website: www.temybarber.com",
+        "contact_info": "📞 Phone: 01064067843\n🌐 Website: www.temybarber.com"
+    },
+    "privacy_policy": {
+        "section_1_title": "1. Information We Collect",
+        "section_1_body": "- Personal information you provide: name, phone number, email, profile picture.\n- Usage information: app usage, device identifiers, crash reports.",
+        "section_2_title": "2. How We Use Information",
+        "section_2_body": "- To operate and improve the app, provide features, and communicate with you.\n- To detect, prevent, and address technical issues and abuse.",
+        "section_3_title": "3. Sharing",
+        "section_3_body": "We do not sell your personal information. We may share with service providers who perform services on our behalf.",
+        "section_4_title": "4. Security",
+        "section_4_body": "We take reasonable measures to protect your information. However, no method of transmission is 100% secure.",
+        "section_5_title": "5. Your Choices",
+        "section_5_body": "- You may delete your account by using the in-app delete account option.\n- You can control notification settings in the app.",
+        "section_6_title": "6. Contact",
+        "section_6_body": "For questions about this policy, contact us via the support channels in the app."
+    },
+    "help": {
+        "how_to_use_title": "How to use the app",
+        "how_to_use_body": "- Browse services and select your preferred option.\n- Book appointments easily through the app.\n- Manage your profile and preferences.",
+        "need_help_title": "Need more help?",
+        "need_help_body": "You can reach our support team any time.\n\nPhone: 01064067843\nEmail: support@temybarber.com"
     }
 }
