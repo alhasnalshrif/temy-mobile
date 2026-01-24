@@ -18,7 +18,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/settings/data/repos/settings_repo.dart';
 import 'package:temy_barber/features/settings/data/models/settings_response.dart';
-import 'package:url_strategy/url_strategy.dart'; // Import url_strategy
+import 'package:url_strategy/url_strategy.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +44,6 @@ void main() async {
     log('Error checking settings: $e');
   }
 
-  // If maintenance mode is active, show MaintenanceScreen
   if (settingsData?.maintenance == true) {
     runApp(
       EasyLocalization(
@@ -67,7 +66,6 @@ void main() async {
 
   await checkedIfUserLoggedIn();
 
-  // Initialize Permission Manager
   try {
     await PermissionManager.instance.initialize();
   } catch (e) {
@@ -75,7 +73,6 @@ void main() async {
   }
 
   if (kDebugMode) {
-    // Check OneSignal configuration in development
     NotificationHelper.checkConfiguration();
   }
 
