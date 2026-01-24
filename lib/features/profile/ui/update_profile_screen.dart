@@ -38,104 +38,102 @@ class UpdateProfileScreen extends StatelessWidget {
           centerTitle: isLargeScreen,
           // backgroundColor: Colors.white,
         ),
-        body: Center(
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: isLargeScreen ? 600 : double.infinity,
-            ),
-            child: BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
-              listener: (context, state) {
-                state.whenOrNull(
-                  success: (userProfile) {
-                    context.read<ProfileCubit>().getProfile();
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          userProfile.message ?? 'تم تحديث الملف الشخصي بنجاح',
-                        ),
-                        backgroundColor: Colors.green,
+        body: Container(
+          constraints: BoxConstraints(
+            maxWidth: isLargeScreen ? 600 : double.infinity,
+          ),
+          child: BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
+            listener: (context, state) {
+              state.whenOrNull(
+                success: (userProfile) {
+                  context.read<ProfileCubit>().getProfile();
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        userProfile.message ?? 'تم تحديث الملف الشخصي بنجاح',
                       ),
-                    );
-                  },
-                  error: (errorHandler) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          errorHandler.apiErrorModel.message ?? 'حدث خطأ ما',
-                        ),
-                        backgroundColor: ColorsManager.red,
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                },
+                error: (errorHandler) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        errorHandler.apiErrorModel.message ?? 'حدث خطأ ما',
                       ),
-                    );
-                  },
-                );
-              },
-              builder: (context, state) {
-                final cubit = context.read<UpdateProfileCubit>();
-                return SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.all(isLargeScreen ? 32.0 : 16.0),
-                    child: Form(
-                      key: cubit.formKey,
-                      child: Column(
-                        children: [
-                          verticalSpace(20),
-                          AppTextFormField(
-                            hintText: 'الاسم',
-                            controller: cubit.nameController,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'الرجاء إدخال الاسم';
-                              }
-                              return null;
-                            },
-                          ),
-                          verticalSpace(16),
-                          AppTextFormField(
-                            hintText: 'رقم الهاتف',
-                            controller: cubit.phoneController,
-                            keyboardType: TextInputType.phone,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'الرجاء إدخال رقم الهاتف';
-                              }
-                              // Add more specific phone validation if needed
-                              return null;
-                            },
-                          ),
-                          verticalSpace(30),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: state is Loading
-                                  ? null
-                                  : () => cubit.updateProfileData(),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: ColorsManager.mainBlue,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 16,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                      backgroundColor: ColorsManager.red,
+                    ),
+                  );
+                },
+              );
+            },
+            builder: (context, state) {
+              final cubit = context.read<UpdateProfileCubit>();
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(isLargeScreen ? 32.0 : 16.0),
+                  child: Form(
+                    key: cubit.formKey,
+                    child: Column(
+                      children: [
+                        verticalSpace(20),
+                        AppTextFormField(
+                          hintText: 'الاسم',
+                          controller: cubit.nameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'الرجاء إدخال الاسم';
+                            }
+                            return null;
+                          },
+                        ),
+                        verticalSpace(16),
+                        AppTextFormField(
+                          hintText: 'رقم الهاتف',
+                          controller: cubit.phoneController,
+                          keyboardType: TextInputType.phone,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'الرجاء إدخال رقم الهاتف';
+                            }
+                            // Add more specific phone validation if needed
+                            return null;
+                          },
+                        ),
+                        verticalSpace(30),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: state is Loading
+                                ? null
+                                : () => cubit.updateProfileData(),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorsManager.mainBlue,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 16,
                               ),
-                              child: state is Loading
-                                  ? const CircularProgressIndicator(
-                                      color: Colors.white,
-                                    )
-                                  : Text(
-                                      'حفظ التغييرات',
-                                      style: TextStyles.font16WhiteSemiBold,
-                                    ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
+                            child: state is Loading
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : Text(
+                                    'حفظ التغييرات',
+                                    style: TextStyles.font16WhiteSemiBold,
+                                  ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

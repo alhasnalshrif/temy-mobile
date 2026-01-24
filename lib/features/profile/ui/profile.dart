@@ -116,24 +116,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     // Main profile screen for logged-in users
     return Scaffold(
-      body: Center(
-        child: Container(
-          constraints: BoxConstraints(
-            maxWidth: isLargeScreen ? 800 : double.infinity,
-          ),
-          child: SingleChildScrollView(
-            child: Container(
-              width: double.infinity,
-              color: Colors.black,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const ProfileHeader(),
-                  _buildProfileInfoSection(),
-                  verticalSpace(30),
-                  _buildProfileMenuSection(size),
-                ],
-              ),
+      body: Container(
+        constraints: BoxConstraints(
+          maxWidth: isLargeScreen ? 800 : double.infinity,
+        ),
+        child: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            color: Colors.black,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ProfileHeader(),
+                _buildProfileInfoSection(),
+                verticalSpace(30),
+                _buildProfileMenuSection(size),
+              ],
             ),
           ),
         ),

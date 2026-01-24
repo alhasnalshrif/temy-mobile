@@ -25,38 +25,36 @@ class HelpScreen extends StatelessWidget {
         centerTitle: isLargeScreen,
       ),
       body: SafeArea(
-        child: Center(
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: isLargeScreen ? 800 : double.infinity,
-            ),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.all(isLargeScreen ? 32 : 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _section(
-                    title: 'How to use the app',
-                    body: '''
+        child: Container(
+          constraints: BoxConstraints(
+            maxWidth: isLargeScreen ? 800 : double.infinity,
+          ),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(isLargeScreen ? 32 : 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _section(
+                  title: 'How to use the app',
+                  body: '''
 - Browse services and select your preferred option.
 - Book appointments easily through the app.
 - Manage your profile and preferences.''',
-                    titleStyle: titleStyle,
-                    bodyStyle: bodyStyle,
-                  ),
-                  _section(
-                    title: 'Need more help?',
-                    body: '''
+                  titleStyle: titleStyle,
+                  bodyStyle: bodyStyle,
+                ),
+                _section(
+                  title: 'Need more help?',
+                  body: '''
 You can reach our support team any time.
 
 📞 Phone: 01064067843
 📧 Email: support@temybarber.com
                 ''',
-                    titleStyle: titleStyle,
-                    bodyStyle: bodyStyle,
-                  ),
-                ],
-              ),
+                  titleStyle: titleStyle,
+                  bodyStyle: bodyStyle,
+                ),
+              ],
             ),
           ),
         ),

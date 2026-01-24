@@ -153,7 +153,7 @@ class AppRouterGo {
           path: AppRoutes.Reservation,
           name: AppRoutes.reservationName,
           builder: (context, state) {
-            final args = state.extra as ReservationArguments;
+            final args = state.extra as ReservationArguments?;
             return BlocProvider(
               create: (context) => ReservationCubit(getIt()),
               child: ReservationsScreen(arguments: args),
@@ -164,7 +164,12 @@ class AppRouterGo {
           path: AppRoutes.BookingConfirmation,
           name: AppRoutes.bookingConfirmationName,
           builder: (context, state) {
-            final args = state.extra as ReservationArguments;
+            final args = state.extra as ReservationArguments?;
+            if (args == null) {
+              // Redirect to dashboard if no arguments provided
+              Future.microtask(() => context.go(AppRoutes.Dashboard));
+              return const SizedBox.shrink();
+            }
             return BlocProvider(
               create: (context) => ReservationCubit(getIt()),
               child: BookingConfirmation(arguments: args),

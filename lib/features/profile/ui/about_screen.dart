@@ -25,41 +25,39 @@ class AboutScreen extends StatelessWidget {
         centerTitle: isLargeScreen,
       ),
       body: SafeArea(
-        child: Center(
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: isLargeScreen ? 800 : double.infinity,
-            ),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.all(isLargeScreen ? 32 : 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _section(
-                    title: 'About Temy Barber',
-                    body:
-                        'Temy Barber is your trusted app for booking barber and grooming services quickly and easily.',
-                    titleStyle: titleStyle,
-                    bodyStyle: bodyStyle,
-                  ),
-                  _section(
-                    title: 'Our Mission',
-                    body:
-                        'We aim to provide seamless grooming experiences with top-rated professionals at your convenience.',
-                    titleStyle: titleStyle,
-                    bodyStyle: bodyStyle,
-                  ),
-                  _section(
-                    title: 'Contact Us',
-                    body: '''
+        child: Container(
+          constraints: BoxConstraints(
+            maxWidth: isLargeScreen ? 800 : double.infinity,
+          ),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(isLargeScreen ? 32 : 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _section(
+                  title: 'About Temy Barber',
+                  body:
+                      'Temy Barber is your trusted app for booking barber and grooming services quickly and easily.',
+                  titleStyle: titleStyle,
+                  bodyStyle: bodyStyle,
+                ),
+                _section(
+                  title: 'Our Mission',
+                  body:
+                      'We aim to provide seamless grooming experiences with top-rated professionals at your convenience.',
+                  titleStyle: titleStyle,
+                  bodyStyle: bodyStyle,
+                ),
+                _section(
+                  title: 'Contact Us',
+                  body: '''
 📞 Phone: 01064067843
 🌐 Website: www.temybarber.com
                 ''',
-                    titleStyle: titleStyle,
-                    bodyStyle: bodyStyle,
-                  ),
-                ],
-              ),
+                  titleStyle: titleStyle,
+                  bodyStyle: bodyStyle,
+                ),
+              ],
             ),
           ),
         ),

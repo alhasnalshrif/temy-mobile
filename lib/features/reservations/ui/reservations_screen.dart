@@ -166,7 +166,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
         content: Text(message),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        backgroundColor: ColorsManager.red.withAlpha( 200),
+        backgroundColor: ColorsManager.red.withAlpha(200),
       ),
     );
   }
@@ -180,6 +180,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
       shadowColor: Colors.transparent,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios_new),
+        color: Colors.black,
         onPressed: () => Navigator.pop(context),
       ),
     );
