@@ -32,12 +32,13 @@ class AppTheme {
         surfaceTintColor: Colors.transparent,
         iconTheme: IconThemeData(size: 24, color: Colors.white),
         titleTextStyle: TextStyle(
+          color: Colors.white,
           fontSize: 18,
           fontWeight: FontWeightHelper.bold,
           fontFamily: 'Cairo',
         ),
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
+          statusBarColor: ColorsManager.mainBlue,
           statusBarIconBrightness: Brightness.dark,
         ),
       ),

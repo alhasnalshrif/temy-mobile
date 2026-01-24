@@ -25,9 +25,6 @@ import 'package:temy_barber/features/category_barbers/ui/category_screen.dart';
 import 'package:temy_barber/features/dashboard/dashboard_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
-import 'package:temy_barber/features/profile/ui/about_screen.dart';
-import 'package:temy_barber/features/profile/ui/help_screen.dart';
-import 'package:temy_barber/features/profile/ui/privacy_policy_screen.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
@@ -194,21 +191,7 @@ class AppRouterGo {
           },
         ),
   
-        GoRoute(
-          path: AppRoutes.PrivacyPolicy,
-          name: AppRoutes.privacyPolicyName,
-          builder: (context, state) => const PrivacyPolicyScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.Help,
-          name: AppRoutes.helpName,
-          builder: (context, state) => const HelpScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.About,
-          name: AppRoutes.aboutName,
-          builder: (context, state) => const AboutScreen(),
-        ),
+        
       ],
 
       // Redirect logic for auth

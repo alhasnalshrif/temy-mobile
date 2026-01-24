@@ -9,6 +9,7 @@ import 'package:temy_barber/features/booking/ui/widgets/booking_shimmer.dart';
 import 'package:temy_barber/features/booking/ui/widgets/queue_booking_card.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_tabs.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/core/utils/responsive_utils.dart'; // Import ResponsiveUtils
 
 class BookingBlocBuilderWithQueue extends StatefulWidget {
   const BookingBlocBuilderWithQueue({super.key});
@@ -81,17 +82,40 @@ class _BookingBlocBuilderWithQueueState
                             ),
                           ),
                         ),
-                        ...queueBookings.map(
-                          (booking) => Padding(
-                            padding: const EdgeInsets.only(bottom: 12.0),
-                            child: QueueBookingCard(
-                              booking: booking,
-                              onCancelBooking: () {
-                                _showCancelDialog(context, booking.id ?? '');
-                              },
+                        if (ResponsiveUtils.isDesktop(context))
+                          GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 500,
+                                  crossAxisSpacing: 16,
+                                  mainAxisSpacing: 16,
+                                  childAspectRatio: 1.3,
+                                ),
+                            itemCount: queueBookings.length,
+                            itemBuilder: (context, index) {
+                              final booking = queueBookings[index];
+                              return QueueBookingCard(
+                                booking: booking,
+                                onCancelBooking: () {
+                                  _showCancelDialog(context, booking.id ?? '');
+                                },
+                              );
+                            },
+                          )
+                        else
+                          ...queueBookings.map(
+                            (booking) => Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: QueueBookingCard(
+                                booking: booking,
+                                onCancelBooking: () {
+                                  _showCancelDialog(context, booking.id ?? '');
+                                },
+                              ),
                             ),
                           ),
-                        ),
                         if (timeSlotBookings.isNotEmpty) verticalSpace(24),
                       ],
 
@@ -109,12 +133,31 @@ class _BookingBlocBuilderWithQueueState
                               ),
                             ),
                           ),
-                        ...timeSlotBookings.map(
-                          (booking) => Padding(
-                            padding: const EdgeInsets.only(bottom: 12.0),
-                            child: BookingCard(booking: booking),
+                        if (ResponsiveUtils.isDesktop(context))
+                          GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 500,
+                                  crossAxisSpacing: 16,
+                                  mainAxisSpacing: 16,
+                                  childAspectRatio:
+                                      1.1, // Adjusted for smaller cards
+                                ),
+                            itemCount: timeSlotBookings.length,
+                            itemBuilder: (context, index) {
+                              final booking = timeSlotBookings[index];
+                              return BookingCard(booking: booking);
+                            },
+                          )
+                        else
+                          ...timeSlotBookings.map(
+                            (booking) => Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: BookingCard(booking: booking),
+                            ),
                           ),
-                        ),
                       ],
                     ],
                   ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/core/utils/responsive_utils.dart';
 
 /// Profile header widget with logo
 class ProfileHeader extends StatelessWidget {
@@ -33,57 +34,72 @@ class ProfileInfo extends StatelessWidget {
   final String userName;
   final String phoneNumber;
   final String? avatarUrl;
+  final bool isVertical;
 
   const ProfileInfo({
     super.key,
     required this.userName,
     required this.phoneNumber,
     this.avatarUrl,
+    this.isVertical = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Row(
-        children: [
-          Hero(
-            tag: 'profile-avatar',
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
-              ),
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 35,
-                backgroundImage: avatarUrl != null
-                    ? NetworkImage(avatarUrl!)
-                    : const AssetImage('assets/images/temy.png')
-                          as ImageProvider,
-                onBackgroundImageError: avatarUrl != null
-                    ? (exception, stackTrace) {
-                        // Handle network errors gracefully
-                      }
-                    : null,
-              ),
+      child: isVertical
+          ? Column(
+              children: [
+                _buildAvatar(),
+                verticalSpace(16),
+                _buildInfoText(center: true),
+              ],
+            )
+          : Row(
+              children: [_buildAvatar(), horizontalSpace(16), _buildInfoText()],
             ),
-          ),
-          horizontalSpace(16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(userName, style: TextStyles.font24WhiteBold),
-              Text(
-                phoneNumber,
-                style: TextStyles.font16WhiteSemiBold.copyWith(
-                  color: Colors.white.withOpacity(0.7),
-                ),
-              ),
-            ],
-          ),
-        ],
+    );
+  }
+
+  Widget _buildAvatar() {
+    return Hero(
+      tag: 'profile-avatar',
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.white, width: 2),
+        ),
+        child: CircleAvatar(
+          backgroundColor: Colors.white,
+          radius: 35,
+          backgroundImage: avatarUrl != null
+              ? NetworkImage(avatarUrl!)
+              : const AssetImage('assets/images/temy.png') as ImageProvider,
+          onBackgroundImageError: avatarUrl != null
+              ? (exception, stackTrace) {
+                  // Handle network errors gracefully
+                }
+              : null,
+        ),
       ),
+    );
+  }
+
+  Widget _buildInfoText({bool center = false}) {
+    return Column(
+      crossAxisAlignment: center
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
+      children: [
+        Text(userName, style: TextStyles.font24WhiteBold),
+        Text(
+          phoneNumber,
+          style: TextStyles.font16WhiteSemiBold.copyWith(
+            color: Colors.white.withOpacity(0.7),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -108,7 +124,12 @@ class LanguageSelector extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.language, color: ColorsManager.mainBlue),
+              Icon(
+                Icons.language,
+                color: ResponsiveUtils.isTablet(context)
+                    ? ColorsManager.mainBlue
+                    : Colors.white,
+              ),
               horizontalSpace(12),
               Text('profile.language'.tr(), style: TextStyles.font16DarkBold),
             ],
@@ -387,6 +408,94 @@ class LoadingScreen extends StatelessWidget {
         color: Colors.white,
         child: const Center(
           child: CircularProgressIndicator(color: ColorsManager.mainBlue),
+        ),
+      ),
+    );
+  }
+}
+
+/// Desktop specific profile card with hover effect
+class DesktopProfileCard extends StatefulWidget {
+  final String title;
+  final IconData icon;
+  final VoidCallback onTap;
+  final bool isDanger;
+
+  const DesktopProfileCard({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.onTap,
+    this.isDanger = false,
+  });
+
+  @override
+  State<DesktopProfileCard> createState() => _DesktopProfileCardState();
+}
+
+class _DesktopProfileCardState extends State<DesktopProfileCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: widget.isDanger
+                    ? ColorsManager.red.withOpacity(_isHovered ? 0.2 : 0.05)
+                    : Colors.black.withOpacity(_isHovered ? 0.1 : 0.05),
+                blurRadius: _isHovered ? 20 : 10,
+                offset: Offset(0, _isHovered ? 8 : 4),
+              ),
+            ],
+            border: Border.all(
+              color: widget.isDanger
+                  ? ColorsManager.red.withOpacity(0.1)
+                  : Colors.transparent,
+              width: 1,
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: widget.isDanger
+                      ? ColorsManager.red.withOpacity(0.1)
+                      : ColorsManager.mainBlue.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  widget.icon,
+                  size: 32,
+                  color: widget.isDanger
+                      ? ColorsManager.red
+                      : ColorsManager.mainBlue,
+                ),
+              ),
+              verticalSpace(16),
+              Text(
+                widget.title,
+                textAlign: TextAlign.center,
+                style: widget.isDanger
+                    ? TextStyles.font16DarkBold.copyWith(
+                        color: ColorsManager.red,
+                      )
+                    : TextStyles.font16DarkBold,
+              ),
+            ],
+          ),
         ),
       ),
     );

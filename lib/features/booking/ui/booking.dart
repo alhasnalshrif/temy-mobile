@@ -93,7 +93,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 Icon(
                   Icons.lock_outline,
                   size: 80,
-                  color: ColorsManager.mainBlue.withOpacity(0.5),
+                  color: ColorsManager.mainBlue.withAlpha(128),
                 ),
                 const SizedBox(height: 24),
                 Text(
@@ -152,6 +152,10 @@ class _BookingScreenState extends State<BookingScreen> {
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
+            alignment: Alignment.center,
+            // center
+            // maxWidth: 1000,
+            constraints: const BoxConstraints(maxWidth: 1000),
             margin: const EdgeInsets.only(top: 20.0),
             padding: const EdgeInsets.all(16.0),
             decoration: const BoxDecoration(

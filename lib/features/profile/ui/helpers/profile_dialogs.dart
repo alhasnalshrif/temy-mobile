@@ -72,7 +72,7 @@ class ProfileDialogs {
                 ],
               ),
               content: SizedBox(
-                width: double.maxFinite,
+                width: 400,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -13,6 +13,7 @@ import 'package:temy_barber/features/profile/ui/helpers/profile_language_helper.
 import 'package:temy_barber/features/profile/ui/helpers/profile_dialogs.dart';
 import 'package:temy_barber/features/profile/ui/widgets/profile_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temy_barber/core/utils/responsive_utils.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -92,7 +93,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final isLargeScreen = size.width > 600;
 
     // Set status bar styling
     SystemChrome.setSystemUIOverlayStyle(
@@ -115,24 +115,99 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     // Main profile screen for logged-in users
+    return ResponsiveBuilder(
+      mobile: _buildMobileLayout(size),
+      desktop: _buildDesktopLayout(size),
+    );
+  }
+
+  /// Build mobile layout
+  Widget _buildMobileLayout(Size size) {
     return Scaffold(
       body: Container(
-        constraints: BoxConstraints(
-          maxWidth: isLargeScreen ? 800 : double.infinity,
-        ),
+        width: double.infinity,
+        color: Colors.black,
         child: SingleChildScrollView(
-          child: Container(
-            width: double.infinity,
-            color: Colors.black,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const ProfileHeader(),
-                _buildProfileInfoSection(),
-                verticalSpace(30),
-                _buildProfileMenuSection(size),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ProfileHeader(),
+              _buildProfileInfoSection(),
+              verticalSpace(30),
+              _buildProfileMenuSection(size),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Build desktop layout
+  Widget _buildDesktopLayout(Size size) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F5F5),
+      body: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header with dark background to match mobile look or custom for desktop
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: const ProfileHeader(),
+              ),
+              verticalSpace(24),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Left Panel: Profile Info
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        padding: const EdgeInsets.all(24),
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            _buildProfileInfoSection(isVertical: true),
+                            verticalSpace(24),
+                            Divider(color: Colors.white.withOpacity(0.1)),
+                            verticalSpace(24),
+                            LanguageSelector(
+                              currentLanguage: currentLanguage,
+                              onLanguageChanged: _onLanguageChanged,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    horizontalSpace(24),
+                    // Right Panel: Actions Grid
+                    Expanded(
+                      flex: 8,
+                      child: Container(
+                        padding: const EdgeInsets.all(24),
+                        // Removed white background and shadow for cleaner look with cards
+                        child: _buildDesktopMenuGrid(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -140,7 +215,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   /// Build profile info section with user data
-  Widget _buildProfileInfoSection() {
+  Widget _buildProfileInfoSection({bool isVertical = false}) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       buildWhen: (previous, current) =>
           current is ProfileLoading ||
@@ -165,12 +240,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           userName: userName,
           phoneNumber: phoneNumber,
           avatarUrl: avatarUrl,
+          isVertical: isVertical,
         );
       },
     );
   }
 
-  /// Build profile menu section with options
+  /// Build profile menu section for mobile
   Widget _buildProfileMenuSection(Size size) {
     return Container(
       width: size.width,
@@ -215,6 +291,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
           LogoutButton(onPressed: _onLogoutPressed),
         ],
       ),
+    );
+  }
+
+  /// Build profile menu grid for desktop
+  Widget _buildDesktopMenuGrid() {
+    return GridView.count(
+      crossAxisCount: 3, // Increased column count for better card layout
+      crossAxisSpacing: 20,
+      mainAxisSpacing: 20,
+      childAspectRatio: 1.2, // Adjusted for card shape
+      shrinkWrap: true,
+      children: [
+        _buildDesktopEditAccountCard(),
+        DesktopProfileCard(
+          title: 'profile.privacy'.tr(),
+          icon: Icons.lock_outline,
+          onTap: () => context.pushGoNamed(AppRoutes.privacyPolicyName),
+        ),
+        DesktopProfileCard(
+          title: 'profile.help'.tr(),
+          icon: Icons.help_outline,
+          onTap: () => context.pushGoNamed(AppRoutes.helpName),
+        ),
+        DesktopProfileCard(
+          title: 'profile.about'.tr(),
+          icon: Icons.info_outline,
+          onTap: () => context.pushGoNamed(AppRoutes.aboutName),
+        ),
+        DesktopProfileCard(
+          title: 'profile.delete_account'.tr(),
+          icon: Icons.delete_forever_outlined,
+          onTap: _onDeleteAccountPressed,
+          isDanger: true,
+        ),
+        DesktopProfileCard(
+          title: 'logout.logout'.tr(),
+          icon: Icons.logout,
+          onTap: _onLogoutPressed,
+          isDanger: true,
+        ),
+      ],
+    );
+  }
+
+  /// Build desktop edit account card
+  Widget _buildDesktopEditAccountCard() {
+    return DesktopProfileCard(
+      title: 'profile.edit_account'.tr(),
+      icon: Icons.person_outline,
+      onTap: () {
+        final state = context.read<ProfileCubit>().state;
+        state.maybeMap(
+          profileSuccess: (successState) {
+            if (successState.userProfile.user != null) {
+              context.pushGoNamed(
+                AppRoutes.updateProfileName,
+                extra: successState.userProfile.user!,
+              );
+            } else {
+              _showErrorSnackBar('profile.user_data_error'.tr());
+            }
+          },
+          orElse: () {
+            _showErrorSnackBar('profile.data_unavailable'.tr());
+          },
+        );
+      },
     );
   }
 
