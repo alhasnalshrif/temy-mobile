@@ -157,16 +157,11 @@ class HomeScreen extends StatelessWidget {
           final user = state.userProfile.user;
           final isVerified = user?.verified ?? true;
 
-          debugPrint('=== Home Screen: User Profile Loaded ===');
-          debugPrint('User verified: $isVerified');
 
           if (!isVerified) {
             final phoneNumber = user?.phone ?? '';
             final countryCode = user?.countryCode ?? '';
             final fullPhone = '$countryCode$phoneNumber';
-
-            debugPrint('User not verified. Redirecting to verification screen');
-            debugPrint('Phone: $fullPhone');
 
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (context.mounted) {

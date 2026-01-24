@@ -105,7 +105,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
       alignment: Alignment.topCenter,
       padding: const EdgeInsets.all(24.0),
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 1280),
+        constraints: const BoxConstraints(maxWidth: 1000),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

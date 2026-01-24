@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
-import 'package:temy_barber/core/utils/responsive_utils.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -31,14 +30,6 @@ class _ScheduleTabState extends State<ScheduleTab> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final crossAxisCount = ResponsiveUtils.isDesktop(context)
-            ? 5
-            : ResponsiveUtils.isTablet(context)
-            ? 4
-            : ResponsiveUtils.isMobile(context)
-            ? 3
-            : 2;
-
         return Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -64,42 +55,44 @@ class _ScheduleTabState extends State<ScheduleTab> {
               ),
               const SizedBox(height: 20),
               Expanded(
-                child: GridView.builder(
-                  itemCount: timeSlots.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: crossAxisCount,
-                    mainAxisSpacing: 18,
-                    crossAxisSpacing: 18,
-                    childAspectRatio: 2.6,
-                  ),
-                  itemBuilder: (context, index) {
-                    final slot = timeSlots[index];
-                    final isDisabled = !slot.isAvailable;
-                    return AnimatedOpacity(
-                      duration: const Duration(milliseconds: 200),
-                      opacity: isDisabled ? 0.5 : 1,
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: ColorsManager.thirdfMain),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          slot.time,
-                          style: Theme.of(context).textTheme.bodyLarge
-                              ?.copyWith(
-                                color: isDisabled
-                                    ? Colors.grey[400]
-                                    : ColorsManager.darkBlue,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 0.2,
+                child: SingleChildScrollView(
+                  child: Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    children: timeSlots.map((slot) {
+                      final isDisabled = !slot.isAvailable;
+                      return SizedBox(
+                        width: 100, // Fixed width for time slots
+                        height: 40,
+                        child: AnimatedOpacity(
+                          duration: const Duration(milliseconds: 200),
+                          opacity: isDisabled ? 0.5 : 1,
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                color: ColorsManager.thirdfMain,
                               ),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              slot.time,
+                              style: Theme.of(context).textTheme.bodyLarge
+                                  ?.copyWith(
+                                    color: isDisabled
+                                        ? Colors.grey[400]
+                                        : ColorsManager.darkBlue,
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.2,
+                                  ),
+                            ),
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
             ],

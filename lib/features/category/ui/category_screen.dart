@@ -8,7 +8,6 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -19,13 +18,17 @@ class CategoryScreen extends StatelessWidget {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          margin: const EdgeInsets.fromLTRB(20, 16, 20, 28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              verticalSpace(10),
-              const CategoryWithBarbersBlocBuilder(),
-            ],
+          alignment: Alignment.topCenter,
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 1000),
+            margin: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                verticalSpace(10),
+                const CategoryWithBarbersBlocBuilder(),
+              ],
+            ),
           ),
         ),
       ),

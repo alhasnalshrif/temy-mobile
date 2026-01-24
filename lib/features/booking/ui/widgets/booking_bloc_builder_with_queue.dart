@@ -82,40 +82,16 @@ class _BookingBlocBuilderWithQueueState
                             ),
                           ),
                         ),
-                        if (ResponsiveUtils.isDesktop(context))
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 500,
-                                  crossAxisSpacing: 16,
-                                  mainAxisSpacing: 16,
-                                  childAspectRatio: 1.3,
-                                ),
-                            itemCount: queueBookings.length,
-                            itemBuilder: (context, index) {
-                              final booking = queueBookings[index];
-                              return QueueBookingCard(
-                                booking: booking,
-                                onCancelBooking: () {
-                                  _showCancelDialog(context, booking.id ?? '');
-                                },
-                              );
+                        _buildResponsiveGrid(
+                          context,
+                          queueBookings,
+                          (booking) => QueueBookingCard(
+                            booking: booking,
+                            onCancelBooking: () {
+                              _showCancelDialog(context, booking.id ?? '');
                             },
-                          )
-                        else
-                          ...queueBookings.map(
-                            (booking) => Padding(
-                              padding: const EdgeInsets.only(bottom: 12.0),
-                              child: QueueBookingCard(
-                                booking: booking,
-                                onCancelBooking: () {
-                                  _showCancelDialog(context, booking.id ?? '');
-                                },
-                              ),
-                            ),
                           ),
+                        ),
                         if (timeSlotBookings.isNotEmpty) verticalSpace(24),
                       ],
 
@@ -133,31 +109,11 @@ class _BookingBlocBuilderWithQueueState
                               ),
                             ),
                           ),
-                        if (ResponsiveUtils.isDesktop(context))
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 500,
-                                  crossAxisSpacing: 16,
-                                  mainAxisSpacing: 16,
-                                  childAspectRatio:
-                                      1.1, // Adjusted for smaller cards
-                                ),
-                            itemCount: timeSlotBookings.length,
-                            itemBuilder: (context, index) {
-                              final booking = timeSlotBookings[index];
-                              return BookingCard(booking: booking);
-                            },
-                          )
-                        else
-                          ...timeSlotBookings.map(
-                            (booking) => Padding(
-                              padding: const EdgeInsets.only(bottom: 12.0),
-                              child: BookingCard(booking: booking),
-                            ),
-                          ),
+                        _buildResponsiveGrid(
+                          context,
+                          timeSlotBookings,
+                          (booking) => BookingCard(booking: booking),
+                        ),
                       ],
                     ],
                   ),
@@ -189,6 +145,49 @@ class _BookingBlocBuilderWithQueueState
             ),
           ),
           orElse: () => const BookingShimmer(),
+        );
+      },
+    );
+  }
+
+  /// Builds a responsive grid that allows items to have variable heights
+  Widget _buildResponsiveGrid(
+    BuildContext context,
+    List<dynamic> items,
+    Widget Function(dynamic) itemBuilder,
+  ) {
+    if (!ResponsiveUtils.isDesktop(context)) {
+      return Column(
+        children: items
+            .map(
+              (item) => Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: itemBuilder(item),
+              ),
+            )
+            .toList(),
+      );
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        // Use 500 as desired max width for a card
+        int crossAxisCount = (width / 500).ceil();
+        crossAxisCount = crossAxisCount < 2 ? 1 : crossAxisCount;
+
+        final double spacing = 16.0;
+        // Calculate item width accounting for spacing
+        // Total spacing = (n - 1) * spacing
+        final double totalSpacing = (crossAxisCount - 1) * spacing;
+        final double itemWidth = (width - totalSpacing) / crossAxisCount;
+
+        return Wrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          children: items.map((item) {
+            return SizedBox(width: itemWidth, child: itemBuilder(item));
+          }).toList(),
         );
       },
     );
