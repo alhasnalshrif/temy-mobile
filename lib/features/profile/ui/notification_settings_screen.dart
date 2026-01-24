@@ -4,6 +4,7 @@ import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/core/utils/responsive_utils.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -31,32 +32,42 @@ class _NotificationSettingsScreenState
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final isLargeScreen = size.width > 600;
+    final isLargeScreen = ResponsiveUtils.isLargeScreen(context);
+    final isDesktop = ResponsiveUtils.isDesktop(context);
 
     return Scaffold(
+      backgroundColor: isLargeScreen ? Colors.grey[50] : Colors.white,
       appBar: AppBar(
         title: Text(
           'notifications.settings'.tr(),
           style: TextStyles.font18DarkBold,
         ),
         backgroundColor: Colors.white,
-        elevation: 0,
+        elevation: isLargeScreen ? 0 : 0.5,
         centerTitle: isLargeScreen,
         iconTheme: const IconThemeData(color: ColorsManager.mainBlue),
         actions: [
           BlocBuilder<NotificationCubit, NotificationState>(
             bloc: notificationCubit,
             builder: (context, state) {
-              final isLoading = state.runtimeType.toString().contains(
-                'Loading',
-              );
-              return TextButton(
-                onPressed: isLoading ? null : _saveSettings,
-                child: Text(
-                  'common.save'.tr(),
-                  style: TextStyles.font16DarkBold.copyWith(
-                    color: isLoading ? Colors.grey : ColorsManager.mainBlue,
+              final isLoading = state.runtimeType.toString().contains('Loading');
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: TextButton(
+                  onPressed: isLoading ? null : _saveSettings,
+                  style: TextButton.styleFrom(
+                    backgroundColor: isLargeScreen && !isLoading
+                        ? ColorsManager.mainBlue.withOpacity(0.1)
+                        : null,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    'common.save'.tr(),
+                    style: TextStyles.font16DarkBold.copyWith(
+                      color: isLoading ? Colors.grey : ColorsManager.mainBlue,
+                    ),
                   ),
                 ),
               );
@@ -80,6 +91,8 @@ class _NotificationSettingsScreenState
               SnackBar(
                 content: Text('notifications.settings_saved'.tr()),
                 backgroundColor: Colors.green,
+                behavior: SnackBarBehavior.floating,
+                width: isLargeScreen ? 400 : null,
               ),
             );
           } else if (state.runtimeType.toString().contains('Error')) {
@@ -88,6 +101,8 @@ class _NotificationSettingsScreenState
               SnackBar(
                 content: Text(errorState.message),
                 backgroundColor: ColorsManager.red,
+                behavior: SnackBarBehavior.floating,
+                width: isLargeScreen ? 400 : null,
               ),
             );
           }
@@ -98,30 +113,63 @@ class _NotificationSettingsScreenState
             return Center(
               child: Container(
                 constraints: BoxConstraints(
-                  maxWidth: isLargeScreen ? 800 : double.infinity,
+                  maxWidth: isDesktop ? 800 : (isLargeScreen ? 600 : double.infinity),
                 ),
+                margin: isLargeScreen
+                    ? const EdgeInsets.symmetric(vertical: 32)
+                    : EdgeInsets.zero,
+                decoration: isLargeScreen
+                    ? BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 20,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      )
+                    : null,
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(isLargeScreen ? 32 : 16),
+                  padding: EdgeInsets.all(isLargeScreen ? 40 : 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if (isLargeScreen) ...[
+                        Text(
+                          'Manage your notifications',
+                          style: TextStyles.font24BlackBold.copyWith(
+                            color: ColorsManager.mainBlue,
+                          ),
+                        ),
+                        verticalSpace(8),
+                        Text(
+                          'Choose what updates you want to receive',
+                          style: TextStyles.font14GrayRegular,
+                        ),
+                        verticalSpace(32),
+                        const Divider(),
+                        verticalSpace(32),
+                      ],
                       _buildSectionHeader('notifications.general'.tr()),
-                      verticalSpace(8),
+                      verticalSpace(isLargeScreen ? 16 : 8),
                       _buildNotificationTile(
-                        icon: Icons.notifications,
+                        icon: Icons.notifications_active_outlined,
                         title: 'notifications.push_notifications'.tr(),
                         subtitle: 'notifications.push_notifications_desc'.tr(),
                         value: pushNotifications,
                         onChanged: (value) =>
                             setState(() => pushNotifications = value),
+                        isLargeScreen: isLargeScreen,
                       ),
-                      verticalSpace(24),
+                      verticalSpace(isLargeScreen ? 32 : 24),
                       _buildSectionHeader(
                         'notifications.booking_notifications'.tr(),
                       ),
-                      verticalSpace(8),
+                      verticalSpace(isLargeScreen ? 16 : 8),
                       _buildNotificationTile(
-                        icon: Icons.schedule,
+                        icon: Icons.calendar_month_outlined,
                         title: 'notifications.booking_reminders'.tr(),
                         subtitle: 'notifications.booking_reminders_desc'.tr(),
                         value: bookingReminders,
@@ -129,28 +177,29 @@ class _NotificationSettingsScreenState
                             ? (value) =>
                                   setState(() => bookingReminders = value)
                             : null,
+                        isLargeScreen: isLargeScreen,
                       ),
-                      verticalSpace(24),
+                      verticalSpace(isLargeScreen ? 32 : 24),
                       _buildSectionHeader('notifications.marketing'.tr()),
-                      verticalSpace(8),
+                      verticalSpace(isLargeScreen ? 16 : 8),
                       _buildNotificationTile(
-                        icon: Icons.local_offer,
+                        icon: Icons.local_offer_outlined,
                         title: 'notifications.promotional_notifications'.tr(),
-                        subtitle: 'notifications.promotional_notifications_desc'
-                            .tr(),
+                        subtitle: 'notifications.promotional_notifications_desc'.tr(),
                         value: promotionalNotifications,
                         onChanged: pushNotifications
                             ? (value) => setState(
                                 () => promotionalNotifications = value,
                               )
                             : null,
+                        isLargeScreen: isLargeScreen,
                       ),
                       if (!pushNotifications) ...[
-                        verticalSpace(24),
+                        verticalSpace(isLargeScreen ? 32 : 24),
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Colors.orange.withOpacity(0.1),
+                            color: Colors.orange.withOpacity(0.08),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: Colors.orange.withOpacity(0.3),
@@ -158,13 +207,14 @@ class _NotificationSettingsScreenState
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.warning, color: Colors.orange[700]),
+                              Icon(Icons.warning_amber_rounded, color: Colors.orange[800]),
                               horizontalSpace(12),
                               Expanded(
                                 child: Text(
                                   'notifications.push_disabled_warning'.tr(),
                                   style: TextStyles.font14GrayRegular.copyWith(
-                                    color: Colors.orange[700],
+                                    color: Colors.orange[800],
+                                    height: 1.4,
                                   ),
                                 ),
                               ),
@@ -172,8 +222,8 @@ class _NotificationSettingsScreenState
                           ),
                         ),
                       ],
-                      verticalSpace(32),
-                      _buildInfoSection(),
+                      verticalSpace(isLargeScreen ? 40 : 32),
+                      _buildInfoSection(isLargeScreen),
                     ],
                   ),
                 ),
@@ -186,7 +236,13 @@ class _NotificationSettingsScreenState
   }
 
   Widget _buildSectionHeader(String title) {
-    return Text(title, style: TextStyles.font18DarkBold);
+    return Text(
+      title, 
+      style: TextStyles.font18DarkBold.copyWith(
+        color: ColorsManager.mainBlue,
+        fontWeight: FontWeight.w700,
+      ),
+    );
   }
 
   Widget _buildNotificationTile({
@@ -195,19 +251,33 @@ class _NotificationSettingsScreenState
     required String subtitle,
     required bool value,
     ValueChanged<bool>? onChanged,
+    bool isLargeScreen = false,
   }) {
     final isEnabled = onChanged != null;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.grey[50], // Slightly different background for tiles
         borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey.shade200),
       ),
       child: SwitchListTile(
-        secondary: Icon(
-          icon,
-          color: isEnabled ? ColorsManager.mainBlue : Colors.grey,
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: isLargeScreen ? 20 : 16, 
+          vertical: isLargeScreen ? 12 : 4
+        ),
+        secondary: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: isEnabled ? ColorsManager.mainBlue.withOpacity(0.1) : Colors.grey.withOpacity(0.1),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            icon,
+            color: isEnabled ? ColorsManager.mainBlue : Colors.grey,
+            size: 24,
+          ),
         ),
         title: Text(
           title,
@@ -215,48 +285,55 @@ class _NotificationSettingsScreenState
             color: isEnabled ? Colors.black : Colors.grey,
           ),
         ),
-        subtitle: Text(
-          subtitle,
-          style: TextStyles.font14GrayRegular.copyWith(
-            color: isEnabled ? Colors.grey[600] : Colors.grey[400],
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: Text(
+            subtitle,
+            style: TextStyles.font14GrayRegular.copyWith(
+              color: isEnabled ? Colors.grey[600] : Colors.grey[400],
+              height: 1.3,
+            ),
           ),
         ),
         value: value,
         onChanged: onChanged,
-        activeThumbColor: ColorsManager.mainBlue,
-        activeTrackColor: ColorsManager.mainBlue.withOpacity(0.2),
+        activeColor: ColorsManager.mainBlue,
       ),
     );
   }
 
-  Widget _buildInfoSection() {
+  Widget _buildInfoSection(bool isLargeScreen) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: ColorsManager.lightBlue.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: ColorsManager.lightBlue.withOpacity(0.3)),
+        color: ColorsManager.lightBlue.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: ColorsManager.lightBlue.withOpacity(0.2)),
       ),
-      child: Column(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Icon(Icons.info, color: ColorsManager.mainBlue),
-              horizontalSpace(8),
-              Text(
-                'notifications.info_title'.tr(),
-                style: TextStyles.font16DarkBold.copyWith(
-                  color: ColorsManager.mainBlue,
+          Icon(Icons.info_outline, color: ColorsManager.mainBlue, size: 28),
+          horizontalSpace(16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'notifications.info_title'.tr(),
+                  style: TextStyles.font16DarkBold.copyWith(
+                    color: ColorsManager.mainBlue,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          verticalSpace(8),
-          Text(
-            'notifications.info_description'.tr(),
-            style: TextStyles.font14GrayRegular.copyWith(
-              color: ColorsManager.mainBlue,
+                verticalSpace(4),
+                Text(
+                  'notifications.info_description'.tr(),
+                  style: TextStyles.font14GrayRegular.copyWith(
+                    color: ColorsManager.mainBlue.withOpacity(0.8),
+                    height: 1.5,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
