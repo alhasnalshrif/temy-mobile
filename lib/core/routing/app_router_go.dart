@@ -18,13 +18,17 @@ import 'package:temy_barber/features/auth/ui/verification_screen.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 import 'package:temy_barber/features/barber/logic/barber_cubit.dart';
 import 'package:temy_barber/features/barber/ui/barber_screen.dart';
+import 'package:temy_barber/features/booking/ui/booking.dart';
 import 'package:temy_barber/features/category/logic/category_cubit.dart';
 import 'package:temy_barber/features/category/ui/category_screen.dart';
 import 'package:temy_barber/features/category_barbers/logic/category_cubit.dart';
 import 'package:temy_barber/features/category_barbers/ui/category_screen.dart';
 import 'package:temy_barber/features/dashboard/dashboard_screen.dart';
+import 'package:temy_barber/features/home/logic/home_cubit.dart';
+import 'package:temy_barber/features/home/ui/home_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
+import 'package:temy_barber/features/profile/ui/profile.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
@@ -39,7 +43,7 @@ class AppRouterGo {
   static GoRouter createRouter({required bool isLoggedIn}) {
     return GoRouter(
       navigatorKey: _rootNavigatorKey,
-      initialLocation: isLoggedIn ? AppRoutes.Dashboard : AppRoutes.Login,
+      initialLocation: isLoggedIn ? AppRoutes.Home : AppRoutes.Login,
       debugLogDiagnostics: kDebugMode, // Disable route logging in production
       routes: [
         // Auth Routes
@@ -97,51 +101,114 @@ class AppRouterGo {
           },
         ),
 
-        // Main App Routes
+        // Main App Routes (Shell)
+        StatefulShellRoute.indexedStack(
+          builder: (context, state, navigationShell) {
+            return DashboardScreen(navigationShell: navigationShell);
+          },
+          branches: [
+            // Home Branch
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: AppRoutes.Home,
+                  name: AppRoutes.homeName,
+                  builder: (context, state) => BlocProvider(
+                    create: (context) => HomeCubit(getIt())
+                      ..getCategories()
+                      ..getBanners(),
+                    child: const HomeScreen(),
+                  ),
+                  routes: [
+                    // Nested Category Routes
+                    GoRoute(
+                      path: 'categories', // Relative path
+                      name: AppRoutes.categoriesName,
+                      builder: (context, state) => BlocProvider(
+                        create: (context) =>
+                            CategoryCubit(getIt())..getCategory(),
+                        child: const CategoryScreen(),
+                      ),
+                    ),
+                    GoRoute(
+                      path: 'category/:categoryId', // Relative path
+                      name: AppRoutes.categoryBarbersName,
+                      builder: (context, state) {
+                        final categoryId = state.pathParameters['categoryId']!;
+                        return BlocProvider(
+                          create: (context) =>
+                              CategoryBarberCubit(getIt(), categoryId)
+                                ..getCategoryWithBarbers(),
+                          child: const CategoryBarbersScreen(),
+                        );
+                      },
+                    ),
+
+                    // Nested Barber Routes
+                    GoRoute(
+                      path: 'barber/:barberId', // Relative path
+                      name: AppRoutes.barberName,
+                      builder: (context, state) {
+                        final barberId = state.pathParameters['barberId']!;
+                        return BlocProvider(
+                          create: (context) =>
+                              BarberCubit(getIt(), barberId)..getBarberDetail(),
+                          child: const BarberScreen(),
+                        );
+                      },
+                    ),
+
+                    // Nested Booking/Reservation Routes (if accessed from Home)
+                    // Note: Reservations might be accessed from Booking tab too,
+                    // but usually flow starts from finding a barber.
+                    GoRoute(
+                      path: 'booking-confirmation',
+                      name: AppRoutes.bookingConfirmationName,
+                      builder: (context, state) {
+                        final args = state.extra as ReservationArguments?;
+                        if (args == null) {
+                          Future.microtask(() => context.go(AppRoutes.Home));
+                          return const SizedBox.shrink();
+                        }
+                        return BlocProvider(
+                          create: (context) => ReservationCubit(getIt()),
+                          child: BookingConfirmation(arguments: args),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+            // Booking Branch
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: AppRoutes.Booking,
+                  name: AppRoutes.bookingName,
+                  builder: (context, state) => const BookingScreen(),
+                ),
+              ],
+            ),
+
+            // Profile Branch
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: AppRoutes.Profile,
+                  name: AppRoutes.profileName,
+                  builder: (context, state) => const ProfileScreen(),
+                ),
+              ],
+            ),
+          ],
+        ),
+
+        // Redirect legacy dashboard route if accessed
         GoRoute(
           path: AppRoutes.Dashboard,
-          name: AppRoutes.dashboardName,
-          builder: (context, state) {
-            final tabIndex = state.extra as int?;
-            return DashboardScreen(initialTabIndex: tabIndex);
-          },
-        ),
-
-        // Category Routes
-        GoRoute(
-          path: AppRoutes.Categories,
-          name: AppRoutes.categoriesName,
-          builder: (context, state) => BlocProvider(
-            create: (context) => CategoryCubit(getIt())..getCategory(),
-            child: const CategoryScreen(),
-          ),
-        ),
-        GoRoute(
-          path: AppRoutes.CategoryBarbers,
-          name: AppRoutes.categoryBarbersName,
-          builder: (context, state) {
-            final categoryId = state.pathParameters['categoryId']!;
-            return BlocProvider(
-              create: (context) =>
-                  CategoryBarberCubit(getIt(), categoryId)
-                    ..getCategoryWithBarbers(),
-              child: const CategoryBarbersScreen(),
-            );
-          },
-        ),
-
-        // Barber Routes
-        GoRoute(
-          path: AppRoutes.BarberDetail,
-          name: AppRoutes.barberName,
-          builder: (context, state) {
-            final barberId = state.pathParameters['barberId']!;
-            return BlocProvider(
-              create: (context) =>
-                  BarberCubit(getIt(), barberId)..getBarberDetail(),
-              child: const BarberScreen(),
-            );
-          },
+          redirect: (context, state) => AppRoutes.Home,
         ),
 
         // Reservation Routes
@@ -157,22 +224,6 @@ class AppRouterGo {
           },
         ),
         GoRoute(
-          path: AppRoutes.BookingConfirmation,
-          name: AppRoutes.bookingConfirmationName,
-          builder: (context, state) {
-            final args = state.extra as ReservationArguments?;
-            if (args == null) {
-              // Redirect to dashboard if no arguments provided
-              Future.microtask(() => context.go(AppRoutes.Dashboard));
-              return const SizedBox.shrink();
-            }
-            return BlocProvider(
-              create: (context) => ReservationCubit(getIt()),
-              child: BookingConfirmation(arguments: args),
-            );
-          },
-        ),
-        GoRoute(
           path: AppRoutes.Invoice,
           name: AppRoutes.invoiceName,
           builder: (context, state) {
@@ -181,7 +232,7 @@ class AppRouterGo {
           },
         ),
 
-        // Profile Routes
+        // Profile Routes (Nested Screens)
         GoRoute(
           path: AppRoutes.UpdateProfile,
           name: AppRoutes.updateProfileName,
@@ -190,8 +241,6 @@ class AppRouterGo {
             return UpdateProfileScreen(currentUser: user);
           },
         ),
-  
-        
       ],
 
       // Redirect logic for auth

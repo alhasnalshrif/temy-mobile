@@ -10,6 +10,9 @@ class AppRoutes {
 
   // Main App Routes
   static const String Dashboard = '/dashboard';
+  static const String Home = '/home';
+  static const String Booking = '/booking';
+  static const String Profile = '/profile';
   static const String Categories = '/categories';
   static const String Category = '/category';
   static const String CategoryBarbers = '/category/:categoryId';
@@ -37,6 +40,9 @@ class AppRoutes {
   static const String forgotPasswordName = 'forgotPassword';
   static const String resetPasswordName = 'resetPassword';
   static const String dashboardName = 'dashboard';
+  static const String homeName = 'home';
+  static const String bookingName = 'booking';
+  static const String profileName = 'profile';
   static const String categoriesName = 'categories';
   static const String categoryBarbersName = 'categoryBarbers';
   static const String barberName = 'barber';
