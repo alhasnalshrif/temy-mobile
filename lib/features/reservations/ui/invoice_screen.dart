@@ -16,7 +16,9 @@ class InvoiceScreen extends StatelessWidget {
 
   const InvoiceScreen({super.key, this.arguments});
 
-  ReservationData? get _reservationData => arguments?.data;
+  List<ReservationData> get _allReservations =>
+      arguments?.allReservations ??
+      (arguments?.data != null ? [arguments!.data] : []);
 
   @override
   Widget build(BuildContext context) {
@@ -76,17 +78,39 @@ class InvoiceScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(20),
                           children: [
                             _buildGuestNotificationBanner(),
-                            _buildSectionCard(
-                              title: 'invoice.barber'.tr(),
-                              icon: Icons.person_outline,
-                              child: _buildBarberContent(),
-                            ),
+                            ..._allReservations.asMap().entries.map((entry) {
+                              final index = entry.key;
+                              final reservation = entry.value;
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (_allReservations.length > 1)
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 12.0,
+                                        top: 8.0,
+                                      ),
+                                      child: Text(
+                                        "${'booking.reservation'.tr()} #${index + 1}",
+                                        style: TextStyles.font16DarkBold
+                                            .copyWith(
+                                              color: ColorsManager.mainBlue,
+                                            ),
+                                      ),
+                                    ),
+                                  _buildReservationCard(reservation),
+                                  if (index < _allReservations.length - 1)
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 16,
+                                      ),
+                                      child: Divider(),
+                                    ),
+                                ],
+                              );
+                            }),
                             const SizedBox(height: 16),
-                            _buildDateTimeCard(),
-                            const SizedBox(height: 16),
-                            _buildServicesCard(),
-                            const SizedBox(height: 16),
-                            _buildTotalCard(),
+                            if (_allReservations.isNotEmpty) _buildTotalCard(),
                           ],
                         ),
                       ),
@@ -138,10 +162,19 @@ class InvoiceScreen extends StatelessWidget {
   }
 
   Widget _buildGuestNotificationBanner() {
-    final isGuest =
-        _reservationData?.user == null && _reservationData?.userName != null;
+    // Check if ANY reservation is guest
+    final hasGuest = _allReservations.any(
+      (r) => r.user == null && r.userName != null,
+    );
+    if (!hasGuest) return const SizedBox.shrink();
 
-    if (!isGuest) return const SizedBox.shrink();
+    // Use first reservation's phone for display if available
+    final displayPhone = _allReservations
+        .firstWhere(
+          (r) => r.userPhone != null,
+          orElse: () => _allReservations.first,
+        )
+        .userPhone;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -171,7 +204,7 @@ class InvoiceScreen extends StatelessWidget {
                   'invoice.guest_notification'.tr(),
                   style: TextStyles.font13GrayRegular,
                 ),
-                if (_reservationData?.userPhone != null) ...[
+                if (displayPhone != null) ...[
                   const SizedBox(height: 6),
                   Row(
                     children: [
@@ -182,7 +215,7 @@ class InvoiceScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        _reservationData!.userPhone!,
+                        displayPhone,
                         style: TextStyles.font13GrayRegular.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -195,6 +228,23 @@ class InvoiceScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  // Wrapper to display details for a single reservation
+  Widget _buildReservationCard(ReservationData reservation) {
+    return Column(
+      children: [
+        _buildSectionCard(
+          title: 'invoice.barber'.tr(),
+          icon: Icons.person_outline,
+          child: _buildBarberContent(reservation),
+        ),
+        const SizedBox(height: 16),
+        _buildDateTimeCard(reservation),
+        const SizedBox(height: 16),
+        _buildServicesCard(reservation),
+      ],
     );
   }
 
@@ -227,17 +277,14 @@ class InvoiceScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBarberContent() {
-    final serviceNames =
-        _reservationData?.services.map((s) => s.name).join(' • ') ?? '';
+  // Updated to accept ReservationData
+  Widget _buildBarberContent(ReservationData reservation) {
+    final serviceNames = reservation.services.map((s) => s.name).join(' • ');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          _reservationData?.barber.name ?? 'booking.unknown_barber'.tr(),
-          style: TextStyles.font16DarkBold,
-        ),
+        Text(reservation.barber.name, style: TextStyles.font16DarkBold),
         if (serviceNames.isNotEmpty) ...[
           const SizedBox(height: 6),
           Text(
@@ -251,12 +298,13 @@ class InvoiceScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDateTimeCard() {
-    final isQueueReservation = _reservationData?.isQueueReservation ?? false;
+  // Updated to accept ReservationData
+  Widget _buildDateTimeCard(ReservationData reservation) {
+    final isQueueReservation = reservation.isQueueReservation ?? false;
 
     if (isQueueReservation) {
-      final queueNumber = _reservationData?.queueNumber;
-      final queuePosition = _reservationData?.queuePosition;
+      final queueNumber = reservation.queueNumber;
+      final queuePosition = reservation.queuePosition;
       final displayNumber = queueNumber ?? queuePosition;
 
       return Container(
@@ -299,14 +347,10 @@ class InvoiceScreen extends StatelessWidget {
     }
 
     DateTime? reservationDate;
-    if (_reservationData?.date != null) {
-      try {
-        reservationDate = DateFormat(
-          'yyyy-MM-dd',
-        ).parse(_reservationData!.date);
-      } catch (e) {
-        debugPrint("Error parsing date: $e");
-      }
+    try {
+      reservationDate = DateFormat('yyyy-MM-dd').parse(reservation.date);
+    } catch (e) {
+      debugPrint("Error parsing date: $e");
     }
 
     final locale =
@@ -318,12 +362,11 @@ class InvoiceScreen extends StatelessWidget {
         ? DateFormat('EEEE, dd MMMM', locale).format(reservationDate)
         : 'common.not_available'.tr();
 
-    final timeStr = _reservationData?.startTime != null
-        ? app_date_utils.formatTimeOfDayString(
-            _reservationData!.startTime,
-            locale: locale,
-          )
-        : 'common.not_available'.tr();
+    // Handle time string properly
+    final timeStr = app_date_utils.formatTimeOfDayString(
+      reservation.startTime,
+      locale: locale,
+    );
 
     return _buildSectionCard(
       title: 'invoice.appointment_date'.tr(),
@@ -354,8 +397,9 @@ class InvoiceScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildServicesCard() {
-    final services = _reservationData?.services ?? [];
+  // Updated to accept ReservationData
+  Widget _buildServicesCard(ReservationData reservation) {
+    final services = reservation.services;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -415,7 +459,12 @@ class InvoiceScreen extends StatelessWidget {
   }
 
   Widget _buildTotalCard() {
-    final totalPrice = _reservationData?.totalPrice ?? 0.0;
+    // Calculate sum of all reservations
+    final grandTotal = _allReservations.fold(
+      0.0,
+      (sum, res) => sum + res.totalPrice,
+    );
+    final isMultiple = _allReservations.length > 1;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -424,14 +473,14 @@ class InvoiceScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'invoice.total'.tr(),
+            isMultiple ? 'common.grand_total'.tr() : 'invoice.total'.tr(),
             style: TextStyles.font16WhiteMedium.copyWith(
               fontWeight: FontWeight.w600,
               color: ColorsManager.black,
             ),
           ),
           Text(
-            "${totalPrice.toInt()} EGP",
+            "${grandTotal.toInt()} EGP",
             style: TextStyles.font18WhiteSemiBold.copyWith(
               fontWeight: FontWeight.bold,
               color: ColorsManager.black,

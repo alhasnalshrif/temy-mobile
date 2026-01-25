@@ -131,6 +131,7 @@
     "duration": "{} دقيقة"
   },
   "booking": {
+    "reservation": "الحجز",
     "screen_title": "الحجوزات",
     "tab_active": "الحجوزات النشطة",
     "tab_history": "السجل",

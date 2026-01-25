@@ -16,8 +16,8 @@ class MultipleReservationResponseModel {
   });
 
   factory MultipleReservationResponseModel.fromJson(
-          Map<String, dynamic> json) =>
-      _$MultipleReservationResponseModelFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$MultipleReservationResponseModelFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$MultipleReservationResponseModelToJson(this);
@@ -31,6 +31,7 @@ class MultipleReservationResponseModel {
         message: message,
         // Create a "synthetic" single reservation response using the first reservation
         data: data.reservations.first,
+        allReservations: data.reservations,
       );
     } else {
       // Fallback if no reservations are present (shouldn't happen)

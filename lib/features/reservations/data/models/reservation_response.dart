@@ -7,11 +7,15 @@ class ReservationResponseModel {
   final String status;
   final String message;
   final ReservationData data;
+  // Optional list for multiple reservations support
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final List<ReservationData>? allReservations;
 
   ReservationResponseModel({
     required this.status,
     required this.message,
     required this.data,
+    this.allReservations,
   });
 
   factory ReservationResponseModel.fromJson(Map<String, dynamic> json) =>

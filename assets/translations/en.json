@@ -131,6 +131,7 @@
         "duration": "{} Min"
     },
     "booking": {
+        "reservation": "Reservation",
         "screen_title": "Booking",
         "tab_active": "Active Bookings",
         "tab_history": "History",
