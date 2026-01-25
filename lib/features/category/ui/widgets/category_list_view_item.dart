@@ -43,6 +43,7 @@ class CategoryListViewItem extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
+          border: Border.all(color: ColorsManager.lightBlue),
           color: backgroundColor,
           borderRadius: BorderRadius.circular(16),
         ),

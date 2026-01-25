@@ -115,26 +115,34 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   }
 
   Widget _buildContent() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const ConfirmationHeader(),
-            const SizedBox(height: 16),
-            _buildOrderSummary(),
-            const SizedBox(height: 16),
-            BarberInfoSection(barberData: _viewModel.arguments.barberData),
-            const SizedBox(height: 16),
-            AppointmentInfoSection(
-              selectedDate: _viewModel.arguments.selectedDate,
-              selectedTime: _viewModel.arguments.selectedTime,
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 1000),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
             ),
-            const SizedBox(height: 16),
-            const PaymentInfoSection(),
-            const SizedBox(height: 16),
-          ],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ConfirmationHeader(),
+                const SizedBox(height: 16),
+                _buildOrderSummary(),
+                const SizedBox(height: 16),
+                BarberInfoSection(barberData: _viewModel.arguments.barberData),
+                const SizedBox(height: 16),
+                AppointmentInfoSection(
+                  selectedDate: _viewModel.arguments.selectedDate,
+                  selectedTime: _viewModel.arguments.selectedTime,
+                ),
+                const SizedBox(height: 16),
+                const PaymentInfoSection(),
+                const SizedBox(height: 16),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -152,25 +160,30 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   }
 
   Widget _buildBottomSection() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (!_viewModel.isQueueMode)
-            AddAnotherReservationButton(onTap: _handleAddAnotherReservation),
-          ConfirmationBottomButtons(
-            onEdit: () => Navigator.pop(context),
-            onConfirm: _handleConfirm,
-            confirmText: _getConfirmButtonText(),
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 1000),
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
-        ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (!_viewModel.isQueueMode)
+              AddAnotherReservationButton(onTap: _handleAddAnotherReservation),
+            ConfirmationBottomButtons(
+              onEdit: () => Navigator.pop(context),
+              onConfirm: _handleConfirm,
+              confirmText: _getConfirmButtonText(),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:temy_barber/core/utils/date_utils.dart' as app_date_utils;
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 
+import 'package:temy_barber/core/utils/responsive_utils.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 
 class InvoiceScreen extends StatelessWidget {
@@ -26,54 +27,73 @@ class InvoiceScreen extends StatelessWidget {
       ),
     );
 
+    final isDesktop = ResponsiveUtils.isDesktop(context);
+
     return Scaffold(
-      backgroundColor: ColorsManager.black,
+      backgroundColor: isDesktop ? Colors.white : ColorsManager.black,
       appBar: AppBar(
-        backgroundColor: ColorsManager.black,
+        backgroundColor: isDesktop ? Colors.white : ColorsManager.black,
         elevation: 0,
         title: Text(
           'invoice.title'.tr(),
-          style: TextStyles.font18WhiteSemiBold,
+          style: isDesktop
+              ? TextStyles.font18DarkBlueBold
+              : TextStyles.font18WhiteSemiBold,
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.close, color: Colors.white),
+          icon: Icon(
+            Icons.close,
+            color: isDesktop ? Colors.black : Colors.white,
+          ),
           onPressed: () => context.goNamed(AppRoutes.dashboardName),
         ),
       ),
       body: Column(
         children: [
-          _buildSuccessHeader(),
+          _buildSuccessHeader(isDesktop),
           Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.all(20),
-                      children: [
-                        _buildGuestNotificationBanner(),
-                        _buildSectionCard(
-                          title: 'invoice.barber'.tr(),
-                          icon: Icons.person_outline,
-                          child: _buildBarberContent(),
-                        ),
-                        const SizedBox(height: 16),
-                        _buildDateTimeCard(),
-                        const SizedBox(height: 16),
-                        _buildServicesCard(),
-                        const SizedBox(height: 16),
-                        _buildTotalCard(),
-                      ],
-                    ),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 800),
+                child: Container(
+                  width: double.infinity,
+                  clipBehavior: Clip.antiAlias,
+                  margin: isDesktop
+                      ? const EdgeInsets.only(bottom: 24)
+                      : EdgeInsets.zero,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: isDesktop
+                        ? BorderRadius.circular(28)
+                        : const BorderRadius.vertical(top: Radius.circular(28)),
                   ),
-                  _buildBottomButton(context),
-                ],
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
+                          padding: const EdgeInsets.all(20),
+                          children: [
+                            _buildGuestNotificationBanner(),
+                            _buildSectionCard(
+                              title: 'invoice.barber'.tr(),
+                              icon: Icons.person_outline,
+                              child: _buildBarberContent(),
+                            ),
+                            const SizedBox(height: 16),
+                            _buildDateTimeCard(),
+                            const SizedBox(height: 16),
+                            _buildServicesCard(),
+                            const SizedBox(height: 16),
+                            _buildTotalCard(),
+                          ],
+                        ),
+                      ),
+                      _buildBottomButton(context),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -82,9 +102,9 @@ class InvoiceScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSuccessHeader() {
+  Widget _buildSuccessHeader(bool isDesktop) {
     return Container(
-      color: ColorsManager.black,
+      color: isDesktop ? Colors.white : ColorsManager.black,
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Column(
         children: [
@@ -92,20 +112,25 @@ class InvoiceScreen extends StatelessWidget {
             width: 72,
             height: 72,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: isDesktop ? ColorsManager.mainBlue : Colors.white,
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 3),
+              border: Border.all(
+                color: isDesktop ? ColorsManager.mainBlue : Colors.white,
+                width: 3,
+              ),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.check,
-              color: ColorsManager.black,
+              color: isDesktop ? Colors.white : ColorsManager.black,
               size: 40,
             ),
           ),
           const SizedBox(height: 12),
           Text(
             'invoice.booking_success'.tr(),
-            style: TextStyles.font18WhiteSemiBold.copyWith(fontSize: 20),
+            style: isDesktop
+                ? TextStyles.font18DarkBlueBold.copyWith(fontSize: 20)
+                : TextStyles.font18WhiteSemiBold.copyWith(fontSize: 20),
           ),
         ],
       ),

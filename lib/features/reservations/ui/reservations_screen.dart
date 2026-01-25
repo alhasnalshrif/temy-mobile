@@ -213,28 +213,34 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   }
 
   Widget _buildTabletLayout() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 4,
-              child: ServicesSection(services: _viewModel.selectedServices),
+    return Container(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 1000),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: ServicesSection(services: _viewModel.selectedServices),
+                ),
+                const SizedBox(width: 24),
+                Expanded(
+                  flex: 6,
+                  child: Column(
+                    children: [
+                      _buildBookingContent(),
+                      const SizedBox(height: 24),
+                      TotalSection(totalPrice: _viewModel.totalPrice),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: 24),
-            Expanded(
-              flex: 6,
-              child: Column(
-                children: [
-                  _buildBookingContent(),
-                  const SizedBox(height: 24),
-                  TotalSection(totalPrice: _viewModel.totalPrice),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -292,29 +298,33 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   Widget _buildBottomActions(bool isLoading) {
     final canProceed = _viewModel.canBook && !isLoading;
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(color: Colors.white),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: PrimaryButton(
-              text: 'default_booking.save_as_default'.tr(),
-              isOutlined: true,
-              onPressed: canProceed ? _handleSaveAsDefault : null,
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 1000),
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(color: Colors.white),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: PrimaryButton(
+                text: 'default_booking.save_as_default'.tr(),
+                isOutlined: true,
+                onPressed: canProceed ? _handleSaveAsDefault : null,
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            flex: 5,
-            child: PrimaryButton(
-              text: 'common.next'.tr(),
-              isLoading: isLoading,
-              onPressed: canProceed ? _handleProceed : null,
+            const SizedBox(width: 12),
+            Expanded(
+              flex: 5,
+              child: PrimaryButton(
+                text: 'common.next'.tr(),
+                isLoading: isLoading,
+                onPressed: canProceed ? _handleProceed : null,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
