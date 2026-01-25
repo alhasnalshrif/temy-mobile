@@ -122,7 +122,8 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   }
 
   Widget _buildContent() {
-    return Center(
+    return Align(
+      alignment: Alignment.topCenter,
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 1000),
         child: SingleChildScrollView(
@@ -132,7 +133,6 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
               vertical: 8.0,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const ConfirmationHeader(),
                 const SizedBox(height: 16),

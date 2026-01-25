@@ -18,7 +18,8 @@ import 'package:temy_barber/features/auth/ui/verification_screen.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 import 'package:temy_barber/features/barber/logic/barber_cubit.dart';
 import 'package:temy_barber/features/barber/ui/barber_screen.dart';
-import 'package:temy_barber/features/booking/ui/booking.dart';
+import 'package:temy_barber/features/booking/ui/booking.dart'
+    deferred as booking;
 import 'package:temy_barber/features/category/logic/category_cubit.dart';
 import 'package:temy_barber/features/category/ui/category_screen.dart';
 import 'package:temy_barber/features/category_barbers/logic/category_cubit.dart';
@@ -28,13 +29,15 @@ import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/ui/home_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
-import 'package:temy_barber/features/profile/ui/profile.dart';
+import 'package:temy_barber/features/profile/ui/profile.dart'
+    deferred as profile;
 import 'package:temy_barber/features/profile/ui/content_screen.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 import 'package:temy_barber/features/reservations/ui/booking_confirmation.dart';
-import 'package:temy_barber/features/reservations/ui/invoice_screen.dart';
+import 'package:temy_barber/features/reservations/ui/invoice_screen.dart'
+    deferred as invoice;
 import 'package:temy_barber/features/reservations/ui/reservations_screen.dart';
 
 class AppRouterGo {
@@ -203,7 +206,15 @@ class AppRouterGo {
                 GoRoute(
                   path: AppRoutes.Booking,
                   name: AppRoutes.bookingName,
-                  builder: (context, state) => const BookingScreen(),
+                  builder: (context, state) => FutureBuilder(
+                    future: booking.loadLibrary(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return booking.BookingScreen();
+                      }
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                  ),
                 ),
               ],
             ),
@@ -214,7 +225,15 @@ class AppRouterGo {
                 GoRoute(
                   path: AppRoutes.Profile,
                   name: AppRoutes.profileName,
-                  builder: (context, state) => const ProfileScreen(),
+                  builder: (context, state) => FutureBuilder(
+                    future: profile.loadLibrary(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return profile.ProfileScreen();
+                      }
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                  ),
                   routes: [
                     GoRoute(
                       path: AppRoutes
@@ -261,7 +280,17 @@ class AppRouterGo {
           name: AppRoutes.invoiceName,
           builder: (context, state) {
             final reservation = state.extra as ReservationResponseModel;
-            return InvoiceScreen(arguments: reservation);
+            return FutureBuilder(
+              future: invoice.loadLibrary(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return invoice.InvoiceScreen(arguments: reservation);
+                }
+                return const Scaffold(
+                  body: Center(child: CircularProgressIndicator()),
+                );
+              },
+            );
           },
         ),
       ],
