@@ -13,25 +13,30 @@ class AppRoutes {
   static const String Home = '/home';
   static const String Booking = '/booking';
   static const String Profile = '/profile';
+
+  // Relative Paths (for nested routes)
+  static const String CategoriesPath = 'categories';
+  static const String CategoryBarbersPath = 'category/:categoryId';
+  static const String BarberDetailPath = 'barber/:barberId';
+  static const String ReservationPath = 'reservation';
+  static const String BookingConfirmationPath = 'booking-confirmation';
+  static const String UpdateProfilePath = 'update';
+  static const String PrivacyPolicyPath = 'privacy-policy';
+  static const String HelpPath = 'help';
+  static const String AboutPath = 'about';
+
+  // Legacy/Absolute constants (kept for reference or deep links if needed, but consider deprecating)
   static const String Categories = '/categories';
-  static const String Category = '/category';
   static const String CategoryBarbers = '/category/:categoryId';
-
-  // Barber & Services
-  static const String Barber = '/barber';
   static const String BarberDetail = '/barber/:barberId';
-
-  // Booking & Reservations
   static const String Reservation = '/reservation';
   static const String BookingConfirmation = '/booking-confirmation';
-  static const String Invoice = '/invoice';
-
-  // Profile Routes
   static const String UpdateProfile = '/profile/update';
-  static const String NotificationSettings = '/profile/notification-settings';
   static const String PrivacyPolicy = '/profile/privacy-policy';
   static const String Help = '/profile/help';
   static const String About = '/profile/about';
+
+  static const String Invoice = '/invoice';
 
   // Route names (for named navigation)
   static const String loginName = 'login';
@@ -61,6 +66,6 @@ class AppRoutes {
   /// AppRoutes.barberPath('123') // Returns '/barber/123'
   /// AppRoutes.categoryPath('456') // Returns '/category/456'
 
-  static String barberPath(String barberId) => '$Barber/$barberId';
-  static String categoryPath(String categoryId) => '$Category/$categoryId';
+  static String barberPath(String barberId) => '$Home/barber/$barberId';
+  static String categoryPath(String categoryId) => '$Home/category/$categoryId';
 }

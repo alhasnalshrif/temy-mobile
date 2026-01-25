@@ -27,7 +27,7 @@ class ResetPasswordBlocListener extends StatelessWidget {
           },
           success: (response) {
             // Close loading dialog
-            Navigator.pop(context);
+            context.pop();
 
             // Show success message
             ScaffoldMessenger.of(context).showSnackBar(
@@ -42,7 +42,7 @@ class ResetPasswordBlocListener extends StatelessWidget {
           },
           error: (error) {
             // Close loading dialog
-            Navigator.pop(context);
+            context.pop();
 
             // Show error message
             ScaffoldMessenger.of(context).showSnackBar(

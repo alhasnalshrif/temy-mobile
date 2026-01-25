@@ -27,7 +27,7 @@ class ForgotPasswordBlocListener extends StatelessWidget {
           },
           success: (response) {
             // Close loading dialog
-            Navigator.pop(context);
+            context.pop();
 
             // Show success message
             ScaffoldMessenger.of(context).showSnackBar(
@@ -38,14 +38,14 @@ class ForgotPasswordBlocListener extends StatelessWidget {
             );
 
             // Navigate to reset password screen
-            context.pushGoNamed(
+            context.goNamed(
               AppRoutes.resetPasswordName,
               extra: context.read<ForgotPasswordCubit>().phoneController.text,
             );
           },
           error: (error) {
             // Close loading dialog
-            Navigator.pop(context);
+            context.pop();
 
             // Show error message
             ScaffoldMessenger.of(context).showSnackBar(

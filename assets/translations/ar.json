@@ -27,7 +27,8 @@
     "next": "التالي",
     "edit": "تعديل",
     "total": "المجموع",
-    "currency": "ج.م"
+    "currency": "ج.م",
+    "grand_total": "المجموع الكلي"
 
   },
   "calendar": {

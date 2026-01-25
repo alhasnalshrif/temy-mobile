@@ -417,7 +417,7 @@ class NotificationService {
     try {
       if (_navigatorKey?.currentContext != null) {
         // Navigate to categories screen (promotions/services)
-        _navigatorKey!.currentContext!.go(AppRoutes.Categories);
+        _navigatorKey!.currentContext!.goNamed(AppRoutes.categoriesName);
       }
     } catch (e) {
       log('Error navigating to promotions: $e');

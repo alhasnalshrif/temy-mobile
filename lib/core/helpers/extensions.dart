@@ -2,8 +2,11 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 extension Navigation on BuildContext {
-
-  void pop() => Navigator.of(this).pop();
+  void pop() {
+    if (GoRouter.of(this).canPop()) {
+      GoRouter.of(this).pop();
+    }
+  }
 
   // GoRouter methods for URL-based navigation
   void goNamed(

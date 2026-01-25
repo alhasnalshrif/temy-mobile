@@ -29,7 +29,7 @@ class SignupBlocListener extends StatelessWidget {
                 .read<SignupCubit>()
                 .phoneController
                 .text;
-            context.pushGoNamed(AppRoutes.verificationName, extra: phoneNumber);
+            context.goNamed(AppRoutes.verificationName, extra: phoneNumber);
           },
           signupError: (error) {
             setupErrorState(context, error);

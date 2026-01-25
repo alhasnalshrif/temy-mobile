@@ -5,6 +5,7 @@ import 'package:temy_barber/core/services/cleanup_service.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import '../../../core/routing/app_routes.dart';
 import 'profile_state.dart';
+import 'package:temy_barber/core/helpers/constants.dart';
 import 'dart:developer';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -36,6 +37,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       // Use CleanupService for comprehensive cleanup
       await _cleanupService.performLogoutCleanup();
+      isLoggedInUser = false;
 
       log('✅ Logout completed successfully');
       emit(const ProfileState.initial());
@@ -59,10 +61,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       response.when(
         success: (deletedProfile) {
           log('✅ Account deleted successfully on server');
-          dialogContext.goNamed(AppRoutes.loginName);
 
           // Step 2: Use CleanupService for comprehensive cleanup
           _cleanupService.performAccountDeletionCleanup();
+          isLoggedInUser = false;
+
+          dialogContext.goNamed(AppRoutes.loginName);
 
           emit(
             ProfileState.deleteSuccess(

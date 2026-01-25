@@ -72,7 +72,7 @@ class CategoryListViewItem extends StatelessWidget {
       child: Text(
         serviceResponseModel?.name ?? 'Service',
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          color: Colors.grey[900],
+          color: ColorsManager.mainBlue,
           height: 1.3,
           fontWeight: FontWeight.w600,
           fontSize: 14 / textScale,

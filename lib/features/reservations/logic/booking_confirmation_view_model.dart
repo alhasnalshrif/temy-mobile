@@ -134,7 +134,6 @@ class BookingConfirmationViewModel extends ChangeNotifier {
 
   @override
   void dispose() {
-    clearReservations();
     super.dispose();
   }
 }

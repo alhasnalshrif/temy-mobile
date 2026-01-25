@@ -24,15 +24,13 @@ class CategoryBarberListView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 8),
         itemCount: itemCount,
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 500,
           mainAxisSpacing: 16,
           crossAxisSpacing: 16,
-          childAspectRatio: 2.8,
+          childAspectRatio: 4,
         ),
         itemBuilder: (context, index) {
           return CategoryListViewItem(
@@ -42,7 +40,7 @@ class CategoryBarberListView extends StatelessWidget {
             onTap: () {
               debugPrint('Category tapped: ${barberDataList[index]?.name}');
 
-              context.pushGoNamed(
+              context.goNamed(
                 AppRoutes.barberName,
                 pathParameters: {'barberId': barberDataList[index]?.id ?? ''},
               );

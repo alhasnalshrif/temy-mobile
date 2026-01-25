@@ -213,10 +213,7 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                         totalPrice: totalPrice,
                       );
                       Navigator.of(context).pop();
-                      context.pushGoNamed(
-                        AppRoutes.reservationName,
-                        extra: args,
-                      );
+                      context.goNamed(AppRoutes.reservationName, extra: args);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorsManager.mainBlue,

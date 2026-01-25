@@ -201,7 +201,7 @@ class LoginScreen extends StatelessWidget {
           verticalSpace(24),
           GestureDetector(
             onTap: () {
-              context.pushGoNamed(AppRoutes.forgotPasswordName);
+              context.goNamed(AppRoutes.forgotPasswordName);
             },
             child: Text(
               'auth.forgot_password'.tr(),
@@ -217,9 +217,7 @@ class LoginScreen extends StatelessWidget {
           const SizedBox(height: 16),
           const TermsAndConditionsText(),
           const SizedBox(height: 30),
-          const Align(
-            child: DontHaveAccountText(),
-          ),
+          const Align(child: DontHaveAccountText()),
           const SizedBox(height: 20),
           Center(
             child: TextButton(

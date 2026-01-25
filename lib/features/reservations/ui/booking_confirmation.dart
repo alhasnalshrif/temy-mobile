@@ -26,6 +26,8 @@ class BookingConfirmation extends StatefulWidget {
 class _BookingConfirmationState extends State<BookingConfirmation> {
   late BookingConfirmationViewModel _viewModel;
 
+  bool _isAddingAnother = false;
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +36,11 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
   @override
   void dispose() {
+    // Only clear reservations if we are NOT adding another one
+    // and if the view model is available (not null)
+    if (!_isAddingAnother) {
+      _viewModel.clearReservations();
+    }
     _viewModel.dispose();
     super.dispose();
   }
@@ -178,7 +185,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
             if (!_viewModel.isQueueMode)
               AddAnotherReservationButton(onTap: _handleAddAnotherReservation),
             ConfirmationBottomButtons(
-              onEdit: () => Navigator.pop(context),
+              onEdit: () => context.pop(),
               onConfirm: _handleConfirm,
               confirmText: _getConfirmButtonText(),
             ),
@@ -215,8 +222,9 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     }
 
     _viewModel.addToMultipleReservations();
+    _isAddingAnother = true;
     _showSnackBar('booking_confirmation.booking_added'.tr(), Colors.green);
-    context.go(AppRoutes.Categories);
+    context.goNamed(AppRoutes.categoriesName);
   }
 
   Future<void> _handleConfirm() async {

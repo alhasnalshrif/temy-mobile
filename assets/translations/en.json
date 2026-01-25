@@ -27,7 +27,9 @@
         "next": "Next",
         "edit": "Edit",
         "total": "Total",
-        "currency": "EGP"
+        "currency": "EGP",
+    "grand_total": "Grand Total"
+
     },
     "calendar": {
         "today": "Today",

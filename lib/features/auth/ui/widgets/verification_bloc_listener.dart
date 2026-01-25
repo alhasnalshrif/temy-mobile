@@ -43,7 +43,6 @@ class VerificationBlocListener extends StatelessWidget {
             if (cubit.comingFromLogin) {
               _handleLoginVerificationSuccess(context, verificationResponse);
             } else {
-           
               context.goNamed(AppRoutes.loginName);
             }
           },
@@ -67,6 +66,7 @@ class VerificationBlocListener extends StatelessWidget {
 
       if (token.isNotEmpty && userId.isNotEmpty) {
         await _saveUserToken(token, userId);
+        isLoggedInUser = true;
 
         try {
           final notificationCubit = getIt<NotificationCubit>();
@@ -131,7 +131,7 @@ class VerificationBlocListener extends StatelessWidget {
 
   void _dismissActiveDialog(BuildContext context) {
     if (_isDialogOpen) {
-      Navigator.of(context, rootNavigator: true).pop();
+      context.pop();
       _isDialogOpen = false;
     }
   }

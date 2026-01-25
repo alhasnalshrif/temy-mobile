@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
@@ -50,7 +51,7 @@ class UpdateProfileScreen extends StatelessWidget {
                 state.whenOrNull(
                   success: (userProfile) {
                     context.read<ProfileCubit>().getProfile();
-                    Navigator.pop(context);
+                    context.pop();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(

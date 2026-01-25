@@ -38,9 +38,7 @@ class CategoryWithBarbersBlocBuilder extends StatelessWidget {
         child: Row(
           children: [
             // Avatar shimmer
-            ShimmerLoading.circular(
-              size: 56,
-            ),
+            ShimmerLoading.circular(size: 56),
             const SizedBox(width: 16),
             // Text shimmer
             Expanded(
@@ -60,7 +58,9 @@ class CategoryWithBarbersBlocBuilder extends StatelessWidget {
   }
 
   Widget setupSuccess(
-      CategoryServicesResponseModel response, BuildContext context) {
+    CategoryServicesResponseModel response,
+    BuildContext context,
+  ) {
     final barbers = response.data?.barbers ?? [];
 
     if (barbers.isEmpty) {
@@ -69,19 +69,10 @@ class CategoryWithBarbersBlocBuilder extends StatelessWidget {
       );
     }
 
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CategoryBarberListView(barberDataList: barbers),
-        ],
-      ),
-    );
+    return Expanded(child: CategoryBarberListView(barberDataList: barbers));
   }
 
   Widget setupError() {
-    return const Center(
-      child: Text('Failed to load barbers'),
-    );
+    return const Center(child: Text('Failed to load barbers'));
   }
 }

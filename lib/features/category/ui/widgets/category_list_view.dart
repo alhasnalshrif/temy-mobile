@@ -42,7 +42,7 @@ class CategoryBarberListView extends StatelessWidget {
             onTap: () {
               debugPrint('Category tapped: ${barberDataList[index]?.name}');
 
-              context.pushGoNamed(
+              context.goNamed(
                 AppRoutes.categoryBarbersName,
                 pathParameters: {'categoryId': barberDataList[index]?.id ?? ''},
               );

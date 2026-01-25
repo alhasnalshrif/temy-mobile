@@ -45,13 +45,13 @@ class CategoryListView extends StatelessWidget {
               return CategoryListViewItem(
                 categoryResponseModel: categoryDataList[index],
                 indexItem: index,
-                radius: cardRadius, 
+                radius: cardRadius,
                 onTap: () {
                   debugPrint(
                     'Category tapped: ${categoryDataList[index].name}',
                   );
 
-                  context.pushGoNamed(
+                  context.goNamed(
                     AppRoutes.categoryBarbersName,
                     pathParameters: {
                       'categoryId': categoryDataList[index].id ?? '',

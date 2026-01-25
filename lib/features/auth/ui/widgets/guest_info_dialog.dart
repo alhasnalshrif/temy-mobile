@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/widgets/app_text_button.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/features/reservations/data/models/queue_response.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
@@ -374,7 +375,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                               child: OutlinedButton(
                                 onPressed: isLoading
                                     ? null
-                                    : () => Navigator.pop(context),
+                                    : () => context.pop(),
                                 style: OutlinedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 14,

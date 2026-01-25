@@ -29,6 +29,7 @@ import 'package:temy_barber/features/home/ui/home_screen.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/features/profile/ui/profile.dart';
+import 'package:temy_barber/features/profile/ui/content_screen.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
@@ -122,7 +123,7 @@ class AppRouterGo {
                   routes: [
                     // Nested Category Routes
                     GoRoute(
-                      path: 'categories', // Relative path
+                      path: AppRoutes.CategoriesPath, // Relative path
                       name: AppRoutes.categoriesName,
                       builder: (context, state) => BlocProvider(
                         create: (context) =>
@@ -131,7 +132,7 @@ class AppRouterGo {
                       ),
                     ),
                     GoRoute(
-                      path: 'category/:categoryId', // Relative path
+                      path: AppRoutes.CategoryBarbersPath, // Relative path
                       name: AppRoutes.categoryBarbersName,
                       builder: (context, state) {
                         final categoryId = state.pathParameters['categoryId']!;
@@ -146,7 +147,7 @@ class AppRouterGo {
 
                     // Nested Barber Routes
                     GoRoute(
-                      path: 'barber/:barberId', // Relative path
+                      path: AppRoutes.BarberDetailPath, // Relative path
                       name: AppRoutes.barberName,
                       builder: (context, state) {
                         final barberId = state.pathParameters['barberId']!;
@@ -156,13 +157,28 @@ class AppRouterGo {
                           child: const BarberScreen(),
                         );
                       },
+                      routes: [
+                        // Nested Reservation (accessed from Barber)
+                        GoRoute(
+                          path: AppRoutes.ReservationPath,
+                          name: AppRoutes.reservationName,
+                          builder: (context, state) {
+                            final args = state.extra as ReservationArguments?;
+                            return BlocProvider(
+                              create: (context) => ReservationCubit(getIt()),
+                              child: ReservationsScreen(arguments: args),
+                            );
+                          },
+                        ),
+                      ],
                     ),
 
-                    // Nested Booking/Reservation Routes (if accessed from Home)
-                    // Note: Reservations might be accessed from Booking tab too,
-                    // but usually flow starts from finding a barber.
+                    // Nested Booking Confirmation (accessed from Home/Reservation)
+                    // Kept at Home level to allow clearing Barber/Reservation from history if desired,
+                    // or can be nested if we want to keep history.
+                    // Usually confirmation leads back to Home.
                     GoRoute(
-                      path: 'booking-confirmation',
+                      path: AppRoutes.BookingConfirmationPath,
                       name: AppRoutes.bookingConfirmationName,
                       builder: (context, state) {
                         final args = state.extra as ReservationArguments?;
@@ -199,46 +215,53 @@ class AppRouterGo {
                   path: AppRoutes.Profile,
                   name: AppRoutes.profileName,
                   builder: (context, state) => const ProfileScreen(),
+                  routes: [
+                    GoRoute(
+                      path: AppRoutes
+                          .UpdateProfilePath, // Relative path for /profile/update
+                      name: AppRoutes.updateProfileName,
+                      builder: (context, state) {
+                        final user = state.extra as User;
+                        return UpdateProfileScreen(currentUser: user);
+                      },
+                    ),
+                    GoRoute(
+                      path: AppRoutes.PrivacyPolicyPath,
+                      name: AppRoutes.privacyPolicyName,
+                      builder: (context, state) => ContentScreen(
+                        titleKey: 'privacy_policy.title',
+                        sections: ContentData.getPrivacyPolicySections(),
+                      ),
+                    ),
+                    GoRoute(
+                      path: AppRoutes.HelpPath,
+                      name: AppRoutes.helpName,
+                      builder: (context, state) => ContentScreen(
+                        titleKey: 'help.title',
+                        sections: ContentData.getHelpSections(),
+                      ),
+                    ),
+                    GoRoute(
+                      path: AppRoutes.AboutPath,
+                      name: AppRoutes.aboutName,
+                      builder: (context, state) => ContentScreen(
+                        titleKey: 'about.title',
+                        sections: ContentData.getAboutSections(),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ],
         ),
 
-        // Redirect legacy dashboard route if accessed
-        GoRoute(
-          path: AppRoutes.Dashboard,
-          redirect: (context, state) => AppRoutes.Home,
-        ),
-
-        // Reservation Routes
-        GoRoute(
-          path: AppRoutes.Reservation,
-          name: AppRoutes.reservationName,
-          builder: (context, state) {
-            final args = state.extra as ReservationArguments?;
-            return BlocProvider(
-              create: (context) => ReservationCubit(getIt()),
-              child: ReservationsScreen(arguments: args),
-            );
-          },
-        ),
         GoRoute(
           path: AppRoutes.Invoice,
           name: AppRoutes.invoiceName,
           builder: (context, state) {
             final reservation = state.extra as ReservationResponseModel;
             return InvoiceScreen(arguments: reservation);
-          },
-        ),
-
-        // Profile Routes (Nested Screens)
-        GoRoute(
-          path: AppRoutes.UpdateProfile,
-          name: AppRoutes.updateProfileName,
-          builder: (context, state) {
-            final user = state.extra as User;
-            return UpdateProfileScreen(currentUser: user);
           },
         ),
       ],

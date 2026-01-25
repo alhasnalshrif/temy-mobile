@@ -46,7 +46,7 @@ class InvoiceScreen extends StatelessWidget {
             Icons.close,
             color: isDesktop ? Colors.black : Colors.white,
           ),
-          onPressed: () => context.goNamed(AppRoutes.dashboardName),
+          onPressed: () => context.goNamed(AppRoutes.homeName),
         ),
       ),
       body: Column(
@@ -462,7 +462,7 @@ class InvoiceScreen extends StatelessWidget {
             elevation: 0,
           ),
           onPressed: () {
-            context.goNamed(AppRoutes.dashboardName);
+            context.goNamed(AppRoutes.homeName);
           },
           child: Text(
             'invoice.back_to_home'.tr(),

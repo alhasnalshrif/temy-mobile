@@ -269,17 +269,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ProfileTile(
             title: 'profile.privacy'.tr(),
             icon: Icons.lock_outline,
-            onTap: () => context.pushGoNamed(AppRoutes.privacyPolicyName),
+            onTap: () => context.goNamed(AppRoutes.privacyPolicyName),
           ),
           ProfileTile(
             title: 'profile.help'.tr(),
             icon: Icons.help_outline,
-            onTap: () => context.pushGoNamed(AppRoutes.helpName),
+            onTap: () => context.goNamed(AppRoutes.helpName),
           ),
           ProfileTile(
             title: 'profile.about'.tr(),
             icon: Icons.info_outline,
-            onTap: () => context.pushGoNamed(AppRoutes.aboutName),
+            onTap: () => context.goNamed(AppRoutes.aboutName),
           ),
           DangerTile(
             title: 'profile.delete_account'.tr(),
@@ -306,17 +306,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         DesktopProfileCard(
           title: 'profile.privacy'.tr(),
           icon: Icons.lock_outline,
-          onTap: () => context.pushGoNamed(AppRoutes.privacyPolicyName),
+          onTap: () => context.goNamed(AppRoutes.privacyPolicyName),
         ),
         DesktopProfileCard(
           title: 'profile.help'.tr(),
           icon: Icons.help_outline,
-          onTap: () => context.pushGoNamed(AppRoutes.helpName),
+          onTap: () => context.goNamed(AppRoutes.helpName),
         ),
         DesktopProfileCard(
           title: 'profile.about'.tr(),
           icon: Icons.info_outline,
-          onTap: () => context.pushGoNamed(AppRoutes.aboutName),
+          onTap: () => context.goNamed(AppRoutes.aboutName),
         ),
         DesktopProfileCard(
           title: 'profile.delete_account'.tr(),
@@ -344,7 +344,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         state.maybeMap(
           profileSuccess: (successState) {
             if (successState.userProfile.user != null) {
-              context.pushGoNamed(
+              context.goNamed(
                 AppRoutes.updateProfileName,
                 extra: successState.userProfile.user!,
               );
@@ -370,7 +370,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         state.maybeMap(
           profileSuccess: (successState) {
             if (successState.userProfile.user != null) {
-              context.pushGoNamed(
+              context.goNamed(
                 AppRoutes.updateProfileName,
                 extra: successState.userProfile.user!,
               );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
@@ -288,7 +289,14 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                     barberData: widget.serviceResponseModel,
                     totalPrice: _selectedTotalPrice,
                   );
-                  context.pushGoNamed('reservation', extra: args);
+                  context.goNamed(
+                    AppRoutes.reservationName,
+                    pathParameters: {
+                      'barberId':
+                          widget.serviceResponseModel?.id.toString() ?? '',
+                    },
+                    extra: args,
+                  );
                 },
           borderRadius: BorderRadius.circular(12),
           child: Container(

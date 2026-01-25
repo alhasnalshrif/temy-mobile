@@ -181,7 +181,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios_new),
         color: Colors.black,
-        onPressed: () => Navigator.pop(context),
+        onPressed: () => context.pop(),
       ),
     );
   }
@@ -336,6 +336,6 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
 
   void _handleProceed() {
     final args = _viewModel.buildReservationArguments();
-    context.pushGoNamed(AppRoutes.bookingConfirmationName, extra: args);
+    context.goNamed(AppRoutes.bookingConfirmationName, extra: args);
   }
 }
