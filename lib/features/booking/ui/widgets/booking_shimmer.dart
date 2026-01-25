@@ -83,13 +83,11 @@ class BookingShimmer extends StatelessWidget {
                   children: [
                     ShimmerLoading.rectangular(
                       height: 18,
-                      width: 120,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     const SizedBox(height: 8),
                     ShimmerLoading.rectangular(
                       height: 14,
-                      width: 150,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     const SizedBox(height: 4),
@@ -97,7 +95,8 @@ class BookingShimmer extends StatelessWidget {
                       children: [
                         ShimmerLoading.rectangular(
                           height: 14,
-                          width: 80,
+                          width:
+                              80, // Keep some small widths for labels if they don't stretch
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ],
@@ -108,7 +107,7 @@ class BookingShimmer extends StatelessWidget {
               // Status indicator or cancel button
               ShimmerLoading.rectangular(
                 height: 32,
-                width: 70,
+                width: 80,
                 borderRadius: BorderRadius.circular(8),
               ),
             ],
@@ -126,13 +125,11 @@ class BookingShimmer extends StatelessWidget {
                   children: [
                     ShimmerLoading.rectangular(
                       height: 14,
-                      width: 80,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     const SizedBox(height: 8),
                     ShimmerLoading.rectangular(
                       height: 16,
-                      width: 140,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ],
@@ -145,13 +142,11 @@ class BookingShimmer extends StatelessWidget {
                   children: [
                     ShimmerLoading.rectangular(
                       height: 14,
-                      width: 80,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     const SizedBox(height: 8),
                     ShimmerLoading.rectangular(
                       height: 16,
-                      width: 120,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ],
@@ -164,7 +159,6 @@ class BookingShimmer extends StatelessWidget {
           // Services section
           ShimmerLoading.rectangular(
             height: 14,
-            width: 100,
             borderRadius: BorderRadius.circular(4),
           ),
           verticalSpace(8),
@@ -181,7 +175,7 @@ class BookingShimmer extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8),
               child: ShimmerLoading.rectangular(
                 height: 14,
-                width: 100,
+                width: 150, // Center can be wider
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
@@ -202,13 +196,12 @@ class BookingShimmer extends StatelessWidget {
             children: [
               ShimmerLoading.rectangular(
                 height: 14,
-                width: 180,
                 borderRadius: BorderRadius.circular(4),
               ),
               const SizedBox(height: 4),
               ShimmerLoading.rectangular(
                 height: 12,
-                width: 60,
+                width: 80,
                 borderRadius: BorderRadius.circular(4),
               ),
             ],

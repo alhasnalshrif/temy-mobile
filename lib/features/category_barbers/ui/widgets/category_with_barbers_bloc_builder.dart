@@ -45,9 +45,9 @@ class CategoryWithBarbersBlocBuilder extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ShimmerLoading.rectangular(height: 16, width: 120),
+                  ShimmerLoading.rectangular(height: 16),
                   const SizedBox(height: 8),
-                  ShimmerLoading.rectangular(height: 12, width: 80),
+                  ShimmerLoading.rectangular(height: 12),
                 ],
               ),
             ),

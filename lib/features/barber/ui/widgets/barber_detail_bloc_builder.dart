@@ -46,10 +46,10 @@ class BarberDetailBlocBuilder extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Title shimmer
-            ShimmerLoading.rectangular(height: 22, width: 160),
+            ShimmerLoading.rectangular(height: 22),
             const SizedBox(height: 12),
             // Subtitle shimmer
-            ShimmerLoading.rectangular(height: 16, width: 220),
+            ShimmerLoading.rectangular(height: 16),
             const SizedBox(height: 16),
             // Content shimmer (e.g., for a card or image)
             ShimmerLoading.rectangular(height: 80, width: double.infinity),
@@ -65,8 +65,6 @@ class BarberDetailBlocBuilder extends StatelessWidget {
 
   Widget setupError(errorHandler) {
     print('Error occurred: $errorHandler');
-    return Center(
-      child: Text('${'barber.error'.tr()}: $errorHandler'),
-    );
+    return Center(child: Text('${'barber.error'.tr()}: $errorHandler'));
   }
 }

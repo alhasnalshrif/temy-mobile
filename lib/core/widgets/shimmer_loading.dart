@@ -53,113 +53,117 @@ class ShimmerCard extends StatelessWidget {
     final Color shimmerHighlight =
         highlightColor ?? context.shimmerHighlightColor;
 
-    // Responsive width: constrain to screen size if not specified
-    final double effectiveWidth = width == double.infinity
-        ? MediaQuery.of(context).size.width * 0.9
-        : width;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // limit width to available space if infinite
+        final double effectiveWidth = width == double.infinity
+            ? constraints.maxWidth
+            : width;
 
-    // Card layout with placeholders
-    Widget cardContent = Container(
-      width: effectiveWidth,
-      height: height,
-      padding: const EdgeInsets.all(16),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Placeholder for image/thumbnail
-          if (showImage)
-            ShimmerLoading.rectangular(
-              width: imageWidth,
-              height: imageHeight,
-              baseColor: shimmerBase,
-              highlightColor: shimmerHighlight,
-              period: period,
-              direction: direction,
-              animationCurve: animationCurve,
-              borderRadius: BorderRadius.circular(8),
-              enabled: enabled,
-            ),
-          if (showImage) const SizedBox(width: 16),
-
-          // Placeholder for text content (title and subtitle)
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Title placeholder
+        // Card layout with placeholders
+        Widget cardContent = Container(
+          width: effectiveWidth,
+          height: height,
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Placeholder for image/thumbnail
+              if (showImage)
                 ShimmerLoading.rectangular(
-                  height: titleHeight,
+                  width: imageWidth,
+                  height: imageHeight,
                   baseColor: shimmerBase,
                   highlightColor: shimmerHighlight,
                   period: period,
                   direction: direction,
                   animationCurve: animationCurve,
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(8),
                   enabled: enabled,
                 ),
-                const SizedBox(height: 8),
-                // Subtitle placeholder
-                ShimmerLoading.rectangular(
-                  height: subtitleHeight,
-                  width: effectiveWidth * 0.6,
-                  baseColor: shimmerBase,
-                  highlightColor: shimmerHighlight,
-                  period: period,
-                  direction: direction,
-                  animationCurve: animationCurve,
-                  borderRadius: BorderRadius.circular(4),
-                  enabled: enabled,
-                ),
-                if (showButtons) const SizedBox(height: 12),
-                // Button placeholders
-                if (showButtons)
-                  Row(
-                    children: List.generate(
-                      buttonCount,
-                      (index) => Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: ShimmerLoading.circular(
-                          size: 36,
-                          baseColor: shimmerBase,
-                          highlightColor: shimmerHighlight,
-                          period: period,
-                          direction: direction,
-                          animationCurve: animationCurve,
-                          enabled: enabled,
+              if (showImage) const SizedBox(width: 16),
+
+              // Placeholder for text content (title and subtitle)
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Title placeholder
+                    ShimmerLoading.rectangular(
+                      height: titleHeight,
+                      baseColor: shimmerBase,
+                      highlightColor: shimmerHighlight,
+                      period: period,
+                      direction: direction,
+                      animationCurve: animationCurve,
+                      borderRadius: BorderRadius.circular(4),
+                      enabled: enabled,
+                    ),
+                    const SizedBox(height: 8),
+                    // Subtitle placeholder
+                    ShimmerLoading.rectangular(
+                      height: subtitleHeight,
+                      width: effectiveWidth * 0.6,
+                      baseColor: shimmerBase,
+                      highlightColor: shimmerHighlight,
+                      period: period,
+                      direction: direction,
+                      animationCurve: animationCurve,
+                      borderRadius: BorderRadius.circular(4),
+                      enabled: enabled,
+                    ),
+                    if (showButtons) const SizedBox(height: 12),
+                    // Button placeholders
+                    if (showButtons)
+                      Row(
+                        children: List.generate(
+                          buttonCount,
+                          (index) => Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: ShimmerLoading.circular(
+                              size: 36,
+                              baseColor: shimmerBase,
+                              highlightColor: shimmerHighlight,
+                              period: period,
+                              direction: direction,
+                              animationCurve: animationCurve,
+                              enabled: enabled,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-              ],
-            ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        );
 
-    // Apply shimmer effect if enabled
-    if (enabled) {
-      cardContent = Shimmer.fromColors(
-        baseColor: shimmerBase,
-        highlightColor: shimmerHighlight,
-        period: period,
-        direction: direction,
-        loop: 1,
-        enabled: enabled,
-        child: cardContent,
-      );
-    }
+        // Apply shimmer effect if enabled
+        if (enabled) {
+          cardContent = Shimmer.fromColors(
+            baseColor: shimmerBase,
+            highlightColor: shimmerHighlight,
+            period: period,
+            direction: direction,
+            loop: 1,
+            enabled: enabled,
+            child: cardContent,
+          );
+        }
 
-    // Wrap in a Card widget for elevation and shadow
-    return Semantics(
-      label: semanticLabel ?? 'Loading card placeholder',
-      child: Card(
-        elevation: elevation,
-        shape: RoundedRectangleBorder(borderRadius: borderRadius),
-        clipBehavior: Clip.antiAlias,
-        child: cardContent,
-      ),
+        // Wrap in a Card widget for elevation and shadow
+        return Semantics(
+          label: semanticLabel ?? 'Loading card placeholder',
+          child: Card(
+            elevation: elevation,
+            shape: RoundedRectangleBorder(borderRadius: borderRadius),
+            clipBehavior: Clip.antiAlias,
+            child: cardContent,
+          ),
+        );
+      },
     );
   }
 }
@@ -287,8 +291,9 @@ class ShimmerLoading extends StatelessWidget {
       'Width and height must be positive or null.',
     );
 
-    final double effectiveWidth =
-        width ?? MediaQuery.of(context).size.width * 0.9;
+    // Use width if provided, otherwise standard expand behavior (double.infinity).
+    // Avoid MediaQuery as it forces screen width logic which breaks responsive constraints.
+    final double? effectiveWidth = width ?? double.infinity;
 
     final defaultDecoration = ShapeDecoration(
       color: shimmerBase.withOpacity(0.6),
