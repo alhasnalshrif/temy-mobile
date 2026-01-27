@@ -39,6 +39,8 @@
 	<string>Main</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to provide relevant services and notifications.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
