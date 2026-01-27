@@ -75,7 +75,7 @@ class VerificationBlocListener extends StatelessWidget {
           debugPrint('Could not access NotificationCubit: $e');
         }
 
-        context.goNamed(AppRoutes.dashboardName);
+        context.goNamed(AppRoutes.homeName);
       } else {
         // Somethin went wrong, show error
         setupErrorState(context, 'Verification completed but login failed');

@@ -240,7 +240,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
       unselectedLabelColor: Colors.grey[600],
       indicator: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: ColorsManager.mainBlue.withOpacity(0.1),
+        color: ColorsManager.mainBlue.withAlpha(25),
         border: Border.all(color: Theme.of(context).primaryColor, width: 1.5),
       ),
       indicatorPadding: const EdgeInsets.symmetric(

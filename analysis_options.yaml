@@ -26,6 +26,10 @@ linter:
     avoid_redundant_argument_values: true
     avoid_unnecessary_containers: true
     unnecessary_late: true
+    # .g.dart files are generated files and should not be add in it
+    exclude:
+      - '**/*.g.dart'
+      - '**/*.freezed.dart'
 
 analyzer:
   exclude:

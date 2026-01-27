@@ -83,7 +83,7 @@ class SignupBlocListener extends StatelessWidget {
                     fontSize: 16,
                     color: Theme.of(
                       context,
-                    ).colorScheme.onSurface.withOpacity(0.8),
+                    ).colorScheme.onSurface.withAlpha(77),
                   ),
                   textAlign: TextAlign.center,
                 ),

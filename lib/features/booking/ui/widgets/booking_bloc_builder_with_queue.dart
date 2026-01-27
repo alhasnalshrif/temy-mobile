@@ -176,7 +176,7 @@ class _BookingBlocBuilderWithQueueState
         int crossAxisCount = (width / 500).ceil();
         crossAxisCount = crossAxisCount < 2 ? 1 : crossAxisCount;
 
-        final double spacing = 16.0;
+        const double spacing = 16.0;
         // Calculate item width accounting for spacing
         // Total spacing = (n - 1) * spacing
         final double totalSpacing = (crossAxisCount - 1) * spacing;

@@ -94,7 +94,7 @@ class BookingStatusStepper extends StatelessWidget {
           color: status == statusValue
               ? ColorsManager.mainBlue
               : isActive
-                  ? ColorsManager.mainBlue.withOpacity(0.7)
+                  ? ColorsManager.mainBlue.withAlpha(179)
                   : Colors.grey[200],
           shape: BoxShape.circle,
         ),
@@ -131,7 +131,7 @@ class BookingStatusStepper extends StatelessWidget {
           style: TextStyle(
             fontSize: 11, // Smaller font
             color: status == statusValue
-                ? ColorsManager.mainBlue.withOpacity(1.0)
+                ? ColorsManager.mainBlue.withAlpha(255)
                 : isActive
                     ? ColorsManager.mainBlue
                     : Colors.grey[600],

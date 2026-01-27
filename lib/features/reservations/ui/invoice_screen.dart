@@ -310,9 +310,9 @@ class InvoiceScreen extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: ColorsManager.mainBlue.withOpacity(0.08),
+          color: ColorsManager.mainBlue.withAlpha(20),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: ColorsManager.mainBlue.withOpacity(0.3)),
+          border: Border.all(color: ColorsManager.mainBlue.withAlpha(77)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

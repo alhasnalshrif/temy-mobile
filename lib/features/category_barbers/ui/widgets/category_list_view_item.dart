@@ -44,7 +44,7 @@ class CategoryListViewItem extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: backgroundColor,
-          border: Border.all(color: Colors.grey.withOpacity(0.2)),
+          border: Border.all(color: Colors.grey.withAlpha(51)),
 
           borderRadius: BorderRadius.circular(16),
         ),
@@ -141,7 +141,7 @@ class _CategoryImage extends StatelessWidget {
       child: Icon(
         Icons.broken_image,
         size: radius * 0.8,
-        color: ColorsManager.red.withOpacity(0.6),
+        color: ColorsManager.red.withAlpha(153),
       ),
     ),
   );

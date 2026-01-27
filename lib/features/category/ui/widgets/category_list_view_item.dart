@@ -4,7 +4,6 @@ import 'package:shimmer/shimmer.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/category/data/models/categories_list_response.dart';
 
-/// A widget that displays a single category item in a list with an image and name.
 class CategoryListViewItem extends StatelessWidget {
   final CategoryItem? serviceResponseModel;
   final int indexItem;
@@ -34,7 +33,6 @@ class CategoryListViewItem extends StatelessWidget {
     );
   }
 
-  /// Builds the main container with a tap animation.
   Widget _buildAnimatedContainer(BuildContext context) {
     return AnimatedScale(
       duration: const Duration(milliseconds: 100),
@@ -63,23 +61,17 @@ class CategoryListViewItem extends StatelessWidget {
     );
   }
 
-  /// Builds the category name with responsive text constraints.
   Widget _buildCategoryName(BuildContext context) {
-    final textScale = MediaQuery.of(context).textScaleFactor;
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: radius * 2.5),
-      child: Text(
-        serviceResponseModel?.name ?? 'Service',
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          color: Colors.grey[900],
-          height: 1.3,
-          fontWeight: FontWeight.w600,
-          fontSize: 14 / textScale,
-        ),
-        textAlign: TextAlign.start,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
+    return Text(
+      serviceResponseModel?.name ?? 'Service',
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+        color: Colors.grey[900],
+        fontWeight: FontWeight.w600,
+        fontSize: 18,
       ),
+      textAlign: TextAlign.start,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
@@ -124,14 +116,12 @@ class _CategoryImage extends StatelessWidget {
     );
   }
 
-  /// Builds a shimmer effect for loading images.
   Widget _buildShimmer(double size) => Shimmer.fromColors(
     baseColor: Colors.grey[300]!,
     highlightColor: Colors.grey[100]!,
     child: Container(width: size, height: size, color: Colors.white),
   );
 
-  /// Builds an error widget for failed image loads.
   Widget _buildError(double size) => Container(
     width: size,
     height: size,
@@ -140,12 +130,11 @@ class _CategoryImage extends StatelessWidget {
       child: Icon(
         Icons.broken_image,
         size: radius * 0.8,
-        color: ColorsManager.red.withOpacity(0.6),
+        color: ColorsManager.red.withAlpha(153),
       ),
     ),
   );
 
-  /// Builds a fallback widget for missing images.
   Widget _buildFallback(double size) => Container(
     width: size,
     height: size,

@@ -59,14 +59,13 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
     );
 
     if (otp != null && mounted) {
-      print('✅ GuestInfoDialog: OTP received from dialog: $otp');
-      // Return guest info with OTP to parent
+   
       final guestInfo = GuestInfo(name: name, phone: phone);
 
       // Return both guest info and OTP as a map
       Navigator.pop(context, {'guestInfo': guestInfo, 'otp': otp});
     } else {
-      print('❌ GuestInfoDialog: OTP dialog cancelled or returned null');
+      debugPrint(' GuestInfoDialog: OTP dialog cancelled or returned null');
     }
   }
 
@@ -179,7 +178,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                         color: ColorsManager.lightBlue,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: ColorsManager.mainBlue.withOpacity(0.3),
+                          color: ColorsManager.mainBlue.withAlpha(77),
                         ),
                       ),
                       child: Row(
@@ -221,8 +220,8 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                             horizontal: 24,
                             vertical: 12,
                           ),
-                          backgroundColor: ColorsManager.lightBlue.withOpacity(
-                            0.3,
+                          backgroundColor: ColorsManager.lightBlue.withAlpha(
+                            77,
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -236,10 +235,10 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: ColorsManager.red.withOpacity(0.1),
+                        color: ColorsManager.red.withAlpha(26),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: ColorsManager.red.withOpacity(0.3),
+                          color: ColorsManager.red.withAlpha(77),
                         ),
                       ),
                       child: Row(

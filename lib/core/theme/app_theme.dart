@@ -129,7 +129,7 @@ class AppTheme {
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
-          side: BorderSide(color: ColorsManager.lighterGray.withOpacity(0.5)),
+          side: BorderSide(color: ColorsManager.lighterGray.withAlpha(128)),
         ),
       ),
 

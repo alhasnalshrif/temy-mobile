@@ -183,7 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             _buildProfileInfoSection(isVertical: true),
                             verticalSpace(24),
-                            Divider(color: Colors.white.withOpacity(0.1)),
+                            Divider(color: Colors.white.withAlpha(26)),
                             verticalSpace(24),
                             LanguageSelector(
                               currentLanguage: currentLanguage,

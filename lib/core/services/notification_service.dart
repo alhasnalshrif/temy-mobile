@@ -384,11 +384,8 @@ class NotificationService {
     log('Navigate to booking details: $bookingId');
     try {
       if (_navigatorKey?.currentContext != null) {
-        // Navigate to booking tab in dashboard with specific booking
-        _navigatorKey!.currentContext!.goNamed(
-          AppRoutes.dashboardName,
-          extra: 1, // Index 1 is the booking tab
-        );
+        // Navigate to booking tab
+        _navigatorKey!.currentContext!.goNamed(AppRoutes.bookingName);
       }
     } catch (e) {
       log('Error navigating to booking details: $e');
@@ -401,10 +398,7 @@ class NotificationService {
     try {
       if (_navigatorKey?.currentContext != null) {
         // Navigate to booking tab in dashboard
-        _navigatorKey!.currentContext!.goNamed(
-          AppRoutes.dashboardName,
-          extra: 1, // Index 1 is the booking tab
-        );
+        _navigatorKey!.currentContext!.goNamed(AppRoutes.bookingName);
       }
     } catch (e) {
       log('Error navigating to upcoming bookings: $e');

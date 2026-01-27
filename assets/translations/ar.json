@@ -221,7 +221,7 @@
     "new_password": "كلمة المرور الجديدة",
     "enter_new_password": "أدخل كلمة المرور الجديدة",
     "password_required": "كلمة المرور مطلوبة",
-    "password_validation_message": "كلمة المرور: 8 أحرف على الأقل مع أحرف وأرقام",
+    "password_min_length": "كلمة المرور يجب أن تكون 8 ارقام على الأقل",
     "confirm_password": "تأكيد كلمة المرور",
     "confirm_new_password": "تأكيد كلمة المرور الجديدة",
     "confirm_password_required": "أكد كلمة المرور",
@@ -361,5 +361,10 @@
     "how_to_use_body": "- تصفح الخدمات واختر الخيار المفضل لديك.\n- احجز المواعيد بسهولة من خلال التطبيق.\n- إدارة ملفك الشخصي وتفضيلاتك.",
     "need_help_title": "هل تحتاج المزيد من المساعدة؟",
     "need_help_body": "يمكنك الوصول إلى فريق الدعم لدينا في أي وقت.\n\nالهاتف: 01064067843\nالبريد الإلكتروني: support@temybarber.com"
+  },
+  "home_screen": {
+    "complete_reservation_title": "أكمل حجزك",
+    "pending_reservations": "لديك {} حجز معلق",
+    "continue_booking": "متابعة"
   }
 }

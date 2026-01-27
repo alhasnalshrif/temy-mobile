@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
@@ -172,7 +171,7 @@ class _MyDashboardState extends State<DashboardScreen> {
                     height: 40,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: ColorsManager.mainBlue.withOpacity(0.1),
+                      color: ColorsManager.mainBlue.withAlpha(25),
                     ),
                     child: IconButton(
                       padding: EdgeInsets.zero,

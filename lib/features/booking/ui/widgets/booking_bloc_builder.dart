@@ -8,9 +8,10 @@ import 'package:temy_barber/features/booking/logic/booking_state.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_card.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_shimmer.dart'; // Import optimized shimmer
 import 'package:temy_barber/features/booking/ui/widgets/booking_tabs.dart';
-// Import BookingStatusStepper
 import 'package:temy_barber/features/booking/ui/widgets/empty_booking_view.dart';
 import 'package:temy_barber/features/booking/ui/widgets/error_booking_view.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
 
 class BookingBlocBuilder extends StatefulWidget {
   const BookingBlocBuilder({super.key});
@@ -76,8 +77,8 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
                   },
                 ),
                 verticalSpace(16),
-                // Single booking status stepper for filtering
 
+                // Single booking status stepper for filtering
                 verticalSpace(16),
                 if (bookingsToShow.isEmpty)
                   Padding(
@@ -90,12 +91,7 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
                           ? 'booking.book_appointment'.tr()
                           : 'booking.explore_services'.tr(),
                       onPressed: () {
-                        if (_showActiveBookings) {
-                          // TODO: Navigate to booking screen or refresh
-                          context.read<BookingCubit>().getBooking();
-                        } else {
-                          // TODO: Navigate to services or home screen
-                        }
+                        context.goNamed(AppRoutes.homeName);
                       },
                     ),
                   )
@@ -159,9 +155,11 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
               verticalSpace(20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: EmptyBookingView(onPressed: () {
-                  context.read<BookingCubit>().getBooking();
-                }),
+                child: EmptyBookingView(
+                  onPressed: () {
+                    context.read<BookingCubit>().getBooking();
+                  },
+                ),
               ),
             ],
           ),

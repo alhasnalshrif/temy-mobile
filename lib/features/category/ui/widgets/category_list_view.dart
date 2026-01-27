@@ -22,17 +22,16 @@ class CategoryBarberListView extends StatelessWidget {
         : barberDataList.length;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
         itemCount: itemCount,
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 500,
-          mainAxisSpacing: 16,
+          mainAxisSpacing: 2,
           crossAxisSpacing: 16,
-          childAspectRatio: 2.8,
+          childAspectRatio: 3.5,
         ),
         itemBuilder: (context, index) {
           return CategoryListViewItem(

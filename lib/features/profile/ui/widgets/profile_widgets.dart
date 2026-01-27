@@ -96,7 +96,7 @@ class ProfileInfo extends StatelessWidget {
         Text(
           phoneNumber,
           style: TextStyles.font16WhiteSemiBold.copyWith(
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withAlpha(179),
           ),
         ),
       ],
@@ -205,8 +205,8 @@ class ProfileTile extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            splashColor: ColorsManager.mainBlue.withOpacity(0.1),
-            highlightColor: ColorsManager.mainBlue.withOpacity(0.05),
+            splashColor: ColorsManager.mainBlue.withAlpha(25),
+            highlightColor: ColorsManager.mainBlue.withAlpha(13),
             child: ListTile(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -250,13 +250,13 @@ class DangerTile extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            splashColor: ColorsManager.red.withOpacity(0.1),
-            highlightColor: ColorsManager.red.withOpacity(0.05),
+            splashColor: ColorsManager.red.withAlpha(25),
+            highlightColor: ColorsManager.red.withAlpha(13),
             child: ListTile(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              tileColor: ColorsManager.red.withOpacity(0.05),
+              tileColor: ColorsManager.red.withAlpha(13),
               leading: Icon(icon, color: ColorsManager.red),
               title: Text(
                 title,
@@ -347,7 +347,7 @@ class GuestScreen extends StatelessWidget {
                         Icon(
                           Icons.lock_outline,
                           size: 80,
-                          color: ColorsManager.mainBlue.withOpacity(0.5),
+                          color: ColorsManager.mainBlue.withAlpha(128),
                         ),
                         const SizedBox(height: 24),
                         Text(
@@ -452,17 +452,16 @@ class _DesktopProfileCardState extends State<DesktopProfileCard> {
             boxShadow: [
               BoxShadow(
                 color: widget.isDanger
-                    ? ColorsManager.red.withOpacity(_isHovered ? 0.2 : 0.05)
-                    : Colors.black.withOpacity(_isHovered ? 0.1 : 0.05),
+                    ? ColorsManager.red.withAlpha(_isHovered ? 51 : 13)
+                    : Colors.black.withAlpha(_isHovered ? 26 : 13),
                 blurRadius: _isHovered ? 20 : 10,
                 offset: Offset(0, _isHovered ? 8 : 4),
               ),
             ],
             border: Border.all(
               color: widget.isDanger
-                  ? ColorsManager.red.withOpacity(0.1)
+                  ? ColorsManager.red.withAlpha(25)
                   : Colors.transparent,
-              width: 1,
             ),
           ),
           child: Column(
@@ -472,8 +471,8 @@ class _DesktopProfileCardState extends State<DesktopProfileCard> {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: widget.isDanger
-                      ? ColorsManager.red.withOpacity(0.1)
-                      : ColorsManager.mainBlue.withOpacity(0.1),
+                      ? ColorsManager.red.withAlpha(25)
+                      : ColorsManager.mainBlue.withAlpha(25),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(

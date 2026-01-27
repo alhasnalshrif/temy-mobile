@@ -14,17 +14,19 @@ import 'package:flutter/services.dart';
 class ResetPasswordScreen extends StatelessWidget {
   final String phoneNumber;
 
-  const ResetPasswordScreen({
-    super.key,
-    required this.phoneNumber,
-  });
+  const ResetPasswordScreen({super.key, required this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('auth.reset_password'.tr(), style: TextStyles.font18WhiteBold),
+        title: Text(
+          'auth.reset_password'.tr(),
+          style: TextStyles.font18WhiteBold,
+        ),
         backgroundColor: ColorsManager.mainBlue,
+        centerTitle: true,
+        
       ),
       body: SafeArea(
         child: Padding(
@@ -63,7 +65,7 @@ class ResetPasswordScreen extends StatelessWidget {
   Widget _buildResetPasswordForm(BuildContext context) {
     // Set the phone number in the cubit
     context.read<ResetPasswordCubit>().setPhoneNumber(phoneNumber);
-    
+
     return Form(
       key: context.read<ResetPasswordCubit>().formKey,
       child: Column(
@@ -81,9 +83,7 @@ class ResetPasswordScreen extends StatelessWidget {
           AppTextFormField(
             hintText: 'auth.enter_verification_code'.tr(),
             keyboardType: TextInputType.number,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-            ],
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             controller: context.read<ResetPasswordCubit>().codeController,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -110,8 +110,8 @@ class ResetPasswordScreen extends StatelessWidget {
               if (value == null || value.isEmpty) {
                 return 'auth.password_required'.tr();
               }
-              if (!AppRegex.isPasswordValid(value)) {
-                return 'auth.password_validation_message'.tr();
+              if (!AppRegex.hasMinLength(value)) {
+                return 'auth.password_min_length'.tr();
               }
               return null;
             },
@@ -128,13 +128,16 @@ class ResetPasswordScreen extends StatelessWidget {
           verticalSpace(12),
           AppTextFormField(
             hintText: 'auth.confirm_new_password'.tr(),
-            controller: context.read<ResetPasswordCubit>().confirmPasswordController,
+            controller: context
+                .read<ResetPasswordCubit>()
+                .confirmPasswordController,
             isObscureText: true,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'auth.confirm_password_required'.tr();
               }
-              if (value != context.read<ResetPasswordCubit>().passwordController.text) {
+              if (value !=
+                  context.read<ResetPasswordCubit>().passwordController.text) {
                 return 'auth.passwords_do_not_match'.tr();
               }
               return null;

@@ -92,7 +92,7 @@ class InfoContainer extends StatelessWidget {
     return Container(
       padding: padding,
       decoration: BoxDecoration(
-        color: backgroundColor ?? ColorsManager.mainBlue.withOpacity(0.1),
+        color: backgroundColor ?? ColorsManager.mainBlue.withAlpha(25),
         borderRadius: BorderRadius.circular(12),
         border: borderColor != null
             ? Border.all(color: borderColor!)

@@ -41,12 +41,12 @@ import 'package:temy_barber/features/reservations/ui/invoice_screen.dart'
 import 'package:temy_barber/features/reservations/ui/reservations_screen.dart';
 
 class AppRouterGo {
-  static final GlobalKey<NavigatorState> _rootNavigatorKey =
+  static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
   static GoRouter createRouter({required bool isLoggedIn}) {
     return GoRouter(
-      navigatorKey: _rootNavigatorKey,
+      navigatorKey: navigatorKey,
       initialLocation: isLoggedIn ? AppRoutes.Home : AppRoutes.Login,
       debugLogDiagnostics: kDebugMode, // Disable route logging in production
       routes: [
@@ -304,13 +304,15 @@ class AppRouterGo {
         final isResetPassword =
             state.matchedLocation == AppRoutes.ResetPassword;
         final isVerification = state.matchedLocation == AppRoutes.Verification;
+        final isHome = state.matchedLocation.startsWith(AppRoutes.Home);
 
         // Allow auth screens even if not logged in
         if (isLoggingIn ||
             isSigningUp ||
             isForgotPassword ||
             isResetPassword ||
-            isVerification) {
+            isVerification ||
+            isHome) {
           return null;
         }
 
@@ -332,7 +334,4 @@ class AppRouterGo {
       ),
     );
   }
-
-  // Helper to get the navigator key
-  static GlobalKey<NavigatorState> get navigatorKey => _rootNavigatorKey;
 }

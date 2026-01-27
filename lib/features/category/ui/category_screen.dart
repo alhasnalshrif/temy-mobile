@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/category/ui/widgets/category_with_barbers_bloc_builder.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -9,11 +10,10 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('navigation.categories'.tr()),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: ColorsManager.mainBlue,
       ),
       body: SafeArea(
         child: Container(
@@ -21,13 +21,10 @@ class CategoryScreen extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: Container(
             constraints: const BoxConstraints(maxWidth: 1000),
-            margin: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 28),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                verticalSpace(10),
-                const CategoryWithBarbersBlocBuilder(),
-              ],
+              children: [const CategoryWithBarbersBlocBuilder()],
             ),
           ),
         ),

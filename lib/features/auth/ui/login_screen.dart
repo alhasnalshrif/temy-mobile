@@ -201,7 +201,7 @@ class LoginScreen extends StatelessWidget {
           verticalSpace(24),
           GestureDetector(
             onTap: () {
-              context.goNamed(AppRoutes.forgotPasswordName);
+              context.pushGoNamed(AppRoutes.forgotPasswordName);
             },
             child: Text(
               'auth.forgot_password'.tr(),
@@ -222,7 +222,7 @@ class LoginScreen extends StatelessWidget {
           Center(
             child: TextButton(
               onPressed: () {
-                context.goNamed(AppRoutes.dashboardName);
+                context.goNamed(AppRoutes.homeName);
               },
               child: Text(
                 'auth.continue_as_guest'.tr(),

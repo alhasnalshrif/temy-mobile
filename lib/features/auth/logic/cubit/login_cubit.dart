@@ -27,12 +27,9 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(
-      success: (loginResponse) async {
-        await saveUserToken(
-          loginResponse.token ?? '',
-          loginResponse.data!.user?.id ?? '',
-        );
-        emit(LoginState.success(loginResponse));
+      success: (data) async {
+        await saveUserToken(data.token ?? '', data.data!.user?.id ?? '');
+        emit(LoginState.success(data));
       },
       failure: (error) {
         emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
@@ -41,18 +38,14 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> saveUserToken(String token, String id) async {
-    // Use AuthService to save token with validation
     await AuthService.instance.saveToken(token, userId: id);
 
-    // Update global state
     isLoggedInUser = true;
 
-    // Update device token on server after successful login
     try {
       final notificationCubit = getIt<NotificationCubit>();
-      await notificationCubit.setUserId(id);
+      notificationCubit.setUserId(id);
     } catch (error) {
-      // Don't fail the login process if notification setup fails
       debugPrint('Failed to update device token after login: $error');
     }
   }

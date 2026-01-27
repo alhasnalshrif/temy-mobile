@@ -244,7 +244,7 @@ class _CalendarSectionState extends State<CalendarSection>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
               color: isDayOff
-                  ? ColorsManager.red.withOpacity(0.1)
+                  ? ColorsManager.red.withAlpha(25)
                   : Colors.transparent,
             ),
             child: Center(

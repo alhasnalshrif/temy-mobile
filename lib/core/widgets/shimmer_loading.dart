@@ -293,10 +293,10 @@ class ShimmerLoading extends StatelessWidget {
 
     // Use width if provided, otherwise standard expand behavior (double.infinity).
     // Avoid MediaQuery as it forces screen width logic which breaks responsive constraints.
-    final double? effectiveWidth = width ?? double.infinity;
+    final double effectiveWidth = width ?? double.infinity;
 
     final defaultDecoration = ShapeDecoration(
-      color: shimmerBase.withOpacity(0.6),
+      color: shimmerBase.withAlpha(153),
       shape: shapeBorder,
     );
 

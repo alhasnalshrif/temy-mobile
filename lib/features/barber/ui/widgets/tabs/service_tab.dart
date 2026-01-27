@@ -42,7 +42,7 @@ class ServiceTab extends StatelessWidget {
           crossAxisCount = 1;
         }
 
-        final double spacing = 16.0;
+        const double spacing = 16.0;
         final double totalSpacing = (crossAxisCount - 1) * spacing;
         final double itemWidth = (width - totalSpacing) / crossAxisCount;
 

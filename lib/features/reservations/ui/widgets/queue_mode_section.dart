@@ -12,7 +12,7 @@ class QueueModeSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: ColorsManager.mainBlue.withOpacity(0.1),
+        color: ColorsManager.mainBlue.withAlpha(25),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: ColorsManager.mainBlue),
       ),

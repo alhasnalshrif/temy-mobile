@@ -52,8 +52,8 @@ class _BannerCarouselState extends State<BannerCarousel> {
               margin: const EdgeInsets.symmetric(horizontal: 4.0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: ColorsManager.mainBlue.withOpacity(
-                  _currentIndex == entry.key ? 0.9 : 0.4,
+                color: ColorsManager.mainBlue.withAlpha(
+                  _currentIndex == entry.key ? 230 : 102,
                 ),
               ),
             );

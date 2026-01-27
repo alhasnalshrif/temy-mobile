@@ -269,7 +269,7 @@ class AddAnotherReservationButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: ColorsManager.lightBlue.withOpacity(0.4),
+        color: ColorsManager.lightBlue.withAlpha(102),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Material(
@@ -299,7 +299,7 @@ class AddAnotherReservationButton extends StatelessWidget {
                 Icon(
                   Icons.arrow_forward_ios,
                   size: 16,
-                  color: ColorsManager.mainBlue.withOpacity(0.7),
+                  color: ColorsManager.mainBlue.withAlpha(179),
                 ),
               ],
             ),
@@ -560,7 +560,7 @@ class _ReservationCard extends StatelessWidget {
             icon: Container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                color: ColorsManager.red.withOpacity(0.1),
+                color: ColorsManager.red.withAlpha(25),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
@@ -657,7 +657,7 @@ class _GrandTotalCard extends StatelessWidget {
       margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
       decoration: BoxDecoration(
-        color: ColorsManager.thirdfMain.withOpacity(0.3),
+        color: ColorsManager.thirdfMain.withAlpha(75),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(

@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 
-class MultiReservationManager {
+class MultiReservationManager extends ChangeNotifier {
   static final MultiReservationManager _instance =
       MultiReservationManager._internal();
   factory MultiReservationManager() => _instance;
@@ -13,15 +14,18 @@ class MultiReservationManager {
 
   void addReservation(ReservationArguments reservation) {
     _reservations.add(reservation);
+    notifyListeners();
   }
 
   void clearReservations() {
     _reservations.clear();
+    notifyListeners();
   }
 
   void removeReservation(int index) {
     if (index >= 0 && index < _reservations.length) {
       _reservations.removeAt(index);
+      notifyListeners();
     }
   }
 
@@ -31,15 +35,18 @@ class MultiReservationManager {
 
   double getTotalPrice() {
     return _reservations.fold(
-        0, (total, reservation) => total + reservation.totalPrice);
+      0,
+      (total, reservation) => total + reservation.totalPrice,
+    );
   }
 
-  List<Map<String, dynamic>> getReservationsData(
-      {ReservationArguments? currentReservation}) {
+  List<Map<String, dynamic>> getReservationsData({
+    ReservationArguments? currentReservation,
+  }) {
     final List<ReservationArguments> allReservations =
         currentReservation != null
-            ? [..._reservations, currentReservation]
-            : _reservations;
+        ? [..._reservations, currentReservation]
+        : _reservations;
 
     return allReservations.map((reservation) {
       final serviceIds = reservation.selectedServices.map((s) => s.id).toList();

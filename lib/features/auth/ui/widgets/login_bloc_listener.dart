@@ -4,12 +4,11 @@ import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/auth/logic/cubit/login_cubit.dart';
 import 'package:temy_barber/features/auth/logic/cubit/login_state.dart';
-import 'package:temy_barber/core/widgets/shimmer_loading.dart'; // Import shimmer
 import 'package:easy_localization/easy_localization.dart';
-import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
-import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
 import '../../../../core/theme/styles.dart';
+
+import 'package:temy_barber/core/routing/app_router_go.dart';
 
 class LoginBlocListener extends StatelessWidget {
   const LoginBlocListener({super.key});
@@ -25,7 +24,7 @@ class LoginBlocListener extends StatelessWidget {
             setupLoadingState(context);
           },
           success: (loginResponse) {
-            context.pop();
+            Navigator.of(context, rootNavigator: true).pop();
 
             // Check if user is verified
             final user = loginResponse.data?.user;
@@ -59,19 +58,15 @@ class LoginBlocListener extends StatelessWidget {
               return;
             }
 
-            // Set user ID for OneSignal after successful login
-            final userId = loginResponse.data?.user?.id;
-            if (userId != null) {
-              // Get NotificationCubit directly from GetIt instead of from context
-              try {
-                final notificationCubit = getIt<NotificationCubit>();
-                notificationCubit.setUserId(userId);
-              } catch (e) {
-                debugPrint('Could not access NotificationCubit: $e');
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (context.mounted) {
+                context.goNamed(AppRoutes.homeName);
+              } else {
+                AppRouterGo.navigatorKey.currentState?.context.goNamed(
+                  AppRoutes.homeName,
+                );
               }
-            }
-
-            context.goNamed(AppRoutes.dashboardName);
+            });
           },
           error: (error) {
             setupErrorState(context, error);
@@ -85,15 +80,14 @@ class LoginBlocListener extends StatelessWidget {
   void setupLoadingState(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => Center(
-        // Replace CircularProgressIndicator with ShimmerLoading
-        child: ShimmerLoading.circular(size: 50), // Example shimmer
-      ),
+      barrierDismissible: false,
+      builder: (context) =>
+          const Center(child: CircularProgressIndicator(color: Colors.white)),
     );
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop();
+    Navigator.of(context, rootNavigator: true).pop(); // Close loading dialog
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -103,7 +97,7 @@ class LoginBlocListener extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              context.pop();
+              Navigator.of(context, rootNavigator: true).pop();
             },
             child: Text(
               'common.got_it'.tr(),

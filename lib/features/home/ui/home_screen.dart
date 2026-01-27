@@ -11,6 +11,7 @@ import 'package:temy_barber/features/home/ui/widgets/category_sea_all.dart';
 import 'package:temy_barber/features/home/ui/widgets/home_top_bar.dart';
 import 'package:temy_barber/features/home/ui/widgets/next_booking_card.dart';
 import 'package:temy_barber/features/home/ui/widgets/default_booking_card.dart';
+import 'package:temy_barber/features/home/ui/widgets/complete_reservation_card.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/profile_state.dart';
@@ -54,6 +55,7 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const HomeTopBar(),
+          const CompleteReservationCard(),
           const DefaultBookingCard(),
           const NextBookingCard(),
           verticalSpace(16),
@@ -78,6 +80,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           const HomeTopBar(),
           verticalSpace(16),
+          const CompleteReservationCard(),
           // Two-column layout for booking cards
           const Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,6 +115,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               const HomeTopBar(),
               verticalSpace(40),
+              const CompleteReservationCard(),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
@@ -156,7 +160,6 @@ class HomeScreen extends StatelessWidget {
         if (state is ProfileSuccess) {
           final user = state.userProfile.user;
           final isVerified = user?.verified ?? true;
-
 
           if (!isVerified) {
             final phoneNumber = user?.phone ?? '';

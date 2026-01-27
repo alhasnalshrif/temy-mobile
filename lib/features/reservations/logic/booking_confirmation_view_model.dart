@@ -132,10 +132,6 @@ class BookingConfirmationViewModel extends ChangeNotifier {
     return BookingValidationResult(isValid: true);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }
 
 /// Result of booking validation

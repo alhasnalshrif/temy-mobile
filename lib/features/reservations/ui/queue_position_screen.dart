@@ -139,7 +139,7 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
           children: [
             // Status Card
             Card(
-              color: statusColor.withOpacity(0.1),
+              color: statusColor.withAlpha(25),
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
@@ -281,7 +281,7 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withAlpha(25),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: color, size: 32),
