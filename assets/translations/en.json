@@ -343,6 +343,7 @@
         "contact_info": "📞 Phone: 01064067843\n🌐 Website: www.temybarber.com"
     },
     "privacy_policy": {
+        "title": "Privacy Policy",
         "section_1_title": "1. Information We Collect",
         "section_1_body": "- Personal information you provide: name, phone number, email, profile picture.\n- Usage information: app usage, device identifiers, crash reports.",
         "section_2_title": "2. How We Use Information",
@@ -357,6 +358,7 @@
         "section_6_body": "For questions about this policy, contact us via the support channels in the app."
     },
     "help": {
+    "title": "Help and Support",
         "how_to_use_title": "How to use the app",
         "how_to_use_body": "- Browse services and select your preferred option.\n- Book appointments easily through the app.\n- Manage your profile and preferences.",
         "need_help_title": "Need more help?",

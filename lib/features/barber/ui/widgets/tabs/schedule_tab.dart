@@ -13,6 +13,8 @@ class ScheduleTab extends StatefulWidget {
 }
 
 class _ScheduleTabState extends State<ScheduleTab> {
+  int? _selectedTimeSlotIndex;
+
   @override
   Widget build(BuildContext context) {
     final schedule = widget.serviceResponseModel?.availability;
@@ -55,44 +57,61 @@ class _ScheduleTabState extends State<ScheduleTab> {
               ),
               const SizedBox(height: 20),
               Expanded(
-                child: SingleChildScrollView(
-                  child: Wrap(
-                    spacing: 12,
-                    runSpacing: 12,
-                    children: timeSlots.map((slot) {
-                      final isDisabled = !slot.isAvailable;
-                      return SizedBox(
-                        width: 100, // Fixed width for time slots
-                        height: 40,
-                        child: AnimatedOpacity(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 2.5,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                  ),
+                  itemCount: timeSlots.length,
+                  itemBuilder: (context, index) {
+                    final slot = timeSlots[index];
+                    final isDisabled = !slot.isAvailable;
+                    final isSelected = _selectedTimeSlotIndex == index;
+
+                    return GestureDetector(
+                      onTap: isDisabled
+                          ? null
+                          : () {
+                              setState(() {
+                                _selectedTimeSlotIndex = index;
+                              });
+                            },
+                      child: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 200),
+                        opacity: isDisabled ? 0.5 : 1,
+                        child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
-                          opacity: isDisabled ? 0.5 : 1,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(14),
-                              border: Border.all(
-                                color: ColorsManager.thirdfMain,
-                              ),
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              slot.time,
-                              style: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(
-                                    color: isDisabled
-                                        ? Colors.grey[400]
-                                        : ColorsManager.darkBlue,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.2,
-                                  ),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? ColorsManager.mainBlue
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(
+                              color: isSelected
+                                  ? ColorsManager.mainBlue
+                                  : ColorsManager.thirdfMain,
                             ),
                           ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            slot.time,
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(
+                                  color: isSelected
+                                      ? Colors.white
+                                      : (isDisabled
+                                            ? Colors.grey[400]
+                                            : ColorsManager.darkBlue),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 0.2,
+                                ),
+                          ),
                         ),
-                      );
-                    }).toList(),
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

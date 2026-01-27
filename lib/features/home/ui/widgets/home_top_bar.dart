@@ -8,17 +8,20 @@ class HomeTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Column(
-          children: [
-            Text('temy_barber'.tr(), style: TextStyles.font24BlackBold),
-          ],
-        ),
-        // const Spacer(),
-        // const Image(image: AssetImage('assets/images/logo.png'), height: 40),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            children: [
+              Text('temy_barber'.tr(), style: TextStyles.font24BlackBold),
+            ],
+          ),
+          // const Spacer(),
+          // const Image(image: AssetImage('assets/images/logo.png'), height: 40),
+        ],
+      ),
     );
   }
 }

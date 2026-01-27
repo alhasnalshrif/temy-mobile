@@ -114,8 +114,12 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
         style: TextStyles.font16DarkBold,
       ),
       centerTitle: true,
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
+      foregroundColor: ColorsManager.black,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios_new),
+        color: Colors.black,
+        onPressed: () => context.pop(),
+      ),
       elevation: 0,
       shadowColor: Colors.transparent,
     );

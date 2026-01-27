@@ -34,7 +34,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   // Update selection and price
@@ -82,7 +82,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
       children: [
         Expanded(
           child: DefaultTabController(
-            length: 3,
+            length: 2,
             child: NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) => [
                 SliverToBoxAdapter(child: _buildHeader()),
@@ -147,7 +147,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                   border: Border.all(color: ColorsManager.moreLighterGray),
                 ),
                 child: DefaultTabController(
-                  length: 3,
+                  length: 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -218,6 +218,40 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
+                if (barber?.workingHours != null) ...[
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.calendar_today,
+                        size: 16,
+                        color: Colors.grey[600],
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        _getWorkingDays(barber?.workingHours?.daysOff),
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Icon(
+                        Icons.access_time,
+                        size: 16,
+                        color: Colors.grey[600],
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        '${barber?.workingHours?.start} - ${barber?.workingHours?.end}',
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
                 const SizedBox(height: 8),
                 RatingDisplay(
                   rating: 5.0,
@@ -252,7 +286,6 @@ class _BarberScreenItemState extends State<BarberScreenItem>
       tabs: [
         Tab(text: 'barber.service_tab'.tr()),
         Tab(text: 'barber.schedule_tab'.tr()),
-        Tab(text: 'barber.about_tab'.tr()),
       ],
     );
   }
@@ -267,7 +300,6 @@ class _BarberScreenItemState extends State<BarberScreenItem>
           onServiceSelected: _onServiceSelected,
         ),
         ScheduleTab(serviceResponseModel: widget.serviceResponseModel),
-        AboutTab(serviceResponseModel: widget.serviceResponseModel),
       ],
     );
   }
@@ -320,5 +352,14 @@ class _BarberScreenItemState extends State<BarberScreenItem>
 
   String _priceText(double price) {
     return 'barber.price'.tr(args: [price.toStringAsFixed(0)]);
+  }
+
+  String _getWorkingDays(List<int>? daysOff) {
+    if (daysOff == null || daysOff.isEmpty) return 'Mon - Sun';
+    if (daysOff.contains(7) && daysOff.length == 1) return 'Mon - Sat';
+    if (daysOff.contains(6) && daysOff.contains(7) && daysOff.length == 2) {
+      return 'Mon - Fri';
+    }
+    return 'Mon - Sun';
   }
 }

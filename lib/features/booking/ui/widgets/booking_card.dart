@@ -36,6 +36,8 @@ class BookingCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+             
+              const SizedBox(height: 8.0),
               Text(
                 'booking.cancel_title'.tr(),
                 style: Theme.of(dialogContext).textTheme.headlineSmall

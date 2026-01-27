@@ -102,7 +102,7 @@ class ServiceTab extends StatelessWidget {
                                 border: Border.all(
                                   color: isSelected
                                       ? Colors.transparent
-                                      : ColorsManager.lightGray,
+                                      : ColorsManager.gray,
                                 ),
                               ),
                               child: isSelected

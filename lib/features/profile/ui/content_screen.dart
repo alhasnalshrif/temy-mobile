@@ -34,6 +34,7 @@ class ContentScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
+          width: double.infinity,
           constraints: BoxConstraints(
             maxWidth: isLargeScreen ? 800 : double.infinity,
           ),
