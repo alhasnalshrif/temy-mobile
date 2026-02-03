@@ -130,16 +130,16 @@ class _CalendarSectionState extends State<CalendarSection>
 
   // Get full day name for tooltip
   String _getFullDayName(int index) {
-    const arabicFullDays = [
-      'الأحد',
-      'الإثنين',
-      'الثلاثاء',
-      'الأربعاء',
-      'الخميس',
-      'الجمعة',
-      'السبت',
+    const dayKeys = [
+      'calendar.sunday',
+      'calendar.monday',
+      'calendar.tuesday',
+      'calendar.wednesday',
+      'calendar.thursday',
+      'calendar.friday',
+      'calendar.saturday',
     ];
-    return arabicFullDays[index];
+    return dayKeys[index].tr();
   }
 
   // Check if day index is a day off (0=Sunday, 6=Saturday)
@@ -254,7 +254,9 @@ class _CalendarSectionState extends State<CalendarSection>
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: isDayOff ? ColorsManager.red.withAlpha(200) : ColorsManager.lightBlue,
+                  color: isDayOff
+                      ? ColorsManager.red.withAlpha(200)
+                      : ColorsManager.lightBlue,
                 ),
               ),
             ),
@@ -337,9 +339,7 @@ class _CalendarSectionState extends State<CalendarSection>
       // Day off - show with red styling
       textColor = ColorsManager.red.withAlpha(200);
       fontWeight = FontWeight.w500;
-      decoration = decoration.copyWith(
-        color: ColorsManager.red.withAlpha(20),
-      );
+      decoration = decoration.copyWith(color: ColorsManager.red.withAlpha(20));
     } else if (!isSelectable) {
       // Past dates or out of booking range
       textColor = Colors.grey[400]!;

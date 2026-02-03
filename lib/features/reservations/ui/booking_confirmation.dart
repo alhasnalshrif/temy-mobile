@@ -39,7 +39,10 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     // Only clear reservations if we are NOT adding another one
     // and if the view model is available (not null)
     if (!_isAddingAnother) {
-      _viewModel.clearReservations();
+      // Use post-frame callback to avoid setState during disposal
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _viewModel.clearReservations();
+      });
     }
     _viewModel.dispose();
     super.dispose();

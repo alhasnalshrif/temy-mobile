@@ -15,39 +15,36 @@ class CategoryBarberListView extends StatelessWidget {
     this.spacing = 8.0,
     this.maxItems = 6,
   });
+
   @override
   Widget build(BuildContext context) {
     final int itemCount = barberDataList.length > maxItems
         ? maxItems
         : barberDataList.length;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: GridView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        itemCount: itemCount,
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 500,
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          childAspectRatio: 4,
-        ),
-        itemBuilder: (context, index) {
-          return CategoryListViewItem(
-            serviceResponseModel: barberDataList[index],
-            indexItem: index,
-            radius: 36, // Fixed size for better consistency
-            onTap: () {
-              debugPrint('Category tapped: ${barberDataList[index]?.name}');
-
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+      itemCount: itemCount,
+      // Performance optimization: estimate item height
+      itemExtent: 100,
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        final barber = barberDataList[index];
+        return CategoryListViewItem(
+          key: ValueKey(barber?.id ?? 'barber_$index'),
+          serviceResponseModel: barber,
+          indexItem: index,
+          radius: 32,
+          onTap: () {
+            if (barber?.id != null) {
               context.goNamed(
                 AppRoutes.barberName,
-                pathParameters: {'barberId': barberDataList[index]?.id ?? ''},
+                pathParameters: {'barberId': barber!.id!},
               );
-            },
-          );
-        },
-      ),
+            }
+          },
+        );
+      },
     );
   }
 }

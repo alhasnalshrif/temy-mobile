@@ -34,7 +34,14 @@
   "calendar": {
     "today": "اليوم",
     "booking_available_days": "متاح الحجز خلال {} يوم",
-    "day_off": "(إجازة)"
+    "day_off": "(إجازة)",
+    "sunday": "الأحد",
+    "monday": "الإثنين",
+    "tuesday": "الثلاثاء",
+    "wednesday": "الأربعاء",
+    "thursday": "الخميس",
+    "friday": "الجمعة",
+    "saturday": "السبت"
   },
   "queue": {
     "live_status": "حالة الطابور المباشرة",
@@ -55,7 +62,12 @@
     "total_duration": "المدة الكلية",
     "est_wait": "تقريباً {} دقيقة",
     "service_count": "{} خدمات",
-    "service_duration": "{} دقيقة"
+    "service_duration": "{} دقيقة",
+    "loading": "جاري التحميل...",
+    "joined_success": "تم الانضمام إلى الطابور بنجاح",
+    "status_title": "حالة الطابور",
+    "error_message": "خطأ: {}",
+    "service_in_progress": "خدمتك قيد التنفيذ الآن..."
   },
   "booking_confirmation": {
     "title": "تأكيد الحجز",
@@ -77,7 +89,10 @@
     "unknown_barber": "حلاق غير محدد",
     "remove_tooltip": "حذف الحجز",
     "remove_title": "إزالة الحجز",
-    "remove_message": "هل أنت متأكد من حذف هذا الحجز؟"
+    "remove_message": "هل أنت متأكد من حذف هذا الحجز؟",
+    "reservation_removed": "تم إزالة الحجز بنجاح",
+    "guest_info_error": "معلومات الضيف مطلوبة",
+    "otp_required": "رمز التحقق مطلوب"
   },
   "time_slots": {
     "available_time": "الوقت المتاح",
@@ -128,7 +143,9 @@
     "no_description": "لا يوجد وصف متاح",
     "available_hours": "الساعات المتاحة",
     "price": "{} ج.م",
-    "duration": "{} دقيقة"
+    "duration": "{} دقيقة",
+    "no_barbers_available": "لا يوجد حلاقين متاحين لهذه الفئة",
+    "failed_to_load": "فشل تحميل الحلاقين"
   },
   "booking": {
     "reservation": "الحجز",
@@ -178,7 +195,10 @@
     "queue_mode_benefit_1": "انضم إلى الطابور وانتظر دورك",
     "queue_mode_benefit_2": "سيتم إشعارك عندما يحين دورك",
     "required_services": "الخدمات المطلوبة",
-    "no_services_selected": "لم يتم اختيار أي خدمات"
+    "no_services_selected": "لم يتم اختيار أي خدمات",
+    "success_message": "تم الحجز بنجاح!",
+    "load_error": "فشل تحميل المواعيد المتاحة",
+    "cancelled_status": "ملغى"
   },
   "auth": {
     "terms_agreement": "بتسجيل الدخول، أنت توافق على",
@@ -231,6 +251,11 @@
     "reset_error": "فشل إعادة تعيين كلمة المرور",
     "request_success": "تم إرسال رمز إعادة التعيين",
     "request_error": "فشل إرسال رمز إعادة التعيين",
+    "password_reset_success": "تم إعادة تعيين كلمة المرور بنجاح",
+    "reset_code_sent": "تم إرسال رمز إعادة التعيين إلى هاتفك",
+    "phone_number_label": "رقم الهاتف",
+    "password_label": "الرقم السري",
+    "phone_validation_error": "الرجاء إدخال رقم هاتف صحيح",
     "signup": {
       "title": "إنشاء حساب",
       "subtitle": "أدخل بياناتك لإنشاء حساب",
@@ -258,7 +283,15 @@
     "error_title": "خطأ",
     "try_again": "حاول مرة أخرى",
     "error_loading_info": "فشل تحميل معلومات التحقق",
-    "got_it": "فهمت"
+    "got_it": "فهمت",
+    "resend_code_success": "تم إعادة إرسال رمز التحقق",
+    "resend_code_button": "إعادة إرسال الرمز",
+    "code_sent_message": "لقد أرسلنا رمز التحقق إلى رقم هاتفك {}",
+    "verification_code_label": "رمز التحقق",
+    "code_required_error": "الرجاء إدخال رمز التحقق",
+    "verify_button": "تحقق",
+    "screen_title": "التحقق من الحساب",
+    "check_phone_title": "تحقق من هاتفك"
   },
   "profile": {
     "title": "الملف الشخصي",
@@ -274,7 +307,15 @@
     "about": "عنا",
     "delete_account": "حذف الحساب",
     "user_data_error": "لا يمكن تحميل بيانات المستخدم",
-    "data_unavailable": "البيانات غير متوفرة"
+    "data_unavailable": "البيانات غير متوفرة",
+    "update_success": "تم تحديث الملف الشخصي بنجاح",
+    "update_error": "حدث خطأ ما",
+    "update_profile_title": "تعديل الحساب",
+    "name_label": "الاسم",
+    "name_required": "الرجاء إدخال الاسم",
+    "phone_label": "رقم الهاتف",
+    "phone_required": "الرجاء إدخال رقم الهاتف",
+    "save_changes": "حفظ التغييرات"
   },
   "notifications": {
     "history": "سجل الإشعارات",
@@ -330,7 +371,10 @@
     "no_internet_connection": "لا يوجد اتصال بالإنترنت",
     "network_unreachable": "الشبكة غير متاحة",
     "connection_timeout": "انتهت مهلة الاتصال",
-    "connection_failed": "فشل الاتصال"
+    "connection_failed": "فشل الاتصال",
+    "no_internet_title": "لا يوجد اتصال بالإنترنت",
+    "no_internet_message": "تحقق من اتصالك بالإنترنت وحاول مرة أخرى",
+    "retry_button": "إعادة المحاولة"
   },
   "about": {
     "title": "حول تيمي بربر",

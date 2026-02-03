@@ -225,25 +225,11 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                       Icon(
                         Icons.calendar_today,
                         size: 16,
-                        color: Colors.grey[600],
+                        color: ColorsManager.mainBlue,
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        _getWorkingDays(barber?.workingHours?.daysOff),
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Icon(
-                        Icons.access_time,
-                        size: 16,
-                        color: Colors.grey[600],
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        '${barber?.workingHours?.start} - ${barber?.workingHours?.end}',
+                        _getWorkingDays(barber?.workingHours.daysOff),
                         style: textTheme.bodyMedium?.copyWith(
                           color: Colors.grey[600],
                           fontWeight: FontWeight.w500,
@@ -253,6 +239,26 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                   ),
                 ],
                 const SizedBox(height: 8),
+
+                Row(
+                  children: [
+                    Icon(
+                      Icons.access_time,
+                      size: 16,
+                      color: ColorsManager.mainBlue,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      '${barber?.workingHours.start} - ${barber?.workingHours.end}',
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: ColorsManager.mainBlue,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
                 RatingDisplay(
                   rating: 5.0,
                   // rating: barber?.rating.average ?? 0.0,

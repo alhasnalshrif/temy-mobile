@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/features/barber/logic/barber_cubit.dart';
 import 'package:temy_barber/features/barber/logic/barber_state.dart';
@@ -26,7 +27,7 @@ class BarberDetailBlocBuilder extends StatelessWidget {
                 categoriesResponseModel.barberDetailResponseModel.data;
             return setupSuccess(categoriesList);
           },
-          barberError: (errorHandler) => setupError(errorHandler),
+          barberError: (errorHandler) => setupError(context, errorHandler),
           orElse: () {
             return const SizedBox.shrink();
           },
@@ -63,8 +64,52 @@ class BarberDetailBlocBuilder extends StatelessWidget {
     return BarberScreenItem(serviceResponseModel: categoriesList);
   }
 
-  Widget setupError(errorHandler) {
-    print('Error occurred: $errorHandler');
-    return Center(child: Text('${'barber.error'.tr()}: $errorHandler'));
+  Widget setupError(BuildContext context, errorHandler) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.error_outline, size: 64, color: Colors.grey[400]),
+            const SizedBox(height: 16),
+            Text(
+              'barber.failed_to_load'.tr(),
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'common.error'.tr(),
+              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton.icon(
+              onPressed: () {
+                context.read<BarberCubit>().retry();
+              },
+              icon: const Icon(Icons.refresh),
+              label: Text('common.retry'.tr()),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorsManager.mainBlue,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

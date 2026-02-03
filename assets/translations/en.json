@@ -34,7 +34,14 @@
     "calendar": {
         "today": "Today",
         "booking_available_days": "Booking available for {} days",
-        "day_off": "(Day Off)"
+        "day_off": "(Day Off)",
+        "sunday": "Sunday",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday"
     },
     "queue": {
         "live_status": "Live Queue Status",
@@ -55,7 +62,12 @@
         "total_duration": "Total Duration",
         "est_wait": "~{} min",
         "service_count": "{} service(s)",
-        "service_duration": "{} min"
+        "service_duration": "{} min",
+        "loading": "Loading...",
+        "joined_success": "Successfully joined queue",
+        "status_title": "Queue Status",
+        "error_message": "Error: {}",
+        "service_in_progress": "Your service is now in progress..."
     },
     "booking_confirmation": {
         "title": "Confirm Booking",
@@ -77,7 +89,10 @@
         "unknown_barber": "Unknown Barber",
         "remove_tooltip": "Remove Booking",
         "remove_title": "Remove Booking",
-        "remove_message": "Are you sure you want to remove this booking?"
+        "remove_message": "Are you sure you want to remove this booking?",
+        "reservation_removed": "Booking removed successfully",
+        "guest_info_error": "Guest information is required",
+        "otp_required": "Verification code is required"
     },
     "time_slots": {
         "available_time": "Available Time",
@@ -128,7 +143,9 @@
         "no_description": "No description available",
         "available_hours": "Available Hours",
         "price": "EGP {}",
-        "duration": "{} Min"
+        "duration": "{} Min",
+        "no_barbers_available": "No barbers available for this category",
+        "failed_to_load": "Failed to load barbers"
     },
     "booking": {
         "reservation": "Reservation",
@@ -178,7 +195,10 @@
         "queue_mode_benefit_1": "Join the queue and wait for your turn",
         "queue_mode_benefit_2": "You'll be notified when it's your turn",
         "required_services": "Selected Services",
-        "no_services_selected": "No services selected"
+        "no_services_selected": "No services selected",
+        "success_message": "Booking successful!",
+        "load_error": "Failed to load available appointments",
+        "cancelled_status": "Cancelled"
     },
     "auth": {
         "terms_agreement": "By logging in, you agree to our",
@@ -231,6 +251,11 @@
         "reset_error": "Failed to reset password",
         "request_success": "Reset code sent",
         "request_error": "Failed to send reset code",
+        "password_reset_success": "Password has been reset successfully",
+        "reset_code_sent": "Reset code has been sent to your phone",
+        "phone_number_label": "Phone Number",
+        "password_label": "Password",
+        "phone_validation_error": "Please enter a valid phone number",
         "signup": {
             "title": "Create Account",
             "subtitle": "Enter your data to create an account",
@@ -258,7 +283,15 @@
         "error_title": "Error",
         "try_again": "Please try again",
         "error_loading_info": "Failed to load verification information",
-        "got_it": "Got it"
+        "got_it": "Got it",
+        "resend_code_success": "Verification code has been resent",
+        "resend_code_button": "Resend Code",
+        "code_sent_message": "We have sent a verification code to your phone number {}",
+        "verification_code_label": "Verification Code",
+        "code_required_error": "Please enter verification code",
+        "verify_button": "Verify",
+        "screen_title": "Account Verification",
+        "check_phone_title": "Check Your Phone"
     },
     "profile": {
         "title": "Profile",
@@ -274,7 +307,9 @@
         "about": "About",
         "delete_account": "Delete Account",
         "user_data_error": "Cannot load user data",
-        "data_unavailable": "Data unavailable"
+        "data_unavailable": "Data unavailable",
+        "update_success": "Profile updated successfully",
+        "update_error": "Something went wrong"
     },
     "notifications": {
         "history": "Notification History",
@@ -330,7 +365,10 @@
         "no_internet_connection": "No internet connection",
         "network_unreachable": "Network unreachable",
         "connection_timeout": "Connection timeout",
-        "connection_failed": "Connection failed"
+        "connection_failed": "Connection failed",
+        "no_internet_title": "No Internet Connection",
+        "no_internet_message": "Check your internet connection and try again",
+        "retry_button": "Retry"
     },
     "about": {
         "title": "About Temy Barber",

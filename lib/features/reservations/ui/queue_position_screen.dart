@@ -48,17 +48,19 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
       body: BlocBuilder<QueueCubit, QueueState>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: Text('Loading...')),
+            initial: () => Center(child: Text('queue.loading'.tr())),
             joinQueueLoading: () =>
                 const Center(child: CircularProgressIndicator()),
             joinQueueSuccess: (data) =>
-                const Center(child: Text('Successfully joined queue')),
-            joinQueueError: (error) => Center(child: Text('Error: $error')),
+                Center(child: Text('queue.joined_success'.tr())),
+            joinQueueError: (error) =>
+                Center(child: Text('queue.error_message'.tr(args: [error]))),
             queueStatusLoading: () =>
                 const Center(child: CircularProgressIndicator()),
             queueStatusSuccess: (data) =>
-                const Center(child: Text('Queue Status')),
-            queueStatusError: (error) => Center(child: Text('Error: $error')),
+                Center(child: Text('queue.status_title'.tr())),
+            queueStatusError: (error) =>
+                Center(child: Text('queue.error_message'.tr(args: [error]))),
             queuePositionLoading: () =>
                 const Center(child: CircularProgressIndicator()),
             queuePositionSuccess: (data) => _buildQueuePositionView(data),
@@ -72,10 +74,10 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
                     color: ColorsManager.red,
                   ),
                   const SizedBox(height: 16),
-                  Text('Error: $error'),
+                  Text('queue.error_message'.tr(args: [error])),
                   const SizedBox(height: 16),
                   AppTextButton(
-                    buttonText: 'Retry',
+                    buttonText: 'common.retry'.tr(),
                     textStyle: const TextStyle(color: Colors.white),
                     onPressed: () {
                       context.read<QueueCubit>().getMyQueuePosition(
@@ -89,7 +91,8 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
             queueActionLoading: () =>
                 const Center(child: CircularProgressIndicator()),
             queueActionSuccess: (message) => Center(child: Text(message)),
-            queueActionError: (error) => Center(child: Text('Error: $error')),
+            queueActionError: (error) =>
+                Center(child: Text('queue.error_message'.tr(args: [error]))),
           );
         },
       ),

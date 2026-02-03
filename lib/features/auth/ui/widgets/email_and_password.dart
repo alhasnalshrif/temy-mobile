@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/app_regex.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/auth/logic/cubit/login_cubit.dart';
 
@@ -80,19 +82,20 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('رقم الهاتف', style: TextStyles.font14Blue2SemiBold),
+              Text(
+                'auth.phone_number_label'.tr(),
+                style: TextStyles.font14Blue2SemiBold,
+              ),
               verticalSpace(8),
               AppTextFormField(
                 hintText: '01012345678',
                 keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||
                       !AppRegex.isPhoneNumberValid(value)) {
-                    return 'Please enter a valid phone number';
+                    return 'auth.phone_validation_error'.tr();
                   }
                 },
                 controller: loginCubit.emailController,
@@ -103,7 +106,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('الرقم السري', style: TextStyles.font14Blue2SemiBold),
+              Text(
+                'auth.password_label'.tr(),
+                style: TextStyles.font14Blue2SemiBold,
+              ),
               verticalSpace(8),
               AppTextFormField(
                 controller: loginCubit.passwordController,
@@ -117,6 +123,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                   },
                   child: Icon(
                     isObscureText ? Icons.visibility_off : Icons.visibility,
+                    color: ColorsManager.mainBlue,
                   ),
                 ),
                 validator: (value) {

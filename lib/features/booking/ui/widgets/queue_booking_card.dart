@@ -268,9 +268,7 @@ class QueueBookingCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _getStatusColor(queueStatus).withAlpha(25),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: _getStatusColor(queueStatus).withAlpha(75),
-        ),
+        border: Border.all(color: _getStatusColor(queueStatus).withAlpha(75)),
       ),
       child: Column(
         children: [
@@ -312,7 +310,7 @@ class QueueBookingCard extends StatelessWidget {
                 horizontalSpace(12),
                 Expanded(
                   child: Text(
-                    'خدمتك قيد التنفيذ الآن...',
+                    'queue.service_in_progress'.tr(),
                     style: TextStyle(
                       color: Colors.green[700],
                       fontWeight: FontWeight.bold,

@@ -55,7 +55,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
         centerTitle: true,
         // the back button remove
         automaticallyImplyLeading: false,
-        title: Text('التحقق من الحساب', style: TextStyles.font18WhiteBold),
+        title: Text(
+          'verification.screen_title'.tr(),
+          style: TextStyles.font18WhiteBold,
+        ),
         backgroundColor: ColorsManager.mainBlue,
       ),
       body: SafeArea(
@@ -71,13 +74,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ),
                 verticalSpace(24),
                 Text(
-                  'تحقق من هاتفك',
+                  'verification.check_phone_title'.tr(),
                   style: TextStyles.font26BlueBold,
                   textAlign: TextAlign.center,
                 ),
                 verticalSpace(12),
                 Text(
-                  'لقد أرسلنا رمز التحقق إلى رقم هاتفك ${widget.phoneNumber}',
+                  'verification.code_sent_message'.tr(
+                    args: [widget.phoneNumber],
+                  ),
                   style: TextStyles.font16GrayRegular,
                   textAlign: TextAlign.center,
                 ),
@@ -88,7 +93,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'رمز التحقق',
+                        'verification.verification_code_label'.tr(),
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -104,14 +109,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             .codeController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'الرجاء إدخال رمز التحقق';
+                            return 'verification.code_required_error'.tr();
                           }
                           return null;
                         },
                       ),
                       verticalSpace(40),
                       AppTextButton(
-                        buttonText: "تحقق",
+                        buttonText: "verification.verify_button".tr(),
                         textStyle: TextStyles.font16WhiteSemiBold,
                         onPressed: () {
                           validateThenVerify(context);
@@ -135,7 +140,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             );
                           },
                           child: Text(
-                            'إعادة إرسال الرمز',
+                            'verification.resend_code_button'.tr(),
                             style: TextStyles.font14BlueSemiBold,
                           ),
                         ),

@@ -10,12 +10,16 @@ class CategoryBarbersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFFAFBFC),
       appBar: AppBar(
         foregroundColor: Colors.white,
-        title: Text('navigation.barbers'.tr()),
+        title: Text(
+          'navigation.barbers'.tr(),
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+        ),
         centerTitle: true,
         backgroundColor: ColorsManager.mainBlue,
+        elevation: 0,
       ),
       body: SafeArea(
         child: Container(
@@ -23,13 +27,10 @@ class CategoryBarbersScreen extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: Container(
             constraints: const BoxConstraints(maxWidth: 1000),
-            margin: const EdgeInsets.fromLTRB(20, 16, 20, 28),
-            child: Column(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                verticalSpace(10),
-                const CategoryWithBarbersBlocBuilder(),
-              ],
+              children: [CategoryWithBarbersBlocBuilder()],
             ),
           ),
         ),

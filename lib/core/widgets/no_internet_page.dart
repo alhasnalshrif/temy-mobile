@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 
@@ -22,13 +23,13 @@ class NoInternetPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              'لا يوجد اتصال بالإنترنت',
+              'errors.no_internet_title'.tr(),
               style: TextStyles.font18DarkBlueBold,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             Text(
-              'تحقق من اتصالك بالإنترنت وحاول مرة أخرى',
+              'errors.no_internet_message'.tr(),
               style: TextStyles.font16GrayRegular,
               textAlign: TextAlign.center,
             ),
@@ -46,7 +47,7 @@ class NoInternetPage extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'إعادة المحاولة',
+                'errors.retry_button'.tr(),
                 style: TextStyles.font16WhiteSemiBold,
               ),
             ),

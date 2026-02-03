@@ -196,9 +196,8 @@ class LoginScreen extends StatelessWidget {
             'auth.enter_credentials'.tr(),
             style: TextStyles.font16WhiteSemiBold.copyWith(color: Colors.black),
           ),
-          verticalSpace(24),
+          verticalSpace(16),
           const EmailAndPassword(),
-          verticalSpace(24),
           GestureDetector(
             onTap: () {
               context.pushGoNamed(AppRoutes.forgotPasswordName);
@@ -208,17 +207,17 @@ class LoginScreen extends StatelessWidget {
               style: TextStyles.font13BlueRegular,
             ),
           ),
-          verticalSpace(40),
+          verticalSpace(16),
           AppTextButton(
             buttonText: 'auth.login_button'.tr(),
             textStyle: TextStyles.font16WhiteSemiBold,
             onPressed: () => validateThenDoLogin(context),
           ),
-          const SizedBox(height: 16),
+          verticalSpace(16),
           const TermsAndConditionsText(),
-          const SizedBox(height: 30),
+          verticalSpace(16),
           const Align(child: DontHaveAccountText()),
-          const SizedBox(height: 20),
+          verticalSpace(16),
           Center(
             child: TextButton(
               onPressed: () {

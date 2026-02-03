@@ -216,7 +216,7 @@ class TimeSlotSection extends StatelessWidget {
             'available': false,
             'endTime': null,
             'displayStart': _formatTimeForDisplay(slot.time),
-            'reason': 'مدة غير كافية',
+            'reason': 'time_slots.insufficient_time'.tr(),
           });
         }
         i += 1;
@@ -449,7 +449,9 @@ class TimeSlotSection extends StatelessWidget {
                     final selectionEndDisplay = _formatTimeForDisplay(
                       _getEndTime(selectedTime!, totalDuration),
                     );
-                    return 'time_slots.booking_summary'.tr(args: [selectionStartDisplay, selectionEndDisplay]);
+                    return 'time_slots.booking_summary'.tr(
+                      args: [selectionStartDisplay, selectionEndDisplay],
+                    );
                   }(),
                   style: const TextStyle(
                     fontSize: 14,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
@@ -33,7 +34,10 @@ class UpdateProfileScreen extends StatelessWidget {
             ..initializeFields(currentUser.name ?? '', currentUser.phone ?? ''),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('تعديل الحساب', style: TextStyles.font18WhiteBold),
+          title: Text(
+            'profile.update_profile_title'.tr(),
+            style: TextStyles.font18WhiteBold,
+          ),
           leading: const BackButton(color: Colors.white),
           backgroundColor: ColorsManager.mainBlue,
           centerTitle: isLargeScreen,
@@ -55,7 +59,7 @@ class UpdateProfileScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          userProfile.message ?? 'تم تحديث الملف الشخصي بنجاح',
+                          userProfile.message ?? 'profile.update_success'.tr(),
                         ),
                         backgroundColor: Colors.green,
                       ),
@@ -65,7 +69,8 @@ class UpdateProfileScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          errorHandler.apiErrorModel.message ?? 'حدث خطأ ما',
+                          errorHandler.apiErrorModel.message ??
+                              'profile.update_error'.tr(),
                         ),
                         backgroundColor: ColorsManager.red,
                       ),
@@ -84,23 +89,23 @@ class UpdateProfileScreen extends StatelessWidget {
                         children: [
                           verticalSpace(20),
                           AppTextFormField(
-                            hintText: 'الاسم',
+                            hintText: 'profile.name_label'.tr(),
                             controller: cubit.nameController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'الرجاء إدخال الاسم';
+                                return 'profile.name_required'.tr();
                               }
                               return null;
                             },
                           ),
                           verticalSpace(16),
                           AppTextFormField(
-                            hintText: 'رقم الهاتف',
+                            hintText: 'profile.phone_label'.tr(),
                             controller: cubit.phoneController,
                             keyboardType: TextInputType.phone,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'الرجاء إدخال رقم الهاتف';
+                                return 'profile.phone_required'.tr();
                               }
                               // Add more specific phone validation if needed
                               return null;
@@ -127,7 +132,7 @@ class UpdateProfileScreen extends StatelessWidget {
                                       color: Colors.white,
                                     )
                                   : Text(
-                                      'حفظ التغييرات',
+                                      'profile.save_changes'.tr(),
                                       style: TextStyles.font16WhiteSemiBold,
                                     ),
                             ),

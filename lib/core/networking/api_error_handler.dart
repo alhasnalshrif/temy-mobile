@@ -147,6 +147,11 @@ class ErrorHandler implements Exception {
       apiErrorModel = DataSource.default_.getFailure();
     }
   }
+
+  @override
+  String toString() {
+    return apiErrorModel.message ?? 'An error occurred';
+  }
 }
 
 ApiErrorModel _handleError(DioException error) {

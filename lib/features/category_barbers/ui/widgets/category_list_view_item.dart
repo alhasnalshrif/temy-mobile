@@ -23,64 +23,64 @@ class CategoryListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      duration: const Duration(milliseconds: 300),
-      opacity: 1.0,
-      child: GestureDetector(
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
         onTap: onTap,
-        behavior: HitTestBehavior.opaque,
-        child: _buildAnimatedContainer(context),
+        borderRadius: BorderRadius.circular(20),
+        child: _buildCard(context),
       ),
     );
   }
 
-  /// Builds the main container with a tap animation.
-  Widget _buildAnimatedContainer(BuildContext context) {
-    return AnimatedScale(
-      duration: const Duration(milliseconds: 100),
-      scale: onTap != null ? 1.0 : 0.98,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 6),
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          border: Border.all(color: Colors.grey.withAlpha(51)),
-
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _CategoryImage(
-              imageUrl: serviceResponseModel?.avatar,
-              radius: radius,
-              backgroundColor: backgroundColor,
-            ),
-            const SizedBox(width: 12),
-            _buildCategoryName(context),
-          ],
-        ),
+  /// Builds the main card with enhanced visual design.
+  Widget _buildCard(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.grey.withOpacity(0.15), width: 1),
+      ),
+      child: Row(
+        children: [
+          _CategoryImage(
+            imageUrl: serviceResponseModel?.avatar,
+            radius: radius,
+          ),
+          const SizedBox(width: 16),
+          Expanded(child: _buildBarberInfo(context)),
+          const SizedBox(width: 8),
+          Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 18,
+            color: ColorsManager.mainBlue.withOpacity(0.4),
+          ),
+        ],
       ),
     );
   }
 
-  /// Builds the category name with responsive text constraints.
-  Widget _buildCategoryName(BuildContext context) {
-    final textScale = MediaQuery.of(context).textScaleFactor;
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: radius * 2.5),
-      child: Text(
-        serviceResponseModel?.name ?? 'Service',
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          color: ColorsManager.mainBlue,
-          height: 1.3,
-          fontWeight: FontWeight.w600,
-          fontSize: 14 / textScale,
+  /// Builds the barber information with name.
+  Widget _buildBarberInfo(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          serviceResponseModel?.name ?? 'Service',
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            color: ColorsManager.mainBlue,
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            height: 1.4,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
-        textAlign: TextAlign.start,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
+      ],
     );
   }
 }
@@ -88,13 +88,8 @@ class CategoryListViewItem extends StatelessWidget {
 class _CategoryImage extends StatelessWidget {
   final String? imageUrl;
   final double radius;
-  final Color backgroundColor;
 
-  const _CategoryImage({
-    required this.imageUrl,
-    required this.radius,
-    required this.backgroundColor,
-  });
+  const _CategoryImage({required this.imageUrl, required this.radius});
 
   @override
   Widget build(BuildContext context) {
@@ -104,44 +99,77 @@ class _CategoryImage extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: ColorsManager.lightBlue,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            ColorsManager.lightBlue.withOpacity(0.3),
+            ColorsManager.lightBlue.withOpacity(0.1),
+          ],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: ColorsManager.mainBlue.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-      padding: const EdgeInsets.all(2),
-      child: ClipOval(
-        child: hasImage
-            ? CachedNetworkImage(
-                imageUrl: imageUrl!,
-                width: size,
-                height: size,
-                fit: BoxFit.cover,
-                fadeInDuration: const Duration(milliseconds: 300),
-                placeholder: (context, url) => _buildShimmer(size),
-                errorWidget: (context, url, error) => _buildError(size),
-              )
-            : _buildFallback(size),
+      padding: const EdgeInsets.all(3),
+      child: Container(
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+        ),
+        child: ClipOval(
+          child: hasImage
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl!,
+                  width: size,
+                  height: size,
+                  fit: BoxFit.cover,
+                  fadeInDuration: const Duration(milliseconds: 250),
+                  fadeOutDuration: const Duration(milliseconds: 150),
+                  // Optimized caching strategy
+                  memCacheWidth:
+                      (size * MediaQuery.of(context).devicePixelRatio).round(),
+                  memCacheHeight:
+                      (size * MediaQuery.of(context).devicePixelRatio).round(),
+                  maxWidthDiskCache: 400,
+                  maxHeightDiskCache: 400,
+                  placeholder: (context, url) => _buildShimmer(size),
+                  errorWidget: (context, url, error) => _buildError(size),
+                )
+              : _buildFallback(size),
+        ),
       ),
     );
   }
 
   /// Builds a shimmer effect for loading images.
   Widget _buildShimmer(double size) => Shimmer.fromColors(
-    baseColor: Colors.grey[300]!,
-    highlightColor: Colors.grey[100]!,
-    child: Container(width: size, height: size, color: Colors.white),
+    baseColor: Colors.grey[200]!,
+    highlightColor: Colors.grey[50]!,
+    period: const Duration(milliseconds: 1200),
+    child: Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+    ),
   );
 
   /// Builds an error widget for failed image loads.
   Widget _buildError(double size) => Container(
     width: size,
     height: size,
-    color: Colors.grey[200],
+    decoration: BoxDecoration(color: Colors.grey[100], shape: BoxShape.circle),
     child: Center(
       child: Icon(
-        Icons.broken_image,
-        size: radius * 0.8,
-        color: ColorsManager.red.withAlpha(153),
+        Icons.person_outline_rounded,
+        size: radius * 1.1,
+        color: ColorsManager.mainBlue.withOpacity(0.3),
       ),
     ),
   );
@@ -150,9 +178,23 @@ class _CategoryImage extends StatelessWidget {
   Widget _buildFallback(double size) => Container(
     width: size,
     height: size,
-    color: backgroundColor,
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          ColorsManager.lightBlue,
+          ColorsManager.lightBlue.withOpacity(0.7),
+        ],
+      ),
+      shape: BoxShape.circle,
+    ),
     child: Center(
-      child: Icon(Icons.category, size: radius * 0.8, color: Colors.grey[600]),
+      child: Icon(
+        Icons.person_rounded,
+        size: radius * 1.1,
+        color: Colors.white,
+      ),
     ),
   );
 }
