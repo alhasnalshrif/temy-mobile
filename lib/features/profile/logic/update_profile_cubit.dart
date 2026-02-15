@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
+import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import 'package:temy_barber/features/profile/logic/update_profile_state.dart';
 
@@ -13,21 +16,33 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   final TextEditingController phoneController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  static const _timeout = Duration(seconds: 20);
+
   void updateProfileData() async {
     if (formKey.currentState!.validate()) {
       emit(const UpdateProfileState.loading());
-      final response = await _profileRepo.updateProfile({
-        'name': nameController.text,
-        'phone': phoneController.text,
-      });
-      response.when(
-        success: (userProfile) {
-          emit(UpdateProfileState.success(userProfile));
-        },
-        failure: (error) {
-          emit(UpdateProfileState.error(error));
-        },
-      );
+
+      try {
+        final response = await _profileRepo
+            .updateProfile({
+              'name': nameController.text,
+              'phone': phoneController.text,
+            })
+            .timeout(_timeout);
+
+        response.when(
+          success: (userProfile) {
+            emit(UpdateProfileState.success(userProfile));
+          },
+          failure: (error) {
+            emit(UpdateProfileState.error(error));
+          },
+        );
+      } on TimeoutException catch (e) {
+        emit(UpdateProfileState.error(ErrorHandler.handle(e)));
+      } catch (e) {
+        emit(UpdateProfileState.error(ErrorHandler.handle(e)));
+      }
     }
   }
 

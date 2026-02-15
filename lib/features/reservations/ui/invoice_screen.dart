@@ -3,22 +3,23 @@ import 'package:flutter/services.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
-import 'package:temy_barber/core/utils/date_utils.dart' as app_date_utils;
 
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 
 import 'package:temy_barber/core/utils/responsive_utils.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
+import 'package:temy_barber/features/reservations/logic/invoice_logic.dart';
 
 class InvoiceScreen extends StatelessWidget {
   final ReservationResponseModel? arguments;
 
+  final _logic = const InvoiceLogic();
+
   const InvoiceScreen({super.key, this.arguments});
 
   List<ReservationData> get _allReservations =>
-      arguments?.allReservations ??
-      (arguments?.data != null ? [arguments!.data] : []);
+      _logic.getAllReservations(arguments);
 
   @override
   Widget build(BuildContext context) {
@@ -163,18 +164,11 @@ class InvoiceScreen extends StatelessWidget {
 
   Widget _buildGuestNotificationBanner() {
     // Check if ANY reservation is guest
-    final hasGuest = _allReservations.any(
-      (r) => r.user == null && r.userName != null,
-    );
+    final hasGuest = _logic.hasGuest(_allReservations);
     if (!hasGuest) return const SizedBox.shrink();
 
     // Use first reservation's phone for display if available
-    final displayPhone = _allReservations
-        .firstWhere(
-          (r) => r.userPhone != null,
-          orElse: () => _allReservations.first,
-        )
-        .userPhone;
+    final displayPhone = _logic.getDisplayPhone(_allReservations);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -346,27 +340,13 @@ class InvoiceScreen extends StatelessWidget {
       );
     }
 
-    DateTime? reservationDate;
-    try {
-      reservationDate = DateFormat('yyyy-MM-dd').parse(reservation.date);
-    } catch (e) {
-      debugPrint("Error parsing date: $e");
-    }
-
     final locale =
         EasyLocalization.of(
           WidgetsBinding.instance.rootElement!,
         )?.locale.languageCode ??
         'ar';
-    final dateStr = reservationDate != null
-        ? DateFormat('EEEE, dd MMMM', locale).format(reservationDate)
-        : 'common.not_available'.tr();
-
-    // Handle time string properly
-    final timeStr = app_date_utils.formatTimeOfDayString(
-      reservation.startTime,
-      locale: locale,
-    );
+    final dateStr = _logic.formatReservationDate(reservation.date, locale);
+    final timeStr = _logic.formatReservationTime(reservation.startTime, locale);
 
     return _buildSectionCard(
       title: 'invoice.appointment_date'.tr(),
@@ -460,10 +440,7 @@ class InvoiceScreen extends StatelessWidget {
 
   Widget _buildTotalCard() {
     // Calculate sum of all reservations
-    final grandTotal = _allReservations.fold(
-      0.0,
-      (sum, res) => sum + res.totalPrice,
-    );
+    final grandTotal = _logic.calculateGrandTotal(_allReservations);
     final isMultiple = _allReservations.length > 1;
 
     return Container(

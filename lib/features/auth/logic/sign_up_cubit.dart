@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
@@ -22,32 +24,56 @@ class SignupCubit extends Cubit<SignupState> {
       TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  static const _timeout = Duration(seconds: 20);
+
   void emitSignupStates() async {
     emit(const SignupState.signupLoading());
-    final response = await _signupRepo.signup(
-      SignupRequestBody(
-        name: nameController.text,
-        phone: phoneController.text,
-        password: passwordController.text,
-        passwordConfirmation: passwordConfirmationController.text,
-        gender: 0,
-      ),
-    );
-    response.when(success: (signupResponse) async {
-      await saveUserToken(
-          signupResponse.token ?? '', signupResponse.data!.user?.id ?? '');
-      emit(SignupState.signupSuccess(signupResponse));
-    }, failure: (error) {
-      emit(SignupState.signupError(error: error.apiErrorModel.message ?? ''));
-    });
+
+    try {
+      final response = await _signupRepo
+          .signup(
+            SignupRequestBody(
+              name: nameController.text,
+              phone: phoneController.text,
+              password: passwordController.text,
+              passwordConfirmation: passwordConfirmationController.text,
+              gender: 0,
+            ),
+          )
+          .timeout(_timeout);
+
+      await response.when(
+        success: (signupResponse) async {
+          await saveUserToken(
+            signupResponse.token ?? '',
+            signupResponse.data!.user?.id ?? '',
+          );
+          emit(SignupState.signupSuccess(signupResponse));
+        },
+        failure: (error) {
+          emit(SignupState.signupError(
+            error: error.apiErrorModel.message ?? 'Unknown error',
+          ));
+        },
+      );
+    } on TimeoutException catch (_) {
+      emit(const SignupState.signupError(error: 'Request timeout. Please try again.'));
+    } catch (e) {
+      emit(SignupState.signupError(error: e.toString()));
+    }
   }
 
 
   Future<void> saveUserToken(String token, String id) async {
-    // save token to shared preferences
-    await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
-    await SharedPrefHelper.setSecuredString(SharedPrefKeys.userId, id);
-    DioFactory.setTokenIntoHeaderAfterLogin(token);
+    try {
+      // save token to shared preferences
+      await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
+      await SharedPrefHelper.setSecuredString(SharedPrefKeys.userId, id);
+      DioFactory.setTokenIntoHeaderAfterLogin(token);
+    } catch (e) {
+      debugPrint('Failed to save user token: $e');
+      rethrow;
+    }
 
     // Update device token on server after successful login
     try {

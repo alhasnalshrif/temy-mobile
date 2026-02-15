@@ -21,6 +21,8 @@ class SettingsData {
   bool? isQueueMode;
   @JsonKey(name: 'maintenance')
   bool? maintenance;
+  @JsonKey(name: 'maintenance_message')
+  String? maintenanceMessage;
   @JsonKey(name: 'logo')
   String? logo;
   @JsonKey(name: 'about')
@@ -38,6 +40,7 @@ class SettingsData {
   SettingsData({
     this.isQueueMode,
     this.maintenance,
+    this.maintenanceMessage,
     this.logo,
     this.about,
     this.phone,

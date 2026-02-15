@@ -172,7 +172,7 @@ class HomeScreen extends StatelessWidget {
                   AppRoutes.verificationName,
                   extra: {
                     'phoneNumber': fullPhone,
-                    'shouldAutoResend': true,
+                    'shouldAutoResend': false,
                     'comingFromLogin': true,
                   },
                 );

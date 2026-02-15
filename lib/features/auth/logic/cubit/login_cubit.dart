@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/auth/auth_service.dart';
@@ -18,33 +20,49 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  static const _timeout = Duration(seconds: 20);
+
   void emitLoginStates() async {
     emit(const LoginState.loading());
-    final response = await _loginRepo.login(
-      LoginRequestBody(
-        phone: emailController.text,
-        password: passwordController.text,
-      ),
-    );
-    response.when(
-      success: (data) async {
-        await saveUserToken(data.token ?? '', data.data!.user?.id ?? '');
-        emit(LoginState.success(data));
-      },
-      failure: (error) {
-        emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
-      },
-    );
+
+    try {
+      final response = await _loginRepo
+          .login(
+            LoginRequestBody(
+              phone: emailController.text,
+              password: passwordController.text,
+            ),
+          )
+          .timeout(_timeout);
+
+      await response.when(
+        success: (data) async {
+          await saveUserToken(data.token ?? '', data.data!.user?.id ?? '');
+          emit(LoginState.success(data));
+        },
+        failure: (error) {
+          emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
+        },
+      );
+    } on TimeoutException catch (_) {
+      emit(const LoginState.error(error: 'Request timeout. Please try again.'));
+    } catch (e) {
+      emit(LoginState.error(error: e.toString()));
+    }
   }
 
   Future<void> saveUserToken(String token, String id) async {
-    await AuthService.instance.saveToken(token, userId: id);
-
-    isLoggedInUser = true;
+    try {
+      await AuthService.instance.saveToken(token, userId: id);
+      isLoggedInUser = true;
+    } catch (e) {
+      debugPrint('Failed to save auth token: $e');
+      rethrow;
+    }
 
     try {
       final notificationCubit = getIt<NotificationCubit>();
-      notificationCubit.setUserId(id);
+      await notificationCubit.setUserId(id);
     } catch (error) {
       debugPrint('Failed to update device token after login: $error');
     }

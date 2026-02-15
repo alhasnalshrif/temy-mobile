@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
@@ -14,21 +16,35 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
 
   ForgotPasswordCubit(this._forgotPasswordRepo) : super(const ForgotPasswordState.initial());
 
+  static const _timeout = Duration(seconds: 20);
+
   Future<void> requestPasswordReset() async {
     emit(const ForgotPasswordState.loading());
-    
-    final response = await _forgotPasswordRepo.requestPasswordReset(
-      ForgotPasswordRequestBody(phone: phoneController.text),
-    );
-    
-    response.when(
-      success: (data) {
-        emit(ForgotPasswordState.success(data));
-      },
-      failure: (error) {
-        emit(ForgotPasswordState.error(error.apiErrorModel.message ?? 'An error occurred'));
-      },
-    );
+
+    try {
+      final response = await _forgotPasswordRepo
+          .requestPasswordReset(
+            ForgotPasswordRequestBody(phone: phoneController.text),
+          )
+          .timeout(_timeout);
+
+      response.when(
+        success: (data) {
+          emit(ForgotPasswordState.success(data));
+        },
+        failure: (error) {
+          emit(ForgotPasswordState.error(
+            error.apiErrorModel.message ?? 'An error occurred',
+          ));
+        },
+      );
+    } on TimeoutException catch (_) {
+      emit(const ForgotPasswordState.error(
+        'Request timeout. Please try again.',
+      ));
+    } catch (e) {
+      emit(ForgotPasswordState.error(e.toString()));
+    }
   }
 
   void reset() {

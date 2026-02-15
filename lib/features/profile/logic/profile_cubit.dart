@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/core/networking/api_error_handler.dart';
@@ -11,21 +13,29 @@ import 'dart:developer';
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepo _homeRepo;
   final CleanupService _cleanupService;
+  static const _timeout = Duration(seconds: 20);
 
   ProfileCubit(this._homeRepo, this._cleanupService)
     : super(const ProfileState.initial());
 
   void getProfile() async {
     emit(const ProfileState.profileLoading());
-    final response = await _homeRepo.getProfile();
-    response.when(
-      success: (userProfile) {
-        emit(ProfileState.profileSuccess(userProfile));
-      },
-      failure: (error) {
-        emit(ProfileState.profileError(error));
-      },
-    );
+
+    try {
+      final response = await _homeRepo.getProfile().timeout(_timeout);
+      response.when(
+        success: (userProfile) {
+          emit(ProfileState.profileSuccess(userProfile));
+        },
+        failure: (error) {
+          emit(ProfileState.profileError(error));
+        },
+      );
+    } on TimeoutException catch (e) {
+      emit(ProfileState.profileError(ErrorHandler.handle(e)));
+    } catch (e) {
+      emit(ProfileState.profileError(ErrorHandler.handle(e)));
+    }
   }
 
   /// Enhanced logout with comprehensive data cleanup
@@ -56,7 +66,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       log('🚀 Starting account deletion process...');
 
       // Step 1: Call API to delete account on server
-      final response = await _homeRepo.deleteProfile();
+      final response = await _homeRepo.deleteProfile().timeout(_timeout);
 
       response.when(
         success: (deletedProfile) {
@@ -79,6 +89,9 @@ class ProfileCubit extends Cubit<ProfileState> {
           emit(ProfileState.deleteError(error));
         },
       );
+    } on TimeoutException catch (e) {
+      log('❌ Account deletion error: $e');
+      emit(ProfileState.deleteError(ErrorHandler.handle(e)));
     } catch (error) {
       log('❌ Account deletion error: $error');
       emit(ProfileState.deleteError(ErrorHandler.handle(error)));

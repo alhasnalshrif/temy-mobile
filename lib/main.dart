@@ -18,7 +18,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/settings/data/repos/settings_repo.dart';
 import 'package:temy_barber/features/settings/data/models/settings_response.dart';
-import 'package:url_strategy/url_strategy.dart'; 
+import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,6 +53,7 @@ void main() async {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           home: MaintenanceScreen(
+            message: settingsData?.maintenanceMessage,
             logo: settingsData?.logo,
             about: settingsData?.about,
             phone: settingsData?.phone,

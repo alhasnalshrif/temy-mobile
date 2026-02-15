@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
@@ -24,31 +28,45 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     _phoneNumber = phone;
   }
 
+  static const _timeout = Duration(seconds: 20);
+
   Future<void> resetPassword() async {
     if (_phoneNumber == null || _phoneNumber!.isEmpty) {
       emit(const ResetPasswordState.error('Phone number is missing'));
       return;
     }
-    
+
     emit(const ResetPasswordState.loading());
-    
-    final response = await _forgotPasswordRepo.resetPassword(
-      ResetPasswordRequestBody(
-        phone: _phoneNumber!,
-        code: codeController.text,
-        newPassword: passwordController.text,
-        passwordConfirm: confirmPasswordController.text,
-      ),
-    );
-    
-    response.when(
-      success: (data) {
-        emit(ResetPasswordState.success(data));
-      },
-      failure: (error) {
-        emit(ResetPasswordState.error(error.apiErrorModel.message ?? 'An error occurred'));
-      },
-    );
+
+    try {
+      final response = await _forgotPasswordRepo
+          .resetPassword(
+            ResetPasswordRequestBody(
+              phone: _phoneNumber!,
+              code: codeController.text,
+              newPassword: passwordController.text,
+              passwordConfirm: confirmPasswordController.text,
+            ),
+          )
+          .timeout(_timeout);
+
+      response.when(
+        success: (data) {
+          emit(ResetPasswordState.success(data));
+        },
+        failure: (error) {
+          emit(ResetPasswordState.error(
+            error.apiErrorModel.message ?? 'An error occurred',
+          ));
+        },
+      );
+    } on TimeoutException catch (_) {
+      emit(const ResetPasswordState.error(
+        'Request timeout. Please try again.',
+      ));
+    } catch (e) {
+      emit(ResetPasswordState.error(e.toString()));
+    }
   }
 
   void reset() {

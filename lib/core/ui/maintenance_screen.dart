@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
-// import 'package:temy_barber/core/widgets/app_text_button.dart'; // Removed as I want to keep it simple and avoid potential issues
 
 class MaintenanceScreen extends StatelessWidget {
   final String? message;
   final String? logo;
   final String? phone;
-  final String? about; // Added about
+  final String? about;
   final String? address;
 
   const MaintenanceScreen({
@@ -24,53 +23,28 @@ class MaintenanceScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Logo
-              if (logo != null && logo!.isNotEmpty) ...[
-                Image.network(
-                  logo!,
-                  height: 120,
-                  width: 120,
-                  errorBuilder: (context, error, stackTrace) => const Icon(
-                    Icons.build_rounded,
-                    size: 80,
-                    color: ColorsManager.mainBlue,
-                  ),
-                ),
-                verticalSpace(30),
-              ] else ...[
-                const Icon(
+              Image.asset(
+                'assets/images/logo.png',
+                width: MediaQuery.of(context).size.width * 0.6,
+                errorBuilder: (context, error, stackTrace) => const Icon(
                   Icons.build_rounded,
                   size: 80,
                   color: ColorsManager.mainBlue,
                 ),
-                verticalSpace(30),
-              ],
-
-              // Title
-              const Text(
-                'Under Maintenance',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
               ),
-              verticalSpace(16),
-
+              verticalSpace(30),
               // Message
               Text(
                 message ??
                     'We are currently performing scheduled maintenance to improve our services. Please check back later.',
                 style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[600],
-                  height: 1.5,
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: ColorsManager.mainBlue,
                 ),
                 textAlign: TextAlign.center,
               ),

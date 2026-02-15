@@ -25,7 +25,33 @@ class _BookingBlocBuilderWithQueueState
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BookingCubit, BookingState>(
+    return BlocConsumer<BookingCubit, BookingState>(
+      listener: (context, state) {
+        state.maybeMap(
+          cancelBookingSuccess: (_) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('booking.cancel_success_message'.tr()),
+                backgroundColor: Colors.green,
+              ),
+            );
+          },
+          cancelBookingError: (errorState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  errorState.errorHandler.apiErrorModel.message ??
+                      'booking.cancel_error_message'.tr(),
+                ),
+                backgroundColor: ColorsManager.red,
+              ),
+            );
+            // Retry loading bookings to restore the list
+            context.read<BookingCubit>().getBooking();
+          },
+          orElse: () {},
+        );
+      },
       builder: (context, state) {
         return state.maybeMap(
           bookingSuccess: (successState) {

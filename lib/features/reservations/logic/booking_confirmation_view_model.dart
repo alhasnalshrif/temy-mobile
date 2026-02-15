@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:temy_barber/core/helpers/constants.dart';
-import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
+import 'package:temy_barber/features/reservations/data/models/booking_confirmation_models.dart';
+import 'package:temy_barber/features/reservations/logic/booking_confirmation_logic.dart';
 import 'package:temy_barber/features/reservations/logic/simple_multi_reservation_manager.dart';
-import 'package:temy_barber/features/reservations/data/models/queue_response.dart';
 
 /// ViewModel for BookingConfirmation screen handling all business logic
 class BookingConfirmationViewModel extends ChangeNotifier {
   final ReservationArguments arguments;
   final MultiReservationManager _multiReservationManager;
+  final BookingConfirmationLogic _logic;
 
   BookingConfirmationViewModel({
     required this.arguments,
     MultiReservationManager? multiReservationManager,
+    BookingConfirmationLogic? logic,
   }) : _multiReservationManager =
-           multiReservationManager ?? MultiReservationManager();
+           multiReservationManager ?? MultiReservationManager(),
+       _logic = logic ?? const BookingConfirmationLogic();
 
   // Getters
   bool get isQueueMode => arguments.isQueueMode ?? false;
@@ -46,26 +48,17 @@ class BookingConfirmationViewModel extends ChangeNotifier {
   }
 
   /// Format date for display
-  String formatDateForDisplay(DateTime date, String time) {
-    // This will be formatted with DateFormat in the UI
-    return '$date, $time';
-  }
+  String formatDateForDisplay(DateTime date, String time) =>
+      _logic.formatDateForDisplay(date, time);
 
   /// Format date for API
-  String formatDateForApi(DateTime date) {
-    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-  }
+  String formatDateForApi(DateTime date) => _logic.formatDateForApi(date);
 
   /// Get user ID from shared preferences
-  Future<String> getUserId() async {
-    return await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
-  }
+  Future<String> getUserId() => _logic.getUserId();
 
   /// Check if user is logged in
-  Future<bool> isUserLoggedIn() async {
-    final userId = await getUserId();
-    return userId.isNotEmpty;
-  }
+  Future<bool> isUserLoggedIn() => _logic.isUserLoggedIn();
 
   /// Add current reservation to multi-reservation list
   void addToMultipleReservations() {
@@ -99,66 +92,14 @@ class BookingConfirmationViewModel extends ChangeNotifier {
   String get barberId => arguments.barberData?.id ?? '';
 
   /// Build updated arguments for reservation
-  ReservationArguments buildUpdatedArguments() {
-    return ReservationArguments(
-      selectedServices: arguments.selectedServices,
-      barberData: arguments.barberData,
-      totalPrice: arguments.totalPrice,
-      selectedDate: arguments.selectedDate,
-      selectedTime: arguments.selectedTime,
-      isQueueMode: isQueueMode,
-    );
-  }
+  ReservationArguments buildUpdatedArguments() =>
+      _logic.buildUpdatedArguments(arguments);
 
   /// Validate booking can proceed
-  BookingValidationResult validateBooking() {
-    if (!isQueueMode && !hasValidDateAndTime) {
-      return BookingValidationResult(
-        isValid: false,
-        errorMessage: 'booking_confirmation.select_date_time',
-      );
-    }
-    return BookingValidationResult(isValid: true);
-  }
+  BookingValidationResult validateBooking() =>
+      _logic.validateBooking(arguments);
 
   /// Validate adding to multiple reservations
-  BookingValidationResult validateAddToMultiple() {
-    if (!hasValidDateAndTime) {
-      return BookingValidationResult(
-        isValid: false,
-        errorMessage: 'booking_confirmation.select_date_time_first',
-      );
-    }
-    return BookingValidationResult(isValid: true);
-  }
-
-}
-
-/// Result of booking validation
-class BookingValidationResult {
-  final bool isValid;
-  final String? errorMessage;
-
-  BookingValidationResult({required this.isValid, this.errorMessage});
-}
-
-/// Data class for booking confirmation
-class BookingConfirmationData {
-  final String date;
-  final String startTime;
-  final List<String> serviceIds;
-  final String barberId;
-  final String? userId;
-  final GuestInfo? guestInfo;
-  final ReservationArguments arguments;
-
-  BookingConfirmationData({
-    required this.date,
-    required this.startTime,
-    required this.serviceIds,
-    required this.barberId,
-    this.userId,
-    this.guestInfo,
-    required this.arguments,
-  });
+  BookingValidationResult validateAddToMultiple() =>
+      _logic.validateAddToMultiple(arguments);
 }

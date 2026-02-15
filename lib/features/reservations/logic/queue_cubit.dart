@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
+import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/features/reservations/data/repos/reservation_repo.dart';
 import 'package:temy_barber/features/reservations/data/models/queue_response.dart';
 import 'queue_state.dart';
@@ -8,10 +10,11 @@ import 'queue_state.dart';
 class QueueCubit extends Cubit<QueueState> {
   final ReservationRepo _reservationRepo;
   Timer? _pollingTimer;
+  static const _timeout = Duration(seconds: 20);
 
   QueueCubit(this._reservationRepo) : super(const QueueState.initial());
 
-  // Join the queue
+  // Join queue
   void joinQueue({
     required String barberId,
     required List<String> serviceIds,
@@ -21,69 +24,98 @@ class QueueCubit extends Cubit<QueueState> {
   }) async {
     emit(const QueueState.joinQueueLoading());
 
-    final response = await _reservationRepo.joinQueue(
-      barberId: barberId,
-      serviceIds: serviceIds,
-      userId: userId,
-      guest: guest,
-      note: note,
-    );
+    try {
+      final response = await _reservationRepo
+          .joinQueue(
+            barberId: barberId,
+            serviceIds: serviceIds,
+            userId: userId,
+            guest: guest,
+            note: note,
+          )
+          .timeout(_timeout);
 
-    response.when(
-      success: (reservationResponse) {
-        // After joining, get the position
-        getMyQueuePosition(reservationResponse.data.id);
-      },
-      failure: (error) {
-        emit(
-          QueueState.joinQueueError(
-            error.apiErrorModel.message ?? 'Failed to join queue',
-          ),
-        );
-      },
-    );
+      response.when(
+        success: (reservationResponse) {
+          // After joining, get to position
+          getMyQueuePosition(reservationResponse.data.id);
+        },
+        failure: (error) {
+          emit(
+            QueueState.joinQueueError(
+              error.apiErrorModel.message ?? 'Failed to join queue',
+            ),
+          );
+        },
+      );
+    } on TimeoutException catch (e) {
+      emit(
+        QueueState.joinQueueError(ErrorHandler.handle(e).toString()),
+      );
+    } catch (e) {
+      emit(QueueState.joinQueueError(ErrorHandler.handle(e).toString()));
+    }
   }
 
   // Get queue status for a barber
   void getQueueStatus({required String barberId}) async {
     emit(const QueueState.queueStatusLoading());
 
-    final response = await _reservationRepo.getQueueStatus(barberId: barberId);
+    try {
+      final response =
+          await _reservationRepo.getQueueStatus(barberId: barberId).timeout(_timeout);
 
-    response.when(
-      success: (queueStatusResponse) {
-        emit(QueueState.queueStatusSuccess(queueStatusResponse.data));
-      },
-      failure: (error) {
-        emit(
-          QueueState.queueStatusError(
-            error.apiErrorModel.message ?? 'Failed to get queue status',
-          ),
-        );
-      },
-    );
+      response.when(
+        success: (queueStatusResponse) {
+          emit(QueueState.queueStatusSuccess(queueStatusResponse.data));
+        },
+        failure: (error) {
+          emit(
+            QueueState.queueStatusError(
+              error.apiErrorModel.message ?? 'Failed to get queue status',
+            ),
+          );
+        },
+      );
+    } on TimeoutException catch (e) {
+      emit(
+        QueueState.queueStatusError(ErrorHandler.handle(e).toString()),
+      );
+    } catch (e) {
+      emit(QueueState.queueStatusError(ErrorHandler.handle(e).toString()));
+    }
   }
 
   // Get my queue position
   void getMyQueuePosition(String reservationId) async {
     emit(const QueueState.queuePositionLoading());
 
-    final response = await _reservationRepo.getMyQueuePosition(
-      reservationId: reservationId,
-    );
+    try {
+      final response = await _reservationRepo
+          .getMyQueuePosition(
+            reservationId: reservationId,
+          )
+          .timeout(_timeout);
 
-    response.when(
-      success: (queuePositionResponse) {
-        emit(QueueState.queuePositionSuccess(queuePositionResponse.data));
-      },
-      failure: (error) {
-        emit(
-          QueueState.queuePositionError(
-            error.apiErrorModel.message ?? 'Failed to get queue position',
-          ),
-        );
-      },
-    );
+      response.when(
+        success: (queuePositionResponse) {
+          emit(QueueState.queuePositionSuccess(queuePositionResponse.data));
+        },
+        failure: (error) {
+          emit(
+            QueueState.queuePositionError(
+              error.apiErrorModel.message ?? 'Failed to get queue position',
+            ),
+          );
+        },
+      );
+    } on TimeoutException catch (e) {
+      emit(
+        QueueState.queuePositionError(ErrorHandler.handle(e).toString()),
+      );
+    } catch (e) {
+      emit(QueueState.queuePositionError(ErrorHandler.handle(e).toString()));
+    }
   }
 
   // Start polling queue position (for real-time updates)
@@ -123,48 +155,67 @@ class QueueCubit extends Cubit<QueueState> {
   void advanceQueue(String barberId) async {
     emit(const QueueState.queueActionLoading());
 
-    final response = await _reservationRepo.advanceQueue(barberId: barberId);
+    try {
+      final response =
+          await _reservationRepo.advanceQueue(barberId: barberId).timeout(_timeout);
 
-    response.when(
-      success: (_) {
-        emit(
-          const QueueState.queueActionSuccess('Queue advanced successfully'),
-        );
-        // Refresh queue status after action
-        getQueueStatus(barberId: barberId);
-      },
-      failure: (error) {
-        emit(
-          QueueState.queueActionError(
-            error.apiErrorModel.message ?? 'Failed to advance queue',
-          ),
-        );
-      },
-    );
+      response.when(
+        success: (_) {
+          emit(
+            const QueueState.queueActionSuccess('Queue advanced successfully'),
+          );
+          // Refresh queue status after action
+          getQueueStatus(barberId: barberId);
+        },
+        failure: (error) {
+          emit(
+            QueueState.queueActionError(
+              error.apiErrorModel.message ?? 'Failed to advance queue',
+            ),
+          );
+        },
+      );
+    } on TimeoutException catch (e) {
+      emit(
+        QueueState.queueActionError(ErrorHandler.handle(e).toString()),
+      );
+    } catch (e) {
+      emit(QueueState.queueActionError(ErrorHandler.handle(e).toString()));
+    }
   }
 
   // Skip customer (for barber/admin/cashier)
   void skipCustomer(String reservationId, String barberId) async {
     emit(const QueueState.queueActionLoading());
 
-    final response = await _reservationRepo.skipCustomer(
-      reservationId: reservationId,
-    );
+    try {
+      final response = await _reservationRepo
+          .skipCustomer(
+            reservationId: reservationId,
+          )
+          .timeout(_timeout);
 
-    response.when(
-      success: (_) {
-        emit(const QueueState.queueActionSuccess('Customer skipped'));
-        // Refresh queue status after action
-        getQueueStatus(barberId: barberId);
-      },
-      failure: (error) {
-        emit(
-          QueueState.queueActionError(
-            error.apiErrorModel.message ?? 'Failed to skip customer',
-          ),
-        );
-      },
-    );
+      response.when(
+        success: (_) {
+          emit(const QueueState.queueActionSuccess('Customer skipped'));
+          // Refresh queue status after action
+          getQueueStatus(barberId: barberId);
+        },
+        failure: (error) {
+          emit(
+            QueueState.queueActionError(
+              error.apiErrorModel.message ?? 'Failed to skip customer',
+            ),
+          );
+        },
+      );
+    } on TimeoutException catch (e) {
+      emit(
+        QueueState.queueActionError(ErrorHandler.handle(e).toString()),
+      );
+    } catch (e) {
+      emit(QueueState.queueActionError(ErrorHandler.handle(e).toString()));
+    }
   }
 
   @override

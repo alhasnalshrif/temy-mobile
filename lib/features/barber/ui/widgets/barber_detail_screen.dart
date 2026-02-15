@@ -4,14 +4,14 @@ import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
-import 'package:temy_barber/features/barber/ui/widgets/tabs/about_tab.dart';
 import 'package:temy_barber/features/barber/ui/widgets/barber_image.dart';
 import 'package:temy_barber/features/barber/ui/widgets/rating_display.dart';
 import 'package:temy_barber/features/barber/ui/widgets/tabs/schedule_tab.dart';
 import 'package:temy_barber/features/barber/ui/widgets/tabs/service_tab.dart';
-import 'package:temy_barber/features/barber/ui/widgets/sliver_tab_bar_delegate.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
+import 'package:temy_barber/features/reservations/logic/time_slot_logic.dart';
+import 'package:temy_barber/features/reservations/ui/widgets/time_slot_section.dart';
 
 class BarberScreenItem extends StatefulWidget {
   final BarberDetailData? serviceResponseModel;
@@ -30,6 +30,15 @@ class _BarberScreenItemState extends State<BarberScreenItem>
   // Track selected service IDs
   final Set<BarberService> _selectedServices = {};
   double _selectedTotalPrice = 0.0;
+  String? _selectedTime;
+
+  // Calculate total duration in minutes
+  int get _totalDuration {
+    return _selectedServices.fold(
+      0,
+      (total, service) => total + service.duration,
+    );
+  }
 
   @override
   void initState() {
@@ -86,15 +95,13 @@ class _BarberScreenItemState extends State<BarberScreenItem>
             child: NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) => [
                 SliverToBoxAdapter(child: _buildHeader()),
-                SliverPersistentHeader(
-                  delegate: SliverTabBarDelegate(tabBar: _buildTabBar()),
-                  pinned: true,
-                ),
+              
               ],
               body: _buildTabContent(),
             ),
           ),
         ),
+       
         _buildBookingButton(),
       ],
     );
@@ -153,7 +160,16 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                     children: [
                       _buildTabBar(),
                       const SizedBox(height: 16),
-                      Expanded(child: _buildTabContent()),
+                      SizedBox(
+                        height: 400, // Fixed height for tab content
+                        child: _buildTabContent(),
+                      ),
+                      if (_selectedServices.isNotEmpty) ...[
+                        const SizedBox(height: 24),
+                        const Divider(),
+                        const SizedBox(height: 24),
+                        _buildTimeSlotSection(),
+                      ],
                     ],
                   ),
                 ),
@@ -198,7 +214,13 @@ class _BarberScreenItemState extends State<BarberScreenItem>
       );
     }
 
-    return Padding(
+    return Container(
+      decoration: BoxDecoration(
+        color: ColorsManager.lightBlue,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: ColorsManager.moreLighterGray),
+      ),
+      margin: const EdgeInsets.fromLTRB(16, 16, 16, 12),
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,7 +271,7 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${barber?.workingHours.start} - ${barber?.workingHours.end}',
+                      '${const TimeSlotLogic().formatTimeForDisplay(barber?.workingHours.start ?? "")} - ${const TimeSlotLogic().formatTimeForDisplay(barber?.workingHours.end ?? "")}',
                       style: textTheme.bodyMedium?.copyWith(
                         color: ColorsManager.mainBlue,
                         fontWeight: FontWeight.w500,
@@ -259,11 +281,11 @@ class _BarberScreenItemState extends State<BarberScreenItem>
                 ),
                 const SizedBox(height: 8),
 
-                RatingDisplay(
-                  rating: 5.0,
-                  // rating: barber?.rating.average ?? 0.0,
-                  reviewCount: barber?.rating.total ?? 0,
-                ),
+                // RatingDisplay(
+                //   rating: 5.0,
+                //   // rating: barber?.rating.average ?? 0.0,
+                //   reviewCount: barber?.rating.total ?? 0,
+                // ),
               ],
             ),
           ),
@@ -321,11 +343,12 @@ class _BarberScreenItemState extends State<BarberScreenItem>
           onTap: _selectedServices.isEmpty
               ? null
               : () {
-                  // Pass both selected services and barber details
                   final args = ReservationArguments(
                     selectedServices: _selectedServices.toList(),
                     barberData: widget.serviceResponseModel,
                     totalPrice: _selectedTotalPrice,
+                    selectedTime: _selectedTime,
+                    selectedDate: DateTime.now(),
                   );
                   context.goNamed(
                     AppRoutes.reservationName,
@@ -358,6 +381,19 @@ class _BarberScreenItemState extends State<BarberScreenItem>
 
   String _priceText(double price) {
     return 'barber.price'.tr(args: [price.toStringAsFixed(0)]);
+  }
+
+  Widget _buildTimeSlotSection() {
+    return TimeSlotSection(
+      barberData: widget.serviceResponseModel,
+      selectedTime: _selectedTime,
+      onTimeSelected: (time) {
+        setState(() {
+          _selectedTime = time;
+        });
+      },
+      totalDuration: _totalDuration,
+    );
   }
 
   String _getWorkingDays(List<int>? daysOff) {

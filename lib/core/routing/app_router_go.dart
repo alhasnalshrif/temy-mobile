@@ -74,7 +74,16 @@ class AppRouterGo {
           path: AppRoutes.Verification,
           name: AppRoutes.verificationName,
           builder: (context, state) {
-            final args = state.extra as Map<String, dynamic>?;
+            final extra = state.extra;
+            final Map<String, dynamic>? args;
+            if (extra is Map<String, dynamic>) {
+              args = extra;
+            } else if (extra is String) {
+              args = {'phoneNumber': extra};
+            } else {
+              args = null;
+            }
+
             return BlocProvider(
               create: (context) => getIt<VerificationCubit>(),
               child: VerificationScreen(

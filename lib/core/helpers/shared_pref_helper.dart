@@ -89,7 +89,19 @@ class SharedPrefHelper {
     } else {
       const flutterSecureStorage = FlutterSecureStorage();
       debugPrint('FlutterSecureStorage : getSecuredString with key : $key');
-      return await flutterSecureStorage.read(key: key) ?? '';
+      try {
+        return await flutterSecureStorage.read(key: key) ?? '';
+      } catch (e) {
+        // Handle BadPaddingException - occurs when encryption key changes
+        // (e.g., after app reinstall, OS update, or keystore reset)
+        debugPrint(
+          '⚠️ FlutterSecureStorage: Failed to decrypt key "$key". '
+          'Clearing corrupted data. Error: $e',
+        );
+        // Delete the corrupted entry
+        await flutterSecureStorage.delete(key: key);
+        return '';
+      }
     }
   }
 

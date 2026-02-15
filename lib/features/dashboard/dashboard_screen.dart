@@ -295,7 +295,7 @@ class _MyDashboardState extends State<DashboardScreen> {
                   AppRoutes.verificationName,
                   extra: {
                     'phoneNumber': fullPhone,
-                    'shouldAutoResend': true,
+                    'shouldAutoResend': false,
                     'comingFromLogin': true,
                   },
                 );

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
@@ -22,7 +24,7 @@ class VerificationCubit extends Cubit<VerificationState> {
   // Whether user came from login (vs signup)
   bool comingFromLogin = false;
 
-  // Set the phone number that needs verification
+  // Set to phone number that needs verification
   void setPhoneNumber(String phone) {
     phoneNumber = phone;
   }
@@ -32,7 +34,9 @@ class VerificationCubit extends Cubit<VerificationState> {
     comingFromLogin = fromLogin;
   }
 
-  // Verify the code
+  static const _timeout = Duration(seconds: 20);
+
+  // Verify code
   void verifyCode() async {
     if (phoneNumber == null || phoneNumber!.isEmpty) {
       emit(const VerificationState.error(error: 'Phone number is missing'));
@@ -40,25 +44,35 @@ class VerificationCubit extends Cubit<VerificationState> {
     }
 
     emit(const VerificationState.loading());
-    final response = await _verificationRepo.verify(
-      VerificationRequestBody(
-        // phone: phoneNumber!,
-        verificationCode: codeController.text,
-      ),
-    );
 
-    response.when(
-      success: (verificationResponse) {
-        emit(VerificationState.success(verificationResponse));
-      },
-      failure: (error) {
-        emit(
-          VerificationState.error(
-            error: error.apiErrorModel.message ?? 'Verification failed',
-          ),
-        );
-      },
-    );
+    try {
+      final response = await _verificationRepo
+          .verify(
+            VerificationRequestBody(
+              verificationCode: codeController.text,
+            ),
+          )
+          .timeout(_timeout);
+
+      response.when(
+        success: (verificationResponse) {
+          emit(VerificationState.success(verificationResponse));
+        },
+        failure: (error) {
+          emit(
+            VerificationState.error(
+              error: error.apiErrorModel.message ?? 'Verification failed',
+            ),
+          );
+        },
+      );
+    } on TimeoutException catch (_) {
+      emit(const VerificationState.error(
+        error: 'Request timeout. Please try again.',
+      ));
+    } catch (e) {
+      emit(VerificationState.error(error: e.toString()));
+    }
   }
 
   // Resend verification code
@@ -71,26 +85,37 @@ class VerificationCubit extends Cubit<VerificationState> {
 
     debugPrint('Resending verification code to: $phoneNumber');
     emit(const VerificationState.loading());
-    final response = await _verificationRepo.resendCode(
-      ResendCodeRequestBody(phone: phoneNumber!),
-    );
 
-    response.when(
-      success: (resendResponse) {
-        debugPrint('Verification code resent successfully');
-        emit(const VerificationState.initial());
-      },
-      failure: (error) {
-        debugPrint(
-          'Failed to resend verification code: ${error.apiErrorModel.message}',
-        );
-        emit(
-          VerificationState.error(
-            error: error.apiErrorModel.message ?? 'Failed to resend code',
-          ),
-        );
-      },
-    );
+    try {
+      final response = await _verificationRepo
+          .resendCode(
+            ResendCodeRequestBody(phone: phoneNumber!),
+          )
+          .timeout(_timeout);
+
+      response.when(
+        success: (resendResponse) {
+          debugPrint('Verification code resent successfully');
+          emit(const VerificationState.initial());
+        },
+        failure: (error) {
+          debugPrint(
+            'Failed to resend verification code: ${error.apiErrorModel.message}',
+          );
+          emit(
+            VerificationState.error(
+              error: error.apiErrorModel.message ?? 'Failed to resend code',
+            ),
+          );
+        },
+      );
+    } on TimeoutException catch (_) {
+      emit(const VerificationState.error(
+        error: 'Request timeout. Please try again.',
+      ));
+    } catch (e) {
+      emit(VerificationState.error(error: e.toString()));
+    }
   }
 
   @override

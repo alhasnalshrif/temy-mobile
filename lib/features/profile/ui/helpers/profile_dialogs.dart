@@ -119,6 +119,30 @@ class ProfileDialogs {
                         }
                       },
                       deleteError: (errorState) {
+                        final errorModel =
+                            errorState.errorHandler.apiErrorModel;
+
+                        if (errorModel.code == 401) {
+                          onDialogClosed();
+                          Navigator.of(dialogContext).pop();
+
+                          // Session expired handling
+                          context.read<ProfileCubit>().logout();
+                          if (context.mounted) {
+                            context.goNamed(AppRoutes.loginName);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  errorModel.message ??
+                                      'Session expired. Please login again.',
+                                ),
+                                backgroundColor: ColorsManager.red,
+                              ),
+                            );
+                          }
+                          return;
+                        }
+
                         onDialogClosed();
                         Navigator.of(dialogContext).pop();
 
@@ -126,7 +150,7 @@ class ProfileDialogs {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              errorState.errorHandler.apiErrorModel.message ??
+                              errorModel.message ??
                                   'delete_account.delete_failed'.tr(),
                             ),
                             backgroundColor: ColorsManager.red,

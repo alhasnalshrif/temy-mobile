@@ -23,13 +23,21 @@ class SignupBlocListener extends StatelessWidget {
             setupLoadingState(context);
           },
           signupSuccess: (signupResponse) {
-            context.pop();
+            Navigator.of(context, rootNavigator: true).pop();
 
             final phoneNumber = context
                 .read<SignupCubit>()
                 .phoneController
                 .text;
-            context.goNamed(AppRoutes.verificationName, extra: phoneNumber);
+            context.goNamed(
+              AppRoutes.verificationName,
+              extra: {
+                'phoneNumber': phoneNumber,
+                'shouldAutoResend':
+                    true, // Newly signed up users usually need OTP
+                'comingFromLogin': false,
+              },
+            );
           },
           signupError: (error) {
             setupErrorState(context, error);
@@ -41,7 +49,7 @@ class SignupBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop();
+    Navigator.of(context, rootNavigator: true).pop(); // Close loading dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -122,6 +130,7 @@ class SignupBlocListener extends StatelessWidget {
   void setupLoadingState(BuildContext context) {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) => Center(
         child: ShimmerLoading.circular(size: 50), // Example shimmer
       ),
