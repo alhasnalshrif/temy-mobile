@@ -114,6 +114,7 @@ flutter_native_splash:
   android_12:
     image: assets/images/mainlogo.jpeg
     color: "#ffffff"
+  ios_content_mode: center
 
 
 # The following section is specific to Flutter packages.
