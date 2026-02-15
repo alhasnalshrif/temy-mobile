@@ -57,10 +57,16 @@ class AuthInterceptor extends Interceptor {
     );
 
     // Check if response contains a new token (some APIs return refreshed tokens)
-    if (response.data is Map && response.data.containsKey('token')) {
+    // We skip this for signup/login responses to avoid duplicate saves
+    final path = response.requestOptions.path;
+    final isAuthEndpoint = path.contains('signup') || path.contains('login');
+
+    if (!isAuthEndpoint &&
+        response.data is Map &&
+        response.data.containsKey('token')) {
       final newToken = response.data['token'];
       if (newToken != null && newToken is String && newToken.isNotEmpty) {
-        debugPrint('🔄 AuthInterceptor: New token received, updating...');
+        debugPrint('🔄 AuthInterceptor: New token received in response, updating...');
         AuthService.instance.saveToken(newToken);
       }
     }

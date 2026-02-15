@@ -169,9 +169,7 @@ class ProfileDialogs {
                     return ElevatedButton(
                       onPressed: !isLoading
                           ? () {
-                              context.read<ProfileCubit>().deleteAccount(
-                                dialogContext,
-                              );
+                              context.read<ProfileCubit>().deleteAccount();
                             }
                           : null,
                       style: ElevatedButton.styleFrom(

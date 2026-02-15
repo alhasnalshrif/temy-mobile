@@ -1,14 +1,13 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/core/networking/api_result.dart';
+import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/core/services/cleanup_service.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
-import '../../../core/routing/app_routes.dart';
 import 'profile_state.dart';
-import 'package:temy_barber/core/helpers/constants.dart';
-import 'dart:developer';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepo _homeRepo;
@@ -59,7 +58,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   /// Delete user account permanently
-  void deleteAccount(dialogContext) async {
+  void deleteAccount() async {
     emit(const ProfileState.deleteLoading());
 
     try {
@@ -69,19 +68,15 @@ class ProfileCubit extends Cubit<ProfileState> {
       final response = await _homeRepo.deleteProfile().timeout(_timeout);
 
       response.when(
-        success: (deletedProfile) {
+        success: (_) {
           log('✅ Account deleted successfully on server');
 
           // Step 2: Use CleanupService for comprehensive cleanup
           _cleanupService.performAccountDeletionCleanup();
           isLoggedInUser = false;
 
-          dialogContext.goNamed(AppRoutes.loginName);
-
           emit(
-            ProfileState.deleteSuccess(
-              deletedProfile.message ?? 'Account deleted successfully',
-            ),
+            const ProfileState.deleteSuccess('Account deleted successfully'),
           );
         },
         failure: (error) {

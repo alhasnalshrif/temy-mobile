@@ -101,7 +101,8 @@
         "booking_summary": "Booking: {} - {}",
         "unavailable": "Unavailable",
         "insufficient_time": "Insufficient time",
-        "slot_mismatch": "Selected time does not match selected services duration"
+        "slot_mismatch": "Selected time does not match selected services duration",
+        "slot_no_longer_available": "This time slot is no longer available. Please select a different time."
     },
     "logout": {
         "logout": "Logout",

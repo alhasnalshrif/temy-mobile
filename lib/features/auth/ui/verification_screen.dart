@@ -34,18 +34,18 @@ class _VerificationScreenState extends State<VerificationScreen> {
     cubit.setPhoneNumber(widget.phoneNumber);
     cubit.setComingFromLogin(widget.comingFromLogin);
 
-    debugPrint('=== Verification Screen Initialized ===');
-    debugPrint('Phone Number: ${widget.phoneNumber}');
-    debugPrint('Should Auto Resend: ${widget.shouldAutoResend}');
-    debugPrint('Coming From Login: ${widget.comingFromLogin}');
+    // debugPrint('=== Verification Screen Initialized ===');
+    // debugPrint('Phone Number: ${widget.phoneNumber}');
+    // debugPrint('Should Auto Resend: ${widget.shouldAutoResend}');
+    // debugPrint('Coming From Login: ${widget.comingFromLogin}');
 
     // Auto-resend OTP if coming from login screen for unverified user
-    if (widget.shouldAutoResend) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        debugPrint('Auto-resending verification code...');
-        cubit.resendCode();
-      });
-    }
+    // if (widget.shouldAutoResend) {
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     debugPrint('Auto-resending verification code...');
+    //     cubit.resendCode();
+    //   });
+    // }
   }
 
   @override

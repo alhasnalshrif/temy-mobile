@@ -75,6 +75,12 @@ class SharedPrefHelper {
       debugPrint(
         "FlutterSecureStorage : setSecuredString with key : $key and value : $value",
       );
+      // Delete the key first to avoid "already exists" error
+      try {
+        await flutterSecureStorage.delete(key: key);
+      } catch (_) {
+        // Ignore if key doesn't exist
+      }
       await flutterSecureStorage.write(key: key, value: value);
     }
   }

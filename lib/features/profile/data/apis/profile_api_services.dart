@@ -19,7 +19,7 @@ abstract class ProfileApiServices {
   Future<UserProfile> updateProfile(@Body() Map<String, dynamic> updateData);
 
   @DELETE(HomeApiConstants.profileDelete)
-  Future<UserProfile> deleteProfile();
+  Future<void> deleteProfile();
 
   // Notification endpoints
   @POST(HomeApiConstants.updateDeviceToken)

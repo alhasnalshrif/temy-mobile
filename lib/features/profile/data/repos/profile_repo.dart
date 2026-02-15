@@ -29,10 +29,10 @@ class ProfileRepo {
     }
   }
 
-  Future<ApiResult<UserProfile>> deleteProfile() async {
+  Future<ApiResult<void>> deleteProfile() async {
     try {
-      final response = await _profileApiServices.deleteProfile();
-      return ApiResult.success(response);
+      await _profileApiServices.deleteProfile();
+      return const ApiResult.success(null);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }

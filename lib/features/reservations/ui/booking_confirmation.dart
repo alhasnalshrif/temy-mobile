@@ -101,7 +101,28 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
 
   void _onError(String message) {
     Navigator.of(context, rootNavigator: true).pop();
-    _showSnackBar(message, ColorsManager.red);
+
+    // Check if this is an overlap error and provide better UX
+    if (message.contains('overlaps with an existing booking') ||
+        message.contains('overlaps') ||
+        message.contains('already booked')) {
+      _showSnackBar('time_slots.slot_no_longer_available'.tr(), ColorsManager.red);
+
+      // Refresh time slots after overlap error so user can see updated availability
+      if (_viewModel.arguments.selectedDate != null &&
+          _viewModel.arguments.barberData?.id != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            context.read<ReservationCubit>().getAvailableTimeSlots(
+              barberId: _viewModel.arguments.barberData!.id,
+              date: _viewModel.arguments.selectedDate!,
+            );
+          }
+        });
+      }
+    } else {
+      _showSnackBar(message, ColorsManager.red);
+    }
   }
 
   void _showSnackBar(String message, Color color) {

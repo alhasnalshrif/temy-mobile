@@ -121,10 +121,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     try {
       await _notificationService.setUserId(userId);
 
-      // Add a small delay to allow OneSignal to process the login
-      await Future.delayed(const Duration(seconds: 2));
-
-      // Update device token after setting user ID
+      // Update device token after setting user ID (no delay needed)
       await _updateDeviceTokenOnServer();
     } catch (error) {
       log('Failed to set user ID: $error');

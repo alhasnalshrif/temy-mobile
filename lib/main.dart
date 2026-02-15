@@ -58,6 +58,23 @@ void main() async {
             about: settingsData?.about,
             phone: settingsData?.phone,
             address: settingsData?.address,
+            onRefresh: () async {
+              // Re-fetch settings to check if maintenance is still active
+              final settingsRepo = getIt<SettingsRepo>();
+              final response = await settingsRepo.getSettings();
+
+              response.when(
+                success: (data) {
+                  if (data.data?.maintenance == false) {
+                    // Maintenance is over, restart the app
+                    main();
+                  }
+                },
+                failure: (error) {
+                  log('Refresh failed: $error');
+                },
+              );
+            },
           ),
         ),
       ),

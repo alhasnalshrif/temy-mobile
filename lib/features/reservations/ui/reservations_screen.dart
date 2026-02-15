@@ -109,7 +109,29 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
       },
       reservationError: (error) {
         _dismissLoadingDialog();
-        _showErrorSnackBar(error.toString());
+
+        // Check if this is an overlap error and provide better UX
+        final errorMessage = error.apiErrorModel.message.toString();
+        if (errorMessage.contains('overlaps with an existing booking') ||
+            errorMessage.contains('overlaps') ||
+            errorMessage.contains('already booked')) {
+          _showErrorSnackBar('time_slots.slot_no_longer_available'.tr());
+
+          // Refresh time slots after overlap error so user can see updated availability
+          if (_viewModel.barberData?.id != null &&
+              _viewModel.selectedDate != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) {
+                context.read<ReservationCubit>().getAvailableTimeSlots(
+                  barberId: _viewModel.barberData!.id,
+                  date: _viewModel.selectedDate!,
+                );
+              }
+            });
+          }
+        } else {
+          _showErrorSnackBar(errorMessage);
+        }
       },
       timeSlotsLoading: () {
         _viewModel.onTimeSlotsLoading();

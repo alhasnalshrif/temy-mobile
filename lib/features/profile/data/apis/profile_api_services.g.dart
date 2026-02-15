@@ -77,30 +77,23 @@ class _ProfileApiServices implements ProfileApiServices {
   }
 
   @override
-  Future<UserProfile> deleteProfile() async {
+  Future<void> deleteProfile() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<UserProfile>(
-      Options(method: 'DELETE', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'users/profile/delete',
-            queryParameters: queryParameters,
-            data: _data,
-          )
+    await _dio.fetch(
+      RequestOptions(
+        method: 'DELETE',
+        headers: _headers,
+        extra: _extra,
+        path: 'users/profile/delete',
+        queryParameters: queryParameters,
+        data: _data,
+        responseType: ResponseType.plain,
+      )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserProfile _value;
-    try {
-      _value = UserProfile.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
-      rethrow;
-    }
-    return _value;
   }
 
   @override

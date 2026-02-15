@@ -143,6 +143,8 @@ class AuthService {
   }
 
   /// Save authentication token
+  /// Note: This does NOT set isLoggedInUser to true - caller should do that
+  /// when the user is fully authenticated (e.g., after verification)
   Future<void> saveToken(String token, {String? userId}) async {
     debugPrint('💾 AuthService: Saving authentication token');
 
@@ -164,9 +166,6 @@ class AuthService {
 
     // Update Dio headers
     DioFactory.setTokenIntoHeaderAfterLogin(token);
-
-    // Update global state
-    isLoggedInUser = true;
 
     debugPrint('✅ AuthService: Token saved successfully');
   }

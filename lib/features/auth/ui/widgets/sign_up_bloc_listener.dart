@@ -33,8 +33,7 @@ class SignupBlocListener extends StatelessWidget {
               AppRoutes.verificationName,
               extra: {
                 'phoneNumber': phoneNumber,
-                'shouldAutoResend':
-                    true, // Newly signed up users usually need OTP
+                'shouldAutoResend': false, // Code already sent during signup
                 'comingFromLogin': false,
               },
             );

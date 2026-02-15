@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 
-class MaintenanceScreen extends StatelessWidget {
+class MaintenanceScreen extends StatefulWidget {
   final String? message;
   final String? logo;
   final String? phone;
   final String? about;
   final String? address;
+  final Future<void> Function()? onRefresh;
 
   const MaintenanceScreen({
     super.key,
@@ -16,7 +17,33 @@ class MaintenanceScreen extends StatelessWidget {
     this.phone,
     this.about,
     this.address,
+    this.onRefresh,
   });
+
+  @override
+  State<MaintenanceScreen> createState() => _MaintenanceScreenState();
+}
+
+class _MaintenanceScreenState extends State<MaintenanceScreen> {
+  bool _isRefreshing = false;
+
+  Future<void> _handleRefresh() async {
+    if (widget.onRefresh == null || _isRefreshing) return;
+
+    setState(() {
+      _isRefreshing = true;
+    });
+
+    try {
+      await widget.onRefresh!();
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isRefreshing = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +66,7 @@ class MaintenanceScreen extends StatelessWidget {
               verticalSpace(30),
               // Message
               Text(
-                message ??
+                widget.message ??
                     'We are currently performing scheduled maintenance to improve our services. Please check back later.',
                 style: TextStyle(
                   fontSize: 26,
@@ -50,9 +77,9 @@ class MaintenanceScreen extends StatelessWidget {
               ),
               verticalSpace(20),
 
-              if (about != null && about!.isNotEmpty) ...[
+              if (widget.about != null && widget.about!.isNotEmpty) ...[
                 Text(
-                  about!,
+                  widget.about!,
                   style: TextStyle(fontSize: 14, color: Colors.grey[500]),
                   textAlign: TextAlign.center,
                 ),
@@ -60,7 +87,7 @@ class MaintenanceScreen extends StatelessWidget {
               ],
 
               // Contact Info (Phone)
-              if (phone != null && phone!.isNotEmpty) ...[
+              if (widget.phone != null && widget.phone!.isNotEmpty) ...[
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -77,7 +104,7 @@ class MaintenanceScreen extends StatelessWidget {
                       ),
                       horizontalSpace(8),
                       Text(
-                        phone!,
+                        widget.phone!,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -89,12 +116,56 @@ class MaintenanceScreen extends StatelessWidget {
                 ),
               ],
 
-              if (address != null && address!.isNotEmpty) ...[
+              if (widget.address != null && widget.address!.isNotEmpty) ...[
                 verticalSpace(20),
                 Text(
-                  address!,
+                  widget.address!,
                   style: TextStyle(fontSize: 14, color: Colors.grey[500]),
                   textAlign: TextAlign.center,
+                ),
+              ],
+
+              // Refresh Button
+              if (widget.onRefresh != null) ...[
+                verticalSpace(40),
+                GestureDetector(
+                  onTap: _handleRefresh,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: _isRefreshing ? Colors.grey[300] : ColorsManager.mainBlue,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (_isRefreshing)
+                          const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                          )
+                        else
+                          const Icon(
+                            Icons.refresh,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        horizontalSpace(8),
+                        Text(
+                          _isRefreshing ? 'Refreshing...' : 'Refresh',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ],
