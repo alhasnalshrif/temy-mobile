@@ -29,7 +29,6 @@
     "total": "المجموع",
     "currency": "ج.م",
     "grand_total": "المجموع الكلي"
-
   },
   "calendar": {
     "today": "اليوم",
@@ -413,5 +412,11 @@
     "complete_reservation_title": "أكمل حجزك",
     "pending_reservations": "لديك {} حجز معلق",
     "continue_booking": "متابعة"
+  },
+  "update_required": {
+    "title": "تحديث مطلوب",
+    "message": "يتوفر إصدار جديد من التطبيق. يرجى التحديث للاستمرار في استخدام التطبيق.",
+    "button": "تحديث الآن",
+    "skip": "تخطي الآن"
   }
 }

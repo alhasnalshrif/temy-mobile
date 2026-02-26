@@ -37,6 +37,15 @@ class SettingsData {
   @JsonKey(name: 'queue_settings')
   GlobalQueueSettings? queueSettings;
 
+  @JsonKey(name: 'app_version')
+  String? appVersion;
+  @JsonKey(name: 'force_update')
+  bool? forceUpdate;
+  @JsonKey(name: 'android_url')
+  String? androidUrl;
+  @JsonKey(name: 'iphone_url')
+  String? iphoneUrl;
+
   SettingsData({
     this.isQueueMode,
     this.maintenance,
@@ -46,6 +55,10 @@ class SettingsData {
     this.phone,
     this.address,
     this.queueSettings,
+    this.appVersion,
+    this.forceUpdate,
+    this.androidUrl,
+    this.iphoneUrl,
   });
 
   factory SettingsData.fromJson(Map<String, dynamic> json) =>

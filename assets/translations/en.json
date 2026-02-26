@@ -28,8 +28,7 @@
         "edit": "Edit",
         "total": "Total",
         "currency": "EGP",
-    "grand_total": "Grand Total"
-
+        "grand_total": "Grand Total"
     },
     "calendar": {
         "today": "Today",
@@ -397,7 +396,7 @@
         "section_6_body": "For questions about this policy, contact us via the support channels in the app."
     },
     "help": {
-    "title": "Help and Support",
+        "title": "Help and Support",
         "how_to_use_title": "How to use the app",
         "how_to_use_body": "- Browse services and select your preferred option.\n- Book appointments easily through the app.\n- Manage your profile and preferences.",
         "need_help_title": "Need more help?",
@@ -407,5 +406,11 @@
         "complete_reservation_title": "Complete your reservation",
         "pending_reservations": "You have {} pending service(s)",
         "continue_booking": "Continue"
+    },
+    "update_required": {
+        "title": "Update Required",
+        "message": "A new version of the app is available. Please update to continue using the app.",
+        "button": "Update Now",
+        "skip": "Skip for now"
     }
 }

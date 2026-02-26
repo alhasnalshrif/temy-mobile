@@ -5,6 +5,7 @@ import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/auth/logic/sign_up_cubit.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/routing/app_router_go.dart';
 import '../../logic/sign_up_state.dart';
 
 class SignupBlocListener extends StatelessWidget {
@@ -25,18 +26,39 @@ class SignupBlocListener extends StatelessWidget {
           signupSuccess: (signupResponse) {
             Navigator.of(context, rootNavigator: true).pop();
 
-            final phoneNumber = context
-                .read<SignupCubit>()
-                .phoneController
-                .text;
-            context.goNamed(
-              AppRoutes.verificationName,
-              extra: {
-                'phoneNumber': phoneNumber,
-                'shouldAutoResend': false, // Code already sent during signup
-                'comingFromLogin': false,
-              },
-            );
+            final isVerified = signupResponse.data?.user?.verified ?? false;
+
+            if (isVerified) {
+              // User is already verified, go directly to home (logged in)
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (context.mounted) {
+                  context.goNamed(AppRoutes.homeName);
+                } else {
+                  AppRouterGo.navigatorKey.currentState?.context.goNamed(
+                    AppRoutes.homeName,
+                  );
+                }
+              });
+            } else {
+              final phoneNumber = context
+                  .read<SignupCubit>()
+                  .phoneController
+                  .text;
+
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (context.mounted) {
+                  context.goNamed(
+                    AppRoutes.verificationName,
+                    extra: {
+                      'phoneNumber': phoneNumber,
+                      'shouldAutoResend':
+                          false, // Code already sent during signup
+                      'comingFromLogin': false,
+                    },
+                  );
+                }
+              });
+            }
           },
           signupError: (error) {
             setupErrorState(context, error);

@@ -19,6 +19,8 @@ import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/settings/data/repos/settings_repo.dart';
 import 'package:temy_barber/features/settings/data/models/settings_response.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:temy_barber/core/ui/update_modal.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -131,7 +133,7 @@ void main() async {
         path: 'assets/translations',
         fallbackLocale: const Locale('ar'),
         startLocale: Locale(savedLanguage),
-        child: const TemyApp(),
+        child: TemyApp(settingsData: settingsData),
       ),
     ),
   );
@@ -167,7 +169,8 @@ Future<void> checkedIfUserLoggedIn() async {
 }
 
 class TemyApp extends StatefulWidget {
-  const TemyApp({super.key});
+  final SettingsData? settingsData;
+  const TemyApp({super.key, this.settingsData});
 
   @override
   State<TemyApp> createState() => _TemyAppState();
@@ -181,6 +184,50 @@ class _TemyAppState extends State<TemyApp> {
     super.initState();
     _goRouter = AppRouterGo.createRouter(isLoggedIn: isLoggedInUser);
     NotificationService.setNavigatorKey(AppRouterGo.navigatorKey);
+
+    if (widget.settingsData != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await _checkUpdate(widget.settingsData!);
+      });
+    }
+  }
+
+  Future<void> _checkUpdate(SettingsData settings) async {
+    if (settings.appVersion == null || settings.appVersion!.isEmpty) return;
+
+    final packageInfo = await PackageInfo.fromPlatform();
+    final currentVersion = packageInfo.version;
+
+    if (_isUpdateRequired(currentVersion, settings.appVersion!)) {
+      final context = AppRouterGo.navigatorKey.currentContext;
+      if (context != null) {
+        UpdateModal.show(
+          context,
+          forceUpdate: settings.forceUpdate ?? false,
+          androidUrl: settings.androidUrl ?? '',
+          iphoneUrl: settings.iphoneUrl ?? '',
+        );
+      }
+    }
+  }
+
+  bool _isUpdateRequired(String current, String remote) {
+    final currentParts = current
+        .split('.')
+        .map((e) => int.tryParse(e) ?? 0)
+        .toList();
+    final remoteParts = remote
+        .split('.')
+        .map((e) => int.tryParse(e) ?? 0)
+        .toList();
+
+    for (var i = 0; i < 3; i++) {
+      final c = i < currentParts.length ? currentParts[i] : 0;
+      final r = i < remoteParts.length ? remoteParts[i] : 0;
+      if (r > c) return true;
+      if (r < c) return false;
+    }
+    return false;
   }
 
   @override
