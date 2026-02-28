@@ -290,8 +290,7 @@ class _CalendarSectionState extends State<CalendarSection>
           final isSelected = _isSameDay(date, selectedDate);
           final isCurrentMonth = date.month == currentMonth.month;
           final isDayOff = _isDayOff(date);
-          final isSelectable =
-              _isSelectable(date) && isCurrentMonth && !isDayOff;
+          final isSelectable = _isSelectable(date) && !isDayOff;
           final isToday = _isToday(date);
 
           return GestureDetector(
@@ -332,8 +331,8 @@ class _CalendarSectionState extends State<CalendarSection>
     FontWeight fontWeight = FontWeight.normal;
 
     // Apply styling based on date state (priority order matters)
-    if (!isCurrentMonth) {
-      // Days from other months - very faded
+    if (!isCurrentMonth && !isSelectable) {
+      // Unselectable days from other months - very faded
       textColor = Colors.grey[300]!;
     } else if (isDayOff && isCurrentMonth) {
       // Day off - show with red styling
@@ -358,6 +357,9 @@ class _CalendarSectionState extends State<CalendarSection>
       decoration = decoration.copyWith(
         border: Border.all(color: ColorsManager.mainBlue, width: 2),
       );
+    } else if (!isCurrentMonth) {
+      // Selectable days from other months
+      textColor = Colors.grey[600]!;
     } else {
       // Normal selectable date
       textColor = Colors.black87;
