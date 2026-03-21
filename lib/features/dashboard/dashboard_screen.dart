@@ -110,8 +110,11 @@ class _MyDashboardState extends State<DashboardScreen> {
           shadowColor: Colors.transparent,
         ),
         child: SizedBox(
-          height: 80,
+          // height: 80,
           child: NavigationBar(
+            backgroundColor: ColorsManager.mainBlue,
+            indicatorColor: Colors.white,
+            labelTextStyle: WidgetStateProperty.all(TextStyles.font14WhiteBold),
             selectedIndex: widget.navigationShell.currentIndex,
             destinations: _buildDestinations(),
             onDestinationSelected: _onItemTapped,
@@ -237,7 +240,12 @@ class _MyDashboardState extends State<DashboardScreen> {
   List<NavigationDestination> _buildDestinations() {
     return [
       NavigationDestination(
-        icon: Image.asset('assets/icons/home.png', height: 24, width: 24),
+        icon: Image.asset(
+          'assets/icons/home.png',
+          height: 24,
+          width: 24,
+          color: ColorsManager.background,
+        ),
         selectedIcon: Image.asset(
           'assets/icons/home.png',
           height: 24,
@@ -247,7 +255,12 @@ class _MyDashboardState extends State<DashboardScreen> {
         label: 'navigation.home'.tr(),
       ),
       NavigationDestination(
-        icon: Image.asset('assets/icons/calendar.png', height: 24, width: 24),
+        icon: Image.asset(
+          'assets/icons/calendar.png',
+          height: 24,
+          width: 24,
+          color: ColorsManager.background,
+        ),
         selectedIcon: Image.asset(
           'assets/icons/calendar.png',
           height: 24,
@@ -257,7 +270,12 @@ class _MyDashboardState extends State<DashboardScreen> {
         label: 'navigation.booking'.tr(),
       ),
       NavigationDestination(
-        icon: Image.asset('assets/icons/user.png', height: 24, width: 24),
+        icon: Image.asset(
+          'assets/icons/user.png',
+          height: 24,
+          width: 24,
+          color: ColorsManager.background,
+        ),
         selectedIcon: Image.asset(
           'assets/icons/user.png',
           height: 24,

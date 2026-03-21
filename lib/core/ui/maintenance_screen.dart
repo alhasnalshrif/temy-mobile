@@ -69,9 +69,10 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                 widget.message ??
                     'We are currently performing scheduled maintenance to improve our services. Please check back later.',
                 style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  height: 1.4,
                   color: ColorsManager.mainBlue,
+                  // fontFamily: F
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -131,9 +132,14 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                 GestureDetector(
                   onTap: _handleRefresh,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
-                      color: _isRefreshing ? Colors.grey[300] : ColorsManager.mainBlue,
+                      color: _isRefreshing
+                          ? Colors.grey[300]
+                          : ColorsManager.mainBlue,
                       borderRadius: BorderRadius.circular(25),
                     ),
                     child: Row(
@@ -145,7 +151,9 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                             height: 16,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.white,
+                              ),
                             ),
                           )
                         else

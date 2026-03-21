@@ -46,43 +46,44 @@ void main() async {
     log('Error checking settings: $e');
   }
 
-  if (settingsData?.maintenance == true) {
-    runApp(
-      EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ar')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('ar'),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: MaintenanceScreen(
-            message: settingsData?.maintenanceMessage,
-            logo: settingsData?.logo,
-            about: settingsData?.about,
-            phone: settingsData?.phone,
-            address: settingsData?.address,
-            onRefresh: () async {
-              // Re-fetch settings to check if maintenance is still active
-              final settingsRepo = getIt<SettingsRepo>();
-              final response = await settingsRepo.getSettings();
+  // if (settingsData?.maintenance == true) {
+  //   runApp(
+  //     EasyLocalization(
+  //       supportedLocales: const [Locale('en'), Locale('ar')],
+  //       path: 'assets/translations',
+  //       fallbackLocale: const Locale('ar'),
+  //       child: MaterialApp(
+  //         debugShowCheckedModeBanner: false,
+  //         theme: AppTheme.theme,
+  //         home: MaintenanceScreen(
+  //           message: settingsData?.maintenanceMessage,
+  //           logo: settingsData?.logo,
+  //           about: settingsData?.about,
+  //           phone: settingsData?.phone,
+  //           address: settingsData?.address,
+  //           onRefresh: () async {
+  //             // Re-fetch settings to check if maintenance is still active
+  //             final settingsRepo = getIt<SettingsRepo>();
+  //             final response = await settingsRepo.getSettings();
 
-              response.when(
-                success: (data) {
-                  if (data.data?.maintenance == false) {
-                    // Maintenance is over, restart the app
-                    main();
-                  }
-                },
-                failure: (error) {
-                  log('Refresh failed: $error');
-                },
-              );
-            },
-          ),
-        ),
-      ),
-    );
-    return;
-  }
+  //             response.when(
+  //               success: (data) {
+  //                 if (data.data?.maintenance == false) {
+  //                   // Maintenance is over, restart the app
+  //                   main();
+  //                 }
+  //               },
+  //               failure: (error) {
+  //                 log('Refresh failed: $error');
+  //               },
+  //             );
+  //           },
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  //   return;
+  // }
 
   await checkedIfUserLoggedIn();
 
