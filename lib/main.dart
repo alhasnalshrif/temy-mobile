@@ -11,9 +11,10 @@ import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
 import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:temy_barber/core/theme/app_theme.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/utils/notification_helper.dart';
 import 'package:temy_barber/core/routing/app_router_go.dart';
-import 'package:temy_barber/core/ui/maintenance_screen.dart';
+import 'package:temy_barber/core/ui/maintenance_screen.dart'; 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/settings/data/repos/settings_repo.dart';
@@ -235,8 +236,8 @@ class _TemyAppState extends State<TemyApp> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: ColorsManager.mainBlue,
+        statusBarIconBrightness: Brightness.light,
       ),
     );
 

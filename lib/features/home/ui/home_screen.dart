@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
@@ -29,6 +30,11 @@ class HomeScreen extends StatelessWidget {
           : AppBar(
               backgroundColor: ColorsManager.mainBlue,
               elevation: 0,
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: ColorsManager.mainBlue,
+                statusBarIconBrightness: Brightness.light, // Android: light icons
+                statusBarBrightness: Brightness.dark, // iOS: light icons
+              ),
               title: const HomeTopBar(),
             ),
       body: SafeArea(

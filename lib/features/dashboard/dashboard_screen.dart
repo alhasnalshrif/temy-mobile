@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
@@ -94,30 +95,35 @@ class _MyDashboardState extends State<DashboardScreen> {
   }
 
   Widget _buildMobileDashboard() {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: ColorsManager.mainBlue,
+        statusBarIconBrightness: Brightness.light, // Android: light icons
+        statusBarBrightness: Brightness.dark, // iOS: light icons
+      ),
+      child: Scaffold(
+        body: Stack(
           children: [widget.navigationShell, _buildVerificationListener()],
         ),
-      ),
-      bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
-          backgroundColor: Colors.white,
-          indicatorColor: Colors.white,
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-          labelTextStyle: WidgetStateProperty.all(TextStyles.font13BlueRegular),
-          surfaceTintColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-        ),
-        child: SizedBox(
-          // height: 80,
-          child: NavigationBar(
-            backgroundColor: ColorsManager.mainBlue,
+        bottomNavigationBar: NavigationBarTheme(
+          data: NavigationBarThemeData(
+            backgroundColor: Colors.white,
             indicatorColor: Colors.white,
-            labelTextStyle: WidgetStateProperty.all(TextStyles.font14WhiteBold),
-            selectedIndex: widget.navigationShell.currentIndex,
-            destinations: _buildDestinations(),
-            onDestinationSelected: _onItemTapped,
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+            labelTextStyle: WidgetStateProperty.all(TextStyles.font13BlueRegular),
+            surfaceTintColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+          ),
+          child: SizedBox(
+            // height: 80,
+            child: NavigationBar(
+              backgroundColor: ColorsManager.mainBlue,
+              indicatorColor: Colors.white,
+              labelTextStyle: WidgetStateProperty.all(TextStyles.font14WhiteBold),
+              selectedIndex: widget.navigationShell.currentIndex,
+              destinations: _buildDestinations(),
+              onDestinationSelected: _onItemTapped,
+            ),
           ),
         ),
       ),

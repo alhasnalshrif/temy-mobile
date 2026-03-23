@@ -83,11 +83,14 @@ class _CalendarSectionState extends State<CalendarSection>
   bool _isSelectable(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final maxDate = today.add(Duration(days: widget.maxBookingDays));
+    
+    // If maxBookingDays is 2, we want today and tomorrow (1 day ahead)
+    final daysAhead = widget.maxBookingDays > 0 ? widget.maxBookingDays - 1 : 0;
+    final maxDate = today.add(Duration(days: daysAhead));
 
     return date.isAtSameMomentAs(today) ||
-        (date.isAfter(today) && date.isBefore(maxDate) ||
-            date.isAtSameMomentAs(maxDate));
+        (date.isAfter(today) && date.isBefore(maxDate)) ||
+        date.isAtSameMomentAs(maxDate);
   }
 
   // Format month name

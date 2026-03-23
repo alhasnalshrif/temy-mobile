@@ -39,7 +39,8 @@ class AppTheme {
         ),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorsManager.mainBlue,
-          statusBarIconBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
         ),
       ),
 
