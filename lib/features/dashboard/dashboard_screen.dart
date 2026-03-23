@@ -244,7 +244,7 @@ class _MyDashboardState extends State<DashboardScreen> {
           'assets/icons/home.png',
           height: 24,
           width: 24,
-          color: ColorsManager.background,
+          color: ColorsManager.thirdfMain,
         ),
         selectedIcon: Image.asset(
           'assets/icons/home.png',
@@ -259,7 +259,7 @@ class _MyDashboardState extends State<DashboardScreen> {
           'assets/icons/calendar.png',
           height: 24,
           width: 24,
-          color: ColorsManager.background,
+          color: ColorsManager.thirdfMain,
         ),
         selectedIcon: Image.asset(
           'assets/icons/calendar.png',
@@ -274,7 +274,7 @@ class _MyDashboardState extends State<DashboardScreen> {
           'assets/icons/user.png',
           height: 24,
           width: 24,
-          color: ColorsManager.background,
+          color: ColorsManager.thirdfMain,
         ),
         selectedIcon: Image.asset(
           'assets/icons/user.png',

@@ -15,7 +15,7 @@ class HomeTopBar extends StatelessWidget {
         children: [
           Column(
             children: [
-              Text('temy_barber'.tr(), style: TextStyles.font24BlackBold),
+              Text('temy_barber'.tr(), style: TextStyles.font24WhiteBold),
             ],
           ),
           // const Spacer(),

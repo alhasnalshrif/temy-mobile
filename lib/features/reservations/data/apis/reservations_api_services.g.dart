@@ -45,7 +45,7 @@ class _ReservationApiServices implements ReservationApiServices {
     try {
       _value = ReservationResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -74,7 +74,7 @@ class _ReservationApiServices implements ReservationApiServices {
     try {
       _value = MultipleReservationResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -107,7 +107,7 @@ class _ReservationApiServices implements ReservationApiServices {
     try {
       _value = TimeSlotsResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -135,7 +135,7 @@ class _ReservationApiServices implements ReservationApiServices {
     try {
       _value = OtpResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -165,7 +165,7 @@ class _ReservationApiServices implements ReservationApiServices {
     try {
       _value = ReservationResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;

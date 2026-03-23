@@ -42,7 +42,7 @@ class _ProfileApiServices implements ProfileApiServices {
     try {
       _value = UserProfile.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -70,7 +70,7 @@ class _ProfileApiServices implements ProfileApiServices {
     try {
       _value = UserProfile.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -82,18 +82,17 @@ class _ProfileApiServices implements ProfileApiServices {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    await _dio.fetch(
-      RequestOptions(
-        method: 'DELETE',
-        headers: _headers,
-        extra: _extra,
-        path: 'users/profile/delete',
-        queryParameters: queryParameters,
-        data: _data,
-        responseType: ResponseType.plain,
-      )
+    final _options = _setStreamType<void>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/profile/delete',
+            queryParameters: queryParameters,
+            data: _data,
+          )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
+    await _dio.fetch<void>(_options);
   }
 
   @override
@@ -120,7 +119,7 @@ class _ProfileApiServices implements ProfileApiServices {
     try {
       _value = NotificationResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -150,7 +149,7 @@ class _ProfileApiServices implements ProfileApiServices {
     try {
       _value = NotificationResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;

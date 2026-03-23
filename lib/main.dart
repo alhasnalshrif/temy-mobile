@@ -18,13 +18,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/settings/data/repos/settings_repo.dart';
 import 'package:temy_barber/features/settings/data/models/settings_response.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:temy_barber/core/ui/update_modal.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setPathUrlStrategy();
+  usePathUrlStrategy();
   await EasyLocalization.ensureInitialized();
 
   setupGetIt();

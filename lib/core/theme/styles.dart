@@ -58,11 +58,11 @@ class TextStyles {
   );
 
   static TextStyle font24WhiteBold = const TextStyle(
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: FontWeightHelper.bold,
     color: Colors.white,
-  ); 
-   static TextStyle font14WhiteBold = const TextStyle(
+  );
+  static TextStyle font14WhiteBold = const TextStyle(
     fontSize: 14,
     color: Colors.white,
   );

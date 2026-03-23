@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
 import 'package:temy_barber/features/home/logic/home_cubit.dart';
 import 'package:temy_barber/features/home/ui/widgets/banner/banner_bloc_builder.dart';
@@ -23,6 +24,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: ResponsiveUtils.isDesktop(context)
+          ? null
+          : AppBar(
+              backgroundColor: ColorsManager.mainBlue,
+              elevation: 0,
+              title: const HomeTopBar(),
+            ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -54,7 +62,6 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HomeTopBar(),
           const CompleteReservationCard(),
           const DefaultBookingCard(),
           const NextBookingCard(),
