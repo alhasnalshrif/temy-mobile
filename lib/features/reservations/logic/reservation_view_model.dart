@@ -17,6 +17,7 @@ class ReservationViewModel extends ChangeNotifier {
   bool _isLoadingTimeSlots = false;
   bool _isQueueMode = false;
   bool _isLoadingSettings = true;
+  bool _isDefault = false;
 
   // Dependencies
   final ReservationArguments? arguments;
@@ -34,6 +35,7 @@ class ReservationViewModel extends ChangeNotifier {
   bool get isLoadingTimeSlots => _isLoadingTimeSlots;
   bool get isQueueMode => _isQueueMode;
   bool get isLoadingSettings => _isLoadingSettings;
+  bool get isDefault => _isDefault;
 
   BarberDetailData? get barberData => arguments?.barberData;
   List<BarberService> get selectedServices => arguments?.selectedServices ?? [];
@@ -188,6 +190,54 @@ class ReservationViewModel extends ChangeNotifier {
       'default_reservation',
       jsonEncode(defaultReservation),
     );
+    
+    _isDefault = true;
+    notifyListeners();
+  }
+
+  /// Remove the saved default reservation
+  Future<void> removeDefault() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('default_reservation');
+    
+    _isDefault = false;
+    notifyListeners();
+  }
+
+  /// Check if the current reservation matches the saved default
+  Future<void> checkIsDefault() async {
+    if (barberData == null || selectedServices.isEmpty) {
+       _isDefault = false;
+       notifyListeners();
+       return;
+    }
+    
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final defaultJson = prefs.getString('default_reservation');
+      if (defaultJson != null) {
+        final data = jsonDecode(defaultJson);
+        final defaultBarberId = data['barber']['id'];
+        
+        final defaultServices = List<dynamic>.from(data['services']);
+        final defaultServiceIds = defaultServices.map((s) => s['id']).toSet();
+        
+        final currentServiceIds = selectedServices.map((s) => s.id).toSet();
+        
+        if (defaultBarberId == barberData!.id && 
+            defaultServiceIds.length == currentServiceIds.length && 
+            defaultServiceIds.containsAll(currentServiceIds)) {
+          _isDefault = true;
+        } else {
+          _isDefault = false;
+        }
+      } else {
+        _isDefault = false;
+      }
+    } catch (e) {
+      _isDefault = false;
+    }
+    notifyListeners();
   }
 
   /// Format date for API requests

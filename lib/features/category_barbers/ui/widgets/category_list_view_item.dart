@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/category_barbers/data/models/category_response.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// A widget that displays a single category item in a list with an image and name.
 class CategoryListViewItem extends StatelessWidget {
@@ -36,49 +37,105 @@ class CategoryListViewItem extends StatelessWidget {
   /// Builds the main card with enhanced visual design.
   Widget _buildCard(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.withOpacity(0.15), width: 1),
-      ),
-      child: Row(
-        children: [
-          _CategoryImage(
-            imageUrl: serviceResponseModel?.avatar,
-            radius: radius,
-          ),
-          const SizedBox(width: 16),
-          Expanded(child: _buildBarberInfo(context)),
-          const SizedBox(width: 8),
-          Icon(
-            Icons.arrow_forward_ios_rounded,
-            size: 18,
-            color: ColorsManager.mainBlue.withOpacity(0.4),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: ColorsManager.mainBlue.withOpacity(0.06),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
           ),
         ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(24),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(24),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                _CategoryImage(
+                  imageUrl: serviceResponseModel?.avatar,
+                  radius: 34,
+                ),
+                const SizedBox(width: 16),
+                Expanded(child: _buildBarberInfo(context)),
+                const SizedBox(width: 8),
+                // Book Now Pill
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: ColorsManager.mainBlue.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Text(
+                    'default_booking.book_now'.tr(),
+                    style: TextStyle(
+                      color: ColorsManager.mainBlue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
 
-  /// Builds the barber information with name.
+  /// Builds the barber information with name and additional details.
   Widget _buildBarberInfo(BuildContext context) {
+    final int servicesCount = serviceResponseModel?.services?.length ?? 0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          serviceResponseModel?.name ?? 'Service',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: ColorsManager.mainBlue,
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-            height: 1.4,
+          serviceResponseModel?.name ?? 'barber.name'.tr(),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: const Color(0xFF1A1A2E),
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
           ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(height: 6),
+        Row(
+          children: [
+            Icon(Icons.cut_rounded, size: 14, color: Colors.grey.shade500),
+            const SizedBox(width: 4),
+            Text(
+              '$servicesCount ${servicesCount == 1 ? 'خدمة' : 'خدمات'}', // Quick Arabic fallback since we don't have tr key
+              style: TextStyle(
+                color: Colors.grey.shade600,
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            const Icon(Icons.star_rounded, color: Colors.orange, size: 15),
+            const SizedBox(width: 4),
+            Text(
+              '5.0',
+              style: TextStyle(
+                color: Colors.grey.shade700,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+            ),
+          ],
         ),
       ],
     );

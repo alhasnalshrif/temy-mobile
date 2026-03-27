@@ -132,6 +132,12 @@ class TextStyles {
     color: ColorsManager.mainBlue,
   );
 
+  static TextStyle font14WhiteSemiBold = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeightHelper.semiBold,
+    color: Colors.white,
+  );
+
   static TextStyle font14BlueBold = const TextStyle(
     fontSize: 14,
     fontWeight: FontWeightHelper.bold,

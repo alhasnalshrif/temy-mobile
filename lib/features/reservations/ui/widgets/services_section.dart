@@ -13,8 +13,18 @@ class ServicesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CardContainer(
-      padding: EdgeInsets.zero,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: ColorsManager.mainBlue.withOpacity(0.04),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -68,13 +78,14 @@ class _ServiceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _buildServiceImage(),
-          const SizedBox(width: 16),
+          const SizedBox(width: 14),
           Expanded(child: _buildServiceName()),
-          const SizedBox(width: 8),
+          const SizedBox(width: 12),
           _buildPriceAndDuration(),
         ],
       ),
@@ -82,17 +93,26 @@ class _ServiceItem extends StatelessWidget {
   }
 
   Widget _buildServiceImage() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: SizedBox(
-        width: 50,
-        height: 50,
+    return Container(
+      width: 60,
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.grey[50],
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey[100]!),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
         child: Image.network(
           service.imageCover ?? '',
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => Container(
-            color: Colors.grey[200],
-            child: Image.asset('assets/images/temy.png', fit: BoxFit.fitWidth),
+          errorBuilder: (_, __, ___) => Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Image.asset(
+              'assets/images/temy.png',
+              fit: BoxFit.contain,
+              color: Colors.grey[400],
+            ),
           ),
         ),
       ),
@@ -100,16 +120,24 @@ class _ServiceItem extends StatelessWidget {
   }
 
   Widget _buildServiceName() {
-    return Text(service.name, style: TextStyles.font15DarkBlueMedium);
+    return Text(
+      service.name,
+      style: TextStyles.font14BlueSemiBold,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+    );
   }
 
   Widget _buildPriceAndDuration() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           'EGP ${service.price.toStringAsFixed(0)}',
-          style: TextStyles.font16DarkBold,
+          style: TextStyles.font16DarkBold.copyWith(
+            color: ColorsManager.mainBlue,
+          ),
         ),
         const SizedBox(height: 4),
         Container(

@@ -94,13 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    // Set status bar styling
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.black,
-        statusBarIconBrightness: Brightness.light,
-      ),
-    );
+    // Status bar styling is handled by AnnotatedRegion around the layout
 
     // Show loading screen while initializing
     if (_isLoading) {
@@ -121,21 +115,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  /// Build mobile layout
   Widget _buildMobileLayout(Size size) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        color: Colors.black,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ProfileHeader(),
-              _buildProfileInfoSection(),
-              verticalSpace(30),
-              _buildProfileMenuSection(size),
-            ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.black,
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: Container(
+            width: double.infinity,
+            color: Colors.black,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const ProfileHeader(),
+                  _buildProfileInfoSection(),
+                  verticalSpace(30),
+                  _buildProfileMenuSection(size),
+                ],
+              ),
+            ),
           ),
         ),
       ),

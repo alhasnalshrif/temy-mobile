@@ -83,7 +83,7 @@ class _CalendarSectionState extends State<CalendarSection>
   bool _isSelectable(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    
+
     // If maxBookingDays is 2, we want today and tomorrow (1 day ahead)
     final daysAhead = widget.maxBookingDays > 0 ? widget.maxBookingDays - 1 : 0;
     final maxDate = today.add(Duration(days: daysAhead));
@@ -170,10 +170,15 @@ class _CalendarSectionState extends State<CalendarSection>
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               child: Row(
                 children: [
-                  const Icon(
-                    Icons.calendar_today_outlined,
-                    size: 14,
-                    color: ColorsManager.mainBlue,
+                  // const Icon(
+                  //   Icons.calendar_today_outlined,
+                  //   size: 14,
+                  //   color: ColorsManager.mainBlue,
+                  // ),
+                  Image.asset(
+                    'assets/icons/calendar.png',
+                    width: 18,
+                    height: 18,
                   ),
                   const SizedBox(width: 6),
                   Text(
@@ -195,7 +200,14 @@ class _CalendarSectionState extends State<CalendarSection>
         Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: ColorsManager.mainBlue.withOpacity(0.04),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -204,8 +216,8 @@ class _CalendarSectionState extends State<CalendarSection>
                 height: 40,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: ColorsManager.thirdfMain,
+                  borderRadius: BorderRadius.circular(12),
+                  color: ColorsManager.mainBlue.withOpacity(0.04),
                 ),
                 child: Center(
                   child: FadeTransition(
@@ -214,7 +226,8 @@ class _CalendarSectionState extends State<CalendarSection>
                       _formatMonthYear(currentMonth),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 15,
+                        color: ColorsManager.mainBlue,
                       ),
                     ),
                   ),
@@ -255,11 +268,11 @@ class _CalendarSectionState extends State<CalendarSection>
                 shortcut,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
                   color: isDayOff
                       ? ColorsManager.red.withAlpha(200)
-                      : ColorsManager.lightBlue,
+                      : Colors.grey.shade400,
                 ),
               ),
             ),

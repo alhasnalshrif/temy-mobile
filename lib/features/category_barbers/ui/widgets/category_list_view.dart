@@ -25,8 +25,6 @@ class CategoryBarberListView extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
       itemCount: itemCount,
-      // Performance optimization: estimate item height
-      itemExtent: 100,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         final barber = barberDataList[index];
@@ -37,7 +35,7 @@ class CategoryBarberListView extends StatelessWidget {
           radius: 32,
           onTap: () {
             if (barber?.id != null) {
-              context.goNamed(
+              context.pushGoNamed(
                 AppRoutes.barberName,
                 pathParameters: {'barberId': barber!.id!},
               );

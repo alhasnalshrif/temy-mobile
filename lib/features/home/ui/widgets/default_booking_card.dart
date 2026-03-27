@@ -212,8 +212,11 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                         barberData: barberDetail,
                         totalPrice: totalPrice,
                       );
-                      Navigator.of(context).pop();
-                      context.goNamed(AppRoutes.reservationName, extra: args);
+                      context.pushGoNamed(
+                        AppRoutes.reservationName,
+                        pathParameters: {'barberId': barberData['id'].toString()},
+                        extra: args,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorsManager.mainBlue,

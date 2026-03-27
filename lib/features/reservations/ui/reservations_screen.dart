@@ -13,7 +13,6 @@ import 'package:temy_barber/features/reservations/ui/widgets/calendar_section.da
 import 'package:temy_barber/features/reservations/ui/widgets/time_slot_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/total_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/queue_mode_section.dart';
-import 'package:temy_barber/features/reservations/ui/widgets/common_widgets.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
@@ -38,6 +37,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   }
 
   void _initializeData() {
+    _viewModel.checkIsDefault();
     _fetchQueueSettings();
     _fetchAvailableTimeSlots();
   }
@@ -80,7 +80,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
               child: Column(
                 children: [
                   Expanded(child: _buildResponsiveLayout()),
-                  _buildBottomActions(isLoading),
+                  _buildFloatingPill(isLoading),
                 ],
               ),
             ),
@@ -194,17 +194,44 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   }
 
   PreferredSizeWidget _buildAppBar() {
+    final isDefault = _viewModel.isDefault;
+
     return AppBar(
-      title: Text('barber.details'.tr(), style: TextStyles.font18DarkBlueBold),
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
+      title: Text('barber.details'.tr(), style: TextStyles.font18WhiteBold),
+      backgroundColor: ColorsManager.mainBlue,
       elevation: 0,
-      shadowColor: Colors.transparent,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios_new),
-        color: Colors.black,
+        color: Colors.white,
         onPressed: () => context.pop(),
       ),
+      actions: [
+        TextButton.icon(
+          onPressed: _handleSaveAsDefault,
+          icon: Icon(
+            isDefault ? Icons.bookmark : Icons.bookmark_border,
+            color: isDefault
+                ? ColorsManager.background
+                : ColorsManager.lightBlue,
+            size: 20,
+          ),
+          label: Text(
+            isDefault
+                ? 'default_booking.saved_as_default'.tr()
+                : 'default_booking.save_as_default'.tr(),
+            style: TextStyle(
+              color: isDefault
+                  ? ColorsManager.background
+                  : ColorsManager.lightBlue,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+        ),
+      ],
     );
   }
 
@@ -219,7 +246,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   Widget _buildMobileLayout() {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 100),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -228,6 +255,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
             _buildBookingContent(),
             const SizedBox(height: 24),
             TotalSection(totalPrice: _viewModel.totalPrice),
+            const SizedBox(height: 24),
           ],
         ),
       ),
@@ -247,7 +275,13 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
               children: [
                 Expanded(
                   flex: 4,
-                  child: ServicesSection(services: _viewModel.selectedServices),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ServicesSection(services: _viewModel.selectedServices),
+                      const SizedBox(height: 32),
+                    ],
+                  ),
                 ),
                 const SizedBox(width: 24),
                 Expanded(
@@ -257,6 +291,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                       _buildBookingContent(),
                       const SizedBox(height: 24),
                       TotalSection(totalPrice: _viewModel.totalPrice),
+                      const SizedBox(height: 24),
                     ],
                   ),
                 ),
@@ -317,47 +352,61 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     }
   }
 
-  Widget _buildBottomActions(bool isLoading) {
+  Widget _buildFloatingPill(bool isLoading) {
     final canProceed = _viewModel.canBook && !isLoading;
 
-    return Align(
-      alignment: Alignment.bottomCenter,
+    return SafeArea(
+      top: false,
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 1000),
-        padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(color: Colors.white),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: PrimaryButton(
-                text: 'default_booking.save_as_default'.tr(),
-                isOutlined: true,
-                onPressed: canProceed ? _handleSaveAsDefault : null,
-              ),
+        height: 60,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          color: ColorsManager.mainBlue,
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: canProceed ? _handleProceed : null,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
+              child: isLoading
+                  ? const SizedBox(
+                      width: 22,
+                      height: 22,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                  : Text(
+                      'common.next'.tr(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              flex: 5,
-              child: PrimaryButton(
-                text: 'common.next'.tr(),
-                isLoading: isLoading,
-                onPressed: canProceed ? _handleProceed : null,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
 
   void _handleSaveAsDefault() {
-    _viewModel.saveAsDefault();
-    _showSuccessSnackBar('default_booking.saved_as_default'.tr());
+    if (_viewModel.isDefault) {
+      _viewModel.removeDefault();
+      _showSuccessSnackBar('default_booking.removed'.tr());
+    } else {
+      _viewModel.saveAsDefault();
+      _showSuccessSnackBar('default_booking.saved_as_default'.tr());
+    }
+    setState(() {});
   }
 
   void _handleProceed() {
     final args = _viewModel.buildReservationArguments();
-    context.goNamed(AppRoutes.bookingConfirmationName, extra: args);
+    context.pushGoNamed(AppRoutes.bookingConfirmationName, extra: args);
   }
 }
