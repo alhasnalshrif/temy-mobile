@@ -63,6 +63,7 @@ class _BarberScreenItemState extends State<BarberScreenItem> {
 
   Widget _buildMobileLayout() {
     final services = widget.serviceResponseModel?.services ?? [];
+    final barberName = widget.serviceResponseModel?.name ?? 'barber.name'.tr();
 
     return Stack(
       children: [
@@ -74,7 +75,10 @@ class _BarberScreenItemState extends State<BarberScreenItem> {
               expandedHeight: 220,
               pinned: true,
               backgroundColor: Colors.white,
+              foregroundColor: const Color(0xFF1A1A2E),
               elevation: 0,
+              // centerTitle: true,
+              titleSpacing: 0,
               leadingWidth: 64,
               leading: Center(
                 child: _circleBtn(
@@ -82,7 +86,32 @@ class _BarberScreenItemState extends State<BarberScreenItem> {
                   () => Navigator.of(context).pop(),
                 ),
               ),
-            
+              title: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.sizeOf(context).width * 0.5,
+                ),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.75),
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                  child: Text(
+                    barberName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: const Color(0xFF1A1A2E),
+                    ),
+                  ),
+                ),
+              ),
+
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.network(
                   widget.serviceResponseModel?.avatar ?? '',
@@ -120,7 +149,7 @@ class _BarberScreenItemState extends State<BarberScreenItem> {
             ),
 
             // ── Barber info header ──
-            SliverToBoxAdapter(child: _buildBarberInfo()),
+            // SliverToBoxAdapter(child: _buildBarberInfo()),
 
             // ── Section title ──
             SliverToBoxAdapter(

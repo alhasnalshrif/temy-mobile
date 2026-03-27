@@ -17,6 +17,11 @@ class BannerCarousel extends StatefulWidget {
 class _BannerCarouselState extends State<BannerCarousel> {
   int _currentIndex = 0;
 
+  // Banner heights by breakpoint for quick tuning.
+  static const double _mobileBannerHeight = 180;
+  static const double _tabletBannerHeight = 240;
+  static const double _desktopBannerHeight = 320;
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -64,9 +69,9 @@ class _BannerCarouselState extends State<BannerCarousel> {
   }
 
   double _getResponsiveBannerHeight(double screenWidth) {
-    if (screenWidth >= 1024) return 300; // Desktop
-    if (screenWidth >= 600) return 220; // Tablet
-    return 160; // Mobile
+    if (screenWidth >= 1024) return _desktopBannerHeight; // Desktop
+    if (screenWidth >= 600) return _tabletBannerHeight; // Tablet
+    return _mobileBannerHeight; // Mobile
   }
 }
 

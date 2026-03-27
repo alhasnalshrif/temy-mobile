@@ -286,26 +286,28 @@ class LogoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
-      tween: Tween(begin: 0.95, end: 1.0),
+      tween: Tween(begin: 0.6, end: 1.0),
       duration: const Duration(milliseconds: 300),
       builder: (context, value, child) {
         return Transform.scale(
           scale: value,
-          child: SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: onPressed,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ColorsManager.mainBlue,
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+          child: Align(
+            child: FractionallySizedBox(
+              widthFactor: 0.6,
+              child: ElevatedButton(
+                onPressed: onPressed,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsManager.mainBlue,
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 16),
-              ),
-              child: Text(
-                'logout.logout'.tr(),
-                style: TextStyles.font16WhiteSemiBold,
+                child: Text(
+                  'logout.logout'.tr(),
+                  style: TextStyles.font16WhiteSemiBold,
+                ),
               ),
             ),
           ),

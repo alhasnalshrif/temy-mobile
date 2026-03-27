@@ -128,16 +128,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Container(
             width: double.infinity,
             color: Colors.black,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const ProfileHeader(),
-                  _buildProfileInfoSection(),
-                  verticalSpace(30),
-                  _buildProfileMenuSection(size),
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ProfileHeader(),
+                _buildProfileInfoSection(),
+                verticalSpace(30),
+                Expanded(child: _buildProfileMenuSection(size)),
+              ],
             ),
           ),
         ),
@@ -260,38 +258,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LanguageSelector(
-            currentLanguage: currentLanguage,
-            onLanguageChanged: _onLanguageChanged,
-          ),
-          verticalSpace(10),
-          _buildEditAccountTile(),
-          ProfileTile(
-            title: 'profile.privacy'.tr(),
-            icon: Icons.lock_outline,
-            onTap: () => context.goNamed(AppRoutes.privacyPolicyName),
-          ),
-          ProfileTile(
-            title: 'profile.help'.tr(),
-            icon: Icons.help_outline,
-            onTap: () => context.goNamed(AppRoutes.helpName),
-          ),
-          ProfileTile(
-            title: 'profile.about'.tr(),
-            icon: Icons.info_outline,
-            onTap: () => context.goNamed(AppRoutes.aboutName),
-          ),
-          DangerTile(
-            title: 'profile.delete_account'.tr(),
-            icon: Icons.delete_forever_outlined,
-            onTap: _onDeleteAccountPressed,
-          ),
-          verticalSpace(20),
-          LogoutButton(onPressed: _onLogoutPressed),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LanguageSelector(
+              currentLanguage: currentLanguage,
+              onLanguageChanged: _onLanguageChanged,
+            ),
+            verticalSpace(10),
+            _buildEditAccountTile(),
+            ProfileTile(
+              title: 'profile.privacy'.tr(),
+              icon: Icons.lock_outline,
+              onTap: () => context.goNamed(AppRoutes.privacyPolicyName),
+            ),
+            ProfileTile(
+              title: 'profile.help'.tr(),
+              icon: Icons.help_outline,
+              onTap: () => context.goNamed(AppRoutes.helpName),
+            ),
+            ProfileTile(
+              title: 'profile.about'.tr(),
+              icon: Icons.info_outline,
+              onTap: () => context.goNamed(AppRoutes.aboutName),
+            ),
+            DangerTile(
+              title: 'profile.delete_account'.tr(),
+              icon: Icons.delete_forever_outlined,
+              onTap: _onDeleteAccountPressed,
+            ),
+            verticalSpace(20),
+            LogoutButton(onPressed: _onLogoutPressed),
+          ],
+        ),
       ),
     );
   }

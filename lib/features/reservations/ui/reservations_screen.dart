@@ -77,10 +77,14 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
             appBar: _buildAppBar(),
             backgroundColor: Colors.white,
             body: SafeArea(
-              child: Column(
+              child: Stack(
                 children: [
-                  Expanded(child: _buildResponsiveLayout()),
-                  _buildFloatingPill(isLoading),
+                  Positioned.fill(child: _buildResponsiveLayout()),
+                  Positioned(
+                    right: 16,
+                    bottom: MediaQuery.paddingOf(context).bottom + 12,
+                    child: _buildFloatingPill(isLoading),
+                  ),
                 ],
               ),
             ),
@@ -355,39 +359,49 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   Widget _buildFloatingPill(bool isLoading) {
     final canProceed = _viewModel.canBook && !isLoading;
 
-    return SafeArea(
-      top: false,
-      child: Container(
-        height: 60,
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          color: ColorsManager.mainBlue,
-          borderRadius: BorderRadius.circular(100),
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: canProceed ? _handleProceed : null,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-              child: isLoading
-                  ? const SizedBox(
-                      width: 22,
-                      height: 22,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
-                    )
-                  : Text(
-                      'common.next'.tr(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 220),
+      curve: Curves.easeOut,
+      width: 170,
+      height: 48,
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        color: canProceed
+            ? ColorsManager.mainBlue
+            : ColorsManager.mainBlue.withAlpha(120),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: canProceed
+            ? [
+                BoxShadow(
+                  color: ColorsManager.mainBlue.withAlpha(64),
+                  blurRadius: 16,
+                  offset: const Offset(0, 8),
+                ),
+              ]
+            : null,
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: canProceed ? _handleProceed : null,
+          child: Center(
+            child: isLoading
+                ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
-            ),
+                  )
+                : Text(
+                    'common.next'.tr(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
           ),
         ),
       ),
