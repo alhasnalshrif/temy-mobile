@@ -14,7 +14,7 @@ import 'package:temy_barber/core/theme/app_theme.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/utils/notification_helper.dart';
 import 'package:temy_barber/core/routing/app_router_go.dart';
-import 'package:temy_barber/core/ui/maintenance_screen.dart'; 
+import 'package:temy_barber/core/ui/maintenance_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/settings/data/repos/settings_repo.dart';
@@ -47,44 +47,44 @@ void main() async {
     log('Error checking settings: $e');
   }
 
-  // if (settingsData?.maintenance == true) {
-  //   runApp(
-  //     EasyLocalization(
-  //       supportedLocales: const [Locale('en'), Locale('ar')],
-  //       path: 'assets/translations',
-  //       fallbackLocale: const Locale('ar'),
-  //       child: MaterialApp(
-  //         debugShowCheckedModeBanner: false,
-  //         theme: AppTheme.theme,
-  //         home: MaintenanceScreen(
-  //           message: settingsData?.maintenanceMessage,
-  //           logo: settingsData?.logo,
-  //           about: settingsData?.about,
-  //           phone: settingsData?.phone,
-  //           address: settingsData?.address,
-  //           onRefresh: () async {
-  //             // Re-fetch settings to check if maintenance is still active
-  //             final settingsRepo = getIt<SettingsRepo>();
-  //             final response = await settingsRepo.getSettings();
+  if (settingsData?.maintenance == true) {
+    runApp(
+      EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('ar')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('ar'),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.theme,
+          home: MaintenanceScreen(
+            message: settingsData?.maintenanceMessage,
+            logo: settingsData?.logo,
+            about: settingsData?.about,
+            phone: settingsData?.phone,
+            address: settingsData?.address,
+            onRefresh: () async {
+              // Re-fetch settings to check if maintenance is still active
+              final settingsRepo = getIt<SettingsRepo>();
+              final response = await settingsRepo.getSettings();
 
-  //             response.when(
-  //               success: (data) {
-  //                 if (data.data?.maintenance == false) {
-  //                   // Maintenance is over, restart the app
-  //                   main();
-  //                 }
-  //               },
-  //               failure: (error) {
-  //                 log('Refresh failed: $error');
-  //               },
-  //             );
-  //           },
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  //   return;
-  // }
+              response.when(
+                success: (data) {
+                  if (data.data?.maintenance == false) {
+                    // Maintenance is over, restart the app
+                    main();
+                  }
+                },
+                failure: (error) {
+                  log('Refresh failed: $error');
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
+    return;
+  }
 
   await checkedIfUserLoggedIn();
 
@@ -198,18 +198,24 @@ class _TemyAppState extends State<TemyApp> {
     if (settings.appVersion == null || settings.appVersion!.isEmpty) return;
 
     final packageInfo = await PackageInfo.fromPlatform();
-    final currentVersion = packageInfo.version;
+    final currentVersion = packageInfo.version; // Default to 1.0 if parsing fails
+
+    print("Remote appVersion: ${settings.appVersion}");
+    print("Local currentVersion: $currentVersion");
 
     if (_isUpdateRequired(currentVersion, settings.appVersion!)) {
-      final context = AppRouterGo.navigatorKey.currentContext;
-      if (context != null) {
-        UpdateModal.show(
-          context,
-          forceUpdate: settings.forceUpdate ?? false,
-          androidUrl: settings.androidUrl ?? '',
-          iphoneUrl: settings.iphoneUrl ?? '',
-        );
+      // Wait for the navigator key context to become available
+      while (AppRouterGo.navigatorKey.currentContext == null) {
+        await Future.delayed(const Duration(milliseconds: 100));
       }
+
+      final context = AppRouterGo.navigatorKey.currentContext!;
+      UpdateModal.show(
+        context,
+        forceUpdate: settings.forceUpdate ?? false,
+        androidUrl: settings.androidUrl ?? '',
+        iphoneUrl: settings.iphoneUrl ?? '',
+      );
     }
   }
 
