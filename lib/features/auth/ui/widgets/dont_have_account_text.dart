@@ -16,13 +16,16 @@ class DontHaveAccountText extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          style: TextStyles.font13DarkBlueRegular,
+          style: TextStyles.font13DarkBlueRegular.copyWith(fontSize: 16),
           children: [
             TextSpan(text: 'auth.signup.dont_have_account'.tr()),
             const TextSpan(text: ' '),
             TextSpan(
               text: 'auth.signup.button'.tr(),
-              style: TextStyles.font13BlueSemiBold,
+              style: TextStyles.font13BlueSemiBold.copyWith(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),

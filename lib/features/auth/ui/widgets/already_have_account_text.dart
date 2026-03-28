@@ -14,12 +14,15 @@ class AlreadyHaveAccountText extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          style: TextStyles.font13DarkBlueRegular,
+          style: TextStyles.font13DarkBlueRegular.copyWith(fontSize: 16),
           children: [
             TextSpan(text: '${'auth.signup.already_have_account'.tr()} '),
             TextSpan(
-              text: 'auth.signup.button'.tr(),
-              style: TextStyles.font13BlueSemiBold,
+              text: 'auth.login_button'.tr(),
+              style: TextStyles.font13BlueSemiBold.copyWith(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
