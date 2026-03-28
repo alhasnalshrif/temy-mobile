@@ -8,14 +8,6 @@ part 'category_state.freezed.dart';
 class CategoryBarberState with _$CategoryBarberState {
   const factory CategoryBarberState.initial() = _Initial;
 
-  // categories
-  // const factory CategoryState.categoryLoading() = CategoryLoading;
-  // const factory CategoryState.categorySuccess(
-  //     ServiceResponseModel serviceResponseModel) = CategorySuccess;
-
-  // const factory CategoryState.categoryError(ErrorHandler errorHandler) =
-  //     CategoryError;
-
   // categories with barbers
   const factory CategoryBarberState.categoryWithBarbersLoading() =
       CategoryWithBarbersLoading;

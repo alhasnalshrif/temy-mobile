@@ -21,10 +21,8 @@ class CategoryBarbersScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: SafeArea(
-        child: Container(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          width: double.infinity,
-          alignment: Alignment.topCenter,
           child: const CategoryWithBarbersBlocBuilder(),
         ),
       ),
