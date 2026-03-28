@@ -34,11 +34,7 @@ class PaginationResult {
   @JsonKey(name: 'numberOfPages')
   final int? numberOfPages;
 
-  PaginationResult({
-    this.currentPage,
-    this.limit,
-    this.numberOfPages,
-  });
+  PaginationResult({this.currentPage, this.limit, this.numberOfPages});
 
   factory PaginationResult.fromJson(Map<String, dynamic> json) =>
       _$PaginationResultFromJson(json);
@@ -49,9 +45,10 @@ class BannerData {
   @JsonKey(name: 'image')
   final String? image;
 
-  BannerData({
-    this.image,
-  });
+  @JsonKey(name: 'url')
+  final String? url;
+
+  BannerData({this.image, this.url});
 
   factory BannerData.fromJson(Map<String, dynamic> json) =>
       _$BannerDataFromJson(json);

@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/home/data/models/banner_response.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BannerCarousel extends StatefulWidget {
   final List<BannerData> banners;
@@ -44,22 +45,33 @@ class _BannerCarouselState extends State<BannerCarousel> {
           ),
           itemBuilder: (context, index, realIndex) {
             final banner = widget.banners[index];
-            return _BannerItem(imageUrl: banner.image);
+            return GestureDetector(
+              onTap: () async {
+                final urlString = banner.url;
+                if (urlString != null && urlString.isNotEmpty) {
+                  final uri = Uri.parse(urlString);
+                  if (await canLaunchUrl(uri)) {
+                    await launchUrl(uri, mode: LaunchMode.externalApplication);
+                  }
+                }
+              },
+              child: _BannerItem(imageUrl: banner.image),
+            );
           },
         ),
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: widget.banners.asMap().entries.map((entry) {
-            return Container(
-              width: 8.0,
-              height: 8.0,
+            final isSelected = _currentIndex == entry.key;
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              width: isSelected ? 24.0 : 12.0,
+              height: 3.0,
               margin: const EdgeInsets.symmetric(horizontal: 4.0),
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: ColorsManager.mainBlue.withAlpha(
-                  _currentIndex == entry.key ? 230 : 102,
-                ),
+                borderRadius: BorderRadius.circular(2.0),
+                color: ColorsManager.black.withAlpha(isSelected ? 230 : 102),
               ),
             );
           }).toList(),

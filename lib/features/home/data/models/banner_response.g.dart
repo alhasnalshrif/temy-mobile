@@ -44,7 +44,7 @@ Map<String, dynamic> _$PaginationResultToJson(PaginationResult instance) =>
     };
 
 BannerData _$BannerDataFromJson(Map<String, dynamic> json) =>
-    BannerData(image: json['image'] as String?);
+    BannerData(image: json['image'] as String?, url: json['url'] as String?);
 
 Map<String, dynamic> _$BannerDataToJson(BannerData instance) =>
-    <String, dynamic>{'image': instance.image};
+    <String, dynamic>{'image': instance.image, 'url': instance.url};
