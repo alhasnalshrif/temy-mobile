@@ -91,7 +91,8 @@
         "remove_message": "Are you sure you want to remove this booking?",
         "reservation_removed": "Booking removed successfully",
         "guest_info_error": "Guest information is required",
-        "otp_required": "Verification code is required"
+        "otp_required": "Verification code is required",
+        "otp_error": "Invalid verification code"
     },
     "time_slots": {
         "available_time": "Available Time",
@@ -147,7 +148,8 @@
         "no_barbers_available": "No barbers available for this category",
         "failed_to_load": "Failed to load barbers",
         "minutes": "min",
-        "select_service": "Select a service to book"
+        "select_service": "Select a service to book",
+        "name": "Barber Name"
     },
     "booking": {
         "reservation": "Reservation",
@@ -200,7 +202,10 @@
         "no_services_selected": "No services selected",
         "success_message": "Booking successful!",
         "load_error": "Failed to load available appointments",
-        "cancelled_status": "Cancelled"
+        "cancelled_status": "Cancelled",
+        "cancel_success_message": "Booking cancelled successfully!",
+        "cancel_error_message": "Failed to cancel booking",
+        "default_service": "Default Service"
     },
     "auth": {
         "terms_agreement": "By logging in, you agree to our",
@@ -276,7 +281,8 @@
             "button": "Sign Up",
             "already_have_account": "Already have an account?",
             "dont_have_account": "Don't have an account?"
-        }
+        },
+        "password_min_length": "Password must be at least 6 characters"
     },
     "verification": {
         "success_title": "Verification Successful",
@@ -311,7 +317,13 @@
         "user_data_error": "Cannot load user data",
         "data_unavailable": "Data unavailable",
         "update_success": "Profile updated successfully",
-        "update_error": "Something went wrong"
+        "update_error": "Something went wrong",
+        "name_label": "Full Name",
+        "name_required": "Name is required",
+        "phone_label": "Phone Number",
+        "phone_required": "Phone number is required",
+        "save_changes": "Save Changes",
+        "update_profile_title": "Update Profile"
     },
     "notifications": {
         "history": "Notification History",
@@ -414,5 +426,7 @@
         "message": "A new version of the app is available. Please update to continue using the app.",
         "button": "Update Now",
         "skip": "Skip for now"
-    }
+    },
+    "cancel": "Cancel",
+    "reason": "Reason"
 }
