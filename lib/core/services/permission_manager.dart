@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:flutter/foundation.dart';
+import 'package:permission_handler/permission_handler.dart' as app_permission;
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
 
@@ -13,6 +15,10 @@ class PermissionManager {
   bool? _notificationPermissionCache;
   DateTime? _lastPermissionCheck;
   static const Duration _cacheValidDuration = Duration(minutes: 5);
+  static const int _permissionPromptIntervalOpens = 5;
+  static const String _appOpenCountKey = 'notification_app_open_count';
+  static const String _lastPromptOpenCountKey =
+      'notification_last_prompt_open_count';
 
   /// Initialize permission manager
   Future<void> initialize() async {
@@ -25,14 +31,14 @@ class PermissionManager {
   }
 
   /// Request notification permission with enhanced flow
-  Future<bool> requestNotificationPermission() async {
+  Future<bool> requestNotificationPermission({bool force = false}) async {
     try {
       log('🔔 Requesting notification permission...');
 
-      // Check if we've already requested this permission
+      // Avoid hard-blocking retries unless this is an explicit forced request.
       final hasRequestedBefore = await _hasRequestedPermissionBefore();
 
-      if (hasRequestedBefore) {
+      if (hasRequestedBefore && !force) {
         // If requested before and denied, guide user to settings
         final currentStatus = await getNotificationPermissionStatus();
         if (!currentStatus) {
@@ -55,6 +61,8 @@ class PermissionManager {
 
       if (!granted) {
         await _handlePermissionGuidance();
+      } else {
+        await _clearPermissionDenialState();
       }
 
       return granted;
@@ -216,9 +224,29 @@ class PermissionManager {
   Future<bool> shouldShowSettingsGuidance() async {
     try {
       final denialCount = await getPermissionDenialCount();
-      return denialCount >= 2;
+      final hasOpenedSettings = await SharedPrefHelper.getBool(
+        'notification_settings_opened',
+      );
+      return denialCount >= 2 && !hasOpenedSettings;
     } catch (e) {
       log('Error checking settings guidance: $e');
+      return false;
+    }
+  }
+
+  /// Open app system settings so user can manually enable notifications.
+  Future<bool> openSystemSettings() async {
+    try {
+      if (kIsWeb) return false;
+
+      final opened = await app_permission.openAppSettings();
+      if (opened) {
+        await markSettingsOpened();
+      }
+
+      return opened;
+    } catch (e) {
+      log('Error opening system settings: $e');
       return false;
     }
   }
@@ -257,6 +285,48 @@ class PermissionManager {
       log('Error checking first time request: $e');
       return true;
     }
+  }
+
+  /// Called once per app launch to optionally re-prompt every 5 opens.
+  Future<void> handleAppOpenPermissionPolicy() async {
+    try {
+      if (kIsWeb) return;
+
+      final openCount = await _incrementAndGetAppOpenCount();
+      final notificationsEnabled = await getNotificationPermissionStatus();
+
+      if (notificationsEnabled) {
+        return;
+      }
+
+      final alreadyPromptedThisOpen =
+          await SharedPrefHelper.getInt(_lastPromptOpenCountKey) == openCount;
+      if (alreadyPromptedThisOpen) {
+        return;
+      }
+
+      if (openCount % _permissionPromptIntervalOpens != 0) {
+        return;
+      }
+
+      log('🔔 App open #$openCount: re-requesting notification permission');
+      await requestNotificationPermission(force: true);
+      await SharedPrefHelper.setData(_lastPromptOpenCountKey, openCount);
+    } catch (e) {
+      log('❌ Error handling app-open notification permission policy: $e');
+    }
+  }
+
+  Future<int> _incrementAndGetAppOpenCount() async {
+    final current = await SharedPrefHelper.getInt(_appOpenCountKey);
+    final updated = current + 1;
+    await SharedPrefHelper.setData(_appOpenCountKey, updated);
+    return updated;
+  }
+
+  Future<void> _clearPermissionDenialState() async {
+    await SharedPrefHelper.setData('notification_permission_denied_count', 0);
+    await SharedPrefHelper.setData('notification_settings_opened', false);
   }
 }
 

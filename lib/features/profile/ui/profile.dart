@@ -12,6 +12,7 @@ import 'package:temy_barber/features/profile/ui/helpers/profile_auth_helper.dart
 import 'package:temy_barber/features/profile/ui/helpers/profile_language_helper.dart';
 import 'package:temy_barber/features/profile/ui/helpers/profile_dialogs.dart';
 import 'package:temy_barber/features/profile/ui/widgets/profile_widgets.dart';
+import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
 
@@ -28,6 +29,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _isDeleteDialogShown = false;
   bool _isGuest = true;
   bool _isLoading = true;
+  bool _pushNotificationsEnabled = false;
+  bool _isUpdatingNotifications = false;
 
   @override
   void initState() {
@@ -40,12 +43,108 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _initializeProfile() async {
     final isGuest = ProfileAuthHelper.isGuest();
     final savedLanguage = await ProfileLanguageHelper.loadSavedLanguage();
+    final notificationsEnabled = await PermissionManager.instance
+        .getNotificationPermissionStatus();
 
     setState(() {
       _isGuest = isGuest;
       currentLanguage = savedLanguage;
+      _pushNotificationsEnabled = notificationsEnabled;
       _isLoading = false;
     });
+  }
+
+  Future<void> _onNotificationToggled(bool value) async {
+    if (_isUpdatingNotifications) return;
+
+    setState(() {
+      _isUpdatingNotifications = true;
+    });
+
+    try {
+      bool shouldEnable = value;
+
+      if (value) {
+        final granted = await PermissionManager.instance
+            .requestNotificationPermission(force: true);
+        shouldEnable = granted;
+
+        if (!granted) {
+          final shouldShowSettings = await PermissionManager.instance
+              .shouldShowSettingsGuidance();
+          if (shouldShowSettings && mounted) {
+            await _showOpenSettingsDialog();
+          }
+        }
+      }
+
+      await notificationCubit.updateNotificationSettings(
+        pushNotifications: shouldEnable,
+      );
+
+      if (shouldEnable) {
+        await notificationCubit.initializeNotifications();
+      }
+
+      if (mounted) {
+        setState(() {
+          _pushNotificationsEnabled = shouldEnable;
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              shouldEnable
+                  ? 'notifications.settings_saved'.tr()
+                  : 'notifications.push_disabled_warning'.tr(),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('profile.update_error'.tr())));
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isUpdatingNotifications = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _showOpenSettingsDialog() async {
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text('notifications.open_settings_title'.tr()),
+          content: Text('notifications.open_settings_message'.tr()),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text('common.cancel'.tr()),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.of(dialogContext).pop();
+                final opened = await PermissionManager.instance
+                    .openSystemSettings();
+                if (!opened && mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('profile.update_error'.tr())),
+                  );
+                }
+              },
+              child: Text('notifications.open_settings_action'.tr()),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -184,6 +283,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             _buildProfileInfoSection(isVertical: true),
                             verticalSpace(24),
+                            ProfileSwitchTile(
+                              title: 'notifications.push_notifications'.tr(),
+                              subtitle: 'notifications.push_notifications_desc'
+                                  .tr(),
+                              icon: Icons.notifications_active_outlined,
+                              value: _pushNotificationsEnabled,
+                              isLoading: _isUpdatingNotifications,
+                              onChanged: _onNotificationToggled,
+                            ),
+                            verticalSpace(12),
                             Divider(color: Colors.white.withAlpha(26)),
                             verticalSpace(24),
                             LanguageSelector(
@@ -268,6 +377,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             verticalSpace(10),
             _buildEditAccountTile(),
+            ProfileSwitchTile(
+              title: 'notifications.push_notifications'.tr(),
+              subtitle: 'notifications.push_notifications_desc'.tr(),
+              icon: Icons.notifications_active_outlined,
+              value: _pushNotificationsEnabled,
+              isLoading: _isUpdatingNotifications,
+              onChanged: _onNotificationToggled,
+            ),
             ProfileTile(
               title: 'profile.privacy'.tr(),
               icon: Icons.lock_outline,

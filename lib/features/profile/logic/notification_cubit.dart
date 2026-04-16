@@ -17,7 +17,10 @@ class NotificationCubit extends Cubit<NotificationState> {
   final NotificationService _notificationService;
 
   NotificationCubit(this._profileRepo, this._notificationService)
-      : super(const NotificationState.initial());
+    : super(const NotificationState.initial());
+
+  static const String _lastRegisteredPlayerIdPrefix =
+      'notification_last_registered_player_';
 
   /// Initialize notifications and sync with server
   Future<void> initializeNotifications() async {
@@ -33,20 +36,31 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   /// Update device token on server
-  Future<void> _updateDeviceTokenOnServer() async {
+  Future<void> _updateDeviceTokenOnServer({bool force = false}) async {
     try {
       final playerId = await _notificationService.getPlayerId();
-      final userId =
-          await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
+      final userId = await SharedPrefHelper.getSecuredString(
+        SharedPrefKeys.userId,
+      );
 
       log('Retrieved playerId: ${playerId ?? "null"}');
       log('Retrieved userId: ${userId ?? "null"}');
 
       if (playerId != null && userId != null && userId.isNotEmpty) {
+        final cacheKey = '$_lastRegisteredPlayerIdPrefix$userId';
+        final cachedPlayerId = await SharedPrefHelper.getString(cacheKey);
+        final didDeviceChange = cachedPlayerId != playerId;
+
+        if (!force && !didDeviceChange) {
+          log('Player ID unchanged, skipping device re-registration');
+          return;
+        }
+
         final result = await _profileRepo.registerDevice(userId, playerId);
         result.when(
           success: (response) {
             log('Device registered successfully: ${response.message}');
+            SharedPrefHelper.setData(cacheKey, playerId);
           },
           failure: (error) {
             log('Failed to register device: ${error.apiErrorModel.message}');
@@ -73,6 +87,14 @@ class NotificationCubit extends Cubit<NotificationState> {
     try {
       // Update local notification service
       await _notificationService.setNotificationEnabled(pushNotifications);
+      emit(
+        NotificationState.settingsUpdated(
+          NotificationResponse(
+            status: 'success',
+            message: 'Notification settings updated',
+          ),
+        ),
+      );
     } catch (error) {
       emit(NotificationState.error(error.toString()));
     }
@@ -87,8 +109,8 @@ class NotificationCubit extends Cubit<NotificationState> {
     emit(const NotificationState.loading());
 
     try {
-      final granted =
-          await PermissionManager.instance.requestNotificationPermission();
+      final granted = await PermissionManager.instance
+          .requestNotificationPermission();
       if (granted) {
         emit(const NotificationState.permissionGranted());
         // Initialize notifications after permission granted
@@ -104,8 +126,8 @@ class NotificationCubit extends Cubit<NotificationState> {
   /// Check notification permission status
   Future<void> checkNotificationPermission() async {
     try {
-      final enabled =
-          await PermissionManager.instance.getNotificationPermissionStatus();
+      final enabled = await PermissionManager.instance
+          .getNotificationPermissionStatus();
       if (enabled) {
         emit(const NotificationState.permissionGranted());
       } else {
@@ -121,8 +143,8 @@ class NotificationCubit extends Cubit<NotificationState> {
     try {
       await _notificationService.setUserId(userId);
 
-      // Update device token after setting user ID (no delay needed)
-      await _updateDeviceTokenOnServer();
+      // Always sync on login; backend can add new devices when needed.
+      await _updateDeviceTokenOnServer(force: true);
     } catch (error) {
       log('Failed to set user ID: $error');
     }
@@ -142,9 +164,14 @@ class NotificationCubit extends Cubit<NotificationState> {
     emit(const NotificationState.loading());
     try {
       await _updateDeviceTokenOnServer();
-      emit(NotificationState.settingsUpdated( NotificationResponse(
-          status: 'success',
-          message: 'Device registration retried successfully')));
+      emit(
+        NotificationState.settingsUpdated(
+          NotificationResponse(
+            status: 'success',
+            message: 'Device registration retried successfully',
+          ),
+        ),
+      );
     } catch (error) {
       emit(NotificationState.error(error.toString()));
     }
@@ -155,11 +182,14 @@ class NotificationCubit extends Cubit<NotificationState> {
     // TODO: Implement when backend API is ready
     emit(const NotificationState.loading());
     // For now, emit mock data
-    emit( NotificationState.settingsLoaded(
-         NotificationSettingsResponse(
-      pushNotifications: true,
-      bookingReminders: true,
-      promotionalNotifications: false,
-    )));
+    emit(
+      NotificationState.settingsLoaded(
+        NotificationSettingsResponse(
+          pushNotifications: true,
+          bookingReminders: true,
+          promotionalNotifications: false,
+        ),
+      ),
+    );
   }
 }

@@ -102,6 +102,7 @@ void main() async {
     if (!kIsWeb) {
       await getIt<NotificationService>().initialize();
       log(' OneSignal initialization completed');
+      await PermissionManager.instance.handleAppOpenPermissionPolicy();
     }
   } catch (e) {
     log('OneSignal initialization failed: $e');
@@ -198,7 +199,8 @@ class _TemyAppState extends State<TemyApp> {
     if (settings.appVersion == null || settings.appVersion!.isEmpty) return;
 
     final packageInfo = await PackageInfo.fromPlatform();
-    final currentVersion = packageInfo.version; // Default to 1.0 if parsing fails
+    final currentVersion =
+        packageInfo.version; // Default to 1.0 if parsing fails
 
     print("Remote appVersion: ${settings.appVersion}");
     print("Local currentVersion: $currentVersion");

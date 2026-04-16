@@ -227,6 +227,60 @@ class ProfileTile extends StatelessWidget {
   }
 }
 
+class ProfileSwitchTile extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+  final IconData icon;
+  final bool value;
+  final ValueChanged<bool> onChanged;
+  final bool isLoading;
+
+  const ProfileSwitchTile({
+    super.key,
+    required this.title,
+    this.subtitle,
+    required this.icon,
+    required this.value,
+    required this.onChanged,
+    this.isLoading = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Material(
+          color: Colors.transparent,
+          child: ListTile(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            tileColor: Colors.white,
+            leading: Icon(icon, color: ColorsManager.mainBlue),
+            title: Text(title, style: TextStyles.font16DarkBold),
+            subtitle: subtitle == null
+                ? null
+                : Text(subtitle!, style: TextStyles.font14GrayRegular),
+            trailing: isLoading
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : Switch(
+                    value: value,
+                    onChanged: onChanged,
+                    activeColor: ColorsManager.mainBlue,
+                  ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// Danger/warning profile menu tile widget
 class DangerTile extends StatelessWidget {
   final String title;
