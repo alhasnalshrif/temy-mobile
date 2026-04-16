@@ -216,7 +216,7 @@ class LoginScreen extends StatelessWidget {
           verticalSpace(16),
           const TermsAndConditionsText(),
           verticalSpace(16),
-          const Align(child: DontHaveAccountText()),
+          const DontHaveAccountText(),
           verticalSpace(16),
           Center(
             child: TextButton(
