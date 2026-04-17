@@ -199,6 +199,7 @@
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				9F2E6A4F6E8D4D7D9B2C1A00 /* Native Assets dSYM */,
 				B5226358180A027FCAAB5BCB /* [CP] Embed Pods Frameworks */,
 				E7DF210EE5E2B5A8E86593C9 /* [CP] Copy Pods Resources */,
 			);
@@ -309,6 +310,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
+		};
+		9F2E6A4F6E8D4D7D9B2C1A00 /* Native Assets dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/objective_c.framework/objective_c",
+			);
+			name = "Native Assets dSYM";
+			outputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/objective_c.framework.dSYM",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"${CONFIGURATION}\" == \"Release\" || \"${CONFIGURATION}\" == \"Profile\" ]]; then\n  binary=\"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/objective_c.framework/objective_c\"\n  dsym=\"${DWARF_DSYM_FOLDER_PATH}/objective_c.framework.dSYM\"\n  if [ -f \"$binary\" ] && command -v dsymutil >/dev/null 2>&1; then\n    rm -rf \"$dsym\"\n    dsymutil \"$binary\" -o \"$dsym\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
