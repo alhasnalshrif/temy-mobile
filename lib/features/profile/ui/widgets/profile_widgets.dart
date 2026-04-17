@@ -249,31 +249,63 @@ class ProfileSwitchTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Material(
-          color: Colors.transparent,
-          child: ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            tileColor: Colors.white,
-            leading: Icon(icon, color: ColorsManager.mainBlue),
-            title: Text(title, style: TextStyles.font16DarkBold),
-            subtitle: subtitle == null
-                ? null
-                : Text(subtitle!, style: TextStyles.font14GrayRegular),
-            trailing: isLoading
-                ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Switch(
-                    value: value,
-                    onChanged: onChanged,
-                    activeColor: ColorsManager.mainBlue,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(14),
+          onTap: isLoading ? null : () => onChanged(!value),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+
+                  child: Icon(icon, color: ColorsManager.mainBlue, size: 21),
+                ),
+                horizontalSpace(12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title, style: TextStyles.font16DarkBold),
+                      if (subtitle != null) ...[
+                        verticalSpace(4),
+                        Text(
+                          subtitle!,
+                          style: TextStyles.font14GrayRegular,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ],
                   ),
+                ),
+                horizontalSpace(8),
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: isLoading
+                      ? const SizedBox(
+                          key: ValueKey('loading'),
+                          width: 22,
+                          height: 22,
+                          child: CircularProgressIndicator(strokeWidth: 2.2),
+                        )
+                      : Switch.adaptive(
+                          key: const ValueKey('switch'),
+                          value: value,
+                          onChanged: isLoading ? null : onChanged,
+                          activeColor: ColorsManager.mainBlue,
+                          activeTrackColor: ColorsManager.mainBlue,
+                          inactiveThumbColor: Colors.white,
+                          inactiveTrackColor: Colors.black.withAlpha(56),
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                        ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

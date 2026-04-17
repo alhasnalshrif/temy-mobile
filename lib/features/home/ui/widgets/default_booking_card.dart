@@ -62,6 +62,8 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
     }
 
     final barberData = _defaultReservation!['barber'];
+    final maxReservationDays =
+        (barberData['maxReservationDays'] as num?)?.toInt() ?? 30;
     final services = List<Map<String, dynamic>>.from(
       _defaultReservation!['services'],
     );
@@ -193,7 +195,7 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                         name: barberData['name'],
                         avatar: barberData['avatar'],
                         portfolioImages: [],
-                        maxReservationDays: 30,
+                        maxReservationDays: maxReservationDays,
                         workingHours: WorkingHours(
                           start: '09:00',
                           end: '21:00',
@@ -214,7 +216,9 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                       );
                       context.pushGoNamed(
                         AppRoutes.reservationName,
-                        pathParameters: {'barberId': barberData['id'].toString()},
+                        pathParameters: {
+                          'barberId': barberData['id'].toString(),
+                        },
                         extra: args,
                       );
                     },

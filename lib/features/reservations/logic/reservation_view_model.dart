@@ -170,6 +170,7 @@ class ReservationViewModel extends ChangeNotifier {
         'id': barberData!.id,
         'name': barberData!.name,
         'avatar': barberData!.avatar,
+        'maxReservationDays': barberData!.maxReservationDays,
       },
       'services': selectedServices
           .map(
@@ -190,7 +191,7 @@ class ReservationViewModel extends ChangeNotifier {
       'default_reservation',
       jsonEncode(defaultReservation),
     );
-    
+
     _isDefault = true;
     notifyListeners();
   }
@@ -199,7 +200,7 @@ class ReservationViewModel extends ChangeNotifier {
   Future<void> removeDefault() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('default_reservation');
-    
+
     _isDefault = false;
     notifyListeners();
   }
@@ -207,25 +208,25 @@ class ReservationViewModel extends ChangeNotifier {
   /// Check if the current reservation matches the saved default
   Future<void> checkIsDefault() async {
     if (barberData == null || selectedServices.isEmpty) {
-       _isDefault = false;
-       notifyListeners();
-       return;
+      _isDefault = false;
+      notifyListeners();
+      return;
     }
-    
+
     try {
       final prefs = await SharedPreferences.getInstance();
       final defaultJson = prefs.getString('default_reservation');
       if (defaultJson != null) {
         final data = jsonDecode(defaultJson);
         final defaultBarberId = data['barber']['id'];
-        
+
         final defaultServices = List<dynamic>.from(data['services']);
         final defaultServiceIds = defaultServices.map((s) => s['id']).toSet();
-        
+
         final currentServiceIds = selectedServices.map((s) => s.id).toSet();
-        
-        if (defaultBarberId == barberData!.id && 
-            defaultServiceIds.length == currentServiceIds.length && 
+
+        if (defaultBarberId == barberData!.id &&
+            defaultServiceIds.length == currentServiceIds.length &&
             defaultServiceIds.containsAll(currentServiceIds)) {
           _isDefault = true;
         } else {

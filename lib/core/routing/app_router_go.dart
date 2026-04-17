@@ -35,6 +35,7 @@ import 'package:temy_barber/features/profile/ui/content_screen.dart';
 import 'package:temy_barber/features/profile/ui/update_profile_screen.dart';
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
+import 'package:temy_barber/features/reservations/ui/guest_reservation_success_screen.dart';
 import 'package:temy_barber/features/reservations/ui/booking_confirmation.dart';
 import 'package:temy_barber/features/reservations/ui/invoice_screen.dart'
     deferred as invoice;
@@ -300,6 +301,19 @@ class AppRouterGo {
                 );
               },
             );
+          },
+        ),
+        GoRoute(
+          path: AppRoutes.GuestReservationSuccess,
+          name: AppRoutes.guestReservationSuccessName,
+          builder: (context, state) {
+            final reservation = state.extra as ReservationResponseModel?;
+            if (reservation == null) {
+              Future.microtask(() => context.go(AppRoutes.Home));
+              return const SizedBox.shrink();
+            }
+
+            return GuestReservationSuccessScreen(reservation: reservation);
           },
         ),
       ],

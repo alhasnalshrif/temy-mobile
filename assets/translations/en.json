@@ -235,6 +235,10 @@
         "otp_invalid_length": "Code must be 6 digits",
         "resend_otp": "Resend Code",
         "otp_wait_before_resend": "Wait before resending code",
+        "sending_otp": "Sending OTP...",
+        "otp_already_sent_info": "OTP already sent! Please check your phone and enter the code below.",
+        "enter_otp_code": "Enter OTP Code",
+        "error_sending_otp": "Error sending OTP",
         "verify": "Verify",
         "forgot_password_title": "Forgot Password",
         "forgot_password_subtitle": "Enter your phone number to receive reset code",
@@ -282,7 +286,9 @@
             "already_have_account": "Already have an account?",
             "dont_have_account": "Don't have an account?"
         },
-        "password_min_length": "Password must be at least 6 characters"
+        "password_min_length": "Password must be at least 6 characters",
+        "registration_success_title": "Registration Successful",
+        "registration_success_message": "Your reservation has been created successfully."
     },
     "verification": {
         "success_title": "Verification Successful",
@@ -366,6 +372,7 @@
         "booking_success": "Booking Successful",
         "guest_booking": "Guest Booking",
         "guest_notification": "Booking details sent to your WhatsApp",
+        "view_invoice": "View Invoice",
         "barber": "Barber",
         "appointment_date": "Appointment Date",
         "date": "Date",

@@ -37,6 +37,7 @@ class AppRoutes {
   static const String About = '/profile/about';
 
   static const String Invoice = '/invoice';
+  static const String GuestReservationSuccess = '/guest-reservation-success';
 
   // Route names (for named navigation)
   static const String loginName = 'login';
@@ -54,6 +55,7 @@ class AppRoutes {
   static const String reservationName = 'reservation';
   static const String bookingConfirmationName = 'bookingConfirmation';
   static const String invoiceName = 'invoice';
+  static const String guestReservationSuccessName = 'guestReservationSuccess';
   static const String updateProfileName = 'updateProfile';
   static const String notificationSettingsName = 'notificationSettings';
   static const String privacyPolicyName = 'privacyPolicy';

@@ -23,6 +23,15 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
 
+  bool _isOtpAlreadySentError(String? message) {
+    if (message == null || message.isEmpty) return false;
+
+    final normalized = message.toLowerCase();
+    return normalized.contains('already sent') ||
+        message.contains('تم إرسال رمز التحقق بالفعل') ||
+        message.contains('يرجى الانتظار قبل طلب رمز جديد');
+  }
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -59,7 +68,6 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
     );
 
     if (otp != null && mounted) {
-   
       final guestInfo = GuestInfo(name: name, phone: phone);
 
       // Return both guest info and OTP as a map
@@ -100,13 +108,12 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
 
         final errorMessage = state.maybeWhen(
           otpRequestError: (error) =>
-              error.apiErrorModel.message ?? 'Error sending OTP',
+              error.apiErrorModel.message ?? 'auth.error_sending_otp'.tr(),
           orElse: () => null,
         );
 
         // Check if it's a rate limit error (OTP already sent)
-        final isRateLimitError =
-            errorMessage?.contains('already sent') ?? false;
+        final isRateLimitError = _isOtpAlreadySentError(errorMessage);
 
         return Container(
           decoration: const BoxDecoration(
@@ -163,7 +170,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                           ),
                           verticalSpace(16),
                           Text(
-                            'Sending OTP...',
+                            'auth.sending_otp'.tr(),
                             style: TextStyles.font14GrayRegular,
                           ),
                         ],
@@ -191,7 +198,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                           horizontalSpace(12),
                           Expanded(
                             child: Text(
-                              'OTP already sent! Please check your phone and enter the code below.',
+                              'auth.otp_already_sent_info'.tr(),
                               style: TextStyles.font14DarkBlueMedium,
                             ),
                           ),
@@ -211,7 +218,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                         },
                         icon: const Icon(Icons.dialpad, size: 20),
                         label: Text(
-                          'Enter OTP Code',
+                          'auth.enter_otp_code'.tr(),
                           style: TextStyles.font14DarkBlueMedium,
                         ),
                         style: TextButton.styleFrom(
@@ -251,7 +258,7 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                           horizontalSpace(12),
                           Expanded(
                             child: Text(
-                              errorMessage ?? 'An error occurred',
+                              errorMessage ?? 'common.error'.tr(),
                               style: TextStyles.font14GrayRegular.copyWith(
                                 color: ColorsManager.red,
                               ),
@@ -401,6 +408,21 @@ class _GuestInfoDialogState extends State<GuestInfoDialog> {
                                 onPressed: isLoading
                                     ? () {}
                                     : () {
+                                        if (!_formKey.currentState!
+                                            .validate()) {
+                                          return;
+                                        }
+
+                                        final phone = _phoneController.text
+                                            .trim();
+                                        final name = _nameController.text
+                                            .trim();
+
+                                        if (hasError && isRateLimitError) {
+                                          _showOtpDialog(phone, name);
+                                          return;
+                                        }
+
                                         _requestOtpAndShowDialog();
                                       },
                               ),

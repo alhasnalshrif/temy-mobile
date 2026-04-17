@@ -8,6 +8,7 @@ import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
+import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/logic/booking_confirmation_view_model.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_state.dart';
@@ -71,11 +72,15 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
   void _handleStateChanges(BuildContext context, ReservationState state) {
     state.maybeWhen(
       reservationLoading: () => _showLoadingDialog(),
-      reservationSuccess: (response, _) => _onReservationSuccess(response),
+      reservationSuccess: (response, _) => _onReservationSuccess(
+        response,
+        isGuestReservation: _isGuestReservation(response),
+      ),
       reservationError: (error) =>
           _onError(error.apiErrorModel.message.toString()),
       otpVerificationLoading: () => _showLoadingDialog(),
-      otpVerificationSuccess: (response, _) => _onReservationSuccess(response),
+      otpVerificationSuccess: (response, _) =>
+          _onReservationSuccess(response, isGuestReservation: true),
       otpVerificationError: (error) => _onError(
         error.apiErrorModel.message ?? 'booking_confirmation.otp_error'.tr(),
       ),
@@ -94,10 +99,68 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     );
   }
 
-  void _onReservationSuccess(dynamic response) {
+  bool _isGuestReservation(ReservationResponseModel response) {
+    return response.data.user == null && response.data.userName != null;
+  }
+
+  void _onReservationSuccess(
+    ReservationResponseModel response, {
+    required bool isGuestReservation,
+  }) {
     Navigator.of(context, rootNavigator: true).pop();
     _viewModel.clearReservations();
-    context.go(AppRoutes.Invoice, extra: response);
+
+    if (isGuestReservation) {
+      _showGuestRegistrationSuccessDialog();
+      return;
+    }
+
+    context.goNamed(AppRoutes.invoiceName, extra: response);
+  }
+
+  void _showGuestRegistrationSuccessDialog() {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          icon: const Icon(Icons.check_circle, color: Colors.green, size: 40),
+          title: Text(
+            'auth.registration_success_title'.tr(),
+            textAlign: TextAlign.center,
+            style: TextStyles.font16DarkBold,
+          ),
+          content: Text(
+            'auth.registration_success_message'.tr(),
+            textAlign: TextAlign.center,
+            style: TextStyles.font14GrayRegular,
+          ),
+          actions: [
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                  context.goNamed(AppRoutes.loginName);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsManager.mainBlue,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Text('verification.continue_to_login'.tr()),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _onError(String message) {
@@ -107,7 +170,10 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     if (message.contains('overlaps with an existing booking') ||
         message.contains('overlaps') ||
         message.contains('already booked')) {
-      _showSnackBar('time_slots.slot_no_longer_available'.tr(), ColorsManager.red);
+      _showSnackBar(
+        'time_slots.slot_no_longer_available'.tr(),
+        ColorsManager.red,
+      );
 
       // Refresh time slots after overlap error so user can see updated availability
       if (_viewModel.arguments.selectedDate != null &&

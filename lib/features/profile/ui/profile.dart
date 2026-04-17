@@ -13,6 +13,7 @@ import 'package:temy_barber/features/profile/ui/helpers/profile_language_helper.
 import 'package:temy_barber/features/profile/ui/helpers/profile_dialogs.dart';
 import 'package:temy_barber/features/profile/ui/widgets/profile_widgets.dart';
 import 'package:temy_barber/core/services/permission_manager.dart';
+import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
 
@@ -24,12 +25,15 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  static const String _notificationsAlwaysEnabledKey =
+      'profile_notifications_always_enabled';
+
   String currentLanguage = 'ar';
   late NotificationCubit notificationCubit;
   bool _isDeleteDialogShown = false;
   bool _isGuest = true;
   bool _isLoading = true;
-  bool _pushNotificationsEnabled = false;
+  bool _pushNotificationsEnabled = true;
   bool _isUpdatingNotifications = false;
 
   @override
@@ -43,19 +47,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _initializeProfile() async {
     final isGuest = ProfileAuthHelper.isGuest();
     final savedLanguage = await ProfileLanguageHelper.loadSavedLanguage();
-    final notificationsEnabled = await PermissionManager.instance
-        .getNotificationPermissionStatus();
+    final alwaysEnabled = await SharedPrefHelper.getBool(
+      _notificationsAlwaysEnabledKey,
+    );
+
+    if (!alwaysEnabled) {
+      await SharedPrefHelper.setData(_notificationsAlwaysEnabledKey, true);
+    }
 
     setState(() {
       _isGuest = isGuest;
       currentLanguage = savedLanguage;
-      _pushNotificationsEnabled = notificationsEnabled;
+      _pushNotificationsEnabled = true;
       _isLoading = false;
     });
   }
 
   Future<void> _onNotificationToggled(bool value) async {
     if (_isUpdatingNotifications) return;
+
+    // Keep notifications enabled once the user enables them.
+    if (_pushNotificationsEnabled && !value) {
+      return;
+    }
 
     setState(() {
       _isUpdatingNotifications = true;
@@ -84,6 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       if (shouldEnable) {
         await notificationCubit.initializeNotifications();
+        await SharedPrefHelper.setData(_notificationsAlwaysEnabledKey, true);
       }
 
       if (mounted) {
@@ -366,11 +381,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           topRight: Radius.circular(25),
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            verticalSpace(20),
+
             LanguageSelector(
               currentLanguage: currentLanguage,
               onLanguageChanged: _onLanguageChanged,

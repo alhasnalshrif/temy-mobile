@@ -7,7 +7,6 @@ class ReservationResponseModel {
   final String status;
   final String message;
   final ReservationData data;
-  // Optional list for multiple reservations support
   @JsonKey(includeFromJson: false, includeToJson: false)
   final List<ReservationData>? allReservations;
 

@@ -235,6 +235,10 @@
         "otp_invalid_length": "رمز التحقق يجب أن يكون 6 أرقام",
         "resend_otp": "إعادة إرسال الرمز",
         "otp_wait_before_resend": "انتظر قبل إعادة إرسال الرمز",
+        "sending_otp": "جاري إرسال رمز التحقق...",
+        "otp_already_sent_info": "تم إرسال رمز التحقق بالفعل! يرجى التحقق من هاتفك وإدخال الرمز أدناه.",
+        "enter_otp_code": "إدخال رمز التحقق",
+        "error_sending_otp": "حدث خطأ أثناء إرسال رمز التحقق",
         "verify": "تحقق",
         "forgot_password_title": "نسيت كلمة المرور",
         "forgot_password_subtitle": "أدخل رقم هاتفك لتلقي رمز إعادة التعيين",
@@ -281,7 +285,9 @@
             "button": "إنشاء حساب",
             "already_have_account": "لديك حساب بالفعل؟",
             "dont_have_account": "ليس لديك حساب؟"
-        }
+        },
+        "registration_success_title": "تم التسجيل بنجاح",
+        "registration_success_message": "تم إنشاء الحجز بنجاح."
     },
     "verification": {
         "success_title": "تم التحقق بنجاح",
@@ -365,6 +371,7 @@
         "booking_success": "تم الحجز بنجاح",
         "guest_booking": "حجز ضيف",
         "guest_notification": "تم إرسال تفاصيل الحجز إلى رقم الواتساب",
+        "view_invoice": "عرض الفاتورة",
         "barber": "الحلاق",
         "appointment_date": "موعد الحجز",
         "date": "التاريخ",
