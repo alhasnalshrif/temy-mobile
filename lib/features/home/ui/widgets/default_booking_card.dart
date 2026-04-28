@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:temy_barber/core/di/dependency_injection.dart';
+import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
-import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
-import 'dart:convert';
+import 'package:temy_barber/features/barber/data/repos/barber_repo.dart';
+import 'package:temy_barber/features/reservations/data/models/default_reservation.dart';
+import 'package:temy_barber/features/reservations/data/repos/default_reservation_storage.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class DefaultBookingCard extends StatefulWidget {
@@ -17,7 +19,9 @@ class DefaultBookingCard extends StatefulWidget {
 
 class _DefaultBookingCardState extends State<DefaultBookingCard> {
   bool _isLoading = true;
-  Map<String, dynamic>? _defaultReservation;
+  bool _isBookingLoading = false;
+  DefaultReservation? _defaultReservation;
+  final DefaultReservationStorage _storage = DefaultReservationStorage();
 
   @override
   void initState() {
@@ -26,26 +30,25 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
   }
 
   Future<void> _loadDefaultReservation() async {
-    final prefs = await SharedPreferences.getInstance();
-    final reservationJson = prefs.getString('default_reservation');
+    final reservation = await _storage.load();
+
+    if (!mounted) return;
 
     setState(() {
       _isLoading = false;
-      if (reservationJson != null) {
-        _defaultReservation = jsonDecode(reservationJson);
-      }
+      _defaultReservation = reservation;
     });
   }
 
   Future<void> _removeDefaultBooking() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('default_reservation');
+    await _storage.remove();
+
+    if (!mounted) return;
 
     setState(() {
       _defaultReservation = null;
     });
 
-    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('default_booking.removed'.tr()),
@@ -55,24 +58,49 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
     );
   }
 
+  Future<BarberDetailData> _resolveBarberDetail(
+    DefaultReservation reservation,
+  ) async {
+    try {
+      final response = await getIt<BarberRepo>().getCategory(
+        reservation.barber.id,
+      );
+
+      return response.when(
+        success: (barberDetailResponseModel) => barberDetailResponseModel.data,
+        failure: (_) => reservation.barber,
+      );
+    } catch (_) {
+      return reservation.barber;
+    }
+  }
+
+  Future<void> _handleBookNow(DefaultReservation reservation) async {
+    setState(() => _isBookingLoading = true);
+
+    final barberDetail = await _resolveBarberDetail(reservation);
+
+    if (!mounted) return;
+
+    setState(() => _isBookingLoading = false);
+
+    context.pushGoNamed(
+      AppRoutes.reservationName,
+      pathParameters: {'barberId': reservation.barber.id},
+      extra: reservation.toReservationArguments(barberData: barberDetail),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_isLoading || _defaultReservation == null) {
       return const SizedBox.shrink();
     }
 
-    final barberData = _defaultReservation!['barber'];
-    final maxReservationDays =
-        (barberData['maxReservationDays'] as num?)?.toInt() ?? 30;
-    final services = List<Map<String, dynamic>>.from(
-      _defaultReservation!['services'],
-    );
-    final totalPrice = _defaultReservation!['totalPrice'].toDouble();
-
-    int totalDuration = 0;
-    for (var service in services) {
-      totalDuration += service['duration'] as int;
-    }
+    final reservation = _defaultReservation!;
+    final barber = reservation.barber;
+    final services = reservation.services;
+    final totalPrice = reservation.totalPrice;
 
     return Dismissible(
       key: const Key('default_booking_card'),
@@ -127,11 +155,11 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
             children: [
               CircleAvatar(
                 radius: 18,
-                backgroundImage: barberData['avatar'] != null
-                    ? NetworkImage(barberData['avatar'])
+                backgroundImage: barber.avatar.isNotEmpty
+                    ? NetworkImage(barber.avatar)
                     : null,
                 backgroundColor: Colors.grey[200],
-                child: barberData['avatar'] == null
+                child: barber.avatar.isEmpty
                     ? const Icon(Icons.person, color: Colors.grey, size: 16)
                     : null,
               ),
@@ -149,14 +177,14 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      barberData['name'] ?? 'مصفف الشعر',
+                      barber.name.isEmpty ? 'مصفف الشعر' : barber.name,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      '${services.length} ${'default_booking.services'.tr()} · ${(totalDuration / 60).ceil()} ${'default_booking.hour'.tr()}',
+                      '${services.length} ${'default_booking.services'.tr()} · ${(reservation.totalDuration / 60).ceil()} ${'default_booking.hour'.tr()}',
                       style: TextStyle(color: Colors.grey[600], fontSize: 11),
                     ),
                   ],
@@ -176,52 +204,9 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                   ),
                   const SizedBox(height: 4),
                   ElevatedButton(
-                    onPressed: () {
-                      List<BarberService> barberServices = services.map((
-                        service,
-                      ) {
-                        return BarberService(
-                          id: service['id'],
-                          name: service['name'],
-                          price: service['price'],
-                          duration: service['duration'],
-                          category: service['category'],
-                          imageCover: service['imageCover'],
-                        );
-                      }).toList();
-
-                      final barberDetail = BarberDetailData(
-                        id: barberData['id'],
-                        name: barberData['name'],
-                        avatar: barberData['avatar'],
-                        portfolioImages: [],
-                        maxReservationDays: maxReservationDays,
-                        workingHours: WorkingHours(
-                          start: '09:00',
-                          end: '21:00',
-                          daysOff: [],
-                        ),
-                        rating: Rating(average: 0, total: 0),
-                        services: [],
-                        availability: Availability(
-                          date: DateTime.now().toString(),
-                          slots: [],
-                        ),
-                      );
-
-                      final args = ReservationArguments(
-                        selectedServices: barberServices,
-                        barberData: barberDetail,
-                        totalPrice: totalPrice,
-                      );
-                      context.pushGoNamed(
-                        AppRoutes.reservationName,
-                        pathParameters: {
-                          'barberId': barberData['id'].toString(),
-                        },
-                        extra: args,
-                      );
-                    },
+                    onPressed: _isBookingLoading
+                        ? null
+                        : () => _handleBookNow(reservation),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorsManager.mainBlue,
                       shape: RoundedRectangleBorder(
@@ -236,11 +221,23 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(
-                          Icons.calendar_today_outlined,
-                          size: 12,
-                          color: Colors.white,
-                        ),
+                        if (_isBookingLoading)
+                          const SizedBox(
+                            width: 12,
+                            height: 12,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.white,
+                              ),
+                            ),
+                          )
+                        else
+                          const Icon(
+                            Icons.calendar_today_outlined,
+                            size: 12,
+                            color: Colors.white,
+                          ),
                         const SizedBox(width: 4),
                         Text(
                           'default_booking.book_now'.tr(),

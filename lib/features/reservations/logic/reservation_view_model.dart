@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
+import 'package:temy_barber/features/reservations/data/models/default_reservation.dart';
+import 'package:temy_barber/features/reservations/data/repos/default_reservation_storage.dart';
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
 
 /// ViewModel that manages all business logic for the Reservations screen.
@@ -21,8 +21,13 @@ class ReservationViewModel extends ChangeNotifier {
 
   // Dependencies
   final ReservationArguments? arguments;
+  final DefaultReservationStorage _defaultReservationStorage =
+      DefaultReservationStorage();
 
   ReservationViewModel({this.arguments}) {
+    _selectedDate = arguments?.selectedDate ?? DateTime.now();
+    _selectedTime = arguments?.selectedTime;
+    _isQueueMode = arguments?.isQueueMode ?? false;
     _currentMonth = DateTime(_selectedDate.year, _selectedDate.month);
   }
 
@@ -161,36 +166,16 @@ class ReservationViewModel extends ChangeNotifier {
 
   /// Save current reservation as default for quick booking
   Future<void> saveAsDefault() async {
-    if (barberData == null || selectedServices.isEmpty) return;
+    final currentBarberData = barberData;
+    if (currentBarberData == null || selectedServices.isEmpty) return;
 
-    final prefs = await SharedPreferences.getInstance();
-
-    final defaultReservation = {
-      'barber': {
-        'id': barberData!.id,
-        'name': barberData!.name,
-        'avatar': barberData!.avatar,
-        'maxReservationDays': barberData!.maxReservationDays,
-      },
-      'services': selectedServices
-          .map(
-            (service) => {
-              'id': service.id,
-              'name': service.name,
-              'price': service.price,
-              'duration': service.duration,
-              'category': service.category,
-              'imageCover': service.imageCover,
-            },
-          )
-          .toList(),
-      'totalPrice': totalPrice,
-    };
-
-    await prefs.setString(
-      'default_reservation',
-      jsonEncode(defaultReservation),
+    final defaultReservation = DefaultReservation(
+      barber: currentBarberData,
+      services: selectedServices,
+      totalPrice: totalPrice,
     );
+
+    await _defaultReservationStorage.save(defaultReservation);
 
     _isDefault = true;
     notifyListeners();
@@ -198,8 +183,7 @@ class ReservationViewModel extends ChangeNotifier {
 
   /// Remove the saved default reservation
   Future<void> removeDefault() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('default_reservation');
+    await _defaultReservationStorage.remove();
 
     _isDefault = false;
     notifyListeners();
@@ -207,34 +191,26 @@ class ReservationViewModel extends ChangeNotifier {
 
   /// Check if the current reservation matches the saved default
   Future<void> checkIsDefault() async {
-    if (barberData == null || selectedServices.isEmpty) {
+    final currentBarberData = barberData;
+    if (currentBarberData == null || selectedServices.isEmpty) {
       _isDefault = false;
       notifyListeners();
       return;
     }
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final defaultJson = prefs.getString('default_reservation');
-      if (defaultJson != null) {
-        final data = jsonDecode(defaultJson);
-        final defaultBarberId = data['barber']['id'];
+      final defaultReservation = await _defaultReservationStorage.load();
+      final defaultServiceIds =
+          defaultReservation?.services.map((service) => service.id).toSet() ??
+          {};
+      final currentServiceIds = selectedServices
+          .map((service) => service.id)
+          .toSet();
 
-        final defaultServices = List<dynamic>.from(data['services']);
-        final defaultServiceIds = defaultServices.map((s) => s['id']).toSet();
-
-        final currentServiceIds = selectedServices.map((s) => s.id).toSet();
-
-        if (defaultBarberId == barberData!.id &&
-            defaultServiceIds.length == currentServiceIds.length &&
-            defaultServiceIds.containsAll(currentServiceIds)) {
-          _isDefault = true;
-        } else {
-          _isDefault = false;
-        }
-      } else {
-        _isDefault = false;
-      }
+      _isDefault =
+          defaultReservation?.barber.id == currentBarberData.id &&
+          defaultServiceIds.length == currentServiceIds.length &&
+          defaultServiceIds.containsAll(currentServiceIds);
     } catch (e) {
       _isDefault = false;
     }
