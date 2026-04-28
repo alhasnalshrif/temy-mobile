@@ -11,6 +11,7 @@ import 'package:temy_barber/features/barber/data/models/reservation_arguments.da
 import 'package:temy_barber/features/reservations/data/models/reservation_response.dart';
 import 'package:temy_barber/features/reservations/logic/booking_confirmation_view_model.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
+import 'package:temy_barber/features/reservations/logic/reservation_success_feedback.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_state.dart';
 import 'package:temy_barber/features/reservations/data/models/queue_response.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/confirmation_widgets.dart';
@@ -111,6 +112,7 @@ class _BookingConfirmationState extends State<BookingConfirmation> {
     _viewModel.clearReservations();
 
     if (isGuestReservation) {
+      ReservationSuccessFeedback.play();
       _showGuestRegistrationSuccessDialog();
       return;
     }

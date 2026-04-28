@@ -10,7 +10,7 @@ class ServicesListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
       title: Text(service?.name ?? '', style: TextStyles.font14BlueBold),
       trailing: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -18,7 +18,7 @@ class ServicesListViewItem extends StatelessWidget {
         children: [
           Text(
             'EGP ${service?.price ?? '0'}',
-            style: TextStyles.font14BlueBold,
+            style: TextStyles.font13BlueRegular,
           ),
           const SizedBox(height: 4),
           Text(

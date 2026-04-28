@@ -36,7 +36,6 @@ class BookingCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-             
               const SizedBox(height: 8.0),
               Text(
                 'booking.cancel_title'.tr(),
@@ -181,11 +180,11 @@ class BookingCard extends StatelessWidget {
               if (isCancelled) const CancelledIndicator(),
             ],
           ),
-          verticalSpace(16),
+          verticalSpace(8),
           const Divider(color: ColorsManager.lightBlue),
-          verticalSpace(16),
+          verticalSpace(8),
           DateTimeSection(booking: booking),
-          verticalSpace(16),
+          verticalSpace(8),
           ServicesListView(booking: booking.services ?? []),
         ],
       ),

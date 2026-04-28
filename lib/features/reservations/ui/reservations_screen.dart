@@ -122,13 +122,13 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
           _showErrorSnackBar('time_slots.slot_no_longer_available'.tr());
 
           // Refresh time slots after overlap error so user can see updated availability
-          if (_viewModel.barberData?.id != null &&
-              _viewModel.selectedDate != null) {
+          final barberId = _viewModel.barberData?.id;
+          if (barberId != null) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (mounted) {
                 context.read<ReservationCubit>().getAvailableTimeSlots(
-                  barberId: _viewModel.barberData!.id,
-                  date: _viewModel.selectedDate!,
+                  barberId: barberId,
+                  date: _viewModel.selectedDate,
                 );
               }
             });
