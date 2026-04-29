@@ -2,27 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
-import 'package:temy_barber/features/booking/data/models/booking_response.dart'; // Add BookingData model
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:temy_barber/features/booking/logic/booking_state.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_card.dart';
-import 'package:temy_barber/features/booking/ui/widgets/booking_shimmer.dart'; // Import optimized shimmer
+import 'package:temy_barber/features/booking/ui/widgets/booking_shimmer.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_tabs.dart';
 import 'package:temy_barber/features/booking/ui/widgets/empty_booking_view.dart';
 import 'package:temy_barber/features/booking/ui/widgets/error_booking_view.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
 
-class BookingBlocBuilder extends StatefulWidget {
+class BookingBlocBuilder extends StatelessWidget {
   const BookingBlocBuilder({super.key});
-
-  @override
-  State<BookingBlocBuilder> createState() => _BookingBlocBuilderState();
-}
-
-class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
-  bool _showActiveBookings = true;
-  String _selectedStatus = "all"; // Default to show all statuses
 
   @override
   Widget build(BuildContext context) {
@@ -30,64 +21,34 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
       builder: (context, state) {
         return state.maybeMap(
           bookingSuccess: (successState) {
-            final activeBookings = successState.activeBookings;
-            final historyBookings = successState.historyBookings;
-
-            // Filter by status if a specific status is selected
-            List<BookingData> bookingsToShow;
-
-            if (_showActiveBookings) {
-              bookingsToShow = activeBookings;
-              if (_selectedStatus != "all") {
-                bookingsToShow = bookingsToShow
-                    .where((booking) => booking.status == _selectedStatus)
-                    .toList();
-              }
-            } else {
-              bookingsToShow = historyBookings;
-              if (_selectedStatus != "all") {
-                bookingsToShow = bookingsToShow
-                    .where((booking) => booking.status == _selectedStatus)
-                    .toList();
-              }
-            }
+            final bookingsToShow = context.read<BookingCubit>().getFilteredBookings();
+            final showActiveBookings = successState.showActiveBookings;
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 BookingTabs(
-                  showActiveBookings: _showActiveBookings,
+                  showActiveBookings: showActiveBookings,
                   onActiveTap: () {
-                    if (!_showActiveBookings) {
-                      setState(() {
-                        _showActiveBookings = true;
-                        _selectedStatus =
-                            "all"; // Reset filter when switching tabs
-                      });
+                    if (!showActiveBookings) {
+                      context.read<BookingCubit>().toggleBookingTab(true);
                     }
                   },
                   onHistoryTap: () {
-                    if (_showActiveBookings) {
-                      setState(() {
-                        _showActiveBookings = false;
-                        _selectedStatus =
-                            "all"; // Reset filter when switching tabs
-                      });
+                    if (showActiveBookings) {
+                      context.read<BookingCubit>().toggleBookingTab(false);
                     }
                   },
                 ),
-                verticalSpace(16),
-
-                // Single booking status stepper for filtering
                 verticalSpace(16),
                 if (bookingsToShow.isEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: EmptyBookingView(
-                      message: _showActiveBookings
+                      message: showActiveBookings
                           ? 'booking.empty_active'.tr()
                           : 'booking.empty_history'.tr(),
-                      buttonText: _showActiveBookings
+                      buttonText: showActiveBookings
                           ? 'booking.book_appointment'.tr()
                           : 'booking.explore_services'.tr(),
                       onPressed: () {
@@ -113,25 +74,14 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
           bookingLoading: (_) => SingleChildScrollView(
             child: Column(
               children: [
-                // Show the same tabs UI as the success state for consistency
                 BookingTabs(
-                  showActiveBookings: _showActiveBookings,
-                  onActiveTap: () {
-                    if (!_showActiveBookings) {
-                      setState(() => _showActiveBookings = true);
-                    }
-                  },
-                  onHistoryTap: () {
-                    if (_showActiveBookings) {
-                      setState(() => _showActiveBookings = false);
-                    }
-                  },
+                  showActiveBookings: true,
+                  onActiveTap: () {},
+                  onHistoryTap: () {},
                 ),
                 verticalSpace(16),
-                // Use the shimmer with properties matching current state
-                BookingShimmer(
-                  showActiveBookings: _showActiveBookings,
-                  showStatusStepper: _showActiveBookings,
+                const BookingShimmer(
+                  
                 ),
               ],
             ),
@@ -140,17 +90,9 @@ class _BookingBlocBuilderState extends State<BookingBlocBuilder> {
           orElse: () => Column(
             children: [
               BookingTabs(
-                showActiveBookings: _showActiveBookings,
-                onActiveTap: () {
-                  if (!_showActiveBookings) {
-                    setState(() => _showActiveBookings = true);
-                  }
-                },
-                onHistoryTap: () {
-                  if (_showActiveBookings) {
-                    setState(() => _showActiveBookings = false);
-                  }
-                },
+                showActiveBookings: true,
+                onActiveTap: () {},
+                onHistoryTap: () {},
               ),
               verticalSpace(20),
               Padding(

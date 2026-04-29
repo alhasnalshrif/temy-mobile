@@ -353,7 +353,14 @@
         "booking_confirmed": "تأكيد الحجز",
         "booking_reminder": "تذكير بالموعد",
         "booking_cancelled": "إلغاء الحجز",
-        "promotion": "عرض ترويجي"
+        "promotion": "عرض ترويجي",
+        "prompt_title": "لا تفوت الفرصة!",
+        "prompt_title_personalized": "{name}، لا تفوت الفرصة!",
+        "prompt_description": "فعّل الإشعارات لتتمكن من متابعة حجوزاتك والعروض الخاصة والتحديثات المهمة.",
+        "prompt_description_bookings": "فعّل الإشعارات لتصلك تذكيرات بمواعيد حجوزاتك القادمة ولا تفوت أي موعد.",
+        "prompt_enable_button": "تفعيل الإشعارات",
+        "prompt_later_button": "اطلب مني لاحقاً",
+        "enabled_success": "تم تفعيل الإشعارات بنجاح!"
     },
     "delete_account": {
         "title": "حذف الحساب",

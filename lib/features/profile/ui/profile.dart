@@ -66,11 +66,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _onNotificationToggled(bool value) async {
     if (_isUpdatingNotifications) return;
 
-    // Keep notifications enabled once the user enables them.
-    if (_pushNotificationsEnabled && !value) {
-      return;
-    }
-
     setState(() {
       _isUpdatingNotifications = true;
     });
@@ -99,6 +94,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (shouldEnable) {
         await notificationCubit.initializeNotifications();
         await SharedPrefHelper.setData(_notificationsAlwaysEnabledKey, true);
+      } else {
+        await SharedPrefHelper.setData(_notificationsAlwaysEnabledKey, false);
       }
 
       if (mounted) {

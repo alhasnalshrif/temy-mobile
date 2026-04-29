@@ -9,6 +9,7 @@ import 'package:temy_barber/core/di/dependency_injection.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/services/notification_service.dart';
+import 'package:temy_barber/core/services/notification_prompt_service.dart';
 import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:temy_barber/core/theme/app_theme.dart';
 import 'package:temy_barber/core/theme/colors.dart';
@@ -19,6 +20,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/settings/data/repos/settings_repo.dart';
 import 'package:temy_barber/features/settings/data/models/settings_response.dart';
+import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:temy_barber/core/ui/update_modal.dart';
@@ -188,11 +190,15 @@ class _TemyAppState extends State<TemyApp> {
     _goRouter = AppRouterGo.createRouter(isLoggedIn: isLoggedInUser);
     NotificationService.setNavigatorKey(AppRouterGo.navigatorKey);
 
-    if (widget.settingsData != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Check for app updates
+      if (widget.settingsData != null) {
         await _checkUpdate(widget.settingsData!);
-      });
-    }
+      }
+
+      // Check if we should show notification prompt
+      await _checkNotificationPrompt();
+    });
   }
 
   Future<void> _checkUpdate(SettingsData settings) async {
@@ -217,6 +223,47 @@ class _TemyAppState extends State<TemyApp> {
         forceUpdate: settings.forceUpdate ?? false,
         androidUrl: settings.androidUrl ?? '',
         iphoneUrl: settings.iphoneUrl ?? '',
+      );
+    }
+  }
+
+  Future<void> _checkNotificationPrompt() async {
+    // Only show prompt for logged-in users
+    if (!isLoggedInUser) return;
+
+    // Wait for the navigator key context to become available
+    while (AppRouterGo.navigatorKey.currentContext == null) {
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
+
+    final shouldShow = await NotificationPromptService.instance.shouldShowPrompt();
+    if (shouldShow && AppRouterGo.navigatorKey.currentContext != null) {
+      // Get user data for personalization
+      String? userName;
+      bool hasUpcomingBookings = false;
+
+      try {
+        // Try to get user name from shared preferences
+        final savedName = await SharedPrefHelper.getString(SharedPrefKeys.userName);
+        if (savedName.isNotEmpty) {
+          userName = savedName;
+        }
+
+        // Check if user has upcoming bookings
+        try {
+          final bookingCubit = getIt<BookingCubit>();
+          hasUpcomingBookings = bookingCubit.hasUpcomingBookings();
+        } catch (e) {
+          log('Error checking upcoming bookings: $e');
+        }
+      } catch (e) {
+        log('Error getting user data: $e');
+      }
+
+      await NotificationPromptService.instance.showPrompt(
+        AppRouterGo.navigatorKey.currentContext!,
+        userName: userName,
+        hasUpcomingBookings: hasUpcomingBookings,
       );
     }
   }

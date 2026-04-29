@@ -1,44 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/core/utils/responsive_utils.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
+import 'package:temy_barber/features/barber/logic/barber_service_selection_cubit.dart';
+import 'package:temy_barber/features/barber/ui/widgets/floating_booking_button.dart';
 import 'package:temy_barber/features/barber/ui/widgets/rating_display.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:temy_barber/core/utils/responsive_utils.dart';
+import 'package:temy_barber/features/barber/ui/widgets/service_card.dart';
 import 'package:temy_barber/features/barber/ui/widgets/tabs/service_tab.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/time_slot_section.dart';
 
-class BarberScreenItem extends StatefulWidget {
+class BarberScreenItem extends StatelessWidget {
   final BarberDetailData? serviceResponseModel;
 
   const BarberScreenItem({super.key, this.serviceResponseModel});
 
   @override
-  State<BarberScreenItem> createState() => _BarberScreenItemState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => BarberServiceSelectionCubit(),
+      child: _BarberScreenContent(serviceResponseModel: serviceResponseModel),
+    );
+  }
 }
 
-class _BarberScreenItemState extends State<BarberScreenItem> {
-  final Set<BarberService> _selectedServices = {};
-  double _selectedTotalPrice = 0.0;
-  String? _selectedTime;
+class _BarberScreenContent extends StatelessWidget {
+  final BarberDetailData? serviceResponseModel;
 
-  int get _totalDuration => _selectedServices.fold(0, (t, s) => t + s.duration);
-
-  void _onServiceSelected(BarberService service, double price, bool selected) {
-    setState(() {
-      if (selected) {
-        _selectedServices.add(service);
-        _selectedTotalPrice += price;
-      } else {
-        _selectedServices.remove(service);
-        _selectedTotalPrice -= price;
-      }
-    });
-  }
+  const _BarberScreenContent({super.key, required this.serviceResponseModel});
 
   @override
   Widget build(BuildContext context) {
@@ -51,345 +46,201 @@ class _BarberScreenItemState extends State<BarberScreenItem> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: ResponsiveBuilder(
-          mobile: _buildMobileLayout(),
-          tablet: _buildDesktopLayout(),
-          desktop: _buildDesktopLayout(),
+          mobile: _BarberMobileLayout(serviceResponseModel: serviceResponseModel),
+          tablet: _BarberDesktopLayout(serviceResponseModel: serviceResponseModel),
+          desktop: _BarberDesktopLayout(serviceResponseModel: serviceResponseModel),
         ),
       ),
     );
   }
+}
 
-  // ─── MOBILE ──────────────────────────────────────────────────────────────────
+/// Mobile layout for barber screen
+class _BarberMobileLayout extends StatelessWidget {
+  final BarberDetailData? serviceResponseModel;
 
-  Widget _buildMobileLayout() {
-    final services = widget.serviceResponseModel?.services ?? [];
-    final barberName = widget.serviceResponseModel?.name ?? 'barber.name'.tr();
+  const _BarberMobileLayout({super.key, required this.serviceResponseModel});
+
+  @override
+  Widget build(BuildContext context) {
+    final services = serviceResponseModel?.services ?? [];
+    final barberName = serviceResponseModel?.name ?? 'barber.name'.tr();
 
     return Stack(
       children: [
         CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
-            // ── Hero image — smooth collapse and fade ──
-            SliverAppBar(
-              expandedHeight: 220,
-              pinned: true,
-              backgroundColor: Colors.white,
-              foregroundColor: const Color(0xFF1A1A2E),
-              elevation: 0,
-              // centerTitle: true,
-              titleSpacing: 0,
-              leadingWidth: 64,
-              leading: Center(
-                child: _circleBtn(
-                  Icons.arrow_back_ios_new_rounded,
-                  () => Navigator.of(context).pop(),
-                ),
-              ),
-              title: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.sizeOf(context).width * 0.5,
-                ),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.75),
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                  child: Text(
-                    barberName,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xFF1A1A2E),
-                    ),
-                  ),
-                ),
-              ),
-
-              flexibleSpace: FlexibleSpaceBar(
-                background: Image.network(
-                  widget.serviceResponseModel?.avatar ?? '',
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    color: ColorsManager.mainBlue.withOpacity(0.15),
-                  ),
-                ),
-              ),
-              // White rounded shelf attached to the bottom of the app bar
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(24),
-                child: Container(
-                  height: 24,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(30),
-                    ),
-                  ),
-                  child: Center(
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 8),
-                      width: 36,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // ── Barber info header ──
-            // SliverToBoxAdapter(child: _buildBarberInfo()),
-
-            // ── Section title ──
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
-                child: Text(
-                  'barber.service_tab'.tr(),
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF1A1A2E),
-                  ),
-                ),
-              ),
-            ),
-
-            // ── Service items ──
-            if (services.isEmpty)
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(40),
-                  child: Center(
-                    child: Text(
-                      'barber.no_services'.tr(),
-                      style: TextStyles.font16GrayRegular,
-                    ),
-                  ),
-                ),
-              )
-            else
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(
-                  16,
-                  0,
-                  16,
-                  100,
-                ), // padding for floating button
-                sliver: SliverList.separated(
-                  itemCount: services.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 12),
-                  itemBuilder: (context, index) {
-                    final service = services[index];
-                    return _ServiceCard(
-                      service: service,
-                      isSelected: _selectedServices.any(
-                        (s) => s.id == service.id,
-                      ),
-                      onTap: () => _onServiceSelected(
-                        service,
-                        service.price.toDouble(),
-                        !_selectedServices.any((s) => s.id == service.id),
-                      ),
-                    );
-                  },
-                ),
-              ),
+            _buildSliverAppBar(context, barberName),
+            _buildServiceSection(services),
           ],
         ),
-
-        // ── Floating compact booking pill ──
-        _buildFloatingBookingPill(),
+        _buildFloatingBookingButton(context),
       ],
     );
   }
 
-  Widget _circleBtn(IconData icon, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.9),
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
+  Widget _buildSliverAppBar(BuildContext context, String barberName) {
+    return SliverAppBar(
+      expandedHeight: 220,
+      pinned: true,
+      backgroundColor: Colors.white,
+      foregroundColor: const Color(0xFF1A1A2E),
+      elevation: 0,
+      titleSpacing: 0,
+      leadingWidth: 64,
+      leading: Center(
+        child: _CircleBtn(
+          icon: Icons.arrow_back_ios_new_rounded,
+          onTap: () => Navigator.of(context).pop(),
         ),
-        child: Icon(icon, color: ColorsManager.mainBlue, size: 20),
+      ),
+      title: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.sizeOf(context).width * 0.5,
+        ),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: Colors.white.withAlpha(191),
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: Text(
+            barberName,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: const Color(0xFF1A1A2E),
+            ),
+          ),
+        ),
+      ),
+      flexibleSpace: FlexibleSpaceBar(
+        background: Image.network(
+          serviceResponseModel?.avatar ?? '',
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => Container(
+            color: ColorsManager.mainBlue.withAlpha(38),
+          ),
+        ),
+      ),
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(24),
+        child: _buildRoundedShelf(),
       ),
     );
   }
 
-  Widget _buildBarberInfo() {
-    final barber = widget.serviceResponseModel;
-    final tt = Theme.of(context).textTheme;
+  Widget _buildRoundedShelf() {
+    return Container(
+      height: 24,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      ),
+      child: Center(
+        child: Container(
+          margin: const EdgeInsets.only(top: 8),
+          width: 36,
+          height: 4,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade300,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+      ),
+    );
+  }
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 4, 20, 16),
-      child: Row(
+  Widget _buildServiceSection(List<dynamic> services) {
+    return SliverToBoxAdapter(
+      child: Column(
         children: [
-          // Left: name + rating
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  barber?.name ?? 'barber.name'.tr(),
-                  style: tt.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF1A1A2E),
-                  ),
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
+            child: Text(
+              'barber.service_tab'.tr(),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF1A1A2E),
+              ),
             ),
           ),
-          // Right: favorite
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.red.withOpacity(0.08),
-              shape: BoxShape.circle,
+          if (services.isEmpty)
+            Padding(
+              padding: const EdgeInsets.all(40),
+              child: Center(
+                child: Text('barber.no_services'.tr(), style: TextStyles.font16GrayRegular),
+              ),
+            )
+          else
+            BlocBuilder<BarberServiceSelectionCubit, BarberServiceSelectionState>(
+              builder: (context, state) {
+                return ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 100),
+                  itemCount: services.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 12),
+                  itemBuilder: (context, index) {
+                    final service = services[index];
+                    return ServiceSelectionCard(
+                      service: service,
+                      isSelected: state.selectedServices.any((s) => s.id == service.id),
+                      onTap: () => context.read<BarberServiceSelectionCubit>().toggleService(
+                        service,
+                        service.price.toDouble(),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
-            child: const Icon(Icons.favorite, color: Colors.red, size: 20),
-          ),
         ],
       ),
     );
   }
 
-  Widget _buildFloatingBookingPill() {
-    final bool has = _selectedServices.isNotEmpty;
-
-    return Positioned(
-      bottom: 32,
-      left: 0,
-      right: 0,
-      child: SafeArea(
-        child: IgnorePointer(
-          ignoring: !has,
-          child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 300),
-            opacity: has ? 1.0 : 0.0,
-            curve: Curves.easeOut,
-            child: AnimatedSlide(
-              duration: const Duration(milliseconds: 400),
-              offset: has ? Offset.zero : const Offset(0, 0.5),
-              curve: Curves.easeOutBack,
-              child: Center(
-                child: Container(
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    color: ColorsManager.mainBlue,
-                    borderRadius: BorderRadius.circular(100),
-                    boxShadow: [
-                      BoxShadow(
-                        color: ColorsManager.mainBlue.withOpacity(0.35),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: has ? _navigateToReservation : null,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 14,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // Price and duration
-                            // Column(
-                            //   crossAxisAlignment: CrossAxisAlignment.start,
-                            //   mainAxisSize: MainAxisSize.min,
-                            //   children: [
-                            //     Text(
-                            //       _priceText(_selectedTotalPrice),
-                            //       style: const TextStyle(
-                            //         color: Colors.white,
-                            //         fontWeight: FontWeight.bold,
-                            //         fontSize: 16,
-                            //       ),
-                            //     ),
-                            //     Text(
-                            //       '$_totalDuration ${'barber.minutes'.tr()}',
-                            //       style: TextStyle(
-                            //         color: Colors.white.withOpacity(0.8),
-                            //         fontSize: 12,
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            // const SizedBox(width: 16),
-                            // Divider
-                            // Container(
-                            //   height: 28,
-                            //   width: 1.5,
-                            //   color: Colors.white.withOpacity(0.2),
-                            // ),
-                            // const SizedBox(width: 16),
-                            // Book Now Text
-                            Text(
-                              'barber.book_now'.tr(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+  Widget _buildFloatingBookingButton(BuildContext context) {
+    return BlocBuilder<BarberServiceSelectionCubit, BarberServiceSelectionState>(
+      builder: (context, state) {
+        return FloatingBookingButton(
+          hasSelection: state.hasSelection,
+          onTap: () => _navigateToReservation(context, state),
+        );
+      },
     );
   }
 
-  void _navigateToReservation() {
+  void _navigateToReservation(BuildContext context, BarberServiceSelectionState state) {
     context.pushGoNamed(
       AppRoutes.reservationName,
       pathParameters: {
-        'barberId': widget.serviceResponseModel?.id.toString() ?? '',
+        'barberId': serviceResponseModel?.id.toString() ?? '',
       },
       extra: ReservationArguments(
-        selectedServices: _selectedServices.toList(),
-        barberData: widget.serviceResponseModel,
-        totalPrice: _selectedTotalPrice,
-        selectedTime: _selectedTime,
+        selectedServices: state.selectedServices.toList(),
+        barberData: serviceResponseModel,
+        totalPrice: state.totalPrice,
+        selectedTime: state.selectedTime,
         selectedDate: DateTime.now(),
       ),
     );
   }
+}
 
-  // ─── DESKTOP ─────────────────────────────────────────────────────────────────
+/// Desktop layout for barber screen
+class _BarberDesktopLayout extends StatelessWidget {
+  final BarberDetailData? serviceResponseModel;
 
-  Widget _buildDesktopLayout() {
+  const _BarberDesktopLayout({super.key, required this.serviceResponseModel});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: ColorsManager.background,
       alignment: Alignment.topCenter,
@@ -399,68 +250,154 @@ class _BarberScreenItemState extends State<BarberScreenItem> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: ColorsManager.moreLighterGray),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _buildHeader(),
-                    const SizedBox(height: 24),
-                    const Divider(
-                      height: 1,
-                      color: ColorsManager.moreLighterGray,
-                    ),
-                    const SizedBox(height: 24),
-                    _buildDesktopBookingButton(),
-                  ],
-                ),
-              ),
-            ),
+            Expanded(flex: 3, child: _buildBarberInfoCard()),
             const SizedBox(width: 24),
-            Expanded(
-              flex: 7,
-              child: Container(
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: ColorsManager.moreLighterGray),
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 400,
-                      child: ServiceTab(
-                        serviceResponseModel: widget.serviceResponseModel,
-                        selectedServices: _selectedServices,
-                        onServiceSelected: _onServiceSelected,
-                      ),
-                    ),
-                    if (_selectedServices.isNotEmpty) ...[
-                      const SizedBox(height: 24),
-                      const Divider(),
-                      const SizedBox(height: 24),
-                      _buildTimeSlotSection(),
-                    ],
-                  ],
-                ),
-              ),
-            ),
+            Expanded(flex: 7, child: _buildServicesCard()),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildHeader() {
-    final barber = widget.serviceResponseModel;
+  Widget _buildBarberInfoCard() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: ColorsManager.moreLighterGray),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _BarberHeader(barber: serviceResponseModel),
+          const SizedBox(height: 24),
+          const Divider(height: 1, color: ColorsManager.moreLighterGray),
+          const SizedBox(height: 24),
+          BlocBuilder<BarberServiceSelectionCubit, BarberServiceSelectionState>(
+            builder: (context, state) {
+              return _DesktopBookingButton(
+                hasSelection: state.hasSelection,
+                totalPrice: state.totalPrice,
+                onTap: () => _navigateToReservation(context, state),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildServicesCard() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: ColorsManager.moreLighterGray),
+      ),
+      child: BlocBuilder<BarberServiceSelectionCubit, BarberServiceSelectionState>(
+        builder: (context, state) {
+          return Column(
+            children: [
+              SizedBox(
+                height: 400,
+                child: ServiceTab(
+                  serviceResponseModel: serviceResponseModel,
+                  selectedServices: state.selectedServices,
+                  onServiceSelected: (service, price, selected) {
+                    context.read<BarberServiceSelectionCubit>().toggleService(service, price);
+                  },
+                ),
+              ),
+              if (state.hasSelection) ...[
+                const SizedBox(height: 24),
+                const Divider(),
+                const SizedBox(height: 24),
+                TimeSlotSection(
+                  barberData: serviceResponseModel,
+                  selectedTime: state.selectedTime,
+                  onTimeSelected: (t) => context.read<BarberServiceSelectionCubit>().selectTime(t),
+                  totalDuration: state.totalDuration,
+                ),
+              ],
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  void _navigateToReservation(BuildContext context, BarberServiceSelectionState state) {
+    context.pushGoNamed(
+      AppRoutes.reservationName,
+      pathParameters: {
+        'barberId': serviceResponseModel?.id.toString() ?? '',
+      },
+      extra: ReservationArguments(
+        selectedServices: state.selectedServices.toList(),
+        barberData: serviceResponseModel,
+        totalPrice: state.totalPrice,
+        selectedTime: state.selectedTime,
+        selectedDate: DateTime.now(),
+      ),
+    );
+  }
+}
+
+/// Desktop booking button
+class _DesktopBookingButton extends StatelessWidget {
+  final bool hasSelection;
+  final double totalPrice;
+  final VoidCallback onTap;
+
+  const _DesktopBookingButton({
+    required this.hasSelection,
+    required this.totalPrice,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: hasSelection ? ColorsManager.mainBlue : Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: hasSelection ? onTap : null,
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Text(
+              hasSelection
+                  ? '${'barber.book_now'.tr()} - ${totalPrice.toStringAsFixed(0)}'
+                  : 'barber.select_service'.tr(),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: hasSelection ? Colors.white : Colors.grey.shade600,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Barber header widget
+class _BarberHeader extends StatelessWidget {
+  final BarberDetailData? barber;
+
+  const _BarberHeader({super.key, required this.barber});
+
+  @override
+  Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
     return Column(
       children: [
@@ -487,171 +424,34 @@ class _BarberScreenItemState extends State<BarberScreenItem> {
       ],
     );
   }
-
-  String _priceText(double price) =>
-      'barber.price'.tr(args: [price.toStringAsFixed(0)]);
-
-  Widget _buildDesktopBookingButton() {
-    final bool hasSelection = _selectedServices.isNotEmpty;
-
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: hasSelection ? ColorsManager.mainBlue : Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: hasSelection ? _navigateToReservation : null,
-          borderRadius: BorderRadius.circular(16),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              hasSelection
-                  ? '${'barber.book_now'.tr()} - ${_priceText(_selectedTotalPrice)}'
-                  : 'barber.select_service'.tr(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: hasSelection ? Colors.white : Colors.grey.shade600,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTimeSlotSection() {
-    return TimeSlotSection(
-      barberData: widget.serviceResponseModel,
-      selectedTime: _selectedTime,
-      onTimeSelected: (t) => setState(() => _selectedTime = t),
-      totalDuration: _totalDuration,
-    );
-  }
 }
 
-// ─── Stateless service card (no rebuilds on parent setState) ──────────────────
-
-class _ServiceCard extends StatelessWidget {
-  final BarberService service;
-  final bool isSelected;
+/// Circle button for navigation
+class _CircleBtn extends StatelessWidget {
+  final IconData icon;
   final VoidCallback onTap;
 
-  const _ServiceCard({
-    required this.service,
-    required this.isSelected,
-    required this.onTap,
-  });
+  const _CircleBtn({required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeInOut,
-      decoration: BoxDecoration(
-        color: isSelected ? ColorsManager.mainBlue.withAlpha(10) : Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isSelected
-              ? ColorsManager.mainBlue
-              : ColorsManager.lighterGray,
-          width: isSelected ? 2 : 1.5,
-        ),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(16),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(16),
-          child: Padding(
-            padding: const EdgeInsets.all(14),
-            child: Row(
-              children: [
-                // Checkbox circle
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? ColorsManager.mainBlue
-                        : ColorsManager.moreLighterGray,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: isSelected
-                          ? Colors.transparent
-                          : ColorsManager.gray,
-                    ),
-                  ),
-                  child: isSelected
-                      ? const Icon(
-                          Icons.check_rounded,
-                          color: Colors.white,
-                          size: 16,
-                        )
-                      : null,
-                ),
-                const SizedBox(width: 14),
-                // Name + duration
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        service.name,
-                        style: TextStyles.font13DarkBlueRegular,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.access_time_rounded,
-                            size: 14,
-                            color: ColorsManager.gray,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            'barber.duration'.tr(
-                              args: [service.duration.toString()],
-                            ),
-                            style: TextStyles.font13GrayRegular,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 10),
-                // Price badge
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 7,
-                  ),
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? ColorsManager.mainBlue
-                        : ColorsManager.thirdfMain,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    'barber.price'.tr(args: [service.price.toString()]),
-                    style: isSelected
-                        ? TextStyles.font14WhiteSemiBold
-                        : TextStyles.font14BlueSemiBold,
-                  ),
-                ),
-              ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: Colors.white.withAlpha(230),
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withAlpha(20),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-          ),
+          ],
         ),
+        child: Icon(icon, color: ColorsManager.mainBlue, size: 20),
       ),
     );
   }

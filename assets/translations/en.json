@@ -354,7 +354,14 @@
         "booking_confirmed": "Booking Confirmed",
         "booking_reminder": "Booking Reminder",
         "booking_cancelled": "Booking Cancelled",
-        "promotion": "Promotion"
+        "promotion": "Promotion",
+        "prompt_title": "Don't Miss Out!",
+        "prompt_title_personalized": "{name}, Don't Miss Out!",
+        "prompt_description": "Enable notifications to stay updated with your bookings, special offers, and important updates.",
+        "prompt_description_bookings": "Enable notifications to receive reminders about your upcoming bookings and never miss an appointment.",
+        "prompt_enable_button": "Enable Notifications",
+        "prompt_later_button": "Ask Me Later",
+        "enabled_success": "Notifications enabled successfully!"
     },
     "delete_account": {
         "title": "Delete Account",

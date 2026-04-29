@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
+import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/core/services/cleanup_service.dart';
@@ -24,6 +25,13 @@ class ProfileCubit extends Cubit<ProfileState> {
       final response = await _homeRepo.getProfile().timeout(_timeout);
       response.when(
         success: (userProfile) {
+          // Save user name for personalized notifications
+          if (userProfile.user?.name != null) {
+            SharedPrefHelper.setData(
+              SharedPrefKeys.userName,
+              userProfile.user!.name,
+            );
+          }
           emit(ProfileState.profileSuccess(userProfile));
         },
         failure: (error) {

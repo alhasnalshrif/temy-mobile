@@ -5,57 +5,98 @@ import 'package:temy_barber/features/reservations/data/models/default_reservatio
 import 'package:temy_barber/features/reservations/data/repos/default_reservation_storage.dart';
 import 'package:temy_barber/features/reservations/data/models/time_slots_response.dart';
 
-/// ViewModel that manages all business logic for the Reservations screen.
-/// This separates UI concerns from business logic for better maintainability.
+/// Configuration constants for reservations
+class ReservationConfig {
+  static const int defaultMaxBookingDays = 30;
+  static const String dateFormat = 'yyyy-MM-dd';
+}
+
+/// State management class for reservation screen
+/// Handles business logic and state separation from UI
 class ReservationViewModel extends ChangeNotifier {
-  // Private state
-  DateTime _selectedDate = DateTime.now();
-  DateTime _currentMonth = DateTime.now();
+  // Selection State
+  DateTime _selectedDate;
+  DateTime _currentMonth;
   String? _selectedTime;
-  bool _isLoadingDialogShowing = false;
-  TimeSlotsResponse? _timeSlotsData;
+
+  // Loading States
   bool _isLoadingTimeSlots = false;
+  bool _isLoadingSettings = false;
+  bool _isLoadingDialogShowing = false;
+
+  // Data State
+  TimeSlotsResponse? _timeSlotsData;
   bool _isQueueMode = false;
-  bool _isLoadingSettings = true;
   bool _isDefault = false;
 
   // Dependencies
   final ReservationArguments? arguments;
-  final DefaultReservationStorage _defaultReservationStorage =
-      DefaultReservationStorage();
+  final DefaultReservationStorage _storage;
 
-  ReservationViewModel({this.arguments}) {
-    _selectedDate = arguments?.selectedDate ?? DateTime.now();
-    _selectedTime = arguments?.selectedTime;
-    _isQueueMode = arguments?.isQueueMode ?? false;
-    _currentMonth = DateTime(_selectedDate.year, _selectedDate.month);
+  ReservationViewModel({this.arguments})
+      : _selectedDate = DateTime.now(),
+        _currentMonth = DateTime.now(),
+        _storage = DefaultReservationStorage() {
+    _initializeFromArguments();
   }
 
-  // Getters
+  /// Initialize state from navigation arguments
+  void _initializeFromArguments() {
+    final now = DateTime.now();
+    _selectedDate = arguments?.selectedDate ?? now;
+    _selectedTime = arguments?.selectedTime;
+    _isQueueMode = arguments?.isQueueMode ?? false;
+    _currentMonth = DateTime(now.year, now.month);
+  }
+
+  // ===== Getters =====
+
+  /// Currently selected date
   DateTime get selectedDate => _selectedDate;
+
+  /// Currently displayed month in calendar
   DateTime get currentMonth => _currentMonth;
+
+  /// Currently selected time slot
   String? get selectedTime => _selectedTime;
-  bool get isLoadingDialogShowing => _isLoadingDialogShowing;
+
+  /// Available time slots from backend
   TimeSlotsResponse? get timeSlotsData => _timeSlotsData;
+
+  /// Whether time slots are currently being fetched
   bool get isLoadingTimeSlots => _isLoadingTimeSlots;
-  bool get isQueueMode => _isQueueMode;
+
+  /// Whether queue settings are currently being fetched
   bool get isLoadingSettings => _isLoadingSettings;
+
+  /// Whether loading dialog is currently showing
+  bool get isLoadingDialogShowing => _isLoadingDialogShowing;
+
+  /// Whether current booking mode is queue (vs time-slot)
+  bool get isQueueMode => _isQueueMode;
+
+  /// Whether current reservation matches saved default
   bool get isDefault => _isDefault;
 
+  /// Barber data from arguments
   BarberDetailData? get barberData => arguments?.barberData;
-  List<BarberService> get selectedServices => arguments?.selectedServices ?? [];
+
+  /// Selected services for booking
+  List<BarberService> get selectedServices =>
+      arguments?.selectedServices ?? [];
+
+  /// Total price of selected services
   double get totalPrice => arguments?.totalPrice ?? 0.0;
 
-  /// Maximum booking days from barber settings
-  int get maxBookingDays => barberData?.maxReservationDays ?? 30;
+  /// Maximum booking days from backend settings
+  int get maxBookingDays =>
+      barberData?.maxReservationDays ?? ReservationConfig.defaultMaxBookingDays;
 
   /// Total duration of all selected services in minutes
   int get totalDuration =>
       selectedServices.fold(0, (sum, service) => sum + service.duration);
 
-  /// Check if booking can proceed
-  /// For queue mode: only services needed
-  /// For time-slot mode: services + selected time needed
+  /// Whether booking can proceed based on mode and selections
   bool get canBook {
     if (_isQueueMode) {
       return selectedServices.isNotEmpty;
@@ -63,8 +104,10 @@ class ReservationViewModel extends ChangeNotifier {
     return _selectedTime != null && selectedServices.isNotEmpty;
   }
 
-  // Setters with notification
-  void setSelectedDate(DateTime date) {
+  // ===== Date Selection Methods =====
+
+  /// Update selected date and reset related state
+  void selectDate(DateTime date) {
     if (_selectedDate != date) {
       _selectedDate = date;
       _selectedTime = null; // Reset time when date changes
@@ -72,88 +115,141 @@ class ReservationViewModel extends ChangeNotifier {
     }
   }
 
-  void setCurrentMonth(DateTime month) {
+  /// Update currently displayed calendar month
+  void updateCurrentMonth(DateTime month) {
     if (_currentMonth != month) {
       _currentMonth = month;
       notifyListeners();
     }
   }
 
-  void setSelectedTime(String? time) {
+  // ===== Time Selection Methods =====
+
+  /// Update selected time slot
+  void selectTime(String? time) {
     if (_selectedTime != time) {
       _selectedTime = time;
       notifyListeners();
     }
   }
 
-  void setLoadingDialogShowing(bool value) {
-    _isLoadingDialogShowing = value;
+  /// Check if date needs fresh time slot data from backend
+  bool shouldFetchTimeSlots(DateTime date) {
+    final normalizedDate = _normalizeDate(date);
+    final normalizedSelected = _normalizeDate(_selectedDate);
+    return normalizedDate != normalizedSelected;
   }
 
+  /// Check if backend indicates date has available slots
+  bool hasAvailableSlots(DateTime date) {
+    if (!shouldFetchTimeSlots(date)) {
+      return _timeSlotsData != null &&
+          !_timeSlotsData!.data.isDayOff &&
+          _timeSlotsData!.data.slots.isNotEmpty;
+    }
+    return false; // Need to fetch from backend first
+  }
+
+  // ===== Loading State Methods =====
+
+  /// Update time slots loading state
+  void setTimeSlotsLoading(bool isLoading) {
+    _isLoadingTimeSlots = isLoading;
+    if (isLoading) {
+      _timeSlotsData = null;
+      _selectedTime = null;
+    }
+    notifyListeners();
+  }
+
+  /// Update time slots data from backend response
   void setTimeSlotsData(TimeSlotsResponse? data) {
     _timeSlotsData = data;
-    notifyListeners();
-  }
-
-  void setLoadingTimeSlots(bool value) {
-    _isLoadingTimeSlots = value;
-    notifyListeners();
-  }
-
-  void setQueueMode(bool value) {
-    _isQueueMode = value;
-    notifyListeners();
-  }
-
-  void setLoadingSettings(bool value) {
-    _isLoadingSettings = value;
-    notifyListeners();
-  }
-
-  /// Update state when time slots are loading
-  void onTimeSlotsLoading() {
-    _isLoadingTimeSlots = true;
-    _timeSlotsData = null;
-    _selectedTime = null;
-    notifyListeners();
-  }
-
-  /// Update state when time slots load successfully
-  void onTimeSlotsSuccess(TimeSlotsResponse response) {
     _isLoadingTimeSlots = false;
-    _timeSlotsData = response;
     notifyListeners();
   }
 
-  /// Update state when time slots fail to load
-  void onTimeSlotsError() {
-    _isLoadingTimeSlots = false;
-    _timeSlotsData = null;
+  /// Update queue settings loading state
+  void setQueueSettingsLoading(bool isLoading) {
+    _isLoadingSettings = isLoading;
     notifyListeners();
   }
 
-  /// Update state when queue settings are loading
-  void onQueueSettingsLoading() {
-    _isLoadingSettings = true;
-    notifyListeners();
-  }
-
-  /// Update state when queue settings load successfully
-  void onQueueSettingsSuccess(bool isQueueMode) {
-    _isLoadingSettings = false;
+  /// Update queue mode from backend response
+  void setQueueMode(bool isQueueMode) {
     _isQueueMode = isQueueMode;
-    notifyListeners();
-  }
-
-  /// Update state when queue settings fail to load
-  void onQueueSettingsError() {
     _isLoadingSettings = false;
-    _isQueueMode = false;
     notifyListeners();
   }
 
-  /// Build reservation arguments for navigation
-  ReservationArguments buildReservationArguments() {
+  /// Update loading dialog visibility
+  void setLoadingDialogShowing(bool isShowing) {
+    _isLoadingDialogShowing = isShowing;
+  }
+
+  // ===== Default Reservation Methods =====
+
+  /// Save current reservation as default for quick booking
+  Future<bool> saveAsDefault() async {
+    final currentBarber = barberData;
+    if (currentBarber == null || selectedServices.isEmpty) {
+      return false;
+    }
+
+    try {
+      final defaultReservation = DefaultReservation(
+        barber: currentBarber,
+        services: selectedServices,
+        totalPrice: totalPrice,
+      );
+
+      await _storage.save(defaultReservation);
+      _isDefault = true;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Remove saved default reservation
+  Future<bool> removeDefault() async {
+    try {
+      await _storage.remove();
+      _isDefault = false;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Check if current reservation matches saved default
+  Future<bool> checkIsDefault() async {
+    final currentBarber = barberData;
+    if (currentBarber == null || selectedServices.isEmpty) {
+      _isDefault = false;
+      notifyListeners();
+      return false;
+    }
+
+    try {
+      final defaultReservation = await _storage.load();
+      final isMatch = _matchesDefaultReservation(defaultReservation, currentBarber);
+      _isDefault = isMatch;
+      notifyListeners();
+      return isMatch;
+    } catch (e) {
+      _isDefault = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  // ===== Navigation Methods =====
+
+  /// Build reservation arguments for navigation to next screen
+  ReservationArguments buildNavigationArguments() {
     return ReservationArguments(
       selectedServices: selectedServices,
       barberData: barberData,
@@ -164,62 +260,35 @@ class ReservationViewModel extends ChangeNotifier {
     );
   }
 
-  /// Save current reservation as default for quick booking
-  Future<void> saveAsDefault() async {
-    final currentBarberData = barberData;
-    if (currentBarberData == null || selectedServices.isEmpty) return;
-
-    final defaultReservation = DefaultReservation(
-      barber: currentBarberData,
-      services: selectedServices,
-      totalPrice: totalPrice,
-    );
-
-    await _defaultReservationStorage.save(defaultReservation);
-
-    _isDefault = true;
-    notifyListeners();
-  }
-
-  /// Remove the saved default reservation
-  Future<void> removeDefault() async {
-    await _defaultReservationStorage.remove();
-
-    _isDefault = false;
-    notifyListeners();
-  }
-
-  /// Check if the current reservation matches the saved default
-  Future<void> checkIsDefault() async {
-    final currentBarberData = barberData;
-    if (currentBarberData == null || selectedServices.isEmpty) {
-      _isDefault = false;
-      notifyListeners();
-      return;
-    }
-
-    try {
-      final defaultReservation = await _defaultReservationStorage.load();
-      final defaultServiceIds =
-          defaultReservation?.services.map((service) => service.id).toSet() ??
-          {};
-      final currentServiceIds = selectedServices
-          .map((service) => service.id)
-          .toSet();
-
-      _isDefault =
-          defaultReservation?.barber.id == currentBarberData.id &&
-          defaultServiceIds.length == currentServiceIds.length &&
-          defaultServiceIds.containsAll(currentServiceIds);
-    } catch (e) {
-      _isDefault = false;
-    }
-    notifyListeners();
-  }
-
-  /// Format date for API requests
+  /// Format date for API requests (YYYY-MM-DD)
   String formatDateForApi(DateTime date) {
-    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+    final year = date.year.toString();
+    final month = date.month.toString().padLeft(2, '0');
+    final day = date.day.toString().padLeft(2, '0');
+    return '$year-$month-$day';
+  }
+
+  // ===== Private Helper Methods =====
+
+  /// Normalize date to midnight for consistent comparisons
+  DateTime _normalizeDate(DateTime date) {
+    return DateTime(date.year, date.month, date.day);
+  }
+
+  /// Check if current selection matches saved default reservation
+  bool _matchesDefaultReservation(
+    DefaultReservation? defaultReservation,
+    BarberDetailData currentBarber,
+  ) {
+    if (defaultReservation == null) return false;
+
+    final defaultServiceIds =
+        defaultReservation.services.map((s) => s.id).toSet();
+    final currentServiceIds = selectedServices.map((s) => s.id).toSet();
+
+    return defaultReservation.barber.id == currentBarber.id &&
+        defaultServiceIds.length == currentServiceIds.length &&
+        defaultServiceIds.containsAll(currentServiceIds);
   }
 
   @override

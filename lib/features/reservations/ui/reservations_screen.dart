@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/widgets/floating_action_pill.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_cubit.dart';
 import 'package:temy_barber/features/reservations/logic/reservation_state.dart';
@@ -13,8 +16,6 @@ import 'package:temy_barber/features/reservations/ui/widgets/calendar_section.da
 import 'package:temy_barber/features/reservations/ui/widgets/time_slot_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/total_section.dart';
 import 'package:temy_barber/features/reservations/ui/widgets/queue_mode_section.dart';
-import 'package:temy_barber/core/widgets/shimmer_loading.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
 
 class ReservationsScreen extends StatefulWidget {
@@ -94,109 +95,6 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     );
   }
 
-  void _handleStateChanges(BuildContext context, ReservationState state) {
-    state.maybeWhen(
-      queueSettingsLoading: () => _viewModel.onQueueSettingsLoading(),
-      queueSettingsSuccess: (settings) {
-        _viewModel.onQueueSettingsSuccess(settings.data?.isQueueMode ?? false);
-        setState(() {});
-      },
-      queueSettingsError: (_) {
-        _viewModel.onQueueSettingsError();
-        setState(() {});
-      },
-      reservationLoading: () => _showLoadingDialog(),
-      reservationSuccess: (response, _) {
-        _dismissLoadingDialog();
-        context.go(AppRoutes.Invoice, extra: response);
-        _showSuccessSnackBar('booking.success_message'.tr());
-      },
-      reservationError: (error) {
-        _dismissLoadingDialog();
-
-        // Check if this is an overlap error and provide better UX
-        final errorMessage = error.apiErrorModel.message.toString();
-        if (errorMessage.contains('overlaps with an existing booking') ||
-            errorMessage.contains('overlaps') ||
-            errorMessage.contains('already booked')) {
-          _showErrorSnackBar('time_slots.slot_no_longer_available'.tr());
-
-          // Refresh time slots after overlap error so user can see updated availability
-          final barberId = _viewModel.barberData?.id;
-          if (barberId != null) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (mounted) {
-                context.read<ReservationCubit>().getAvailableTimeSlots(
-                  barberId: barberId,
-                  date: _viewModel.selectedDate,
-                );
-              }
-            });
-          }
-        } else {
-          _showErrorSnackBar(errorMessage);
-        }
-      },
-      timeSlotsLoading: () {
-        _viewModel.onTimeSlotsLoading();
-        setState(() {});
-      },
-      timeSlotsSuccess: (response) {
-        _viewModel.onTimeSlotsSuccess(response);
-        setState(() {});
-      },
-      timeSlotsError: (error) {
-        _viewModel.onTimeSlotsError();
-        setState(() {});
-        _showErrorSnackBar('${'booking.load_error'.tr()}: $error');
-      },
-      orElse: () {},
-    );
-  }
-
-  void _showLoadingDialog() {
-    if (_viewModel.isLoadingDialogShowing) return;
-    _viewModel.setLoadingDialogShowing(true);
-
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) => PopScope(
-        canPop: false,
-        child: Center(child: ShimmerLoading.circular(size: 50)),
-      ),
-    );
-  }
-
-  void _dismissLoadingDialog() {
-    if (_viewModel.isLoadingDialogShowing) {
-      Navigator.of(context).pop();
-      _viewModel.setLoadingDialogShowing(false);
-    }
-  }
-
-  void _showSuccessSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        backgroundColor: Colors.green[700],
-      ),
-    );
-  }
-
-  void _showErrorSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        backgroundColor: ColorsManager.red.withAlpha(200),
-      ),
-    );
-  }
-
   PreferredSizeWidget _buildAppBar() {
     final isDefault = _viewModel.isDefault;
 
@@ -210,30 +108,9 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
         onPressed: () => context.pop(),
       ),
       actions: [
-        TextButton.icon(
-          onPressed: _handleSaveAsDefault,
-          icon: Icon(
-            isDefault ? Icons.bookmark : Icons.bookmark_border,
-            color: isDefault
-                ? ColorsManager.background
-                : ColorsManager.lightBlue,
-            size: 20,
-          ),
-          label: Text(
-            isDefault
-                ? 'default_booking.saved_as_default'.tr()
-                : 'default_booking.save_as_default'.tr(),
-            style: TextStyle(
-              color: isDefault
-                  ? ColorsManager.background
-                  : ColorsManager.lightBlue,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-          ),
+        _BookmarkButton(
+          isDefault: isDefault,
+          onTap: _handleSaveAsDefault,
         ),
       ],
     );
@@ -335,92 +212,142 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     );
   }
 
+  Widget _buildFloatingPill(bool isLoading) {
+    return FloatingActionPill(
+      isLoading: isLoading,
+      isEnabled: _viewModel.canBook,
+      onTap: _handleProceed,
+    );
+  }
+
+  void _handleStateChanges(BuildContext context, ReservationState state) {
+    state.maybeWhen(
+      queueSettingsLoading: () => _viewModel.setQueueSettingsLoading(true),
+      queueSettingsSuccess: (settings) {
+        _viewModel.setQueueMode(settings.data?.isQueueMode ?? false);
+        setState(() {});
+      },
+      queueSettingsError: (_) {
+        _viewModel.setQueueMode(false);
+        setState(() {});
+      },
+      reservationLoading: () => LoadingDialog.show(context),
+      reservationSuccess: (response, _) {
+        LoadingDialog.dismiss(context);
+        context.go(AppRoutes.Invoice, extra: response);
+        SnackbarHelper.showSuccess(context, 'booking.success_message'.tr());
+      },
+      reservationError: (error) {
+        LoadingDialog.dismiss(context);
+        _handleReservationError(error.apiErrorModel.message.toString());
+      },
+      timeSlotsLoading: () {
+        _viewModel.setTimeSlotsLoading(true);
+        setState(() {});
+      },
+      timeSlotsSuccess: (response) {
+        _viewModel.setTimeSlotsData(response);
+        setState(() {});
+      },
+      timeSlotsError: (error) {
+        _viewModel.setTimeSlotsData(null);
+        setState(() {});
+        SnackbarHelper.showError(context, '${'booking.load_error'.tr()}: $error');
+      },
+      orElse: () {},
+    );
+  }
+
+  void _handleReservationError(String errorMessage) {
+    if (errorMessage.contains('overlaps with an existing booking') ||
+        errorMessage.contains('overlaps') ||
+        errorMessage.contains('already booked')) {
+      SnackbarHelper.showError(context, 'time_slots.slot_no_longer_available'.tr());
+
+      final barberId = _viewModel.barberData?.id;
+      if (barberId != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            context.read<ReservationCubit>().getAvailableTimeSlots(
+              barberId: barberId,
+              date: _viewModel.selectedDate,
+            );
+          }
+        });
+      }
+    } else {
+      SnackbarHelper.showError(context, errorMessage);
+    }
+  }
+
   void _handleDateSelected(DateTime date) {
-    _viewModel.setSelectedDate(date);
+    _viewModel.selectDate(date);
     _fetchAvailableTimeSlots();
     setState(() {});
   }
 
   void _handleMonthChanged(DateTime month) {
-    _viewModel.setCurrentMonth(month);
+    _viewModel.updateCurrentMonth(month);
     setState(() {});
   }
 
   void _handleTimeSelected(String? time) {
     final previousSelection = _viewModel.selectedTime;
-    _viewModel.setSelectedTime(time);
+    _viewModel.selectTime(time);
     setState(() {});
 
     if (previousSelection != null && time == null) {
-      _showErrorSnackBar('time_slots.slot_mismatch'.tr());
+      SnackbarHelper.showError(context, 'time_slots.slot_mismatch'.tr());
     }
-  }
-
-  Widget _buildFloatingPill(bool isLoading) {
-    final canProceed = _viewModel.canBook && !isLoading;
-
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 220),
-      curve: Curves.easeOut,
-      width: 170,
-      height: 48,
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        color: canProceed
-            ? ColorsManager.mainBlue
-            : ColorsManager.mainBlue.withAlpha(120),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: canProceed
-            ? [
-                BoxShadow(
-                  color: ColorsManager.mainBlue.withAlpha(64),
-                  blurRadius: 16,
-                  offset: const Offset(0, 8),
-                ),
-              ]
-            : null,
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: canProceed ? _handleProceed : null,
-          child: Center(
-            child: isLoading
-                ? const SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                    ),
-                  )
-                : Text(
-                    'common.next'.tr(),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-          ),
-        ),
-      ),
-    );
   }
 
   void _handleSaveAsDefault() {
     if (_viewModel.isDefault) {
       _viewModel.removeDefault();
-      _showSuccessSnackBar('default_booking.removed'.tr());
+      SnackbarHelper.showSuccess(context, 'default_booking.removed'.tr());
     } else {
       _viewModel.saveAsDefault();
-      _showSuccessSnackBar('default_booking.saved_as_default'.tr());
+      SnackbarHelper.showSuccess(context, 'default_booking.saved_as_default'.tr());
     }
     setState(() {});
   }
 
   void _handleProceed() {
-    final args = _viewModel.buildReservationArguments();
+    final args = _viewModel.buildNavigationArguments();
     context.pushGoNamed(AppRoutes.bookingConfirmationName, extra: args);
+  }
+}
+
+/// Bookmark button for saving default booking
+class _BookmarkButton extends StatelessWidget {
+  final bool isDefault;
+  final VoidCallback onTap;
+
+  const _BookmarkButton({
+    required this.isDefault,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton.icon(
+      onPressed: onTap,
+      icon: Icon(
+        isDefault ? Icons.bookmark : Icons.bookmark_border,
+        color: isDefault ? ColorsManager.background : ColorsManager.lightBlue,
+        size: 20,
+      ),
+      label: Text(
+        isDefault ? 'default_booking.saved_as_default'.tr() : 'default_booking.save_as_default'.tr(),
+        style: TextStyle(
+          color: isDefault ? ColorsManager.background : ColorsManager.lightBlue,
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+      ),
+    );
   }
 }

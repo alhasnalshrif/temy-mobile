@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/core/networking/api_error_handler.dart';
 import 'package:temy_barber/features/booking/data/repos/booking_repo.dart';
+import 'package:temy_barber/features/booking/data/models/booking_response.dart';
 import 'booking_state.dart';
 
 class BookingCubit extends Cubit<BookingState> {
@@ -73,5 +74,56 @@ class BookingCubit extends Cubit<BookingState> {
     } catch (e) {
       emit(BookingState.cancelBookingError(ErrorHandler.handle(e)));
     }
+  }
+
+  /// Toggle between active and history bookings.
+  void toggleBookingTab(bool showActive) {
+    state.maybeWhen(
+      bookingSuccess: (activeBookings, historyBookings, showActiveBookings, selectedStatus) {
+        emit(BookingState.bookingSuccess(
+          activeBookings: activeBookings,
+          historyBookings: historyBookings,
+          showActiveBookings: showActive,
+        ));
+      },
+      orElse: () {},
+    );
+  }
+
+  /// Filter bookings by status.
+  void filterByStatus(String status) {
+    state.maybeWhen(
+      bookingSuccess: (activeBookings, historyBookings, showActiveBookings, _) {
+        emit(BookingState.bookingSuccess(
+          activeBookings: activeBookings,
+          historyBookings: historyBookings,
+          showActiveBookings: showActiveBookings,
+          selectedStatus: status,
+        ));
+      },
+      orElse: () {},
+    );
+  }
+
+  /// Get filtered bookings based on current state.
+  List<BookingData> getFilteredBookings() {
+    return state.maybeWhen(
+      bookingSuccess: (activeBookings, historyBookings, showActiveBookings, selectedStatus) {
+        final bookings = showActiveBookings ? activeBookings : historyBookings;
+        if (selectedStatus == 'all') return bookings;
+        return bookings.where((booking) => booking.status == selectedStatus).toList();
+      },
+      orElse: () => [],
+    );
+  }
+
+  /// Check if user has upcoming active bookings
+  bool hasUpcomingBookings() {
+    return state.maybeWhen(
+      bookingSuccess: (activeBookings, historyBookings, showActiveBookings, selectedStatus) {
+        return activeBookings.isNotEmpty;
+      },
+      orElse: () => false,
+    );
   }
 }

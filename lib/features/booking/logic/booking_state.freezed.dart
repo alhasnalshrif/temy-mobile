@@ -137,12 +137,12 @@ return cancelBookingError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  bookingLoading,TResult Function( List<BookingData> activeBookings,  List<BookingData> historyBookings)?  bookingSuccess,TResult Function( ErrorHandler errorHandler)?  bookingError,TResult Function()?  cancelBookingLoading,TResult Function()?  cancelBookingSuccess,TResult Function( ErrorHandler errorHandler)?  cancelBookingError,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  bookingLoading,TResult Function( List<BookingData> activeBookings,  List<BookingData> historyBookings,  bool showActiveBookings,  String selectedStatus)?  bookingSuccess,TResult Function( ErrorHandler errorHandler)?  bookingError,TResult Function()?  cancelBookingLoading,TResult Function()?  cancelBookingSuccess,TResult Function( ErrorHandler errorHandler)?  cancelBookingError,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case BookingLoading() when bookingLoading != null:
 return bookingLoading();case BookingSuccess() when bookingSuccess != null:
-return bookingSuccess(_that.activeBookings,_that.historyBookings);case BookingError() when bookingError != null:
+return bookingSuccess(_that.activeBookings,_that.historyBookings,_that.showActiveBookings,_that.selectedStatus);case BookingError() when bookingError != null:
 return bookingError(_that.errorHandler);case CancelBookingLoading() when cancelBookingLoading != null:
 return cancelBookingLoading();case CancelBookingSuccess() when cancelBookingSuccess != null:
 return cancelBookingSuccess();case CancelBookingError() when cancelBookingError != null:
@@ -164,12 +164,12 @@ return cancelBookingError(_that.errorHandler);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  bookingLoading,required TResult Function( List<BookingData> activeBookings,  List<BookingData> historyBookings)  bookingSuccess,required TResult Function( ErrorHandler errorHandler)  bookingError,required TResult Function()  cancelBookingLoading,required TResult Function()  cancelBookingSuccess,required TResult Function( ErrorHandler errorHandler)  cancelBookingError,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  bookingLoading,required TResult Function( List<BookingData> activeBookings,  List<BookingData> historyBookings,  bool showActiveBookings,  String selectedStatus)  bookingSuccess,required TResult Function( ErrorHandler errorHandler)  bookingError,required TResult Function()  cancelBookingLoading,required TResult Function()  cancelBookingSuccess,required TResult Function( ErrorHandler errorHandler)  cancelBookingError,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case BookingLoading():
 return bookingLoading();case BookingSuccess():
-return bookingSuccess(_that.activeBookings,_that.historyBookings);case BookingError():
+return bookingSuccess(_that.activeBookings,_that.historyBookings,_that.showActiveBookings,_that.selectedStatus);case BookingError():
 return bookingError(_that.errorHandler);case CancelBookingLoading():
 return cancelBookingLoading();case CancelBookingSuccess():
 return cancelBookingSuccess();case CancelBookingError():
@@ -190,12 +190,12 @@ return cancelBookingError(_that.errorHandler);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  bookingLoading,TResult? Function( List<BookingData> activeBookings,  List<BookingData> historyBookings)?  bookingSuccess,TResult? Function( ErrorHandler errorHandler)?  bookingError,TResult? Function()?  cancelBookingLoading,TResult? Function()?  cancelBookingSuccess,TResult? Function( ErrorHandler errorHandler)?  cancelBookingError,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  bookingLoading,TResult? Function( List<BookingData> activeBookings,  List<BookingData> historyBookings,  bool showActiveBookings,  String selectedStatus)?  bookingSuccess,TResult? Function( ErrorHandler errorHandler)?  bookingError,TResult? Function()?  cancelBookingLoading,TResult? Function()?  cancelBookingSuccess,TResult? Function( ErrorHandler errorHandler)?  cancelBookingError,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case BookingLoading() when bookingLoading != null:
 return bookingLoading();case BookingSuccess() when bookingSuccess != null:
-return bookingSuccess(_that.activeBookings,_that.historyBookings);case BookingError() when bookingError != null:
+return bookingSuccess(_that.activeBookings,_that.historyBookings,_that.showActiveBookings,_that.selectedStatus);case BookingError() when bookingError != null:
 return bookingError(_that.errorHandler);case CancelBookingLoading() when cancelBookingLoading != null:
 return cancelBookingLoading();case CancelBookingSuccess() when cancelBookingSuccess != null:
 return cancelBookingSuccess();case CancelBookingError() when cancelBookingError != null:
@@ -275,7 +275,7 @@ String toString() {
 
 
 class BookingSuccess implements BookingState {
-  const BookingSuccess({required final  List<BookingData> activeBookings, required final  List<BookingData> historyBookings}): _activeBookings = activeBookings,_historyBookings = historyBookings;
+  const BookingSuccess({required final  List<BookingData> activeBookings, required final  List<BookingData> historyBookings, this.showActiveBookings = true, this.selectedStatus = 'all'}): _activeBookings = activeBookings,_historyBookings = historyBookings;
   
 
  final  List<BookingData> _activeBookings;
@@ -292,6 +292,8 @@ class BookingSuccess implements BookingState {
   return EqualUnmodifiableListView(_historyBookings);
 }
 
+@JsonKey() final  bool showActiveBookings;
+@JsonKey() final  String selectedStatus;
 
 /// Create a copy of BookingState
 /// with the given fields replaced by the non-null parameter values.
@@ -303,16 +305,16 @@ $BookingSuccessCopyWith<BookingSuccess> get copyWith => _$BookingSuccessCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingSuccess&&const DeepCollectionEquality().equals(other._activeBookings, _activeBookings)&&const DeepCollectionEquality().equals(other._historyBookings, _historyBookings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingSuccess&&const DeepCollectionEquality().equals(other._activeBookings, _activeBookings)&&const DeepCollectionEquality().equals(other._historyBookings, _historyBookings)&&(identical(other.showActiveBookings, showActiveBookings) || other.showActiveBookings == showActiveBookings)&&(identical(other.selectedStatus, selectedStatus) || other.selectedStatus == selectedStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_activeBookings),const DeepCollectionEquality().hash(_historyBookings));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_activeBookings),const DeepCollectionEquality().hash(_historyBookings),showActiveBookings,selectedStatus);
 
 @override
 String toString() {
-  return 'BookingState.bookingSuccess(activeBookings: $activeBookings, historyBookings: $historyBookings)';
+  return 'BookingState.bookingSuccess(activeBookings: $activeBookings, historyBookings: $historyBookings, showActiveBookings: $showActiveBookings, selectedStatus: $selectedStatus)';
 }
 
 
@@ -323,7 +325,7 @@ abstract mixin class $BookingSuccessCopyWith<$Res> implements $BookingStateCopyW
   factory $BookingSuccessCopyWith(BookingSuccess value, $Res Function(BookingSuccess) _then) = _$BookingSuccessCopyWithImpl;
 @useResult
 $Res call({
- List<BookingData> activeBookings, List<BookingData> historyBookings
+ List<BookingData> activeBookings, List<BookingData> historyBookings, bool showActiveBookings, String selectedStatus
 });
 
 
@@ -340,11 +342,13 @@ class _$BookingSuccessCopyWithImpl<$Res>
 
 /// Create a copy of BookingState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? activeBookings = null,Object? historyBookings = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? activeBookings = null,Object? historyBookings = null,Object? showActiveBookings = null,Object? selectedStatus = null,}) {
   return _then(BookingSuccess(
 activeBookings: null == activeBookings ? _self._activeBookings : activeBookings // ignore: cast_nullable_to_non_nullable
 as List<BookingData>,historyBookings: null == historyBookings ? _self._historyBookings : historyBookings // ignore: cast_nullable_to_non_nullable
-as List<BookingData>,
+as List<BookingData>,showActiveBookings: null == showActiveBookings ? _self.showActiveBookings : showActiveBookings // ignore: cast_nullable_to_non_nullable
+as bool,selectedStatus: null == selectedStatus ? _self.selectedStatus : selectedStatus // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

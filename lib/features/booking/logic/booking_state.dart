@@ -13,6 +13,8 @@ class BookingState with _$BookingState {
   const factory BookingState.bookingSuccess({
     required List<BookingData> activeBookings,
     required List<BookingData> historyBookings,
+    @Default(true) bool showActiveBookings,
+    @Default('all') String selectedStatus,
   }) = BookingSuccess;
   const factory BookingState.bookingError(ErrorHandler errorHandler) =
       BookingError;

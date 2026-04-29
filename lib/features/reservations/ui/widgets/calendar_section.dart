@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:temy_barber/core/theme/colors.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/features/reservations/logic/calendar_logic.dart';
 
 class CalendarSection extends StatefulWidget {
   final int maxBookingDays;
@@ -8,8 +9,8 @@ class CalendarSection extends StatefulWidget {
   final DateTime initialMonth;
   final Function(DateTime) onDateSelected;
   final Function(DateTime) onMonthChanged;
-  final List<int>?
-  daysOff; // Days off indices (0=Sunday, 1=Monday, ..., 6=Saturday)
+  final List<int>? daysOff;
+  final CalendarLogic? logic;
 
   const CalendarSection({
     super.key,
@@ -19,7 +20,10 @@ class CalendarSection extends StatefulWidget {
     required this.onDateSelected,
     required this.onMonthChanged,
     this.daysOff,
+    this.logic,
   });
+
+  static const _defaultLogic = CalendarLogic();
 
   @override
   State<CalendarSection> createState() => _CalendarSectionState();
@@ -31,6 +35,8 @@ class _CalendarSectionState extends State<CalendarSection>
   late DateTime currentMonth;
   late AnimationController _animationController;
   late Animation<double> _animation;
+
+  CalendarLogic get _logic => widget.logic ?? CalendarSection._defaultLogic;
 
   @override
   void initState() {
@@ -57,200 +63,102 @@ class _CalendarSectionState extends State<CalendarSection>
     super.dispose();
   }
 
-  // Get the days in the current month
-  List<DateTime> _getDaysInMonth(DateTime month) {
-    final first = DateTime(month.year, month.month);
-    final daysInMonth = DateTime(month.year, month.month + 1, 0).day;
-
-    // Determine the first day to display (to fill the grid)
-    final firstDayOfWeek = first.weekday % 7; // 0 = Sunday, 1 = Monday, etc.
-    final start = first.subtract(Duration(days: firstDayOfWeek));
-
-    // Generate all dates to display
-    List<DateTime> days = [];
-    for (int i = 0; i < 42; i++) {
-      // 6 weeks (rows) * 7 days
-      days.add(start.add(Duration(days: i)));
-      // Stop after we've included enough days for the current month
-      if (days.length > firstDayOfWeek + daysInMonth && days.length % 7 == 0) {
-        break;
-      }
-    }
-    return days;
-  }
-
-  // Check if date is selectable (not in the past and within booking range)
-  bool _isSelectable(DateTime date) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-
-    // If maxBookingDays is 2, we want today and tomorrow (1 day ahead)
-    final daysAhead = widget.maxBookingDays > 0 ? widget.maxBookingDays - 1 : 0;
-    final maxDate = today.add(Duration(days: daysAhead));
-
-    return date.isAtSameMomentAs(today) ||
-        (date.isAfter(today) && date.isBefore(maxDate)) ||
-        date.isAtSameMomentAs(maxDate);
-  }
-
-  // Format month name
-  String _formatMonthYear(DateTime date) {
-    return DateFormat('MMMM yyyy').format(date);
-  }
-
-  // Check if two dates are the same day
-  bool _isSameDay(DateTime a, DateTime b) {
-    return a.year == b.year && a.month == b.month && a.day == b.day;
-  }
-
-  // Check if date is today
-  bool _isToday(DateTime date) {
-    final now = DateTime.now();
-    return date.year == now.year &&
-        date.month == now.month &&
-        date.day == now.day;
-  }
-
-  // Check if date is a day off for the barber
-  bool _isDayOff(DateTime date) {
-    if (widget.daysOff == null || widget.daysOff!.isEmpty) {
-      return false;
-    }
-
-    // Get day of week (DateTime: 1=Monday to 7=Sunday)
-    // Convert to our format (0=Sunday, 1=Monday, ..., 6=Saturday)
-    final dayIndex = date.weekday % 7; // 7 (Sunday) becomes 0
-
-    return widget.daysOff!.contains(dayIndex);
-  }
-
-  // Get readable day shortcut for Arabic
-  String _getDayShortcut(int index) {
-    // Arabic day shortcuts (single letter, more readable)
-    const arabicDays = ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'];
-    return arabicDays[index];
-  }
-
-  // Get full day name for tooltip
-  String _getFullDayName(int index) {
-    const dayKeys = [
-      'calendar.sunday',
-      'calendar.monday',
-      'calendar.tuesday',
-      'calendar.wednesday',
-      'calendar.thursday',
-      'calendar.friday',
-      'calendar.saturday',
-    ];
-    return dayKeys[index].tr();
-  }
-
-  // Check if day index is a day off (0=Sunday, 6=Saturday)
-  bool _isDayIndexOff(int dayIndex) {
-    if (widget.daysOff == null || widget.daysOff!.isEmpty) {
-      return false;
-    }
-
-    return widget.daysOff!.contains(dayIndex);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'calendar.today'.tr(),
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              child: Row(
-                children: [
-                  // const Icon(
-                  //   Icons.calendar_today_outlined,
-                  //   size: 14,
-                  //   color: ColorsManager.mainBlue,
-                  // ),
-                  Image.asset(
-                    'assets/icons/calendar.png',
-                    width: 18,
-                    height: 18,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    'calendar.booking_available_days'.tr(
-                      args: ['${widget.maxBookingDays}'],
-                    ),
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: ColorsManager.mainBlue,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        _buildHeader(),
         const SizedBox(height: 15),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [
-              BoxShadow(
-                color: ColorsManager.mainBlue.withOpacity(0.04),
-                blurRadius: 20,
-                offset: const Offset(0, 8),
-              ),
-            ],
-          ),
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Container(
-                height: 40,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: ColorsManager.mainBlue.withOpacity(0.04),
-                ),
-                child: Center(
-                  child: FadeTransition(
-                    opacity: _animation,
-                    child: Text(
-                      _formatMonthYear(currentMonth),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: ColorsManager.mainBlue,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              _buildCalendarDays(),
-              const SizedBox(height: 12),
-              FadeTransition(opacity: _animation, child: _buildCalendarDates()),
-            ],
-          ),
-        ),
+        _buildCalendarCard(),
       ],
     );
   }
 
-  Widget _buildCalendarDays() {
+  Widget _buildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text('calendar.today'.tr(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        _buildBookingDaysBadge(),
+      ],
+    );
+  }
+
+  Widget _buildBookingDaysBadge() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Row(
+        children: [
+          Image.asset('assets/icons/calendar.png', width: 18, height: 18),
+          const SizedBox(width: 6),
+          Text(
+            'calendar.booking_available_days'.tr(args: ['${widget.maxBookingDays}']),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: ColorsManager.mainBlue),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCalendarCard() {
+    final daysResult = _logic.generateMonthGrid(currentMonth);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: ColorsManager.mainBlue.withOpacity(0.04),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          _buildMonthHeader(),
+          const SizedBox(height: 16),
+          _buildWeekdayHeaders(),
+          const SizedBox(height: 12),
+          FadeTransition(
+            opacity: _animation,
+            child: _buildCalendarGrid(daysResult),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMonthHeader() {
+    return Container(
+      height: 40,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: ColorsManager.mainBlue.withOpacity(0.04),
+      ),
+      child: Center(
+        child: FadeTransition(
+          opacity: _animation,
+          child: Text(
+            _logic.formatMonthYear(currentMonth),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: ColorsManager.mainBlue),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWeekdayHeaders() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: List.generate(7, (index) {
-        final isDayOff = _isDayIndexOff(index);
-        final shortcut = _getDayShortcut(index);
-        final fullName = _getFullDayName(index);
+        final isDayOff = _logic.isBarberDayOffByIndex(index, widget.daysOff);
+        final shortcut = _logic.getArabicDayShortcut(index);
+        final fullName = _logic.getLocalizedDayName(index);
 
         return Tooltip(
           message: fullName + (isDayOff ? ' ${'calendar.day_off'.tr()}' : ''),
@@ -259,9 +167,7 @@ class _CalendarSectionState extends State<CalendarSection>
             height: 28,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
-              color: isDayOff
-                  ? ColorsManager.red.withAlpha(25)
-                  : Colors.transparent,
+              color: isDayOff ? ColorsManager.red.withAlpha(25) : Colors.transparent,
             ),
             child: Center(
               child: Text(
@@ -270,9 +176,7 @@ class _CalendarSectionState extends State<CalendarSection>
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: isDayOff
-                      ? ColorsManager.red.withAlpha(200)
-                      : Colors.grey.shade400,
+                  color: isDayOff ? ColorsManager.red.withAlpha(200) : Colors.grey.shade400,
                 ),
               ),
             ),
@@ -282,116 +186,69 @@ class _CalendarSectionState extends State<CalendarSection>
     );
   }
 
-  Widget _buildCalendarDates() {
-    final days = _getDaysInMonth(currentMonth);
-    final List<Widget> rows = [];
-
-    for (var i = 0; i < days.length; i += 7) {
-      final rowDays = days.sublist(
-        i,
-        i + 7 > days.length ? days.length : i + 7,
-      );
-      rows.add(_buildCalendarRow(rowDays));
-    }
-
-    return Column(children: rows);
-  }
-
-  Widget _buildCalendarRow(List<DateTime> dates) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 14.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: dates.map((date) {
-          final isSelected = _isSameDay(date, selectedDate);
-          final isCurrentMonth = date.month == currentMonth.month;
-          final isDayOff = _isDayOff(date);
-          final isSelectable = _isSelectable(date) && !isDayOff;
-          final isToday = _isToday(date);
-
-          return GestureDetector(
-            onTap: isSelectable
-                ? () {
-                    setState(() {
-                      selectedDate = date;
-                      widget.onDateSelected(date);
-                    });
-                  }
-                : null,
-            child: _buildDateCell(
-              date.day.toString(),
-              isSelected: isSelected,
-              isCurrentMonth: isCurrentMonth,
-              isSelectable: isSelectable,
-              isToday: isToday,
-              isDayOff: isDayOff,
-            ),
-          );
-        }).toList(),
-      ),
+  Widget _buildCalendarGrid(CalendarGridResult daysResult) {
+    return Column(
+      children: daysResult.weeks.map((rowDays) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 14.0),
+          child: _buildCalendarRow(rowDays),
+        );
+      }).toList(),
     );
   }
 
-  Widget _buildDateCell(
-    String date, {
-    bool isSelected = false,
-    bool isCurrentMonth = true,
-    bool isSelectable = true,
-    bool isToday = false,
-    bool isDayOff = false,
-  }) {
-    // Base style for all date states
-    BoxDecoration decoration = const BoxDecoration(shape: BoxShape.circle);
+  Widget _buildCalendarRow(List<DateTime> dates) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: dates.map((date) {
+        final dateInfo = _logic.getCellInfo(
+          date: date,
+          selectedDate: selectedDate,
+          currentMonth: currentMonth,
+          maxBookingDays: widget.maxBookingDays,
+          daysOff: widget.daysOff,
+        );
 
-    Color textColor;
-    FontWeight fontWeight = FontWeight.normal;
+        return GestureDetector(
+          onTap: dateInfo.isSelectable
+              ? () {
+                  setState(() {
+                    selectedDate = date;
+                    widget.onDateSelected(date);
+                  });
+                }
+              : null,
+          child: CalendarDateCell(info: dateInfo, style: _logic.getCellStyle(dateInfo)),
+        );
+      }).toList(),
+    );
+  }
+}
 
-    // Apply styling based on date state (priority order matters)
-    if (!isCurrentMonth && !isSelectable) {
-      // Unselectable days from other months - very faded
-      textColor = Colors.grey[300]!;
-    } else if (isDayOff && isCurrentMonth) {
-      // Day off - show with red styling
-      textColor = ColorsManager.red.withAlpha(200);
-      fontWeight = FontWeight.w500;
-      decoration = decoration.copyWith(color: ColorsManager.red.withAlpha(20));
-    } else if (!isSelectable) {
-      // Past dates or out of booking range
-      textColor = Colors.grey[400]!;
-      decoration = decoration.copyWith(
-        border: Border.all(color: Colors.grey[200]!),
-      );
-    } else if (isSelected) {
-      // Selected date
-      textColor = Colors.white;
-      fontWeight = FontWeight.bold;
-      decoration = decoration.copyWith(color: ColorsManager.mainBlue);
-    } else if (isToday) {
-      // Today's date
-      textColor = ColorsManager.mainBlue;
-      fontWeight = FontWeight.bold;
-      decoration = decoration.copyWith(
-        border: Border.all(color: ColorsManager.mainBlue, width: 2),
-      );
-    } else if (!isCurrentMonth) {
-      // Selectable days from other months
-      textColor = Colors.grey[600]!;
-    } else {
-      // Normal selectable date
-      textColor = Colors.black87;
-    }
+/// Individual calendar date cell widget
+class CalendarDateCell extends StatelessWidget {
+  final CalendarCellInfo info;
+  final CalendarCellStyle style;
 
+  const CalendarDateCell({
+    super.key,
+    required this.info,
+    required this.style,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       width: 36,
       height: 36,
-      decoration: decoration,
+      decoration: style.decoration,
       alignment: Alignment.center,
       child: Text(
-        date,
+        info.date.day.toString(),
         style: TextStyle(
-          color: textColor,
-          fontWeight: fontWeight,
+          color: style.textColor,
+          fontWeight: style.fontWeight,
           fontSize: 14,
         ),
       ),
