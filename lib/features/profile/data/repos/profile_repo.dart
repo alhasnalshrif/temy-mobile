@@ -1,4 +1,4 @@
-import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/networking/api_safe_call.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/features/profile/data/apis/profile_api_services.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
@@ -11,54 +11,34 @@ class ProfileRepo {
   ProfileRepo(this._profileApiServices);
 
   Future<ApiResult<UserProfile>> getProfile() async {
-    try {
-      final response = await _profileApiServices.getProfile();
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
+    return ApiSafeCall.call(() => _profileApiServices.getProfile());
   }
 
   Future<ApiResult<UserProfile>> updateProfile(
       Map<String, dynamic> updateData) async {
-    try {
-      final response = await _profileApiServices.updateProfile(updateData);
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
+    return ApiSafeCall.call(
+      () => _profileApiServices.updateProfile(updateData),
+    );
   }
 
   Future<ApiResult<void>> deleteProfile() async {
-    try {
-      await _profileApiServices.deleteProfile();
-      return const ApiResult.success(null);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
+    return ApiSafeCall.callVoid(() => _profileApiServices.deleteProfile());
   }
 
-  // Notification methods
   Future<ApiResult<NotificationResponse>> updateDeviceToken(
       NotificationTokenRequest request) async {
-    try {
-      final response = await _profileApiServices.updateDeviceToken(request);
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
+    return ApiSafeCall.call(
+      () => _profileApiServices.updateDeviceToken(request),
+    );
   }
 
   Future<ApiResult<NotificationResponse>> registerDevice(
       String userId, String playerId) async {
-    try {
-      final response = await _profileApiServices.registerDevice({
+    return ApiSafeCall.call(
+      () => _profileApiServices.registerDevice({
         'userId': userId,
         'playerId': playerId,
-      });
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
+      }),
+    );
   }
 }

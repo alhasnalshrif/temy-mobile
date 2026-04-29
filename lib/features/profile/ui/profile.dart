@@ -16,6 +16,7 @@ import 'package:temy_barber/core/services/permission_manager.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/utils/responsive_utils.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -103,21 +104,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _pushNotificationsEnabled = shouldEnable;
         });
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              shouldEnable
-                  ? 'notifications.settings_saved'.tr()
-                  : 'notifications.push_disabled_warning'.tr(),
-            ),
-          ),
+        SnackbarHelper.showSuccess(
+          context,
+          shouldEnable
+              ? 'notifications.settings_saved'.tr()
+              : 'notifications.push_disabled_warning'.tr(),
         );
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('profile.update_error'.tr())));
+        SnackbarHelper.showError(context, 'profile.update_error'.tr());
       }
     } finally {
       if (mounted) {
@@ -146,9 +142,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 final opened = await PermissionManager.instance
                     .openSystemSettings();
                 if (!opened && mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('profile.update_error'.tr())),
-                  );
+                  SnackbarHelper.showError(context, 'profile.update_error'.tr());
                 }
               },
               child: Text('notifications.open_settings_action'.tr()),
@@ -469,61 +463,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   /// Build desktop edit account card
-  Widget _buildDesktopEditAccountCard() {
-    return DesktopProfileCard(
-      title: 'profile.edit_account'.tr(),
-      icon: Icons.person_outline,
-      onTap: () {
-        final state = context.read<ProfileCubit>().state;
-        state.maybeMap(
-          profileSuccess: (successState) {
-            if (successState.userProfile.user != null) {
-              context.goNamed(
-                AppRoutes.updateProfileName,
-                extra: successState.userProfile.user!,
-              );
-            } else {
-              _showErrorSnackBar('profile.user_data_error'.tr());
-            }
-          },
-          orElse: () {
-            _showErrorSnackBar('profile.data_unavailable'.tr());
-          },
-        );
+  void _navigateToEditProfile() {
+    final state = context.read<ProfileCubit>().state;
+    state.maybeMap(
+      profileSuccess: (successState) {
+        if (successState.userProfile.user != null) {
+          context.goNamed(
+            AppRoutes.updateProfileName,
+            extra: successState.userProfile.user!,
+          );
+        } else {
+          _showErrorSnackBar('profile.user_data_error'.tr());
+        }
+      },
+      orElse: () {
+        _showErrorSnackBar('profile.data_unavailable'.tr());
       },
     );
   }
 
-  /// Build edit account tile with state handling
+  Widget _buildDesktopEditAccountCard() {
+    return DesktopProfileCard(
+      title: 'profile.edit_account'.tr(),
+      icon: Icons.person_outline,
+      onTap: _navigateToEditProfile,
+    );
+  }
+
   Widget _buildEditAccountTile() {
     return ProfileTile(
       title: 'profile.edit_account'.tr(),
       icon: Icons.person_outline,
-      onTap: () {
-        final state = context.read<ProfileCubit>().state;
-        state.maybeMap(
-          profileSuccess: (successState) {
-            if (successState.userProfile.user != null) {
-              context.goNamed(
-                AppRoutes.updateProfileName,
-                extra: successState.userProfile.user!,
-              );
-            } else {
-              _showErrorSnackBar('profile.user_data_error'.tr());
-            }
-          },
-          orElse: () {
-            _showErrorSnackBar('profile.data_unavailable'.tr());
-          },
-        );
-      },
+      onTap: _navigateToEditProfile,
     );
   }
 
   /// Show error message to user
   void _showErrorSnackBar(String message) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
+    SnackbarHelper.showError(context, message);
   }
 }

@@ -4,6 +4,8 @@ import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/widgets/app_avatar.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 import 'package:temy_barber/features/barber/data/repos/barber_repo.dart';
 import 'package:temy_barber/features/reservations/data/models/default_reservation.dart';
@@ -49,13 +51,7 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
       _defaultReservation = null;
     });
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('default_booking.removed'.tr()),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: ColorsManager.red,
-      ),
-    );
+    SnackbarHelper.showError(context, 'default_booking.removed'.tr());
   }
 
   Future<BarberDetailData> _resolveBarberDetail(
@@ -153,16 +149,7 @@ class _DefaultBookingCardState extends State<DefaultBookingCard> {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              CircleAvatar(
-                radius: 18,
-                backgroundImage: barber.avatar.isNotEmpty
-                    ? NetworkImage(barber.avatar)
-                    : null,
-                backgroundColor: Colors.grey[200],
-                child: barber.avatar.isEmpty
-                    ? const Icon(Icons.person, color: Colors.grey, size: 16)
-                    : null,
-              ),
+              AppAvatar(imageUrl: barber.avatar, radius: 18),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(

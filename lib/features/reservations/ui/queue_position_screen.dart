@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/widgets/app_text_button.dart';
+import 'package:temy_barber/core/widgets/error_retry_view.dart';
 import 'package:temy_barber/features/reservations/logic/queue_cubit.dart';
 import 'package:temy_barber/features/reservations/logic/queue_state.dart';
 
@@ -64,29 +65,11 @@ class _QueuePositionScreenState extends State<QueuePositionScreen> {
             queuePositionLoading: () =>
                 const Center(child: CircularProgressIndicator()),
             queuePositionSuccess: (data) => _buildQueuePositionView(data),
-            queuePositionError: (error) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.error_outline,
-                    size: 64,
-                    color: ColorsManager.red,
-                  ),
-                  const SizedBox(height: 16),
-                  Text('queue.error_message'.tr(args: [error])),
-                  const SizedBox(height: 16),
-                  AppTextButton(
-                    buttonText: 'common.retry'.tr(),
-                    textStyle: const TextStyle(color: Colors.white),
-                    onPressed: () {
-                      context.read<QueueCubit>().getMyQueuePosition(
-                        widget.reservationId,
-                      );
-                    },
-                  ),
-                ],
-              ),
+            queuePositionError: (error) => ErrorRetryView(
+              message: 'queue.error_message'.tr(args: [error]),
+              onRetry: () {
+                context.read<QueueCubit>().getMyQueuePosition(widget.reservationId);
+              },
             ),
             queueActionLoading: () =>
                 const Center(child: CircularProgressIndicator()),

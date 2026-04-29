@@ -1,33 +1,5 @@
 part of 'multiple_order_summary.dart';
 
-/// Barber avatar widget
-class _BarberAvatar extends StatelessWidget {
-  final String? avatarUrl;
-
-  const _BarberAvatar({this.avatarUrl});
-
-  bool get _hasValidAvatar =>
-      avatarUrl != null && avatarUrl!.isNotEmpty && avatarUrl != 'null';
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 20,
-      backgroundColor: Colors.grey.shade100,
-      backgroundImage: _hasValidAvatar ? NetworkImage(avatarUrl!) : null,
-      onBackgroundImageError: _hasValidAvatar
-          ? (exception, stackTrace) {
-              // Handle network errors gracefully
-            }
-          : null,
-      child: !_hasValidAvatar
-          ? const Icon(Icons.person, size: 20, color: Colors.grey)
-          : null,
-    );
-  }
-}
-
-/// Reservation card for multiple reservations
 class _ReservationCard extends StatelessWidget {
   final ReservationArguments reservation;
   final bool showRemoveButton;
@@ -77,7 +49,7 @@ class _ReservationCard extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(color: ColorsManager.lightBlue, width: 1.5),
           ),
-          child: _BarberAvatar(avatarUrl: reservation.barberData?.avatar),
+          child: AppAvatar(imageUrl: reservation.barberData?.avatar, radius: 20),
         ),
         const SizedBox(width: 12),
         Expanded(

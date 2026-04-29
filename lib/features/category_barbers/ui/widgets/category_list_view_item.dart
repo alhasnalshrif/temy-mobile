@@ -43,7 +43,7 @@ class CategoryListViewItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: ColorsManager.mainBlue.withOpacity(0.06),
+            color: ColorsManager.mainBlueAlpha6,
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -70,7 +70,7 @@ class CategoryListViewItem extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: ColorsManager.mainBlue.withOpacity(0.08),
+                    color: ColorsManager.mainBlueAlpha8,
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: Text(
@@ -162,13 +162,13 @@ class _CategoryImage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            ColorsManager.lightBlue.withOpacity(0.3),
-            ColorsManager.lightBlue.withOpacity(0.1),
+            ColorsManager.lightBlueAlpha30,
+            ColorsManager.lightBlueAlpha10,
           ],
         ),
         boxShadow: [
           BoxShadow(
-            color: ColorsManager.mainBlue.withOpacity(0.1),
+            color: ColorsManager.mainBlueAlpha10,
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -226,7 +226,7 @@ class _CategoryImage extends StatelessWidget {
       child: Icon(
         Icons.person_outline_rounded,
         size: radius * 1.1,
-        color: ColorsManager.mainBlue.withOpacity(0.3),
+        color: ColorsManager.mainBlueAlpha30,
       ),
     ),
   );
@@ -241,7 +241,7 @@ class _CategoryImage extends StatelessWidget {
         end: Alignment.bottomRight,
         colors: [
           ColorsManager.lightBlue,
-          ColorsManager.lightBlue.withOpacity(0.7),
+          ColorsManager.lightBlueAlpha70,
         ],
       ),
       shape: BoxShape.circle,

@@ -22,4 +22,17 @@ class ColorsManager {
 
   static const Color black = Color(0xFF000000);
   static const Color red = Color(0xFFFF3B30);
+
+  static const Color mainBlueAlpha4 = Color(0x0A363062);
+  static const Color mainBlueAlpha6 = Color(0x0F363062);
+  static const Color mainBlueAlpha8 = Color(0x14363062);
+  static const Color mainBlueAlpha10 = Color(0x1A363062);
+  static const Color mainBlueAlpha30 = Color(0x4D363062);
+  static const Color lightBlueAlpha10 = Color(0x1AF4F8FF);
+  static const Color lightBlueAlpha30 = Color(0x4DF4F8FF);
+  static const Color lightBlueAlpha70 = Color(0xB3F4F8FF);
+  static const Color blackAlpha10 = Color(0x1A000000);
+  static const Color whiteAlpha10 = Color(0x1AFFFFFF);
+  static const Color redAlpha90 = Color(0xE6FF3B30);
+  static const Color redAlpha25 = Color(0x40FF3B30);
 }

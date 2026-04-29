@@ -5,6 +5,7 @@ import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/widgets/app_text_button.dart';
 import 'package:temy_barber/core/widgets/app_text_form_field.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
 import 'package:temy_barber/features/auth/logic/verification_cubit.dart';
 import 'package:temy_barber/features/auth/ui/widgets/verification_bloc_listener.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -130,14 +131,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             context.read<VerificationCubit>().resendCode();
 
                             // Show a snackbar to indicate the code was resent
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'verification.resend_code_success'.tr(),
-                                ),
-                                backgroundColor: Colors.green,
-                              ),
-                            );
+                            SnackbarHelper.showSuccess(context, 'verification.resend_code_success'.tr());
                           },
                           child: Text(
                             'verification.resend_code_button'.tr(),

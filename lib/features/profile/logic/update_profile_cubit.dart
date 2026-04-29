@@ -1,13 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/core/networking/api_result.dart';
-import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/logic/base_cubit.dart';
 import 'package:temy_barber/features/profile/data/repos/profile_repo.dart';
 import 'package:temy_barber/features/profile/logic/update_profile_state.dart';
 
-class UpdateProfileCubit extends Cubit<UpdateProfileState> {
+class UpdateProfileCubit extends BaseCubit<UpdateProfileState> {
   final ProfileRepo _profileRepo;
   UpdateProfileCubit(this._profileRepo)
       : super(const UpdateProfileState.initial());
@@ -16,37 +13,25 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   final TextEditingController phoneController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  static const _timeout = Duration(seconds: 20);
-
   void updateProfileData() async {
     if (formKey.currentState!.validate()) {
       emit(const UpdateProfileState.loading());
 
-      try {
-        final response = await _profileRepo
-            .updateProfile({
-              'name': nameController.text,
-              'phone': phoneController.text,
-            })
-            .timeout(_timeout);
-
-        response.when(
-          success: (userProfile) {
-            emit(UpdateProfileState.success(userProfile));
-          },
-          failure: (error) {
-            emit(UpdateProfileState.error(error));
-          },
-        );
-      } on TimeoutException catch (e) {
-        emit(UpdateProfileState.error(ErrorHandler.handle(e)));
-      } catch (e) {
-        emit(UpdateProfileState.error(ErrorHandler.handle(e)));
-      }
+      executeApi(
+        apiCall: () => _profileRepo.updateProfile({
+          'name': nameController.text,
+          'phone': phoneController.text,
+        }),
+        onSuccess: (userProfile) {
+          emit(UpdateProfileState.success(userProfile));
+        },
+        onError: (error) {
+          emit(UpdateProfileState.error(error));
+        },
+      );
     }
   }
 
-  // Method to initialize controllers with current data
   void initializeFields(String name, String phone) {
     nameController.text = name;
     phoneController.text = phone;

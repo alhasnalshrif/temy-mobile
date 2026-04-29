@@ -1,4 +1,4 @@
-import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/networking/api_safe_call.dart';
 import 'package:temy_barber/core/networking/api_result.dart';
 import 'package:temy_barber/core/networking/api_service.dart';
 import 'package:temy_barber/features/auth/data/models/sign_up_response.dart';
@@ -12,22 +12,15 @@ class VerificationRepo {
 
   Future<ApiResult<SignupResponse>> verify(
       VerificationRequestBody verificationRequestBody) async {
-    try {
-      final response = await _apiService.verify(verificationRequestBody);
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
+    return ApiSafeCall.call(
+      () => _apiService.verify(verificationRequestBody),
+    );
   }
 
   Future<ApiResult<SignupResponse>> resendCode(
       ResendCodeRequestBody resendCodeRequestBody) async {
-    try {
-      final response =
-          await _apiService.resendVerificationCode(resendCodeRequestBody);
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
-    }
+    return ApiSafeCall.call(
+      () => _apiService.resendVerificationCode(resendCodeRequestBody),
+    );
   }
 }

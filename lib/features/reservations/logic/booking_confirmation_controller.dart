@@ -5,7 +5,9 @@ import 'package:temy_barber/core/helpers/extensions.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/core/widgets/dialog_helper.dart';
 import 'package:temy_barber/core/widgets/shimmer_loading.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
 import 'package:temy_barber/features/auth/ui/widgets/guest_info_dialog.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 import 'package:temy_barber/features/reservations/data/models/queue_response.dart';
@@ -74,22 +76,19 @@ class BookingConfirmationController {
   /// Handle remove reservation
   void removeReservation(int index) {
     viewModel.removeReservation(index);
-    _showSnackBar(
-      'booking_confirmation.reservation_removed'.tr(),
-      Colors.green,
-    );
+    SnackbarHelper.showSuccess(context, 'booking_confirmation.reservation_removed'.tr());
   }
 
   /// Handle add another reservation
   Future<void> handleAddAnotherReservation() async {
     final validation = viewModel.validateAddToMultiple();
     if (!validation.isValid) {
-      _showSnackBar(validation.errorMessage!.tr(), ColorsManager.red);
+      SnackbarHelper.showError(context, validation.errorMessage!.tr());
       return;
     }
 
     viewModel.addToMultipleReservations();
-    _showSnackBar('booking_confirmation.booking_added'.tr(), Colors.green);
+    SnackbarHelper.showSuccess(context, 'booking_confirmation.booking_added'.tr());
     context.goNamed(AppRoutes.categoriesName);
   }
 
@@ -97,7 +96,7 @@ class BookingConfirmationController {
   Future<void> _confirmMultipleReservations() async {
     final validation = viewModel.validateBooking();
     if (!validation.isValid) {
-      _showSnackBar(validation.errorMessage!.tr(), ColorsManager.red);
+      SnackbarHelper.showError(context, validation.errorMessage!.tr());
       return;
     }
 
@@ -115,7 +114,7 @@ class BookingConfirmationController {
   Future<void> _confirmBooking() async {
     final validation = viewModel.validateBooking();
     if (!validation.isValid) {
-      _showSnackBar(validation.errorMessage!.tr(), ColorsManager.red);
+      SnackbarHelper.showError(context, validation.errorMessage!.tr());
       return;
     }
 
@@ -159,18 +158,12 @@ class BookingConfirmationController {
     }
 
     if (guestInfo == null) {
-      _showSnackBar(
-        'booking_confirmation.guest_info_error'.tr(),
-        ColorsManager.red,
-      );
+      SnackbarHelper.showError(context, 'booking_confirmation.guest_info_error'.tr());
       return null;
     }
 
     if (!viewModel.isQueueMode && otp == null) {
-      _showSnackBar(
-        'booking_confirmation.otp_required'.tr(),
-        ColorsManager.red,
-      );
+      SnackbarHelper.showError(context, 'booking_confirmation.otp_required'.tr());
       return null;
     }
 
@@ -331,12 +324,8 @@ class BookingConfirmationController {
     if (message.contains('overlaps with an existing booking') ||
         message.contains('overlaps') ||
         message.contains('already booked')) {
-      _showSnackBar(
-        'time_slots.slot_no_longer_available'.tr(),
-        ColorsManager.red,
-      );
+      SnackbarHelper.showError(context, 'time_slots.slot_no_longer_available'.tr());
 
-      // Refresh time slots after overlap error
       if (viewModel.arguments.selectedDate != null &&
           viewModel.arguments.barberData?.id != null) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -349,26 +338,11 @@ class BookingConfirmationController {
         });
       }
     } else {
-      _showSnackBar(message, ColorsManager.red);
+      SnackbarHelper.showError(context, message);
     }
   }
 
-  /// Show loading dialog
   void _showLoadingDialog() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) => PopScope(
-        canPop: false,
-        child: Center(child: ShimmerLoading.circular(size: 50)),
-      ),
-    );
-  }
-
-  /// Show snackbar message
-  void _showSnackBar(String message, Color color) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message), backgroundColor: color),
-    );
+    DialogHelper.showLoading(context);
   }
 }

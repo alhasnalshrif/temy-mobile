@@ -2,36 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/core/widgets/app_avatar.dart';
 import 'package:temy_barber/features/barber/data/models/barber_detail_response.dart';
 
-/// Barber avatar widget
-class _BarberAvatar extends StatelessWidget {
-  final String? avatarUrl;
-
-  const _BarberAvatar({this.avatarUrl});
-
-  bool get _hasValidAvatar =>
-      avatarUrl != null && avatarUrl!.isNotEmpty && avatarUrl != 'null';
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 20,
-      backgroundColor: Colors.grey.shade100,
-      backgroundImage: _hasValidAvatar ? NetworkImage(avatarUrl!) : null,
-      onBackgroundImageError: _hasValidAvatar
-          ? (exception, stackTrace) {
-              // Handle network errors gracefully
-            }
-          : null,
-      child: !_hasValidAvatar
-          ? const Icon(Icons.person, size: 20, color: Colors.grey)
-          : null,
-    );
-  }
-}
-
-/// Info card for confirmation sections
 class _ConfirmationCard extends StatelessWidget {
   final Widget child;
 
@@ -51,7 +24,6 @@ class _ConfirmationCard extends StatelessWidget {
   }
 }
 
-/// Barber info section widget
 class BarberInfoSection extends StatelessWidget {
   final BarberDetailData? barberData;
 
@@ -64,7 +36,7 @@ class BarberInfoSection extends StatelessWidget {
     return _ConfirmationCard(
       child: Row(
         children: [
-          _BarberAvatar(avatarUrl: barberData?.avatar),
+          AppAvatar(imageUrl: barberData?.avatar, radius: 20),
           const SizedBox(width: 12),
           Expanded(
             child: Text(

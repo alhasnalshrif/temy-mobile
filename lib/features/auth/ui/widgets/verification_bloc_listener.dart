@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:temy_barber/core/helpers/extensions.dart';
-import 'package:temy_barber/core/routing/app_routes.dart';
-import 'package:temy_barber/core/theme/colors.dart';
-import 'package:temy_barber/core/theme/styles.dart';
-import 'package:temy_barber/core/widgets/shimmer_loading.dart';
 import 'package:temy_barber/core/helpers/constants.dart';
 import 'package:temy_barber/core/helpers/shared_pref_helper.dart';
-import 'package:temy_barber/core/networking/dio_factory.dart';
 import 'package:temy_barber/core/di/dependency_injection.dart';
+import 'package:temy_barber/core/networking/dio_factory.dart';
+import 'package:temy_barber/core/helpers/extensions.dart';
+import 'package:temy_barber/core/routing/app_routes.dart';
+import 'package:temy_barber/core/widgets/dialog_helper.dart';
 import 'package:temy_barber/features/profile/logic/notification_cubit.dart';
 import 'package:temy_barber/features/auth/logic/verification_cubit.dart';
 import 'package:temy_barber/features/auth/logic/verification_state.dart';
@@ -32,7 +29,11 @@ class VerificationBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            setupLoadingState(context);
+            if (_isDialogOpen) return;
+            _isDialogOpen = true;
+            DialogHelper.showLoading(context).then((_) {
+              _isDialogOpen = false;
+            });
           },
           initial: () {
             _dismissActiveDialog(context);
@@ -47,7 +48,8 @@ class VerificationBlocListener extends StatelessWidget {
             }
           },
           error: (error) {
-            setupErrorState(context, error);
+            _dismissActiveDialog(context);
+            DialogHelper.showError(context, error);
           },
         );
       },
@@ -60,7 +62,6 @@ class VerificationBlocListener extends StatelessWidget {
     verificationResponse,
   ) async {
     try {
-      // Save token and user data
       final token = verificationResponse.token ?? '';
       final userId = verificationResponse.data?.user?.id ?? '';
 
@@ -77,11 +78,10 @@ class VerificationBlocListener extends StatelessWidget {
 
         context.goNamed(AppRoutes.homeName);
       } else {
-        // Somethin went wrong, show error
-        setupErrorState(context, 'Verification completed but login failed');
+        DialogHelper.showError(context, 'Verification completed but login failed');
       }
     } catch (e) {
-      setupErrorState(context, 'Failed to complete login after verification');
+      DialogHelper.showError(context, 'Failed to complete login after verification');
     }
   }
 
@@ -91,47 +91,9 @@ class VerificationBlocListener extends StatelessWidget {
     DioFactory.setTokenIntoHeaderAfterLogin(token);
   }
 
-  void setupErrorState(BuildContext context, String error) {
-    _dismissActiveDialog(context);
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.white,
-        icon: const Icon(Icons.error, color: ColorsManager.red, size: 32),
-        content: Text(error, style: TextStyles.font15DarkBlueMedium),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'verification.got_it'.tr(),
-              style: TextStyles.font14BlueSemiBold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void setupLoadingState(BuildContext context) {
-    if (_isDialogOpen) {
-      return;
-    }
-    _isDialogOpen = true;
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (dialogContext) =>
-          Center(child: ShimmerLoading.circular(size: 50)),
-    ).whenComplete(() {
-      _isDialogOpen = false;
-    });
-  }
-
   void _dismissActiveDialog(BuildContext context) {
     if (_isDialogOpen) {
-      context.pop();
+      Navigator.of(context, rootNavigator: true).pop();
       _isDialogOpen = false;
     }
   }

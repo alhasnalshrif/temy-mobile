@@ -6,6 +6,7 @@ import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/routing/app_routes.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
 import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/profile_state.dart';
 
@@ -103,12 +104,7 @@ class ProfileDialogs {
                         Navigator.of(dialogContext).pop();
 
                         // Show success message
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(successState.message),
-                            backgroundColor: Colors.green,
-                          ),
-                        );
+                        SnackbarHelper.showSuccess(context, successState.message);
 
                         // Perform logout after successful delete
                         context.read<ProfileCubit>().logout();
@@ -130,14 +126,9 @@ class ProfileDialogs {
                           context.read<ProfileCubit>().logout();
                           if (context.mounted) {
                             context.goNamed(AppRoutes.loginName);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  errorModel.message ??
-                                      'Session expired. Please login again.',
-                                ),
-                                backgroundColor: ColorsManager.red,
-                              ),
+                            SnackbarHelper.showError(
+                              context,
+                              errorModel.message ?? 'Session expired. Please login again.',
                             );
                           }
                           return;
@@ -147,14 +138,9 @@ class ProfileDialogs {
                         Navigator.of(dialogContext).pop();
 
                         // Show error message
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              errorModel.message ??
-                                  'delete_account.delete_failed'.tr(),
-                            ),
-                            backgroundColor: ColorsManager.red,
-                          ),
+                        SnackbarHelper.showError(
+                          context,
+                          errorModel.message ?? 'delete_account.delete_failed'.tr(),
                         );
                       },
                       orElse: () {},

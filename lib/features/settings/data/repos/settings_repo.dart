@@ -14,11 +14,7 @@ class SettingsRepo {
       final response = await _settingsApiService.getSettings();
       return ApiResult.success(response);
     } catch (error) {
-      // If unauthorized, we might still want default settings or handle it.
-      // But for global settings usually it should be public or we handle 401 gracefully.
-      if (error is DioException && error.response?.statusCode == 401) {
-        // Default fallback if needed
-      }
+      if (error is DioException && error.response?.statusCode == 401) {}
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }

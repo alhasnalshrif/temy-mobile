@@ -110,7 +110,7 @@ class _CalendarSectionState extends State<CalendarSection>
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: ColorsManager.mainBlue.withOpacity(0.04),
+            color: ColorsManager.mainBlueAlpha4,
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -138,7 +138,7 @@ class _CalendarSectionState extends State<CalendarSection>
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: ColorsManager.mainBlue.withOpacity(0.04),
+        color: ColorsManager.mainBlueAlpha4,
       ),
       child: Center(
         child: FadeTransition(

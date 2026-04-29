@@ -6,6 +6,7 @@ import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/widgets/app_text_button.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
 
 class OtpVerificationDialog extends StatefulWidget {
   final String phoneNumber;
@@ -63,12 +64,7 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
 
   void _handleResend() {
     if (_secondsRemaining > 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('auth.otp_wait_before_resend'.tr()),
-          backgroundColor: Colors.orange,
-        ),
-      );
+      SnackbarHelper.showWarning(context, 'auth.otp_wait_before_resend'.tr());
       return;
     }
 

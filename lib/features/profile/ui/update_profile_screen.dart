@@ -8,6 +8,7 @@ import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/core/widgets/app_text_form_field.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
 import 'package:temy_barber/features/profile/data/models/profile_response.dart';
 import 'package:temy_barber/features/profile/logic/profile_cubit.dart';
 import 'package:temy_barber/features/profile/logic/update_profile_cubit.dart';
@@ -56,24 +57,15 @@ class UpdateProfileScreen extends StatelessWidget {
                   success: (userProfile) {
                     context.read<ProfileCubit>().getProfile();
                     context.pop();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          userProfile.message ?? 'profile.update_success'.tr(),
-                        ),
-                        backgroundColor: Colors.green,
-                      ),
+                    SnackbarHelper.showSuccess(
+                      context,
+                      userProfile.message ?? 'profile.update_success'.tr(),
                     );
                   },
                   error: (errorHandler) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          errorHandler.apiErrorModel.message ??
-                              'profile.update_error'.tr(),
-                        ),
-                        backgroundColor: ColorsManager.red,
-                      ),
+                    SnackbarHelper.showError(
+                      context,
+                      errorHandler.apiErrorModel.message ?? 'profile.update_error'.tr(),
                     );
                   },
                 );

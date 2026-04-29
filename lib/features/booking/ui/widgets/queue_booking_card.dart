@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/widgets/cancel_confirmation_dialog.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
 import 'package:temy_barber/core/widgets/status_widgets.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
@@ -35,12 +36,7 @@ class QueueBookingCard extends StatelessWidget {
           if (booking.id != null) {
             context.read<BookingCubit>().cancelBooking(booking.id!);
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('booking.error_cancel_no_id'.tr()),
-                backgroundColor: ColorsManager.red,
-              ),
-            );
+            SnackbarHelper.showError(context, 'booking.error_cancel_no_id'.tr());
           }
         },
       ),

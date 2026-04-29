@@ -9,7 +9,10 @@ import 'package:temy_barber/features/booking/ui/widgets/booking_shimmer.dart';
 import 'package:temy_barber/features/booking/ui/widgets/queue_booking_card.dart';
 import 'package:temy_barber/features/booking/ui/widgets/booking_tabs.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
-import 'package:temy_barber/core/utils/responsive_utils.dart'; // Import ResponsiveUtils
+import 'package:temy_barber/core/utils/responsive_utils.dart';
+import 'package:temy_barber/core/widgets/snackbar_helper.dart';
+import 'package:temy_barber/core/widgets/cancel_confirmation_dialog.dart';
+import 'package:temy_barber/core/widgets/error_retry_view.dart'; // Import ResponsiveUtils
 
 class BookingBlocBuilderWithQueue extends StatefulWidget {
   const BookingBlocBuilderWithQueue({super.key});
@@ -29,22 +32,12 @@ class _BookingBlocBuilderWithQueueState
       listener: (context, state) {
         state.maybeMap(
           cancelBookingSuccess: (_) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('booking.cancel_success_message'.tr()),
-                backgroundColor: Colors.green,
-              ),
-            );
+            SnackbarHelper.showSuccess(context, 'booking.cancel_success_message'.tr());
           },
           cancelBookingError: (errorState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  errorState.errorHandler.apiErrorModel.message ??
-                      'booking.cancel_error_message'.tr(),
-                ),
-                backgroundColor: ColorsManager.red,
-              ),
+            SnackbarHelper.showError(
+              context,
+              errorState.errorHandler.apiErrorModel.message ?? 'booking.cancel_error_message'.tr(),
             );
             // Retry loading bookings to restore the list
             context.read<BookingCubit>().getBooking();
@@ -146,29 +139,9 @@ class _BookingBlocBuilderWithQueueState
               ],
             );
           },
-          bookingError: (errorState) => Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 60,
-                  color: ColorsManager.red.withAlpha(200),
-                ),
-                verticalSpace(16),
-                Text(
-                  'booking.error_loading'.tr(),
-                  style: const TextStyle(fontSize: 16),
-                ),
-                verticalSpace(8),
-                ElevatedButton(
-                  onPressed: () {
-                    context.read<BookingCubit>().getBooking();
-                  },
-                  child: Text('booking.retry'.tr()),
-                ),
-              ],
-            ),
+          bookingError: (errorState) => ErrorRetryView(
+            message: 'booking.error_loading'.tr(),
+            onRetry: () => context.read<BookingCubit>().getBooking(),
           ),
           orElse: () => const BookingShimmer(),
         );
@@ -246,30 +219,8 @@ class _BookingBlocBuilderWithQueueState
   }
 
   void _showCancelDialog(BuildContext context, String bookingId) {
-    showDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text('booking.cancel_title'.tr()),
-          content: Text('booking.cancel_message'.tr()),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(),
-              child: Text('booking.no'.tr()),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(dialogContext).pop();
-                context.read<BookingCubit>().cancelBooking(bookingId);
-              },
-              child: Text(
-                'booking.yes'.tr(),
-                style: const TextStyle(color: ColorsManager.red),
-              ),
-            ),
-          ],
-        );
-      },
-    );
+    CancelConfirmationDialog.show(context, onConfirm: () {
+      context.read<BookingCubit>().cancelBooking(bookingId);
+    });
   }
 }

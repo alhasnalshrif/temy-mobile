@@ -1,81 +1,54 @@
-import 'dart:async';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temy_barber/core/networking/api_result.dart';
-import 'package:temy_barber/core/networking/api_error_handler.dart';
+import 'package:temy_barber/core/logic/base_cubit.dart';
 import 'package:temy_barber/features/home/data/repos/home_repo.dart';
 import 'home_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
+class HomeCubit extends BaseCubit<HomeState> {
   final HomeRepo _homeRepo;
   HomeCubit(this._homeRepo) : super(const HomeState.initial());
-
-  static const _timeout = Duration(seconds: 20);
 
   void getCategories() async {
     emit(const HomeState.categoriesLoading());
 
-    try {
-      final response = await _homeRepo.getCategorie().timeout(_timeout);
-      response.when(
-        success: (categoriesResponseModel) {
-          emit(HomeState.categoriesSuccess(categoriesResponseModel));
-        },
-        failure: (error) {
-          emit(HomeState.categoriesError(error));
-        },
-      );
-    } on TimeoutException catch (e) {
-      emit(HomeState.categoriesError(ErrorHandler.handle(e)));
-    } catch (e) {
-      emit(HomeState.categoriesError(ErrorHandler.handle(e)));
-    }
+    executeApi(
+      apiCall: () => _homeRepo.getCategorie(),
+      onSuccess: (categoriesResponseModel) {
+        emit(HomeState.categoriesSuccess(categoriesResponseModel));
+      },
+      onError: (error) {
+        emit(HomeState.categoriesError(error));
+      },
+    );
   }
 
   void getBarbers() async {
     emit(const HomeState.barbersLoading());
 
-    try {
-      final response = await _homeRepo.getBarbers().timeout(_timeout);
-      response.when(
-        success: (barbersResponseModel) {
-          emit(HomeState.barbersSuccess(barbersResponseModel));
-        },
-        failure: (error) {
-          emit(HomeState.barbersError(error));
-        },
-      );
-    } on TimeoutException catch (e) {
-      emit(HomeState.barbersError(ErrorHandler.handle(e)));
-    } catch (e) {
-      emit(HomeState.barbersError(ErrorHandler.handle(e)));
-    }
+    executeApi(
+      apiCall: () => _homeRepo.getBarbers(),
+      onSuccess: (barbersResponseModel) {
+        emit(HomeState.barbersSuccess(barbersResponseModel));
+      },
+      onError: (error) {
+        emit(HomeState.barbersError(error));
+      },
+    );
   }
 
   void getBanners() async {
     emit(const HomeState.bannersLoading());
 
-    try {
-      final response = await _homeRepo.getBanners().timeout(_timeout);
-      response.when(
-        success: (bannersResponseModel) {
-          emit(HomeState.bannersSuccess(bannersResponseModel));
-        },
-        failure: (error) {
-          emit(HomeState.bannersError(error));
-        },
-      );
-    } on TimeoutException catch (e) {
-      emit(HomeState.bannersError(ErrorHandler.handle(e)));
-    } catch (e) {
-      emit(HomeState.bannersError(ErrorHandler.handle(e)));
-    }
+    executeApi(
+      apiCall: () => _homeRepo.getBanners(),
+      onSuccess: (bannersResponseModel) {
+        emit(HomeState.bannersSuccess(bannersResponseModel));
+      },
+      onError: (error) {
+        emit(HomeState.bannersError(error));
+      },
+    );
   }
 
-  /// Refreshes all home screen data
-  /// Returns a Future that completes when all data is refreshed
   Future<void> refreshHomeData() async {
-    // Fetch barbers and banners data in parallel
     await Future.wait([
       _refreshCategories(),
       _refreshBarbers(),
@@ -83,58 +56,39 @@ class HomeCubit extends Cubit<HomeState> {
     ]);
   }
 
-  // refresh categories
   Future<void> _refreshCategories() async {
-    try {
-      final response = await _homeRepo.getCategorie().timeout(_timeout);
-      response.when(
-        success: (categoriesResponseModel) {
-          emit(HomeState.categoriesSuccess(categoriesResponseModel));
-        },
-        failure: (error) {
-          emit(HomeState.categoriesError(error));
-        },
-      );
-    } on TimeoutException catch (e) {
-      emit(HomeState.categoriesError(ErrorHandler.handle(e)));
-    } catch (e) {
-      emit(HomeState.categoriesError(ErrorHandler.handle(e)));
-    }
+    executeApi(
+      apiCall: () => _homeRepo.getCategorie(),
+      onSuccess: (categoriesResponseModel) {
+        emit(HomeState.categoriesSuccess(categoriesResponseModel));
+      },
+      onError: (error) {
+        emit(HomeState.categoriesError(error));
+      },
+    );
   }
 
   Future<void> _refreshBarbers() async {
-    try {
-      final response = await _homeRepo.getBarbers().timeout(_timeout);
-      response.when(
-        success: (barbersResponseModel) {
-          emit(HomeState.barbersSuccess(barbersResponseModel));
-        },
-        failure: (error) {
-          emit(HomeState.barbersError(error));
-        },
-      );
-    } on TimeoutException catch (e) {
-      emit(HomeState.barbersError(ErrorHandler.handle(e)));
-    } catch (e) {
-      emit(HomeState.barbersError(ErrorHandler.handle(e)));
-    }
+    executeApi(
+      apiCall: () => _homeRepo.getBarbers(),
+      onSuccess: (barbersResponseModel) {
+        emit(HomeState.barbersSuccess(barbersResponseModel));
+      },
+      onError: (error) {
+        emit(HomeState.barbersError(error));
+      },
+    );
   }
 
   Future<void> _refreshBanners() async {
-    try {
-      final response = await _homeRepo.getBanners().timeout(_timeout);
-      response.when(
-        success: (bannersResponseModel) {
-          emit(HomeState.bannersSuccess(bannersResponseModel));
-        },
-        failure: (error) {
-          emit(HomeState.bannersError(error));
-        },
-      );
-    } on TimeoutException catch (e) {
-      emit(HomeState.bannersError(ErrorHandler.handle(e)));
-    } catch (e) {
-      emit(HomeState.bannersError(ErrorHandler.handle(e)));
-    }
+    executeApi(
+      apiCall: () => _homeRepo.getBanners(),
+      onSuccess: (bannersResponseModel) {
+        emit(HomeState.bannersSuccess(bannersResponseModel));
+      },
+      onError: (error) {
+        emit(HomeState.bannersError(error));
+      },
+    );
   }
 }

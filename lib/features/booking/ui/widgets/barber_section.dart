@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:temy_barber/core/widgets/app_avatar.dart';
 
 class BarberSection extends StatelessWidget {
   final String name;
@@ -20,16 +21,10 @@ class BarberSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          
+        AppAvatar(
+          imageUrl: avatarUrl,
           radius: 28,
-          backgroundImage: (avatarUrl != null && avatarUrl!.isNotEmpty)
-              ? NetworkImage(avatarUrl!)
-              : null,
-          backgroundColor: Colors.grey[200],
-          child: (avatarUrl == null || avatarUrl!.isEmpty)
-              ? const Icon(Icons.store, color: Colors.grey)
-              : null,
+          fallbackWidget: const Icon(Icons.store, color: Colors.grey, size: 28),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -48,7 +43,7 @@ class BarberSection extends StatelessWidget {
                   const Icon(Icons.star, size: 16, color: Colors.amber),
                   const SizedBox(width: 4),
                   Text(
-                    '$rating ($reviewCount)', // Use passed rating and review count
+                    '$rating ($reviewCount)',
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -59,8 +54,6 @@ class BarberSection extends StatelessWidget {
             ],
           ),
         ),
-        // Optional: Add a trailing element like a favorite button if needed
-        // Icon(Icons.favorite_border, color: Colors.grey),
       ],
     );
   }

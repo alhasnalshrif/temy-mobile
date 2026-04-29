@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temy_barber/core/theme/colors.dart';
 import 'package:temy_barber/core/theme/styles.dart';
+import 'package:temy_barber/core/widgets/app_avatar.dart';
 import 'package:temy_barber/features/barber/data/models/reservation_arguments.dart';
 
 part 'multiple_order_summary_impl.dart';

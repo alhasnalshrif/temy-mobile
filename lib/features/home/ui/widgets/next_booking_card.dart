@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temy_barber/core/helpers/spacing.dart';
 import 'package:temy_barber/core/theme/colors.dart';
+import 'package:temy_barber/core/widgets/app_avatar.dart';
 import 'package:temy_barber/core/theme/styles.dart';
 import 'package:temy_barber/features/booking/data/models/booking_response.dart';
 import 'package:temy_barber/features/booking/logic/booking_cubit.dart';
@@ -73,7 +74,7 @@ class NextBookingCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: ColorsManager.blackAlpha10,
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -90,7 +91,7 @@ class NextBookingCard extends StatelessWidget {
               width: 45,
               height: 45,
               decoration: BoxDecoration(
-                color: ColorsManager.red.withOpacity(0.9),
+                color: ColorsManager.redAlpha90,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(
                     context.locale.languageCode == 'ar' ? 16 : 0,
@@ -121,7 +122,7 @@ class NextBookingCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
+                        color: ColorsManager.whiteAlpha10,
                         shape: BoxShape.circle,
                       ),
                       child: Image(
@@ -155,7 +156,7 @@ class NextBookingCard extends StatelessWidget {
                     vertical: 8,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: ColorsManager.whiteAlpha10,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
@@ -179,38 +180,18 @@ class NextBookingCard extends StatelessWidget {
                 ),
 
                 verticalSpace(12),
-                Divider(color: Colors.white.withOpacity(0.1), height: 1),
+                Divider(color: ColorsManager.whiteAlpha10, height: 1),
                 verticalSpace(12),
 
                 // Bottom Row: Barber Profile
                 Row(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: ColorsManager.red,
-                          width: 1.5,
-                        ),
-                      ),
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundImage:
-                            booking.barber?.avatar != null &&
-                                booking.barber!.avatar!.isNotEmpty
-                            ? NetworkImage(booking.barber!.avatar!)
-                            : null,
-                        backgroundColor: Colors.grey[800],
-                        child:
-                            booking.barber?.avatar == null ||
-                                booking.barber!.avatar!.isEmpty
-                            ? const Icon(
-                                Icons.person,
-                                color: Colors.white,
-                                size: 20,
-                              )
-                            : null,
-                      ),
+                    AppAvatar(
+                      imageUrl: booking.barber?.avatar,
+                      backgroundColor: Colors.grey[800],
+                      borderColor: ColorsManager.red,
+                      borderWidth: 1.5,
+                      fallbackWidget: const Icon(Icons.person, color: Colors.white, size: 20),
                     ),
                     horizontalSpace(12),
                     Expanded(
