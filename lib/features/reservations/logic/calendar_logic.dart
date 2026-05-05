@@ -45,10 +45,7 @@ class CalendarGridResult {
   final List<List<DateTime>> weeks;
   final List<DateTime> allDays;
 
-  const CalendarGridResult({
-    required this.weeks,
-    required this.allDays,
-  });
+  const CalendarGridResult({required this.weeks, required this.allDays});
 
   /// Get total number of weeks
   int get weekCount => weeks.length;
@@ -158,7 +155,8 @@ class CalendarLogic {
     for (int i = 0; i < CalendarConfig.totalDayCells; i++) {
       days.add(startDate.add(Duration(days: i)));
       // Stop if we've covered all needed days and completed a week
-      if (days.length > totalDays && days.length % CalendarConfig.daysInWeek == 0) {
+      if (days.length > totalDays &&
+          days.length % CalendarConfig.daysInWeek == 0) {
         break;
       }
     }
@@ -178,11 +176,15 @@ class CalendarLogic {
 
   /// Check if date is within valid booking range
   bool isWithinBookingRange(DateTime date, int maxBookingDays) {
-    final today = _getToday();
-    final maxDate = today.add(Duration(days: maxBookingDays));
+    if (maxBookingDays <= 0) return false;
 
-    return (date.isAtSameMomentAs(today) || date.isAfter(today)) &&
-        !date.isAfter(maxDate);
+    final selectedDate = DateTime(date.year, date.month, date.day);
+    final today = _getToday();
+    final maxDate = today.add(Duration(days: maxBookingDays - 1));
+
+    return (selectedDate.isAtSameMomentAs(today) ||
+            selectedDate.isAfter(today)) &&
+        !selectedDate.isAfter(maxDate);
   }
 
   /// Check if date is barber's day off
